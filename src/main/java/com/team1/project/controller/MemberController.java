@@ -36,4 +36,10 @@ public class MemberController {
 	public String review() {
 		return "review";	
 	}
+	
+	// 리뷰
+	@RequestMapping("/us.do")
+	public String us() {
+		return "us";	
+	}
 }	
