@@ -48,6 +48,36 @@
 		<put-attribute name="body" value="/WEB-INF/views/review/us.jsp"></put-attribute>
 	</definition>
 	
+	
+	<definition name="board/List" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/boardList.jsp"></put-attribute>
+	</definition>
+
+	<definition name="board/Detail" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/boardDetail.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="board/map" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/boardmap.jsp"></put-attribute>
+	</definition>
+	
+	
+		<definition name="capDetail" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/capDetail.jsp"></put-attribute>
+	</definition>
+	
+	
+		<definition name="cap" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/cap.jsp"></put-attribute>
+	</definition>
+	
+	
+	
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>
@@ -84,6 +114,7 @@
 		<put-attribute name="title" value="관리자 1:1 문의하기 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
 	</definition>
+
 <!-- 	
 	<definition name="board/list" template="/WEB-INF/views/board/boardList.jsp">
 	    <put-attribute name="title" value="게시판"></put-attribute>
