@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	.us_container{
+		width: 80%;
+		margin: 0 auto;
+		padding: 3%;
+	}
 	.us_header {
 		position: sticky;
 	    z-index: 9;
@@ -112,9 +117,40 @@
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
 	}
+	.us_fillter {
+		display: inline-flex;
+		width: 100%;
+	}
+	.fillter_btn_area {
+		width: 85%;
+	}
+	.fillter_btn {
+		width: 100px;
+		height: 50px;
+		border-radius: 10px;
+		background-color: black;
+		color: white;
+	}
+	.fillter_btn:hover {
+		background-color: white;
+		color : black;
+	}
+	.city_fillter {
+		text-align: right;
+	}
+	.city_btn{
+		width: 100px;
+		height: 50px;
+		border-radius: 10px;
+		background-color: white;
+	}
+	.city_fillter_inner > ul > 
+	
 </style>
 </head>
 <body>
+<div class="us_container">
+
 <div class="us_header">
     <div class="us_header2"></div>
     <div class="us_header3">
@@ -134,7 +170,44 @@
     </div>
 </div>
 
+<div class="us_fillter">
+	<div class="fillter_btn_area">
+		<button class="fillter_btn">댓글순</button>
+		<button class="fillter_btn">조회순</button>
+		<button class="fillter_btn">인기순</button>
+	</div>
+	<div class="city_fillter">
+		<button class="city_btn">지역</button>
+			<div class="city_fillter_inner">
+				<ul>
+					<li>한국
+						<ul>
+							<li>서울</li>
+							<li>경기도</li>
+							<li>강원도</li>
+							<li>인천</li>
+							<li>충청북도</li>
+							<li>충청남도</li>
+							<li>대전</li>
+							<li>전라북도</li>
+							<li>전라남도</li>
+							<li>광주</li>
+							<li>경상북도</li>
+							<li>경상남도</li>
+							<li>울산</li>
+							<li>부산</li>
+							<li>대구</li>
+							<li>마산,창원</li>
+						</ul>
+					</li>
+				</ul>
+			
+			</div>
+	</div>
+</div>
 
+
+</div>
 
 </body>
 </html>
