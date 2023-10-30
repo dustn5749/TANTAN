@@ -197,13 +197,13 @@
             </li>
             <li class="nav-item">
               <a href="/userList" class="nav-link">
-                <i class="nav-icon fas fa-users "></i>
+                <i class="nav-icon fas fa-user"></i>
                   <p> 회원관리</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/usList" class="nav-link">
-                <i class="nav-icon fas fa-star"></i>
+                <i class="nav-icon fas fa-users"></i>
                   <p> 동행관리</p>
               </a>
             </li>
