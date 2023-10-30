@@ -41,7 +41,53 @@
     margin-top: -50px;
     background-color: #0099FF;
 }
-</style>
+.carousel-item {
+	margin:0 auto;
+	align-content: center;
+	text-align: center;
+	align-items: center; 
+	width: 100% !important;
+	}
+/* best top5 여행지 */
+
+.best_top5_city {	
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.best_top5_city_inner {
+    margin: 0 auto;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 반응형 스타일 추가 */
+@media (max-width: 768px) {
+    .top5_city {
+        width: 100%; /* 화면이 768px 미만일 때 1개씩 표시 */
+        margin: 10px 0;
+       	border: 1px solid black;
+		border-radius: 15px;
+		height: 300px;
+    }
+}
+
+@media (min-width: 769px) {
+    .top5_city {
+    	display: inline-block;
+        width: 15%; /* 화면이 769px 이상일 때 5개씩 표시 */
+        margin: 0 10px;
+    	border: 1px solid black;
+		border-radius: 15px;
+		height: 300px;
+    }
+}
 
 </style>
 </head>
@@ -70,77 +116,30 @@
 
     <!-- Start Banner Hero -->
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
-    	<img src="/assets/img/jeju.jpg" style="width: 100%; height: 700px;" >
+    	
 -         <ol class="carousel-indicators">
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1" class="active"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2" class="active"></li>
         </ol>
-        
-        
+        <!-- 배너 이미지 위치  -->
         <div class="carousel-inner">
-            
             <div class="carousel-item active">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/11111.jpg" alt="" width="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left align-self-center">
-                                <h1 class="h1 text-success"><b>Zay</b> eCommerce</h1>
-                                <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
-                                <p>
-                                	
-                                   <a rel="sponsored" class="text-success" href="https://templatemo.com" target="_blank">TemplateMo</a> website. 
-                                    <a rel="sponsored" class="text-success" href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                    <a rel="sponsored" class="text-success" href="https://unsplash.com/" target="_blank">Unsplash</a> and
-                                    <a rel="sponsored" class="text-success" href="https://icons8.com/" target="_blank">Icons 8</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    			<img src="/assets/img/sea.jpg" style="width: 100%; height: 700px;" >
             </div>
+            
+            
             <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner_img_02.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Proident occaecat</h1>
-                                <h3 class="h2">Aliquip ex ea commodo consequat</h3>
-                                <p>
-                                    You are permitted to use this Zay CSS template for your commercial websites. 
-                                    You are <strong>not permitted</strong> to re-distribute the template ZIP file in any kind of template collection websites.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<img src="/assets/img/palace.jpg" style="width: 100%; height: 700px;" >
             </div>
+            
+            
             <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner_img_03.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
-                                <p>
-                                    We bring you 100% free CSS templates for your websites. 
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends about our website. Thank you.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<img src="/assets/img/boat.jpg" style="width: 100%; height: 700px;" >
             </div>
         </div> 
+        
+        <!-- 배너 슬라이드 화살표 -->
         <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
             <i class="fas fa-chevron-left"></i>
         </a>
@@ -150,6 +149,25 @@
     </div>
     <!-- End Banner Hero -->
 
+	<!-- best top5 지역 -->
+	<div class="best_top5_city">
+		<p>BEST 여행지 TOP5</p>
+		<div class="best_top5_city_inner">
+			<div class="top5_city">
+				
+			</div>
+			<div class="top5_city">
+			</div>
+			<div class="top5_city">
+			</div>
+			<div class="top5_city">
+			</div>
+			<div class="top5_city">
+			
+			</div>
+		</div>
+	
+	</div>
 
     <!-- Start Categories of The Month -->
     <section class="container py-5">
