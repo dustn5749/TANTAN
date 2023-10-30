@@ -16,7 +16,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"></put-attribute>
 	</definition>
 	
-	
 		<definition name="loginForm" extends="baseLayout">
 		<put-attribute name="title" value="로그인페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/loginForm.jsp"></put-attribute>
@@ -56,6 +55,11 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/admin/adminFooter.jsp"></put-attribute>
 	</definition>
 
+	<definition name="snsProfile" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="admin" extends="adminLayout">
 		<put-attribute name="title" value="관리자 메인 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminMain.jsp"></put-attribute>

@@ -36,7 +36,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <div id="jsGrid1"></div>
+          <div id="jsGrid2" style=text-align:center;></div>
         </div>
         <!-- /.card-body -->
       </div>
