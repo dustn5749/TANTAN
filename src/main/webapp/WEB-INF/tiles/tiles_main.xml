@@ -15,8 +15,9 @@
 		<put-attribute name="title" value="메인 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"></put-attribute>
 	</definition>
-		
-	<definition name="loginForm" extends="baseLayout">
+	
+	
+		<definition name="loginForm" extends="baseLayout">
 		<put-attribute name="title" value="로그인페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/loginForm.jsp"></put-attribute>
 	</definition>
@@ -47,12 +48,6 @@
 		<put-attribute name="title" value="리뷰페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/review/us.jsp"></put-attribute>
 	</definition>
-	
-	<definition name="profile" extends="baseLayout">
-		<put-attribute name="title" value="프로필페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/sns/profile.jsp"></put-attribute>
-	</definition>
-	
 	
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
@@ -85,12 +80,12 @@
 		<put-attribute name="title" value="관리자 1:1 문의하기 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
 	</definition>
-
+<!-- 	
 	<definition name="board/list" template="/WEB-INF/views/board/boardList.jsp">
 	    <put-attribute name="title" value="게시판"></put-attribute>
 	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
 	</definition>
-<!--
+
 	<definition name="notice/list" template="/WEB-INF/views/notice/noticeList.jsp">
 	    <put-attribute name="title" value="공지사항"></put-attribute>
 	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
