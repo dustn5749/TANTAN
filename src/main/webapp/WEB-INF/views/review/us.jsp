@@ -122,7 +122,7 @@
 		width: 100%;
 	}
 	.fillter_btn_area {
-		width: 85%;
+		width: 90%;
 	}
 	.fillter_btn {
 		width: 100px;
@@ -143,9 +143,27 @@
 		height: 50px;
 		border-radius: 10px;
 		background-color: white;
+		
 	}
-	.city_fillter_inner > ul > 
-	
+	.city_fillter_inner {
+       display: flex;
+		
+	}
+	    .mainItem {
+		display : none;
+      }
+      .mainItem.active {
+      	display : block;
+      }
+      .sub {
+        display: none;
+      }
+      .sub.active {
+        display: block;
+      }
+      ul > li {
+      	list-style: none;
+      }
 </style>
 </head>
 <body>
@@ -180,34 +198,47 @@
 		<button class="city_btn">지역</button>
 			<div class="city_fillter_inner">
 				<ul>
-					<li>한국
-						<ul>
-							<li>서울</li>
-							<li>경기도</li>
-							<li>강원도</li>
-							<li>인천</li>
-							<li>충청북도</li>
-							<li>충청남도</li>
-							<li>대전</li>
-							<li>전라북도</li>
-							<li>전라남도</li>
-							<li>광주</li>
-							<li>경상북도</li>
-							<li>경상남도</li>
-							<li>울산</li>
-							<li>부산</li>
-							<li>대구</li>
-							<li>마산,창원</li>
-						</ul>
-					</li>
-				</ul>
-			
+			      <li class="mainItem">
+			        <span class="mainTxt">한국</span>
+			        <ul class="sub">
+			          <li>서울</li>
+			          <li>경기도</li>
+			          <li>강원도</li>
+			          <li>인천</li>
+			          <li>충청북도</li>
+			          <li>충청남도</li>
+			          <li>대전</li>
+			          <li>전라북도</li>
+			          <li>전라남도</li>
+			          <li>광주</li>
+			          <li>경상북도</li>
+			          <li>경상남도</li>
+			          <li>울산</li>
+			          <li>부산</li>
+			          <li>대구</li>
+			          <li>마산,창워</li>
+			        </ul>
+			      </li>
+   				 </ul>
 			</div>
 	</div>
 </div>
 
-
 </div>
+<script>
+document.querySelector(".city_btn").addEventListener("click", function () {
+    console.log("click");
 
+    document.querySelector(".mainItem").style.display="flex";
+  });
+
+document.querySelector(".mainTxt").addEventListener("click", function () {
+    console.log("click");
+
+    document.querySelector(".sub").classList.toggle("active");
+  });
+
+	
+</script>
 </body>
 </html>

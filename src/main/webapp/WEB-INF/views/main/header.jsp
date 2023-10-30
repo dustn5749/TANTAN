@@ -17,6 +17,8 @@
      font-family: 'NPSfontBold';
 	font-size: 20px !important;
 	
+}
+
 
 }
 
