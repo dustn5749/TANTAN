@@ -150,7 +150,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="admin" class="brand-link d" style="text-align: center; align-items: center;">
-      <img src="img/LOGO.png" style="margin: auto; width: 200px;">
+      <img src="admin/img/LOGO.png" style="margin: auto; width: 200px;">
     </a>
     <!-- <a href="#" class="brand-link">
       <img src="dist/img/LOGO.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
@@ -162,7 +162,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="img/user.png" class="img-circle elevation-2" alt="User Image">
+          <img src="admin/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Admin</a>

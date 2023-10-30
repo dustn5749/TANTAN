@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.css">
-  <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+  <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid.css">
+  <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid-theme.min.css">
 </head>
 <body>
 

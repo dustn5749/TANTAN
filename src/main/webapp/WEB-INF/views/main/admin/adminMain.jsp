@@ -36,7 +36,7 @@
     		<div class="card-header p-0 pt-1 border-bottom-0">
     			<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
     				<li class="nav-item">
-    					<a class="nav-link" id="custom-home-tab" data-toggle="pill" href="#home-tab" role="tab" aria-controls="home-tab" autofocus="autofocus"> 회원</a>
+    					<a class="nav-link" id="custom-home-tab" data-toggle="pill" href="#home-tab" role="tab" aria-controls="home-tab"> 회원</a>
     				</li>
     				<li class="nav-item">
     					<a class="nav-link" id="custom-board-tab" data-toggle="pill" href="#board-tab" role="tab" aria-controls="board-tab"> 게시글</a>
