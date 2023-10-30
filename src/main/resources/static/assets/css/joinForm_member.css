@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}	/* 회원가입 container 시작*/
+	.joinForm_container {
+		margin: 0 auto;	
+		width: 90%;
+		padding: 3%;
+	}
+	/* 회원가입 진행 창 */
+	.jogin_process {
+		margin: 0 auto;
+		text-align: center;
+		align-content: center;
+		align-items: center;
+		width: 65%;
+	}
+	#join_member_process{
+		background-color: rgb(183, 226, 250);
+	}
+	.jogin_process > div{
+		display: inline-block;
+		width: 30%;
+		margin: 0 auto;
+		text-align: center;
+		align-content: center;
+		align-items: center;
+    font-family: 'Pretendard-Regular';
+		font-size: 20px !important;
+		border: 1px solid rgb(197, 228, 246);
+		border-radius: 5px !important;
+		background: rgb(244, 251, 255);
+	}
+	/* 회원가입 진행창 진행 완료 이미지 */
+	.check_img {
+ 	 	visibility: hidden;  
+		width: 70px;
+	}
+	
+	/* 회원가입 테이블 div */
+	.join_inner {
+		margin: 30px auto;
+		width: 60%;
+		 padding: 10px;
+		 border: 1px dashed rgb(225, 225, 225);
+		 border-radius: 10px;
+	}
+	/* 회원가입 테이블 */
+	#join_table{
+		margin: 30px auto;
+    font-family: 'Pretendard-Regular';
+  	  width: 70%;
+	}
+	/* 회원가입 제목 */
+	#memberDetail {
+		font-size: 30px;
+		margin-bottom: 50px !important;
+	}
+	/* 회원가입 정보 안내(아이디, 비밀번호...)  */
+	.join_menu {
+		color: gray;
+		font-size: 14px !important;	
+	}
+	/* 회원가입 정보 입력창 */
+	.input_area {
+		width: 80%;
+		align-items: center;
+		align-content: center;
+	}
+	.input_area > input {
+		width: 90%;
+		border: none;
+		font-size: 15px !important;
+    	font-family: 'Pretendard-Regular';
+    	height:40px;	
+    	}
+	.inputTr{
+		border-bottom: 1px dotted rgb(190, 190, 190);
+		height: 50px;
+	}
+	/* 중복확인 버튼 */
+	#id_check_btn{
+    font-family: 'Pretendard-Regular';
+		background: rgb(200, 246, 254);
+		border-radius: 5px;
+		border: 1px solid rgb(175, 237, 248);
+	}
+	#id_check_btn:hover {
+		color: white;
+		background-color: rgb(86, 149, 244);
+	}
+	/*  약관 */
+	#temrs_td{
+	 	padding-top: 50px;
+	 	padding-bottom: 15px;
+	 	height: 50px;
+	 	font-size: 20px;  
+	}
+	.terms_input {
+		color: grey;
+	}
+	.essential_terms {
+		color : red;
+	}
+	
+	/* 다음 버튼 div */
+	#nextBtn_area{
+		margin: 20px auto;
+		width: 90%;
+		text-align: right;	
+			
+	}
+	#nextBtn {
+		width:100px;
+		height: 40px;
+		border-radius: 5px;
+		background-color:  rgb(86, 149, 244);
+		border: none;
+		box-shadow: 1px 1px 1px 1px rgb(225, 225, 225);
+		color : white;
+    font-family: 'Pretendard-Regular';
+	}
+	#nextBtn:hover {
+		background-color: rgb(200, 246, 254);
+		color: black;
+	}

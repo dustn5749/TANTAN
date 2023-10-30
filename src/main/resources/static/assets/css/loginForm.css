@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+	/*로그인 container 시작 */
+	.loginForm_container{
+		font-family: 'Pretendard-Regular';
+		margin: 0 auto;
+		align-content: center;
+		align-items: center;
+		justify-content: center;
+		width: 90%;
+		height: 1000px;
+		padding:30px;
+		background-color:rgb(234, 241, 250);
+	}
+	.loginForm_inner {
+		margin: 0 auto;
+		align-content: center;
+		align-items: center;
+		justify-content: center;
+		width: 95%;
+		height: 900px;
+		background-color:  rgb(244, 246, 248);
+	}
+	.login_table_div{
+		margin: 0 auto;
+		text-align: center;
+		padding: 30px;
+		width: 45%;
+	}
+	.login_table_div > hr {
+		align-content: center;
+		align-items: center;
+		width: 100%;
+	}
+	/*로그인 테이블, 버튼 테이블*/
+	#loginTb, #oauthBtnTb{
+		text-align: center;
+		margin: 0 auto;
+		
+	}
+	#table_title {
+		font-size: 30px;
+		font-family: 'Pretendard-Regular' !important;
+		height: 150px;
+		text-align: center;
+	}
+	.loginInput{
+		width: 550px;
+		height: 80px;
+	}
+	.loginInput > input {
+		width: 80%;
+		border: 1px solid black;
+		border-radius: 1px;
+		height: 80%;
+		padding: 10px;
+	
+		 font-family: 'Pretendard-Regular' !important;
+	}
+	/* 아이디 비밀번호 찾기 */
+	.searchTd {
+		width: 275px;
+		height: 80px;
+		text-align: center;
+	}
+	.searchTd > a{
+		width: 80%;
+		text-decoration: underline;
+		color: grey;
+		font-size: 13px !important;
+		cursor: pointer;
+	}
+
+	#search_area_id:hover,
+	#search_area_pwd:hover
+	{
+		color: rgb(191, 222, 254);
+		font-weight: bold;
+		font-size: 15px !important;
+	}
+
+	
+	/*로그인 버튼*/
+	#loginBtn {
+		background-color: rgb(1, 52, 103);
+		color: white;
+		border : none;
+		box-shadow: 1px 1px 1px 1px rgb(197, 197, 197);
+		border-radius: 1px;
+	}
+	/* 회원가입 버튼 */
+	#joinBtn {
+		 background-color: rgb(230, 230, 230);
+		 border: none;
+		 box-shadow: 1px 1px 1px 1px rgb(197, 197, 197);
+		 border-radius: 1px;
+	}
+	
+	#loginBtn:hover, 
+	#loginBtn:focus,
+	#joinBtn:hover, 
+	#joinBtn:focus
+	 {
+		background-color: rgb(186, 220, 255);
+		color : black;	
+	}
+	
+	.btnArea >button>img {
+		width: 100%;
+		height: 60px;
+	}
+	
+	/* 소셜 로그인 table */
+	#oauthBtnTb {
+		font-family: 'Pretendard-Regular' !important;
+		margin: 0 auto;
+		margin-top: 30px;
+	}
+	.btnArea{
+		width: 550px;
+		height: 80px;
+	}
+	.btnArea >button {
+		width: 85%;
+		border: 1px solid black;
+		border-radius: 1px;
+		height: 80%;
+		padding: 10px;
+		font-family: 'Pretendard-Regular' !important;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		border: none;
+		background: none;
+		
+	}

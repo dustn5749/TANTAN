@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/index.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"></put-attribute>
+	</definition>
+	
+	
+		<definition name="loginForm" extends="baseLayout">
+		<put-attribute name="title" value="로그인페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/loginForm.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="joinForm" extends="baseLayout">
+		<put-attribute name="title" value="회원가입페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/join/joinForm.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="snsJoinForm" extends="baseLayout">
+		<put-attribute name="title" value="회원가입페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/join/snsJoinForm.jsp"></put-attribute>
+	</definition>
+	
+	
+	<definition name="joinComplete" extends="baseLayout">
+		<put-attribute name="title" value="회원가입 완료"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/join/join_completeForm.jsp"></put-attribute>
+	</definition>
+	
+		<definition name="review" extends="baseLayout">
+		<put-attribute name="title" value="리뷰페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/review/review.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="us" extends="baseLayout">
+		<put-attribute name="title" value="리뷰페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/review/us.jsp"></put-attribute>
+	</definition>
+<!-- 	
+	<definition name="board/list" template="/WEB-INF/views/board/boardList.jsp">
+	    <put-attribute name="title" value="게시판"></put-attribute>
+	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="notice/list" template="/WEB-INF/views/notice/noticeList.jsp">
+	    <put-attribute name="title" value="공지사항"></put-attribute>
+	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
+	</definition> -->
+
+	
+</tiles-definitions>
