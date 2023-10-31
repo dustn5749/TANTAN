@@ -4,10 +4,11 @@
 <html>
 <head>
     <title>Kakao Maps</title>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <!-- Kakao Maps API -->
+<script src="//code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><?php // http://craftpip.github.io/jquery-confirm/ ?> 
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f&libraries=services,clusterer,drawing"></script>
+
+
 
        <title>Kakao Maps</title>
     <style>
@@ -153,14 +154,14 @@
         align-items: center;
         }
         
-
-	.container{  overflow: hidden; }
-	.container { overflow: hidden; width:100%; max-width: 500px; margin:40px auto;  }
-	.container .evt-map{ width:100%; height:300px; border:solid 1px #eee; }
-	.container .form{ margin:10px 0; border-bottom: solid 3px #eee; padding:5px 0;}
-	.container .form input{ width:280px; padding:5px 3px; font-size:12px; }
-	.container .form a{ display: inline-block; width:80px; text-align:center; border:solid 1px #eee; text-decoration: none; color:#333; font-size:12px; padding:5px 0; }
-
+	
+		.container{  overflow: hidden; }
+		.container { overflow: hidden; width:100%; max-width: 500px; margin:40px auto;  }
+		.container .evt-map{ width:100%; height:300px; border:solid 1px #eee; }
+		.container .form{ margin:10px 0; border-bottom: solid 3px #eee; padding:5px 0;}
+		.container .form input{ width:280px; padding:5px 3px; font-size:12px; }
+		.container .form a{ display: inline-block; width:80px; text-align:center; border:solid 1px #eee; text-decoration: none; color:#333; font-size:12px; 		padding:5px 0; }
+	
 
 
     </style>
@@ -173,6 +174,7 @@
      
     
     </div>
+    
 <div class="container-fluid">
 		    <div class="row d-flex justify-content-center">
 		      <div class="col-12 text-center">
@@ -230,58 +232,45 @@
           </section>
            <div class="container">
     <div class="map-section">
-<!--         <h1>지도</h1> -->
-       
+    
+		<!--<h1>지도</h1> --> 
         <div class="evt-map" id="map"></div>
     </div>
     <div class="form-section">
         <form class="col-md-9 m-auto" method="post" role="form">
-            <div class="mb-3">
-                <label for="inputsubject">Day 1</label>
+             	  <div class="text-center">
+            <div class="mt-3">
+                <label for="inputsubject"><h2>Day 1</h2></label>
                 <input type="date" class="form-control mt-1" id="date1" name="date1" placeholder="Choose Date">
                 <input type="date" class="form-control mt-1" id="date1" name="date1" placeholder="Choose Date">
                 <input type="time" class="form-control mt-1" id="time1" name="time1" placeholder="Choose Time">
-              <div class="form">
-    <a href="#" class="btn btn-info btn-sm add-place" onclick="toggleAddressInput()">장소추가</a>
-    <input type="text" class="evt-address d-none" name="address" value="" placeholder="주소입력">
-    <a href="#none" onclick="handleSearchAddress()" class="evt-search d-none">검색</a>
+				  <div class="text-center">
+				  </div>
+    <div class="form">
+    <br>
+        <a href="#" class="btn btn-info btn-sm add-place" onclick="toggleAddressInput()">장소추가</a>
+        <input type="text" class="evt-address d-none" name="address" value="" placeholder="주소입력">
+        <a href="#none" onclick="handleSearchAddress()" class="evt-search d-none">검색</a>
+        <a href="#" class="btn btn-info btn-sm add-memo">메모추가</a>
+    </div>
+    <div class="mt-3">
+        <label for="inputsubject"><h2>Day 2</h2></label>
+        <input type="date" class="form-control mt-1" id="date2" name="date2" placeholder="Choose Date">
+        <input type="date" class="form-control mt-1" id="date1" name="date1" placeholder="Choose Date">
+        <input type="time" class="form-control mt-1" id="time2" name="time2" placeholder="Choose Time">
+        	  <div class="text-center">
+        	  </div>
+    <div class="form">
+    <br>
+        <a href="#" class="btn btn-info btn-sm add-place" onclick="toggleAddressInput()">장소추가</a>
+        <input type="text" class="evt-address d-none" name="address" value="" placeholder="주소입력">
+        <a href="#none" onclick="handleSearchAddress()" class="evt-search d-none">검색</a>
+        <a href="#" class="btn btn-info btn-sm add-memo">메모추가</a>
+    </div>
+    </div>
 </div>
-
-<script>
-    function toggleAddressInput() {
-        const addressInput = document.querySelector('.evt-address');
-        const searchButton = document.querySelector('.evt-search');
-
-        // 입력 칸과 검색 버튼을 토글하여 보이거나 숨기도록 처리
-        if (addressInput.classList.contains('d-none')) {
-            addressInput.classList.remove('d-none');
-            searchButton.classList.remove('d-none');
-        } else {
-            addressInput.classList.add('d-none');
-            searchButton.classList.add('d-none');
-        }
-    }
-
-    function handleSearchAddress() {
-        // 여기에 주소 검색 이벤트를 추가하는 JavaScript 코드를 작성합니다.
-        alert('주소 검색을 수행합니다.');
-    }
-</script>
-              
-                
-                <a href="#" class="btn btn-info btn-sm add-memo">메모추가</a>
-            </div>
-            <div class="mb-3">
-                <label for="inputsubject">Day 2</label>
-                <input type="date" class="form-control mt-1" id="date2" name="date2" placeholder="Choose Date">
-                <input type="date" class="form-control mt-1" id="date1" name="date1" placeholder="Choose Date">
-                <input type="time" class="form-control mt-1" id="time2" name="time2" placeholder="Choose Time">
-            <a href="#" class="btn btn-info btn-sm add-place" onclick="showAddressInput()">장소추가</a>
-<input type="text" class="evt-address d-none" name="address" value="" placeholder="주소입력">
-<a href="#none" class="evt-search d-none" onclick="handleSearchAddress()">검색</a>
-            
-                <a href="#" class="btn btn-info btn-sm add-memo">메모추가</a>
-            </div>
+	  
+		</div>
             <div class="row">
                 <div class="col text-center mt-2">
                     <button type="submit" class="btn btn-success btn-lg px-3">일정 생성하기</button>
@@ -294,100 +283,9 @@
                 
 			
 			
-			<!-- kakao 지도 API (+ services와 clusterer, drawing 라이브러리 불러오기) -->
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=543d067cfc41f7325d2f408e2f32264d&libraries=services,clusterer,drawing"></script>
-			<script>
-    var map = {
-        item: {},
-        load: function(id, options) {
-            var thisObj = this;
-            if (typeof id == 'undefined') {
-                return false;
-            }
-            if (typeof options == 'undefined') {
-                options = {};
-            }
-
-            thisObj.item[id] = {};
-
-            thisObj.item[id].map = new kakao.maps.Map(document.getElementById(id), {
-                center: new kakao.maps.LatLng(options.lat || 33.450701, options.lng || 126.570667),
-                level: options.level || 3
-            });
-
-            thisObj.item[id].markers = [];
-            thisObj.item[id].markers.push(new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(options.lat || 33.450701, options.lng || 126.570667)
-            }));
-
-            thisObj.item[id].markers.forEach(function(marker) {
-                marker.setMap(thisObj.item[id].map);
-            });
-        },
-        search: function(id, address) {
-            var thisObj = this;
-            if (typeof id == 'undefined' || typeof address == 'undefined' || typeof thisObj.item[id] == 'undefined') {
-                return false;
-            }
-
-            var geocoder = new kakao.maps.services.Geocoder();
-
-            geocoder.addressSearch(address, function(result, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                    thisObj.item[id].markers.forEach(function(marker) {
-                        marker.setMap(null);
-                    });
-                    thisObj.item[id].markers = [];
-                    thisObj.item[id].markers.push(new kakao.maps.Marker({ position: coords }));
-                    thisObj.item[id].markers.forEach(function(marker) {
-                        marker.setMap(thisObj.item[id].map);
-                    });
-
-                    thisObj.item[id].map.panTo(coords);
-                } else {
-                    alert('주소 검색에 실패하였습니다.');
-                }
-            });
-        }
-    };
-
-    $(document).ready(function(e) {
-        map.load('map', {});
-    });
-
-    $(document).on('click', '.evt-search', function(e) {
-        var address = $('.evt-address').val();
-        if ($.trim(address) === '') {
-            alert("주소를 입력해주세요.");
-            return false;
-        }
-        map.search('map', address);
-    });
-
-    $(document).on('keydown', '.evt-address', function(e) {
-        if (e.keyCode === 13) {
-            var address = $(this).val();
-            if ($.trim(address) === '') {
-                alert("주소를 입력해주세요.");
-                return false;
-            }
-            map.search('map', address);
-        }
-    });
-</script>
-
-
-  
-       
- 
-<!-- jquery -->
-<script src="//code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
-
+		
 <script>
-	var map = {
+var map = {
 		item : {},
 
 		// 맵 로드
@@ -497,6 +395,20 @@
 			map.search('map',address);
 		}
 	});
+    function toggleAddressInput() {
+        const addressInput = document.querySelector('.evt-address');
+        const searchButton = document.querySelector('.evt-search');
+
+        // 입력 칸과 검색 버튼을 토글하여 보이거나 숨기도록 처리
+        if (addressInput.classList.contains('d-none')) {
+            addressInput.classList.remove('d-none');
+            searchButton.classList.remove('d-none');
+        } else {
+            addressInput.classList.add('d-none');
+            searchButton.classList.add('d-none');
+        }
+    }
+	
 </script>
 </body>
 </html>

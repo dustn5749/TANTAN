@@ -1,55 +1,296 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대보3기 게시판</title>
-    <link rel="stylesheet" href="/assets/css/boardList.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   .us_container{
+      width: 80%;
+      margin: 0 auto;
+      padding: 3%;
+   }
+   .us_header {
+      position: sticky;
+       z-index: 9;
+       top: 80px;
+       height: fit-content;
+       background-color: rgb(255, 255, 255);
+       transition: all 0.1s ease-in-out 0.3s;
+   }
+   .us_header2 {
+       background-color: rgb(255, 255, 255);
+   }
+   .us_header3 {
+      display: flex;
+       -webkit-box-pack: center;
+       justify-content: center;
+       -webkit-box-align: center;
+       align-items: center;
+       position: sticky;
+       z-index: 9;
+       top: 80px;
+       width: 100%;
+       height: 44px;
+       margin-top: 20px;
+       padding: 0px 0px 20px;
+       background-color: rgb(255, 255, 255);
+   }
+   .us_header4 {
+   z-index: 9;
+    box-sizing: border-box;
+    width: 260px;
+    height: 38px;
+    padding: 0px 18px;
+    background: rgba(0, 0, 0, 0);
+   }   
+   
+   .us_header5{
+   position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 6px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 50px;
+   }
+   .us_header6 {
+       position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+   
+   }
+   .us_inner {
+       position: absolute;
+    left: 0px;
+    width: 50%;
+    height: 34px;
+    background-color: rgb(37, 37, 37);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px 0px;
+   }
+   .us_btn{
+       position: relative;
+    box-sizing: border-box;
+    width: 50%;
+    height: 34px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+    transition: color 0.1s ease-out 0.4s;
+   }
+   .us_img {
+       width: 16px;
+    height: 16px;
+    margin-right: 4px;
+   }
+   .schedule_btn{
+       position: relative;
+    box-sizing: border-box;
+    width: 50%;
+    height: 34px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(106, 106, 106);
+    border-radius: 20px;
+    transition: color 0.1s ease-out 0.4s;
+   }
+   .us_fillter {
+      display: inline-flex;
+      width: 100%;
+   }
+   .fillter_btn_area {
+      width: 90%;
+   }
+   .fillter_btn {
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: black;
+      color: white;
+   }
+   .fillter_btn:hover {
+      background-color: white;
+      color : black;
+   }
+   .city_fillter {
+      text-align: right;
+   }
+   .city_btn{
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: white;
+      
+   }
+   .city_fillter_inner {
+       display: flex;
+      
+   }
+       .mainItem {
+      display : none;
+      }
+      .mainItem.active {
+         display : block;
+      }
+/*       .sub { */
+/*         display: none; */
+/*       } */
+      .sub.active {
+        display: block;
+      }
+      ul > li {
+         list-style: none;
+      }
+      .ehUQiC {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 32px;
+    margin: 108px 0px 140px;
+    padding: 0px;
+}
+.bPLlTV {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0px 5px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+.fcPuDF {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0px 5px;
+    padding-right: 0px;
+    padding-left: 2px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 50px;
+}.bPLlTV {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0px 5px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+.fcPuDF {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0px 5px;
+    padding-right: 0px;
+    padding-left: 2px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 50px;
+}
+.ekMLCz {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: auto;
+    height: 32px;
+    margin: 0px 10px;
+}
 
+.fdmLWW {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0px 5px;
+    padding-right: 1px;
+    padding-left: 0px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 50px;
+}
+/*   .sub { */
+/*             display: none; */
+/*             list-style: none; */
+/*         } */
+        
+    .mainTxt {
+            position: relative;
+        }
+
+        .sub {
+            position: absolute;
+            index: 1;
+            left: 0;
+            bottom: 0;
+            display: none;
+            list-style: none;
+        }
+</style>
 </head>
 
-<style>
-.sc-6fd3897f-2 {
-      display: none;
-      
-      /* CSS로 버튼 디자인 및 스타일링을 적용합니다. */
-.custom-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.custom-button:hover {
-  background-color: #2980b9;
-  cursor: pointer;
-}
-      
-      
-      </style>
-
-<div class="sc-8276a693-3 fnsrxQ">
-    <div class="sc-8276a693-4 hiyPAt"></div>
-    <div class="sc-8276a693-6 cyzJKz">
-        <div class="sc-6b89d0a2-0 fqFOsB">
-            <div class="sc-6b89d0a2-1 jOzFyS">
-                <div class="sc-6b89d0a2-2 eHXddr">
-                    <div class="sc-6b89d0a2-3 gRnINB" style="left: 0%;"></div>
-                    <button class="sc-6b89d0a2-4 hiCFUB">
-                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="sc-6b89d0a2-5 ddkKBo">동행
+<body>
+<div class="us_header">
+    <div class="us_header2"></div>
+    <div class="us_header3">
+        <div class="us_header4">
+            <div class="us_header5">
+                <div class="us_header6">
+                    <div class="us_inner" style="left: 0%;"></div>
+                    <button class="us_btn">
+                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
                     </button>
-                    <button class="sc-6b89d0a2-4 jpNkys">
-                        <img src="/assets/img/answer2_img02.png" alt="일정" class="sc-6b89d0a2-5 ddkKBo">일정
+                    <button class="schedule_btn">
+                        <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
                     </button>
                 </div>
             </div>
@@ -57,65 +298,318 @@
     </div>
 </div>
 
-    
+<div class="us_fillter">
+ <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
+    <button class="fillter_btn">댓글순</button>
+    <button class="fillter_btn">조회순</button>
+    <button class="fillter_btn">인기순</button>
+</div>
+<div class="city_fillter">
 
-<main class="sc-8276a693-1 dtglEk">
-  <div class="sc-6fd3897f-0 kNZvbZ">
-    <div class="sc-6fd3897f-1 bgXato">
-      <div class="sc-fe318b44-0 bPOjyX">
-        <button class="sc-fe318b44-1 diPORg">최신 순</button>
-        <button class="sc-fe318b44-1 diPORg">인기 순</button>
-        <button class="sc-fe318b44-1 diPORg">많이 본 순</button>
-        <button class="sc-fe318b44-1 eTYLaQ">댓글 순</button>
-      </div>
-    </div>
-        
-        
- 
-<!--     <div class="sc-b294d238-0 RYzmN"> -->
-<!--       <div class="sc-b294d238-1 dEnAsw"> -->
-<!--     <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg"  -->
-<!--     style="transition: transform 0.3s ease 0s; transform: rotate(0deg); cursor: pointer; display: inline-block;"> -->
-    
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 9.49252C0.75 9.19691 0.992057 8.95728 1.29065 8.95728H19.2094C19.5079 8.95728 19.75 9.19691 19.75 9.49252C19.75 9.78813 19.5079 10.0278 19.2094 10.0278H1.29065C0.992057 10.0278 0.75 9.78813 0.75 9.49252Z" fill="#6a6a6a"></path> -->
-  
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 3.2225C0.75 2.92689 0.992057 2.68726 1.29065 2.68726H19.2094C19.5079 2.68726 19.75 2.92689 19.75 3.2225C19.75 3.51811 19.5079 3.75775 19.2094 3.75775H1.29065C0.992057 3.75775 0.75 3.51811 0.75 3.2225Z" fill="#6a6a6a"></path> -->
-  
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 15.7625C0.75 15.4669 0.992057 15.2273 1.29065 15.2273H19.2094C19.5079 15.2273 19.75 15.4669 19.75 15.7625C19.75 16.0582 19.5079 16.2978 19.2094 16.2978H1.29065C0.992057 16.2978 0.75 16.0582 0.75 15.7625Z" fill="#6a6a6a"></path> -->
-  
-<!--   <path d="M8.62799 3.38083C8.62799 4.75331 7.50415 5.86592 6.11783 5.86592C4.7315 5.86592 3.60767 4.75331 3.60767 3.38083C3.60767 2.00836 4.7315 0.895752 6.11783 0.895752C7.50415 0.895752 8.62799 2.00836 8.62799 3.38083Z" fill="white"></path> -->
-  
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M6.11797 1.48977C5.06302 1.48977 4.20781 2.33643 4.20781 3.38085C4.20781 4.42526 5.06302 5.27192 6.11797 5.27192C7.17293 5.27192 8.02814 4.42526 8.02814 3.38085C8.02814 2.33643 7.17293 1.48977 6.11797 1.48977ZM3.00781 3.38085C3.00781 1.68031 4.40028 0.301758 6.11797 0.301758C7.83567 0.301758 9.22814 1.68031 9.22814 3.38085C9.22814 5.08138 7.83567 6.45993 6.11797 6.45993C4.40028 6.45993 3.00781 5.08138 3.00781 3.38085Z" fill="#6a6a6a"></path> -->
-  
-<!--   <path d="M8.62799 15.7898C8.62799 17.1622 7.50415 18.2749 6.11783 18.2749C4.7315 18.2749 3.60767 17.1622 3.60767 15.7898C3.60767 14.4173 4.7315 13.3047 6.11783 13.3047C7.50415 13.3047 8.62799 14.4173 8.62799 15.7898Z" fill="white"></path> -->
-  
-<!--   <path d="M16.8904 9.65085C16.8904 11.0233 15.7666 12.1359 14.3803 12.1359C12.994 12.1359 11.8701 11.0233 11.8701 9.65085C11.8701 8.27838 12.994 7.16577 14.3803 7.16577C15.7666 7.16577 16.8904 8.27838 16.8904 9.65085Z" fill="white"></path> -->
-  
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M14.3802 7.75979C13.3252 7.75979 12.47 8.60645 12.47 9.65087C12.47 10.6953 13.3252 11.5419 14.3802 11.5419C15.4351 11.5419 16.2903 10.6953 16.2903 9.65087C16.2903 8.60645 15.4351 7.75979 14.3802 7.75979ZM11.27 9.65087C11.27 7.95033 12.6625 6.57178 14.3802 6.57178C16.0979 6.57178 17.4903 7.95033 17.4903 9.65087C17.4903 11.3514 16.0979 12.73 14.3802 12.73C12.6625 12.73 11.27 11.3514 11.27 9.65087Z" fill="#6a6a6a"></path> -->
-  
-<!--   <path d="M8.48468 15.9211C8.48468 17.2936 7.36084 18.4062 5.97452 18.4062C4.58819 18.4062 3.46436 17.2936 3.46436 15.9211C3.46436 14.5486 4.58819 13.436 5.97452 13.436C7.36084 13.436 8.48468 14.5486 8.48468 15.9211Z" fill="white"></path> -->
-  
-<!--   <path fill-rule="evenodd" clip-rule="evenodd" d="M5.97442 14.0298C4.91947 14.0298 4.06426 14.8765 4.06426 15.9209C4.06426 16.9653 4.91947 17.812 5.97442 17.812C7.02937 17.812 7.88458 16.9653 7.88458 15.9209C7.88458 14.8765 7.02937 14.0298 5.97442 14.0298ZM2.86426 15.9209C2.86426 14.2204 4.25673 12.8418 5.97442 12.8418C7.69212 12.8418 9.08458 14.2204 9.08458 15.9209C9.08458 17.6214 7.69212 19 5.97442 19C4.25673 19 2.86426 17.6214 2.86426 15.9209Z" fill="#6a6a6a"></path> -->
-<!-- </svg> -->
-
+<button class="city_btn" onclick="toggleCityFilter()">지역</button>
+<div class="city_fillter_inner" style="display: none;">
+    <ul>
+        <li class="mainItem">
+            <div class="parent">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        한국
+                    </button>
+                    <ul class="dropdown-menu" style="display: none;">
+                        <!-- Insert your list items here -->
+                        <li><a class="dropdown-item" href="#">서울</a></li>
+                        <li><a class="dropdown-item" href="#">경기도</a></li>
+			     	<li>강원도</li>
+                   <li>인천</li>
+                   <li>충청북도</li>
+                   <li>충청남도</li>
+                   <li>대전</li>
+                   <li>전라북도</li>
+                   <li>전라남도</li>
+                   <li>광주</li>
+                   <li>경상북도</li>
+                   <li>경상남도</li>
+                   <li>울산</li>
+                   <li>부산</li>
+                   <li>대구</li>
+                   <li>마산,창워</li>
+                 </ul>
+  				</ul>
+				</div>
+         		</div>
+   				</div>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $40.00 - $80.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$50.00</span>
+                                    $25.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    $40.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$50.00</span>
+                                    $25.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $120.00 - $280.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+				                    
+                    
+                    
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    $40.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
    
-<!--  <style> -->
-<!-- /*     .sc-6fd3897f-2 .sc-9280f9a9-0 { display: none; } */ -->
-<!--   </style> -->
-<!-- </head> -->
+<div class="sc-73e2cff1-0 ehUQiC">
+	<button disabled="" class="sc-73e2cff1-1 fcWStM">
+		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+				<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+		</svg>
+	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+			<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+	</svg>
+</button>
+		<button disabled="" class="sc-73e2cff1-1 fdmLWW">
+			<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+		<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+	</svg>
+</button>
 
-<div class="region-selector">
-  <span class="select-region">지역</span>
-  <div class="dropdown-icon"></div>
+<div class="sc-73e2cff1-2 ekMLCz">
+	<button class="sc-73e2cff1-3 bwuLmH">1</button>
+	<button class="sc-73e2cff1-3 bPLlTV">2</button>
+	<button class="sc-73e2cff1-3 bPLlTV">3</button>
+	<button class="sc-73e2cff1-3 bPLlTV">4</button>
+	<button class="sc-73e2cff1-3 bPLlTV">5</button>
+</div>
+	<button class="sc-73e2cff1-1 fcPuDF">
+		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+			<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
+		</svg>
+</button>
 
-  <div class="sc-6fd3897f-2">
-    <button class="sc-9280f9a9-0 iAUmuD" style="display: none;"><p class="sc-9280f9a9-1 jkexzH">한국</p></button>
-  </div>
+<button class="sc-73e2cff1-1 fcPuDE">
+	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
+	</svg>
+	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
+	</svg>
+</button>
 </div>
 
-<button id="createCompanionButton" class="custom-button">동행 생성하기</button>
 
 <script>
+
+function toggleCityFilter() {
+    var filter = document.querySelector('.city_fillter_inner');
+    filter.style.display = filter.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleKorea() {
+    var koreaList = document.querySelector('.sub');
+    koreaList.style.display = koreaList.style.display === 'none' ? 'block' : 'none';
+}
+		document.querySelector(".city_btn").addEventListener("click", function () {
+    		console.log("click");
+
+   		 document.querySelector(".mainItem").style.display="flex";
+  		});
+
+		document.querySelector(".mainTxt").addEventListener("click", function () {
+    		console.log("click");
+
+    	document.querySelector(".sub").classList.toggle("active");
+  			});
+
+   
+
 document.addEventListener('DOMContentLoaded', function() {
   const createCompanionButton = document.getElementById('createCompanionButton');
 
@@ -123,94 +617,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = "boardDetail.jsp"; 
   });
 });
-</script>
 
-
-
-<div class="selected-location"></div>
-		    </div>
-		    <div class="sc-cf3dfdf6-1 dkbZSI">
-		      <button class="sc-9280f9a9-0 gpXqPI">
-		        <p class="sc-9280f9a9-1 kSLJX">울릉도</p>
-		      </button>
-		      <button class="sc-9280f9a9-0 gpXqPI">
-		        <p class="sc-9280f9a9-1 kSLJX">전라도</p>
-		      </button>
-		 <button class="sc-9280f9a9-0 gpXqPI">
-		        <p class="sc-9280f9a9-1 kSLJX">경상도</p>
-		      </button>
-		     <button class="sc-9280f9a9-0 gpXqPI">
-		        <p class="sc-9280f9a9-1 kSLJX">충청도</p>
-		      </button>
-		      
-<!-- 		     <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">인천</p> -->
-<!-- 		      </button> -->
-<!-- 		       <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">경기도</p> -->
-<!-- 		      </button> -->
-<!-- 		 <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">부산</p> -->
-<!-- 		      </button> -->
-<!-- 		       <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">제주도</p> -->
-<!-- 		       <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">강원도</p> -->
-<!-- 		      </button> -->
-<!-- 		       <button class="sc-9280f9a9-0 gpXqPI"> -->
-<!-- 		        <p class="sc-9280f9a9-1 kSLJX">서울</p> -->
-<!-- 		      </button> -->
-		
-		
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 KSLJX"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">서울특별시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 KSLJX"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">부산광역시</P> -->
-<!-- 		    </BUTTON> -->
-		    
-   
-<!-- 			<BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">대구광역시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">인천광역시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">광주광역시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">대전광역시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">울산광역시</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">세종특별자치시</P> -->
-<!-- 		</BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">경기도</P> -->
-<!-- 		</BUTTON> -->
-<!-- 		    <BUTTON CLASS="SC-9280F9A9-0 GPXQPI"> -->
-<!-- 		        <P CLASS="SC-9280F9A9-1 KSLJX">강원도</P> -->
-<!-- 		    </BUTTON> -->
-<!-- 		</DIV> -->
-	
-	<div class="sc-6fd3897f-3 cjErMT">
-	    <button width="93px" color="#fff" class="sc-1a19d32c-0 kZebzh">
-	        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-	            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6052 12C19.6052 15.5899 16.6951 18.5 13.1052 18.5V20C17.5235 20 21.1052 16.4183 21.1052 		12C21.1052 7.58172 17.5235 4 13.1052 4C8.68695 4 5.10522 7.58172 5.10522 12H6.60522C6.60522 8.41015 9.51537 5.5 13.1052 5.5C16.6951 5.5 19.6052 		8.41015 19.6052 12Z" fill="#00CE7C"></path>
-	            <path d="M6.23389 15.6285C6.03593 15.8428 5.6973 15.8428 5.49934 15.6285L2.66746 12.5629C2.37163 12.2427 2.59877 11.7237 3.03473 		11.7237L8.6985 11.7237C9.13446 11.7237 9.3616 12.2427 9.06577 12.5629L6.23389 15.6285Z" fill="#00CE7C"></path>
-	          
-	            <circle cx="13.1052" cy="19.25" r="0.75" fill="#00CE7C"></circle>
-	       		</svg> 초기화</button>
-	    
-	    <button width="calc(100% - 105px)" color="#fff" class="sc-1a19d32c-0 eOBcjJ">적용하기</button>
-	</div>
-	   
-  
-      
-<script>
 document.addEventListener("DOMContentLoaded", function() {
 	  const selectRegion = document.querySelector('.select-region');
 	  const koreaButton = document.querySelector('.sc-9280f9a9-0');
@@ -219,31 +626,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	    koreaButton.style.display = 'block';
 	  });
 	});
-// document.addEventListener('DOMContentLoaded', function() {
-// 	  const selectRegion = document.querySelector('.select-region');
-// 	  const regionSelector = document.querySelector('.sc-6fd3897f-2');
-// 	  const buttonKorea = document.querySelector('.sc-6fd3897f-2 .sc-9280f9a9-0');
-
-// 	  let isRegionSelected = false;
-
-// 	  selectRegion.addEventListener('click', function() {
-// 	    if (!isRegionSelected) {
-// 	      regionSelector.style.display = 'block';
-// 	      isRegionSelected = true;
-// 	    } else {
-// 	      regionSelector.style.display = 'none';
-// 	      isRegionSelected = false;
-// 	    }
-// 	  });
-// 	});
-
-
-
-//   buttonKorea.addEventListener('click', function() {
-//     regionSelector.style.display = 'block';
-//     buttonKorea.style.display = 'none';
-//   });
-// });
 
 document.addEventListener('DOMContentLoaded', function() {
 	  const buttons = document.querySelectorAll('.sc-9280f9a9-0.gpXqPI');
@@ -289,82 +671,6 @@ function displaySelectedLocationInfo(selectedRegion) {
     </div>
   </div>
 </main>
-
-
-<section class="sc-19abfb4d-0 gMqNL">
-	<div class="sc-29bc4f98-0 fcEaCl">
-		<div class="sc-29bc4f98-5 coaePv">
-		<div class="sc-29bc4f98-6 lmnhGl">
-		<img src="" class="sc-29bc4f98-7 lnUgzp">
-		<div class="sc-29bc4f98-8 jyBUwE">
-		<p color="#000000" class="sc-29bc4f98-3 bNQCRm"></p>
-		<div class="sc-29bc4f98-4 fcbBSx">
-		<p color="#008ff6" class="sc-29bc4f98-3 fxmbuM"></p>
-		<div color="#008ff6" class="sc-29bc4f98-1 kAVbMF"></div>
-		<p color="#008ff6" class="sc-29bc4f98-3 fxmbuM"></p>
-		</div>
-		</div>
-	</div>
-	
-		<div class="sc-29bc4f98-2 llYPOV">
-	</div>
-		<div class="sc-29bc4f98-9 hRWitS">
-		<div class="sc-29bc4f98-10 fXtNyN">
-	</div>
-	
-	<div class="sc-29bc4f98-11 fVyVIL">
-		<img src="" class="sc-29bc4f98-12 cZSBPp">
-		<p class="sc-29bc4f98-13 cnWlyh"></p>
-	</div>
-	
-		<div class="sc-29bc4f98-4 fcbBSv">
-		<p color="#00CE7C" class="sc-29bc4f98-3 vVyyB">일</p>
-		<div color="#00CE7C" class="sc-29bc4f98-1 bAChzx"></div>
-		<p color="#00CE7C" class="sc-29bc4f98-3 hNtUmQ"></p>
-		</div>
-		</div>
-	</div>
-	
-	<div class="sc-29bc4f98-14 grDCHa">
-		<img src="" class="sc-29bc4f98-15 kbGHFj">
-		<div class="sc-29bc4f98-16 gxQXjn">
-		<div class="sc-29bc4f98-17 kpFUIh">
-			<svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M12.7244 7.11371C12.7244 10.6866 6.49995 16.3557 6.49995 16.3557C6.49995 16.3557 0.275513 10.6866 0.275513 7.11371C0.275513 3.54077 3.06229 			0.644341 6.49995 0.644341C9.93761 0.644341 12.7244 3.54077 12.7244 7.11371Z" fill="#fff"></path>
-			<ellipse cx="6.50063" cy="6.40462" rx="2.81106" ry="2.81106" fill="#008FF6"></ellipse>
-			</svg>
-		</div>
-		
-	<p color="#fff" class="sc-29bc4f98-18 kBBtA-D"></p>
-	</div><div class="sc-29bc4f98-19 iwPKbY"><div class="sc-29bc4f98-20 dDVluB">
-	<p class="sc-29bc4f98-21 jDYjaB"></p>
-	<div color="#00CE7C" class="sc-29bc4f98-1 bAChzx"></div>
-	<p class="sc-29bc4f98-21 jDYjaB"></p>
-	</div>
-	<div class="sc-29bc4f98-22 kOBvnc">
-	<div class="sc-29bc4f98-23 jkGfHV">
-	<img src="" class="sc-29bc4f98-24 kDkfpo">
-	<p class="sc-29bc4f98-25 dOUlxh"></p></div><div class="sc-29bc4f98-23 jkGfHV">
-	<img src="" class="sc-29bc4f98-24 kDkfpo">
-	<p class="sc-29bc4f98-25 dOUlxh">0</p></div><div class="sc-29bc4f98-23 jBgfDo">
-	<img src="" class="sc-29bc4f98-24 kDkfpo">
-	<p class="sc-29bc4f98-25 dOUlxh">0</p>
-	</div>
-	</div>
-	</div>
-	</div>
-	<div class="sc-29bc4f98-26 kHbskm">
-	<p class="sc-29bc4f98-27 gTrsyi"></p>
-	<p class="sc-29bc4f98-28 fLzFwe">
-	</p>
-	</div>
-</div>
-
-
-
-
-
-</section>
 
 </body>
 
