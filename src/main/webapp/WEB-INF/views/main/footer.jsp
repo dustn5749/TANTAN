@@ -7,12 +7,10 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-<<<<<<< HEAD
 =======
 .bg-dark{
 	background-color: white !important;
 } 
->>>>>>> refs/remotes/origin/main
 
 </style>
 </head>
