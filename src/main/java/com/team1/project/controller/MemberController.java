@@ -31,21 +31,5 @@ public class MemberController {
 		return "joinComplete";	
 	}
 	
-	// 리뷰
-	@RequestMapping("/review.do")
-	public String review() {
-		return "review";	
-	}
-	
-	// 동행test
-	@RequestMapping("/us.do")
-	public String us() {
-		return "us";	
-	}
-	
-	// 리뷰
-	@RequestMapping("/map.do")
-	public String map() {
-		return "map";	
-	}
+
 }	

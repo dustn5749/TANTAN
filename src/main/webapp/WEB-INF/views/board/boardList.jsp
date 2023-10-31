@@ -275,6 +275,14 @@
             display: none;
             list-style: none;
         }
+     .schedule_btn {
+     	cursor: pointer !important;
+     
+     }
+     .schedule_btn:hover {
+     	background-color: black !important;
+     	color : white !important;
+     }
 </style>
 </head>
 
@@ -289,7 +297,7 @@
                     <button class="us_btn">
                         <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
                     </button>
-                    <button class="schedule_btn">
+                    <button class="schedule_btn" >
                         <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
                     </button>
                 </div>
@@ -587,6 +595,10 @@
 
 <script>
 
+document.querySelector(".schedule_btn").addEventListener("click", function () {
+	location.href="/board/cap";
+}
+)
 function toggleCityFilter() {
     var filter = document.querySelector('.city_fillter_inner');
     filter.style.display = filter.style.display === 'none' ? 'block' : 'none';
@@ -665,6 +677,7 @@ function displaySelectedLocationInfo(selectedRegion) {
     // 선택된 지역에 따라 정보를 업데이트
     selectedLocationInfo.textContent = `선택된 지역: ${selectedRegion}`;
 }
+
 
 </script>
       </div>
