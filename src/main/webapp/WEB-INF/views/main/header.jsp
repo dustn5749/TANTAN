@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style type="text/css">
 
 @font-face {
@@ -17,7 +19,24 @@
      font-family: 'NPSfontBold';
 	font-size: 20px !important;
 	
-
+	 /* 버튼 아이콘의 크기를 조절 */
+    .nav-icon i {
+        font-size: 30px; /* 원하는 크기로 조절합니다. */
+    }
+    
+    /* 버튼들 간격을 조절 */
+    .nav-icon {
+        margin-right: 20px; /* 원하는 간격으로 조절합니다. */
+    }
+    
+	.nav-link {
+        font-family: 'NPSfontBold';
+        font-size: 20px !important;
+    }
+    
+    .navbar .align-self-center .d-flex {
+    	width: 200px !important;
+    }
 }
 
 
@@ -54,7 +73,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
+                <div class="navbar align-self-center d-flex" style="width: 200px">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
                             <div class="input-group-text">
@@ -62,18 +81,23 @@
                             </div>
                         </div>
                     </div>
-
+					
                     <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <i class="fa-solid fa-user-group"></i>
+<!--                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> -->
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <i class="fa-regular fa-message"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
                     </a>
-                </div>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+20</span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa-regular fa-user"></i>                    
+                    </a>
             </div>
-
         </div>
     </nav>
     </header>

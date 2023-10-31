@@ -78,6 +78,24 @@
 	
 	
 	
+	
+	
+	<definition name="snsLayout" template="/WEB-INF/views/snsIndex.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+		<put-attribute name="footer" value=""></put-attribute>
+	</definition>
+	
+	<definition name="snsProfile" extends="snsLayout">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
+	</definition>
+	
+	
+	
+	
+	
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>
@@ -85,10 +103,6 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/admin/adminFooter.jsp"></put-attribute>
 	</definition>
 
-	<definition name="snsProfile" extends="baseLayout">
-		<put-attribute name="title" value="메인 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
-	</definition>
 	
 	<definition name="admin" extends="adminLayout">
 		<put-attribute name="title" value="관리자 메인 페이지"></put-attribute>
@@ -113,6 +127,12 @@
 	<definition name="admin11" extends="adminLayout">
 		<put-attribute name="title" value="관리자 1:1 문의하기 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="map" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
 	</definition>
 
 <!-- 	
