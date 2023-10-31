@@ -225,6 +225,7 @@
 </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div class="us_fillter">
    <div class="fillter_btn_area">
       <button class="fillter_btn">댓글순</button>
@@ -260,7 +261,14 @@
          </div>
    </div>
 </div>
+=======
+</div>
+<script>
+document.querySelector(".city_btn").addEventListener("click", function () {
+    console.log("click");
+>>>>>>> refs/remotes/origin/main
 
+<<<<<<< HEAD
 <script>
 document.querySelector(".city_btn").addEventListener("click", function () {
     console.log("click");
@@ -284,6 +292,8 @@ document.querySelector(".city_btn").addEventListener("click", function () {
     console.log("click");
 >>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
+=======
+>>>>>>> refs/remotes/origin/main
     document.querySelector(".mainItem").style.display="flex";
   });
 

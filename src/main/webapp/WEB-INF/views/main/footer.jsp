@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 
 <style type="text/css">
+=======
 .bg-dark{
 	background-color: white !important;
 } 
@@ -17,7 +18,7 @@
   <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
-            </div>
+            
 
             <div class="row text-light mb-4" >
                  <div class="col-12 mb-3">
@@ -42,12 +43,11 @@
 			     <img src="/assets/img/logo.png" style="width: 180px;">
 			
             </div>
-        </div>
 
         <div class="w-100 bg-black py-3">
            
         </div>
-
+        </div>
     </footer>
     <!-- End Footer -->
 </body>
