@@ -115,6 +115,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
 	</definition>
 
+
+	<definition name="map" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
+	</definition>
+
 <!-- 	
 	<definition name="board/list" template="/WEB-INF/views/board/boardList.jsp">
 	    <put-attribute name="title" value="게시판"></put-attribute>
