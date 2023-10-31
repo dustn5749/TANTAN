@@ -19,7 +19,7 @@
        transition: all 0.1s ease-in-out 0.3s;
    }
    .us_header2 {
-       background-color: rgb(255, 255, 255);
+       background-color:0 rgb(255, 255, 255);
    }
    .us_header3 {
       display: flex;

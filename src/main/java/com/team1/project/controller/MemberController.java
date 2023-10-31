@@ -31,9 +31,5 @@ public class MemberController {
 		return "joinComplete";	
 	}
 	
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 }	
