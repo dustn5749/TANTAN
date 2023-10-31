@@ -60,10 +60,10 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/member/review.do">커뮤니티</a>
+                            <a class="nav-link" href="">커뮤니티</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">동행</a>
+                            <a class="nav-link" href="/board/list">동행</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">고객센터</a>

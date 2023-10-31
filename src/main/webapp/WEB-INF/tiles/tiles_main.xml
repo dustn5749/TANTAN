@@ -37,16 +37,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/join/join_completeForm.jsp"></put-attribute>
 	</definition>
 	
-		<definition name="review" extends="baseLayout">
-		<put-attribute name="title" value="리뷰페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/review/review.jsp"></put-attribute>
-	</definition>
-
-
-	<definition name="us" extends="baseLayout">
-		<put-attribute name="title" value="리뷰페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/review/us.jsp"></put-attribute>
-	</definition>
 	
 	
 	<definition name="board/List" extends="baseLayout">

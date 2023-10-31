@@ -11,7 +11,19 @@
 .bg-dark{
 	background-color: white !important;
 } 
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
+#content {
+    flex: 1;
+}
+
+#tempaltemo_footer {
+    flex-shrink: 0;
+}
 </style>
 </head>
 <body>
