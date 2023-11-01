@@ -30,19 +30,24 @@
    a {
       cursor: url('./assets/img/cursor2.png'), auto !important;
    }
-   
-   .bg {
-      z-index:100;
-      position: fixed;
-      right: 0;
-/*       top:90 */
-      width: 250px;
-      height: 250px;
-   }
-   
-   .bg img {
-      width: 100%;
-   }
+
+/* 토끼 아이콘 DIV */
+.bg {
+    z-index: 100;
+    position: fixed;
+    right: 0;
+    /* top: 90 */
+    width: 300px;
+    height: 250px;
+    text-align: center;
+    display: flex;
+}
+
+.bg:hover img {
+    transform: scale(1.1);
+    transition: transform 0.3s; /* 선택적인 트랜지션을 추가하여 부드럽게 확대/축소 가능 */
+}
+
 #template-mo-zay-hero-carousel .carousel-control-next i, #template-mo-zay-hero-carousel .carousel-control-prev i {
     color: #0099ff !important;
     font-size: 2.8em !important;
@@ -81,7 +86,7 @@
 /* 일정검색 input */	
 .schedule_bar {
     position: absolute;
-    top: 73%; /* 수직 가운데 정렬 */
+    top: 72%; /* 수직 가운데 정렬 */
     left: 51%; /* 수평 가운데 정렬 */
     transform: translate(-50%, -50%); /* 가운데 정렬을 위한 변환 */
     z-index: 1; /* 이미지를 최상위로 표시 */;
@@ -137,10 +142,10 @@
 }
 /* best top5 여행지 */
 .best_top5_city {	
-   background-color: rgb(243, 248, 255);
+   	background: url("/assets/img/wave.jpg");
     width: 100%;
     height: 700px;
-    margin: 30px auto;
+    margin: 0 auto;
     align-content: center;
     align-items: center;
     text-align: center;
@@ -255,7 +260,6 @@
 /* 최신 동행 모집 */
 
 .container .py-5{
-background-image: url("/assets/img/backpng.png") !important;
 }
 
 .col-12 .col-md-4 .p-5 .mt-3 {
@@ -264,8 +268,8 @@ background-image: url("/assets/img/backpng.png") !important;
 </style>
 </head>
 <body>
-<div class="bg">
-      <img alt="" src="./assets/img/rabbit.png">
+	<div class="bg">
+	  <img src="/assets/img/rabbit.png" id="rabbit_img">	
    </div>
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -409,19 +413,13 @@ background-image: url("/assets/img/backpng.png") !important;
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Watches</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+               
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+              
             </div>
         </div>
     </section>
@@ -514,7 +512,13 @@ background-image: url("/assets/img/backpng.png") !important;
         </div>
     </section>
     <!-- End Featured Product -->
-
+	<script type="text/javascript">
+	/* 토끼 눌렀을때 sns 페이지로 연동 */
+	$("#rabbit_img").on("click",function(){
+		location.href="/snsProfile";
+	})
+	
+	</script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SnsProfileController {
 
-	@RequestMapping({"/snsProfile"})
+	@RequestMapping("/snsProfile")
 	public String Main() {
 		return "snsProfile";
 	}
