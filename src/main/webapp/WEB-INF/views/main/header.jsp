@@ -84,6 +84,7 @@ ul, li {
 	font-family: 'NPSfontBold';	
 	text-align: center;
 	justify-content: center;	
+	display: flex;
 }
 .under_menu{
 	display: none;

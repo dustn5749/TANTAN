@@ -129,6 +129,7 @@
     color: rgb(106, 106, 106);
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
+
    }
    /* 동행 생성하기 버튼 div */
    .make_us {
@@ -351,6 +352,7 @@
 
 <div class="schedule_container">
 <div class="us_header">
+
     <div class="us_header2"></div>
     <div class="us_header3">
         <div class="us_header4">
