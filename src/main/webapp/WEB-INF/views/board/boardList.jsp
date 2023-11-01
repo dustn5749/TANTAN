@@ -11,10 +11,13 @@
       padding: 3%;
    }
     
+    .content{
+    padding : 4%;
     
+    }
     .us_header_size{
-    float: right;
-    width: 27%;
+     float: right;
+    width: 237px;
     top: 80px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
@@ -147,12 +150,12 @@
 >>>>>>> refs/remotes/origin/main
    }
    .us_fillter {
-      display: inline-flex;
-      width: 34%;
-      padding: 10px;
+   	margin: 0 auto;
+   	width: 1260px;
    }
    .fillter_btn_area {
-      width: 78%;
+   	  display: flex;
+      width: 300px;
    }
    .fillter_btn {
       width: 80px;
@@ -160,6 +163,9 @@
       border-radius: 10px;
       background-color: black;
       color: white;
+   }
+   .fillter_btn +.fillter_btn  {
+   	margin: 0 10px;
    }
    .fillter_btn:hover {
       background-color: white;
@@ -174,12 +180,12 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: auto; 
+    width: 80px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
     padding: 8px 14px;
-    background: rgb(255, 255, 255);
+    background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
@@ -194,12 +200,12 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: auto; 
+    width: 80px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
     padding: 8px 14px;
-    background: rgb(255, 255, 255);
+    background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
@@ -353,126 +359,65 @@
         margin: 0 auto; 
     }
     
-      #korea {
-            display: none; 
-        }
-     
+	ul > li {
+	position:relative;
+	}
+
+	ul. {
+	position: abd
+	}
+
 </style>
 </head>
 
 <body>
-<<<<<<< HEAD
-
 <div class="schedule_container">
-<div class="us_header">
-=======
- <div class="us_header">
->>>>>>> refs/remotes/origin/main
-    <div class="us_header2"></div>
-    <div class="us_header3">
-        <div class="us_header4">
-            <div class="us_header5">
-                <div class="us_header6">
-                    <div class="us_inner" style="left: 0%;"></div>
-                    <button class="us_btn">
-                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img" >동행
-                    </button>
-                    <button class="schedule_btn" >
-                        <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
-                    </button>
+    <div class="us_header">
+        <div class="us_header2"></div>
+        <div class="us_header3">
+            <div class="us_header4">
+                <div class="us_header5">
+                    <div class="us_header6">
+                        <div class="us_inner" style="left: 0%;"></div>
+                        <button class="us_btn">
+                            <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
+                        </button>
+                        <button class="schedule_btn">
+                            <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
- <div class="us_header_size">
-    <div class="us_header_size">
-     <button class="city_btn" onclick="toggleCityFilter()">지역</button>
 
-    <div id="korea">한국</div>
-    
-
+    <div class="us_fillter">
+    	<div class="us_header_size">
+	       <ul><button class="city_btn" onclick="toggleCityFilter()">지역</button></ul>
     <div class="city_fillter" id="koreanCities" style="display: none;">
         <ul>
             <li>서울</li>
-            <li>경기도</li>
             <li>강원도</li>
-            <!-- 나머지 지역 -->
+            <li>제주</li>
+            <li>부산</li>
+            <li>경기도</li>
+            <li>충청도</li>
+            <li>경상도</li>
+            <li>전라도</li>
+            <li>울릉도</li>
         </ul>
     </div>
-</div>
-
-<script >   
-function toggleCityFilter() {
-    var korea = document.getElementById("korea");
-    if (korea.style.display === "none") {
-        korea.style.display = "block"; // 보이도록 설정
-    } else {
-        korea.style.display = "none"; // 감추도록 설정
-    }
-}
-
-
-
-</script>
-    
-    
-  <button class="city_btn1" 
-    onclick="window.location.href = 'detail'" 
-    style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;"
->
-    동행생성하기
-</button>
-  
-
-            
+	        <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; 			align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; 			padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+	    </div>
+        <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
+            <button class="fillter_btn">댓글순</button>
+            <button class="fillter_btn">조회순</button>
+            <button class="fillter_btn">인기순</button>
+        </div>
     </div>
-
-<div class="us_fillter">
-  <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
-    <button class="fillter_btn">댓글순</button>
-    <button class="fillter_btn">조회순</button>
-    <button class="fillter_btn">인기순</button>
-</div>
-<div class="city_fillter">
-
-
-
-
-<div class="city_fillter_inner" style="display: none;">
-    <ul>
-        <li class="mainItem">
-            <div class="parent">
-                <div class="btn-group">
-                  
-                    <ul class="dropdown-menu" style="display: none;">
-                        <!-- Insert your list items here -->
-                        <li><a class="dropdown-item" href="#">서울</a></li>
-                        <li><a class="dropdown-item" href="#">경기도</a></li>
-			     	<li>강원도</li>
-                   <li>인천</li>
-                   <li>충청북도</li>
-                   <li>충청남도</li>
-                   <li>대전</li>
-                   <li>전라북도</li>
-                   <li>전라남도</li>
-                   <li>광주</li>
-                   <li>경상북도</li>
-                   <li>경상남도</li>
-                   <li>울산</li>
-                   <li>부산</li>
-                   <li>대구</li>
-                   <li>마산,창원,진해</li>
-                 </ul>
-  				</ul>
-				</div>
-         		</div>
-   				</div>
-   				
-        <!-- Section-->
-        <section class="">
+        <section>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
@@ -644,10 +589,6 @@ function toggleCityFilter() {
                             </div>
                         </div>
                     </div>
-                    
-				                    
-                    
-                    
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
@@ -678,6 +619,8 @@ function toggleCityFilter() {
                 </div>
             </div>
         </section>
+   
+   
    
 <div class="sc-73e2cff1-0 ehUQiC">
 	<button disabled="" class="sc-73e2cff1-1 fcWStM">
@@ -718,8 +661,36 @@ function toggleCityFilter() {
 </div>
 </div>
 
+
+
 <script>
- 
+
+function toggleCountry() {
+    var koreaDiv = document.getElementById("korea");
+    koreaDiv.innerHTML = "한국";
+}
+
+
+function toggleCityFilter() {
+    var korea = document.getElementById("korea");
+    if (korea.style.display === "none") {
+        korea.style.display = "block"; // 보이도록 설정
+    } else {
+        korea.style.display = "none"; // 감추도록 설정
+    }
+}
+</script>
+
+<script>
+document.querySelector(".schedule_btn").addEventListener("click", function () {
+    location.href = "/board/schedule";
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 이 부분에 버튼 클릭 시의 작업 등을 정의
+});
 
 
 // 일정이동 버튼
