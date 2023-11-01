@@ -9,7 +9,11 @@
 <title>Insert title here</title>
 
 <style>
-
+	/* review container 시작 */
+	.review_container {
+		margin: 0 auto;
+		padding: 10px;
+	}
      .boardmap_container {
             width: 90% !important;
             padding: 3% !important;
@@ -21,9 +25,10 @@
         .row {
             display: flex;
             margin: 0 auto !important;
-            padding: 30px !important;
+           
             justify-content: center;
             width: 100%;
+            height: 100% !important;
         }
 
         .col-md-12 {
@@ -75,9 +80,16 @@
         }
 	.col-md-6 {
 		position: relative;
-		height: 500px;
+		height: 700px;
+		/* padding-bottom: 200px */
 	}
-
+	.col-md-6 > a {
+		align-content: center;
+		align-items: center;
+		align-self: center;
+		margin: 0 atuo;
+		
+	}
 .list0 { clear:both; position: relative; z-index: 1; top: -35px; left: -5px; } 
 .list1 { clear:both; position: absolute; z-index: 1; top: 260px; left: 20px; }
 .list2 { clear:both; position: absolute; z-index: 2; top: 215px; left: 52px; } 
@@ -137,7 +149,7 @@
   </style>
 </head>
 <body>
-
+	<div class="review_container">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
@@ -184,13 +196,13 @@
         <div class="cmd" style="margin-bottom: 10px;">
             <input type="button" name="save" id="save" value="등록">
         </div>
-    </div>
+   		 </div>
+		</div>
+		</div>
+		</div>
+		</div>
+	</div>
 </div>
-</div>
-</div>
-</div>
-
-
      <script>
      
   let rating = new Rating();//별점 인스턴스 생성document.addEventListener('DOMContentLoaded', function(){

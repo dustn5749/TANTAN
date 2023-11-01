@@ -7,28 +7,44 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-.bg-dark{
-	background-color: white !important;
-} 
-#container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
 
-#content {
-    flex: 1;
-}
 
 #tempaltemo_footer {
-    flex-shrink: 0;
+    background-color: #000; /* 배경색 설정 */
+    bottom: 0; /* 화면 아래에 고정 */
+    left: 0;
+    right: 0;
 }
+
+.footer_container {
+    padding: 10px; /* 원하는 여백 값으로 설정 */
+   
+}
+
+/* 아이콘 리스트의 스타일 설정 */
+.footer-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-icons li {
+    display: inline;
+    margin-right: 10px; /* 아이콘 간격 설정 */
+}
+
+/* 로고 이미지 스타일 설정 */
+#tempaltemo_footer img {
+    width: 180px; /* 원하는 이미지 너비 설정 */
+}
+
+
 </style>
 </head>
 <body>
   <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
-        <div class="container">
+        <div class="footer_container">
             
 
             <div class="row text-light mb-4" >
