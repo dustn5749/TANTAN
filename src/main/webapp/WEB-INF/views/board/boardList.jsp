@@ -129,7 +129,22 @@
     color: rgb(106, 106, 106);
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
+<<<<<<< HEAD
 
+=======
+   }
+   /* 동행 생성하기 버튼 div */
+   .make_us {
+   		display: flex;
+   		float: right;
+   		width: 90%;
+   }
+   .make_us > button {
+   		width: 150px;
+   		height: 35px;
+   		background-color: rgb(81, 174, 255);
+   		border-radius: 7px;
+>>>>>>> refs/remotes/origin/main
    }
    .us_fillter {
       display: inline-flex;
@@ -346,9 +361,13 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
 <div class="schedule_container">
 <div class="us_header">
+=======
+ <div class="us_header">
+>>>>>>> refs/remotes/origin/main
     <div class="us_header2"></div>
     <div class="us_header3">
         <div class="us_header4">
@@ -445,7 +464,7 @@ function toggleCityFilter() {
                    <li>울산</li>
                    <li>부산</li>
                    <li>대구</li>
-                   <li>마산,창워</li>
+                   <li>마산,창원,진해</li>
                  </ul>
   				</ul>
 				</div>

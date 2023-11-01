@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 
 <style>
+
      .boardmap_container {
             width: 90% !important;
             padding: 3% !important;
@@ -136,8 +137,6 @@
   </style>
 </head>
 <body>
-   
-     
 
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
