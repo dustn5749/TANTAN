@@ -118,6 +118,7 @@
    .make_us {
    		display: flex;
    		float: right;
+   		width: 90%;
    }
    .make_us > button {
    		width: 150px;
@@ -298,7 +299,7 @@
 </head>
 
 <body>
-<div class="us_header">
+ <div class="us_header">
     <div class="us_header2"></div>
     <div class="us_header3">
         <div class="us_header4">

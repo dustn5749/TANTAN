@@ -23,30 +23,8 @@
 .carousel-inner{
 	background-color: rgb(244, 250, 255);
 }
- body {
-       cursor: url('./assets/img/cursor.png'), auto !important;       
-   }
 
-   a {
-      cursor: url('./assets/img/cursor2.png'), auto !important;
-   }
 
-/* 토끼 아이콘 DIV */
-.bg {
-    z-index: 100;
-    position: fixed;
-    right: 0;
-    /* top: 90 */
-    width: 300px;
-    height: 250px;
-    text-align: center;
-    display: flex;
-}
-
-.bg:hover img {
-    transform: scale(1.1);
-    transition: transform 0.3s; /* 선택적인 트랜지션을 추가하여 부드럽게 확대/축소 가능 */
-}
 
 #template-mo-zay-hero-carousel .carousel-control-next i, #template-mo-zay-hero-carousel .carousel-control-prev i {
     color: #0099ff !important;
@@ -268,9 +246,7 @@
 </style>
 </head>
 <body>
-	<div class="bg">
-	  <img src="/assets/img/rabbit.png" id="rabbit_img">	
-   </div>
+
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -512,13 +488,7 @@
         </div>
     </section>
     <!-- End Featured Product -->
-	<script type="text/javascript">
-	/* 토끼 눌렀을때 sns 페이지로 연동 */
-	$("#rabbit_img").on("click",function(){
-		location.href="/snsProfile";
-	})
 	
-	</script>
 
 </body>
 </html>

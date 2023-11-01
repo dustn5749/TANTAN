@@ -15,20 +15,31 @@
     font-weight: 700;
     font-style: normal;
 }
-.nav-link{
+/* header 메뉴바  */
+.nav > li {
+	position: relative;
+	font-family: 'NPSfontBold';
+	text-align: center;
+	
+}
+.nav > li > a {
+	display: block;
+	text-decoration: none;
+	font-family: 'NPSfontBold';
+	
+}
+.nav > li > ul{
      font-family: 'NPSfontBold';
 	font-size: 20px !important;
+	position: absolute;
+		text-align: center;
 	
 	 /* 버튼 아이콘의 크기를 조절 */
     .nav-icon i {
         font-size: 30px; /* 원하는 크기로 조절합니다. */
     }
     
-    /* 버튼들 간격을 조절 */
-    .nav-icon {
-        margin-right: 20px; /* 원하는 간격으로 조절합니다. */
-    }
-    
+   
 	.nav-link {
         font-family: 'NPSfontBold';
         font-size: 20px !important;
@@ -37,6 +48,38 @@
     .navbar .align-self-center .d-flex {
     	width: 200px !important;
     }
+}
+.nav > li:hover > ul {
+	display: block;
+	width: 160px; 
+	text-align: center;
+	opacity : 0.9;
+	
+}
+.nav > li > ul > li> a:hover {
+	color : blue;
+}
+.nav > li > ul > li  {
+	list-style: none;
+	height: 50px;
+	text-align: center;
+
+	
+}
+.nav > li > ul > li> a  {
+	text-decoration: none;
+	font-family: 'NPSfontBold';	
+	text-align: center;
+	
+}
+.under_menu{
+	display: none;
+	position: absolute; z-index: 99; 
+	text-align: center;
+	background-color: white;
+}
+a {
+	cursor: pointer !important];
 }
 
 
@@ -60,12 +103,20 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-
-                            <a class="nav-link" href="/board/map">커뮤니티</a>
+                            <a class="nav-link">커뮤니티
+                            	<ul class="under_menu">
+                            		<li><a  href="/board/map">리뷰 및 추천</a></li>
+                            	</ul>
+                            </a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/board/list">동행</a>
+                            <a class="nav-link">동행
+                            	<ul class="under_menu">
+                            		<li><a  href="/board/list">동행 모집</a></li>
+                            		<li><a href="/board/schedule">일정</a></li>
+                            	</ul>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">고객센터</a>
@@ -86,7 +137,6 @@
 					
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa-solid fa-user-group"></i>
-<!--                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> -->
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa-regular fa-message"></i>
@@ -104,5 +154,9 @@
     </nav>
     </header>
     <!-- Close Header -->
+    <script type="text/javascript">
+
+
+    </script>
 </body>
 </html>

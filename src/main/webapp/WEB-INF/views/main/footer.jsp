@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-=======
 .bg-dark{
 	background-color: white !important;
 } 

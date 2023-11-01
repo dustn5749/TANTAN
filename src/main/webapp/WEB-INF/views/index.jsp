@@ -30,17 +30,51 @@ TemplateMo 559 Zay Shop
 https://templatemo.com/tm-559-zay-shop
 
 -->
+<style type="text/css">
 
+/* 마우스 커서에 대한 설정 */
+ body {
+    cursor: url('/assets/img/cursor2.png'), auto !important;
+   }
+
+   a {
+       cursor: url('/assets/img/cursor.png'), auto !important;       
+     
+   }
+
+
+
+/* 토끼 아이콘 DIV */
+.bg {
+    z-index: 100;
+    position: fixed;
+    right: 0;
+    /* top: 90 */
+    width: 300px;
+    height: 250px;
+    text-align: center;
+    display: flex;
+}
+
+.bg:hover img {
+    transform: scale(1.1);
+    transition: transform 0.3s; /* 선택적인 트랜지션을 추가하여 부드럽게 확대/축소 가능 */
+}
+</style>
 
 </head>
 
 <body>
    
  	<div id="container">
+ 	
 		<div id="header">
 			<tiles:insertAttribute name="header"/>
 		</div>
 		<div id="content">
+			<div class="bg">
+	  		<img src="/assets/img/rabbit.png" id="rabbit_img">	
+   			</div>
 		<tiles:insertAttribute name="body"/>
 		</div>
 		<div id="footer">
@@ -55,5 +89,13 @@ https://templatemo.com/tm-559-zay-shop
     <script src="/assets/js/templatemo.js"></script>
     <script src="/assets/js/custom.js"></script>
     <!-- End Script -->
+    
+    <script type="text/javascript">
+	/* 토끼 눌렀을때 sns 페이지로 연동 */
+	$("#rabbit_img").on("click",function(){
+		location.href="/snsProfile";
+	})
+	
+	</script>
 </body>
 </html>
