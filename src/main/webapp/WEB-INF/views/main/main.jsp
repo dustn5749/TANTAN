@@ -513,10 +513,6 @@
 		                        <div class="card-body p-6">
 		                            <div class="text-center">
 		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-		                            <div>
-										<div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-			                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-		                            </div>
 		                            <p style=text-align:left;>부산
 		                            <hr>
 		                                <!-- Product name-->
