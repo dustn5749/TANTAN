@@ -16,23 +16,34 @@
     font-style: normal;
 }
 /* header 메뉴바  */
+ul, li {
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	text-align: center;
+}
 .nav > li {
 	position: relative;
 	font-family: 'NPSfontBold';
+	list-style: none;
+	width: 100px;
 	text-align: center;
-	
+/* 	display: flex; */
+
 }
 .nav > li > a {
 	display: block;
 	text-decoration: none;
 	font-family: 'NPSfontBold';
+	text-align: center;
 	
 }
 .nav > li > ul{
      font-family: 'NPSfontBold';
 	font-size: 20px !important;
 	position: absolute;
-		text-align: center;
+	text-align: center;
+	
 	
 	 /* 버튼 아이콘의 크기를 조절 */
     .nav-icon i {
@@ -46,42 +57,51 @@
     }
     
     .navbar .align-self-center .d-flex {
-    	width: 200px !important;
-    }
+/*     	width: 200px !important;
+ */    }
 }
 .nav > li:hover > ul {
 	display: block;
 	width: 160px; 
-	text-align: center;
 	opacity : 0.9;
+	text-align: center;
 	
 }
+
+.nav > li > ul > li:hover {
+	background-color : rgb(233, 254, 255);
+}
+
 .nav > li > ul > li> a:hover {
 	color : blue;
 }
+
 .nav > li > ul > li  {
 	list-style: none;
 	height: 50px;
 	text-align: center;
-
 	
+
 }
 .nav > li > ul > li> a  {
 	text-decoration: none;
 	font-family: 'NPSfontBold';	
 	text-align: center;
-	
+	justify-content: center;	
 }
 .under_menu{
 	display: none;
-	position: absolute; z-index: 99; 
-	text-align: center;
-	background-color: white;
+	position: absolute; 
+ 	z-index: 99; 
+ 	background-color: white;
+ 	
 }
 a {
 	cursor: pointer !important];
 }
-
+.under_menu_inner {
+	justify-content: center;
+}
 
 </style>
 </head>
@@ -105,7 +125,7 @@ a {
                         <li class="nav-item">
                             <a class="nav-link">커뮤니티
                             	<ul class="under_menu">
-                            		<li><a  href="/board/map">리뷰 및 추천</a></li>
+                            		<li class="under_menu_inner"><a  href="/board/map">리뷰 및 추천</a></li>
                             	</ul>
                             </a>
 
@@ -113,8 +133,8 @@ a {
                         <li class="nav-item">
                             <a class="nav-link">동행
                             	<ul class="under_menu">
-                            		<li><a  href="/board/list">동행 모집</a></li>
-                            		<li><a href="/board/schedule">일정</a></li>
+                            		<li class="under_menu_inner"><a  href="/board/list">동행 모집</a></li>
+                            		<li class="under_menu_inner"><a href="/board/schedule">일정 공유</a></li>
                             	</ul>
                             </a>
                         </li>

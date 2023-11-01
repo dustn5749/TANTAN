@@ -37,9 +37,8 @@ https://templatemo.com/tm-559-zay-shop
     cursor: url('/assets/img/cursor2.png'), auto !important;
    }
 
-   a {
+   a:hover {
        cursor: url('/assets/img/cursor.png'), auto !important;       
-     
    }
 
 
