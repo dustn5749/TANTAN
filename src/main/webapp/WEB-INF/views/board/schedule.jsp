@@ -10,7 +10,21 @@
       margin: 0 auto;
       padding: 3%;
    }
+    
+    
+    .us_header_size{
+    float: right;
+    width: 27%;
+    top: 80px;
+    height: fit-content;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+}
+
+      }
+   
    .us_header {
+   
       position: sticky;
        z-index: 9;
        top: 80px;
@@ -89,7 +103,7 @@
     align-items: center;
     font-size: 15px;
     font-weight: 500;
-    color: rgb(255, 255, 255);
+    color: black;
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
    }
@@ -99,7 +113,7 @@
     margin-right: 4px;
    }
    .schedule_btn{
-       position: relative;
+    position: relative;
     box-sizing: border-box;
     width: 50%;
     height: 34px;
@@ -113,17 +127,20 @@
     color: rgb(106, 106, 106);
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
+    background-color: black;
+    color : white;
    }
    .us_fillter {
       display: inline-flex;
-      width: 100%;
+      width: 34%;
+      padding: 10px;
    }
    .fillter_btn_area {
-      width: 90%;
+      width: 78%;
    }
    .fillter_btn {
-      width: 100px;
-      height: 50px;
+      width: 80px;
+      height: 40px;
       border-radius: 10px;
       background-color: black;
       color: white;
@@ -132,16 +149,66 @@
       background-color: white;
       color : black;
    }
-   .city_fillter {
-      text-align: right;
-   }
-   .city_btn{
-      width: 100px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: white;
+   
+/*    .city_fillter { */
+/*       text-align: right; */
+/*    } */
+   
+/*    .city_btn{ */
+/*    	position: absolute; */
+/* 	top: 100%; */
+/* 	left: 100px; */
+/*       width: 100px; */
+/*       height: 50px; */
+/*       border-radius: 10px; */
+/*       background-color: white; */
       
-   }
+/*    } */
+   
+
+
+.city_btn {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: auto; 
+    height: 40px;
+    margin-right: 15px;
+    margin-left: 0; 
+    padding: 8px 14px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+}
+ 
+ }
+ 
+ 
+.city_btn1 {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: auto; 
+    height: 40px;
+    margin-right: 15px;
+    margin-left: 0; 
+    padding: 8px 14px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+}
+ 
+
+     }
+   
+   
+   
    .city_fillter_inner {
        display: flex;
       
@@ -279,14 +346,30 @@
      	cursor: pointer !important;
      
      }
-     .schedule_btn:hover {
+     .us_btn:hover {
      	background-color: black !important;
      	color : white !important;
      }
+     
+     .py-5 {
+     padding: 10px;
+     
+     }
+ .schedule_container {
+        width: 94%; 
+        margin: 0 auto; 
+    }
+    
+      #korea {
+            display: none; 
+        }
+     
 </style>
 </head>
 
 <body>
+
+<div class="schedule_container">
 <div class="us_header">
     <div class="us_header2"></div>
     <div class="us_header3">
@@ -306,23 +389,67 @@
     </div>
 </div>
 
+
+ <div class="us_header_size">
+    <div class="us_header_size">
+     <button class="city_btn" onclick="toggleCityFilter()">지역</button>
+
+    <div id="korea">한국</div>
+    
+
+    <div class="city_fillter" id="koreanCities" style="display: none;">
+        <ul>
+            <li>서울</li>
+            <li>경기도</li>
+            <li>강원도</li>
+            <!-- 나머지 지역 -->
+        </ul>
+    </div>
+</div>
+
+<script >   
+function toggleCityFilter() {
+    var korea = document.getElementById("korea");
+    if (korea.style.display === "none") {
+        korea.style.display = "block"; // 보이도록 설정
+    } else {
+        korea.style.display = "none"; // 감추도록 설정
+    }
+}
+
+
+
+</script>
+    
+    
+  <button class="city_btn1" 
+    onclick="window.location.href = 'cap'" 
+    style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;"
+>
+    일정생성하기
+</button>
+  
+
+            
+    </div>
+
 <div class="us_fillter">
- <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
+  <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
     <button class="fillter_btn">댓글순</button>
     <button class="fillter_btn">조회순</button>
     <button class="fillter_btn">인기순</button>
 </div>
 <div class="city_fillter">
 
-<button class="city_btn" onclick="toggleCityFilter()">지역</button>
+
+
+
 <div class="city_fillter_inner" style="display: none;">
     <ul>
         <li class="mainItem">
             <div class="parent">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        한국
-                    </button>
+                  
                     <ul class="dropdown-menu" style="display: none;">
                         <!-- Insert your list items here -->
                         <li><a class="dropdown-item" href="#">서울</a></li>
@@ -346,8 +473,9 @@
 				</div>
          		</div>
    				</div>
+   				
         <!-- Section-->
-        <section class="py-5">
+        <section class="">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
@@ -365,7 +493,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -395,7 +523,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -417,7 +545,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail"">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -444,7 +572,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -466,7 +594,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -485,7 +613,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -515,7 +643,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -546,7 +674,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -591,12 +719,15 @@
 	</svg>
 </button>
 </div>
-
+</div>
 
 <script>
 
-document.querySelector(".schedule_btn").addEventListener("click", function () {
-	location.href="/board/cap";
+
+
+
+document.querySelector(".us_btn").addEventListener("click", function () {
+	location.href="/board/list";
 }
 )
 function toggleCityFilter() {
@@ -669,6 +800,8 @@ document.addEventListener('DOMContentLoaded', function() {
             displaySelectedLocationInfo(selectedRegion);
             regionList.classList.add('hidden'); // 선택 시 목록 숨김
         });
+        
+        
     });
 });
 
@@ -677,6 +810,7 @@ function displaySelectedLocationInfo(selectedRegion) {
     // 선택된 지역에 따라 정보를 업데이트
     selectedLocationInfo.textContent = `선택된 지역: ${selectedRegion}`;
 }
+
 
 
 </script>
