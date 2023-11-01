@@ -133,7 +133,7 @@ a {
                         <li class="nav-item">
                             <a class="nav-link">동행
                             	<ul class="under_menu">
-                            		<li class="under_menu_inner"><a  href="/board/list">동행 모집</a></li>
+                            		<li class="under_menu_inner"><a href="/board/list">동행 모집</a></li>
                             		<li class="under_menu_inner"><a href="/board/schedule">일정 공유</a></li>
                             	</ul>
                             </a>

@@ -502,85 +502,89 @@
                     <h1 class="h1">일정공유</h1>
                 </div>
             </div>
-            <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                	<div class="col mb-5">
-	                    <div class="card h-100">
-	                        <!-- Product image-->
-	                        <img class="card-img-top" src="assets/img/busan.jpg" />
-	                        
-	                        <!-- Product details-->
-	                        <div class="card-body p-6">
-	                            <div class="text-center">
-	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-	                            <p style=text-align:left;>부산
-	                            <hr>
-	                                <!-- Product name-->
-	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
-	                                <hr>
-	                                <!-- Product price-->
-	                            </div>
-	                        </div>
-	                        <!-- Product actions-->
-	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-	                        </div>
+            <div class="row" id="schedule">
+	            <div class="col-12 col-md-4 p-5 mt-3">
+	                	<div class="col mb-5">
+		                    <div class="card h-100">
+		                        <!-- Product image-->
+		                        <img class="card-img-top" src="assets/img/busan.jpg" />
+		                        
+		                        <!-- Product details-->
+		                        <div class="card-body p-6">
+		                            <div class="text-center">
+		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+		                            <div>
+										<div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+			                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+		                            </div>
+		                            <p style=text-align:left;>부산
+		                            <hr>
+		                                <!-- Product name-->
+		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+		                                <hr>
+		                                <!-- Product price-->
+		                            </div>
+		                        </div>
+		                        <!-- Product actions-->
+		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+		                        </div>
+		                    </div>
 	                    </div>
-                    </div>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                	<div class="col mb-5">
-	                    <div class="card h-100">
-	                        <!-- Product image-->
-	                        <img class="card-img-top" src="assets/img/busan.jpg" />
-	                        
-	                        <!-- Product details-->
-	                        <div class="card-body p-6">
-	                            <div class="text-center">
-	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-	                            <p style=text-align:left;>부산
-	                            <hr>
-	                                <!-- Product name-->
-	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
-	                                <hr>
-	                                <!-- Product price-->
-	                            </div>
-	                        </div>
-	                        <!-- Product actions-->
-	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-	                        </div>
+	            </div>
+	            <div class="col-12 col-md-4 p-5 mt-3">
+	                	<div class="col mb-5">
+		                    <div class="card h-100">
+		                        <!-- Product image-->
+		                        <img class="card-img-top" src="assets/img/busan.jpg" />
+		                        
+		                        <!-- Product details-->
+		                        <div class="card-body p-6">
+		                            <div class="text-center">
+		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+		                            <p style=text-align:left;>부산
+		                            <hr>
+		                                <!-- Product name-->
+		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+		                                <hr>
+		                                <!-- Product price-->
+		                            </div>
+		                        </div>
+		                        <!-- Product actions-->
+		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+		                        </div>
+		                    </div>
 	                    </div>
-                    </div>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                	<div class="col mb-5">
-	                    <div class="card h-100">
-	                        <!-- Product image-->
-	                        <img class="card-img-top" src="assets/img/busan.jpg" />
-	                        
-	                        <!-- Product details-->
-	                        <div class="card-body p-6">
-	                            <div class="text-center">
-	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-	                            <p style=text-align:left;>부산
-	                            <hr>
-	                                <!-- Product name-->
-	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
-	                                <hr>
-	                                <!-- Product price-->
-	                            </div>
-	                        </div>
-	                        <!-- Product actions-->
-	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-	                        </div>
+	            </div>
+	            <div class="col-12 col-md-4 p-5 mt-3">
+	                	<div class="col mb-5">
+		                    <div class="card h-100">
+		                        <!-- Product image-->
+		                        <img class="card-img-top" src="assets/img/busan.jpg" />
+		                        
+		                        <!-- Product details-->
+		                        <div class="card-body p-6">
+		                            <div class="text-center">
+		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+		                            <p style=text-align:left;>부산
+		                            <hr>
+		                                <!-- Product name-->
+		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+		                                <hr>
+		                                <!-- Product price-->
+		                            </div>
+		                        </div>
+		                        <!-- Product actions-->
+		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+		                        </div>
+		                    </div>
 	                    </div>
-                    </div>
-            </div>
+	            </div>
             </div>
         </div>
     </section>
