@@ -37,34 +37,6 @@ public class BoardController {
 	} 
 
 
-//	// 게시판 등록
-//    @ResponseBody
-//    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-//    public Map<String, Object> insertBoard(@RequestBody BoardDTO board) throws Exception {
-//        Map<String, Object> resultMap = new HashMap<>();
-//        if (boardService.insertBoard(board)) {
-//            resultMap.put("message", "등록에 성공했습니다!");
-//        } else {
-//            resultMap.put("message", "등록에 실패했습니다.");
-//        }
-//        return resultMap;
-//    }
-    
-//	// 게시판 등록
-//    @ResponseBody
-//    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-//    public Map<String, Object> insertBoard(@RequestBody BoardDTO board) throws Exception {
-//        Map<String, Object> resultMap = new HashMap<>();
-//        if (boardService.insertBoard(board)) {
-//            resultMap.put("message", "등록에 성공했습니다!");
-//        } else {
-//            resultMap.put("message", "등록에 실패했습니다.");
-//        }
-//        return resultMap;
-//    }
-//    
-    
-    
     // 게시판 상세보기
     @RequestMapping(value = "/detail")
     public String detail(BoardDTO board) throws Exception {
@@ -90,21 +62,24 @@ public class BoardController {
     
     @RequestMapping(value = "/cap")
     public String cap(BoardDTO board) throws Exception {
-
-        return "cap";
+    return "cap";
     }
     
     @RequestMapping(value = "/capDetail")
     public String capDetail(BoardDTO board) throws Exception {
-
-        return "capDetail";
+    return "capDetail";
     }
-    
-    @RequestMapping(value = "/hang")
-    public String hangDetail(BoardDTO board) throws Exception {
-
-        return "hang";
+        
+     @RequestMapping(value = "/schedule")
+     public String schedule(BoardDTO board) throws Exception {
+     return "schedule";
      
+     }
+     
+    @RequestMapping(value = "/hang")
+    public String hang(BoardDTO board) throws Exception {
+    return "hang";
+            
 //    // 게시판 수정    @ResponseBody
 //    @RequestMapping(value = "/revice", method = RequestMethod.POST)
 //    public Map<String, Object> revice(@RequestBody BoardDTO board) throws Exception {

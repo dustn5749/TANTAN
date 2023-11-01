@@ -4,95 +4,182 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <style>
-        /* 모든 요소를 가운데 정렬 */
+
+   <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-/*             height: 100vh; */
-            margin: 0;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-/*         /* 전체 내용의 최대 너비 설정 */ */
-/*         #main { */
-/*             max-width: 800px; */
-/*             width: 100%; */
-/*         } */
+        .bg-dark {
+            background-color: #343a40;
+            color: #ffffff;
+        }
 
-        .box {
+        .profile-details p {
+            margin: 5px 0;
+        }
+
+        #main {
+            max-width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #0099ff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 20px;
         }
 
-/*         .featured-image img { */
-/*             width: 100%; */
-/*             height: auto; */
-/*         } */
-
-/*         .info-section { */
-/*             margin-bottom: 20px; */
-/*         } */
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
 
         .report-button {
-            background-color: red;
+            background-color: #ff4444;
             color: white;
-            padding: 5px 10px;
+            padding: 8px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-/*         .reply-form { */
-/*             margin-bottom: 20px; */
-/*         } */
+        .report-button:hover,
+        .orange-btn:hover {
+            background-color: #0099ff;;
+        }
 
-/*         .reply-form-button-wrapper { */
-/*             margin-top: 10px; */
-/*         } */
+        .orange-btn {
+            background-color: #0099ff;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .reply-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .reply-form-button-wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .schedule {
+        
+          width: 150px;
+            height: 150px;
+        }
+        
     </style>
 </head>
+
 <body>
+
+
     <section id="main">
         <div class="container">
-            <div class="row">
-                <div id="content" class="col-8 col-12-medium">
-                    <article class="box post">
-                        <header>
-                            <h2>여행가고 싶은 킹연수 언니</h2>
-                        </header>
-                        <!-- 이미지를 넣을 공간 -->
-                        <div class="featured-image">
-                            <img src="images/your-image.jpg" alt="이미지 설명">
-                        </div>
-                        <p>자소서 언제 쓰누;</p>
-                    </article>
+
+ <header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <img src="images/travel-header.jpg" alt="여행 상세정보 이미지!" style="width: 100%; max-width: 600px;">
+        </div>
+    </div>
+</header>
+ 
+
+            <div class="profile-info">
+                <div class="profile-image">
+                    <img src="images/profile-image.jpg" alt="프로필 이미지">
                 </div>
+                <div class="profile-details">
+                    <h2>사용자 이름</h2>
+                    <p>이메일: example@example.com</p>
+                    <p>전화번호: 123-456-7890</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+           <strong> 지역:</strong>서울 
+            <strong>모집 인원:</strong> 50명
+         
+         	<div class="schedule">
+
+  <form>
+    <div style="display: flex; align-items: center;">
+        <input type="date" class="form-control mt-1" id="date_start" name="date_start" placeholder="날짜 선택">
+        <span style="margin: 0 5px;">-</span>
+        <input type="date" class="form-control mt-1" id="date_end" name="date_end" placeholder="날짜 선택">
+    </div>
+</form>
+
+ <div class="location-info">
+        <p>내용을 입력칸 </p>
+                <button class="report-button" onclick="report()">신고하기</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="reply-form">
+                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
+                <div class="reply-form-button-wrapper">
+                    <button class="orange-btn" onclick="btnInsert('${postdetail.id}')">댓글쓰기</button>
+		<button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
+		
+		<script>
+		    function goToHomepage() {
+		        window.location.href = '/board/list'; // 홈페이지 URL 주소로 대체하세요.
+		    }
+		</script>
+
+      
+      
+      
+                </div>
+                </div>
+                
+            </div>
+            
+            <div class="reply-container">
+                <!-- 댓글 목록을 표시하거나 렌더링하는 부분 -->
             </div>
         </div>
     </section>
 
-    <div class="info-section">
-        <h2>모집 정보</h2>
-        <p><strong>지역:</strong> 서울</p>
-        <p><strong>모집 인원:</strong> 50명</p>
-        <p><strong>날짜:</strong> 2023년 11월 15일</p>
-        <button class="report-button" onclick="report()">신고하기</button>
-    </div>
-
-    <div class="section-footer">
-        <div class="reply-form">
-            <label class="form-label">댓글작성</label>
-            <textarea class="form-control" id="reply-form"></textarea>
-            <div class="reply-form-button-wrapper">
-                <button class="btn orange-btn" onclick="btnInsert('${ postdetail.id }')">댓글쓰기</button>
-            </div>
-        </div>
-        <div class="reply-container">
-            <!-- 댓글 목록을 표시하거나 렌더링하는 부분 -->
-        </div>
-    </div>
-
+</body>
+    
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
