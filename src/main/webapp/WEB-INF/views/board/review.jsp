@@ -155,7 +155,7 @@
                     <div class="col-md-6">
                     <br>
                     
-						<a href='./bbs/board.php?bo_table=m101&sca=전남' onfocus='this.blur()' onmouseover=mus_on('mus1') onmouseout=mus_off('mus1') onclick=smenu_click('mus1')><img src='/assets/img/map/m061.png' alt='' border='0' name='mus1' class='list1' ></a><a href='./bbs/board.php?bo_table=m101&sca=전북' onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_click('mus2')><img src='/assets/img/map/m063.png' alt='' border='0' name='mus2' class='list2' ></a><a href='./bbs/board.php?bo_table=m101&sca=경남' onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('mus3')><img src='/assets/img/map/m055.png' alt='' border='0' name='mus3' class='list3' ></a><a href='./bbs/board.php?bo_table=m101&sca=강원' onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('mus4')><img src='/assets/img/map/m033.png' alt='' border='0' name='mus4' class='list4' ></a><a href='./bbs/board.php?bo_table=m101&sca=충남' onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('mus5')><img src='/assets/img/map/m041.png' alt='' border='0' name='mus5' class='list5' ></a><a href='./bbs/board.php?bo_table=m101&sca=경기' onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('mus6')><img src='/assets/img/map/m031.png' alt='' border='0' name='mus6' class='list6' ></a><a href='./bbs/board.php?bo_table=m101&sca=충북' onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('mus7')><img src='/assets/img/map/m043.png' alt='' border='0' name='mus7' class='list7' ></a><a href='./bbs/board.php?bo_table=m101&sca=경북' onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('mus8')><img src='/assets/img/map/m054.png' alt='' border='0' name='mus8' class='list8' ></a><a href='./bbs/board.php?bo_table=m101&sca=제주' onfocus='this.blur()' onmouseover=mus_on('mus9') onmouseout=mus_off('mus9') onclick=smenu_click('mus9')><img src='/assets/img/map/m064.png' alt='' border='0' name='mus9' class='list9' ></a><a href='./bbs/board.php?bo_table=m101&sca=서울' onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('mus10')><img src='/assets/img/map/m02.png' alt='' border='0' name='mus10' class='list10' ></a><a href='./bbs/board.php?bo_table=m101&sca=인천' onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('mus11')><img src='/assets/img/map/m032.png' alt='' border='0' name='mus11' class='list11' ></a><a href='./bbs/board.php?bo_table=m101&sca=대전' onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('mus12')><img src='/assets/img/map/m042.png' alt='' border='0' name='mus12' class='list12' ></a><a href='./bbs/board.php?bo_table=m101&sca=광주' onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('mus13')><img src='/assets/img/map/m062.png' alt='' border='0' name='mus13' class='list13' ></a><a href='./bbs/board.php?bo_table=m101&sca=대구' onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('mus14')><img src='/assets/img/map/m053.png' alt='' border='0' name='mus14' class='list14' ></a><a href='./bbs/board.php?bo_table=m101&sca=울산' onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('mus15')><img src='/assets/img/map/m052.png' alt='' border='0' name='mus15' class='list15' ></a><a href='./bbs/board.php?bo_table=m101&sca=부산' onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('mus16')><img src='/assets/img/map/m051.png' alt='' border='0' name='mus16' class='list16' ></a>        
+						<a href='./bbs/board.php?bo_table=m101&sca=전남' onfocus='this.blur()' onmouseover=mus_on('mus1') onmouseout=mus_off('mus1') onclick=smenu_click('mus1')><img src='/assets/img/map2/m061.gif' alt='' border='0' name='mus1' class='list1' ></a><a href='./bbs/board.php?bo_table=m101&sca=전북' onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_click('mus2')><img src='/assets/img/map2/m063.gif' alt='' border='0' name='mus2' class='list2' ></a><a href='./bbs/board.php?bo_table=m101&sca=경남' onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('mus3')><img src='/assets/img/map2/m055.gif' alt='' border='0' name='mus3' class='list3' ></a><a href='./bbs/board.php?bo_table=m101&sca=강원' onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('mus4')><img src='/assets/img/map2/m033.gif' alt='' border='0' name='mus4' class='list4' ></a><a href='./bbs/board.php?bo_table=m101&sca=충남' onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('mus5')><img src='/assets/img/map2/m041.gif' alt='' border='0' name='mus5' class='list5' ></a><a href='./bbs/board.php?bo_table=m101&sca=경기' onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('mus6')><img src='/assets/img/map2/m031.gif' alt='' border='0' name='mus6' class='list6' ></a><a href='./bbs/board.php?bo_table=m101&sca=충북' onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('mus7')><img src='/assets/img/map2/m043.gif' alt='' border='0' name='mus7' class='list7' ></a><a href='./bbs/board.php?bo_table=m101&sca=경북' onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('mus8')><img src='/assets/img/map2/m054.gif' alt='' border='0' name='mus8' class='list8' ></a><a href='./bbs/board.php?bo_table=m101&sca=제주' onfocus='this.blur()' onmouseover=mus_on('mus9') onmouseout=mus_off('mus9') onclick=smenu_click('mus9')><img src='/assets/img/map2/m064.gif' alt='' border='0' name='mus9' class='list9' ></a><a href='./bbs/board.php?bo_table=m101&sca=서울' onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('mus10')><img src='/assets/img/map2/m02.gif' alt='' border='0' name='mus10' class='list10' ></a><a href='./bbs/board.php?bo_table=m101&sca=인천' onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('mus11')><img src='/assets/img/map2/m032.gif' alt='' border='0' name='mus11' class='list11' ></a><a href='./bbs/board.php?bo_table=m101&sca=대전' onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('mus12')><img src='/assets/img/map2/m042.gif' alt='' border='0' name='mus12' class='list12' ></a><a href='./bbs/board.php?bo_table=m101&sca=광주' onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('mus13')><img src='/assets/img/map2/m062.gif' alt='' border='0' name='mus13' class='list13' ></a><a href='./bbs/board.php?bo_table=m101&sca=대구' onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('mus14')><img src='/assets/img/map2/m053.gif' alt='' border='0' name='mus14' class='list14' ></a><a href='./bbs/board.php?bo_table=m101&sca=울산' onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('mus15')><img src='/assets/img/map2/m052.gif' alt='' border='0' name='mus15' class='list15' ></a><a href='./bbs/board.php?bo_table=m101&sca=부산' onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('mus16')><img src='/assets/img/map2/m051.gif' alt='' border='0' name='mus16' class='list16' ></a>        
                     <div class="card-img-top mb-5 mb-md-0"></div></div>
                  
     <div class="col-md-6" style="text-align: center;">
@@ -310,38 +310,38 @@
   mus16on  = new Image( );
   mus16off = new Image( );
   /* 메뉴를 늘이거나 줄일때 추가~삭제하세요. 쌍으로 구성되어있습니다. */
-  mus1off.src = '/assets/img/map/m061.png';
-  mus2off.src = '/assets/img/map/m063.png';
-  mus3off.src = '/assets/img/map/m055.png';
-  mus4off.src = '/assets/img/map/m033.png';
-  mus5off.src = '/assets/img/map/m041.png';
-  mus6off.src = '/assets/img/map/m031.png';
-  mus7off.src = '/assets/img/map/m043.png';
-  mus8off.src = '/assets/img/map/m054.png';
-  mus9off.src = '/assets/img/map/m064.png';
-  mus10off.src = '/assets/img/map/m02.png';
-  mus11off.src = '/assets/img/map/m032.png';
-  mus12off.src = '/assets/img/map/m042.png';
-  mus13off.src = '/assets/img/map/m062.png';
-  mus14off.src = '/assets/img/map/m053.png';
-  mus15off.src = '/assets/img/map/m052.png';
-  mus16off.src = '/assets/img/map/m051.png';
-  mus1on.src  = '/assets/img/map/m061o.png';
-  mus2on.src  = '/assets/img/map/m063o.png';
-  mus3on.src  = '/assets/img/map/m055o.png';
-  mus4on.src  = '/assets/img/map/m033o.png';
-  mus5on.src  = '/assets/img/map/m041o.png';
-  mus6on.src  = '/assets/img/map/m031o.png';
-  mus7on.src  = '/assets/img/map/m043o.png';
-  mus8on.src  = '/assets/img/map/m054o.png';
-  mus9on.src  = '/assets/img/map/m064o.png';
-  mus10on.src  = '/assets/img/map/m02o.png';
-  mus11on.src  = '/assets/img/map/m032o.png';
-  mus12on.src  = '/assets/img/map/m042o.png';
-  mus13on.src  = '/assets/img/map/m062o.png';
-  mus14on.src  = '/assets/img/map/m053o.png';
-  mus15on.src  = '/assets/img/map/m052o.png';
-  mus16on.src  = '/assets/img/map/m051o.png';
+  mus1off.src = '/assets/img/map2/m061.gif';
+  mus2off.src = '/assets/img/map2/m063.gif';
+  mus3off.src = '/assets/img/map2/m055.gif';
+  mus4off.src = '/assets/img/map2/m033.gif';
+  mus5off.src = '/assets/img/map2/m041.gif';
+  mus6off.src = '/assets/img/map2/m031.gif';
+  mus7off.src = '/assets/img/map2/m043.gif';
+  mus8off.src = '/assets/img/map2/m054.gif';
+  mus9off.src = '/assets/img/map2/m064.gif';
+  mus10off.src = '/assets/img/map2/m02.gif';
+  mus11off.src = '/assets/img/map2/m032.gif';
+  mus12off.src = '/assets/img/map2/m042.gif';
+  mus13off.src = '/assets/img/map2/m062.gif';
+  mus14off.src = '/assets/img/map2/m053.gif';
+  mus15off.src = '/assets/img/map2/m052.gif';
+  mus16off.src = '/assets/img/map2/m051.gif';
+  mus1on.src  = '/assets/img/map2/m061o.gif';
+  mus2on.src  = '/assets/img/map2/m063o.gif';
+  mus3on.src  = '/assets/img/map2/m055o.gif';
+  mus4on.src  = '/assets/img/map2/m033o.gif';
+  mus5on.src  = '/assets/img/map2/m041o.gif';
+  mus6on.src  = '/assets/img/map2/m031o.gif';
+  mus7on.src  = '/assets/img/map2/m043o.gif';
+  mus8on.src  = '/assets/img/map2/m054o.gif';
+  mus9on.src  = '/assets/img/map2/m064o.gif';
+  mus10on.src  = '/assets/img/map2/m02o.gif';
+  mus11on.src  = '/assets/img/map2/m032o.gif';
+  mus12on.src  = '/assets/img/map2/m042o.gif';
+  mus13on.src  = '/assets/img/map2/m062o.gif';
+  mus14on.src  = '/assets/img/map2/m053o.gif';
+  mus15on.src  = '/assets/img/map2/m052o.gif';
+  mus16on.src  = '/assets/img/map2/m051o.gif';
  
   /* ----------------------------------------------------------------- */
   var cMuName="";
