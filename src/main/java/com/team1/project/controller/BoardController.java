@@ -100,9 +100,12 @@ public class BoardController {
         return "capDetail";
     }
     
-    
-//    // 게시판 수정하기
-//    @ResponseBody
+    @RequestMapping(value = "/hang")
+    public String hangDetail(BoardDTO board) throws Exception {
+
+        return "hang";
+     
+//    // 게시판 수정    @ResponseBody
 //    @RequestMapping(value = "/revice", method = RequestMethod.POST)
 //    public Map<String, Object> revice(@RequestBody BoardDTO board) throws Exception {
 //    	boolean revice = boardService.boardUpdate(board);
@@ -154,3 +157,4 @@ public class BoardController {
 	
 		}
 	
+}

@@ -60,11 +60,8 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-<<<<<<< HEAD
                             <a class="nav-link" href="/board/map">커뮤니티</a>
-=======
-                            <a class="nav-link" href="">커뮤니티</a>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/board/list">동행</a>
