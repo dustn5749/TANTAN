@@ -72,6 +72,16 @@
 	    <put-attribute name="body" value="/WEB-INF/views/board/hangDetail.jsp"></put-attribute>
 	</definition>
 	
+		<definition name="hang" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/hangDetail.jsp"></put-attribute>
+	</definition>
+	
+		<definition name="schedule" extends="baseLayout">
+	    <put-attribute name="title" value="게시판"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/board/schedule.jsp"></put-attribute>
+	</definition>
+
 	
 	<definition name="snsLayout" template="/WEB-INF/views/snsIndex.jsp">
 		<put-attribute name="title" value="snsIndex페이지"></put-attribute>
@@ -83,11 +93,7 @@
 		<put-attribute name="title" value="sns프로필"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
 	</definition>
-	
-	
-	
-	
-	
+
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>

@@ -111,14 +111,18 @@
                     </div>
                     
          <div style="text-align: center;">
-        <input type="submit" value="취소" class="btn btn-primary">
-        <input type="submit" value="작성완료" class="btn btn-primary">
+    	<input type="button" value="취소" class="btn btn-primary" onclick="window.location.href='/board/list'">
+    	<input type="submit" value="작성완료" class="btn btn-primary" onclick="showConfirmation()">
     	</div>
-     
                 </form>
             </div>
         </div>
-
+        
+ <script>
+        function showConfirmation() {
+            alert('작성이 완료되었습니다.');
+        }
+    </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

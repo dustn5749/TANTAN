@@ -113,7 +113,9 @@
     transition: color 0.1s ease-out 0.4s;
 	}
 	
-	
+	   .orange-btn:hover {
+            background-color: #0099ff;;
+        }
 	
  .layout_body { 
  	display: grid; 
@@ -211,7 +213,7 @@
             </div>
         </div>
     </section>
-
+	<button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
 
 				<!-- calendar 태그 -->
 				<div id='calendar-container' class='calendar-container'>
@@ -219,6 +221,14 @@
 				</div>
 		<div class="layout_side">
 		</div>
+			
+		
+		<script>
+		    function goToHomepage() {
+		        window.location.href = '/board/schedule;' 
+		    }
+		</script>
+		
 </body>
 <script>
 
