@@ -19,7 +19,7 @@
        transition: all 0.1s ease-in-out 0.3s;
    }
    .us_header2 {
-       background-color:0 rgb(255, 255, 255);
+       background-color: rgb(255, 255, 255);
    }
    .us_header3 {
       display: flex;
@@ -113,18 +113,6 @@
     color: rgb(106, 106, 106);
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
-   }
-   /* 동행 생성하기 버튼 div */
-   .make_us {
-   		display: flex;
-   		float: right;
-   		width: 90%;
-   }
-   .make_us > button {
-   		width: 150px;
-   		height: 35px;
-   		background-color: rgb(81, 174, 255);
-   		border-radius: 7px;
    }
    .us_fillter {
       display: inline-flex;
@@ -299,7 +287,7 @@
 </head>
 
 <body>
- <div class="us_header">
+<div class="us_header">
     <div class="us_header2"></div>
     <div class="us_header3">
         <div class="us_header4">
@@ -324,7 +312,6 @@
     <button class="fillter_btn">조회순</button>
     <button class="fillter_btn">인기순</button>
 </div>
-
 <div class="city_fillter">
 
 <button class="city_btn" onclick="toggleCityFilter()">지역</button>
@@ -353,17 +340,12 @@
                    <li>울산</li>
                    <li>부산</li>
                    <li>대구</li>
-                   <li>마산,창원,진해</li>
+                   <li>마산,창워</li>
                  </ul>
   				</ul>
-			</div>
-         </div>
-   	</div>
-   	<div class="make_us">
-		<button id="make_us_btn">
-			동행생성하기
-		</button>
-	</div>
+				</div>
+         		</div>
+   				</div>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">

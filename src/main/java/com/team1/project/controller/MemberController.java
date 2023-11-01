@@ -7,29 +7,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 public class MemberController {
 
-	// 로그인 창으로 이동
+	// 로그인폼으로 연동
 	@RequestMapping("/loginForm.do")
 	public String loginForm() {
 		return "loginForm";
 	}
 	
-	// 회원가입창으로 이동
+	// 회원가입 form으로 가기
 	@RequestMapping("/joinForm.do")
 	public String joinForm() {
-		return "joinForm";	
+		return "joinForm";
 	}
 	
-	// sns회원가입으로 이동
-	@RequestMapping("/joinProcess2.do")
+	// sns 회원가입하기 form으로 가기
+	@RequestMapping("/snsJoinForm.do")
 	public String snsJoinForm() {
-		return "snsJoinForm";	
+		return "snsJoinForm";
 	}
 	
-	// 회원가입완료
+	// 회원가입 완료창
 	@RequestMapping("/joinComplete.do")
 	public String joinComplete() {
-		return "joinComplete";	
+		return "joinComplete";
 	}
-	
-
-}	
+}
