@@ -381,7 +381,7 @@
 
 
     <!-- 최신 동행 모집 -->
-    <section class="container py-5">
+    <section class="container py-6">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">최신 동행 모집</h1>
@@ -389,14 +389,106 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-
+            	<div class="card-header" style=border-radius:5%;>
+            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
+            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
+            	</div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $40.00 - $80.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+<!--                 </div> -->
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-               
+               	<div class="card-header" style=border-radius:5%;>
+	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
+	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
+            	</div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <!-- Product price-->
+                                $40.00 - $80.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-              
+                <div class="card-header" style=border-radius:5%;>
+	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
+	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
+                </div>
+                	<div class="col mb-5">
+	                    <div class="card h-100">
+	                        <!-- Product image-->
+	                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+	                        <!-- Product details-->
+	                        <div class="card-body p-4">
+	                            <div class="text-center">
+	                                <!-- Product name-->
+	                                <h5 class="fw-bolder">Fancy Product</h5>
+	                                <!-- Product price-->
+	                                $40.00 - $80.00
+	                            </div>
+	                        </div>
+	                        <!-- Product actions-->
+	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+	                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+	                        </div>
+	                    </div>
+                    </div>
             </div>
+<!--             <div class="col-12 col-md-4 p-5 mt-3"> -->
+<!--             	<div class="card-header" style=border-radius:5%;> -->
+<!-- 	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div> -->
+<!-- 	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div> -->
+<!--             	</div> -->
+<!--                 <div class="col mb-5"> -->
+<!--                     <div class="card h-100"> -->
+<!--                         Product image -->
+<!--                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /> -->
+<!--                         Product details -->
+<!--                         <div class="card-body p-4"> -->
+<!--                             <div class="text-center"> -->
+<!--                                 Product name -->
+<!--                                 <h5 class="fw-bolder">Fancy Product</h5> -->
+<!--                                 Product price -->
+<!--                                 $40.00 - $80.00 -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         Product actions -->
+<!--                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent"> -->
+<!--                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
         </div>
     </section>
     <!-- End Categories of The Month -->
@@ -407,83 +499,88 @@
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">인기 동행 게시글</h1>
-
+                    <h1 class="h1">일정공유</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$240.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Gym Weight</a>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
-                            </p>
-                            <p class="text-muted">Reviews (24)</p>
-                        </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                	<div class="col mb-5">
+	                    <div class="card h-100">
+	                        <!-- Product image-->
+	                        <img class="card-img-top" src="assets/img/busan.jpg" />
+	                        
+	                        <!-- Product details-->
+	                        <div class="card-body p-6">
+	                            <div class="text-center">
+	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+	                            <p style=text-align:left;>부산
+	                            <hr>
+	                                <!-- Product name-->
+	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+	                                <hr>
+	                                <!-- Product price-->
+	                            </div>
+	                        </div>
+	                        <!-- Product actions-->
+	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+	                        </div>
+	                    </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_02.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
-                            <p class="card-text">
-                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
-                            </p>
-                            <p class="text-muted">Reviews (48)</p>
-                        </div>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                	<div class="col mb-5">
+	                    <div class="card h-100">
+	                        <!-- Product image-->
+	                        <img class="card-img-top" src="assets/img/busan.jpg" />
+	                        
+	                        <!-- Product details-->
+	                        <div class="card-body p-6">
+	                            <div class="text-center">
+	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+	                            <p style=text-align:left;>부산
+	                            <hr>
+	                                <!-- Product name-->
+	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+	                                <hr>
+	                                <!-- Product price-->
+	                            </div>
+	                        </div>
+	                        <!-- Product actions-->
+	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+	                        </div>
+	                    </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_03.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Summer Addides Shoes</a>
-                            <p class="card-text">
-                                Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
-                            </p>
-                            <p class="text-muted">Reviews (74)</p>
-                        </div>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                	<div class="col mb-5">
+	                    <div class="card h-100">
+	                        <!-- Product image-->
+	                        <img class="card-img-top" src="assets/img/busan.jpg" />
+	                        
+	                        <!-- Product details-->
+	                        <div class="card-body p-6">
+	                            <div class="text-center">
+	                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
+	                            <p style=text-align:left;>부산
+	                            <hr>
+	                                <!-- Product name-->
+	                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+	                                <hr>
+	                                <!-- Product price-->
+	                            </div>
+	                        </div>
+	                        <!-- Product actions-->
+	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
+	                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+	                        </div>
+	                    </div>
                     </div>
-                </div>
+            </div>
             </div>
         </div>
     </section>
