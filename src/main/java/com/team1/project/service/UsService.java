@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team1.dao.UsDAO;
+import com.team1.project.dao.UsDAO;
 import com.team1.project.dto.UsDTO;
 
 @Service
