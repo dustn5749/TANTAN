@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.dao.UsDAO">
+
+<!--     <select id="usTop5" resultType="com.team1.project.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO">  -->
+<!--         <![CDATA[ -->
+<!--             SELECT  -->
+<!--                 usNum, cityName, writer, usCount, regDate, startDate, endDate, title, content -->
+<!--             FROM ( -->
+<!--                 SELECT  -->
+<!--                     ROW_NUMBER() OVER (ORDER BY Us.Usnum DESC) ROWNUM, Us.* -->
+<!--                 FROM US  -->
+<!--             ) SUB   -->
+<!--             WHERE ROWNUM <= 5 -->
+<!--         ]]> -->
+<!--     </select> -->
+
+
+<select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO" >
+    SELECT * FROM (
+        SELECT rownum nrow, b.* FROM (
+            SELECT
+                rownum AS usNum, null AS cityName, writer, usCount, regDate, null AS startDate, null AS endDate, title AS title, null AS content
+            FROM board a
+            <if test="searchTitle != '' and searchTitle != null">
+                WHERE title LIKE concat(concat('%', #{searchTitle}), '%')
+            </if>
+            START WITH pid = 0
+            CONNECT BY PRIOR boardid = pid
+            ORDER SIBLINGS BY boardid DESC
+        ) b
+        WHERE rownum &lt;= #{endNo}
+    ) O
+    WHERE nrow BETWEEN #{startNo} AND #{endNo}
+</select>
+
+
+    <insert id="insertUs">
+        INSERT INTO us (
+            US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT
+        ) VALUES (
+            #{usNum}, #{cityName}, #{writer}, #{usCount}, sysdate, #{startDate}, #{endDate}, #{title}, #{content}
+        )
+    </insert>
+
+<!--     <insert id="insertUsReply"> -->
+<!--         <selectKey keyProperty="usNum" resultType="int" order="BEFORE"> -->
+<!--             SELECT seq_board.nextval boardid FROM dual -->
+<!--         </selectKey> -->
+<!--         INSERT INTO board ( -->
+<!--             pid, boardid, title, contents, writer_uid, reg_date -->
+<!--         ) VALUES ( -->
+<!--             #{pid}, #{boardid}, #{title}, #{contents}, #{writer_uid}, sysdate -->
+<!--         ) -->
+<!--     </insert> -->
+
+<!--     <select id="detailUs" resultType="com.kosa.pro1.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO"> -->
+<!--         SELECT -->
+<!--             US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT -->
+<!--         FROM US -->
+<!--         WHERE US_NUM = #{usNum} -->
+<!--     </select> -->
+
+<!--     <update id="usUpdate"> -->
+<!--         UPDATE US -->
+<!--         SET -->
+<!--         CITY_NAME = #{cityName}, -->
+<!--         WRITER = #{writer}, -->
+<!--         US_CNT = #{usCount}, -->
+<!--         REGDATE = sysdate, -->
+<!--         START_DATE = #{startDate}, -->
+<!--         END_DATE = #{endDate}, -->
+<!--         TITLE = #{title}, -->
+<!--         CONTENT = #{content} -->
+<!--         WHERE US_NUM = #{usNum} -->
+<!--     </update> -->
+
+<!--     <delete id="usDelete"> -->
+<!--         DELETE FROM US -->
+<!--         WHERE US_NUM = #{usNum} -->
+<!--     </delete> -->
+
+</mapper>
