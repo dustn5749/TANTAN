@@ -9,10 +9,18 @@
 <title>Insert title here</title>
 
 <style>
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 	/* review container 시작 */
 	.review_container {
 		margin: 0 auto;
 		padding: 10px;
+		
 	}
      .boardmap_container {
             width: 90% !important;
@@ -83,12 +91,65 @@
 		height: 700px;
 		/* padding-bottom: 200px */
 	}
+	#map_div{
+		margin: 0;
+	}
+	.map_div_inner {
+		margin: 0;
+		padding: 0;
+		width: 300px;
+		
+	}
 	.col-md-6 > a {
 		align-content: center;
 		align-items: center;
 		align-self: center;
 		margin: 0 atuo;
 		
+	}
+	
+	
+	/* 검색바 div */
+	.search_bar {
+		height: 100px;
+		margin: 0 auto;
+		padding-top: 25px;
+	}
+	/* 검색 input 창  */
+	.search_bar > input {
+		width: 350px;
+		border: 1px solid rgb(233, 233, 233);
+		border-radius: 3px;
+		padding: 1%;
+		font-family: 'Pretendard-Regular' !important;
+	}
+	/* 검색 버튼 */
+	#search_btn{
+		border: none;
+		box-shadow: 1px 1px 1px 1px rgb(233, 233, 233);
+		border-radius: 10px;
+		width: 50px;
+		height: 50px;
+	}
+	#search_btn:hover {
+		background-color: rgb(173, 173, 173);
+	}
+	
+	
+	/* 벌점을 선택해주세요  */
+	.warning_msg {
+		height: 50px;
+		font-size: 25px !important;
+		font-family: 'Pretendard-Regular' !important;
+	}
+	
+	/* 5자 이상으로 입력해주세요 */
+	.warning_msg_comment {
+		height: 50px;
+		margin: 0 auto;
+		justify-content: center;
+		text-align: center;
+		padding-top: 15px;
 	}
 .list0 { clear:both; position: relative; z-index: 1; top: -35px; left: -5px; } 
 .list1 { clear:both; position: absolute; z-index: 1; top: 260px; left: 20px; }
@@ -140,66 +201,79 @@
     .star-rating label:hover ~ label {
       color: #fc0;
     }
-
-   .card-img-top mb-5 mb-md-0 {
-   
-   
-   }
-
+	/* 등록 버튼 */
+  .cmd {
+  	height: 75px;
+  	margin: 0 atuo;
+  	align-items: center;
+  	padding-top: 25px
+  }
+  .cmd > input{
+  	width: 100px;
+  	height: 35px;
+  	border-radius: 10px;
+  	box-shadow: 1px 1px 1px 1px rgb(233, 233, 233);
+  	background-color: rgb(216, 242, 248);
+  	border: none;
+  	font-family: 'Pretendard-Regular' !important;
+  } 
+  
+  .cmd > input:hover {
+  	background-color: rgb(85, 193, 220);
+  	color :  white;
+  }
   </style>
 </head>
 <body>
 	<div class="review_container">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6">
-                    <br>
-                    
+                    <div class="col-md-6" id="map_div" style="margin: 0; width: 300px; top: 100px;">
+                    <div class="map_div_inner" >
 						<a href='./bbs/board.php?bo_table=m101&sca=전남' onfocus='this.blur()' onmouseover=mus_on('mus1') onmouseout=mus_off('mus1') onclick=smenu_click('mus1')><img src='/assets/img/map2/m061.gif' alt='' border='0' name='mus1' class='list1' ></a><a href='./bbs/board.php?bo_table=m101&sca=전북' onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_click('mus2')><img src='/assets/img/map2/m063.gif' alt='' border='0' name='mus2' class='list2' ></a><a href='./bbs/board.php?bo_table=m101&sca=경남' onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('mus3')><img src='/assets/img/map2/m055.gif' alt='' border='0' name='mus3' class='list3' ></a><a href='./bbs/board.php?bo_table=m101&sca=강원' onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('mus4')><img src='/assets/img/map2/m033.gif' alt='' border='0' name='mus4' class='list4' ></a><a href='./bbs/board.php?bo_table=m101&sca=충남' onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('mus5')><img src='/assets/img/map2/m041.gif' alt='' border='0' name='mus5' class='list5' ></a><a href='./bbs/board.php?bo_table=m101&sca=경기' onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('mus6')><img src='/assets/img/map2/m031.gif' alt='' border='0' name='mus6' class='list6' ></a><a href='./bbs/board.php?bo_table=m101&sca=충북' onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('mus7')><img src='/assets/img/map2/m043.gif' alt='' border='0' name='mus7' class='list7' ></a><a href='./bbs/board.php?bo_table=m101&sca=경북' onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('mus8')><img src='/assets/img/map2/m054.gif' alt='' border='0' name='mus8' class='list8' ></a><a href='./bbs/board.php?bo_table=m101&sca=제주' onfocus='this.blur()' onmouseover=mus_on('mus9') onmouseout=mus_off('mus9') onclick=smenu_click('mus9')><img src='/assets/img/map2/m064.gif' alt='' border='0' name='mus9' class='list9' ></a><a href='./bbs/board.php?bo_table=m101&sca=서울' onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('mus10')><img src='/assets/img/map2/m02.gif' alt='' border='0' name='mus10' class='list10' ></a><a href='./bbs/board.php?bo_table=m101&sca=인천' onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('mus11')><img src='/assets/img/map2/m032.gif' alt='' border='0' name='mus11' class='list11' ></a><a href='./bbs/board.php?bo_table=m101&sca=대전' onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('mus12')><img src='/assets/img/map2/m042.gif' alt='' border='0' name='mus12' class='list12' ></a><a href='./bbs/board.php?bo_table=m101&sca=광주' onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('mus13')><img src='/assets/img/map2/m062.gif' alt='' border='0' name='mus13' class='list13' ></a><a href='./bbs/board.php?bo_table=m101&sca=대구' onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('mus14')><img src='/assets/img/map2/m053.gif' alt='' border='0' name='mus14' class='list14' ></a><a href='./bbs/board.php?bo_table=m101&sca=울산' onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('mus15')><img src='/assets/img/map2/m052.gif' alt='' border='0' name='mus15' class='list15' ></a><a href='./bbs/board.php?bo_table=m101&sca=부산' onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('mus16')><img src='/assets/img/map2/m051.gif' alt='' border='0' name='mus16' class='list16' ></a>        
-                    <div class="card-img-top mb-5 mb-md-0"></div></div>
+                   </div>
+                   </div>
                  
-    <div class="col-md-6" style="text-align: center;">
-    <div class="boardmap_container" style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; display: inline-block;">
-        <div class="search_bar" style="margin-bottom: 20px; text-align: center;">
-            <input type="text" placeholder="지역을 검색해보세요" id="search_bar_input" style="margin-bottom: 10px;">
-            <button style="margin-bottom: 10px;">
-                <img src="/assets/img/search.png" width="30px">
-            </button>
-            <div class="seachcity" style="margin-bottom: 10px;"></div>
-    <div class="row">
-
-        <div class="fs-5 mb-5" style="margin-bottom: 10px;"></div>
-
-        <input type="hidden" name="rate" id="rate" value="0" style="margin-bottom: 10px;">
-        <div class="warning_msg" style="margin-bottom: 10px;">별점을 선택해 주세요.</div>
-
-        <div class="star-rating">
-            <input type="radio" id="5-stars" name="rating" value="5" />
-            <label for="5-stars" class="star">&#9733;</label>
-            <input type="radio" id="4-stars" name="rating" value="4" />
-            <label for="4-stars" class="star">&#9733;</label>
-            <input type="radio" id="3-stars" name="rating" value="3" />
-            <label for="3-stars" class="star">&#9733;</label>
-            <input type="radio" id="2-stars" name="rating" value="2" />
-            <label for="2-stars" class="star">&#9733;</label>
-            <input type="radio" id="1-star" name="rating" value="1" />
-            <label for="1-star" class="star">&#9733;</label>
-        </div>
-            
-         
-
-        <div class="review_contents" style="margin-bottom: 10px;">
-            <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-            <textarea rows="10" class="review_textarea" style="width: 100%;"></textarea>
-        </div>
-
-        <div class="cmd" style="margin-bottom: 10px;">
-            <input type="button" name="save" id="save" value="등록">
-        </div>
-   		 </div>
-		</div>
-		</div>
-		</div>
+			    <div class="col-md-6" style="text-align: center;">
+			    <div class="boardmap_container" style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; display: inline-block;">
+			        <div class="search_bar" >
+			            <input type="text" placeholder="지역을 검색해보세요" id="search_bar_input" style="margin-bottom: 10px;">
+			            <button id="search_btn">
+			                <img src="/assets/img/search.png" width="30px">
+			            </button>
+			          </div>
+			            <div class="seachcity" style="margin-bottom: 10px;"></div>
+			    <div class="row">			
+			        <input type="hidden" name="rate" id="rate" value="0" style="margin-bottom: 10px;">
+			        <div class="warning_msg" >별점을 선택해 주세요</div>
+			
+			        <div class="star-rating">
+			            <input type="radio" id="5-stars" name="rating" value="5" />
+			            <label for="5-stars" class="star">&#9733;</label>
+			            <input type="radio" id="4-stars" name="rating" value="4" />
+			            <label for="4-stars" class="star">&#9733;</label>
+			            <input type="radio" id="3-stars" name="rating" value="3" />
+			            <label for="3-stars" class="star">&#9733;</label>
+			            <input type="radio" id="2-stars" name="rating" value="2" />
+			            <label for="2-stars" class="star">&#9733;</label>
+			            <input type="radio" id="1-star" name="rating" value="1" />
+			            <label for="1-star" class="star">&#9733;</label>
+			        </div>
+			            
+			         
+			
+			        <div class="review_contents" style="margin-bottom: 10px;">
+			            <div class="warning_msg_comment">5자 이상으로 작성해 주세요.</div>
+			            <textarea rows="10" class="review_textarea" style="width: 100%;"></textarea>
+			        </div>
+			
+			        <div class="cmd">
+			            <input type="button" name="save" id="save" value="등록">
+			        </div>
+			   		 </div>
+					</div>
+					</div>
+					
 		</div>
 	</div>
 </div>

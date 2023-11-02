@@ -151,6 +151,10 @@ img {
   cursor: pointer;
 }
 
+.sidebar-btn.active {
+  border: 1px solid #393939;
+}
+
 .sidebar-btn .icon {
   width: 32px;
   height: 32px;
@@ -507,12 +511,12 @@ img {
   display: flex;
 }
 
-.modal {
+.common-modal {
   transform: translateY(60px);
   transition: all 0.3s;
 }
 
-.modal-wrapper.active .modal {
+.modal-wrapper.active .common-modal {
   transform: translateY(0);
 }
 
@@ -948,7 +952,7 @@ img {
   display: none;
 }
 
-.recomment-top.open + .recomment-bottom {
+.recomment-top.open+.recomment-bottom {
   display: block;
 }
 

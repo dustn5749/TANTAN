@@ -17,18 +17,13 @@
     }
     .us_header_size{
      float: right;
-/*     width: 237px;
+/*     width: 300px;
  */    top: 80px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
     display: flex;
 }
-.us_header_size > ul > li > ul > li > button {
-	width: 200px;
-} 
-  .us_header_size > ul > li > ul > li {
-  
-}   
+ 
    
    .us_header {
    
@@ -181,7 +176,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: 80px !important;
+    width:100px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
@@ -190,20 +185,17 @@
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
-
-ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-li {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    border : 0;
-    float: left;
-}
- 
+	.right_btn_ul {
+		position: relative;
+		display: flex;
+	}
+	
+	 .right_btn_li  {
+		margin: 0 auto;
+	}
+	. right_btn_li >button {
+		width: 150px !important;
+	}
 .city_btn1 {
     cursor: pointer;
     position: relative;
@@ -211,15 +203,19 @@ li {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: 80px !important;
+    width: 100px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
     padding: 8px 14px;
-    background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
+
+	button:hover {
+		font-weight: bold;
+		
+	}
    .city_fillter_inner {
        display: flex;
       
@@ -363,17 +359,12 @@ li {
         width: 94%; 
         margin: 0 auto; 
     }
-    
-	ul > li {
-	position:relative;
-	}
+ 
 
 	ul. {
 	position: abd
 	}
-	.us_header_size > .city_btn1 {
-		width: 150px;
-	}
+
 
 </style>
 </head>
@@ -381,26 +372,27 @@ li {
 <body>
 
 <div class="schedule_container">
-    <div class="us_header">
-        <div class="us_header2"></div>
-        <div class="us_header3">
-            <div class="us_header4">
-                <div class="us_header5">
-                    <div class="us_header6">
-                        <div class="us_inner" style="left: 0%;"></div>
-                        <button class="us_btn">
-                            <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
-                        </button>
-                        <button class="schedule_btn">
-                            <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
-                        </button>
-                    </div>
+<div class="us_header">
+    <div class="us_header2"></div>
+    <div class="us_header3">
+        <div class="us_header4">
+            <div class="us_header5">
+                <div class="us_header6">
+                    <div class="us_inner" style="left: 0%;"></div>
+                    <button class="us_btn">
+                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
+                    </button>
+                    <button class="schedule_btn" >
+                        <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <div class="us_fillter">
+<<<<<<< HEAD
     	<div class="us_header_size">
 	       <ul>
 	  	     <li>
@@ -431,6 +423,29 @@ li {
 	  	     	</li>
 	       </ul>
 	    </div>
+=======
+
+        <div class="us_header_size">
+            <ul>
+                <button class="city_btn" onclick="toggleCityFilter()">지역</button>
+            </ul>
+            <div class="city_fillter" id="koreanCities" style="display: none;">
+                <ul>
+                    <li>서울</li>
+                    <li>강원도</li>
+                    <li>제주</li>
+                    <li>부산</li>
+                    <li>경기도</li>
+                    <li>충청도</li>
+                    <li>경상도</li>
+                    <li>전라도</li>
+                    <li>울릉도</li>
+                </ul>
+            </div>
+            <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+        </div>
+
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
