@@ -380,10 +380,6 @@ li {
 
 <body>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 <div class="schedule_container">
     <div class="us_header">
         <div class="us_header2"></div>
