@@ -8,7 +8,7 @@
    .us_container{
       width: 80%;
       margin: 0 auto;
-      padding: 3%;
+      padding: 5%;
    }
     
     .content{
@@ -17,14 +17,18 @@
     }
     .us_header_size{
      float: right;
-    width: 237px;
-    top: 80px;
+/*     width: 237px;
+ */    top: 80px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
     display: flex;
 }
-
-      }
+.us_header_size > ul > li > ul > li > button {
+	width: 200px;
+} 
+  .us_header_size > ul > li > ul > li {
+  
+}   
    
    .us_header {
    
@@ -148,7 +152,7 @@
    }
    .us_fillter {
    	margin: 0 auto;
-   	width: 1260px;
+   	width: 80%;
    }
    .fillter_btn_area {
    	  display: flex;
@@ -185,6 +189,19 @@
     background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
+}
+
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+li {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
 }
  
 .city_btn1 {
@@ -354,13 +371,19 @@
 	ul. {
 	position: abd
 	}
+	.us_header_size > .city_btn1 {
+		width: 150px;
+	}
 
 </style>
 </head>
 
 <body>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 <div class="schedule_container">
     <div class="us_header">
         <div class="us_header2"></div>
@@ -382,6 +405,7 @@
     </div>
 
     <div class="us_fillter">
+<<<<<<< HEAD
         <div class="us_header_size">
             <ul>
                 <button class="city_btn" onclick="toggleCityFilter()">지역</button>
@@ -401,6 +425,38 @@
             </div>
             <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
         </div>
+=======
+    	<div class="us_header_size">
+	       <ul>
+	  	     <li>
+	  	     	<ul>
+	  	     	<li><button class="city_btn" onclick="toggleCityFilter()">지역</button>
+	  	     		<ul>
+	  	     			<li>
+		  	     			<div class="city_fillter" id="koreanCities" style="display: none;">
+					        <ul>
+					            <li>서울</li>
+					            <li>강원도</li>
+					            <li>제주</li>
+					            <li>부산</li>
+					            <li>경기도</li>
+					            <li>충청도</li>
+					            <li>경상도</li>
+					            <li>전라도</li>
+					            <li>울릉도</li>
+					        </ul>
+					  		</div>
+	  	     			</li>
+	  	     		</ul>
+	  	     	</li>
+	  	     	<li>
+	  	     		<button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; 			align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; 			padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+	  	     	</li>
+	  	     	</ul>
+	  	     	</li>
+	       </ul>
+	    </div>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
@@ -654,7 +710,7 @@
 </div>
 </div>
 
-
+</div>
 
 <script>
 
