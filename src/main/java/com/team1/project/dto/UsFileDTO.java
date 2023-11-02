@@ -2,7 +2,7 @@ package com.team1.project.dto;
 
 import java.sql.Date;
 
-public class UsFile {
+public class UsFileDTO {
 
 	  private int usFileNum;
 	  private int usNum;
@@ -12,4 +12,4 @@ public class UsFile {
 	  private String realName;
 	  private String fileType;
 	  private Date regDate;
-}
+	}
