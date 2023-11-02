@@ -405,7 +405,6 @@ li {
     </div>
 
     <div class="us_fillter">
-<<<<<<< HEAD
         <div class="us_header_size">
             <ul>
                 <button class="city_btn" onclick="toggleCityFilter()">지역</button>
@@ -425,7 +424,6 @@ li {
             </div>
             <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
         </div>
-=======
     	<div class="us_header_size">
 	       <ul>
 	  	     <li>
@@ -456,7 +454,6 @@ li {
 	  	     	</li>
 	       </ul>
 	    </div>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
