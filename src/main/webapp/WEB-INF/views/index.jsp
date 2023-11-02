@@ -48,9 +48,9 @@ https://templatemo.com/tm-559-zay-shop
     z-index: 100;
     position: fixed;
     right: 0;
-    /* top: 90 */
-    width: 300px;
-    height: 250px;
+    top: 300px; /* 수정된 값 */
+    width: 290px;
+    height: 240px;
     text-align: center;
     display: flex;
 }
@@ -65,21 +65,24 @@ https://templatemo.com/tm-559-zay-shop
 
 <body>
    
+
  	<div id="container">
  	
 		<div id="header">
 			<tiles:insertAttribute name="header"/>
 		</div>
 		<div id="content">
-			<div class="bg">
-	  		<img src="/assets/img/rabbit.png" id="rabbit_img">	
-   			</div>
+		   	<div class="bg">
+			  <img src="/assets/img/rabbit.png" id="rabbit_img">	
+		   	</div>
 		<tiles:insertAttribute name="body"/>
 		</div>
 		<div id="footer">
 		<tiles:insertAttribute name="footer"/>
 		</div>
 	</div>
+	
+
 
     <!-- Start Script -->
     <script src="/assets/js/jquery-1.11.0.min.js"></script>
