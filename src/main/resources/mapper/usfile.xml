@@ -3,8 +3,8 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team1.usFile">
-<select id="getFiles" resultType="com.team1.project.dto.UsFile">
+<mapper namespace="com.team1.project.dto.usFile">
+<select id="getFiles" parameterType="com.team1.project.dto.UsFileDTO">
     SELECT
         fileNo AS fileNo,
         BOARDNUM AS boardNum,
@@ -18,7 +18,7 @@
     ORDER BY fileNo
 </select>
 
-<select id="getAttacheFile" resultType="com.team1.project.dto.UsFile">
+<select id="getAttacheFile" resultType="com.team1.project.dto.UsFileDTO">
     SELECT
         fileNo AS fileNo,
         BOARDNUM AS boardNum,
