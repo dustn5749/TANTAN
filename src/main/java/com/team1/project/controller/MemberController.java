@@ -30,4 +30,7 @@ public class MemberController {
 	public String joinComplete() {
 		return "joinComplete";
 	}
+	
+	
+	
 }

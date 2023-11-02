@@ -32,9 +32,7 @@
        background-color: rgb(255, 255, 255);
        transition: all 0.1s ease-in-out 0.3s;
    }
-   .us_header2 {
-       background-color: rgb(255, 255, 255);
-   }
+
    .us_header3 {
       display: flex;
        -webkit-box-pack: center;
@@ -47,8 +45,8 @@
        width: 100%;
        height: 44px;
        margin-top: 20px;
-       padding: 0px 0px 20px;
-       background-color: rgb(255, 255, 255);
+/*        padding: 0px 0px 20px;
+       background-color: rgb(255, 255, 255); */
    }
    .us_header4 {
    z-index: 9;
@@ -371,7 +369,6 @@
 
 <div class="schedule_container">
 <div class="us_header">
-    <div class="us_header2"></div>
     <div class="us_header3">
         <div class="us_header4">
             <div class="us_header5">

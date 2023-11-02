@@ -72,6 +72,7 @@
     display: flex;
     justify-content: space-between; /* 요소 사이의 간격을 균등하게 배치합니다 */
     align-items: center; /* 요소들을 수직 중앙 정렬합니다 */
+  
 
 }
 

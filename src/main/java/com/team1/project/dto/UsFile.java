@@ -5,8 +5,8 @@ import java.sql.Date;
 public class UsFile {
 
 	  private int usFileNum;
-	  private int usNum;
-	  private String memberId;
+	  private int us_num;
+	  private String member_id;
 	  private Integer length;
 	  private String uploadName;
 	  private String realName;
