@@ -21,30 +21,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <style>
     
-/*    body { */
-/*             background-color: #f9f9f9; */
-/*             font-family: 'Roboto', sans-serif; */
-/*         } */
-
-/*         .container { */
-/*             margin-top: 50px; */
-/*             background-color: #fff; */
-/*             border-radius: 5px; */
-/*             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-/*             padding: 30px; */
-/*         } */
-
-/*         .navbar { */
-/*             background-color: #0099FF; */
-/*             color: #fff; */
-/*             padding: 15px; */
-/*         } */
-
-/*         .navbar h2 { */
-/*             margin: 0; */
-/*             font-size: 28px; */
-/*         } */
-
        .nav-wrap {
 	position:relative;
 	margin: 50px auto 0;

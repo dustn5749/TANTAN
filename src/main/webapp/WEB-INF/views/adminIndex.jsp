@@ -185,6 +185,65 @@ $('body').addClass('layout-fixed');
 	    });
 	  });
 </script>
+<script>
+  $(function () {
+	    $("#jsGrid3").jsGrid({
+	        height: "100%",
+	        width: "100%",
+
+	        sorting: true,
+	        paging: true,
+
+	        data: db.clients,
+			
+	        headerRowRenderer: function() {
+	        	var $result = $("<tr>").height(0)
+	        						   .append($("<th>").width(150))
+	        						   .append($("<th>").width(50))
+	        						   .append($("<th>").width(200))
+	        						   .append($("<th>").width(100))
+	        						   .append($("<th>").width(100))
+	        						   .append($("<th>").width(100));
+	        						   $result = $result.add($("<tr>")
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("제목"))
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("아이디"))
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("닉네임"))
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("작성날짜"))
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("접속날짜"))
+	        								   			.append($("<th class='jsgrid-cell js-header'>").attr("rowspan",2).text("권한")));
+	        							return $result;
+	        },
+	        
+	        fields: [
+	            { name: "Name", type: "text", width: 150 },
+	            { name: "Age", type: "number", width: 50 },
+	            { name: "Address", type: "text", width: 200 },
+	            { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
+	            { name: "Married", type: "checkbox", title: "Is Married" },
+	            { name: "권한", type: "control", width: 100, editButton: false, deleteButton: false,
+	                itemTemplate: function(value, item) {
+	                   var $result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+	                   var $customEditButton = $("<button>").attr({class: "customGridEditbutton jsgrid-button jsgrid-edit-button"})
+	                     .click(function(e) {
+	                       confirm("삭제하시겠습니까?");
+	                       e.stopPropagation();
+	                     });
+
+	                  var $customDeleteButton = $("<button>").attr({class: "customGridDeletebutton jsgrid-button jsgrid-delete-button"})
+	                   .click(function(e) {
+	                     alert("Title: " + item.title);
+	                     e.stopPropagation();
+	                   });
+
+	                   return $("<div>").append($customEditButton).append($customDeleteButton);
+	                   //return $result.add($customButton);
+	               },
+	             }
+	        ]
+	    });
+	  });
+</script>
 
 <script>
 $(function(){
