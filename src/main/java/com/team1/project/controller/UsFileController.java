@@ -3,6 +3,7 @@ package com.team1.project.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,15 +31,15 @@ public class UsFileController {
 							HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
 		System.out.println("fileController.download()");
-		UsFileDTO attacheFile = usFileService.getAttacheFile(file.getFileNo());
+		UsFileDTO attacheFile = usFileService.getUsFile(file.getFileNo());
 		if(attacheFile != null) {
-			String filePath = CURR_IMAGE_REPO_PATH  + attacheFile.getFileNameReal();
+			String filePath = CURR_IMAGE_REPO_PATH  + attacheFile.getFileNo();
 			System.out.println("attachFile = " + attacheFile);
 			System.out.println("filePath = " + filePath);
 			File images = new File(filePath);
 			
 			response.setHeader("Cache-Control", "no-cache");
-			response.addHeader("Content-disposition", "attachment; fileName=" + URLEncoder.encode(attacheFile.getFileNameOrg(), "UTF-8") );
+			response.addHeader("Content-disposition", "attachment; fileName=" + URLEncoder.encode(attacheFile.getUploadName(), "UTF-8") );
 			response.setContentType("application/octet-stream");
 			response.setContentLength(attacheFile.getLength());
 			
@@ -62,11 +63,11 @@ public class UsFileController {
 	   @RequestMapping("/displayImage.do")
 	   public void displayImage(UsFileDTO file, HttpServletResponse response) throws Exception {
 	       OutputStream out = response.getOutputStream();
-	       UsFileDTO attacheFile = usFileService.getAttacheFile(file.getFileNo());
-	       if (attacheFile != null) {
-	           String filePath = CURR_IMAGE_REPO_PATH + attacheFile.getFileNameReal();
+	       UsFileDTO usFile = usFileService.getUsFile(file.getFileNo());
+	       if (usFile != null) {
+	           String filePath = CURR_IMAGE_REPO_PATH + usFile.getFileNo();
 	           File images = new File(filePath);
-	           String getFileName = attacheFile.getFileNameOrg();
+	           String getFileName = usFile.getUploadName();
 	           int lastIndex = getFileName.lastIndexOf(".");
 			   String extension = getFileName.substring(lastIndex);
 			   if(extension.contains("jpg") || extension.contains("png") || extension.contains("jepg")) {

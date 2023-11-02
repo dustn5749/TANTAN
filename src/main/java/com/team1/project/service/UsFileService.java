@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team1.dao.UsFileDAO;
-import com.team1.project.dto.UsFile;
+import com.team1.project.dao.UsFileDAO;
+import com.team1.project.dto.UsFileDTO;
 
 @Service
 public class UsFileService {
@@ -15,21 +15,21 @@ public class UsFileService {
     private UsFileDAO usFileDAO;
 
     // 첨부파일 추가하기
-    public boolean add(UsFile file) throws Exception {
+    public boolean add(UsFileDTO file) throws Exception {
         System.out.println("UsFileService.add()");
         return usFileDAO.add(file);
     }
 
     // 파일 정보 얻기 (게시판에 따른)
-    public List<UsFile> getFiles(int boardNum) throws Exception {
+    public List<UsFileDTO> getFiles(int boardNum) throws Exception {
         System.out.println("UsFileService.getFiles()");
-        return usFileDAO.getFiles(boardNum);
+        return usFileDAO.getUsFiles(boardNum);
     }
 
     // 파일 정보 얻기
-    public UsFile getAttacheFile(int fileNo) throws Exception {
+    public UsFileDTO getUsFile(int fileNo) throws Exception {
         System.out.println("UsFileService.getAttacheFile()");
-        return usFileDAO.getAttacheFile(fileNo);
+        return usFileDAO.getUsFile(fileNo);
     }
 
     // 첨부파일 삭제하기 (한 개)
@@ -43,8 +43,4 @@ public class UsFileService {
         System.out.println("UsFileService.deletes()");
         return usFileDAO.deletes(deleteNumList);
     }
-}
-
-	
-	
 }

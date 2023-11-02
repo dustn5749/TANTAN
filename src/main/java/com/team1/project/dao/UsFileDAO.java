@@ -1,9 +1,13 @@
 package com.team1.project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team1.project.dto.UsFileDTO;
+
 @Mapper
-public class UsFileDAO {
+public interface UsFileDAO {
     // 첨부파일 추가하기
     boolean add(UsFileDTO file) throws Exception;
 
