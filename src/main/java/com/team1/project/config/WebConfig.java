@@ -19,7 +19,6 @@ public class WebConfig {
 		
 		return configurer;
 	}
-
 	
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
