@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 public class MemberDTO {
 
-	private String uid;		
+	private String member_id;		
 	private String name;	
 	private String pwd;		
 	private String phone;	
