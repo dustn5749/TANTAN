@@ -54,12 +54,15 @@
 	    <put-attribute name="body" value="/WEB-INF/views/board/review.jsp"></put-attribute>
 	</definition>
 	
+		<definition name="us" extends="baseLayout">
+	    <put-attribute name="title" value="동행"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/us/usList.jsp"></put-attribute>
+	</definition>
 	
 		<definition name="capDetail" extends="baseLayout">
 	    <put-attribute name="title" value="게시판"></put-attribute>		
 	    <put-attribute name="body" value="/WEB-INF/views/board/capDetail.jsp"></put-attribute>
 	</definition>
-	
 	
 		<definition name="cap" extends="baseLayout">
 	    <put-attribute name="title" value="게시판"></put-attribute>		

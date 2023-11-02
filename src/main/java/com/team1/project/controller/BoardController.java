@@ -12,17 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.BoardDTO;
-//import com.team1.project.service.BoardService;
 	
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
-//	@Autowired
-//	private BoardService boardService;
-	
-//	@Autowired
-//	private MailService mailService;
 
 	// 1. 게시판 전체 목록 페이지
 	@RequestMapping(value = "/list")
