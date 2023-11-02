@@ -6,7 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-  
+  <!-- FLOT CHARTS -->
+<script src="admin/plugins/flot/jquery.flot.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="admin/plugins/flot/plugins/jquery.flot.resize.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
@@ -61,75 +66,63 @@
     		<div class="card-body table-responsive p-0">
     		<div class="tab-content p-3" id="nav-tabContent">
               <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
-              <hr>
-        <div class="row">
-          <div class="col-12">
-            <!-- interactive chart -->
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="far fa-chart-bar"></i>
-                  Interactive Area Chart
-                </h3>
-
-                <div class="card-tools">
-                  Real time
-                  <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                    <button type="button" class="btn btn-default btn-sm active" data-toggle="on">On</button>
-                    <button type="button" class="btn btn-default btn-sm" data-toggle="off">Off</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div id="interactive" style="height: 300px;"></div>
-              </div>
-              <!-- /.card-body-->
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col -->
-        </div>
+	              <hr>
+		          <div class="row">
+			          <div class="col-12">
+			            <!-- interactive chart -->
+			              <div class="card-header">
+			                <h3 class="card-title">
+			                  <i class="far fa-chart-bar"></i>
+			                  Interactive Area Chart
+			                </h3>
+			                <div class="card-tools">
+			                  Real time
+			                  <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+			                    <button type="button" class="btn btn-default btn-sm active" data-toggle="on">On</button>
+			                    <button type="button" class="btn btn-default btn-sm" data-toggle="off">Off</button>
+			                  </div>
+			                </div>
+			              </div>
+			              <div class="card-body">
+			                <div id="interactive" style="height: 300px;"></div>
+			              </div>
+			              <!-- /.card-body-->
+			            <!-- /.card -->
+			        </div>
+		          <!-- /.col -->
+		          </div>
               </div>
               <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab">
-                               <table class="table table-hover text-nowrap">
-    				<thead>
-    				<tr>
-    					<th>boardID</th>
-    					<th>Nickname</th>
-    					<th>name</th>
-    					<th>lastLogin</th>
-    				</tr>
-    				</thead>
-    				<tbody>
-    				<tr>
-    					<td>2</td>
-    					<td>b</td>
-    					<td>bbb</td>
-    					<td>2023-10-30</td>
-    				</tr>
-    				</tbody>
-    			</table>
+	            <div >
+	              <div>
+	                <h3 class="card-title">
+	                  <i class="far fa-chart-bar"></i>
+	                  Area Chart
+	                </h3>
+	              </div>
+	              <div class="card-body">
+	              <hr>
+	                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
+	              </div>
+	              <!-- /.card-body-->
+	            </div>
                </div>
-              <div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab">
-                             <table class="table table-hover text-nowrap">
-    				<thead>
-    				<tr>
-    					<th>likeID</th>
-    					<th>Nickname</th>
-    					<th>name</th>
-    					<th>lastLogin</th>
-    				</tr>
-    				</thead>
-    				<tbody>
-    				<tr>
-    					<td>3</td>
-    					<td>c</td>
-    					<td>ccc</td>
-    					<td>2023-10-31</td>
-    				</tr>
-    				</tbody>
-    			</table>
-    			</div>
-            </div>
+	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab">
+		            <!-- Bar chart -->
+			            <div>
+			              <div class="card-header">
+			                <h3 class="card-title">
+			                  <i class="far fa-chart-bar"></i>
+			                  Bar Chart
+			                </h3>
+			              </div>
+			              <div class="card-body">
+			              	<div id="bar-chart" style="height: 300px;"></div>
+			              </div>
+			              <!-- /.card-body-->
+            			</div>
+    				</div>
+            	</div>
     		</div>
     	</div>
     </div>
@@ -246,70 +239,70 @@
      */
     //LINE randomly generated data
 
-    var sin = [],
-        cos = []
-    for (var i = 0; i < 14; i += 0.5) {
-      sin.push([i, Math.sin(i)])
-      cos.push([i, Math.cos(i)])
-    }
-    var line_data1 = {
-      data : sin,
-      color: '#3c8dbc'
-    }
-    var line_data2 = {
-      data : cos,
-      color: '#00c0ef'
-    }
-    $.plot('#line-chart', [line_data1, line_data2], {
-      grid  : {
-        hoverable  : true,
-        borderColor: '#f3f3f3',
-        borderWidth: 1,
-        tickColor  : '#f3f3f3'
-      },
-      series: {
-        shadowSize: 0,
-        lines     : {
-          show: true
-        },
-        points    : {
-          show: true
-        }
-      },
-      lines : {
-        fill : false,
-        color: ['#3c8dbc', '#f56954']
-      },
-      yaxis : {
-        show: true
-      },
-      xaxis : {
-        show: true
-      }
-    })
+//     var sin = [],
+//         cos = []
+//     for (var i = 0; i < 14; i += 0.5) {
+//       sin.push([i, Math.sin(i)])
+//       cos.push([i, Math.cos(i)])
+//     }
+//     var line_data1 = {
+//       data : sin,
+//       color: '#3c8dbc'
+//     }
+//     var line_data2 = {
+//       data : cos,
+//       color: '#00c0ef'
+//     }
+//     $.plot('#line-chart', [line_data1, line_data2], {
+//       grid  : {
+//         hoverable  : true,
+//         borderColor: '#f3f3f3',
+//         borderWidth: 1,
+//         tickColor  : '#f3f3f3'
+//       },
+//       series: {
+//         shadowSize: 0,
+//         lines     : {
+//           show: true
+//         },
+//         points    : {
+//           show: true
+//         }
+//       },
+//       lines : {
+//         fill : false,
+//         color: ['#3c8dbc', '#f56954']
+//       },
+//       yaxis : {
+//         show: true
+//       },
+//       xaxis : {
+//         show: true
+//       }
+//     })
     //Initialize tooltip on hover
-    $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
-      position: 'absolute',
-      display : 'none',
-      opacity : 0.8
-    }).appendTo('body')
-    $('#line-chart').bind('plothover', function (event, pos, item) {
+//     $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
+//       position: 'absolute',
+//       display : 'none',
+//       opacity : 0.8
+//     }).appendTo('body')
+//     $('#line-chart').bind('plothover', function (event, pos, item) {
 
-      if (item) {
-        var x = item.datapoint[0].toFixed(2),
-            y = item.datapoint[1].toFixed(2)
+//       if (item) {
+//         var x = item.datapoint[0].toFixed(2),
+//             y = item.datapoint[1].toFixed(2)
 
-        $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
-          .css({
-            top : item.pageY + 5,
-            left: item.pageX + 5
-          })
-          .fadeIn(200)
-      } else {
-        $('#line-chart-tooltip').hide()
-      }
+//         $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
+//           .css({
+//             top : item.pageY + 5,
+//             left: item.pageX + 5
+//           })
+//           .fadeIn(200)
+//       } else {
+//         $('#line-chart-tooltip').hide()
+//       }
 
-    })
+//     })
     /* END LINE CHART */
 
     /*
@@ -372,42 +365,42 @@
      * -----------
      */
 
-    var donutData = [
-      {
-        label: 'Series2',
-        data : 30,
-        color: '#3c8dbc'
-      },
-      {
-        label: 'Series3',
-        data : 20,
-        color: '#0073b7'
-      },
-      {
-        label: 'Series4',
-        data : 50,
-        color: '#00c0ef'
-      }
-    ]
-    $.plot('#donut-chart', donutData, {
-      series: {
-        pie: {
-          show       : true,
-          radius     : 1,
-          innerRadius: 0.5,
-          label      : {
-            show     : true,
-            radius   : 2 / 3,
-            formatter: labelFormatter,
-            threshold: 0.1
-          }
+//     var donutData = [
+//       {
+//         label: 'Series2',
+//         data : 30,
+//         color: '#3c8dbc'
+//       },
+//       {
+//         label: 'Series3',
+//         data : 20,
+//         color: '#0073b7'
+//       },
+//       {
+//         label: 'Series4',
+//         data : 50,
+//         color: '#00c0ef'
+//       }
+//     ]
+//     $.plot('#donutChart', donutData, {
+//       series: {
+//         pie: {
+//           show       : true,
+//           radius     : 1,
+//           innerRadius: 0.5,
+//           label      : {
+//             show     : true,
+//             radius   : 2 / 3,
+//             formatter: labelFormatter,
+//             threshold: 0.1
+//           }
 
-        }
-      },
-      legend: {
-        show: false
-      }
-    })
+//         }
+//       },
+//       legend: {
+//         show: false
+//       }
+//     })
     /*
      * END DONUT CHART
      */

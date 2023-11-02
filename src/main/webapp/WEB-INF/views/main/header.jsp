@@ -51,10 +51,6 @@ ul, li {
     }
     
    
-	.nav-link {
-        font-family: 'NPSfontBold';
-        font-size: 20px !important;
-    }
     
     .navbar .align-self-center .d-flex {
 /*     	width: 200px !important;
@@ -88,6 +84,7 @@ ul, li {
 	font-family: 'NPSfontBold';	
 	text-align: center;
 	justify-content: center;	
+	display: flex;
 }
 .under_menu{
 	display: none;
@@ -134,7 +131,7 @@ a {
                             <a class="nav-link">동행
                             	<ul class="under_menu">
                             		<li class="under_menu_inner"><a  href="/board/list">동행 모집</a></li>
-                            		<li class="under_menu_inner"><a href="/board/schedule">일정 공유</a></li>
+                            		<li class="under_menu_inner"><a class="nav-link" href="/board/schedule">일정 공유</a></li>
                             	</ul>
                             </a>
                         </li>

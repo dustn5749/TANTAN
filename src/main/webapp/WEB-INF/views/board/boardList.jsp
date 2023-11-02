@@ -132,9 +132,7 @@
     color: rgb(106, 106, 106);
     border-radius: 20px;
     transition: color 0.1s ease-out 0.4s;
-<<<<<<< HEAD
 
-=======
    }
    /* 동행 생성하기 버튼 div */
    .make_us {
@@ -147,7 +145,6 @@
    		height: 35px;
    		background-color: rgb(81, 174, 255);
    		border-radius: 7px;
->>>>>>> refs/remotes/origin/main
    }
    .us_fillter {
    	margin: 0 auto;
@@ -190,9 +187,6 @@
     border-radius: 10px;
 }
  
- }
- 
- 
 .city_btn1 {
     cursor: pointer;
     position: relative;
@@ -209,12 +203,6 @@
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
- 
-
-     }
-   
-   
-   
    .city_fillter_inner {
        display: flex;
       
@@ -371,7 +359,12 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
 <div class="schedule_container">
+<<<<<<< HEAD
     <div class="us_header">
         <div class="us_header2"></div>
         <div class="us_header3">
@@ -386,6 +379,22 @@
                             <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
                         </button>
                     </div>
+=======
+<div class="us_header">
+
+    <div class="us_header2"></div>
+    <div class="us_header3">
+        <div class="us_header4">
+            <div class="us_header5">
+                <div class="us_header6">
+                    <div class="us_inner" style="left: 0%;"></div>
+                    <button class="us_btn">
+                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img" >동행
+                    </button>
+                    <button class="schedule_btn" >
+                        <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
+                    </button>
+>>>>>>> refs/remotes/origin/main
                 </div>
             </div>
         </div>
@@ -780,14 +789,6 @@ function displaySelectedLocationInfo(selectedRegion) {
     selectedLocationInfo.textContent = `선택된 지역: ${selectedRegion}`;
 }
 
-
 </script>
-      </div>
-    </div>
-  </div>
-</main>
-
 </body>
-
 </html>
-

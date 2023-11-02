@@ -31,9 +31,6 @@
     <!-- Main content -->
     <section class="content">
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">동행관리</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card-body">
           <div id="jsGrid2" style=text-align:center;></div>
