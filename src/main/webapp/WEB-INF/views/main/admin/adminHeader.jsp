@@ -195,6 +195,15 @@
                 </p>
               </a>
             </li>
+             <li class="nav-item">
+              <a href="adminManage" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  관리자 계정관리
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="/userList" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
