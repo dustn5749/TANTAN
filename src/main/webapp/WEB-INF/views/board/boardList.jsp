@@ -371,7 +371,6 @@
 
 <body>
 
-
 <div class="schedule_container">
 <div class="us_header">
     <div class="us_header2"></div>
@@ -394,36 +393,26 @@
 
     <div class="us_fillter">
 
-    	<div class="us_header_size">
-	       <ul>
-	  	     <li>
-	  	     	<ul class="right_btn_ul">
-	  	     	<li class="right_btn_li"><button class="city_btn" onclick="toggleCityFilter()">지역</button>
-	  	     		<ul>
-	  	     			<li>
-		  	     			<div class="city_fillter" id="koreanCities" style="display: none;">
-					        <ul>
-					            <li>서울</li>
-					            <li>강원도</li>
-					            <li>제주</li>
-					            <li>부산</li>
-					            <li>경기도</li>
-					            <li>충청도</li>
-					            <li>경상도</li>
-					            <li>전라도</li>
-					            <li>울릉도</li>
-					        </ul>
-					  		</div>
-	  	     			</li>
-	  	     		</ul>
-	  	     	</li>
-	  	     	<li class="right_btn_li">
-	  	     		<button class="city_btn1" onclick="window.location.href = 'detail'">글쓰기</button>
-	  	     	</li>
-	  	     	</ul>
-	  	     	</li>
-	       </ul>
-	    </div>
+        <div class="us_header_size">
+            <ul>
+                <button class="city_btn" onclick="toggleCityFilter()">지역</button>
+            </ul>
+            <div class="city_fillter" id="koreanCities" style="display: none;">
+                <ul>
+                    <li>서울</li>
+                    <li>강원도</li>
+                    <li>제주</li>
+                    <li>부산</li>
+                    <li>경기도</li>
+                    <li>충청도</li>
+                    <li>경상도</li>
+                    <li>전라도</li>
+                    <li>울릉도</li>
+                </ul>
+            </div>
+            <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+        </div>
+
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
