@@ -363,10 +363,9 @@
 			</div>
 		</div>
 		
+	
 		
-	</div>
-</div>
-		
+
 <script>
 var map = {
 		item : {},
