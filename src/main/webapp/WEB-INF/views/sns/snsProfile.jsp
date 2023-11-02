@@ -55,31 +55,31 @@
         <div class="sidebar-inner">
           <div class="sidebar-menu">
           <!--사이드바 버튼들 -->
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-home.svg" alt="" class="icon">
               <span class="txt">홈</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
               <span class="txt">일정</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-send.svg" alt="" class="icon">
               <span class="txt">메세지</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-heart.svg" alt="" class="icon">
               <span class="txt">알림</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
               <span class="txt">저장됨</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-activity.svg" alt="" class="icon">
               <span class="txt">내 활동</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <figure class="mini-thumnail">
                 <img src="assets/sns/images/profile-img.jpeg" alt="">
               </figure>
@@ -88,10 +88,10 @@
           </div>
 
           <div class="sidebar-menu">
-            <button type="button" class="sidebar-btn">
-              <img src="assets/sns/images/icon-list.svg" alt="" class="icon">
-              <span class="txt">더보기</span>
-            </button>
+<!--             <button type="button" class="sidebar-btn active"> -->
+<!--               <img src="assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+<!--               <span class="txt">더보기</span> -->
+<!--             </button> -->
           </div>
         </div>
       </div>
@@ -760,10 +760,10 @@
                     <span class="txt-hidden">댓글</span>
                     <img src="assets/sns/images/icon-message-circle.svg" class="icon icon-inactive" alt="">
                   </button>
-                  <button type="button" class="btn icon-btn">
-                    <span class="txt-hidden">메세지</span>
-                    <img src="assets/sns/images/icon-send.svg" class="icon icon-inactive" alt="">
-                  </button>
+<!--                   <button type="button" class="btn icon-btn"> -->
+<!--                     <span class="txt-hidden">메세지</span> -->
+<!--                     <img src="assets/sns/images/icon-send.svg" class="icon icon-inactive" alt=""> -->
+<!--                   </button> -->
                 </div>
                 <div class="display-flex gap-15">
                   <!-- 눌렀을 시 active 클래스 토글 -->
