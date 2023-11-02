@@ -5,6 +5,7 @@
 
 <mapper namespace="com.team1.project.dao.usFile">
 <select id="getFiles" resultType="com.team1.project.dto.UsFileDTO">
+
     SELECT
         fileNo AS fileNo,
         BOARDNUM AS boardNum,
