@@ -134,7 +134,7 @@
               </div>
               <div class="btn-wrap">
                 <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
+                <button type="button" class="btn solid-btn gray-btn" id="profile_modify_btn">프로필 편집</button>
               </div>
             </div>
           </div>
@@ -853,6 +853,10 @@
     function closeModal(id) {
       $('#' + id).removeClass('active');
     }
+    /* 프로필 편집 버튼  */
+    $("#profile_modify_btn").on("click", function(){
+    	location.href="/snsProfile/modify";
+    })
   </script>
 </body>
 
