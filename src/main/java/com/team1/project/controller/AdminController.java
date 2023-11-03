@@ -1,7 +1,12 @@
 package com.team1.project.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.team1.project.service.MemberService;
 
 
 /*
@@ -21,10 +26,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 6. Autowired 사용해서 service 연결.
  * */
 
+
 // 1. 관리자 메인 페이지
 // 관리자 메인 페이지로 이동
 @Controller
+
 public class AdminController {
+	
+	@Autowired
+	private MemberService memberservice; 
+	
 	@RequestMapping("/admin")
 	public String Admin() {
 		return "admin";
@@ -34,9 +45,12 @@ public class AdminController {
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
-	@RequestMapping("/userList")
-	public String AdminUserList() {
-		return "adminUserList";
+	@GetMapping("/memberList")
+	public String AdminMemberList(Model model) {
+		
+		model.addAttribute("memberList", memberservice.memberList());
+		
+		return "adminMemberList";
 	}
 	
 // 3. 관리자 동행관리 페이지

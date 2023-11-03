@@ -1,5 +1,7 @@
 package com.team1.project.dto;
 
+import java.util.List;
+
 import lombok.*;
 
 @Data
@@ -19,5 +21,9 @@ public class MemberDTO {
 	
 	public boolean isEqualPwd(MemberDTO member) {
 		return pwd.equals(pwd);
+	}
+//	관리자
+	public List<MemberDTO> memberList(){
+		return memberList();
 	}
 }
