@@ -31,61 +31,46 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/join/snsJoinForm.jsp"></put-attribute>
 	</definition>
 	
-	
 	<definition name="joinComplete" extends="baseLayout">
 		<put-attribute name="title" value="회원가입 완료"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/join/join_completeForm.jsp"></put-attribute>
 	</definition>
-	
-	
-	
-	<definition name="board/List" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/boardList.jsp"></put-attribute>
-	</definition>
-
-	<definition name="board/Detail" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/boardDetail.jsp"></put-attribute>
-	</definition>
-	
-	<definition name="board/map" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/review.jsp"></put-attribute>
-	</definition>
-	
-		<definition name="us" extends="baseLayout">
+<!--동행목록 -->
+		<definition name="usList" extends="baseLayout">
 	    <put-attribute name="title" value="동행"></put-attribute>		
 	    <put-attribute name="body" value="/WEB-INF/views/us/usList.jsp"></put-attribute>
 	</definition>
-	
-		<definition name="capDetail" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/capDetail.jsp"></put-attribute>
+<!--동행작성하기-->
+		<definition name="usWrite" extends="baseLayout">
+	    <put-attribute name="title" value="동행"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/us/usWrite.jsp"></put-attribute>
 	</definition>
-	
-		<definition name="cap" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/cap.jsp"></put-attribute>
+<!--동행상세보기 -->
+		<definition name="usDetail" extends="baseLayout">
+	    <put-attribute name="title" value="동행"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/us/usDetail.jsp"></put-attribute>
 	</definition>
-	
-	
-		<definition name="hang" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/hangDetail.jsp"></put-attribute>
+<!--일정목록 -->
+		<definition name="scheduleList" extends="baseLayout">
+	    <put-attribute name="title" value="일정"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/schedule/scheduleList.jsp"></put-attribute>
 	</definition>
-	
-		<definition name="hang" extends="baseLayout">
-	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/hangDetail.jsp"></put-attribute>
+<!--일정작성하기-->
+	<definition name="scheduleWrite" extends="baseLayout">
+	    <put-attribute name="title" value="일정"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/schedule/scheduleWrite.jsp"></put-attribute>
 	</definition>
-	
-		<definition name="schedule" extends="baseLayout">
+<!--일정상세보기 -->
+		<definition name="scheduleDetail" extends="baseLayout">
+	    <put-attribute name="title" value="일정"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/schedule/scheduleDetail.jsp"></put-attribute>
+	</definition>
+<!--리뷰페이지-->
+<definition name="reviewMain" extends="baseLayout">
 	    <put-attribute name="title" value="게시판"></put-attribute>		
-	    <put-attribute name="body" value="/WEB-INF/views/board/schedule.jsp"></put-attribute>
+	    <put-attribute name="body" value="/WEB-INF/views/review/reviewMain.jsp"></put-attribute>
 	</definition>
 
-	
 	<definition name="snsLayout" template="/WEB-INF/views/snsIndex.jsp">
 		<put-attribute name="title" value="snsIndex페이지"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>

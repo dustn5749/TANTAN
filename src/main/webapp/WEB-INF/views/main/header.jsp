@@ -122,7 +122,7 @@ a {
                         <li class="nav-item">
                             <a class="nav-link">커뮤니티
                             	<ul class="under_menu">
-                            		<li class="under_menu_inner"><a  href="/board/map">리뷰 및 추천</a></li>
+                            		<li class="under_menu_inner"><a  href="/review/main">리뷰 및 추천</a></li>
                             	</ul>
                             </a>
 
@@ -130,8 +130,8 @@ a {
                         <li class="nav-item">
                             <a class="nav-link">동행
                             	<ul class="under_menu">
-                            		<li class="under_menu_inner"><a  href="/board/list">동행 모집</a></li>
-                            		<li class="under_menu_inner"><a class="nav-link" href="/board/schedule">일정 공유</a></li>
+                            		<li class="under_menu_inner"><a  href="/us/list">동행 모집</a></li>
+                            		<li class="under_menu_inner"><a class="nav-link" href="/schedule/list">일정 공유</a></li>
                             	</ul>
                             </a>
                         </li>

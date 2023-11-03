@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.BoardDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.UsService;
 
@@ -29,8 +30,38 @@ public class UsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-		return "us/list";	
+		return "usList"; //타일즈랑 리턴값이랑 동일해야함.
 	} 
+
+	  // 동행 글쓰기
+    @RequestMapping(value = "/write")
+    public String write(BoardDTO board) throws Exception {
+//    	try {
+//			//model.addAttribute("result", boardService.boardPageList(board));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        return "usWrite";
+    }
+    
+    //동행 상세보기
+    @RequestMapping(value = "/detail")
+    public String detail(BoardDTO board) throws Exception {
+    return "usDetail";
+    
+//	
+//	  // 동행 상세보기
+//    @ResponseBody
+//    @RequestMapping(value = "/detail", method = RequestMethod.POST)
+//    public Map<String, Object> detail(@RequestBody UsDTO us) throws Exception {
+//        System.out.println("동행 상세보기 컨트롤러");
+//        Map<String, Object> Listcomment = new HashMap<>();
+//        UsDTO detail = usService.getUs(us.getUsNum());
+//        usService.viewCount(us.getUsNum());
+//        Listcomment.put("us", detail);
+//        return "detail";
+//    }
+	
 	
 //	// 동행 등록
 //    @ResponseBody
@@ -45,17 +76,8 @@ public class UsController {
 //        return resultMap;
 //    }
     
-//    // 동행 상세보기
-//    @ResponseBody
-//    @RequestMapping(value = "/detail", method = RequestMethod.POST)
-//    public Map<String, Object> detail(@RequestBody UsDTO us) throws Exception {
-//        System.out.println("동행 상세보기 컨트롤러");
-//        Map<String, Object> Listcomment = new HashMap<>();
-//        UsDTO detail = usService.getUs(us.getUsNum());
-//        usService.viewCount(us.getUsNum());
-//        Listcomment.put("us", detail);
-//        return Listcomment;
-//    }
+  
+    
 //    
 //    // 동행 수정하기
 //    @ResponseBody
@@ -106,4 +128,4 @@ public class UsController {
 //        }
 //        return resultMap;
     }
-
+}
