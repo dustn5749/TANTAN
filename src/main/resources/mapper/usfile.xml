@@ -4,7 +4,12 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.usFile">
+<<<<<<< HEAD
 <select id="getFiles" parameterType="com.team1.project.dto.UsFileDTO">
+=======
+<select id="getFiles" resultType="com.team1.project.dto.UsFileDTO">
+
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     SELECT
         fileNo AS fileNo,
         BOARDNUM AS boardNum,
