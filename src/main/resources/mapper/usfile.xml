@@ -7,7 +7,6 @@
 
 <select id="getFiles" resultType="com.team1.project.dto.UsFileDTO">
 
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     SELECT
         fileNo AS fileNo,
         BOARDNUM AS boardNum,
