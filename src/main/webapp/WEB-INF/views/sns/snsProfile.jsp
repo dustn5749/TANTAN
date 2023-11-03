@@ -415,7 +415,7 @@
       <div class="common-modal feed-modal">
       <!-- 큰 이미지 컨테이너 -->
         <div class="lg-thumbnail-container">
-          <!--큰 이미지일 경우 -->
+          <!--큰 이미지-->
           <div class="lg-thumbnail">
             <div class="thumnail-img-box">
               <img src="assets/sns/images/cat03.png" alt="">
@@ -824,7 +824,7 @@
       $(this).on('keyup input', function () { resizeTextarea(this); }).removeAttr('data-autoresize');
     })
 
-	<!--이 부분은 특정 클래스(toggle-icon-btn)를 가진 요소를 클릭할 때, 해당 요소의 활성/비활성 상태를 전환하도록 합니다. active 클래스를 토글하여 아이콘의 모양이 변경될 수 있습니다. -->
+	<!-- 특정 클래스(toggle-icon-btn)를 가진 요소를 클릭할 때, 해당 요소의 활성/비활성 상태를 전환함. active 클래스를 토글하여 아이콘의 모양이 변경될 수 있음. -->
     $('.toggle-icon-btn').on('click', function () {
       $(this).toggleClass('active');
     })
