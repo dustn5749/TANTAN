@@ -45,9 +45,9 @@ public class AdminController {
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
-	@GetMapping("/memberList")
-	public String AdminMemberList(Model model) {
-		
+	@GetMapping("/adminMemberList")
+	public String AdminMemberList(Model model) throws Exception {
+		System.out.println("memberList -> " + memberservice.memberList());
 		model.addAttribute("memberList", memberservice.memberList());
 		
 		return "adminMemberList";

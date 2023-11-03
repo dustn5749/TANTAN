@@ -12,5 +12,5 @@ public interface MemberDao {
 	// 로그인하기
 	public MemberDTO login(MemberDTO member);
 	
-	public List<MemberDTO> memberList();
+	public List<MemberDTO> memberList() throws Exception;
 }

@@ -24,9 +24,11 @@ public class MemberService {
 		return result;
 	}
 	
-	public List<MemberDTO> memberList() {
+	public List<MemberDTO> memberList() throws Exception{
 		
 		List<MemberDTO> memberList = Collections.emptyList();
+		
+		System.out.println("service.memberList -> " + memberList);
 		
 		return memberList;
 	}

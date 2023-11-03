@@ -24,6 +24,9 @@ public class MemberDTO {
 	}
 //	관리자
 	public List<MemberDTO> memberList(){
+		
+		System.out.println("DTO.memberList -> " + memberList());
+		
 		return memberList();
 	}
 }

@@ -205,7 +205,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/userList" class="nav-link">
+              <a href="/adminMemberList" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                   <p> 회원관리</p>
               </a>
