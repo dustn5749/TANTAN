@@ -1,3 +1,13 @@
+.btn_div {
+	position:  relative;
+	display: flex;
+}
+.btn_div > button {
+	border:  none;
+	background-color: transparent;
+	}
+
+
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.55);
 }

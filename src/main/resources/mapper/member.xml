@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.project.dao.MemberDao">
-	<select id="login" resultType="com.team1.project.dto.MemberDTO"> 
+	
+	
+<!-- 	<select id="login" resultType="com.team1.project.dto.MemberDTO"> 
  		SELECT * from member
  		where member_id= #{member_id}
 	</select>
+<<<<<<< HEAD
+	 -->
+	
+	<select id="findByEmail" resultType="com.team1.project.dto.MemberDTO">
+		select * from
+		member
+		where email = #{email}
+	</select>
+	
+	<update id="loginCountInc">
+		update member set
+			loginCount = loginCount + 1
+			<choose>
+				<when test="loginCount > 5 ">
+					, accountLocked = 'Y'
+				</when>
+				<otherwise>
+					, accountLocked = 'N'
+				</otherwise>
+			</choose>
+			where email = #{email}
+	</update>
+	
+	<update id="loginCountClear">
+		update member set
+			loginCount = 0
+			,accountLocked = 'N'
+		where email = #{email}  
+	</update>
 	
 	
+	   	<insert id="insertMember" >
+   
+		insert into member (
+			member_id
+			 ,email
+			,pwd
+			,oauth
+		) values (
+			#{member_id}
+			#{email}
+			,#{pwd}
+			,#{oauth}
+		) 
+	</insert>
 	
-	
-	
-	
-	
-	
+
 	
 	<!-- 관리자 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
