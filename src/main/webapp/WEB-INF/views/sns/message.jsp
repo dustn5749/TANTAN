@@ -17,16 +17,16 @@
 </head>
 
 <body>
-  <div class="pop">
-  	<div class="popDim"></div>
-  	
-  	<div id="message-modal" class="popCont">
-  	<!-- 모달 오버레이 -->
-    <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
-      		  	
-	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
-        <img src="assets/sns/images/xBtn.png" alt="">
-      	</button>
+  <div id="message-modal" class="pop">
+  <!-- 모달 오버레이 -->
+  <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
+  	<div class="popDim"></div> 	
+  	<div class="popCont">
+      	 <!-- 닫기버튼 -->
+        <button type="button" class="icon-btn close-btn" onclick="closeModal('message-modal')">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
+        </button>
+        <!-- END 닫기버튼 -->
 	  	
 		<div class="messageWrap">			
 			<section class="left">

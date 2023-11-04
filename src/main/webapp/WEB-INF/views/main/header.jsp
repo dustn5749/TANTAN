@@ -498,6 +498,8 @@ a {
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
 	
+	
+	
   <script>
     // 1. 친구 목록에서 탭버튼 활성화
     $(".friend-modal-tab").on('click', function () {
