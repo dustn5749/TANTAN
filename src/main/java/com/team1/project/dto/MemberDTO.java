@@ -1,11 +1,9 @@
 package com.team1.project.dto;
 
-<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
+
 import java.util.List;
 
 import lombok.*;
@@ -36,7 +34,6 @@ public class MemberDTO {
 	public boolean isEqualPwd(MemberDTO member) {
 		return pwd.equals(pwd);
 	}
-<<<<<<< HEAD
 	
 	public List<String> getRoleList(){
 			if(this.roles.length() > 0) {
@@ -44,8 +41,7 @@ public class MemberDTO {
 			}
 		return new ArrayList<>();
 	}
-}
-=======
+
 //	관리자
 	public List<MemberDTO> memberList(){
 		
@@ -54,4 +50,3 @@ public class MemberDTO {
 		return memberList();
 	}
 }
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git

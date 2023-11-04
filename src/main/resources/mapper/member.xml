@@ -52,19 +52,11 @@
 			,#{oauth}
 		) 
 	</insert>
-=======
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	<!-- 관리자 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
 		SELECT * from member
 	</select>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </mapper>
