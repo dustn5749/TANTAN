@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="utf-8">
 <head>
     <title>Zay Shop - Contact</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome for icons -->
@@ -20,38 +17,12 @@
     <!-- Leaflet Map styles -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <style>
-    
-/*    body { */
-/*             background-color: #f9f9f9; */
-/*             font-family: 'Roboto', sans-serif; */
-/*         } */
-
-/*         .container { */
-/*             margin-top: 50px; */
-/*             background-color: #fff; */
-/*             border-radius: 5px; */
-/*             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-/*             padding: 30px; */
-/*         } */
-
-/*         .navbar { */
-/*             background-color: #0099FF; */
-/*             color: #fff; */
-/*             padding: 15px; */
-/*         } */
-
-/*         .navbar h2 { */
-/*             margin: 0; */
-/*             font-size: 28px; */
-/*         } */
-
-       .nav-wrap {
+     .nav-wrap {
 	position:relative;
 	margin: 50px auto 0;
 	width: 1000px;
 	height: 50px;
 }
-
 .nav-wrap:after {
 	content: "";
 	position: absolute;
@@ -73,24 +44,20 @@
 	font-weight: bold;
 	text-align: center;
 }
-
 .nav-wrap .nav-ul {
 	margin: 0 0 0 100px;
 	padding: 0;
 	width: 900px;
 	list-style: none;
 }
-
 .nav-li {
 	float: left;
 	width: 100px;
 	height: 50px;
 }
-
 .nav-li:hover a {
 	color: #0099FF;
 }
-
 .nav-li a {
 	display: block;
 	line-height: 50px;
@@ -100,27 +67,19 @@
 	color: #999;
 }
 
-/*         .form-group label { */
-/*             color: #0099FF; */
-/*             font-weight: 500; */
-/*         } */
-
-        .btn-secondary {
-            background-color: #ccc;
-            color: #fff;
-            border: none;
+.btn-secondary {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+}
+.btn-secondary:hover {
+   background-color: #999;
+}
+.btn-primary {   
+    background-color: #0099FF;
+    color: #fff;
+    border: none;
         }
-
-        .btn-secondary:hover {
-            background-color: #999;
-        }
-
-        .btn-primary {
-            background-color: #0099FF;
-            color: #fff;
-            border: none;
-        }
-
         .btn-primary:hover {
             background-color: #0077cc;
         }
@@ -130,7 +89,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="nav-wrap">
         <h2>한국</h2>
@@ -182,8 +140,6 @@
             </li>
         </ul>
     </div>
-
-    
  <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -194,7 +150,6 @@
                         <input type="range" min="1" max="50" value="1" class="form-control-range" id="recruitment" name="recruitment">
                         <p>모집인원: <span id="recruitmentValue">1</span></p>
                     </div>
-
                     <div class="cont_top">
                         <div class="schedule">
                             <em>날짜 선택</em>
@@ -205,7 +160,6 @@
                             </form>
                         </div>
                     </div>
-
  <div class="form-group">
     <div class="d-flex align-items-center">
         <div class="image-container mr-3" id="imagePreview">
@@ -217,8 +171,6 @@
         </label>
     </div>
 </div>
-
-
                     <div class="form-group">
                         <label for="title">제목:</label>
                         <input type="text" id="title" name="title" class="form-control">
@@ -238,23 +190,17 @@
         </div>
     </div>
 </div>
- 
-
     <script>
-        // Show recruitment value dynamically
         var slider = document.getElementById("recruitment");
         var output = document.getElementById("recruitmentValue");
         output.innerHTML = slider.value;
-
         slider.oninput = function() {
             output.innerHTML = this.value;
         };
-
         // Image preview functionality
         document.getElementById('file').onchange = function(evt) {
             var tgt = evt.target || window.event.srcElement,
                 files = tgt.files;
-
             if (FileReader && files && files.length) {
                 var fr = new FileReader();
                 fr.onload = function() {
@@ -268,12 +214,10 @@
                 document.getElementById('imageText').style.display = "none";
             }
         };
-
         function showConfirmation() {
             alert('작성이 완료되었습니다.');
         }
     </script>
-    <!-- Bootstrap JS, jQuery, Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

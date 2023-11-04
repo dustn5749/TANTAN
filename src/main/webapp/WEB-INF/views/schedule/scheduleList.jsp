@@ -32,9 +32,7 @@
        background-color: rgb(255, 255, 255);
        transition: all 0.1s ease-in-out 0.3s;
    }
-   .us_header2 {
-       background-color: rgb(255, 255, 255);
-   }
+
    .us_header3 {
       display: flex;
        -webkit-box-pack: center;
@@ -47,8 +45,8 @@
        width: 100%;
        height: 44px;
        margin-top: 20px;
-       padding: 0px 0px 20px;
-       background-color: rgb(255, 255, 255);
+/*        padding: 0px 0px 20px;
+       background-color: rgb(255, 255, 255); */
    }
    .us_header4 {
    z-index: 9;
@@ -131,13 +129,15 @@
     color : white;
    }
    .us_fillter {
-      display: inline-flex;
-      width: 34%;
-      padding: 10px;
+/*       display: inline-flex; */
+/*        width: 34%; */ */
+       PADDING: 10PX; 
    }
-   .fillter_btn_area {
-      width: 78%;
-   }
+ .fillter_btn_area {
+   position: relative;
+   left: -820px; 
+   width: 78%;
+}
    .fillter_btn {
       width: 80px;
       height: 40px;
@@ -167,6 +167,7 @@
    
 
 
+
 .city_btn {
     cursor: pointer;
     position: relative;
@@ -174,18 +175,15 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: auto; 
+    width: 80px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
     padding: 8px 14px;
-    background: rgb(255, 255, 255);
+    background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
- 
- }
- 
  
 .city_btn1 {
     cursor: pointer;
@@ -194,21 +192,15 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: auto; 
+    width: 80px !important;
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
-    padding: 8px 14px;
-    background: rgb(255, 255, 255);
+     padding: 0px; 
+    background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
- 
-
-     }
-   
-   
-   
    .city_fillter_inner {
        display: flex;
       
@@ -325,11 +317,7 @@
     border: 1px solid rgb(238, 238, 238);
     border-radius: 50px;
 }
-/*   .sub { */
-/*             display: none; */
-/*             list-style: none; */
-/*         } */
-        
+
     .mainTxt {
             position: relative;
         }
@@ -370,111 +358,53 @@
 <body>
 
 <div class="schedule_container">
-<div class="us_header">
-    <div class="us_header2"></div>
-    <div class="us_header3">
-        <div class="us_header4">
-            <div class="us_header5">
-                <div class="us_header6">
-                    <div class="us_inner" style="left: 0%;"></div>
-                    <button class="us_btn">
-                        <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
-                    </button>
-                    <button class="schedule_btn" >
-                        <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
-                    </button>
+    <div class="us_header">
+        <div class="us_header2"></div>
+        <div class="us_header3">
+            <div class="us_header4">
+                <div class="us_header5">
+                    <div class="us_header6">
+                        <div class="us_inner" style="left: 0%;"></div>
+                        <button class="us_btn">
+                            <img src="/assets/img/women_holding_hands.png" alt="동행" class="us_img">동행
+                        </button>
+                        <button class="schedule_btn">
+                            <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-
- <div class="us_header_size">
-    <div class="us_header_size">
-     <button class="city_btn" onclick="toggleCityFilter()">지역</button>
-
-    <div id="korea">한국</div>
-    
-
-    <div class="city_fillter" id="koreanCities" style="display: none;">
-        <ul>
-            <li>서울</li>
-            <li>경기도</li>
-            <li>강원도</li>
-            <!-- 나머지 지역 -->
-        </ul>
-    </div>
-</div>
-
-<script >   
-function toggleCityFilter() {
-    var korea = document.getElementById("korea");
-    if (korea.style.display === "none") {
-        korea.style.display = "block"; // 보이도록 설정
-    } else {
-        korea.style.display = "none"; // 감추도록 설정
-    }
-}
-
-
-
-</script>
-    
-    
-  <button class="city_btn1" 
-    onclick="window.location.href = 'cap'" 
-    style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;"
->
-    일정생성하기
-</button>
-  
-
-            
+    <div class="us_fillter">
+        <div class="us_header_size">
+            <ul>
+                <button class="city_btn" onclick="toggleCityFilter()">지역</button>
+            </ul>
+            <div class="city_fillter" id="koreanCities" style="display: none;">
+                <ul>
+                    <li>서울</li>
+                    <li>강원도</li>
+                    <li>제주</li>
+                    <li>부산</li>
+                    <li>경기도</li>
+                    <li>충청도</li>
+                    <li>경상도</li>
+                    <li>전라도</li>
+                    <li>울릉도</li>
+                </ul>
+            </div>
+            <button class="city_btn1" onclick="window.location.href ='write'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+        </div>
+        <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
+            <button class="fillter_btn">댓글순</button>
+            <button class="fillter_btn">조회순</button>
+            <button class="fillter_btn">인기순</button>
+        </div>
     </div>
 
-<div class="us_fillter">
-  <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
-    <button class="fillter_btn">댓글순</button>
-    <button class="fillter_btn">조회순</button>
-    <button class="fillter_btn">인기순</button>
-</div>
-<div class="city_fillter">
 
-
-
-
-<div class="city_fillter_inner" style="display: none;">
-    <ul>
-        <li class="mainItem">
-            <div class="parent">
-                <div class="btn-group">
-                  
-                    <ul class="dropdown-menu" style="display: none;">
-                        <!-- Insert your list items here -->
-                        <li><a class="dropdown-item" href="#">서울</a></li>
-                        <li><a class="dropdown-item" href="#">경기도</a></li>
-			     	<li>강원도</li>
-                   <li>인천</li>
-                   <li>충청북도</li>
-                   <li>충청남도</li>
-                   <li>대전</li>
-                   <li>전라북도</li>
-                   <li>전라남도</li>
-                   <li>광주</li>
-                   <li>경상북도</li>
-                   <li>경상남도</li>
-                   <li>울산</li>
-                   <li>부산</li>
-                   <li>대구</li>
-                   <li>마산,창워</li>
-                 </ul>
-  				</ul>
-				</div>
-         		</div>
-   				</div>
-   				
-        <!-- Section-->
         <section class="">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -493,7 +423,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -523,7 +453,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -545,7 +475,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail"">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail"">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -572,7 +502,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -594,7 +524,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -613,7 +543,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -643,7 +573,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -674,7 +604,7 @@ function toggleCityFilter() {
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/board/capDetail">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -727,7 +657,7 @@ function toggleCityFilter() {
 
 
 document.querySelector(".us_btn").addEventListener("click", function () {
-	location.href="/board/list";
+	location.href="/us/list";
 }
 )
 function toggleCityFilter() {
@@ -757,7 +687,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const createCompanionButton = document.getElementById('createCompanionButton');
 
   createCompanionButton.addEventListener('click', function() {
-    window.location.href = "boardDetail.jsp"; 
+    window.location.href = "detail.jsp"; 
   });
 });
 

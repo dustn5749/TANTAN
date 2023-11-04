@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 6. Autowired 사용해서 service 연결.
  * */
 
-//	관리자 메인 페이지로 이동
+// 1. 관리자 메인 페이지
+// 관리자 메인 페이지로 이동
 @Controller
 public class AdminController {
 	@RequestMapping("/admin")
@@ -29,25 +30,37 @@ public class AdminController {
 		return "admin";
 	}
 	
-//	관리자 페이지에서 회원관리로 이동
+// 1.1 관리자 메인 페이지 로드시 리스트 함수
+	
+// 2. 관리자 회원관리 페이지
+// 관리자 페이지에서 회원관리로 이동
 	@RequestMapping("/userList")
 	public String AdminUserList() {
 		return "adminUserList";
 	}
 	
-//	관리자 페이지에서 동행관리로 이동
+// 3. 관리자 동행관리 페이지
+// 관리자 페이지에서 동행관리로 이동
 	@RequestMapping("/usList")
 	public String AdminUsList() {
 		return "adminUsList";
 	}
 	
-//	관리자 페이지에서 공지사항으로 이동
+// 4. 관리자 계정관리 페이지
+	@RequestMapping("/adminManage")
+	public String AdminManage() {
+		return "adminManage";
+	}
+	
+// 5. 관리자 공지사항 페이지
+// 관리자 페이지에서 공지사항으로 이동
 	@RequestMapping("/noticeList")
 	public String AdminNoticeList() {
 		return "adminNoticeList";
 	}
 	
-//	관리자 페이지에서 1:1 문의하기 페이지로 이동
+// 6. 관리자 1:1 문의하기 페이지
+// 관리자 페이지에서 1:1 문의하기 페이지로 이동
 	@RequestMapping("/11")
 	public String Admin11() {
 		return "admin11";

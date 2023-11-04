@@ -17,7 +17,7 @@
     }
     .us_header_size{
      float: right;
-    width: 237px;
+/*     width: 237px; */
     top: 80px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
@@ -153,6 +153,7 @@
    .fillter_btn_area {
    	  display: flex;
       width: 300px;
+/*       magin:100px; */
    }
    .fillter_btn {
       width: 80px;
@@ -168,7 +169,6 @@
       background-color: white;
       color : black;
    }
-   
 
 .city_btn {
     cursor: pointer;
@@ -198,7 +198,7 @@
     height: 40px;
     margin-right: 15px;
     margin-left: 0; 
-    padding: 8px 14px;
+     padding: 0px; 
     background: #0099ff;
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
@@ -320,8 +320,7 @@
     .mainTxt {
             position: relative;
         }
-
-        .sub {
+   .sub {
             position: absolute;
             index: 1;
             left: 0;
@@ -330,37 +329,28 @@
             list-style: none;
         }
      .schedule_btn {
-     	cursor: pointer !important;
-     
+     		cursor: pointer !important;
      }
      .schedule_btn:hover {
-     	background-color: black !important;
-     	color : white !important;
+     		background-color: black !important;
+     		color : white !important;
      }
-     
      .py-5 {
-     padding: 10px;
-     
+     		padding: 10px;
      }
- .schedule_container {
+	 .schedule_container {
         width: 94%; 
         margin: 0 auto; 
     }
-    
 	ul > li {
 	position:relative;
 	}
-
 	ul. {
 	position: abd
 	}
-
 </style>
 </head>
-
 <body>
-
-
 <div class="schedule_container">
     <div class="us_header">
         <div class="us_header2"></div>
@@ -380,7 +370,6 @@
             </div>
         </div>
     </div>
-
     <div class="us_fillter">
         <div class="us_header_size">
             <ul>
@@ -399,7 +388,7 @@
                     <li>울릉도</li>
                 </ul>
             </div>
-            <button class="city_btn1" onclick="window.location.href = 'detail'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 8px 14px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+            <button class="city_btn1" onclick="window.location.href ='write'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
         </div>
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
@@ -407,9 +396,6 @@
             <button class="fillter_btn">인기순</button>
         </div>
     </div>
-
-
-    
         <section>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -428,7 +414,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -458,7 +444,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -480,7 +466,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -507,7 +493,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -529,7 +515,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -548,7 +534,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">View options</a></div>
                             </div>
                         </div>
                     </div>
@@ -578,7 +564,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -605,16 +591,13 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="hang">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-   
-   
-   
 <div class="sc-73e2cff1-0 ehUQiC">
 	<button disabled="" class="sc-73e2cff1-1 fcWStM">
 		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
@@ -629,7 +612,6 @@
 		<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
 	</svg>
 </button>
-
 <div class="sc-73e2cff1-2 ekMLCz">
 	<button class="sc-73e2cff1-3 bwuLmH">1</button>
 	<button class="sc-73e2cff1-3 bPLlTV">2</button>
@@ -642,7 +624,6 @@
 			<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
 		</svg>
 </button>
-
 <button class="sc-73e2cff1-1 fcPuDE">
 	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
 		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
@@ -653,17 +634,11 @@
 </button>
 </div>
 </div>
-
-
-
 <script>
-
 function toggleCountry() {
     var koreaDiv = document.getElementById("korea");
     koreaDiv.innerHTML = "한국";
 }
-
-
 function toggleCityFilter() {
     var korea = document.getElementById("korea");
     if (korea.style.display === "none") {
@@ -673,106 +648,24 @@ function toggleCityFilter() {
     }
 }
 </script>
-
 <script>
 document.querySelector(".schedule_btn").addEventListener("click", function () {
-    location.href = "/board/schedule";
+    location.href = "/schedule/list";
 });
 </script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // 이 부분에 버튼 클릭 시의 작업 등을 정의
 });
-
-
-// 일정이동 버튼
-document.querySelector(".schedule_btn").addEventListener("click", function () {
-	location.href="/board/schedule";
-}
-
-)
-function toggleCityFilter() {
-    var filter = document.querySelector('.city_fillter_inner');
-    filter.style.display = filter.style.display === 'none' ? 'block' : 'none';
-}
-
-function toggleKorea() {
-    var koreaList = document.querySelector('.sub');
-    koreaList.style.display = koreaList.style.display === 'none' ? 'block' : 'none';
-}
-		document.querySelector(".city_btn").addEventListener("click", function () {
-    		console.log("click");
-
-   		 document.querySelector(".mainItem").style.display="flex";
-  		});
-
-		document.querySelector(".mainTxt").addEventListener("click", function () {
-    		console.log("click");
-
-    	document.querySelector(".sub").classList.toggle("active");
-  			});
-
-   
-
-document.addEventListener('DOMContentLoaded', function() {
-  const createCompanionButton = document.getElementById('createCompanionButton');
-
-  createCompanionButton.addEventListener('click', function() {
-    window.location.href = "boardDetail.jsp"; 
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-	  const selectRegion = document.querySelector('.select-region');
-	  const koreaButton = document.querySelector('.sc-9280f9a9-0');
-
-	  selectRegion.addEventListener('click', function() {
-	    koreaButton.style.display = 'block';
-	  });
-	});
-
-document.addEventListener('DOMContentLoaded', function() {
-	  const buttons = document.querySelectorAll('.sc-9280f9a9-0.gpXqPI');
-
-	  buttons.forEach(button => {
-	    button.addEventListener('click', function() {
-	      const region = this.textContent.trim(); // 클릭한 버튼의 텍스트 가져오기
-	      const selectedRegion = document.querySelector('.selected-region');
-	      selectedRegion.textContent = region; // 오른쪽 박스에 텍스트 추가
-	    });
-	  });
-	});
-	
-document.addEventListener('DOMContentLoaded', function() {
-    const selectRegion = document.querySelector('.select-region');
-    const regionList = document.querySelector('.region-list');
-
-    selectRegion.addEventListener('click', function() {
-        regionList.classList.toggle('hidden');
-    });
-
-    // 각 지역 클릭 시 이벤트
+     // 각 지역 클릭 시 이벤트
     const regions = document.querySelectorAll('.region');
     regions.forEach(region => {
         region.addEventListener('click', function() {
-            const selectedRegion = this.textContent;
-            // 선택된 지역에 따른 도와 시 정보 표시
-            // 예를 들어, 선택된 지역을 가져와 API 호출 또는 저장된 데이터를 통해 정보를 업데이트할 수 있습니다.
+             const selectedRegion = this.textContent;
+  
             displaySelectedLocationInfo(selectedRegion);
-            regionList.classList.add('hidden'); // 선택 시 목록 숨김
+           regionList.classList.add('hidden');
         });
-        
-        
-    });
-});
-
-function displaySelectedLocationInfo(selectedRegion) {
-    const selectedLocationInfo = document.querySelector('.selected-location');
-    // 선택된 지역에 따라 정보를 업데이트
-    selectedLocationInfo.textContent = `선택된 지역: ${selectedRegion}`;
-}
-
 </script>
 </body>
 </html>

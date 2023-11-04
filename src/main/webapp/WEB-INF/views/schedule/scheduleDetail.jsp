@@ -113,46 +113,30 @@
     transition: color 0.1s ease-out 0.4s;
 	}
 	
-	   .orange-btn:hover {
-            background-color: #0099ff;;
+	.orange-btn:hover {
+     background-color: #0099ff;;
         }
 	
  .layout_body { 
  	display: grid; 
-/*  	grid-template-rows: 30px 10fr;  */
  } 
-
  .map-section {
             padding: 20px;
             whith:400px;
         }
-
-       
-
-        .layout_body {
-            display: grid;
-
-		height: '600px';
-   	aspectRatio: 2; 
-  	  	
-/*    		  grid-template-columns: 1fr 1fr;             */
-/*         } */
-
-        
-
-     
+         .layout_body {
+        display: grid;
+/*         height: 600px; /* '이것도 높이 값으로 변경' */ */
+/*         aspect-ratio: 2; /* 'aspectRatio 수정' */ */
+    }
 </style>
 <!-- googlecalendar -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <!-- fullcalendar -->
 <!-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.css' rel='stylesheet' /> -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/locales-all.min.js'></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-  
-
 <body>
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
@@ -169,8 +153,8 @@
                             <div class="layout_main">
                                 <div class="title-section">
                                     <div class="addsection">
-                                      <button type="button" class="btn btn-outline-secondary addsch" data-bs-toggle="modal" data-bs-target="#calendarModal">일정 추가</button>
-                                      
+                                      <button type="button" class="btn btn-outline-secondary addsch" data-bs-toggle="modal" 
+                                      data-bs-target="#calendarModal">일정 추가</button>
                                     </div>
                                 </div>
                                 <!-- Modal -->
@@ -214,24 +198,18 @@
         </div>
     </section>
 	<button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
-
 				<!-- calendar 태그 -->
 				<div id='calendar-container' class='calendar-container'>
 					<div id='calendar'></div>
 				</div>
 		<div class="layout_side">
-		</div>
-			
-		
+		</div>		
 		<script>
 		    function goToHomepage() {
-		        window.location.href = '/board/schedule;' 
+		        window.location.href = '/schedule/list;' 
 		    }
 		</script>
-		
-</body>
-<script>
-
+		<script>
 		document.addEventListener('DOMContentLoaded', function() {
 		    var calendarEl = document.getElementById('calendar');
 		    var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -239,17 +217,12 @@
 		    });
 		    calendar.render();
 		  });
-		
-		
-		
-		
 		// 모달 창 닫을 떄마다 입력 필드 초기화
 		$('#calendarModal').on('hidden.bs.modal', function (e) {
 		    $("#message-text").val("");
 		    $("#startDay").val("");
 		    $("#endDay").val("");
 		});
-		
 		//추가
 		function save() { 
 		    var startDate = $("input[type='date']:first").val(); 
@@ -261,7 +234,6 @@
 		        endDay: endDate,
 		        scheduleTitle: title
 		    };
-		
 		    $.ajax({
 		        url: "schedule/add",
 		        type: "POST",
@@ -279,7 +251,6 @@
 		        }
 		     });
 		}
-		
 		//수정
 		function update() {
 		    var formData = {};
@@ -287,8 +258,6 @@
 		    formData.scheduleTitle = $("#message-text").val();
 		    formData.startDay = $("input[type='date']:first").val();
 		    formData.endDay = $("input[type='date']:last").val();
-		
-		
 		    $.ajax({
 		        url: "schedule/edit", 	// 요청을 보낼 URL
 		        type: "POST", 			// HTTP 메서드 (GET, POST, PUT, DELETE 등)
@@ -308,7 +277,6 @@
 		        }
 		    });
 		}
-		
 		//삭제
 		function del(scheduleNo) {
 			 if(!confirm("해당 일정을 삭제하시겠습니까?")) return false;
@@ -327,10 +295,8 @@
 		        }
 		    });
 		}
-		
 		//calendar element 취득
 		var calendarEl = document.getElementById('calendar');
-		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			googleCalendarApiKey: 'AIzaSyC1Oqrjs44yB-QREgK7VQ9paY4ISx2o5T8', //googleCalendar
 			height : '100%', 		// calendar 높이 설정
@@ -344,7 +310,6 @@
 				center : 'title',
 				right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 			},
-			
 			initialView : 'dayGridMonth', // 초기 로드될 때 보이는 캘린더 화면 (기본 설정: Month)
 		 // initialDate: '2023-07-01', 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
 			navLinks : true, 	// 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
@@ -362,7 +327,6 @@
 			eventRemove : function(obj) { // 이벤트가 삭제되면 발생하는 이벤트
 				console.log(obj);
 			},
-		
 			/* 이벤트 추가 */
 			dateClick: function(info) { 	// 캘린더 날짜 클릭시 이벤트 생성
 				  	$("#addbtn").show(); 	// '저장' 버튼 표시
@@ -393,7 +357,6 @@
 		            $("input[type='date']:last").val(moment(eventObj.start).format('YYYY-MM-DD'));
 		        }
 			 	// 추가할 데이터 여기에 작성
-		
 			 	// 수정 버튼이 클릭되었을 때의 동작 정의
 			     $("#addbtn").off().on("click", function() {
 				        eventObj.setProp('title', $("#message-text").val());
@@ -433,7 +396,6 @@
 			            startDay: moment(start).format('YYYY-MM-DD'),
 			            endDay: end ? moment(end).format('YYYY-MM-DD') : moment(start).format('YYYY-MM-DD')
 			        };
-		
 			        $.ajax({
 			            url: "schedule/edit",
 			            type: "POST",
@@ -449,7 +411,6 @@
 			             }
 			         });
 			    },
-		
 			eventDidMount:function(info) {
 				console.log();
 			},
@@ -475,8 +436,8 @@
 			}
 			], 
 		});
-
 	//캘린더 랜더링
 	calendar.render();
 </script>
+</body>
 </html>

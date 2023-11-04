@@ -79,14 +79,12 @@
 	line-height: 30px;
 	font-style: normal;
 }
-
 .schedule form {
 	position: relative;
 	display: flex;
 	margin: 0 !important;
 	width: calc(100% - 100px);
 }
-
 .schedule form:after {
 	content: "";
 	position: absolute;
@@ -362,94 +360,67 @@
 				</a>
 			</div>
 		</div>
-		
-	
-		
-
 <script>
 var map = {
 		item : {},
-
 		// 맵 로드
 		load : function(id, options){
 			var thisObj = this;
 			if (typeof id == 'undefined'){ return false; }
-
 			// 옵션이 없을 경우 기본값 정의
 			if(typeof options == 'undefined'){ options = {};}
-
 			// 지도객체 아이템을 조금더 세분화 
 			thisObj.item[id] = {};
-
 			// 지도의 옵션 초기화
 			if(typeof options.lat =='undefined'){ options.lat = 33.450701;}
 			if(typeof options.lng =='undefined'){ options.lng = 126.570667;}
 			if(typeof options.level =='undefined'){ options.level = 3;}
-
 			var coords = new kakao.maps.LatLng(options.lat, options.lng); // 지도의 중심좌표
-
 			// 맵 옵션
 			var mapOptions = {
 				center: coords,
 				level: options.level // 지도의 확대 레벨				
 			}
-
 			// 지도 생성
 			thisObj.item[id].map = new kakao.maps.Map(document.getElementById(id),mapOptions);
-
 			// 마커 생성
 			thisObj.item[id].markers =[];
 			thisObj.item[id].markers[thisObj.item[id].markers.length] = new kakao.maps.Marker({
 			    position: coords,
 			});		
-
 			$.each(thisObj.item[id].markers,function(i,v){
 				// 마커를 적용
 				thisObj.item[id].markers[i].setMap(thisObj.item[id].map);
 			});
-
 		},
 		search : function(id,address){
 			var thisObj = this;
 			if( typeof id == 'undefined') return false;
 			if( typeof address == 'undefined') return false;
 			if( typeof thisObj.item[id] == 'undefined') return false;
-
-
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new kakao.maps.services.Geocoder();
-
-
 			// 주소로 좌표를 검색합니다
 			geocoder.addressSearch(address, function(result, status) {
-
-
-			    // 정상적으로 검색이 완료됐으면 
-			     if (status === kakao.maps.services.Status.OK) {
-
-			     		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-			     		// 현재 마커들을 삭제
-						$.each(thisObj.item[id].markers,function(i,v){
-							// 마커를 적용
-							thisObj.item[id].markers[i].setMap(null);
-							thisObj.item[id].markers = [];
-						});			     		
-
-						// 마커 생성
-						thisObj.item[id].markers[thisObj.item[id].markers.length] = new kakao.maps.Marker({
-						    position: coords
-						});		
-
-			     		// 현재 마커들을 삭제
-						$.each(thisObj.item[id].markers,function(i,v){
-							// 마커를 적용
-							thisObj.item[id].markers[i].setMap(thisObj.item[id].map);
-						});			     		
-
-						thisObj.item[id].map.panTo(coords);    
-
-
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) {
+			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			// 현재 마커들을 삭제
+			$.each(thisObj.item[id].markers,function(i,v){
+			// 마커를 적용
+			thisObj.item[id].markers[i].setMap(null);
+			thisObj.item[id].markers = [];
+			});			     		
+			// 마커 생성
+			thisObj.item[id].markers[thisObj.item[id].markers.length] = new kakao.maps.Marker({
+		    position: coords
+			});		
+			// 현재 마커들을 삭제
+			$.each(thisObj.item[id].markers,function(i,v){
+		    // 마커를 적용
+			thisObj.item[id].markers[i].setMap(thisObj.item[id].map);
+		    });			     		
+			thisObj.item[id].map.panTo(coords);    
 			    } 
 			    else{
 			    	alert('주소 검색에 실패하였습니다.');
@@ -461,14 +432,12 @@ var map = {
 	$(document).ready(function(e){
 		map.load('map',{});
 	});
-
 	// 주소검색 이벤트 -- 검색 버튼 클릭 시
 	$(document).on('click','.evt-search',function(e){
 		var address = $('.evt-address').val();
 		if( $.trim(address) == ''){ alert("주소를 입력해주세요."); return false; }
 		map.search('map',address);
 	});
-
 	// 주소검색 이벤트 -- 검색어 엔터 시
 	$(document).on('keydown','.evt-address',function(e){
 		if( e.keyCode == 13){
@@ -480,7 +449,6 @@ var map = {
     function toggleAddressInput() {
         const addressInput = document.querySelector('.evt-address');
         const searchButton = document.querySelector('.evt-search');
-
         // 입력 칸과 검색 버튼을 토글하여 보이거나 숨기도록 처리
         if (addressInput.classList.contains('d-none')) {
             addressInput.classList.remove('d-none');
@@ -490,7 +458,6 @@ var map = {
             searchButton.classList.add('d-none');
         }
     }
-	
 </script>
 </body>
 </html>

@@ -12,6 +12,14 @@
 <script src="admin/plugins/flot/plugins/jquery.flot.resize.js"></script>
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
 <script src="admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
+<style>
+#pop-board{
+border:1px solid black;
+}
+#pop-us{
+border:1px solid black;
+}
+</style>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
@@ -47,7 +55,7 @@
     					<a class="nav-link" id="custom-board-tab" data-toggle="pill" href="#board-tab" role="tab" aria-controls="board-tab"> 게시글</a>
     				</li>
     				<li class="nav-item">
-    					<a class="nav-link" id="custom-like-tab" data-toggle="pill" href="#like-tab" role="tab" aria-controls="like-tab"> 추천</a>
+    					<a class="nav-link" id="custom-like-tab" data-toggle="pill" href="#like-tab" role="tab" aria-controls="like-tab"> 여행지</a>
     				</li>
     			</ul>
     			<div class="card-body table-responsive p-0">
@@ -65,6 +73,7 @@
     		</div>
     		<div class="card-body table-responsive p-0">
     		<div class="tab-content p-3" id="nav-tabContent">
+    		<!-- 회원 탭 카드 -->
               <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
 	              <hr>
 		          <div class="row">
@@ -92,28 +101,51 @@
 		          <!-- /.col -->
 		          </div>
               </div>
-              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab">
-	            <div >
-	              <div>
-	                <h3 class="card-title">
-	                  <i class="far fa-chart-bar"></i>
-	                  Area Chart
-	                </h3>
+              <!-- 회원 탭 카드 종료 -->
+              
+              <!-- 게시글 탭 카드 -->
+	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab">
+		              <div class="row">
+			              <div class="col-md-6">
+			                  <div >
+			                      <div class="card-header" id="pop-board">
+			                          <h3 class="card-title">
+			                          <i class="far fa-chart-bar"></i>
+			                          인기 게시글
+			                          </h3>
+				                      <div class="card-body">
+				                      <hr>
+				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
+				                      </div>
+				                  </div>
+			              <!-- /.card-body-->
+			                  </div>
+			              </div>
+			              <div class="col-md-6">
+			                  <div>
+			                      <div class="card-header" id="pop-us">
+		   	                          <h3 class="card-title">
+			                          <i class="far fa-chart-bar"></i>
+			                          인기 동행글
+			                          </h3>
+				                      <div class="card-body">
+				                      <hr>
+				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
+				                      </div>
+			                      </div>
+			                  </div>
+			              </div>
+		              </div>
 	              </div>
-	              <div class="card-body">
-	              <hr>
-	                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
-	              </div>
-	              <!-- /.card-body-->
-	            </div>
-               </div>
+               <!-- 게시글 탭 카드 종료 -->
+               
 	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab">
 		            <!-- Bar chart -->
 			            <div>
 			              <div class="card-header">
 			                <h3 class="card-title">
 			                  <i class="far fa-chart-bar"></i>
-			                  Bar Chart
+			                  인기 여행지
 			                </h3>
 			              </div>
 			              <div class="card-body">
@@ -333,6 +365,51 @@
 
     /* END AREA CHART */
 
+     /*
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      {
+        label: 'Series2',
+        data : 30,
+        color: '#3c8dbc'
+      },
+      {
+        label: 'Series3',
+        data : 20,
+        color: '#0073b7'
+      },
+      {
+        label: 'Series4',
+        data : 50,
+        color: '#00c0ef'
+      }
+    ]
+    $.plot('#donut-chart', donutData, {
+      series: {
+        pie: {
+          show       : true,
+          radius     : 1,
+          innerRadius: 0.5,
+          label      : {
+            show     : true,
+            radius   : 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: false
+      }
+    })
+    /*
+     * END DONUT CHART
+     */
+    
     /*
      * BAR CHART
      * ---------
@@ -359,51 +436,6 @@
       }
     })
     /* END BAR CHART */
-
-    /*
-     * DONUT CHART
-     * -----------
-     */
-
-//     var donutData = [
-//       {
-//         label: 'Series2',
-//         data : 30,
-//         color: '#3c8dbc'
-//       },
-//       {
-//         label: 'Series3',
-//         data : 20,
-//         color: '#0073b7'
-//       },
-//       {
-//         label: 'Series4',
-//         data : 50,
-//         color: '#00c0ef'
-//       }
-//     ]
-//     $.plot('#donutChart', donutData, {
-//       series: {
-//         pie: {
-//           show       : true,
-//           radius     : 1,
-//           innerRadius: 0.5,
-//           label      : {
-//             show     : true,
-//             radius   : 2 / 3,
-//             formatter: labelFormatter,
-//             threshold: 0.1
-//           }
-
-//         }
-//       },
-//       legend: {
-//         show: false
-//       }
-//     })
-    /*
-     * END DONUT CHART
-     */
 
   })
 

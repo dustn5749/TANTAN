@@ -13,27 +13,32 @@
   <link rel="stylesheet" href="assets/sns/css/profileReset.css">
   <link rel="stylesheet" href="assets/sns/css/profileStyle.css">
   <link rel="stylesheet" href="assets/sns/css/message.css">
-  <link rel="stylesheet" href="assets/sns/css/modal.css">
 </head>
 
 <body>
   <div class="pop">
   	<div class="popDim"></div>
-  	<!-- 모달 오버레이 -->
-    <div class="modal-overlay" onclick="closeModal('feed-modal')"></div>
-  	<div class="popCont">  		  	
-	  	<button type="button" class="popClose" onclick="closeModal('feed-modal')">
-        <img src="assets/sns/images/xBtn.png" alt="">
-      	</button>
+  	     
+  	<div id="message-modal" class="popCont">  		  	
+	  	<!-- 모달 오버레이 -->
+    	<div class="modal-overlay" onclick="closeModal('message-modal')"></div>
+      	
+	  	<!-- 닫기버튼 -->
+        <button type="button" class="icon-btn close-btn" onclick="closeModal('message-modal')">
+          <img src="assets/sns/images/icon-close.svg" alt="">
+        </button>
+     	<!-- END 닫기버튼 -->
 	  	
 		<div class="messageWrap">			
 			<section class="left">
 				<section class="messageArea">
 					<div class="top">
 						<span class="tit">Messages</span>
-						<button class="btn" onclick="openModal('chat-invite-modal')">
-				          <img src="assets/sns/images/message-circle-plus.svg" alt="초대 아이콘" class="icon">
-				        </button>						
+						<button type="button" class="invite">
+						    <span class="inviteIcon">
+						      <img src="assets/sns/images/makeRoomBtn.png" alt="초대 아이콘" class="icon2">
+						    </span>
+						</button>
 					</div>
 					<div class="searchWrap1">
 						<input type="text" placeholder="닉네임 검색" class="inputTxt">
@@ -110,7 +115,9 @@
 					</div>
 					<div class="friendBox">
 						<div class="friendDiv">
-		
+							<div class="chkDiv">
+								<input type="checkbox" class="chk" value="">
+							</div>
 							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
@@ -123,7 +130,9 @@
 							</div>
 						</div>
 						<div class="friendDiv">
-							
+							<div class="chkDiv">
+								<input type="checkbox" class="chk" value="">
+							</div>
 							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
@@ -137,7 +146,9 @@
 						</div>
 						
 						<div class="friendDiv">
-							
+							<div class="chkDiv">
+								<input type="checkbox" class="chk" value="">
+							</div>
 							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
@@ -150,7 +161,9 @@
 							</div>
 						</div>
 						<div class="friendDiv">
-							
+							<div class="chkDiv">
+								<input type="checkbox" class="chk" value="">
+							</div>
 							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
@@ -204,23 +217,20 @@
 				      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
 				    </span>
 				  </button>
-				</div>
-
-				
-			</section>
-			
+				</div>				
+			</section>			
 		</div>
   	</div>
 
   </div>
   <script>
-  function openModal(id) {
-      $('#' + id).addClass('active');
-    }
-
-    function closeModal(id) {
-      $('#' + id).removeClass('active');
-    }
+	  function openModal(id) {
+	      $('#' + id).addClass('active');
+	    }
+	
+	    function closeModal(id) {
+	      $('#' + id).removeClass('active');
+	    }
   </script>
   
 </body>

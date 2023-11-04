@@ -20,7 +20,7 @@
   max-width: 1320px;
   min-width: 800px;
   width: 90%;
-  background: #fff;
+  background: #ffffff;
   margin: 0 auto;
   min-height: 100vh;
   z-index: 1;
@@ -32,6 +32,7 @@
   top: 10px;
   z-index: 999;
   cursor: pointer;
+  width: 30px;
 }
 
 .pop .popCont .header {
@@ -50,6 +51,9 @@
   margin-top: 30px;
 }
 
+.messageArea{
+	border: 1px solid #000;
+}
 .messageWrap .left .messageArea .top {
   margin-top: 10px;
   padding: 10px;
@@ -126,6 +130,8 @@
 .messageWrap .left .messageArea .messageList .messageDiv .sumBox {
   padding: 10px 10px 10px 70px;
   margin-top: 2px;
+  position: relative;
+  border-bottom: 1px solid #e9ecef;  
 }
 
 .messageWrap .left .messageArea .messageList .messageDiv .sumBox span {
@@ -138,6 +144,7 @@
 
 .messageWrap .left .friendsList {
   margin-top: 20px;
+  border: 1px solid #000;
 }
 
 .messageWrap .left .friendsList .headTit {
@@ -261,7 +268,7 @@
   top: 10px;
   right: 10px;
   position: absolute;
-  background: #f9f9f9;
+  background: #fff;
   padding: 10px 20px;
   color: #000;
   border: 0;
@@ -412,8 +419,10 @@
 
 .messageWrap .chatArea .sendMessage {
   position: absolute;
-  bottom: 30px;
+  bottom: 80px;
   width: 100%;
+  border: 2px solid #000; /* 이 부분을 추가하여 테두리 설정 */
+  border-radius: 10px; /* 원하는 테두리 반경(커브) 설정 */
 }
 
 .messageWrap .chatArea .sendMessage .addImg {
@@ -441,3 +450,70 @@
   z-index: 1;
   cursor: pointer;
 }
+
+.message-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imgBtn ,
+.sendMessageBtn {
+  /* border: 5px solid #000; /* 2px 두께의 검은색 테두리 설정 */
+  border-radius: 0px; /* 테두리의 곡선을 원하는 크기로 조절할 수 있음 */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.addImg img,
+.sendIco img {
+  width: 40px;
+  height: 40px;
+}
+
+.message_content {
+  flex-grow: 1;
+}
+
+.input_area textarea {
+  width: 100%;
+  min-width: 654px;
+  max-width: 700px;
+  height: 65px; /* 텍스트 영역의 높이를 100px로 조절 */
+  line-height: 1.4; /* 원하는 줄 간격으로 조절 (예: 1.4은 140% 높이) */
+  padding: 10px; /* 내부 여백 설정 (위아래 5px, 좌우 10px) */
+  border: 2px solid #000; 
+  border-radius: 20px;
+  box-sizing: border-box;
+  resize: vertical; /* 사용자가 텍스트 영역 크기를 수직으로 조절할 수 있게 함 */
+}
+
+.friend {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.invite {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.friendIcon img {
+  width: 30px;
+  height: 30px;
+}
+
+.inviteIcon img {
+  width: 40px;
+  height: 40px;
+}
+
+.friendSendMsgBtn img{
+  width: 35px;
+  height: 35px;
+}
+
