@@ -70,6 +70,10 @@ dependencies {
 
 	//implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	
+	// 시큐리티 태그 라이브러리 추가
+	implementation 'org.springframework.security:spring-security-taglibs'
+	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 
 }

@@ -28,4 +28,7 @@ $("#loginBtn").on("click", function(){
 })
 
 // 소셜 로그인하기
-$
+$("#kakao_loginBtn").on("click", function(){
+	location.href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=fb376ab678ff9e4b03fa8a74dd227173&redirect_uri=http://localhost:9000/member/kakao/callback&response_type=code";
+	
+})
