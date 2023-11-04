@@ -1,5 +1,8 @@
 package com.team1.project.service;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +22,14 @@ public class MemberService {
 		boolean result = loginmember.getPwd().equals(member.getPwd());
 		System.out.println("result = " + result);
 		return result;
+	}
+	
+	public List<MemberDTO> memberList() throws Exception{
+		
+		List<MemberDTO> memberList = Collections.emptyList();
+		
+		System.out.println("service.memberList -> " + memberList);
+		
+		return memberList;
 	}
 }

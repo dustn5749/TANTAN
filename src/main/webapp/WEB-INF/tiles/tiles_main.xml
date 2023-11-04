@@ -105,9 +105,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminMain.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="adminUserList" extends="adminLayout">
+	<definition name="adminMemberList" extends="adminLayout">
 		<put-attribute name="title" value="관리자 회원관리 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminUserList.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminMemberList.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="adminUsList" extends="adminLayout">
