@@ -19,10 +19,12 @@
 <body>
   <div class="pop">
   	<div class="popDim"></div>
+  	
+  	<div id="message-modal" class="popCont">
   	<!-- 모달 오버레이 -->
-    <div class="modal-overlay" onclick="closeModal('feed-modal')"></div>
-  	<div class="popCont">  		  	
-	  	<button type="button" class="popClose" onclick="closeModal('feed-modal')">
+    <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
+      		  	
+	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
         <img src="assets/sns/images/xBtn.png" alt="">
       	</button>
 	  	
