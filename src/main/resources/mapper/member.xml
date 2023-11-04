@@ -7,6 +7,7 @@
  		SELECT * from member
  		where member_id= #{member_id}
 	</select>
+<<<<<<< HEAD
 	 -->
 	
 	<select id="findByEmail" resultType="com.team1.project.dto.MemberDTO">
@@ -51,4 +52,19 @@
 			,#{oauth}
 		) 
 	</insert>
+=======
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 관리자 -->
+	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
+		SELECT * from member
+	</select>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </mapper>

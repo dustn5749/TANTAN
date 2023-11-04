@@ -1,5 +1,7 @@
 package com.team1.project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.team1.project.dto.MemberDTO;
@@ -11,6 +13,7 @@ public interface MemberDao {
 	// 로그인하기
 	public MemberDTO login(MemberDTO member);
 	
+<<<<<<< HEAD
 	// 마지막 로그인 시간 변경
 	public int updateMemberLastLogin(String email);
 	
@@ -25,4 +28,7 @@ public interface MemberDao {
 	 
 	 // 로그인 카운트 수 증가
 	 public void loginCountInc(MemberDTO member);
+=======
+	public List<MemberDTO> memberList() throws Exception;
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 }

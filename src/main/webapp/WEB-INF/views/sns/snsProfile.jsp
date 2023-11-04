@@ -55,31 +55,31 @@
         <div class="sidebar-inner">
           <div class="sidebar-menu">
           <!--사이드바 버튼들 -->
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-home.svg" alt="" class="icon">
               <span class="txt">홈</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
               <span class="txt">일정</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-send.svg" alt="" class="icon">
               <span class="txt">메세지</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-heart.svg" alt="" class="icon">
               <span class="txt">알림</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
               <span class="txt">저장됨</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <img src="assets/sns/images/icon-activity.svg" alt="" class="icon">
               <span class="txt">내 활동</span>
             </button>
-            <button type="button" class="sidebar-btn">
+            <button type="button" class="sidebar-btn active">
               <figure class="mini-thumnail">
                 <img src="assets/sns/images/profile-img.jpeg" alt="">
               </figure>
@@ -88,10 +88,10 @@
           </div>
 
           <div class="sidebar-menu">
-            <button type="button" class="sidebar-btn">
-              <img src="assets/sns/images/icon-list.svg" alt="" class="icon">
-              <span class="txt">더보기</span>
-            </button>
+<!--             <button type="button" class="sidebar-btn active"> -->
+<!--               <img src="assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+<!--               <span class="txt">더보기</span> -->
+<!--             </button> -->
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
               </div>
               <div class="btn-wrap">
                 <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                <button type="button" class="btn solid-btn gray-btn" id="profile_modify_btn">프로필 편집</button>
+                <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
               </div>
             </div>
           </div>
@@ -415,7 +415,7 @@
       <div class="common-modal feed-modal">
       <!-- 큰 이미지 컨테이너 -->
         <div class="lg-thumbnail-container">
-          <!--큰 이미지일 경우 -->
+          <!--큰 이미지-->
           <div class="lg-thumbnail">
             <div class="thumnail-img-box">
               <img src="assets/sns/images/cat03.png" alt="">
@@ -760,10 +760,10 @@
                     <span class="txt-hidden">댓글</span>
                     <img src="assets/sns/images/icon-message-circle.svg" class="icon icon-inactive" alt="">
                   </button>
-                  <button type="button" class="btn icon-btn">
-                    <span class="txt-hidden">메세지</span>
-                    <img src="assets/sns/images/icon-send.svg" class="icon icon-inactive" alt="">
-                  </button>
+<!--                   <button type="button" class="btn icon-btn"> -->
+<!--                     <span class="txt-hidden">메세지</span> -->
+<!--                     <img src="assets/sns/images/icon-send.svg" class="icon icon-inactive" alt=""> -->
+<!--                   </button> -->
                 </div>
                 <div class="display-flex gap-15">
                   <!-- 눌렀을 시 active 클래스 토글 -->
@@ -824,7 +824,7 @@
       $(this).on('keyup input', function () { resizeTextarea(this); }).removeAttr('data-autoresize');
     })
 
-	<!--이 부분은 특정 클래스(toggle-icon-btn)를 가진 요소를 클릭할 때, 해당 요소의 활성/비활성 상태를 전환하도록 합니다. active 클래스를 토글하여 아이콘의 모양이 변경될 수 있습니다. -->
+	<!-- 특정 클래스(toggle-icon-btn)를 가진 요소를 클릭할 때, 해당 요소의 활성/비활성 상태를 전환함. active 클래스를 토글하여 아이콘의 모양이 변경될 수 있음. -->
     $('.toggle-icon-btn').on('click', function () {
       $(this).toggleClass('active');
     })
@@ -853,10 +853,6 @@
     function closeModal(id) {
       $('#' + id).removeClass('active');
     }
-    /* 프로필 편집 버튼  */
-    $("#profile_modify_btn").on("click", function(){
-    	location.href="/snsProfile/modify";
-    })
   </script>
 </body>
 

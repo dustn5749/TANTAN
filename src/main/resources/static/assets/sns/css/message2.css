@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+.pop{ position: fixed; width: 100%; height: 100%;}
+.pop .popDim{position: fixed; width: 100%; height: 100%; background: #000; opacity: 80%; z-index: 0;}
+.pop .popCont{position: relative; max-width: 1320px; min-width: 800px; width: 90%; background: #fff; margin: 0 auto; min-height: 100vh; z-index: 1;}
+.pop .popCont .popClose{position: absolute; right: 10px; top: 10px; z-index: 999; cursor: pointer;}
+
+.pop .popCont .header{top: 30px !important;}
+
+.messageWrap{width: 100%; margin: 0 auto; padding: 0 50px;}
+.messageWrap .left{float: left; width: 35%; margin-top: 30px;}
+.messageWrap .left .messageArea .top{margin-top: 10px; padding: 10px; display: flex; justify-content: space-between;}
+.messageWrap .left .messageArea .top .tit{font-size: 18px; font-weight: 600;}
+.messageWrap .left .messageArea .top .btn{margin: auto 0;}
+.messageWrap .left .messageArea .top .btn span{cursor: pointer;}
+.messageWrap .left .messageArea .searchWrap1{padding: 10px;}
+.messageWrap .left .messageArea .searchWrap1 .inputTxt{width: 100%; height: 40px; border-radius:20px; border:1px solid #e9ecef; 
+  background-image: url('../images/sample/search.png');
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 22px;
+  padding: 10px 20px 10px 40px;
+}
+
+.messageWrap .left .messageArea .messageList{height: 345px; overflow-x: hidden; overflow-y: auto;}
+.messageWrap .left .messageArea .messageList .messageDiv{position: relative; height: 60px; margin-bottom: 2px;}
+.messageWrap .left .messageArea .messageList .messageDiv:hover{cursor: pointer;}
+.messageWrap .left .messageArea .messageList .messageDiv.on{background: #f9f9f9;}
+.messageWrap .left .messageArea .messageList .messageDiv .uImg{position: absolute; left: 15px; top: 10px; width: 40px; height: 40px; border-radius:70%; overflow: hidden; background: #fff;}
+.messageWrap .left .messageArea .messageList .messageDiv .uImg img{object-fit:cover; width: 100%; height: 100%;}
+.messageWrap .left .messageArea .messageList .messageDiv .sumBox{padding: 10px 10px 10px 70px; margin-top: 2px;}
+.messageWrap .left .messageArea .messageList .messageDiv .sumBox span{color: #898989;}
+.messageWrap .left .messageArea .messageList .messageDiv .sumBox .id{margin-left: 10px;}
+
+.messageWrap .left .friendsList{margin-top: 20px;}
+.messageWrap .left .friendsList .headTit{text-align: center; position: relative; font-size: 20px; border-bottom: 1px #e9ecef solid;}
+.messageWrap .left .friendsList .headTit .close{top: 0; right: 0; position: absolute;}
+.messageWrap .left .friendsList .tab{border-bottom: 1px #e9ecef solid; display: flex; flex-direction: row; justify-content: space-around;}
+.messageWrap .left .friendsList .tab .tit{text-align: center; width: 100%; padding: 10px 0; color: #8b8b8b; cursor: pointer;}
+.messageWrap .left .friendsList .tab .on{border-bottom: 1px #000 solid !important; color: #000 !important; font-size: 18px !important;}
+
+.messageWrap .left .friendsList .searchWrap2{margin-top: 20px;}
+.messageWrap .left .friendsList .searchWrap2 .inputTxt{width: 100%; height: 30px; border-radius:8px; border:0; background: #f9f9f9;
+  background-image: url('../images/sample/search.png');
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 22px;
+  padding:10px 20px 10px 40px;
+}
+
+.messageWrap .left .friendsList .friendBox{height: 240px; overflow-x: hidden; overflow-y: auto;}
+.messageWrap .left .friendsList .friendBox .friendDiv{position: relative; height: 60px; cursor: pointer;}
+.messageWrap .left .friendsList .friendBox .friendDiv .chkDiv{position: absolute; left: 0; top: 20px; width: 20px; height: 20px; z-index: 1;}
+.messageWrap .left .friendsList .friendBox .friendDiv .chkDiv .chk{width: 20px; height: 20px;}
+.messageWrap .left .friendsList .friendBox .friendDiv .uImg{position: absolute; left: 25px; top: 10px; width: 40px; height: 40px; border-radius:70%; overflow: hidden; background: #fff; border: 2px #0080ff solid; z-index: 1;}
+.messageWrap .left .friendsList .friendBox .friendDiv .uImg img{object-fit:cover; width: 100%; height: 100%;}
+.messageWrap .left .friendsList .friendBox .friendDiv .friendInfo{padding: 10px 10px 10px 75px; margin-top: 2px; position: relative; z-index: 0;}
+.messageWrap .left .friendsList .friendBox .friendDiv .friendInfo .nick{position: relative; z-index: 0;}
+.messageWrap .left .friendsList .friendBox .friendDiv .friendInfo .nick .check{margin-left: 0;}
+.messageWrap .left .friendsList .friendBox .friendDiv .friendInfo .txt{color: #898989; z-index: 0;}
+.messageWrap .left .friendsList .friendBox .friendDiv .friendInfo .folBtn{top: 10px; right: 10px; position: absolute; background: #f9f9f9; padding: 10px 20px; color: #000; border: 0; border-radius:10px; font-weight: 600; cursor: pointer; z-index: 1;}
+
+.messageWrap .chatArea{float: right; width: 63%; position: relative; min-height: 90vh;}
+.messageWrap .chatArea .top{margin-top: 40px; padding: 10px; display: flex; justify-content: space-between; position: absolute; top: 5px; width: 100%;}
+.messageWrap .chatArea .top .info{cursor: pointer;}
+.messageWrap .chatArea .chatWrap {height: 740px; overflow-x: hidden; overflow-y: auto; margin-top: 60px;}
+.messageWrap .chatArea .chatWrap .userinfo{text-align: center; height: 250px; margin-top: 70px;}
+.messageWrap .chatArea .chatWrap .userinfo .uImg{width: 80px; height: 80px; border-radius:70%; overflow: hidden; background: #fff; margin: 0 auto; border: 1px #7e7e7e solid;}
+.messageWrap .chatArea .chatWrap .userinfo .uImg img{object-fit:cover; width: 100%; height: 100%;}
+.messageWrap .chatArea .chatWrap .userinfo .id{color: #898989; margin-top: 5px;}
+.messageWrap .chatArea .chatWrap .userinfo .addInfo{color: #414141; margin-top: 15px;}
+.messageWrap .chatArea .chatWrap .userinfo .addInfo .kor{background-image: url('../images/sample/nation/kor.jpg'); background-repeat: no-repeat; background-position: right; background-size: 24px; padding:0 16px;}
+
+.messageWrap .chatArea .chatWrap .userinfo .hist1{color: #898989; margin-top: 15px; font-size: 12px;}
+.messageWrap .chatArea .chatWrap .userinfo .hist2{color: #898989; margin-top: 15px; font-size: 12px;}
+
+.messageWrap .chatArea .chatWrap .chat{margin-top: 50px; padding-left: 30px; min-height: 360px; display: flex; flex-direction: column; justify-content: flex-end;}
+.messageWrap .chatArea .chatWrap .chat div{min-height: 50px; line-height: 50px;}
+.messageWrap .chatArea .chatWrap .chat .ltm{padding-right: 200px; text-align: left; margin-top: 10px;}
+.messageWrap .chatArea .chatWrap .chat .ltm span{font-size: 16px; color: #fff; background: #59acac; padding: 10px 20px; border: 0; border-radius:10px;}
+.messageWrap .chatArea .chatWrap .chat .ltTime{padding-right: 200px; text-align: left; font-size: 12px; color: #898989; min-height: 20px; line-height: 20px;}
+.messageWrap .chatArea .chatWrap .chat .rtm{padding-left: 200px; text-align: right; margin-top: 10px;}
+.messageWrap .chatArea .chatWrap .chat .rtm span{font-size: 16px; color: #fff; background: #3c9dff; padding: 10px 20px; border: 0; border-radius:10px; word-break: break-all; word-wrap: break-word; white-space: normal;}
+.messageWrap .chatArea .chatWrap .chat .rtTime{padding-left: 200px; text-align: right; font-size: 12px; color: #898989; min-height: 20px; line-height: 20px;}
+
+.messageWrap .chatArea .sendMessage {position: absolute; bottom: 0; width: 100%;}
+.messageWrap .chatArea .sendMessage .addImg{position: absolute; top: 12px; left: 15px; z-index: 1; cursor: pointer;}
+.messageWrap .chatArea .sendMessage .inputTxt{width: 100%; height: 40px; padding:10px 150px; border-radius:15px; border:0; background: #f9f9f9; z-index: 0;}
+.messageWrap .chatArea .sendMessage .sendIco{position: absolute; top: 12px; right: 15px; z-index: 1; cursor: pointer;}

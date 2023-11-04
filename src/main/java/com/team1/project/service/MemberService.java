@@ -1,6 +1,11 @@
 package com.team1.project.service;
 
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+import java.util.Collections;
+import java.util.List;
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +31,7 @@ public class MemberService {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	// 회원가입하기
 	public void insertMember(MemberDTO member) throws Exception{
 		System.out.println("memberService.insertMember(member)");
@@ -56,4 +62,14 @@ public class MemberService {
 		}
 	}
 	
+=======
+	public List<MemberDTO> memberList() throws Exception{
+		
+		List<MemberDTO> memberList = Collections.emptyList();
+		
+		System.out.println("service.memberList -> " + memberList);
+		
+		return memberList;
+	}
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 }
