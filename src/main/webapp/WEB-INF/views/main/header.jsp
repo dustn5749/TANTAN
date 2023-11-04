@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="assets/sns/css/profileReset.css">
-<link rel="stylesheet" href="assets/sns/css/proflieStyle.css">
-<link rel="stylesheet" href="assets/sns/css/modal.css">
-<link rel="stylesheet" href="assets/sns/css/message.css">
+<link rel="stylesheet" href="/assets/sns/css/profileReset.css">
+<link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
+<link rel="stylesheet" href="/assets/sns/css/modal.css">
+<link rel="stylesheet" href="/assets/sns/css/message.css">
 
-<script src="assets/js/jquery-3.6.1.min.js"></script>
+<script src="/assets/js/jquery-3.6.1.min.js"></script>
 
 <style type="text/css">
 
@@ -115,7 +115,7 @@ a {
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="/main.do">
-               <img src="/assets/img/logo.png" width="150px">
+               <img src="//assets/img/logo.png" width="150px">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,9 @@ a {
 <!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
 <!--                         <i class="fa-regular fa-user"></i>                     -->
 <!--                     </a> -->
-					
+
+					<!-- 버튼 영역에 대한 div  -->
+					<div class="btn_div">
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('friend-list-modal')">
 						    <i class="fa-solid fa-user-group"></i>
 						</button>
@@ -186,7 +188,8 @@ a {
 						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
-				</button>
+					</button>
+					</div>
             </div>
         </div>
     </nav>
@@ -202,7 +205,7 @@ a {
       <div class="common-modal narrow-modal">
         <!-- 닫기버튼 -->
         <button type="button" class="icon-btn close-btn" onclick="closeModal('friend-list-modal')">
-          <img src="assets/sns/images/icon-close.svg" alt="">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
         </button>
         <!-- END 닫기버튼 -->
 
@@ -210,7 +213,7 @@ a {
         <div class="friend-modal-hd">
           <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
           <button class="btn" onclick="openModal('chat-invite-modal')">
-            <img src="assets/sns/images/message-circle-plus.svg" alt="" class="icon">
+            <img src="/assets/sns/images/message-circle-plus.svg" alt="" class="icon">
           </button>
         </div>
         <!-- END 친구이름 검색 & 채팅초대 버튼 -->
@@ -238,13 +241,13 @@ a {
                 <!-- 친구 프사 & 이름 -->
                 <div class="person-item">
                   <figure class="mini-thumnail">
-                    <img src="assets/sns/images/profile-img.jpeg" alt="">
+                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
                   </figure>
                   <div class="person-profile">
                     <div class="name-wrap">
                       <h6 class="name">choi_seung_hyun_tttop</h6>
                       <!-- 블루뱃지 -->
-                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
                     <p class="intro-txt">소개글입니다.</p>
                   </div>
@@ -265,13 +268,13 @@ a {
                 <!-- 친구 프사 & 이름 -->
                 <div class="person-item">
                   <figure class="mini-thumnail">
-                    <img src="assets/sns/images/profile-img.jpeg" alt="">
+                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
                   </figure>
                   <div class="person-profile">
                     <div class="name-wrap">
                       <h6 class="name">choi_seung_hyun_tttop</h6>
                       <!-- 블루뱃지 -->
-                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
                     <p class="intro-txt">소개글입니다.</p>
                   </div>
@@ -291,13 +294,13 @@ a {
               <!-- 친구 프사 & 이름 -->
                 <div class="person-item">
                   <figure class="mini-thumnail">
-                    <img src="assets/sns/images/mouse.jpg" alt="">
+                    <img src="/assets/sns/images/mouse.jpg" alt="">
                   </figure>
                   <div class="person-profile">
                     <div class="name-wrap">
                       <h6 class="name">쥐</h6>
                       <!-- 블루뱃지 -->
-                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
                     <p class="intro-txt">나는 쥐</p>
                   </div>
@@ -323,13 +326,13 @@ a {
                 <!-- 친구 프사 & 이름 -->
                 <div class="person-item">
                   <figure class="mini-thumnail">
-                    <img src="assets/sns/images/profile-img-jessica.png" alt="">
+                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
                   </figure>
                   <div class="person-profile">
                     <div class="name-wrap">
                       <h6 class="name">jessica</h6>
                       <!-- 블루뱃지 -->
-                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
                     <p class="intro-txt">제시카입니다</p>
                   </div>
@@ -349,13 +352,13 @@ a {
                 <!-- 친구 프사 & 이름 -->
                 <div class="person-item">
                   <figure class="mini-thumnail">
-                    <img src="assets/sns/images/profile-img-default.png" alt="">
+                    <img src="/assets/sns/images/profile-img-default.png" alt="">
                   </figure>
                   <div class="person-profile">
                     <div class="name-wrap">
                       <h6 class="name">minisooni</h6>
                       <!-- 블루뱃지 -->
-                      <!-- <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
+                      <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
                     </div>
                     <p class="intro-txt">미니수니</p>
                   </div>
@@ -385,7 +388,7 @@ a {
       <div class="common-modal narrow-modal">
         <!-- 닫기버튼 -->
         <button type="button" class="icon-btn close-btn" onclick="closeChatModal('chat-invite-modal')">
-          <img src="assets/sns/images/icon-close.svg" alt="">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
         </button>
         <!-- END 닫기버튼 -->
 
@@ -416,13 +419,13 @@ a {
               <!-- 친구 프사 & 이름 -->
               <span class="person-item">
                 <span class="mini-thumnail">
-                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                 </span>
                 <span class="person-profile">
                   <span class="name-wrap">
                     <span class="name">choi_seung_hyun_tttop</span>
                     <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
-                    <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                   </span>
                 </span>
               </span>
@@ -440,13 +443,13 @@ a {
               <!-- 친구 프사 , 이름 -->
               <span class="person-item">
                 <span class="mini-thumnail">
-                  <img src="assets/sns/images/profile-img-jessica.png" alt="">
+                  <img src="/assets/sns/images/profile-img-jessica.png" alt="">
                 </span>
                 <span class="person-profile">
                   <span class="name-wrap">
                     <span class="name">jessica</span>
                     <!-- 블루뱃지 -->
-                    <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                   </span>
                 </span>
               </span>
@@ -464,13 +467,13 @@ a {
               <!-- 친구 프사 & 이름 -->
               <span class="person-item">
                 <span class="mini-thumnail">
-                  <img src="assets/sns/images/profile-img-default.png" alt="">
+                  <img src="/assets/sns/images/profile-img-default.png" alt="">
                 </span>
                 <span class="person-profile">
                   <span class="name-wrap">
                     <span class="name">minisooni</span>
                     <!-- 블루뱃지 -->
-                    <!-- <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
+                    <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
                   </span>
                 </span>
               </span>
