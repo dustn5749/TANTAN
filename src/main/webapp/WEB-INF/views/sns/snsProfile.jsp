@@ -425,11 +425,15 @@
             </div>
 		 <!--저장하기 버튼 -->
             <div class="thumnail-ctrl-bar">
-              <button type="button" class="icon-btn toggle-icon-btn">
-                <span class="txt-hidden">저장하기</span>
-                <img src="assets/sns/images/icon-bookmark.svg" alt="" class="icon icon-inactive">
-                <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon icon-active">
-              </button>
+            <p> 우리집 냥이 귀엽죠? </p>
+             <p class="status-wrap">
+            <span class="gray-txt">조회수 259</span>
+             </p>
+<!--               <button type="button" class="icon-btn toggle-icon-btn"> -->
+<!--                 <span class="txt-hidden">저장하기</span> -->
+<!--                 <img src="assets/sns/images/icon-bookmark.svg" alt="" class="icon icon-inactive"> -->
+<!--                 <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon icon-active"> -->
+<!--               </button> -->
             </div>
           </div>
         </div>
