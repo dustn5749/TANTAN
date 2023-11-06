@@ -160,6 +160,7 @@ public class MemberController {
 				.member_id( String.valueOf(kakaoProfile.getId()))
 				.name(kakaoProfile.getProperties().getNickname())
 				.email(kakaoProfile.getKakao_account().getEmail())
+				.nickname(kakaoProfile.getKakao_account().getEmail())
 				.last_login_time(timeStamp)
 				.roles("USER")
 				.oauth("kakao")

@@ -116,17 +116,20 @@
         <!--상단 프로필 영역 중 왼쪽 부분 -->
           <div class="profile-top-left">
             <figure class="thumbnail">
-     
-     
-              <img src="/assets/sns/images/profile-img.jpeg" alt="">            
-   
-       
+     		<c:choose>
+     			<c:when test="${empty principal.user.profile_img}">
+     				<img alt="" src="/assets/sns/images/profile-img-default.png">
+     			</c:when>
+     			<c:otherwise>
+	              <img src="<c:out value='${principal.user.profile_img}'/>" alt="">             			
+     			</c:otherwise>
+     		</c:choose>
             </figure>
 
             <div class="profile-info">
               <div class="name">
                 <h2>
-                  <span>${principal.user.member_id}</span>
+                  <span>${principal.user.nickname}</span>
                   <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
                 </h2>
                 <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
@@ -160,19 +163,19 @@
               <div class="info03">
                 <dl>
                   <dt>지역</dt>
-                  <dd>대구</dd>
+                  <dd>${principal.user.address}</dd>
                 </dl>
                 <dl>
                   <dt>나이</dt>
-                  <dd>24세</dd>
+                  <dd>${principal.user.age}세</dd>
                 </dl>
                 <dl>
                   <dt>성별</dt>
-                  <dd>남자</dd>
+                  <dd>${principal.user.gender}</dd>
                 </dl>
                 <dl>
                   <dt>소개글</dt>
-                  <dd>안녕하세요~</dd>
+                  <dd>안녕하세요</dd>
                 </dl>
               </div>
             </div>
