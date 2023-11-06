@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <sec:authorize access="isAuthenticated()">
-<sec:authentication property="principal" var="principal"/>
+	<sec:authentication property="principal" var="principal"/>
 </sec:authorize>
     
 <!DOCTYPE html>
@@ -124,6 +124,8 @@ a {
             <a class="navbar-brand text-success logo h1 align-self-center" href="/main.do">
                <img src="/assets/img/logo.png" width="150px">
             </a>
+            
+           
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -521,7 +523,6 @@ a {
     </div>
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
-<<<<<<< HEAD
 	<!-- 메시지 모달 팝업창 -->
 <!-- 	<div id="message-modal" class="popCont">
   	모달 오버레이
@@ -718,11 +719,9 @@ a {
   	</div> -->
   	<!--END 메시지 모달 팝업창 -->
   	
-=======
 	
 	
 	
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
   <script>
     // 1. 친구 목록에서 탭버튼 활성화
     $(".friend-modal-tab").on('click', function () {

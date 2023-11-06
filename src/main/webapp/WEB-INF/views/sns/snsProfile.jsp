@@ -21,14 +21,11 @@
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
   <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
-<<<<<<< HEAD
 
   <script src="/assets/js/jquery-3.6.1.min.js"></script>
-=======
   <link rel="stylesheet" href="/assets/sns/css/modal.css">
   
   <script src="assets/js/jquery-3.6.1.min.js"></script>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </head>
 
 <body>
@@ -119,7 +116,8 @@
         <!--상단 프로필 영역 중 왼쪽 부분 -->
           <div class="profile-top-left">
             <figure class="thumbnail">
-    
+     
+     
               <img src="/assets/sns/images/profile-img.jpeg" alt="">            
    
        
@@ -128,7 +126,7 @@
             <div class="profile-info">
               <div class="name">
                 <h2>
-                  <span><c:if test="${empty principal}">${principal.user}</c:if></span>
+                  <span>${principal.user.member_id}</span>
                   <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
                 </h2>
                 <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
