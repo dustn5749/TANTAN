@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
 .pop {
   position: fixed;
   width: 100%;

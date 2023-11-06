@@ -10,23 +10,23 @@
 
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
-  <link rel="stylesheet" href="assets/sns/css/profileReset.css">
-  <link rel="stylesheet" href="assets/sns/css/profileStyle.css">
-  <link rel="stylesheet" href="assets/sns/css/message.css">
-  <link rel="stylesheet" href="assets/sns/css/modal.css">
+  <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
+  <link rel="stylesheet" href="/assets/sns/css/profileStyle.css">
+  <link rel="stylesheet" href="/assets/sns/css/message.css">
+  <link rel="stylesheet" href="/assets/sns/css/modal.css">
 </head>
 
 <body>
-  <div class="pop">
-  	<div class="popDim"></div>
-  	
-  	<div id="message-modal" class="popCont">
-  	<!-- 모달 오버레이 -->
-    <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
-      		  	
-	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
-        <img src="assets/sns/images/xBtn.png" alt="">
-      	</button>
+  <div id="message-modal" class="pop">
+  <!-- 모달 오버레이 -->
+  <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
+  	<div class="popDim"></div> 	
+  	<div class="popCont">
+      	 <!-- 닫기버튼 -->
+        <button type="button" class="icon-btn close-btn" onclick="closeModal('message-modal')">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
+        </button>
+        <!-- END 닫기버튼 -->
 	  	
 		<div class="messageWrap">			
 			<section class="left">
@@ -34,7 +34,7 @@
 					<div class="top">
 						<span class="tit">Messages</span>
 						<button class="btn" onclick="openModal('chat-invite-modal')">
-				          <img src="assets/sns/images/message-circle-plus.svg" alt="초대 아이콘" class="icon">
+				          <img src="/assets/sns/images/message-circle-plus.svg" alt="" class="icon">
 				        </button>						
 					</div>
 					<div class="searchWrap1">
@@ -42,13 +42,27 @@
 					</div>
 					<div class="messageList">
 						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="sumBox">
 								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
 								<p class="msg">머해?</p>
 							</div>
 						</div>
 						<div class="messageDiv on">
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
 							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="sumBox">
 								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
@@ -63,35 +77,21 @@
 							</div>
 						</div>
 						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="sumBox">
 								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
 								<p class="msg">머해?</p>
 							</div>
 						</div>
 						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="sumBox">
 								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
 								<p class="msg">머해?</p>
 							</div>
 						</div>
 						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="sumBox">
 								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
 								<p class="msg">머해?</p>
@@ -113,7 +113,7 @@
 					<div class="friendBox">
 						<div class="friendDiv">
 		
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
 								<p class="txt">Toni Kroos</p>
@@ -126,7 +126,7 @@
 						</div>
 						<div class="friendDiv">
 							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
 								<p class="txt">Toni Kroos</p>
@@ -140,7 +140,7 @@
 						
 						<div class="friendDiv">
 							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
 								<p class="txt">Toni Kroos</p>
@@ -153,7 +153,7 @@
 						</div>
 						<div class="friendDiv">
 							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
 							<div class="friendInfo">
 								<p class="nick">Gee</p>
 								<p class="txt">Toni Kroos</p>
@@ -215,6 +215,8 @@
   	</div>
 
   </div>
+  
+  
   <script>
   function openModal(id) {
       $('#' + id).addClass('active');

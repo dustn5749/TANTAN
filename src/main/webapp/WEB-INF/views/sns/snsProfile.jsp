@@ -21,8 +21,14 @@
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
   <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
+<<<<<<< HEAD
 
   <script src="/assets/js/jquery-3.6.1.min.js"></script>
+=======
+  <link rel="stylesheet" href="/assets/sns/css/modal.css">
+  
+  <script src="assets/js/jquery-3.6.1.min.js"></script>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </head>
 
 <body>
@@ -176,10 +182,12 @@
         </div>
 		<!-- 프로필 영역 아래 부분 -->
         <div class="profile-bottom">
-          <div class="btn-wrap">
-            <button type="button" class="btn txt-btn blue-btn">+ 새 컬렉션</button>
-          </div>
-		
+<!--           <div class="btn-wrap"> -->
+<!--             <button type="button" class="btn txt-btn blue-btn">+ 새 컬렉션</button> -->
+<!--           </div> -->
+		<div class="btn-wrap">
+		<button type="button" class="btn txt-btn blue-btn" onclick="openModal('upload-modal')">+ 새 컬렉션</button>
+		</div>
 		<!--게시물 목록 영역 -->
           <div class="grid-wrapper">
             <div class="grid">
@@ -824,6 +832,26 @@
     </div>
   </div>
 
+  
+  <!-- 이미지 업로드 팝업창 -->
+    <div id="upload-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeModal('upload-modal')"></div>
+
+      <div class="common-modal narrow-modal">
+        <!-- 닫기버튼 -->
+        <button type="button" class="icon-btn close-btn" onclick="closeModal('upload-modal')">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
+        </button>
+        <!-- END 닫기버튼 -->
+
+                <!-- 메세지 보내기 & 삭제 버튼 -->
+                <div class="btn-wrap">
+                  <button type="button" class="btn blue-btn">파일 업로드</button>
+                </div>
+      	</div>
+    </div>
+    <!-- END 친구 목록 / 친구 요청 모달 팝업창 -->
+    
   <script>
   <!-- 특정속성을 가진 모든 텍스트영역을 내용이 잘리지 않기 위한 텍스트 영역을 자동으로 크기 조절해줌 -->
     $('textarea[data-autoresize]').each(function () {

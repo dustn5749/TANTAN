@@ -521,6 +521,7 @@ a {
     </div>
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
+<<<<<<< HEAD
 	<!-- 메시지 모달 팝업창 -->
 <!-- 	<div id="message-modal" class="popCont">
   	모달 오버레이
@@ -717,6 +718,11 @@ a {
   	</div> -->
   	<!--END 메시지 모달 팝업창 -->
   	
+=======
+	
+	
+	
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
   <script>
     // 1. 친구 목록에서 탭버튼 활성화
     $(".friend-modal-tab").on('click', function () {
