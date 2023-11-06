@@ -157,7 +157,7 @@ public class MemberController {
 		
 		Timestamp timeStamp = Timestamp.valueOf(LocalDateTime.now());
 		MemberDTO kakaoMember = MemberDTO.builder()
-				.member_id( String.valueOf(kakaoProfile.getId()))
+				.member_id(String.valueOf(kakaoProfile.getId()))
 				.name(kakaoProfile.getProperties().getNickname())
 				.email(kakaoProfile.getKakao_account().getEmail())
 				.nickname(kakaoProfile.getKakao_account().getEmail())
@@ -174,6 +174,7 @@ public class MemberController {
 		System.out.println("kakaoMember" + kakaoMember);
 		
 		try {
+			
 			// 기존회원인지 체크하기
 			if(!memberservice.checkMember(kakaoMember)) {
 				memberservice.insertMember(kakaoMember);				 

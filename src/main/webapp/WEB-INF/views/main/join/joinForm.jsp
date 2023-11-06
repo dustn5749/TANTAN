@@ -128,5 +128,6 @@
 			location.href="/member/joinProcess2.do";
 		})
 	</script>
+	<script type="text/javascript" src="/asstest/js/join.js"></script>
 </body>
 </html>
