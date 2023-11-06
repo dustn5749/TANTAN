@@ -77,6 +77,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
 	</definition>
 
+<<<<<<< HEAD
+=======
 <!-- 마이페이지 -->
 	<definition name="mypage" extends="baseLayout">
 		<put-attribute name="title" value="마이페이지"></put-attribute>
@@ -107,6 +109,7 @@
 <!-- sns 끝-->
 
 <!-- 관리자 페이지 시작 -->
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>
