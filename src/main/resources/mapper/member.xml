@@ -26,23 +26,23 @@
 	
 	<update id="loginCountInc">
 		update member set
-			loginCount = loginCount + 1
+			logincnt = logincnt + 1
 			<choose>
-				<when test="loginCount > 5 ">
-					, accountLocked = 'Y'
+				<when test="logincnt > 5 ">
+					, ACCOUNTLOCKED = 'Y'
 				</when>
 				<otherwise>
-					, accountLocked = 'N'
+					, ACCOUNTLOCKED = 'N'
 				</otherwise>
 			</choose>
-			where email = #{email}
+			where member_id = #{member_id}
 	</update>
 	
 	<update id="loginCountClear">
 		update member set
-			loginCount = 0
-			,accountLocked = 'N'
-		where email = #{email}  
+			logincnt = 0
+			,ACCOUNTLOCKED = 'N'
+		where member_id = #{member_id}  
 	</update>
 	
 	
@@ -93,7 +93,12 @@
 		where member_id=#{member_id}
 	</select>
 	
-	<!--  -->
+	<!--   -->
+	<update id="updateMemberLastLogin">
+		update member set 
+			last_login_time = SYSTIMESTAMP
+		where member_id = #{member_id}  
+	</update>
 	
 	<!-- 관리자 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
