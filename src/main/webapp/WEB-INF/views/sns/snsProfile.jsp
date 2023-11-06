@@ -1,7 +1,16 @@
+<%@page import="com.team1.project.dto.MemberDTO"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
+<html  lang="en" >
 
 <head>
   <meta charset="UTF-8">
@@ -10,10 +19,10 @@
 
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
-  <link rel="stylesheet" href="assets/sns/css/profileReset.css">
-  <link rel="stylesheet" href="assets/sns/css/proflieStyle.css">
+  <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
+  <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
 
-  <script src="assets/js/jquery-3.6.1.min.js"></script>
+  <script src="/assets/js/jquery-3.6.1.min.js"></script>
 </head>
 
 <body>
@@ -22,29 +31,29 @@
 <!--       <div class="header-inner"> -->
 <!--         <h1 class="logo"> -->
 <!--           <a href="#"> -->
-<!--             <img src="assets/sns/images/logo.png" alt=""> -->
+<!--             <img src="/assets/sns/images/logo.png" alt=""> -->
 <!--           </a> -->
 <!--         </h1> -->
 
 <!--         <div class="header-menu"> -->
 <!--           <button type="button" class="hd-btn"> -->
 <!--             <span class="txt-hidden">친구</span> -->
-<!--             <img src="assets/sns/images/icon-users.svg" alt="" class="icon"> -->
+<!--             <img src="/assets/sns/images/icon-users.svg" alt="" class="icon"> -->
 <!--           </button> -->
 
 <!--           <button type="button" class="hd-btn"> -->
 <!--             <span class="txt-hidden">메세지</span> -->
-<!--             <img src="assets/sns/images/icon-mail.svg" alt="" class="icon"> -->
+<!--             <img src="/assets/sns/images/icon-mail.svg" alt="" class="icon"> -->
 <!--           </button> -->
 
 <!--           <button type="button" class="hd-btn"> -->
 <!--             <span class="txt-hidden">알림</span> -->
-<!--             <img src="assets/sns/images/icon-heart.svg" alt="" class="icon"> -->
+<!--             <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon"> -->
 <!--           </button> -->
 
 <!--           <button type="button" class="hd-btn hd-mypage-btn"> -->
 <!--             <span class="txt-hidden">마이페이지</span> -->
-<!--             <img src="assets/sns/images/icon-user-filled.svg" alt="" class="icon"> -->
+<!--             <img src="/assets/sns/images/icon-user-filled.svg" alt="" class="icon"> -->
 <!--           </button> -->
 <!--         </div> -->
 <!--       </div> -->
@@ -56,32 +65,32 @@
           <div class="sidebar-menu">
           <!--사이드바 버튼들 -->
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-home.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
               <span class="txt">홈</span>
             </button>
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
               <span class="txt">일정</span>
             </button>
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-send.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-send.svg" alt="" class="icon">
               <span class="txt">메세지</span>
             </button>
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-heart.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
               <span class="txt">알림</span>
             </button>
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
               <span class="txt">저장됨</span>
             </button>
             <button type="button" class="sidebar-btn active">
-              <img src="assets/sns/images/icon-activity.svg" alt="" class="icon">
+              <img src="/assets/sns/images/icon-activity.svg" alt="" class="icon">
               <span class="txt">내 활동</span>
             </button>
             <button type="button" class="sidebar-btn active">
               <figure class="mini-thumnail">
-                <img src="assets/sns/images/profile-img.jpeg" alt="">
+                <img src="/assets/sns/images/profile-img.jpeg" alt="">
               </figure>
               <span class="txt">프로필</span>
             </button>
@@ -89,7 +98,7 @@
 
           <div class="sidebar-menu">
 <!--             <button type="button" class="sidebar-btn active"> -->
-<!--               <img src="assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+<!--               <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
 <!--               <span class="txt">더보기</span> -->
 <!--             </button> -->
           </div>
@@ -104,14 +113,17 @@
         <!--상단 프로필 영역 중 왼쪽 부분 -->
           <div class="profile-top-left">
             <figure class="thumbnail">
-              <img src="assets/sns/images/profile-img.jpeg" alt="">
+    
+              <img src="/assets/sns/images/profile-img.jpeg" alt="">            
+   
+       
             </figure>
 
             <div class="profile-info">
               <div class="name">
                 <h2>
-                  <span>choi_seung_hyun_tttop</span>
-                  <img src="assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
+                  <span><c:if test="${empty principal}">${principal.user}</c:if></span>
+                  <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
                 </h2>
                 <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
               </div>
@@ -173,20 +185,20 @@
             <div class="grid">
             <!-- 각 이미지 카드를 클릭시 JS함수와 연결 -->
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat03.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat03.png" alt="" class="thumbnail-img">
                 <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -196,19 +208,19 @@
             </div>
             <div class="grid">
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat01.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat01.png" alt="" class="thumbnail-img">
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -218,19 +230,19 @@
             </div>
             <div class="grid">
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat02.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat02.png" alt="" class="thumbnail-img">
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -240,108 +252,19 @@
             </div>
             <div class="grid">
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat03.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat03.png" alt="" class="thumbnail-img">
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-                  </div>
-                </div>
-              </figure>
-            </div>
-            <!-- 1 line -->
-            <div class="grid">
-              <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat01.png" alt="" class="thumbnail-img">
-                <div class="overlay">
-                  <div class="overlay-content">
-                    <dl class="icon-heart-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-
-                    <dl class="icon-msg-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-                  </div>
-                </div>
-              </figure>
-            </div>
-            <div class="grid">
-              <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat02.png" alt="" class="thumbnail-img">
-                <div class="overlay">
-                  <div class="overlay-content">
-                    <dl class="icon-heart-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-
-                    <dl class="icon-msg-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-                  </div>
-                </div>
-              </figure>
-            </div>
-            <div class="grid">
-              <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat03.png" alt="" class="thumbnail-img">
-                <div class="overlay">
-                  <div class="overlay-content">
-                    <dl class="icon-heart-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-
-                    <dl class="icon-msg-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-                  </div>
-                </div>
-              </figure>
-            </div>
-            <div class="grid">
-              <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat01.png" alt="" class="thumbnail-img">
-                <div class="overlay">
-                  <div class="overlay-content">
-                    <dl class="icon-heart-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
-                      </dt>
-                      <dd>200</dd>
-                    </dl>
-
-                    <dl class="icon-msg-txt">
-                      <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -352,19 +275,19 @@
             <!-- 1 line -->
             <div class="grid">
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="assets/sns/images/cat02.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat01.png" alt="" class="thumbnail-img">
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -374,19 +297,108 @@
             </div>
             <div class="grid">
               <figure class="feed-item-card" onclick="openModal('feed-modal')">
-                <img src="aassets/sns/images/cat03.png" alt="" class="thumbnail-img">
+                <img src="/assets/sns/images/cat02.png" alt="" class="thumbnail-img">
                 <div class="overlay">
                   <div class="overlay-content">
                     <dl class="icon-heart-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
 
                     <dl class="icon-msg-txt">
                       <dt>
-                        <img src="assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+                  </div>
+                </div>
+              </figure>
+            </div>
+            <div class="grid">
+              <figure class="feed-item-card" onclick="openModal('feed-modal')">
+                <img src="/assets/sns/images/cat03.png" alt="" class="thumbnail-img">
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <dl class="icon-heart-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+
+                    <dl class="icon-msg-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+                  </div>
+                </div>
+              </figure>
+            </div>
+            <div class="grid">
+              <figure class="feed-item-card" onclick="openModal('feed-modal')">
+                <img src="/assets/sns/images/cat01.png" alt="" class="thumbnail-img">
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <dl class="icon-heart-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+
+                    <dl class="icon-msg-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+                  </div>
+                </div>
+              </figure>
+            </div>
+            <!-- 1 line -->
+            <div class="grid">
+              <figure class="feed-item-card" onclick="openModal('feed-modal')">
+                <img src="/assets/sns/images/cat02.png" alt="" class="thumbnail-img">
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <dl class="icon-heart-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+
+                    <dl class="icon-msg-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+                  </div>
+                </div>
+              </figure>
+            </div>
+            <div class="grid">
+              <figure class="feed-item-card" onclick="openModal('feed-modal')">
+                <img src="a/assets/sns/images/cat03.png" alt="" class="thumbnail-img">
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <dl class="icon-heart-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-heart-filled-white.svg" alt="" class="icon">
+                      </dt>
+                      <dd>200</dd>
+                    </dl>
+
+                    <dl class="icon-msg-txt">
+                      <dt>
+                        <img src="/assets/sns/images/icon-message-circle-filled-white.svg" alt="" class="icon">
                       </dt>
                       <dd>200</dd>
                     </dl>
@@ -405,11 +417,11 @@
       <div class="modal-overlay" onclick="closeModal('feed-modal')"></div>
 	<!-- 모달 닫기 버튼 -->
       <button type="button" class="icon-btn close-btn" onclick="closeModal('feed-modal')">
-        <img src="assets/sns/images/icon-close-white.svg" alt="">
+        <img src="/assets/sns/images/icon-close-white.svg" alt="">
       </button>
 	<!-- 이전 항목으로 이동하는 버튼 -->
       <button type="button" class="feed-ctrl-btn prev">
-        <img src="assets/sns/images/icon-chevron-left.svg" alt="" class="icon">
+        <img src="/assets/sns/images/icon-chevron-left.svg" alt="" class="icon">
       </button>
 	<!-- 모달 내용 -->
       <div class="common-modal feed-modal">
@@ -418,14 +430,14 @@
           <!--큰 이미지-->
           <div class="lg-thumbnail">
             <div class="thumnail-img-box">
-              <img src="assets/sns/images/cat03.png" alt="">
+              <img src="/assets/sns/images/cat03.png" alt="">
             </div>
 		 <!--저장하기 버튼 -->
             <div class="thumnail-ctrl-bar">
               <button type="button" class="icon-btn toggle-icon-btn">
                 <span class="txt-hidden">저장하기</span>
-                <img src="assets/sns/images/icon-bookmark.svg" alt="" class="icon icon-inactive">
-                <img src="assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon icon-active">
+                <img src="/assets/sns/images/icon-bookmark.svg" alt="" class="icon icon-inactive">
+                <img src="/assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon icon-active">
               </button>
             </div>
           </div>
@@ -436,15 +448,15 @@
           <div class="content-container-top">
             <div class="name-wrap">
               <figure class="mini-thumnail">
-                <img src="assets/sns/images/profile-img.jpeg" alt="">
+                <img src="/assets/sns/images/profile-img.jpeg" alt="">
               </figure>
               <h4>choi_seung_hyun_tttop</h4>
-              <img src="assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
+              <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
             </div>
 
             <button type="button" class="btn icon-btn" onclick="openModal('feed-ctrl-modal')">
               <span class="txt-hidden">더보기</span>
-              <img src="assets/sns/images/icon-dots.svg" class="icon" alt="">
+              <img src="/assets/sns/images/icon-dots.svg" class="icon" alt="">
             </button>
           </div>
 		<!--댓글 영역-->
@@ -465,13 +477,13 @@
                     <div class="comment-item-container">
                       <div class="comment-item">
                         <figure class="mini-thumnail">
-                          <img src="assets/sns/images/profile-img.jpeg" alt="">
+                          <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
                         <div class="comment-content">
                           <div class="name-content-wrap">
                             <div class="name-wrap">
                               <h6 class="name">choi_seung_hyun_tttop</h6>
-                              <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                              <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                             </div>
                             <p>내용입니다.</p>
                           </div>
@@ -483,8 +495,8 @@
                         </div>
                         <div class="heart-wrap">
                           <button type="button" class="icon-btn toggle-icon-btn">
-                            <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                            <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                            <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                            <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                           </button>
                         </div>
                       </div>
@@ -501,13 +513,13 @@
                             <li class="recomment-list">
                               <div class="comment-item">
                                 <figure class="mini-thumnail">
-                                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                                 </figure>
                                 <div class="comment-content">
                                   <div class="name-content-wrap">
                                     <div class="name-wrap">
                                       <h6 class="name">choi_seung_hyun_tttop</h6>
-                                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                                     </div>
                                     <p>내용입니다.</p>
                                   </div>
@@ -519,8 +531,8 @@
                                 </div>
                                 <div class="heart-wrap">
                                   <button type="button" class="icon-btn toggle-icon-btn">
-                                    <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                                    <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                                    <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                                    <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                                   </button>
                                 </div>
                               </div>
@@ -529,13 +541,13 @@
                             <li class="recomment-list">
                               <div class="comment-item">
                                 <figure class="mini-thumnail">
-                                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                                 </figure>
                                 <div class="comment-content">
                                   <div class="name-content-wrap">
                                     <div class="name-wrap">
                                       <h6 class="name">choi_seung_hyun_tttop</h6>
-                                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                                     </div>
                                     <p>내용입니다.</p>
                                   </div>
@@ -547,8 +559,8 @@
                                 </div>
                                 <div class="heart-wrap">
                                   <button type="button" class="icon-btn toggle-icon-btn">
-                                    <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                                    <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                                    <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                                    <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                                   </button>
                                 </div>
                               </div>
@@ -557,7 +569,7 @@
                             <li class="recomment-list">
                               <div class="comment-item">
                                 <figure class="mini-thumnail">
-                                  <img src="assets/sns/images/profile-img-default.png" alt="">
+                                  <img src="/assets/sns/images/profile-img-default.png" alt="">
                                 </figure>
                                 <div class="comment-content">
                                   <div class="name-content-wrap">
@@ -574,8 +586,8 @@
                                 </div>
                                 <div class="heart-wrap">
                                   <button type="button" class="icon-btn toggle-icon-btn">
-                                    <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                                    <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                                    <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                                    <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                                   </button>
                                 </div>
                               </div>
@@ -590,7 +602,7 @@
                     <div class="comment-item-container">
                       <div class="comment-item">
                         <figure class="mini-thumnail">
-                          <img src="assets/sns/images/profile-img-default.png" alt="">
+                          <img src="/assets/sns/images/profile-img-default.png" alt="">
                         </figure>
                         <div class="comment-content">
                           <div class="name-content-wrap">
@@ -608,8 +620,8 @@
                         </div>
                         <div class="heart-wrap">
                           <button type="button" class="icon-btn toggle-icon-btn">
-                            <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                            <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                            <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                            <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                           </button>
                         </div>
                       </div>
@@ -621,13 +633,13 @@
                     <div class="comment-item-container">
                       <div class="comment-item">
                         <figure class="mini-thumnail">
-                          <img src="assets/sns/images/profile-img.jpeg" alt="">
+                          <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
                         <div class="comment-content">
                           <div class="name-content-wrap">
                             <div class="name-wrap">
                               <h6 class="name">choi_seung_hyun_tttop</h6>
-                              <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                              <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                             </div>
                             <p>내용입니다.</p>
                           </div>
@@ -639,8 +651,8 @@
                         </div>
                         <div class="heart-wrap">
                           <button type="button" class="icon-btn toggle-icon-btn">
-                            <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                            <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                            <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                            <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                           </button>
                         </div>
                       </div>
@@ -656,13 +668,13 @@
                             <li class="recomment-list">
                               <div class="comment-item">
                                 <figure class="mini-thumnail">
-                                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                                 </figure>
                                 <div class="comment-content">
                                   <div class="name-content-wrap">
                                     <div class="name-wrap">
                                       <h6 class="name">choi_seung_hyun_tttop</h6>
-                                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                                     </div>
                                     <p>내용입니다.</p>
                                   </div>
@@ -674,8 +686,8 @@
                                 </div>
                                 <div class="heart-wrap">
                                   <button type="button" class="icon-btn toggle-icon-btn">
-                                    <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                                    <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                                    <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                                    <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                                   </button>
                                 </div>
                               </div>
@@ -684,13 +696,13 @@
                             <li class="recomment-list">
                               <div class="comment-item">
                                 <figure class="mini-thumnail">
-                                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                                 </figure>
                                 <div class="comment-content">
                                   <div class="name-content-wrap">
                                     <div class="name-wrap">
                                       <h6 class="name">choi_seung_hyun_tttop</h6>
-                                      <img src="assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                                     </div>
                                     <p>내용입니다.</p>
                                   </div>
@@ -702,8 +714,8 @@
                                 </div>
                                 <div class="heart-wrap">
                                   <button type="button" class="icon-btn toggle-icon-btn">
-                                    <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                                    <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                                    <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                                    <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                                   </button>
                                 </div>
                               </div>
@@ -718,7 +730,7 @@
                     <div class="comment-item-container">
                       <div class="comment-item">
                         <figure class="mini-thumnail">
-                          <img src="assets/sns/images/profile-img-default.png" alt="">
+                          <img src="/assets/sns/images/profile-img-default.png" alt="">
                         </figure>
                         <div class="comment-content">
                           <div class="name-content-wrap">
@@ -736,8 +748,8 @@
                         </div>
                         <div class="heart-wrap">
                           <button type="button" class="icon-btn toggle-icon-btn">
-                            <img src="assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
-                            <img src="assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
+                            <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon icon-inactive">
+                            <img src="/assets/sns/images/icon-heart-filled-red.svg" alt="" class="icon icon-active">
                           </button>
                         </div>
                       </div>
@@ -753,24 +765,24 @@
                   <!-- 눌렀을 시 active 클래스 토글 -->
                   <button type="button" class="btn icon-btn toggle-icon-btn">
                     <span class="txt-hidden">좋아요</span>
-                    <img src="assets/sns/images/icon-heart.svg" class="icon icon-inactive" alt="">
-                    <img src="assets/sns/images/icon-heart-filled.svg" class="icon icon-active" alt="">
+                    <img src="/assets/sns/images/icon-heart.svg" class="icon icon-inactive" alt="">
+                    <img src="/assets/sns/images/icon-heart-filled.svg" class="icon icon-active" alt="">
                   </button>
                   <button type="button" class="btn icon-btn">
                     <span class="txt-hidden">댓글</span>
-                    <img src="assets/sns/images/icon-message-circle.svg" class="icon icon-inactive" alt="">
+                    <img src="/assets/sns/images/icon-message-circle.svg" class="icon icon-inactive" alt="">
                   </button>
 <!--                   <button type="button" class="btn icon-btn"> -->
 <!--                     <span class="txt-hidden">메세지</span> -->
-<!--                     <img src="assets/sns/images/icon-send.svg" class="icon icon-inactive" alt=""> -->
+<!--                     <img src="/assets/sns/images/icon-send.svg" class="icon icon-inactive" alt=""> -->
 <!--                   </button> -->
                 </div>
                 <div class="display-flex gap-15">
                   <!-- 눌렀을 시 active 클래스 토글 -->
                   <button type="button" class="btn icon-btn toggle-icon-btn">
                     <span class="txt-hidden">저장됨</span>
-                    <img src="assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="">
-                    <img src="assets/sns/images/icon-bookmark-filled.svg" class="icon icon-active" alt="">
+                    <img src="/assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="">
+                    <img src="/assets/sns/images/icon-bookmark-filled.svg" class="icon icon-active" alt="">
                   </button>
                 </div>
               </div>
@@ -786,7 +798,7 @@
               </div>
               <div class="create-comment-bar">
                 <figure class="mini-thumnail">
-                  <img src="assets/sns/images/profile-img.jpeg" alt="">
+                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
                 </figure>
                 <textarea data-autoresize placeholder="댓글 달기..." rows="1" class="txtarea"></textarea>
                 <button type="button" class="btn txt-btn">게시</button>
@@ -797,7 +809,7 @@
       </div>
 		<!-- 우측상단 게시물 상세 편집 버튼 -->
       <button type="button" class="feed-ctrl-btn next">
-        <img src="assets/sns/images/icon-chevron-right.svg" alt="" class="icon">
+        <img src="/assets/sns/images/icon-chevron-right.svg" alt="" class="icon">
       </button>
     </div>
 

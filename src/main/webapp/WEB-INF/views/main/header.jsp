@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,9 +151,18 @@ a {
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">고객센터</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/member/loginForm.do">로그인</a>
-                        </li>
+                        <!-- 로그인 유무 -->
+	                    <li class="nav-item">
+                        <c:choose>
+                        	  <c:when test="${empty principal}">
+                            <a class="nav-link" href="/member/loginForm.do">로그인 </a>
+                        	</c:when>
+                        	 <c:otherwise>
+                        	 <a class="nav-link" href="/logout.do">로그아웃</a>
+                        	</c:otherwise>
+                        </c:choose>
+                       </li>
+
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex" style="width: 200px">
@@ -174,7 +190,9 @@ a {
 <!--                     </a> -->
 
 					<!-- 버튼 영역에 대한 div  -->
-					<div class="btn_div">
+					<c:choose>
+					<c:when test="${!empty principal}">
+						<div class="btn_div">
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('friend-list-modal')">
 						    <i class="fa-solid fa-user-group"></i>
 						</button>
@@ -190,6 +208,12 @@ a {
 						    <i class="fa-regular fa-user"></i>    
 					</button>
 					</div>
+					</c:when>
+					 <c:otherwise>
+						<div class="btn_div"></div>
+					</c:otherwise>
+					</c:choose>
+
             </div>
         </div>
     </nav>
@@ -498,9 +522,9 @@ a {
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
 	<!-- 메시지 모달 팝업창 -->
-	<div id="message-modal" class="popCont">
-  	<!-- 모달 오버레이 -->
-    <div class="modal-overlay" onclick="closeModal('message-modal')"></div>
+<!-- 	<div id="message-modal" class="popCont">
+  	모달 오버레이
+    <div class="modal-overlay" onclick="cloaseModal('message-modal')"></div>
       		  	
 	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
         <img src="assets/sns/images/xBtn.png" alt="">
@@ -690,7 +714,7 @@ a {
 			</section>
 			
 		</div>
-  	</div>
+  	</div> -->
   	<!--END 메시지 모달 팝업창 -->
   	
   <script>

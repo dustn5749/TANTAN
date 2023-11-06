@@ -1,5 +1,8 @@
 package com.team1.project.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +18,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.team1.project.config.auth.AuthFailureHandler;
 import com.team1.project.config.auth.AuthSuccessHandler;
 import com.team1.project.config.auth.PrincipalDetailsService;
+import com.team1.project.dao.MemberDao;
+import com.team1.project.dto.MemberDTO;
+import com.team1.project.service.MemberService;
 
 
 @Configuration
@@ -31,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthFailureHandler authFailureHandler;
 	
+
+	
 	// BCryptPasswordEncoder는 Spring Security에서 제공하는 비밀번호 암호화 객체 (BCrypt라는 해시 함수를 이용하여 패스워드를 암호화 한다.)
 	// 회원 비밀번호 등록시 해당 메서드를 이용하여 암호화해야 로그인 처리시 동일한 해시로 비교한다.
 	// 의존성 주입을 위한 함수를 Bean 객체로 리턴할 수 있게 함수를 구현한다 
@@ -42,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 시큐리티가 로그인 과정에서 password를 가로챌때 해당 해쉬로 암호화해서 비교한다.
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		                                       //아래 부분은 의존성 주입 함수를 호출함        
+		                                       //아래 부분은 의존성 주입 함수를 호출함     
 		auth.userDetailsService(principalDetailsService).passwordEncoder(encryptPassword());
 	}
 	
@@ -90,7 +98,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static void main(String [] args) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		System.out.println("user1@aaa.com->[" + encoder.encode("passwd"));
+		
+		
+		System.out.println("user1@aaa.com->[" + encoder.encode("1234"));
+		
 //		System.out.println("user1@aaa.com->[" + encoder.encode("123456"));
 	}
 	 
