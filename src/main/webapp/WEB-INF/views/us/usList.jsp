@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>동행 목록조회</title>
 <style>
    .us_container{
-      width: 80%;
-      margin: 0 auto;
-      padding: 3%;
+         width: 94%; 
+        margin: 0 auto; 
    }
-    
     .content{
     padding : 4%;
-    
     }
     .us_header_size{
      float: right;
@@ -23,11 +19,8 @@
     background-color: rgb(255, 255, 255);
     display: flex;
 }
-
       }
-   
    .us_header {
-   
       position: sticky;
        z-index: 9;
        top: 80px;
@@ -186,7 +179,6 @@
     border: 1px solid rgb(233, 233, 233);
     border-radius: 10px;
 }
- 
 .city_btn1 {
     cursor: pointer;
     position: relative;
@@ -213,7 +205,6 @@
       .mainItem.active {
          display : block;
       }
-
       .sub.active {
         display: block;
       }
@@ -339,7 +330,7 @@
      		padding: 10px;
      }
 	 .schedule_container {
-        width: 94%; 
+        width: 70%; 
         margin: 0 auto; 
     }
 	ul > li {
@@ -348,8 +339,93 @@
 	ul. {
 	position: abd
 	}
+	
+	
+.nav-wrap {
+	position:relative;
+	margin: 50px auto 0;
+	width: 1000px;
+	height: 50px;
+}
+
+.nav-wrap:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 0 ;
+	margin-top: -15px;
+	width: 6px;
+	height: 30px;
+	background-color: #0099FF;
+}
+.nav-wrap h2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width : 100px;
+	height: 30px;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.nav-wrap .nav-ul {
+	margin: 0 0 0 100px;
+	padding: 0;
+	width: 900px;
+	list-style: none;
+}
+
+.nav-li {
+	float: left;
+	width: 100px;
+	height: 50px;
+}
+
+.nav-li:hover a {
+	color: #0099FF;
+}
+
+.nav-li a {
+	display: block;
+	line-height: 50px;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+	color: #999;
+}
+
+/* 사용자 정의 스타일 */
+.dropdown-menu {
+    background-color: #f8f9fa; /* 배경색 */
+    border: none; /* 기본 테두리 제거 */
+    width: auto; /* 필요에 따라 너비 조절 */
+}
+
+.dropdown-menu .nav-ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown-menu .nav-li {
+    padding: 8px 20px;
+}
+
+.dropdown-menu .nav-li a {
+    text-decoration: none;
+    color: #333; /* 텍스트 색상 */
+    display: block;
+}
+
+.dropdown-menu .nav-li a:hover {
+    background-color: #cce5ff; /* 호버 색상 */
+    color: #0069d9; /* 호버 텍스트 색상 */
+}
+
 </style>
 </head>
+
 <body>
 <div class="schedule_container">
     <div class="us_header">
@@ -364,308 +440,142 @@
                         </button>
                         <button class="schedule_btn">
                             <img src="/assets/img/answer2_img02.png" alt="일정" class="us_img">일정
+    
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="us_fillter">
-        <div class="us_header_size">
-            <ul>
-                <button class="city_btn" onclick="toggleCityFilter()">지역</button>
+
+
+<div class="container mt-5">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            한국
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul class="nav-ul" id="koreaList">
+                <li class="nav-li"><a href="javascript:void(0);">서울</a></li>
+                <li class="nav-li"><a href="javascript:void(0);">부산</a></li>
+                <li class="nav-li"><a href="javascript:void(0);">제주</a></li>
             </ul>
-            <div class="city_fillter" id="koreanCities" style="display: none;">
-                <ul>
-                    <li>서울</li>
-                    <li>강원도</li>
-                    <li>제주</li>
-                    <li>부산</li>
-                    <li>경기도</li>
-                    <li>충청도</li>
-                    <li>경상도</li>
-                    <li>전라도</li>
-                    <li>울릉도</li>
-                </ul>
-            </div>
-            <button class="city_btn1" onclick="window.location.href ='write'" style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
         </div>
+    </div>
+</div>
+    
+    <div class="city_btn_wrap" style="text-align: right;">
+<button class="city_btn1" onclick="city_btn1()" style="cursor: pointer;">글쓰기</button>
+        </div>
+        
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
             <button class="fillter_btn">인기순</button>
         </div>
-    </div>
-        <section>
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">View options</a></div>
-                            </div>
-                        </div>
+        
+  <div class="row">
+    <c:forEach var="item" begin="0" end="19"> 
+        <div class="col-md-3 mb-4">
+            <div class="card box-shadow">
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <h5 class="fw-bolder">${result.list[item].title}</h5>
+                        <p>${result.list[item].writer}</p>
+                        <p>${result.list[item].regdate}</p>
+                        <p>${result.list[item].start_Date}</p>
+                        <p>${result.list[item].end_Date}</p>
+                        <p>${result.list[item].us_cnt}</p>
+                       <p id="us_num2">${result.list[item].us_num}</p>
                     </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $120.00 - $280.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="detail">Add to cart</a></div>
-                            </div>
-                        </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <input type="button" value="상세보기" class="btn btn-outline-dark mt-auto" id="detailButton">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </c:forEach>
+</div>
+
+       		 
+        </div>
+<form id="mForm" action="/us/list" method="POST">
+    <input type="hidden" id="pageNo" name="pageNo" value="" />
+</form>
+
 <div class="sc-73e2cff1-0 ehUQiC">
-	<button disabled="" class="sc-73e2cff1-1 fcWStM">
-		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-				<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-		</svg>
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-			<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
-		<button disabled="" class="sc-73e2cff1-1 fdmLWW">
-			<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
-<div class="sc-73e2cff1-2 ekMLCz">
-	<button class="sc-73e2cff1-3 bwuLmH">1</button>
-	<button class="sc-73e2cff1-3 bPLlTV">2</button>
-	<button class="sc-73e2cff1-3 bPLlTV">3</button>
-	<button class="sc-73e2cff1-3 bPLlTV">4</button>
-	<button class="sc-73e2cff1-3 bPLlTV">5</button>
+    <button disabled="" class="sc-73e2cff1-1 fcWStM">
+        <!-- 이전 버튼 SVG 아이콘 -->
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+        </svg>
+    </button>
+    <button disabled="" class="sc-73e2cff1-1 fdmLWW">
+        <!-- 다음 버튼 SVG 아이콘 -->
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+        </svg>
+    </button>
+
+    <!-- 페이지 이동 -->
+    <div class="sc-73e2cff1-2 ekMLCz">
+        <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
+    </div>
 </div>
-	<button class="sc-73e2cff1-1 fcPuDF">
-		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-			<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-		</svg>
-</button>
-<button class="sc-73e2cff1-1 fcPuDE">
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
-</div>
-</div>
+
 <script>
-function toggleCountry() {
-    var koreaDiv = document.getElementById("korea");
-    koreaDiv.innerHTML = "한국";
+function city_btn1() {
+    window.location.href = '/us/write';
 }
-function toggleCityFilter() {
-    var korea = document.getElementById("korea");
-    if (korea.style.display === "none") {
-        korea.style.display = "block"; // 보이도록 설정
-    } else {
-        korea.style.display = "none"; // 감추도록 설정
+
+    function jsPageNo(pageNo) {
+        document.getElementById("pageNo").value = pageNo;
+        document.getElementById("mForm").submit();
     }
-}
-</script>
-<script>
-document.querySelector(".schedule_btn").addEventListener("click", function () {
-    location.href = "/schedule/list";
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 이 부분에 버튼 클릭 시의 작업 등을 정의
-});
-     // 각 지역 클릭 시 이벤트
-    const regions = document.querySelectorAll('.region');
-    regions.forEach(region => {
-        region.addEventListener('click', function() {
-             const selectedRegion = this.textContent;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var scheduleBtn = document.querySelector(".schedule_btn");
+
+        if (scheduleBtn) {
+            scheduleBtn.addEventListener("click", function(event) {
+                location.href = "/schedule/list";
+            });
+        }
+    });
+
   
-            displaySelectedLocationInfo(selectedRegion);
-           regionList.classList.add('hidden');
-        });
-</script>
+    	document.getElementById('detailButton').addEventListener('click', function() {
+    	    const us_num2Element = document.getElementById('us_num2');
+    	    const us_num = us_num2Element.innerText;
+    	    console.log("us_num" + us_num);
+    	    const param = {
+    	        us_num: us_num
+    	    };
+    	    console.log("param" + param);
+    	    fetch("/us/Detail", {
+    	            method: "POST",
+    	            headers: {
+    	                "Content-Type": "application/json; charset=UTF-8",
+    	            },
+    	            body: JSON.stringify(param)
+    	        })
+    	        .then(response => response.json())
+    	        .then(json => {
+    	         
+    	        	location.href = "/us/Detail"; 
+    	        })
+    	        .catch(error => {
+    	            console.error("오류 발생:", error);
+    	        });
+    	});
+
+    
+</script> 
+
 </body>
 </html>

@@ -3,82 +3,75 @@
 
 <mapper namespace="com.team1.project.dao.UsDAO">
 
-<!--     <select id="usTop5" resultType="com.team1.project.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO">  -->
-<!--         <![CDATA[ -->
-<!--             SELECT  -->
-<!--                 usNum, cityName, writer, usCount, regDate, startDate, endDate, title, content -->
-<!--             FROM ( -->
-<!--                 SELECT  -->
-<!--                     ROW_NUMBER() OVER (ORDER BY Us.Usnum DESC) ROWNUM, Us.* -->
-<!--                 FROM US  -->
-<!--             ) SUB   -->
-<!--             WHERE ROWNUM <= 5 -->
-<!--         ]]> -->
-<!--     </select> -->
-
-
-<select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO" >
+<!-- 전체목록조회 -->
+<select id="getUsList" resultType="com.team1.project.dto.UsDTO">
+  <![CDATA[
     SELECT * FROM (
-        SELECT rownum nrow, b.* FROM (
-            SELECT
-                rownum AS usNum, null AS cityName, writer, usCount, regDate, null AS startDate, null AS endDate, title AS title, null AS content
-            FROM board a
-            <if test="searchTitle != '' and searchTitle != null">
-                WHERE title LIKE concat(concat('%', #{searchTitle}), '%')
-            </if>
-            START WITH pid = 0
-            CONNECT BY PRIOR boardid = pid
-            ORDER SIBLINGS BY boardid DESC
-        ) b
-        WHERE rownum &lt;= #{endNo}
-    ) O
-    WHERE nrow BETWEEN #{startNo} AND #{endNo}
+         SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+         FROM ( 
+             SELECT rownum AS us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+            FROM us a 
+            WHERE rownum BETWEEN #{startNo} AND #{endNo} 
+        )
+     ) WHERE nrow BETWEEN #{startNo} AND #{endNo} 
+  ]]> 
+</select> 
+
+<!-- 메인 탑5 노출 -->
+<select id="usTop5" resultType="com.team1.project.dto.UsDTO">
+	<![CDATA[
+ 		SELECT 
+ 			ROWNUM AS nrow, SUB.* 
+ 		FROM (  
+ 			SELECT  
+ 				US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
+ 			FROM us  
+ 			ORDER BY us_num DESC 
+ 		) SUB   
+ 		WHERE ROWNUM <= 5 
+ 	]]> 
 </select>
 
+<!-- 전체 게시글 수 -->
+<select id="totalCount" resultType="int">
+		select count(*)
+		from us
+ 	</select>
 
-    <insert id="insertUs">
-        INSERT INTO us (
-            US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT
-        ) VALUES (
-            #{usNum}, #{cityName}, #{writer}, #{usCount}, sysdate, #{startDate}, #{endDate}, #{title}, #{content}
-        )
-    </insert>
+<!-- 동행 글쓰기 -->
+    <insert id="writeInsert"> 
+    INSERT INTO us ( 
+        US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE , CONTENT
+    ) VALUES ( 
+        #{us_num}, #{city_name}, #{writer}, #{us_cnt},  #{start_Date}, #{end_Date}, #{title}, #{content} 
+    )
+</insert>
 
-<!--     <insert id="insertUsReply"> -->
-<!--         <selectKey keyProperty="usNum" resultType="int" order="BEFORE"> -->
-<!--             SELECT seq_board.nextval boardid FROM dual -->
-<!--         </selectKey> -->
-<!--         INSERT INTO board ( -->
-<!--             pid, boardid, title, contents, writer_uid, reg_date -->
-<!--         ) VALUES ( -->
-<!--             #{pid}, #{boardid}, #{title}, #{contents}, #{writer_uid}, sysdate -->
-<!--         ) -->
-<!--     </insert> -->
+<!-- 상세보기 -->
+    <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
+    SELECT 
+    US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
+    FROM US 
+    WHERE US_NUM = #{us_num}
+ </select> 
 
-<!--     <select id="detailUs" resultType="com.kosa.pro1.dto.UsDTO" parameterType="com.team1.project.dto.UsDTO"> -->
-<!--         SELECT -->
-<!--             US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT -->
-<!--         FROM US -->
-<!--         WHERE US_NUM = #{usNum} -->
-<!--     </select> -->
-
-<!--     <update id="usUpdate"> -->
-<!--         UPDATE US -->
-<!--         SET -->
-<!--         CITY_NAME = #{cityName}, -->
-<!--         WRITER = #{writer}, -->
-<!--         US_CNT = #{usCount}, -->
-<!--         REGDATE = sysdate, -->
-<!--         START_DATE = #{startDate}, -->
-<!--         END_DATE = #{endDate}, -->
-<!--         TITLE = #{title}, -->
-<!--         CONTENT = #{content} -->
-<!--         WHERE US_NUM = #{usNum} -->
-<!--     </update> -->
-
-<!--     <delete id="usDelete"> -->
-<!--         DELETE FROM US -->
-<!--         WHERE US_NUM = #{usNum} -->
-<!--     </delete> -->
-
+<!-- 수정하기 -->
+   <update id="usUpdate"> 
+    UPDATE US 
+    SET 
+    CITY_NAME = #{city_name},
+    WRITER = #{writer}, 
+    US_CNT = #{us_cnt}, 
+    START_DATE = #{start_Date}, 
+    END_DATE = #{end_Date}, 
+    TITLE = #{title}, 
+    CONTENT = #{content} 
+    WHERE US_NUM = #{us_num} 
+</update> 
+   
+<!-- 삭제하기  -->
+    <delete id="usDelete"> 
+         DELETE FROM US 
+         WHERE US_NUM = #{us_num} 
+     </delete> 
 </mapper>
