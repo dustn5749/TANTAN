@@ -37,7 +37,7 @@ public interface MemberDao {
 	 public int checkMember(MemberDTO member);
 	
 	 //회원리스트 가져오기
-	public List<MemberDTO> memberList() throws Exception;
+	 public List<MemberDTO> memberList();
 	
 	//비밀번호 암호화하기
 	public void encodingPwd(MemberDTO member); 
