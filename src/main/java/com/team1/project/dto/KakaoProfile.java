@@ -2,7 +2,9 @@ package com.team1.project.dto;
 
 
 import lombok.Data;
+import lombok.Getter;
 
+@Getter
 @Data
 public class KakaoProfile {
 	public Long id;
