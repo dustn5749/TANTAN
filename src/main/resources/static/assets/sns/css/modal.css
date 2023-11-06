@@ -1,0 +1,322 @@
+.btn_div {
+	position:  relative;
+	display: flex;
+}
+.btn_div > button {
+	border:  none;
+	background-color: transparent;
+	}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.commu-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #f8f9fd;
+}
+
+.narrow-modal {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 13px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 550px;
+  padding-top: 60px;
+}
+
+.modal-wrapper .narrow-modal .close-btn {
+  width: 40px;
+  height: 40px;
+  top: 10px;
+  right: 10px;
+}
+
+.friend-modal-hd {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.friend-modal-hd .search-inp {
+  border-radius: 60px;
+  background-color: #efefef;
+  border: 1px solid #efefef;
+  height: 45px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 15px;
+  padding-left: 55px;
+  background-image: url(../images/icon-search-gray.svg);
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: 20px 50%;
+  outline: none;
+}
+
+.friend-modal-hd .search-inp:focus {
+  border: 1px solid lightgrey;
+}
+
+.friend-modal-hd .btn {
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.friend-modal-hd .btn:hover {
+  background-color: #efefef;
+}
+
+.friend-modal-hd .btn .icon {
+  width: 30px;
+}
+
+.friend-modal-tabs {
+  display: flex;
+}
+
+.friend-modal-tab {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #e9ecef;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 600;
+  color: #a4a4a4;
+}
+
+.friend-modal-tab:hover {
+  background-color: #efefef91;
+}
+
+.friend-modal-tab:active {
+  transition: all 0s;
+  background-color: #efefef;
+}
+
+.friend-modal-tab.active {
+  border-bottom: 5px solid #1b6cc7;
+  color: #000;
+}
+.message-modal:active {
+	  background-color: #efefef91;
+	  display: none;
+}
+
+.message-modal.active {
+	  background-color: #efefef91;
+	  display: none;
+}
+.message-modal.active {
+  border-bottom: 5px solid #1b6cc7;
+  color: #000;
+}
+.person-item {
+  position: relative;
+  padding-left: 35px;
+}
+
+.person-item .mini-thumnail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.friend-list {
+  display: flex;
+  align-items: center;
+  padding: 18px 15px;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+}
+
+.friend-list:hover {
+  background-color: #efefef91;
+}
+
+.person-profile {
+  margin-left: 15px;
+}
+
+.person-profile .name-wrap .name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.person-profile .name-wrap {
+  margin-bottom: 6px;
+}
+
+.person-profile .intro-txt {
+  font-size: 14px;
+  color: #9b9b9b;
+}
+
+.friend-list .person-item {
+  width: 100%;
+}
+
+.friend-list .btn-wrap {
+  flex-shrink: 0;
+}
+
+.friend-list.status-active {
+  padding-left: 42px;
+  position: relative;
+}
+
+.friend-list.status-active:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1ad200;
+}
+
+.friend-modal-contents {
+  overflow: auto;
+  height: 600px;
+}
+
+.friend-modal-content {
+  display: none;
+}
+
+.friend-modal-content.active {
+  display: block;
+}
+
+.common-modal-ttl h3 {
+  font-size: 21px;
+  font-weight: 600;
+  padding: 5px 20px;
+}
+
+.chat-modal-content {
+  max-height: 600px;
+  overflow: auto;
+}
+
+.chat-modal-content .friend-list {
+  padding: 18px 25px;
+}
+
+.chat-modal-content .gray-txt-wrap {
+  padding: 10px 20px;
+}
+
+label.friend-list span {
+  display: inline-block;
+}
+
+label.friend-list .checkbox {
+  border-radius: 50%;
+  border: 2px solid #e9ecef;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: white;
+}
+
+.friend-list-checkbox {
+  display: none;
+}
+
+.friend-list-checkbox:checked+.friend-list .checkbox {
+  background-color: #5aa8ff;
+  border: 2px solid #5aa8ff;
+  background-image: url(../images/icon-check-white.svg);
+  background-size: 13px;
+  background-position: 50% 51%;
+  background-repeat: no-repeat;
+}
+
+.chat-modal-bottom {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.chat-modal-bottom .btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 100px;
+  font-weight: 400;
+  border: 1px solid #d1d6da;
+  background-color: white;
+  transition: all 0.3s;
+}
+
+.chat-modal-bottom .btn:hover {
+  background-color: rgb(245, 242, 242);
+}
+
+.chat-modal-bottom .btn:active {
+  background-color: white;
+  transition: all 0s;
+}
+
+.chat-modal-bottom .confirm-btn {
+  background-color: #ececed;
+  border-color: #ececed;
+  color: #969696;
+}
+
+.chat-modal-bottom .confirm-btn:hover {
+  background-color: #ececed;
+  border-color: #ececed;
+  color: #969696;
+}
+
+.chat-modal-bottom .confirm-btn.active {
+  background-color: #5aa8ff;
+  border-color: #5aa8ff;
+  color: white;
+  font-weight: 600;
+}
+
+.chat-modal-bottom .confirm-btn.active:hover {
+  background-color: #459cff;
+  border-color: #459cff;
+}
+
+.chat-modal-bottom .confirm-btn.active:active {
+  background-color: #5aa8ff;
+  border-color: #5aa8ff;
+  transition: all 0s;
+}
+
+.btn[disabled] {
+  cursor: default;
+}

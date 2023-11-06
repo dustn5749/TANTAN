@@ -81,6 +81,16 @@
 		<put-attribute name="title" value="sns프로필"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="message" extends="snsLayout">
+		<put-attribute name="title" value="메시지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/message.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="snsProfileModify" extends="snsLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfileModify.jsp"></put-attribute>
+	</definition>
 
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
@@ -95,9 +105,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminMain.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="adminUserList" extends="adminLayout">
+	<definition name="adminMemberList" extends="adminLayout">
 		<put-attribute name="title" value="관리자 회원관리 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminUserList.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminMemberList.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="adminUsList" extends="adminLayout">
@@ -125,6 +135,7 @@
 		<put-attribute name="title" value="메인 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
 	</definition>
+
 
 <!-- 	
 	<definition name="board/list" template="/WEB-INF/views/board/boardList.jsp">

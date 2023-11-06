@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,15 +15,16 @@
 		<div class="loginForm_inner">
 			<div class="login_table_div">
 				<!-- 로그인 정보가 들어가있는 table -->
+				<form name="loginForm" id="loginForm" method="post" action="<c:url value='/member/login.do'/>">
 				<table id="loginTb">
 					<tr>
 					<th colspan="2" id="table_title">로그인</th>
 					</tr>
 					<tr>
-						<td colspan="2" class="loginInput"><input type="text" placeholder="아이디를 입력하세요" name="member_id" id="member_id"></td>
+						<td colspan="2" class="loginInput"><input type="text" placeholder="아이디를 입력하세요" name="username" id="member_id"></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="loginInput"><input type="password" placeholder="비밀번호를 입력하세요" name="pwd" id="pwd"></td>
+						<td colspan="2" class="loginInput"><input type="password" placeholder="비밀번호를 입력하세요" name="password" id="pwd"></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="loginInput"><input type="submit" id="loginBtn" value="로그인"></td>
@@ -34,6 +37,7 @@
 						<td class="searchTd"><a id="search_area_pwd">비밀번호찾기</a></td>
 					</tr>
 				</table>
+				</form>
 				<hr>
 				<table id="oauthBtnTb">
 					<tr>
