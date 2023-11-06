@@ -8,26 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<<<<<<< HEAD
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
     <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
     <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
-=======
+
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
   <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
-<<<<<<< HEAD
     <script src="/assets/js/jquery-1.11.0.min.js"></script>
-=======
+
   <script src="/assets/js/jquery-3.6.1.min.js"></script>
   <link rel="stylesheet" href="/assets/sns/css/modal.css">
   
-  <script src="assets/js/jquery-3.6.1.min.js"></script>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
+  <script src="/assets/js/jquery-3.6.1.min.js"></script>
+
 </head>
 
 <body>
@@ -112,7 +109,6 @@
     </div>
     <!-- 메인 컨텐츠 영역 -->
     <div class="page-wrapper">
-<<<<<<< HEAD
         <!--상단 프로필 영역 -->
         <div class="page-container profile-page">
             <div class="profile-top">
@@ -121,7 +117,6 @@
                     <figure class="thumbnail">
                         <img src="/assets/sns/images/profile-img.jpeg" alt="">
                     </figure>
-=======
 	  <!--상단 프로필 영역 -->
       <div class="page-container profile-page">
         <div class="profile-top">
@@ -137,9 +132,7 @@
      			</c:otherwise>
      		</c:choose>
             </figure>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
-<<<<<<< HEAD
                     <div class="profile-info">
                         <div class="name">
                             <h2>
@@ -194,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-=======
+
             <div class="profile-info">
               <div class="name">
                 <h2>
@@ -224,9 +217,8 @@
                 <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
                 <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
               </div>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
             </div>
-<<<<<<< HEAD
+
             <!-- 프로필 영역 아래 부분 -->
             <div class="profile-bottom">
                 <div class="btn-wrap">
@@ -265,7 +257,7 @@
                         </div>
                     </c:forEach>
                 </div>
-=======
+
           </div>
           <!--상단 프로필 영역 중 오른쪽 부분 -->
           <div class="profile-top-right">
@@ -288,7 +280,6 @@
                   <dd>안녕하세요</dd>
                 </dl>
               </div>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
             </div>
         </div>
     </div>
