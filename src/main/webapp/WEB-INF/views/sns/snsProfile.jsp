@@ -1,5 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,18 +19,7 @@
     <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
     <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
 
-  <link rel="stylesheet" as="style" crossorigin
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
-  <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
-  <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
-
     <script src="/assets/js/jquery-1.11.0.min.js"></script>
-
-  <script src="/assets/js/jquery-3.6.1.min.js"></script>
-  <link rel="stylesheet" href="/assets/sns/css/modal.css">
-  
-  <script src="/assets/js/jquery-3.6.1.min.js"></script>
-
 </head>
 
 <body>
@@ -115,28 +110,20 @@
                 <!--상단 프로필 영역 중 왼쪽 부분 -->
                 <div class="profile-top-left">
                     <figure class="thumbnail">
-                        <img src="/assets/sns/images/profile-img.jpeg" alt="">
+		               <c:choose>
+			              <c:when test="${empty principal.user.profile_img}">
+			                 <img alt="" src="/assets/sns/images/profile-img-default.png">
+			              </c:when>
+			              <c:otherwise>
+			                 <img src="<c:out value='${principal.user.profile_img}'/>" alt="">                      
+			              </c:otherwise>
+		           </c:choose>
                     </figure>
-	  <!--상단 프로필 영역 -->
-      <div class="page-container profile-page">
-        <div class="profile-top">
-        <!--상단 프로필 영역 중 왼쪽 부분 -->
-          <div class="profile-top-left">
-            <figure class="thumbnail">
-     		<c:choose>
-     			<c:when test="${empty principal.user.profile_img}">
-     				<img alt="" src="/assets/sns/images/profile-img-default.png">
-     			</c:when>
-     			<c:otherwise>
-	              <img src="<c:out value='${principal.user.profile_img}'/>" alt="">             			
-     			</c:otherwise>
-     		</c:choose>
-            </figure>
 
                     <div class="profile-info">
                         <div class="name">
                             <h2>
-                                <span>choi_seung_hyun_tttop</span>
+                                <span>${principal.user.nickname}</span>
                                 <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
                             </h2>
                             <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
@@ -170,15 +157,15 @@
                         <div class="info03">
                             <dl>
                                 <dt>지역</dt>
-                                <dd>대구</dd>
+                                <dd>${principal.user.address}</dd>
                             </dl>
                             <dl>
                                 <dt>나이</dt>
-                                <dd>24세</dd>
+                                <dd>${principal.user.age}세</dd>
                             </dl>
                             <dl>
                                 <dt>성별</dt>
-                                <dd>남자</dd>
+                                 <dd>${principal.user.gender}</dd>
                             </dl>
                             <dl>
                                 <dt>소개글</dt>
@@ -187,38 +174,7 @@
                         </div>
                     </div>
                 </div>
-
-            <div class="profile-info">
-              <div class="name">
-                <h2>
-                  <span>${principal.user.nickname}</span>
-                  <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
-                </h2>
-                <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
-              </div>
-              <div class="info01">
-                <dl>
-                  <dt>게시물</dt>
-                  <dd>88</dd>
-                </dl>
-                <dl>
-                  <dt>친구수</dt>
-                  <dd>105</dd>
-                </dl>
-                <dl>
-                  <dt>팔로우</dt>
-                  <dd>1</dd>
-                </dl>
-              </div>
-              <div class="info02">
-                <p>안녕하세요~</p>
-              </div>
-              <div class="btn-wrap">
-                <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
-              </div>
             </div>
-
             <!-- 프로필 영역 아래 부분 -->
             <div class="profile-bottom">
                 <div class="btn-wrap">
@@ -257,29 +213,6 @@
                         </div>
                     </c:forEach>
                 </div>
-
-          </div>
-          <!--상단 프로필 영역 중 오른쪽 부분 -->
-          <div class="profile-top-right">
-            <div class="profile-info">
-              <div class="info03">
-                <dl>
-                  <dt>지역</dt>
-                  <dd>${principal.user.address}</dd>
-                </dl>
-                <dl>
-                  <dt>나이</dt>
-                  <dd>${principal.user.age}세</dd>
-                </dl>
-                <dl>
-                  <dt>성별</dt>
-                  <dd>${principal.user.gender}</dd>
-                </dl>
-                <dl>
-                  <dt>소개글</dt>
-                  <dd>안녕하세요</dd>
-                </dl>
-              </div>
             </div>
         </div>
     </div>
