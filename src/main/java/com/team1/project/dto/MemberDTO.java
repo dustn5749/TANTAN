@@ -22,7 +22,9 @@ public class MemberDTO {
 	private String email;	
 	private String address;	
 	private int age;		
-	private String gender;	
+	private String gender;
+	private String nickname;
+//	private String introduce;
 	
 	//카카오 인증에 대한 필드
 	private String oauth;

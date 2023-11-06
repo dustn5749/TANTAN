@@ -767,6 +767,12 @@ a {
       // 검색 입력창 초기화
       $('.chat-modal-content .search-inp').val('');
     }
+    
+    //마이페이지로 이동
+    
+    function openUserProfile(){
+    	location.href="/member/mypage.do"
+    }
   </script>
 
 </body>
