@@ -16,8 +16,4 @@ public class UsFileDTO {
 	  private String fileType;
 	  private Date regDate;
 	  private int fileNo;
-//	  private int boardNum;
-//	  private String fileNameOrg;
-//	  private String fileNameReal;
-//	  private String contentType;
 	}

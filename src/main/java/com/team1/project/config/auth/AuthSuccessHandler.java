@@ -30,6 +30,7 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     		, Authentication authentication //로그인한 사용자 정보가 있는 객체 
     		) throws IOException, ServletException {
         System.out.println("로그인에 성공했습니다.");
+
 		memberDao.updateMemberLastLogin(authentication.getName());
 		memberDao.loginCountClear(authentication.getName());
 		
