@@ -16,6 +16,7 @@ public class KakaoProfile {
 		public String nickname;
 		public String profile_image;
 		public String thumbnail_image;
+		 
 	}
 	
 	@Data
@@ -29,6 +30,12 @@ public class KakaoProfile {
 		public String email;
 		public boolean profile_nickname_needs_agreement;
 		public boolean profile_image_needs_agreement;
+		public boolean has_age_range;
+		public boolean age_range_needs_agreement;
+		public String age_range;
+		public boolean has_gender;
+		public boolean gender_needs_agreement;
+		public String gender;
 	}
 	
 	@Data

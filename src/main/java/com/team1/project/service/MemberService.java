@@ -19,15 +19,15 @@ public class MemberService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	// 일반 로그인하기
-	public boolean login(MemberDTO member) {
-		System.out.println("memberService.login(member)");
-		MemberDTO loginmember = memberDao.login(member);
-		boolean result = loginmember.getPwd().equals(member.getPwd());
-		System.out.println("result = " + result);
-		return result;
-	}
-	
+//	// 일반 로그인하기
+//	public boolean login(MemberDTO member) {
+//		System.out.println("memberService.login(member)");
+//		MemberDTO loginmember = memberDao.login(member);
+//		boolean result = loginmember.getPwd().equals(member.getPwd());
+//		System.out.println("result = " + result);
+//		return result;
+//	}
+//	
 	// 회원가입하기
 	public void insertMember(MemberDTO member) throws Exception{
 		System.out.println("memberService.insertMember(member)");
@@ -58,6 +58,19 @@ public class MemberService {
 		}
 	}
 	
+	// 기존 회원인지 체크하기
+	public boolean checkMember(MemberDTO member) {
+		System.out.println("memberserviec.checkMeber. 기존 회원인지 체크하기");
+		return memberDao.checkMember(member) != 0;
+	}
+	
+	//비밀번호 암호화해서 저장하기
+	public void encodingPwd(MemberDTO member)  {
+		memberDao.encodingPwd(member);
+	}
+	
+	
+	// 회원 리스트 가져오기
 	public List<MemberDTO> memberList() throws Exception{
 		
 		List<MemberDTO> memberList = Collections.emptyList();

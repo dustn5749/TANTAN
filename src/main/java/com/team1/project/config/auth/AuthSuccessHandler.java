@@ -13,12 +13,15 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import com.team1.project.dao.MemberDao;
+import com.team1.project.dto.MemberDTO;
 
 @Component
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler { 
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	
 	
 	@Override
     public void onAuthenticationSuccess(
@@ -31,8 +34,10 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		memberDao.loginCountClear(authentication.getName());
 		
 		System.out.println("authentication ->" + authentication);
+		System.out.println("success.member ->" + authentication.getName());
 		
         setDefaultTargetUrl("/");
+        
         
         super.onAuthenticationSuccess(request, response, authentication);
     }

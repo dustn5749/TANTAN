@@ -71,27 +71,6 @@
 	    <put-attribute name="body" value="/WEB-INF/views/review/reviewMain.jsp"></put-attribute>
 	</definition>
 
-	<definition name="snsLayout" template="/WEB-INF/views/snsIndex.jsp">
-		<put-attribute name="title" value="snsIndex페이지"></put-attribute>
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body" value=""></put-attribute>
-	</definition>
-	
-	<definition name="snsProfile" extends="snsLayout">
-		<put-attribute name="title" value="sns프로필"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
-	</definition>
-	
-	<definition name="message" extends="snsLayout">
-		<put-attribute name="title" value="메시지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/sns/message.jsp"></put-attribute>
-	</definition>
-	
-	<definition name="snsProfileModify" extends="snsLayout">
-		<put-attribute name="title" value="메인 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfileModify.jsp"></put-attribute>
-	</definition>
-
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>

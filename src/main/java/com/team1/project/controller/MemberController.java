@@ -8,8 +8,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,16 +73,18 @@ public class MemberController {
 		return "joinComplete";
 	}
 	
-	// 일반 로그인하기
-//	@ResponseBody
-//	@RequestMapping("/login.do")
-//	public Map<String, Object> login(@RequestBody MemberDTO member) {
-//		System.out.println("memberController.login(memberDTO)");
-//		System.out.println("member = " + member);
-//		Map<String, Object> result = new HashMap<>();
-//		result.put("result", memberservice.login(member));
-//		return result;
-//	}
+	/*
+	 * //일반 로그인하기
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("/nonKakao/login.do") public Map<String, Object>
+	 * login(@RequestBody MemberDTO member, HttpSession session) {
+	 * System.out.println("memberController.nonKakao.login(memberDTO)");
+	 * System.out.println("member = " + member); Map<String, Object> result = new
+	 * HashMap<>(); result.put("result", memberservice.login(member));
+	 * session.setAttribute("loginMember", member.getMember_id()); return result; }
+	 */
 	
 	// 카카오 인가 코드 받기
 	@RequestMapping("/kakao/callback")
@@ -147,18 +154,30 @@ public class MemberController {
 		// User 오브젝트 : username, password, email
 		System.out.println("카카오 아이디(번호) : "+kakaoProfile.getId());
 		System.out.println("카카오 이메일 : "+kakaoProfile.getKakao_account().getEmail());
-	
+		
+		Timestamp timeStamp = Timestamp.valueOf(LocalDateTime.now());
 		MemberDTO kakaoMember = MemberDTO.builder()
 				.member_id( String.valueOf(kakaoProfile.getId()))
+				.name(kakaoProfile.getProperties().getNickname())
 				.email(kakaoProfile.getKakao_account().getEmail())
+				.last_login_time(timeStamp)
 				.roles("USER")
 				.oauth("kakao")
+				.phone("")
 				.pwd("")
+				.gender("")
+				.profile_img(kakaoProfile.getProperties().getProfile_image())
+				.accountExpired("N")
+				.accountLocked("N")
 				.build();
 		System.out.println("kakaoMember" + kakaoMember);
 		
 		try {
-			memberservice.insertMember(kakaoMember);
+			// 기존회원인지 체크하기
+			if(!memberservice.checkMember(kakaoMember)) {
+				memberservice.insertMember(kakaoMember);				 
+			}
+			
 			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행함");
 		}catch (Exception e) {
 			System.out.println("기존 회원 가입된 경우 다음으로 진행");

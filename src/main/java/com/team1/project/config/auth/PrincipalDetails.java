@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.team1.project.dto.MemberDTO;
@@ -14,6 +15,10 @@ public class PrincipalDetails implements UserDetails {
     private static final long serialVersionUID = -951226953749557253L;
 	private MemberDTO user;
 
+	
+
+	
+	
     public PrincipalDetails(MemberDTO user) {
         this.user = user;
     }
@@ -29,7 +34,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user != null ? user.getEmail() : "";
+        return user != null ? user.getMember_id() : "";
     }
 
     @Override
@@ -51,6 +56,8 @@ public class PrincipalDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    
+    
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

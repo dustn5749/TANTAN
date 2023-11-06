@@ -1,5 +1,6 @@
 package com.team1.project.dto;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,9 @@ public class MemberDTO {
 	private String accountExpired;
 	private String accountLocked;
 	private int loginCnt;
-	private LocalDateTime lastLoginTime;
+	private Timestamp last_login_time;
+	private String profile_img;
+
 	
 	public boolean isEqualPwd(MemberDTO member) {
 		return pwd.equals(pwd);
