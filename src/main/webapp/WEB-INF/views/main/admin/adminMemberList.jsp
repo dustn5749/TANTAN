@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid.css">
-  <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid-theme.min.css">
+<!-- <link rel="stylesheet" href="./Guriddo_jqGrid_JS_5.4.0-Trial/css/ui.jqgrid-bootstrap-ui.css"> -->
+<!-- <link rel="stylesheet" href="./Guriddo_jqGrid_JS_5.4.0-Trial/css/ui.jqgrid-bootstrap.css"> -->
+<!-- <link rel="stylesheet" href="./Guriddo_jqGrid_JS_5.4.0-Trial/css/ui.jqgrid-bootstrap4.css"> -->
+<!-- <link rel="stylesheet" href="./Guriddo_jqGrid_JS_5.4.0-Trial/css/ui.jqgrid.css"> -->
+<!-- <link rel="stylesheet" href="./jquery-ui-1.12.1.custom/jquery-ui.css"> -->
+<!-- <link rel="stylesheet" href="./jquery-ui-1.12.1.custom/jquery-ui.structure.css"> -->
+<!-- <link rel="stylesheet" href="./jquery-ui-1.12.1.custom/jquery-ui.theme.css"> -->
+<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script> -->
 </head>
 <body>
 
@@ -31,40 +36,26 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+<!--     <section class="content"> -->
 <!--       <div class="card"> -->
-<!-- <!--         <div class="card-header"> --> -->
-<!-- <!--           <h3 class="card-title">회원관리</h3> --> -->
-<!-- <!--         </div> --> -->
-<!--         /.card-header -->
-<!--         <div class="card-body"> -->
-<!--           <div id="jsGrid1" style=text-align:center;> -->
-<!--           </div> -->
+<!--         <div class="card-header"> -->
+<!--           <h3 class="card-title">회원관리</h3> -->
 <!--         </div> -->
-<!--         /.card-body -->
+        <!-- /.card-header -->
+<!--         <div class="card-body"> -->
+          	<table id="grid1"></table>
+<!--           </div> -->
+          <div id="Pager"></div>
+<!--           <div id="pager" style="height: 35px;"></div> -->
+        <!-- /.card-body -->
 <!--       </div> -->
-      <!-- /.card -->
-      
-            <table>
-          <thead>
-                <tr>
-                    <th>제목 </th>
-                    <th>내용 </th>
-                </tr>
-          </thead>
-          <tbody>
-              <tr th:each="member : ${memberList}">
-                  <td th:text="${member.memberid}">1</td>
-<!--                   <td> -->
-<%--                       <a th:text="${member.name}" th:href="@{/board/view(id=${board.id})}"></a> --%>
-<!--                   </td> -->
-              </tr>
-          </tbody>
-      </table>
-    </section>
+<!--       /.card -->
+<!--     </section> -->
     <!-- /.content -->
   </div>
 
+<script>
 
+</script>
 </body>
 </html>

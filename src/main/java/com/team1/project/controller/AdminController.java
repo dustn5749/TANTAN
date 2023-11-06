@@ -1,11 +1,15 @@
 package com.team1.project.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.service.MemberService;
 
 
@@ -45,13 +49,33 @@ public class AdminController {
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
-	@GetMapping("/adminMemberList")
-	public String AdminMemberList(Model model) throws Exception {
-		System.out.println("memberList -> " + memberservice.memberList());
-		model.addAttribute("memberList", memberservice.memberList());
+	
+	@RequestMapping("/adminMemberList")
+	
+	public String AdminMemberList() {
 		
 		return "adminMemberList";
 	}
+	
+	@RequestMapping("/memberList")
+	@ResponseBody
+	public Map<String, Object> memberList() throws Exception {
+		
+		List<MemberDTO> memberList = memberservice.memberList();
+		System.out.println("controller.memberList -> " + memberservice.memberList());
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberList",memberList);
+		System.out.println("controller.map -> " + map);
+		return map;
+	}
+//	
+//	@GetMapping("/memberListData")
+//	public String allMemberList(Model model) throws Exception {
+//		
+//		model.addAttribute("memberListData", memberservice.memberList());
+//		
+//		return "adminMemberList";
+//	}
 	
 // 3. 관리자 동행관리 페이지
 // 관리자 페이지에서 동행관리로 이동
