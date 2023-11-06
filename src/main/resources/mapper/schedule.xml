@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.ScheduleDAO">
+
+<select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+    <![CDATA[
+        SELECT a.schedule_num AS schedule_Num, a.member_Id, a.city_Num, a.start_Num, a.end_Date, a.reg_Date, a.memo
+        FROM (
+            SELECT rownum AS rnum, a.schedule_num, a.member_Id, a.city_Num, a.start_Num, a.end_Date, a.reg_Date, a.delete_Yn, a.memo
+            FROM schedule a
+            WHERE rownum BETWEEN #{startNo} AND #{endNo}
+        ) a
+        JOIN city b ON a.city_Num = b.city_Num
+        WHERE a.rnum BETWEEN #{startNo} AND #{endNo}
+    ]]>
+</select>
+
+
+<!--메인 탑5 노출 -->
+<select id="usTop5" resultType="com.team1.project.dto.ScheduleDTO">
+	<![CDATA[
+		SELECT 
+			ROWNUM AS nrow, SUB.*
+		FROM ( 
+			SELECT 
+				US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT
+			FROM us 
+			ORDER BY us_num DESC
+		) SUB  
+		WHERE ROWNUM <= 5
+	]]>
+</select>
+
+<!-- 전체 게시글 수 -->
+<select id="totalCount" resultType="int">
+		select count(*)
+		from us
+	</select>
+
+<!-- 동행 글쓰기 -->
+    <insert id="writeInsert"> 
+    INSERT INTO us ( 
+        US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE , CONTENT
+    ) VALUES ( 
+        #{us_num}, #{city_name}, #{writer}, #{us_cnt},  #{start_Date}, #{end_Date}, #{title}, #{content} 
+    )
+</insert>
+
+<!-- 상세보기 -->
+    <select id="usDetail" resultType="com.team1.project.dto.ScheduleDTO">
+    SELECT 
+    US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
+    FROM US 
+    WHERE US_NUM = #{us_num}
+</select>
+
+<!-- 수정하기 -->
+   <update id="usUpdate"> 
+    UPDATE US 
+    SET 
+    CITY_NAME = #{city_name},
+    WRITER = #{writer}, 
+    US_CNT = #{us_cnt}, 
+    START_DATE = #{start_Date}, 
+    END_DATE = #{end_Date}, 
+    TITLE = #{title}, 
+    CONTENT = #{content} 
+    WHERE US_NUM = #{us_num} 
+</update>
+   
+<!--삭제하기 -->
+     <delete id="usDelete"> 
+         DELETE FROM US 
+         WHERE US_NUM = #{us_num} 
+     </delete> 
+     
+</mapper>
+ 

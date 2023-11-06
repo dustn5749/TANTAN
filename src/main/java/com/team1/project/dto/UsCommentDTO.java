@@ -12,12 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class CommentDTO {
-	
+public class UsCommentDTO {
 	private int commentid;
-	private int boardid;
-	private String contents;
-	private String writer_uid;
-	private Date reg_date;
-	private String delete_yn;
+	private int us_num;
+	private String content;
+	private String writer;
+	private Date regdate;
 }

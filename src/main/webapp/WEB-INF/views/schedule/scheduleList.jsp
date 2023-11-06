@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>일정 목록 조회</title>
 <style>
    .us_container{
       width: 80%;
@@ -129,8 +129,6 @@
     color : white;
    }
    .us_fillter {
-/*       display: inline-flex; */
-/*        width: 34%; */ */
        PADDING: 10PX; 
    }
  .fillter_btn_area {
@@ -150,24 +148,6 @@
       color : black;
    }
    
-/*    .city_fillter { */
-/*       text-align: right; */
-/*    } */
-   
-/*    .city_btn{ */
-/*    	position: absolute; */
-/* 	top: 100%; */
-/* 	left: 100px; */
-/*       width: 100px; */
-/*       height: 50px; */
-/*       border-radius: 10px; */
-/*       background-color: white; */
-      
-/*    } */
-   
-
-
-
 .city_btn {
     cursor: pointer;
     position: relative;
@@ -211,9 +191,7 @@
       .mainItem.active {
          display : block;
       }
-/*       .sub { */
-/*         display: none; */
-/*       } */
+
       .sub.active {
         display: block;
       }
@@ -402,259 +380,64 @@
             <button class="fillter_btn">조회순</button>
             <button class="fillter_btn">인기순</button>
         </div>
-    </div>
-
-
-        <section class="">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail"">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $120.00 - $280.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-				                    
-                    
-                    
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/schedule/detail">Add to cart</a></div>
-                            </div>
+      <div class="container">
+    <div class="row">
+        <c:forEach var="schedule" items="${scheduleList}">
+            <div class="col-md-3 mb-4">
+                <div class="card box-shadow">
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">${schedule.member_Id}</h5>
+                            <p>${schedule.schedule_Num}</p>
+                            <p>${schedule.city_Num}</p>
+                            <p>${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
+                            <p>${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                            <p>${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+                            <p>${schedule.memo != null ? schedule.memo : ""}</p>
+                            <button class="btn btn-outline-dark mt-auto" onclick="showDetails(${schedule.schedule_Num})">상세보기</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </c:forEach>
+    </div>
+</div>
+      
+
+   <form id="mForm" action="/schedule/list/method" method="POST">
+    <input type="hidden" id="pageNo" name="pageNo" value="" />
+</form>
    
+
 <div class="sc-73e2cff1-0 ehUQiC">
-	<button disabled="" class="sc-73e2cff1-1 fcWStM">
-		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-				<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-		</svg>
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-			<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
-		<button disabled="" class="sc-73e2cff1-1 fdmLWW">
-			<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
+    <button disabled="" class="sc-73e2cff1-1 fcWStM">
+        <!-- 이전 버튼 SVG 아이콘 -->
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+        </svg>
+    </button>
+    <button disabled="" class="sc-73e2cff1-1 fdmLWW">
+        <!-- 다음 버튼 SVG 아이콘 -->
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
+        </svg>
+    </button>
 
-<div class="sc-73e2cff1-2 ekMLCz">
-	<button class="sc-73e2cff1-3 bwuLmH">1</button>
-	<button class="sc-73e2cff1-3 bPLlTV">2</button>
-	<button class="sc-73e2cff1-3 bPLlTV">3</button>
-	<button class="sc-73e2cff1-3 bPLlTV">4</button>
-	<button class="sc-73e2cff1-3 bPLlTV">5</button>
-</div>
-	<button class="sc-73e2cff1-1 fcPuDF">
-		<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-			<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-		</svg>
-</button>
-
-<button class="sc-73e2cff1-1 fcPuDE">
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-	<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-		<path d="M2 2L8 8L2 14" stroke="#00CE7C" stroke-width="2" stroke-linecap="square"></path>
-	</svg>
-</button>
-</div>
+    <!-- 페이지 이동 -->
+    <div class="sc-73e2cff1-2 ekMLCz">
+        <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
+    </div>
 </div>
 
 <script>
-
-
-
+function jsPageNo(pageNo) {
+    document.getElementById("pageNo").value = pageNo;
+    document.getElementById("mForm").submit();
+}
 
 document.querySelector(".us_btn").addEventListener("click", function () {
 	location.href="/us/list";
@@ -687,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const createCompanionButton = document.getElementById('createCompanionButton');
 
   createCompanionButton.addEventListener('click', function() {
-    window.location.href = "detail.jsp"; 
+    window.location.href = "detail"; 
   });
 });
 
