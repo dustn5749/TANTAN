@@ -75,4 +75,14 @@
          DELETE FROM US 
          WHERE US_NUM = #{us_num} 
      </delete> 
+     
+     
+     <!-- 최신 동행 모집글 -->
+		<select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
+		    SELECT * FROM (
+		        SELECT * FROM us
+		        ORDER BY regdate DESC
+		    )
+		    WHERE ROWNUM &lt;= 3
+		</select>
 </mapper>

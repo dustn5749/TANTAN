@@ -13,15 +13,15 @@ $("#loginBtn").on("click", function(){
 	};
 	console.log(send)
 	$.ajax({
-		url : "/member/login.do",
+		url : "/schedule/writeInsert",
 	    type: 'POST',
-	    contentType:   "application/json; charset=UTF-8",
-	    data: JSON.stringify(send),
+	    contentType: "application/json; charset=UTF-8",
+	    data: JSON.stringify(param),
 	    dataType: "json",
 	    success: function (data) {
+			alert(data.message);
 			if(data.result){
-				alert("로그인 성공");
-				location.href="/main.do";
+				location.href="/schedule/list";
 			}
 		}
 	})

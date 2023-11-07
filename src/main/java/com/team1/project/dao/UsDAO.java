@@ -36,4 +36,7 @@ public interface UsDAO {
 
 	//답글 폼
 	public int reply(UsDTO us) throws Exception;
+
+	// 최신 동행 모집글 
+	public List<UsDTO> getUsRecentList();
 }

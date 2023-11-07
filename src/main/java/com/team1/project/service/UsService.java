@@ -72,6 +72,11 @@ public class UsService {
 	return result;
 	
 }
+	//최신 동행 리스트
+	public List<UsDTO> getUsRecentList() {
+		System.out.println("usService.getUsRecentList()");
+		return usDAO.getUsRecentList();
+	}
 
 
 //// 조회수 증가

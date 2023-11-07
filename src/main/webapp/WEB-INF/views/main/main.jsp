@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
     
 <!DOCTYPE html>
 <html>
@@ -147,7 +148,7 @@
 }
 
 
-#best_city_title {
+.best_city_title {
 	font-size: 50px  !important;
 	font-weight: bold !important;
 	font-family: 'Pretendard-Regular' !important;
@@ -246,6 +247,24 @@
 .col-12 .col-md-4 .p-5 .mt-3 {
 	width: 20% !important;
 }
+.row, .text-center,  .text-center > a{
+		font-family: 'Pretendard-Regular' !important;
+}
+
+/* 최신 동행 모집 title */
+.fw-bolder {
+	font-size: 23px !important;
+	height: 30px;
+	margin-bottom:10px;
+	font-weight: bold;
+	font-family: 'Pretendard-Regular' !important;
+	
+}
+/* 날짜 */
+.date {
+	font-size: 14px !important;
+	color : rgb(121, 121, 121);
+}
 </style>
 </head>
 <body>
@@ -315,7 +334,7 @@
 	<!-- best top5 지역 -->
 	
     <div class="best_top5_city">
-        <p id="best_city_title">BEST 여행지 TOP5</p>
+        <p class="best_city_title">BEST 여행지 TOP5</p>
         <div class="plus_div"><a class="plus_a">+더보기</a></div>
         <div class="best_top5_city_inner">
             <div class="case">
@@ -358,111 +377,38 @@
     <section class="container py-6">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">최신 동행 모집</h1>
+                <h1 class="best_city_title">최신 동행 모집</h1>
             </div>
         </div>
+        <!-- 최신 동행 모집 div -->
         <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
+         <c:forEach items="${usList}" var="item">
+        	 <div class="col-12 col-md-4 p-5 mt-3">
             	<div class="card-header" style=border-radius:5%;>
-            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
-            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
+            	<div class="row text-center" style=display:inline-block;><span id="writer">작성자</span> <span>${item.writer}</span></div>
+            	<div class="row text-center" style=display:inline-block;float:right;><span><img src="/assets/img/new.png" width="32px;"></span></div>
             	</div>
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="동행사진" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <h5 class="fw-bolder">${item.title}</h5>
                                     <!-- Product price-->
-                                    $40.00 - $80.00
+                                   <span class="date">${item.start_Date}</span> ~ <span  class="date">${item.end_Date}</span>
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
-<!--                 </div> -->
             </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-               	<div class="card-header" style=border-radius:5%;>
-	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
-	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
-            	</div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
-                                <!-- Product price-->
-                                $40.00 - $80.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <div class="card-header" style=border-radius:5%;>
-	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div>
-	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div>
-                </div>
-                	<div class="col mb-5">
-	                    <div class="card h-100">
-	                        <!-- Product image-->
-	                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-	                        <!-- Product details-->
-	                        <div class="card-body p-4">
-	                            <div class="text-center">
-	                                <!-- Product name-->
-	                                <h5 class="fw-bolder">Fancy Product</h5>
-	                                <!-- Product price-->
-	                                $40.00 - $80.00
-	                            </div>
-	                        </div>
-	                        <!-- Product actions-->
-	                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-	                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-	                        </div>
-	                    </div>
-                    </div>
-            </div>
-<!--             <div class="col-12 col-md-4 p-5 mt-3"> -->
-<!--             	<div class="card-header" style=border-radius:5%;> -->
-<!-- 	            	<div class="row text-center" style=display:inline-block;> <span>작성자</span></div> -->
-<!-- 	            	<div class="row text-center" style=display:inline-block;float:right;><span> 제목</span></div> -->
-<!--             	</div> -->
-<!--                 <div class="col mb-5"> -->
-<!--                     <div class="card h-100"> -->
-<!--                         Product image -->
-<!--                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /> -->
-<!--                         Product details -->
-<!--                         <div class="card-body p-4"> -->
-<!--                             <div class="text-center"> -->
-<!--                                 Product name -->
-<!--                                 <h5 class="fw-bolder">Fancy Product</h5> -->
-<!--                                 Product price -->
-<!--                                 $40.00 - $80.00 -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                         Product actions -->
-<!--                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent"> -->
-<!--                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
+        </c:forEach>
         </div>
     </section>
     <!-- End Categories of The Month -->

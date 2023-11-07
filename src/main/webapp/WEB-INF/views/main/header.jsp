@@ -194,20 +194,7 @@ a {
                         </div>
                     </div>
 					
-<!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
-<!--                         <i class="fa-solid fa-user-group"></i> -->
-<!--                     </a> -->
-<!--                     <a class="nav-icon position-relative text-decoration-none" href="message"> -->
-<!--                         <i class="fa-regular fa-message"></i> -->
-<!--                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span> -->
-<!--                     </a> -->
-<!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
-<!--                         <i class="fa-regular fa-bell"></i> -->
-<!--                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+20</span> -->
-<!--                     </a> -->
-<!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
-<!--                         <i class="fa-regular fa-user"></i>                     -->
-<!--                     </a> -->
+
 					
 					<!-- 버튼 영역에 대한 div  -->
 					<c:choose>
@@ -240,6 +227,7 @@ a {
 					</c:choose>
 
             </div>
+        </div>
         </div>
     </nav>
     </header>

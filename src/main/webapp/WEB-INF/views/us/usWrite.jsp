@@ -365,10 +365,10 @@
     	    };
     	  }
 
-    	  dropArea.addEventListener("dragenter", highlight, false);
+/*     	  dropArea.addEventListener("dragenter", highlight, false);
     	  dropArea.addEventListener("dragover", highlight, false);
     	  dropArea.addEventListener("dragleave", unhighlight, false);
-    	  dropArea.addEventListener("drop", handleDrop, false);
+    	  dropArea.addEventListener("drop", handleDrop, false); */
 
     	  return {
     	    handleFiles
@@ -403,6 +403,7 @@
         slider.oninput = function() {
             output.innerHTML = this.value;
         };
+        
         // Image preview functionality
         document.getElementById('file').onchange = function(evt) {
             var tgt = evt.target || window.event.srcElement,

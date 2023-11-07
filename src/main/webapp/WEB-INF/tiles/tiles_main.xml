@@ -60,6 +60,12 @@
 	    <put-attribute name="title" value="일정"></put-attribute>		
 	    <put-attribute name="body" value="/WEB-INF/views/schedule/scheduleWrite.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="write" extends="baseLayout">
+	    <put-attribute name="title" value="일정"></put-attribute>		
+	    <put-attribute name="body" value="/WEB-INF/views/schedule/write.jsp"></put-attribute>
+	</definition>
+	
 <!--일정상세보기 -->
 		<definition name="scheduleDetail" extends="baseLayout">
 	    <put-attribute name="title" value="일정"></put-attribute>		

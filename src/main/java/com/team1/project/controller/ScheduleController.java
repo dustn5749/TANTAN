@@ -21,6 +21,14 @@ public class ScheduleController {
     public String write(ScheduleDTO schedule) throws Exception {
     return "scheduleWrite";
    }
+    
+    //일정작성하기 test
+    @RequestMapping(value = "/write2")
+    public String write2(ScheduleDTO schedule) throws Exception {
+    return "write";
+   }
+    
+    
     //일정상세보기
     @RequestMapping(value = "/detail")
     public String detail(ScheduleDTO schedule) throws Exception {
