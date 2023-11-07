@@ -70,12 +70,6 @@
 	    <put-attribute name="title" value="게시판"></put-attribute>		
 	    <put-attribute name="body" value="/WEB-INF/views/review/reviewMain.jsp"></put-attribute>
 	</definition>
-	
-	
-	<definition name="map" extends="baseLayout">
-		<put-attribute name="title" value="메인 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
-	</definition>
 
 
 <!-- 마이페이지 -->
@@ -112,6 +106,7 @@
 <!-- sns 끝-->
 
 <!-- 관리자 페이지 시작 -->
+
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>
@@ -149,9 +144,12 @@
 		<put-attribute name="title" value="관리자 1:1 문의하기 페이지"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
 	</definition>
-<!-- 관리자 페이지 끝 -->
 
 
+	<definition name="map" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/board/map.jsp"></put-attribute>
+	</definition>
 
 
 <!-- 	

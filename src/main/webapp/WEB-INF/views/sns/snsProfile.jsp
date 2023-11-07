@@ -110,14 +110,15 @@
                 <!--상단 프로필 영역 중 왼쪽 부분 -->
                 <div class="profile-top-left">
                     <figure class="thumbnail">
-                     <c:choose>
-                       <c:when test="${empty principal.user.profile_img}">
-                          <img alt="" src="/assets/sns/images/profile-img-default.png">
-                       </c:when>
-                       <c:otherwise>
-                          <img src="<c:out value='${principal.user.profile_img}'/>" alt="">                      
-                       </c:otherwise>
-                 </c:choose>
+
+		               <c:choose>
+			              <c:when test="${empty principal.user.profile_img}">
+			                 <img alt="" src="/assets/sns/images/profile-img-default.png">
+			              </c:when>
+			              <c:otherwise>
+			                 <img src="<c:out value='${principal.user.profile_img}'/>" alt="">                      
+			              </c:otherwise>
+		           </c:choose>
                     </figure>
 
                     <div class="profile-info">

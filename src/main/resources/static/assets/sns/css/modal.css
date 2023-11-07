@@ -120,19 +120,7 @@
   border-bottom: 5px solid #1b6cc7;
   color: #000;
 }
-.message-modal:active {
-	  background-color: #efefef91;
-	  display: none;
-}
 
-.message-modal.active {
-	  background-color: #efefef91;
-	  display: none;
-}
-.message-modal.active {
-  border-bottom: 5px solid #1b6cc7;
-  color: #000;
-}
 .person-item {
   position: relative;
   padding-left: 35px;

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
@@ -18,8 +17,8 @@
 
     <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
- 	<link rel="stylesheet" href="assets/css/profileReset.css">
- 	<link rel="stylesheet" href="assets/css/proflieStyle.css">
+ 	<link rel="stylesheet" href="/assets/css/profileReset.css">
+ 	<link rel="stylesheet" href="/assets/css/proflieStyle.css">
     
     <link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
     <link rel="shortcut icon" type="/image/x-icon" href="assets/img/favicon.ico">
