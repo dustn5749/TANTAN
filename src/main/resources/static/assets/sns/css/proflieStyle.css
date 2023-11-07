@@ -604,11 +604,6 @@ img {
   justify-content: flex-start;
 }
 
-.thumnail-ctrl-bar p {
-    text-align: left;
-}
-
-
 .lg-thumbnail-container {
   height: 100%;
 }
@@ -624,7 +619,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(90% - 60px);
+  height: calc(100% - 60px);
   background-color: black;
 }
 
@@ -642,20 +637,7 @@ img {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 270px;
-  padding: 0 10px;
-  gap: 5px;
-}
-
-.lg-thumbnail .thumnail-ctrl-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  height: 270px;
+  height: 60px;
   padding: 0 10px;
   gap: 5px;
 }

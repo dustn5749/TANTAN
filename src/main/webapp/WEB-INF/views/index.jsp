@@ -95,7 +95,7 @@ https://templatemo.com/tm-559-zay-shop
     <script type="text/javascript">
 	/* 토끼 눌렀을때 sns 페이지로 연동 */
 	$("#rabbit_img").on("click",function(){
-		location.href="/snsProfile";
+		location.href="/sns/profile";
 	})
 	
 	</script>
