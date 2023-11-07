@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -280,52 +282,22 @@
         <img src="/assets/img/sea.jpg" class="d-block w-100 h-100" alt="First Slide" >
         <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
            <div class="schedule_bar">
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">출발일</div>
-                <div class="schedule_menu_input"><input type="date" class="start_date"></div>
-            </div>
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">마감일</div>
-                <div class="schedule_menu_input"><input type="date" class="end_date"></div>
-            </div>
-            <div class="search_btn_div">
-            <input type="button" value="검색" class="search_button">
-            </div>
+          <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
         </div>
     </div>
     <div class="carousel-item">
         <img src="/assets/img/palace.jpg" class="d-block w-100 h-100" alt="Second Slide"   height="700px" >
         <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
            <div class="schedule_bar">
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">출발일</div>
-                <div class="schedule_menu_input"><input type="date" class="start_date"></div>
-            </div>
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">마감일</div>
-                <div class="schedule_menu_input">
-                <input type="date" class="end_date"></div>
-            </div>
-            <div class="search_btn_div">
-            <input type="button" value="검색" class="search_button">
-            </div>
+            <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
         </div>
     </div>
     <div class="carousel-item">
+    	
         <img src="/assets/img/boat.jpg" class="d-block w-100 h-100" alt="Third Slide"  height="700px">
         <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
            <div class="schedule_bar">
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">출발일</div>
-                <div class="schedule_menu_input"><input type="date" class="start_date"></div>
-            </div>
-            <div class="schedule_bar_inner">
-                <div class="schedule_menu">마감일</div>
-                <div class="schedule_menu_input"><input type="date" class="end_date"></div>
-            </div>
-            <div class="search_btn_div">
-            <input type="button" value="검색" class="search_button">
-            </div>
+            <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
         </div>
     </div>
 </div>

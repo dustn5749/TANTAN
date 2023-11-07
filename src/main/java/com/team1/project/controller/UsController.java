@@ -1,8 +1,11 @@
 package com.team1.project.controller;
 
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.UsService;
@@ -29,8 +33,11 @@ public class UsController {
 	private UsService usService;
 	
 	// 1. 동행 전체 목록 페이지
-	@GetMapping(value = "/list")
-	public String list(UsDTO us, Model model) throws Exception {
+	@RequestMapping(value = "/list")
+	public String list( UsDTO us, Model model) throws Exception {
+		System.out.println("uscontroller.list()");
+
+		System.out.println("us = " + us);
 		model.addAttribute("result", usService.usPageList(us));
 	return "usList"; //타일즈랑 리턴값이랑 동일해야함.
 	} 
@@ -107,6 +114,8 @@ public class UsController {
 	    }
 	    return result;
 	}
+
+	
 
  
 //	 @PostMapping("/comments/add")

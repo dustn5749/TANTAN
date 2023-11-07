@@ -20,10 +20,11 @@ public class UsService {
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
 		// 1. 전체 건수를 얻기
 		us.setTotalCount(usDAO.totalCount(us)); //여기서 전체 게시글 수를 불러와서 저장함.
+		
 		Map<String, Object> result = new HashMap<>();
 		try {
 		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회
-			result.put("us", us);
+		result.put("us", us);
 		} catch (Exception e) {
 			result.put("message", "서버 오류 발생");
 			e.printStackTrace();
