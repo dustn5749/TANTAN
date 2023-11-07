@@ -18,6 +18,9 @@ public interface ScheduleDAO {
 
 	// 동행 조회수증가
 	public int viewCount(int scheduleNum) throws Exception;
+
+	// 내 일정 정보 얻기
+	public List<ScheduleDTO> getMyScheduleList(String member_Id);
 	
 //	//2. 메인에 TOP5 출력하기
 //    public List<UsDTO> usTop5() throws Exception;

@@ -50,7 +50,7 @@
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
-    US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
+    	US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
     FROM US 
     WHERE US_NUM = #{us_num}
  </select> 

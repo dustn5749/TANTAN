@@ -44,4 +44,7 @@ public interface MemberDao {
 	
 	// 관리자리스트 가져오기
 	public List<MemberDTO> adminList();
+
+	// 회원 정보 수정하기
+	public boolean modify(MemberDTO member); 
 }

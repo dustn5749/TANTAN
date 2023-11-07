@@ -6,14 +6,19 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.net.http.HttpRequest;
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +31,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.OAuthToken;
+import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.MemberService;
+import com.team1.project.service.ScheduleService;
 import com.team1.project.config.auth.PrincipalDetails;
 import com.team1.project.dto.KakaoProfile;
 
@@ -43,6 +51,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberservice; 
+	
+	@Autowired
+	private ScheduleService scheduleservice;
 	
 	
 	// 로그인폼으로 연동
@@ -73,18 +84,11 @@ public class MemberController {
 		return "joinComplete";
 	}
 	
-	/*
-	 * //일반 로그인하기
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("/nonKakao/login.do") public Map<String, Object>
-	 * login(@RequestBody MemberDTO member, HttpSession session) {
-	 * System.out.println("memberController.nonKakao.login(memberDTO)");
-	 * System.out.println("member = " + member); Map<String, Object> result = new
-	 * HashMap<>(); result.put("result", memberservice.login(member));
-	 * session.setAttribute("loginMember", member.getMember_id()); return result; }
-	 */
+	// 마이페이지로 이동
+	@RequestMapping("/mypage.do")
+	public String mypage() {
+		return "mypage";
+	}
 	
 	// 카카오 인가 코드 받기
 	@RequestMapping("/kakao/callback")
@@ -199,6 +203,35 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	// 회원 정보 수정하기
+	@ResponseBody
+	@RequestMapping("/modify.do")
+	public Map<String, Object> modify(@RequestBody MemberDTO member){
+		System.out.println("membercontroller.modify()");
+		System.out.println("member = " + member);
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", memberservice.modify(member));
+		result.put("member", memberservice.findById(member.getMember_id()));
+		return result;
+	}
+	
+	//내 일정으로 가기
+	@RequestMapping("/mySchedule.do")
+	public ModelAndView  mySchedule(ModelAndView mv, HttpServletRequest request,
+							Principal principal) {
+	    System.out.println("membercontroller.mySchedule()");
+	    String viewPage = "mySchedule";
+	    if(principal != null) {
+	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
+	    	System.out.println("list = " + list);
+	    	request.setAttribute("scheduleList", list);	    	
+	    }
+	    
+		mv.setViewName(viewPage);
+	    return mv;
+	}
+	
 	
 
 }

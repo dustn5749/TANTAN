@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +28,13 @@
     font-weight: 700;
     font-style: normal;
 }
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
 /* header 메뉴바  */
 ul, li {
 	margin: 0;
@@ -100,12 +114,23 @@ ul, li {
  	
 }
 a {
-	cursor: pointer !important];
+	cursor: pointer !important;
 }
 .under_menu_inner {
 	justify-content: center;
 }
+ /* 관리자 페이지 버튼 */
+ .admin_btn {
+ 	font-size: 14px !important;
+ 	font-family: 'Pretendard-Regular' !important;
+ 	width: 100px;
+ 	height: 20px;
+ 	align-content: center;
+ 	align-items: center;
+ 	display: flex;
 
+ 
+ }
 </style>
 </head>
 <body>
@@ -117,6 +142,8 @@ a {
             <a class="navbar-brand text-success logo h1 align-self-center" href="/main.do">
                <img src="/assets/img/logo.png" width="150px">
             </a>
+            
+           
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -144,9 +171,18 @@ a {
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">고객센터</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/member/loginForm.do">로그인</a>
-                        </li>
+                        <!-- 로그인 유무 -->
+	                    <li class="nav-item">
+                        <c:choose>
+                        	  <c:when test="${empty principal}">
+                            <a class="nav-link" href="/member/loginForm.do">로그인 </a>
+                        	</c:when>
+                        	 <c:otherwise>
+                        	 <a class="nav-link" href="/logout.do">로그아웃</a>
+                        	</c:otherwise>
+                        </c:choose>
+                       </li>
+
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex" style="width: 200px">
@@ -172,9 +208,11 @@ a {
 <!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
 <!--                         <i class="fa-regular fa-user"></i>                     -->
 <!--                     </a> -->
-
+					
 					<!-- 버튼 영역에 대한 div  -->
-					<div class="btn_div">
+					<c:choose>
+					<c:when test="${!empty principal}">
+						<div class="btn_div">
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('friend-list-modal')">
 						    <i class="fa-solid fa-user-group"></i>
 						</button>
@@ -189,7 +227,18 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
+					<c:if test="${principal.user.roles=='Admin'}">
+						<a class="admin_btn" href="/admin">	
+							<img src="/assets/img/key.png" width="25px">관리자
+						</a>
+					</c:if>
 					</div>
+					</c:when>
+					 <c:otherwise>
+						<div class="btn_div"></div>
+					</c:otherwise>
+					</c:choose>
+
             </div>
         </div>
     </nav>
@@ -497,6 +546,202 @@ a {
     </div>
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
+	<!-- 메시지 모달 팝업창 -->
+<!-- 	<div id="message-modal" class="popCont">
+  	모달 오버레이
+    <div class="modal-overlay" onclick="cloaseModal('message-modal')"></div>
+      		  	
+	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
+        <img src="assets/sns/images/xBtn.png" alt="">
+      	</button>
+	  	
+		<div class="messageWrap">			
+			<section class="left">
+				<section class="messageArea">
+					<div class="top">
+						<span class="tit">Messages</span>
+						<button class="btn" onclick="openModal('chat-invite-modal')">
+				          <img src="assets/sns/images/message-circle-plus.svg" alt="초대 아이콘" class="icon">
+				        </button>						
+					</div>
+					<div class="searchWrap1">
+						<input type="text" placeholder="닉네임 검색" class="inputTxt">
+					</div>
+					<div class="messageList">
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv on">
+							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+						<div class="messageDiv">
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="sumBox">
+								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
+								<p class="msg">머해?</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="friendsList">
+					<div class="tab">
+						<button type="button" class="friend">
+						    <span class="friendIcon">
+						      <img src="assets/sns/images/friendBtn.png" alt="친구 아이콘" class="icon2">
+						    </span>
+						</button>
+					</div>
+					<div class="searchWrap2">
+						<input type="text" placeholder="닉네임 검색" class="inputTxt">
+					</div>
+					<div class="friendBox">
+						<div class="friendDiv">
+		
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="friendInfo">
+								<p class="nick">Gee</p>
+								<p class="txt">Toni Kroos</p>
+								<button type="button" class="folBtn">
+								    <span class="friendSendMsgBtn">
+								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
+								    </span>
+								</button>
+							</div>
+						</div>
+						<div class="friendDiv">
+							
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="friendInfo">
+								<p class="nick">Gee</p>
+								<p class="txt">Toni Kroos</p>
+								<button type="button" class="folBtn">
+								    <span class="friendSendMsgBtn">
+								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
+								    </span>
+								</button>
+							</div>
+						</div>
+						
+						<div class="friendDiv">
+							
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="friendInfo">
+								<p class="nick">Gee</p>
+								<p class="txt">Toni Kroos</p>
+								<button type="button" class="folBtn">
+								    <span class="friendSendMsgBtn">
+								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
+								    </span>
+								</button>
+							</div>
+						</div>
+						<div class="friendDiv">
+							
+							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+							<div class="friendInfo">
+								<p class="nick">Gee</p>
+								<p class="txt">Toni Kroos</p>
+								<button type="button" class="folBtn">
+								    <span class="friendSendMsgBtn">
+								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
+								    </span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+			
+			<section class="chatArea">
+				<div class="top">
+					
+					<h3>쥐</h3>
+					
+				</div>
+				<div class="chatWrap">
+					<div class="userinfo">
+						<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
+						<p class="nick">쥐</p>				
+					
+					</div>
+					<div class="chat">
+						<div class="rtm"><span>ㅎㅇ</span></div>
+						<div class="rtTime"><span>4:43 PMㆍSent</span></div>
+						<div class="rtm"><span>머해?</span></div>
+						<div class="rtTime"><span>4:44 PMㆍSent</span></div>
+						<div class="ltm"><span>그냥있어</span></div>
+						<div class="ltTime"><span>4:46 PMㆍreceived</span></div>
+					</div>
+				</div>
+
+			 	<div class="message-container">
+				  <button type="button" class="imgBtn">
+				    <span class="addImg">
+				      <img src="assets/sns/images/sendMessageBtn.png" alt="이미지 아이콘" class="icon">
+				    </span>
+				  </button>
+				  <div class="message-content">
+				    <div class="input_area">
+				      <textarea id="message_content" name="message_content" placeholder="내용을 입력하세요"></textarea>		
+				    </div>
+				  </div>
+				  <button type="button" class="sendMessageBtn">
+				    <span class="sendIco">
+				      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
+				    </span>
+				  </button>
+				</div>
+
+				
+			</section>
+			
+		</div>
+  	</div> -->
+  	<!--END 메시지 모달 팝업창 -->
+  	
 	
 	
 	
@@ -544,6 +789,12 @@ a {
 
       // 검색 입력창 초기화
       $('.chat-modal-content .search-inp').val('');
+    }
+    
+    //마이페이지로 이동
+    
+    function openUserProfile(){
+    	location.href="/member/mypage.do"
     }
   </script>
 

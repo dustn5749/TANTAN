@@ -72,6 +72,41 @@
 	</definition>
 
 
+<!-- 마이페이지 -->
+	<definition name="mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp"></put-attribute>
+	</definition>
+<!-- 내 일정  -->
+	<definition name="mySchedule" extends="baseLayout">
+		<put-attribute name="title" value="내일정"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/myschedule.jsp"></put-attribute>
+	</definition>
+<!-- sns 시작 -->
+<!-- 	<definition name="snsLayout" template="/WEB-INF/views/snsIndex.jsp">
+		<put-attribute name="title" value="snsIndex페이지"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+	</definition>
+	
+	<definition name="snsProfile" extends="snsLayout">
+		<put-attribute name="title" value="sns프로필"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfile.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="message" extends="snsLayout">
+		<put-attribute name="title" value="메시지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/message.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="snsProfileModify" extends="snsLayout">
+		<put-attribute name="title" value="메인 페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/sns/snsProfileModify.jsp"></put-attribute>
+	</definition> -->
+<!-- sns 끝-->
+
+<!-- 관리자 페이지 시작 -->
+
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/main/admin/adminHeader.jsp"></put-attribute>
