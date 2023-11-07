@@ -39,29 +39,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="admin/js/jquery-1.7.2.min.js"></script>
-<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" /> -->
- <!-- jqGrid CSS -->
-<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" /> -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" />
-<!-- <script src="admin/css/jquery-ui.css"></script> -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" />
-<!-- <link rel="styleshhet" href="admin/css/jquery-ui.min.css"> -->
-<script src="admin/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 
-<script src="admin/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
-
-<script src="admin/js/jquery.jqGrid.min.js" type="text/javascript"></script>
-<!-- Bootstrap 4 -->
-<script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="admin/js/adminlte.min.js"></script>
 <!-- jsGrid -->
 <!-- <script src="admin/plugins/jsgrid/demos/db.js"></script> -->
 <!-- <script src="admin/plugins/jsgrid/jsgrid.min.js"></script> -->
 <!-- AdminLTE for demo purposes -->
-<!-- <script src="admin/dist/js/demo.js"></script> -->
+<script src="admin/js/demo.js"></script>
 <!-- FLOT CHARTS -->
 <script src="admin/plugins/flot/jquery.flot.js"></script>
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
@@ -75,58 +58,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
 $('body').addClass('layout-fixed');
 </script>
 <script>
-$(document).ready(function () {
-    $.ajax({
-        url: '/memberList', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
-        dataType: 'json',
-        success: function (data) {
-            console.log(data); // 데이터가 제대로 수신되었는지 확인하기 위해 콘솔에 출력
+// $(document).ready(function () {
+//     $.ajax({
+//         url: '/memberList', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
+//         dataType: 'json',
+//         success: function (data) {
+//             console.log(data); // 데이터가 제대로 수신되었는지 확인하기 위해 콘솔에 출력
 
-            // jqGrid 설정
-            $("#grid1").jqGrid({
-                datatype: "local", // 데이터를 로컬에서 가져오기
-                data: data.memberList, // JSON 데이터 배열
-                colNames: ['아이디', '이름', '비밀번호', '전화번호', '이메일', '나이', '성별'],
-                colModel: [
-                    { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
-                    { label: '이름', name: 'name', index: 'name' },
-                    { label: '비밀번호', name: 'pwd', index: 'pwd' },
-                    { label: '전화번호', name: 'phone', index: 'phone' },
-                    { label: '이메일', name: 'email', index: 'email' },
-                    { label: '나이', name: 'age', index: 'age' },
-                    { label: '성별', name: 'gender', index: 'gender' }
-                ],
-                loadonce: true,
-                viewrecords: true,
-                height: 'auto',
-                autowidth:true,
-                rowNum: 30,
-                rowList: [30, 50, 100],
-                pager: '#Pager',
-                pgtext: 'Page {0} of {1}',
-                sortorder: 'desc',
-                caption: 'gridtest',
-                loadComplete: function (data) {
-                    var allRow = jQuery("#grid1").jqGrid('getGridParam', 'records');
-                    if (allRow == 0) {
-                        $("#grid1 > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
-                    }
+//             // jqGrid 설정
+//             $("#memberGrid").jqGrid({
+//                 datatype: "local", // 데이터를 로컬에서 가져오기
+//                 data: data.memberList, // JSON 데이터 배열
+//                 colNames: ['아이디', '이름', '비밀번호', '전화번호', '이메일', '나이', '성별'],
+//                 colModel: [
+//                     { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
+//                     { label: '이름', name: 'name', index: 'name' },
+//                     { label: '비밀번호', name: 'pwd', index: 'pwd' },
+//                     { label: '전화번호', name: 'phone', index: 'phone' },
+//                     { label: '이메일', name: 'email', index: 'email' },
+//                     { label: '나이', name: 'age', index: 'age' },
+//                     { label: '성별', name: 'gender', index: 'gender' }
+//                 ],
+//                 loadonce: true,
+//                 viewrecords: true,
+//                 height: 'auto',
+//                 autowidth:true,
+//                 rowNum: 30,
+//                 rowList: [30, 50, 100],
+//                 pager: '#Pager',
+//                 pgtext: 'Page {0} of {1}',
+//                 sortorder: 'desc',
+//                 caption: '회원리스트',
+//                 loadComplete: function (data) {
+//                     var allRow = jQuery("#grid1").jqGrid('getGridParam', 'records');
+//                     if (allRow == 0) {
+//                         $("#grid1 > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
+//                     }
 
-                    var idArray = $("#grid1").jqGrid('getDataIDs');
-                    for (var i = 0; i < idArray.length; i++) {
-                        var ret = $("#grid1").getRowData(idArray[i]);
-                        if (ret.finish_yn != "N") {
-                            $("#jqg_grid_" + idArray[i]).attr("disabled", true);
-                        }
-                    }
-                }
-            });
-        },
-        error: function (error) {
-            console.error("Error:", error);
-        }
-    });
-});
+//                     var idArray = $("#grid1").jqGrid('getDataIDs');
+//                     for (var i = 0; i < idArray.length; i++) {
+//                         var ret = $("#grid1").getRowData(idArray[i]);
+//                         if (ret.finish_yn != "N") {
+//                             $("#jqg_grid_" + idArray[i]).attr("disabled", true);
+//                         }
+//                     }
+//                 }
+//             });
+//         },
+//         error: function (error) {
+//             console.error("Error:", error);
+//         }
+//     });
+// });
 //   $(function () {
 //     $("#jsGrid1").jsGrid({
 //         height: "100%",

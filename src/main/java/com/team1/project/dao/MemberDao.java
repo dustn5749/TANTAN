@@ -40,7 +40,10 @@ public interface MemberDao {
 	 public List<MemberDTO> memberList();
 	
 	//비밀번호 암호화하기
-	public void encodingPwd(MemberDTO member);
+	public void encodingPwd(MemberDTO member); 
+	
+	// 관리자리스트 가져오기
+	public List<MemberDTO> adminList();
 
 	// 회원 정보 수정하기
 	public boolean modify(MemberDTO member); 

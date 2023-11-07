@@ -114,7 +114,14 @@
 	</update>
 
 	<!-- 관리자 -->
+	
+	<!-- 회원리스트 가져오기 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
 		SELECT * from member
+	</select>
+	
+	<!-- 관리자 계정 가져오기 -->
+	<select id="adminList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
+		SELECT * from member where roles='Admin'
 	</select>
 </mapper>

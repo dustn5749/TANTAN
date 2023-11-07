@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.MemberDTO;
+import com.team1.project.dto.UsDTO;
 import com.team1.project.service.MemberService;
+import com.team1.project.service.UsService;
 
 
 /*
@@ -39,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberservice; 
+	
+	@Autowired
+	private UsService usService;
 	
 	@RequestMapping("/admin")
 	public String Admin() {
@@ -84,10 +89,34 @@ public class AdminController {
 		return "adminUsList";
 	}
 	
+	@RequestMapping("/usListG")
+	@ResponseBody
+	public Map<String, Object> adminUsList() throws Exception {
+		
+		List<UsDTO> usList = usService.usList();
+		System.out.println("controller.adminUsList -> " + usService.usList());
+		Map<String, Object> map = new HashMap<>();
+		map.put("usList",usList);
+		System.out.println("controller.map -> " + map);
+		return map;
+	}
+	
 // 4. 관리자 계정관리 페이지
 	@RequestMapping("/adminManage")
 	public String AdminManage() {
 		return "adminManage";
+	}
+	
+	@RequestMapping("/adminList")
+	@ResponseBody
+	public Map<String, Object> adminMember() throws Exception {
+		
+		List<MemberDTO> adminList = memberservice.adminList();
+		System.out.println("controller.memberList -> " + memberservice.adminList());
+		Map<String, Object> map = new HashMap<>();
+		map.put("adminList",adminList);
+		System.out.println("controller.map -> " + map);
+		return map;
 	}
 	
 // 5. 관리자 공지사항 페이지

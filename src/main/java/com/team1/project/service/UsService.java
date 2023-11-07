@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.UsDAO;
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
 
 @Service
@@ -71,6 +72,8 @@ public class UsService {
 
 	return result;
 	
+	
+	
 }
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
@@ -78,6 +81,13 @@ public class UsService {
 		return usDAO.getUsRecentList();
 	}
 
+	// 관리자 리스트 가져오기
+	public List<UsDTO> usList() throws Exception{
+		
+		System.out.println("service.memberList -> " + usDAO.usList());
+		
+		return usDAO.usList();
+	}
 
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {

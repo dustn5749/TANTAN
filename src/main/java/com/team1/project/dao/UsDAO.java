@@ -39,4 +39,7 @@ public interface UsDAO {
 
 	// 최신 동행 모집글 
 	public List<UsDTO> getUsRecentList();
+	
+	//관리자 동행 리스트
+	public List<UsDTO> usList();
 }
