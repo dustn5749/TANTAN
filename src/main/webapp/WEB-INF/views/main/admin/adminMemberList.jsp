@@ -152,14 +152,14 @@ $(document).ready(function () {
                 caption: '회원리스트',
                 loadui: "enable",
                 loadComplete: function (data) {
-                    var allRow = jQuery("#grid1").jqGrid('getGridParam', 'records');
+                    var allRow = jQuery("#memberGrid").jqGrid('getGridParam', 'records');
                     if (allRow == 0) {
-                        $("#grid1 > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
+                        $("#memberGrid > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
                     }
 
-                    var idArray = $("#grid1").jqGrid('getDataIDs');
+                    var idArray = $("#memberGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < idArray.length; i++) {
-                        var ret = $("#grid1").getRowData(idArray[i]);
+                        var ret = $("#memberGrid").getRowData(idArray[i]);
                         if (ret.finish_yn != "N") {
                             $("#jqg_grid_" + idArray[i]).attr("disabled", true);
                         }

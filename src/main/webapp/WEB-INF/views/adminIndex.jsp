@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- <script src="admin/plugins/jsgrid/demos/db.js"></script> -->
 <!-- <script src="admin/plugins/jsgrid/jsgrid.min.js"></script> -->
 <!-- AdminLTE for demo purposes -->
-<!-- <script src="admin/dist/js/demo.js"></script> -->
+<script src="admin/js/demo.js"></script>
 <!-- FLOT CHARTS -->
 <script src="admin/plugins/flot/jquery.flot.js"></script>
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->

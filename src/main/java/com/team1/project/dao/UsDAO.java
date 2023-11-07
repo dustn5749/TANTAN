@@ -36,4 +36,7 @@ public interface UsDAO {
 
 	//답글 폼
 	public int reply(UsDTO us) throws Exception;
+	
+	//관리자 동행 리스트
+	public List<UsDTO> usList();
 }
