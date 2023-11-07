@@ -548,14 +548,16 @@ function city_btn1() {
         }
     });
 
-  
+  	/* 동행 상세보기 */
     	document.getElementById('detailButton').addEventListener('click', function() {
     	    const us_num2Element = document.getElementById('us_num2');
     	    const us_num = us_num2Element.innerText;
     	    console.log("us_num" + us_num);
+    	   
     	    const param = {
     	        us_num: us_num
     	    };
+    	    
     	    console.log("param" + param);
     	    fetch("/us/Detail", {
     	            method: "POST",

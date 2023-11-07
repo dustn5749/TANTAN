@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.UsService;
 
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
 @Controller
 @RequestMapping("/us")
 public class UsController {
@@ -54,11 +58,14 @@ public class UsController {
     }
 	
 	//글쓰기 상세보기 페이지 이동
+	
 	@RequestMapping(value = "/Detail" ) 
-	public String detailUs(@PathVariable  int us_num, Model model) throws Exception {
-		UsDTO us = usService.usDetail(us_num);
-		  System.out.println("동행 상세보기 컨트롤러");
-		  model.addAttribute("us", us);
+	public String detailUs(@RequestBody UsDTO us, Model model) throws Exception {
+		System.out.println("us = " + us);
+		log.info("");
+		UsDTO usDetail = usService.usDetail(us.getUs_num());
+		System.out.println("동행 상세보기 컨트롤러");
+		model.addAttribute("us", usDetail);
     return "usDetail";
     }
 	

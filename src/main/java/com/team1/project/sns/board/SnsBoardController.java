@@ -16,10 +16,10 @@ public class SnsBoardController {
 
     private final SnsBoardService service;
 
-    @GetMapping("/boards")
-    public List<SnsBoard> getList() {
-        return service.getList();
-    }
+//    @GetMapping("/boards")
+//    public List<SnsBoard> getList() {
+//        return service.getList();
+//    }
 
     // title과 content를 뺄까 아니면 임의로만 집어넣고 화면에서 출력은 안되게 할 지 고민중이라서 일단 아무렇게나 적어서 집어 넣음
     @GetMapping("/boards/insert/dummny")

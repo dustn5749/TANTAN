@@ -28,6 +28,13 @@
     font-weight: 700;
     font-style: normal;
 }
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
 /* header 메뉴바  */
 ul, li {
 	margin: 0;
@@ -107,12 +114,23 @@ ul, li {
  	
 }
 a {
-	cursor: pointer !important];
+	cursor: pointer !important;
 }
 .under_menu_inner {
 	justify-content: center;
 }
+ /* 관리자 페이지 버튼 */
+ .admin_btn {
+ 	font-size: 14px !important;
+ 	font-family: 'Pretendard-Regular' !important;
+ 	width: 100px;
+ 	height: 20px;
+ 	align-content: center;
+ 	align-items: center;
+ 	display: flex;
 
+ 
+ }
 </style>
 </head>
 <body>
@@ -190,7 +208,7 @@ a {
 <!--                     <a class="nav-icon position-relative text-decoration-none" href="#"> -->
 <!--                         <i class="fa-regular fa-user"></i>                     -->
 <!--                     </a> -->
-
+					
 					<!-- 버튼 영역에 대한 div  -->
 					<c:choose>
 					<c:when test="${!empty principal}">
@@ -209,6 +227,11 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
+					<c:if test="${principal.user.roles=='Admin'}">
+						<a class="admin_btn" href="/admin">	
+							<img src="/assets/img/key.png" width="25px">관리자
+						</a>
+					</c:if>
 					</div>
 					</c:when>
 					 <c:otherwise>

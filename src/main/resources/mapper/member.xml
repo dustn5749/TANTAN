@@ -95,13 +95,24 @@
 		where member_id=#{member_id}
 	</select>
 	
-	<!--   -->
+	<!-- 마지막 로그인 시간  -->
 	<update id="updateMemberLastLogin">
 		update member set 
 			last_login_time = SYSTIMESTAMP
 		where member_id = #{member_id}  
 	</update>
 	
+	<!-- 회원 정보 수정하기 -->
+	<update id="modify" >
+		UPDATE member
+		SET name=#{name},
+		    pwd=#{pwd},
+		    phone=#{phone},
+		    email=#{email},
+		    nickname=#{nickname}
+		WHERE member_id=#{member_id}
+	</update>
+
 	<!-- 관리자 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
 		SELECT * from member

@@ -79,6 +79,18 @@ public class MemberService {
 		
 		return memberList;
 	}
+
+	// 회원 정보 수정하기
+	public boolean modify(MemberDTO member) {
+		System.out.println("memberservice.modify()");
+		return memberDao.modify(member);
+	}
+
+	// 아이디로 멤버 찾기
+	public MemberDTO findById(String member_id) {
+		System.out.println("memberservice.findById()");
+		return memberDao.findById(member_id);
+	}
 	
 
 }

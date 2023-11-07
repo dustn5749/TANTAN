@@ -40,5 +40,8 @@ public interface MemberDao {
 	public List<MemberDTO> memberList() throws Exception;
 	
 	//비밀번호 암호화하기
-	public void encodingPwd(MemberDTO member); 
+	public void encodingPwd(MemberDTO member);
+
+	// 회원 정보 수정하기
+	public boolean modify(MemberDTO member); 
 }

@@ -26,7 +26,7 @@ public class SnsBoardPageController {
         log.info("id : {}", id);
 
         service.viewCountUp(id); // 'SnsBoardService'의 'viewCountUp' 메서드를 호출하여 게시물 조회수를 증가시킴        
-        request.setAttribute("board", service.get(id)); // 'SnsBoardService'를 사용하여 게시물을 가져온 후, 'board'라는 이름으로 요청에 추가
+    //    request.setAttribute("board", service.get(id)); // 'SnsBoardService'를 사용하여 게시물을 가져온 후, 'board'라는 이름으로 요청에 추가
         return "sns-detail"; 
     }
 
