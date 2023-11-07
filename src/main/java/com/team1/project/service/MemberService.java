@@ -73,11 +73,9 @@ public class MemberService {
 	// 회원 리스트 가져오기
 	public List<MemberDTO> memberList() throws Exception{
 		
-		List<MemberDTO> memberList = Collections.emptyList();
+		System.out.println("service.memberList -> " + memberDao.memberList());
 		
-		System.out.println("service.memberList -> " + memberList);
-		
-		return memberList;
+		return memberDao.memberList();
 	}
 	
 
