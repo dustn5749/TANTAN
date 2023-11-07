@@ -78,5 +78,13 @@ public class MemberService {
 		return memberDao.memberList();
 	}
 	
+	// 관리자 리스트 가져오기
+	public List<MemberDTO> adminList() throws Exception{
+		
+		System.out.println("service.memberList -> " + memberDao.adminList());
+		
+		return memberDao.adminList();
+	}
+	
 
 }

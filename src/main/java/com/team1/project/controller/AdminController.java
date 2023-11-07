@@ -90,6 +90,18 @@ public class AdminController {
 		return "adminManage";
 	}
 	
+	@RequestMapping("/adminList")
+	@ResponseBody
+	public Map<String, Object> adminMember() throws Exception {
+		
+		List<MemberDTO> adminList = memberservice.adminList();
+		System.out.println("controller.memberList -> " + memberservice.adminList());
+		Map<String, Object> map = new HashMap<>();
+		map.put("adminList",adminList);
+		System.out.println("controller.map -> " + map);
+		return map;
+	}
+	
 // 5. 관리자 공지사항 페이지
 // 관리자 페이지에서 공지사항으로 이동
 	@RequestMapping("/noticeList")

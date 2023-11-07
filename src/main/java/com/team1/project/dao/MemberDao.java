@@ -41,4 +41,7 @@ public interface MemberDao {
 	
 	//비밀번호 암호화하기
 	public void encodingPwd(MemberDTO member); 
+	
+	// 관리자리스트 가져오기
+	public List<MemberDTO> adminList();
 }

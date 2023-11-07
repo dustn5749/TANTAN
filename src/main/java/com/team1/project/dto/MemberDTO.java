@@ -48,10 +48,17 @@ public class MemberDTO {
 	}
 
 //	관리자
+	
+//	전체 회원 가져오기.
 	public List<MemberDTO> memberList(){
 		
 		System.out.println("DTO.memberList -> " + memberList());
 		
 		return memberList();
+	}
+//	관리자 계정 가져오기
+	public List<MemberDTO> adminList(){
+		
+		return adminList();
 	}
 }

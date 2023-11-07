@@ -9,6 +9,23 @@
 <body>
    <!-- Header -->
     <header>
+    <!-- jQuery -->
+<script src="admin/js/jquery-1.7.2.min.js"></script>
+<script src="admin/js/loading-overlay.min.js"></script>
+<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" /> -->
+ <!-- jqGrid CSS -->
+<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" /> -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" />
+<!-- <script src="admin/css/jquery-ui.css"></script> -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" />
+
+<script src="admin/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
+
+<script src="admin/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+<!-- Bootstrap 4 -->
+<script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="admin/js/adminlte.min.js"></script>
 	  <!-- Navbar -->
 	  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 	    <!-- Left navbar links -->
