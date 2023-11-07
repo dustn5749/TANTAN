@@ -78,6 +78,6 @@
 <!-- 관리자 -->
 <!-- 동행 리스트 가져오기 -->
 	<select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
-		SELECT * from us
+		SELECT * from us where reportcnt > 0
 	</select>
 </mapper>

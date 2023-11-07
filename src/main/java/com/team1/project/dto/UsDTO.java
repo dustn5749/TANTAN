@@ -25,6 +25,7 @@ public class UsDTO {
 	private int us_cnt; // 객체와 관련된 수치적 값 또는 카운트입니다.
 	private Date regdate; // 객체의 등록 날짜입니다.
 	private String writer; // 객체를 작성한 사람의 이름 또는 식별자입니다.
+	private int reportcnt;
 
 	//관리자 동행 목록 가져오기
 	public List<UsDTO> usList() {

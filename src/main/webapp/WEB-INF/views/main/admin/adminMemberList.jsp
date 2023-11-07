@@ -94,10 +94,12 @@
 <!--         </div> -->
         <!-- /.card-header -->
 <!--         <div class="card-body"> -->
+<div>
 			<div style="display:none;" id="myDiv" class="animate-bottom">
-	          	<table id="memberGrid"></table>
+	          	<table id="memberGrid" style=width:100%;></table>
 	<!--           </div> -->
 	          	<div id="Pager"></div>
+          	</div>
           	</div>
 <!--           <div id="pager" style="height: 35px;"></div> -->
         <!-- /.card-body -->
@@ -142,7 +144,7 @@ $(document).ready(function () {
                     { label: '성별', name: 'gender', index: 'gender' }
                 ],
                 viewrecords: true,
-                height: parent.$("#data_lst_area").height() - 55 - 29,
+                height: 690,
                 autowidth:true,
                 rowNum: 30,
                 rowList: [30, 50, 100],

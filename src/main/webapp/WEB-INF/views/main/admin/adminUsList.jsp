@@ -66,19 +66,23 @@ $(document).ready(function () {
 
             // jqGrid 설정
             $("#usGrid").jqGrid({
-                datatype: "local", // 데이터를 로컬에서 가져오기
+                datatype: "local", // 데이터를 서버에서 가져오기
                 data: data.usList, // JSON 데이터 배열
-                colNames: ['제목', '작성자', '등록일', '조회수', '여행지'],
+                colNames: ['제목', '작성자', '등록일', '조회수', '여행지', '신고 횟수', '삭제 여부', 'us_num'],
                 colModel: [
-                    { label: 'title', name: 'title',  index: 'title' },
+                    { label: 'title', name: 'title', index: 'title' },
                     { label: '작성자', name: 'writer', index: 'writer' },
                     { label: '등록일', name: 'regdate', index: 'regdate' },
                     { label: '조회수', name: 'us_cnt', index: 'us_cnt' },
-                    { label: '여행지', name: 'city_name', index: 'city_name' }
+                    { label: '여행지', name: 'city_name', index: 'city_name' },
+                    { label: '신고 횟수', name: 'reportcnt', index: 'reportcnt' },
+                    { name: 'deleteBtn', formatter: formatOpt1, sortable: false },
+                    { name:'us_num', index: 'us_num', hidden: true}
                 ],
                 viewrecords: true,
                 height: parent.$("#data_lst_area").height() - 55 - 29,
-                autowidth:true,
+                autowidth: true,
+                height: 690,
                 rowNum: 30,
                 rowList: [30, 50, 100],
                 pager: '#Pager',
@@ -101,12 +105,30 @@ $(document).ready(function () {
                     }
                 }
             });
+
+            function formatOpt1(cellvalue, options, rowObject) {
+                var str = "";
+                var row_id = options.rowId;
+                var us_num = rowObject.us_num;
+
+                str += "<div class=\"btn-group\">";
+                str += "<button type='button' class='btn btn-default btn-sm' onclick=\"javascript:fn_delete('" + row_id + "','" + us_num + "')\">삭제</button";
+                str += "</div>";
+
+                return str;
+            }
         },
         error: function (error) {
             console.error("Error:", error);
         }
     });
 });
+
+function fn_delete(rowid, us_num) {
+    var str = "rowid는 " + rowid + " / us_num은 " + us_num + "입니다.";
+    console.log("rowid는 " + rowid + " / us_num은 " + us_num + "입니다.");
+    $("#click_result").html(str);
+}
 </script>
 
 </body>
