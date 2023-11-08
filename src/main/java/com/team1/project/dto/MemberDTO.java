@@ -24,6 +24,8 @@ public class MemberDTO {
 	private int age;		
 	private String gender;
 	private String nickname;
+	private int page;
+    private int pageSize; // 페이지 크기
 //	private String introduce;
 	
 	//카카오 인증에 대한 필드

@@ -89,6 +89,9 @@ public class UsService {
 		return usDAO.usList();
 	}
 
+	public List<UsDTO> usReportList() throws Exception{
+		return usDAO.usReportList();
+	}
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

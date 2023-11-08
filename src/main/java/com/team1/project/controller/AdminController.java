@@ -101,6 +101,17 @@ public class AdminController {
 		return map;
 	}
 	
+	@RequestMapping("usReportList")
+	@ResponseBody
+	public Map<String,Object> usReportList() throws Exception{
+		
+		List<UsDTO> usReportList = usService.usReportList();
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("usReportList",usReportList);
+		return map;
+	}
+	
 // 4. 관리자 계정관리 페이지
 	@RequestMapping("/adminManage")
 	public String AdminManage() {

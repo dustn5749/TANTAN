@@ -42,4 +42,6 @@ public interface UsDAO {
 	
 	//관리자 동행 리스트
 	public List<UsDTO> usList();
+	
+	public List<UsDTO> usReportList();
 }

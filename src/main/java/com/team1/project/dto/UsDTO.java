@@ -31,6 +31,10 @@ public class UsDTO {
 	public List<UsDTO> usList() {
 		return usList();
 	}
+	
+	public List<UsDTO> usReportList() {
+		return usReportList();
+	}
 	private int level = 1;         // 게시글 레벨 (기본값 1)
 	private int pageNo = 1;        // 현재 페이지 번호
 	private int totalCount;        // 전체 게시글 건수

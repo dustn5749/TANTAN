@@ -69,7 +69,6 @@ $(document).ready(function () {
                 ],
                 loadonce: true,
                 viewrecords: true,
-//                 height: 'auto',
                 autowidth: true,
                 height: 690,
                 rowNum: 30,

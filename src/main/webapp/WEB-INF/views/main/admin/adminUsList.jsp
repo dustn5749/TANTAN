@@ -80,7 +80,6 @@ $(document).ready(function () {
                     { name:'us_num', index: 'us_num', hidden: true}
                 ],
                 viewrecords: true,
-                height: parent.$("#data_lst_area").height() - 55 - 29,
                 autowidth: true,
                 height: 690,
                 rowNum: 30,

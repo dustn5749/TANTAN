@@ -415,26 +415,42 @@ border:1px solid black;
      * ---------
      */
 
-    var bar_data = {
-      data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
-      bars: { show: true }
-    }
-    $.plot('#bar-chart', [bar_data], {
-      grid  : {
-        borderWidth: 1,
-        borderColor: '#f3f3f3',
-        tickColor  : '#f3f3f3'
-      },
-      series: {
+     const usReportList = [
+    	  { regdate: '2023-11-06', reportcnt: 5 },
+    	  { regdate: '2023-11-07', reportcnt: 8 },
+    	  // 다른 데이터...
+    	];
+     
+  // X축 레이블을 추출합니다.
+     const labels = usReportList.map(item => item.regdate);
+
+     // Y축 데이터를 추출합니다.
+     const dataPoints = usReportList.map(item => item.reportcnt);
+
+     var bar_data = {
+       data: [dataPoints], // Y축 데이터를 설정합니다.
+       bars: { show: true }
+     };
+
+     // 그래프를 그립니다.
+     $.plot('#bar-chart', [bar_data], {
+       grid: {
+         borderWidth: 1,
+         borderColor: '#f3f3f3',
+         tickColor: '#f3f3f3'
+       },
+       series: {
          bars: {
-          show: true, barWidth: 0.5, align: 'center',
-        },
-      },
-      colors: ['#3c8dbc'],
-      xaxis : {
-        ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June']]
-      }
-    })
+           show: true,
+           barWidth: 0.5,
+           align: 'center'
+         },
+       },
+       colors: ['#3c8dbc'],
+       xaxis: {
+         ticks: labels // X축 레이블을 설정합니다.
+       },
+     });
     /* END BAR CHART */
 
   })
