@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri= "http://java.sun.com/jsp/jstl/functions" %>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal"/>
@@ -212,7 +213,7 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
-					<c:if test="${principal.user.roles=='Admin'}">
+					<c:if test="${fn:endsWith(principal.user.roles, 'Admin')}">
 						<a class="admin_btn" href="/admin">	
 							<img src="/assets/img/key.png" width="25px">관리자
 						</a>

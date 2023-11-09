@@ -106,7 +106,7 @@ public class AdminController {
 	public Map<String,Object> usReportList() throws Exception{
 		
 		List<UsDTO> usReportList = usService.usReportList();
-		
+		System.out.println("usReportList -> " + usReportList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("usReportList",usReportList);
 		return map;

@@ -22,7 +22,6 @@ border:1px solid black;
 </style>
 </head>
 <body>
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
   <!-- Content Wrapper. Contains page content body 부분-->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -149,7 +148,8 @@ border:1px solid black;
 			                </h3>
 			              </div>
 			              <div class="card-body">
-			              	<div id="bar-chart" style="height: 300px;"></div>
+<!-- 			              	<div id="bar-chart" style="height: 300px;"></div> -->
+							<canvas id="stackedBarChart"></canvas>
 			              </div>
 			              <!-- /.card-body-->
             			</div>
@@ -341,27 +341,75 @@ border:1px solid black;
      * FULL WIDTH STATIC AREA CHART
      * -----------------
      */
-    var areaData = [[2, 88.0], [3, 93.3], [4, 102.0], [5, 108.5], [6, 115.7], [7, 115.6],
-      [8, 124.6], [9, 130.3], [10, 134.3], [11, 141.4], [12, 146.5], [13, 151.7], [14, 159.9],
-      [15, 165.4], [16, 167.8], [17, 168.7], [18, 169.5], [19, 168.0]]
-    $.plot('#area-chart', [areaData], {
-      grid  : {
-        borderWidth: 0
-      },
-      series: {
-        shadowSize: 0, // Drawing is faster without shadows
-        color     : '#00c0ef',
-        lines : {
-          fill: true //Converts the line chart to area chart
-        },
-      },
-      yaxis : {
-        show: false
-      },
-      xaxis : {
-        show: false
-      }
-    })
+     const url = "/usReportList";
+//      const labels = [];
+
+     $.ajax({
+       url: url,
+       method: "GET",
+       success: function (data) {
+    	   const dayData = data.usReportList.map(function (item) {
+    		    return item.reportcnt;
+    		  });
+    	   const labels = data.usReportList.map(function (item) {
+    		    return item.regdate; // 날짜 데이터를 가져와서 레이블로 사용
+    		  });
+         var stackedChartData = {
+			labels: labels,
+           datasets: [
+             {
+               label: "일자별 신고받은 게시글 수",
+               backgroundColor: "rgba(60,141,188,0.9)",
+               borderColor: "rgba(60,141,188,0.8)",
+               pointRadius: false,
+               pointColor: "#3b8bba",
+               pointStrokeColor: "rgba(60,141,188,1)",
+               pointHighlightFill: "#fff",
+               pointHighlightStroke: "rgba(60,141,188,1)",
+               data: dayData,
+             },
+           ],
+         };
+
+         var barChartData = $.extend(true, {}, stackedChartData);
+         var stackedBarChartCanvas = $("#stackedBarChart")
+           .get(0)
+           .getContext("2d");
+         var stackedBarChartData = $.extend(true, {}, barChartData);
+         var stackedBarChartOptions = {
+           responsive: true,
+           maintainAspectRatio: false,
+           scales: {
+        	   xAxes: [
+        		      {
+        		        stacked: true,
+        		        type: 'time', // X축 스케일을 시간형식으로 설정
+        		        time: {
+        		          unit: 'day', // 날짜 간격을 일(day)로 설정
+        		          displayFormats: {
+        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
+        		          }
+        		        }
+        		      }
+        		    ],
+             yAxes: [
+               {
+                 stacked: true,
+               },
+             ],
+           },
+         };
+         new Chart(stackedBarChartCanvas, {
+           type: "bar",
+           data: stackedBarChartData,
+           options: stackedBarChartOptions,
+         });
+       },
+       error: function (error) {
+         // Handle the error here
+         console.error("Error:", error);
+       },
+     });
 
     /* END AREA CHART */
 
