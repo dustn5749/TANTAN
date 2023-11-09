@@ -24,6 +24,8 @@ public class MemberDTO {
 	private int age;		
 	private String gender;
 	private String nickname;
+	private String status;
+	private int reportcnt;
 	private int page;
     private int pageSize; // 페이지 크기
 //	private String introduce;
