@@ -20,8 +20,8 @@ public class SnsProfileController {
     //sns main페이지로 이동
     @GetMapping("/sns/profile")
     public String goMainPage(HttpServletRequest request) {
-        request.setAttribute("boardList", snsBoardService.getListNotDelete());
-        request.setAttribute("", "");
+        log.info("{}" ,snsBoardService.getBoardList());
+        request.setAttribute("boardList", snsBoardService.getBoardList());
         request.setAttribute("", "");
         return "snsProfile";
     }
@@ -31,6 +31,5 @@ public class SnsProfileController {
     public String goModifyPage() {
         return "snsProfileModify";
     }
-
 
 }

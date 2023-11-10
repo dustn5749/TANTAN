@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class TantanDaeboProjectApplication {
-
+	
     public static void main(String[] args) {
         SpringApplication.run(TantanDaeboProjectApplication.class, args);
     }

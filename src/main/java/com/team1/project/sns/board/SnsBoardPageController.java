@@ -1,6 +1,7 @@
 package com.team1.project.sns.board;
 
 import com.team1.project.sns.board.service.SnsBoardService;
+import com.team1.project.sns.board.service.SnsLikeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SnsBoardPageController {
 
     private final SnsBoardService service;
+    private final SnsLikeService likeService;
 
     @GetMapping("/sns/board/detail/{id}")
     public String getBoardDetail(
@@ -26,8 +28,8 @@ public class SnsBoardPageController {
         log.info("id : {}", id);
 
         service.viewCountUp(id); // 'SnsBoardService'의 'viewCountUp' 메서드를 호출하여 게시물 조회수를 증가시킴        
-    //    request.setAttribute("board", service.get(id)); // 'SnsBoardService'를 사용하여 게시물을 가져온 후, 'board'라는 이름으로 요청에 추가
+        request.setAttribute("board", service.get(id)); // 'SnsBoardService'를 사용하여 게시물을 가져온 후, 'board'라는 이름으로 요청에 추가
+        request.setAttribute("boardLike", likeService.isLikeBoard(id,7800L)); // 'SnsBoardService'를 사용하여 게시물을 가져온 후, 'board'라는 이름으로 요청에 추가
         return "sns-detail"; 
     }
-
 }

@@ -29,6 +29,9 @@ public class SnsBoard {
     private Long memberId; //회원 아이디
 
     private Long viewCount; //조회수
+
+    private Long likeCount; //조회수
+    private Long commentCount; //조회수
     
     //JPA에서 1대다 매핑설정으로 게시물, 파일, 댓글 관계를 매핑하고 SQL쿼리 자동으로 생성하고 저장
     @OneToMany(mappedBy = "boardNum")

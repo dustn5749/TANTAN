@@ -1,5 +1,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<script>
+    $(function(){
+        let like = '${boardLike}';
+
+        if(like === 'true'){
+            $("#boardLike").show();
+            $("#boardUnLike").hide();
+        }
+    });
+    function fnLike(id){
+        $.ajax({
+            url: '/boards/like/'+id, // 컨트롤러 엔드포인트 URL로 변경해야함.
+            dataType: 'json',
+            success: function (data) {
+                $("#boardLike").show();
+                $("#boardUnLike").hide();
+            },
+            error: function (error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+</script>
 <!--게시글 상세보기 -->
 
 <!-- 모달 오버레이 -->
@@ -30,7 +54,7 @@
             <div class="thumnail-ctrl-bar">
                 <button type="button" class="icon-btn toggle-icon-btn">
                     <span class="txt-hidden">저장하기</span>
-                    <img src="<c:url value="/assets/sns/images/icon-bookmark.svg"/>" alt="" class="icon icon-inactive">
+                    <img src="<c:url value="/assets/sns/images/icon-bookmark.svg"/>" alt="" class="icon icon-inactive" >
                     <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt=""
                          class="icon icon-active">
                 </button>
@@ -412,8 +436,8 @@
                         <!-- 눌렀을 시 active 클래스 토글 -->
                         <button type="button" class="btn icon-btn toggle-icon-btn">
                             <span class="txt-hidden">좋아요</span>
-                            <img src="/assets/sns/images/icon-heart.svg" class="icon icon-inactive" alt="">
-                            <img src="/assets/sns/images/icon-heart-filled.svg" class="icon icon-active" alt="">
+                            <img id="boardUnLike" src="/assets/sns/images/icon-heart.svg" class="icon icon-inactive" alt="" onclick="fnLike(${board.boardNum})">
+                            <img id="boardLike" src="/assets/sns/images/icon-heart-filled.svg" class="icon icon-active" alt="" onclick="fnLike(${board.boardNum})">
                         </button>
                         <button type="button" class="btn icon-btn">
                             <span class="txt-hidden">댓글</span>
@@ -429,9 +453,8 @@
                         <!-- 눌렀을 시 active 클래스 토글 -->
                         <button type="button" class="btn icon-btn toggle-icon-btn">
                             <span class="txt-hidden">저장됨</span>
-                            <img src="/assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="">
-                            <img src="/assets/sns/images/icon-bookmark-filled.svg" class="icon icon-active"
-                                 alt="">
+                            <img src="/assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="" >
+                            <img src="/assets/sns/images/icon-bookmark-filled.svg" class="icon icon-active" alt="">
                         </button>
                     </div>
                 </div>
