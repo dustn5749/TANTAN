@@ -35,15 +35,15 @@ public class ScheduleService {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
 		schduleDAO.writeInsert(schedule);
 		schedule.getSchedule_Num();
-		for(int i =0;i<schedule.getMemoList().length;i++) {
-			DayDTO in = DayDTO.builder()
-								.schedule_Num(schedule.getSchedule_Num())
-								.dayDate(schedule.getStart_Num())
-								.place(schedule.getScheduleList()[i])
-								.memo(schedule.getMemoList()[i])
-								.build();
-			schduleDAO.day(in);
-		}
+//		for(int i =0;i<schedule.getMemoList().length;i++) {
+		DayDTO in = DayDTO.builder()
+							.schedule_Num(schedule.getSchedule_Num())
+							.dayDate(schedule.getStart_Num())
+							.place(schedule.getPlace())
+							.memo(schedule.getMemoList())
+							.build();
+		schduleDAO.day(in);
+//		}
 		return true;
 		}
 		

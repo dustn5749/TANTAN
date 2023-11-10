@@ -739,11 +739,14 @@
 		function sendDataToServer() {
 		    const scheduleItems = document.querySelectorAll(".schedule-item");
 		    const schedules = [];
+		    
 		    for (i=0;i<scheduleItems.length;i++) {
 		    	schedules.push({
-		    		day_date : scheduleItems[i].querySelector(".day_date").innerText,
+// 		    		day_date : scheduleItems[i].querySelector(".day_date").innerText,
 		    		place : scheduleItems[i].querySelector(".placeList").value,
-			    	memo_param : scheduleItems[i].querySelector(".memoList").value
+			    	memoList : scheduleItems[i].querySelector(".memoList").value,
+			    	start_Num : "2023-11-10",
+			    	end_Date: "2023-11-11"
 		    	});
 		    }
 

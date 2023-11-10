@@ -24,7 +24,7 @@ public interface ScheduleDAO {
 	public CityDTO selectCity(ScheduleDTO schedule);
 	
 	//day일정 추가
-	public DayDTO day(DayDTO dayDTO) throws Exception;
+	public int day(DayDTO dayDTO) throws Exception;
 	
 	
 //

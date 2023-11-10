@@ -32,25 +32,33 @@
 
 <!--일정 글등록 --> 
     <insert id="writeInsert">
-    <selectKey order="AFTER" keyProperty="schedule_Num" resultType="int">
+    <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
         select sc.nextval as schedule_Num from dual
     </selectKey> 
     insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE)
-    select
-        #{schedule_Num},
-        #{member_Id},
-        #{place} as DOE_NAME,
-        TO_DATE(#{day_date}, 'yyyy-MM-dd') as START_NUM,
-        TO_DATE(#{day_date}, 'yyyy-MM-dd') as END_DATE,
-        sysdate
-    from dual
-    where not exists (select 1 from schedule where SCHEDULE_NUM = #{schedule_Num})
+values(
+	#{schedule_Num},
+    #{member_Id},
+    #{place},
+    #{start_Num},
+    #{end_Date},
+    SYSDATE)
+<!--     #{schedule_Num}, -->
+<!--     #{member_Id}, -->
+<!--     DOE_NUM = #{place}, -->
+<!--     START_NUM = #{start_num}, -->
+<!--     END_DATE = #{end_date}, -->
+<!--     TO_DATE(#{scheduleList[0]}, 'yyyy-MM-dd') as START_NUM, -->
+<!--     TO_DATE(#{scheduleList[0]}, 'yyyy-MM-dd') as END_DATE, -->
+<!--     REG_DATE = sysdate -->
+<!-- from dual -->
+<!-- where not exists (select 1 from schedule where SCHEDULE_NUM = #{schedule_Num}) -->
 </insert>
      
     <!--day1 day2 만들기 --> 
 <insert id="day">
     INSERT INTO Day (day_id, schedule_Num, day_date, place, memo)
-    VALUES (#{dayId}, #{schedule_Num}, TO_DATE(#{dayDate}, 'yyyy-MM-dd'), #{place}, #{memo_param})
+    VALUES (sc.nextval, #{schedule_Num}, TO_DATE(#{dayDate}, 'yyyy-MM-dd'), #{place}, #{memo})
 </insert>
      
     <!--지역번호 만들기 --> 

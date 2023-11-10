@@ -3,6 +3,9 @@ package com.team1.project.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,9 +32,8 @@ public class ScheduleDTO {
 	    private String memo;
 	    private String img;
 	    private String place;
-	    private String []memoList;
-	    private String []scheduleList;
-	    
+	    private String memoList;
+//	    private String []scheduleList;
 
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호
