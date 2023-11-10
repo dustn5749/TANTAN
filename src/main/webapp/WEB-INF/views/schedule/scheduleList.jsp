@@ -381,23 +381,25 @@
             <button class="fillter_btn">인기순</button>
         </div>
       <div class="container">
+   
+   
     <div class="row">
-        <c:forEach var="schedule" items="${scheduleList}">
+        <c:forEach var="schedule" items="${result.scheduleList}">
             <div class="col-md-3 mb-4">
                 <div class="card box-shadow">
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">${schedule.member_Id}</h5>
                             <p>${schedule.schedule_Num}</p>
-                            <p>${schedule.city_Num}</p>
+                            <p>${schedule.doe_Name}</p>
+                               <p>${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                                <p>${schedule.end_Date != null ? schedule.end_Date : ""}</p>
                             <p>${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
-                            <p>${schedule.start_Num != null ? schedule.start_Num : ""}</p>
-                            <p>${schedule.end_Date != null ? schedule.end_Date : ""}</p>
                             <p>${schedule.memo != null ? schedule.memo : ""}</p>
-                            <button class="btn btn-outline-dark mt-auto" onclick="showDetails(${schedule.schedule_Num})">상세보기</button>
-                        </div>
-                    </div>
-                </div>
+                           <button value="${result.list[item].schedule_Num}" class="detailButton">상세보기 </button>
+                     </div>
+                     </div>
+                     </div>
             </div>
         </c:forEach>
     </div>
@@ -443,26 +445,26 @@ document.querySelector(".us_btn").addEventListener("click", function () {
 	location.href="/us/list";
 }
 )
-function toggleCityFilter() {
-    var filter = document.querySelector('.city_fillter_inner');
-    filter.style.display = filter.style.display === 'none' ? 'block' : 'none';
-}
+// function toggleCityFilter() {
+//     var filter = document.querySelector('.city_fillter_inner');
+//     filter.style.display = filter.style.display === 'none' ? 'block' : 'none';
+// }
 
-function toggleKorea() {
-    var koreaList = document.querySelector('.sub');
-    koreaList.style.display = koreaList.style.display === 'none' ? 'block' : 'none';
-}
-		document.querySelector(".city_btn").addEventListener("click", function () {
-    		console.log("click");
+// function toggleKorea() {
+//     var koreaList = document.querySelector('.sub');
+//     koreaList.style.display = koreaList.style.display === 'none' ? 'block' : 'none';
+// }
+// 		document.querySelector(".city_btn").addEventListener("click", function () {
+//     		console.log("click");
 
-   		 document.querySelector(".mainItem").style.display="flex";
-  		});
+//    		 document.querySelector(".mainItem").style.display="flex";
+//   		});
 
-		document.querySelector(".mainTxt").addEventListener("click", function () {
-    		console.log("click");
+// 		document.querySelector(".mainTxt").addEventListener("click", function () {
+//     		console.log("click");
 
-    	document.querySelector(".sub").classList.toggle("active");
-  			});
+//     	document.querySelector(".sub").classList.toggle("active");
+//   			});
 
    
 
@@ -474,65 +476,54 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-	  const selectRegion = document.querySelector('.select-region');
-	  const koreaButton = document.querySelector('.sc-9280f9a9-0');
+// document.addEventListener("DOMContentLoaded", function() {
+// 	  const selectRegion = document.querySelector('.select-region');
+// 	  const koreaButton = document.querySelector('.sc-9280f9a9-0');
 
-	  selectRegion.addEventListener('click', function() {
-	    koreaButton.style.display = 'block';
-	  });
-	});
+// 	  selectRegion.addEventListener('click', function() {
+// 	    koreaButton.style.display = 'block';
+// 	  });
+// 	});
 
-document.addEventListener('DOMContentLoaded', function() {
-	  const buttons = document.querySelectorAll('.sc-9280f9a9-0.gpXqPI');
+// document.addEventListener('DOMContentLoaded', function() {
+// 	  const buttons = document.querySelectorAll('.sc-9280f9a9-0.gpXqPI');
 
-	  buttons.forEach(button => {
-	    button.addEventListener('click', function() {
-	      const region = this.textContent.trim(); // 클릭한 버튼의 텍스트 가져오기
-	      const selectedRegion = document.querySelector('.selected-region');
-	      selectedRegion.textContent = region; // 오른쪽 박스에 텍스트 추가
-	    });
-	  });
-	});
+// 	  buttons.forEach(button => {
+// 	    button.addEventListener('click', function() {
+// 	      const region = this.textContent.trim(); // 클릭한 버튼의 텍스트 가져오기
+// 	      const selectedRegion = document.querySelector('.selected-region');
+// 	      selectedRegion.textContent = region; // 오른쪽 박스에 텍스트 추가
+// 	    });
+// 	  });
+// 	});
 	
-document.addEventListener('DOMContentLoaded', function() {
-    const selectRegion = document.querySelector('.select-region');
-    const regionList = document.querySelector('.region-list');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const selectRegion = document.querySelector('.select-region');
+//     const regionList = document.querySelector('.region-list');
 
-    selectRegion.addEventListener('click', function() {
-        regionList.classList.toggle('hidden');
-    });
+//     selectRegion.addEventListener('click', function() {
+//         regionList.classList.toggle('hidden');
+//     });
 
-    // 각 지역 클릭 시 이벤트
-    const regions = document.querySelectorAll('.region');
-    regions.forEach(region => {
-        region.addEventListener('click', function() {
-            const selectedRegion = this.textContent;
-            // 선택된 지역에 따른 도와 시 정보 표시
-            // 예를 들어, 선택된 지역을 가져와 API 호출 또는 저장된 데이터를 통해 정보를 업데이트할 수 있습니다.
-            displaySelectedLocationInfo(selectedRegion);
-            regionList.classList.add('hidden'); // 선택 시 목록 숨김
-        });
+//     // 각 지역 클릭 시 이벤트
+//     const regions = document.querySelectorAll('.region');
+//     regions.forEach(region => {
+//         region.addEventListener('click', function() {
+//             const selectedRegion = this.textContent;
+//             // 선택된 지역에 따른 도와 시 정보 표시
+//             // 예를 들어, 선택된 지역을 가져와 API 호출 또는 저장된 데이터를 통해 정보를 업데이트할 수 있습니다.
+//             displaySelectedLocationInfo(selectedRegion);
+//             regionList.classList.add('hidden'); // 선택 시 목록 숨김
+//         });
         
         
-    });
-});
-
-function displaySelectedLocationInfo(selectedRegion) {
-    const selectedLocationInfo = document.querySelector('.selected-location');
-    // 선택된 지역에 따라 정보를 업데이트
-    selectedLocationInfo.textContent = `선택된 지역: ${selectedRegion}`;
-}
-
+//     });
+// });
 
 
 </script>
       </div>
     </div>
-  </div>
-</main>
-
 </body>
-
 </html>
 
