@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.team1.project.dto.UsDTO;
+import com.team1.project.dto.UsFileDTO;
 
 @Mapper
 public interface UsDAO {
@@ -23,7 +24,7 @@ public interface UsDAO {
     public List<UsDTO> usTop5() throws Exception;
 		
     //동행 글쓰기
-	public boolean writeInsert(UsDTO us) throws Exception;
+	public int writeInsert(UsDTO us) throws Exception;
 
 	// 동행 상세보기
 	public UsDTO usDetail(int us_num) throws Exception;
@@ -42,4 +43,11 @@ public interface UsDAO {
 	
 	//관리자 동행 리스트
 	public List<UsDTO> usList();
+
+	//us_num의 번호 가져오기
+	public int nextUsNum();
+
+	//us에 fileno저장
+	public void updateFile(UsFileDTO file);
+
 }

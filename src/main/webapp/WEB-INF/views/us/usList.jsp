@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>동행 목록조회</title>
 <style>
+
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
    .us_container{
          width: 94%; 
         margin: 0 auto; 
@@ -422,7 +430,29 @@
     background-color: #cce5ff; /* 호버 색상 */
     color: #0069d9; /* 호버 텍스트 색상 */
 }
+/* 이미지 div */
+.img_div {
+	display: flex;
+}
+.us_content_img {
+	border: none;
+	box-shadow: 1px 1px 1px 1px rgb(237, 237, 237);
+	 width:95%;
+	 height:200px;
+}
+.fw-bolder {
+	font-size: 20px !important;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: bold;
+	font-family: 'Pretendard-Regular';
+	
+}
 
+div, input, p, span, button, h2 {
+	font-family: 'Pretendard-Regular' !important;
+	
+}
 </style>
 </head>
 
@@ -479,13 +509,19 @@
             <div class="card box-shadow">
                 <div class="card-body p-4">
                     <div class="text-center">
+                        <div class="img_div">
+                       		<img src="/file/displayImage.do?usFileNum=${result.list[item].fileNo}" alt="동행이미지 사진" class="us_content_img">
+                        </div>
                         <h5 class="fw-bolder">${result.list[item].title}</h5>
                         <p>${result.list[item].writer}</p>
-                        <p>${result.list[item].regdate}</p>
-                        <p>${result.list[item].start_Date}</p>
-                        <p>${result.list[item].end_Date}</p>
-                        <p>${result.list[item].us_cnt}</p>
-                       <p id="us_num2">${result.list[item].us_num}</p>
+                        <div class="us_day">
+                        	<p class="menu">모집기간</p>
+	                        <span id="start_day"> ${result.list[item].start_Date} ~ </span> 
+	                        <span id="end_day">${result.list[item].end_Date}</span>                        
+                        </div>
+                       <div class="us_cnt_div">
+                       		<span class="menu">모집 인원</span> : <span>${result.list[item].us_cnt} 명</span>
+                       </div>
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -527,7 +563,7 @@
         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
     </div>
 </div>
-
+</div>
 <script>
 function city_btn1() {
     window.location.href = '/us/write';

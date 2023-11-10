@@ -152,6 +152,25 @@
 		color: black;
 	}
 
+/* 회원 탈퇴 div */
+.delete_member_div {
+	display: flex;
+	font-family: 'Pretendard-Regular';
+}
+#deleteMember{
+	font-family: 'Pretendard-Regular';
+	color : grey;
+	font-size: 15px !important;
+	border: none;
+	border-radius: 7px;
+	background: rgb(0, 0, 0);
+	color : white;
+	height: 30px;
+}
+#deleteMember:hover {
+	color : black;
+	background: rgb(151, 151, 151);
+}
 </style>
 </head>
 <body>
@@ -212,11 +231,17 @@
 						<div class="member_menu">프로필 이미지</div>
 						<div class="member_value"><a href="${principal.user.profile_img}"id="profile_img">프로필 이미지</a> </div>
 					</div>
+					<div class="delete_member_div">
+						<div class="member_menu">계정탈퇴</div> 
+						<div class="member_value"><button id="deleteMember">회원 탈퇴하기</button> </div>
+					</div>
+					
 					<div class="content_member_menu">
 						<div class="btn_area">
 							<button id="modify_btn">수정하기</button>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -288,6 +313,29 @@
 
 		    }
 		});
+	
+	
+	/* 회원 탈퇴하기 */
+	$("#deleteMember").on("click", function(){
+		var password = prompt("정말 탈퇴하시겠습니까? 탈퇴하시려면 비밀번호를 입력해주세요")
+		send={ 
+			member_id: $("#member_id").val(),
+			pwd : password }
+		
+    	$.ajax({
+    		url : "/member/deleteMember",
+    	    type: 'POST',
+    	    contentType:   "application/json; charset=UTF-8",
+    	    data: JSON.stringify(send),
+    	    dataType: "json",
+    	    success: function (data) {
+    			if(data.result){
+    				alert("성공적으로 회원 탈퇴에 성공하였습니다.");
+    		     	location.href="/main";
+    			}
+    		}
+    	})
+	})
 	</script>
 </body>
 </html>

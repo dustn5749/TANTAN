@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import com.team1.project.dao.UsDAO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
+import com.team1.project.dto.UsFileDTO;
 
 @Service
 public class UsService {
 
 	@Autowired
 	private UsDAO usDAO;
+	
+	@Autowired
+	private UsFileService usfileService;
 	
 	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
@@ -40,8 +44,24 @@ public class UsService {
 	}
 	//동행 글쓰기
 	public boolean writeInsert(UsDTO us) throws Exception {
+		System.out.println("usService.writeInsert()");
 		System.out.println("us =" + us);
-	return usDAO.writeInsert(us);
+		boolean result = false;
+		usDAO.writeInsert(us);
+		int usNum = usDAO.nextUsNum();
+		System.out.println("usNum = " + usNum);
+		for(UsFileDTO file : us.getFile()) {
+			file.setUsNum(usNum);
+			file.setMemberId(us.getWriter());
+			System.out.println("file " + file);
+			int fileNo = usfileService.add(file);
+			file.setUsFileNum(fileNo);
+			usDAO.updateFile(file);
+		}
+		if(usNum != 0) {
+			result = true;
+		}
+	return result;
 	}
 	
 	// 동행 상세보기

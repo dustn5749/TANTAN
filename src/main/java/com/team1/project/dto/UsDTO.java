@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -26,6 +25,8 @@ public class UsDTO {
 	private Date regdate; // 객체의 등록 날짜입니다.
 	private String writer; // 객체를 작성한 사람의 이름 또는 식별자입니다.
 	private int reportcnt;
+	private int fileNo; //첨부파일 번호
+	private List<UsFileDTO> file;
 
 	//관리자 동행 목록 가져오기
 	public List<UsDTO> usList() {

@@ -40,14 +40,40 @@
  	</select>
 
 <!-- 동행 글쓰기 -->
-    <insert id="writeInsert"> 
-    INSERT INTO us ( 
-        US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE , CONTENT
-    ) VALUES ( 
-        #{us_num}, #{city_name}, #{writer}, #{us_cnt},  #{start_Date}, #{end_Date}, #{title}, #{content} 
+<insert id="writeInsert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
+    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
+        SELECT us_sq.nextval as us_num FROM dual
+    </selectKey>
+    insert into us (
+        us_num,
+        city_name,
+        writer,
+        us_cnt,
+        regdate,
+        start_date,
+        end_date,
+        title,
+        content,
+        status,
+        reportcnt
+    ) VALUES (
+        us_sq.nextval,
+        #{city_name},
+        #{writer},
+        #{us_cnt},
+        sysdate,
+        #{start_Date},
+        #{end_Date},
+        #{title},
+        #{content},
+        'N',
+        0
     )
 </insert>
 
+	<select id="nextUsNum" resultType="int">
+	    SELECT max(us_num) from us
+	</select>
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
@@ -90,4 +116,11 @@
 	<select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
 		SELECT * from us where reportcnt > 0
 	</select>
+	
+	<!--us에 fileno저장  -->
+	<update id="updateFile" parameterType="com.team1.project.dto.UsFileDTO">
+		update us set  FILENO=#{usFileNum}
+		where us_num=#{usNum}
+	</update>
+	
 </mapper>

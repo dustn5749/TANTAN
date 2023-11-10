@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="/assets/sns/css/modal.css">
 <link rel="stylesheet" href="/assets/sns/css/message.css">
 
-<script src="/assets/js/jquery-3.6.1.min.js"></script>
 
 <style type="text/css">
 
@@ -169,7 +168,7 @@ a {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">고객센터</a>
+                            <a class="nav-link" href="/customer/inquiry">고객센터</a>
                         </li>
                         <!-- 로그인 유무 -->
 	                    <li class="nav-item">

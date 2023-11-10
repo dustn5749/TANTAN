@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.UsFileDAO;
+import com.team1.project.dto.UsDTO;
 import com.team1.project.dto.UsFileDTO;
 
 @Service
@@ -15,7 +16,7 @@ public class UsFileService {
     private UsFileDAO usFileDAO;
 
     // 첨부파일 추가하기
-    public boolean add(UsFileDTO file) throws Exception {
+    public int add(UsFileDTO file) throws Exception {
         System.out.println("UsFileService.add()");
         return usFileDAO.add(file);
     }
@@ -28,7 +29,7 @@ public class UsFileService {
 
     // 파일 정보 얻기
     public UsFileDTO getUsFile(int fileNo) throws Exception {
-        System.out.println("UsFileService.getAttacheFile()");
+        System.out.println("UsFileService.getUsFile()");
         return usFileDAO.getUsFile(fileNo);
     }
 
@@ -43,4 +44,6 @@ public class UsFileService {
         System.out.println("UsFileService.deletes()");
         return usFileDAO.deletes(deleteNumList);
     }
+    
+
 }

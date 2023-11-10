@@ -335,7 +335,7 @@
 	
     <div class="best_top5_city">
         <p class="best_city_title">BEST 여행지 TOP5</p>
-        <div class="plus_div"><a class="plus_a">+더보기</a></div>
+        <div class="plus_div"><a class="plus_a" href="/review/main">+더보기</a></div>
         <div class="best_top5_city_inner">
             <div class="case">
                 <div class="top5_city">
@@ -391,7 +391,9 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="동행사진" />
+                            <div class="img_div">
+									<img class="card-img-top" src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행사진" id="us_file_img"/>
+                            </div>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -505,7 +507,8 @@
         </div>
     </section>
     <!-- End Featured Product -->
-	
+<script src="/assets/js/main.js">
+</script>	
 
 </body>
 </html>
