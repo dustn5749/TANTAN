@@ -302,7 +302,6 @@ function goPage(num) {
 
 function fn_delete(rowid, member_id) {
     console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
-    $("#click_result").html(str);
 }
 </script>
 

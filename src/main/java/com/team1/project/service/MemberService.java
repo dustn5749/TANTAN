@@ -98,5 +98,14 @@ public class MemberService {
 		return memberDao.adminList();
 	}
 	
+	// 관리자 회원 정지
+	public boolean memberStop(String member_id) throws Exception{
+		
+		return memberDao.memberStop(member_id);
+	}
 
+	// 관리자 회원 정지 해제
+	public boolean memberRelease(String member_id) throws Exception{
+		return memberDao.memberRelease(member_id);
+	}
 }

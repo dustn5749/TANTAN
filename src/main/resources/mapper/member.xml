@@ -117,7 +117,8 @@
 	
 	<!-- 회원리스트 가져오기 -->
 	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
-		SELECT * from member
+		SELECT * from member 
+		ORDER BY status desc
 	</select>
 	
 	<!-- 관리자 계정 가져오기 -->
@@ -125,4 +126,17 @@
 	    SELECT * FROM member WHERE roles LIKE '%Admin'
 	</select>
 
+	<!-- 관리자 회원 정지 -->
+	<update id="memberStop">
+		UPDATE member 
+		SET status = 'Y'
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<!-- 관리자 회원 정지해제 -->
+	<update id="memberRelease">
+		UPDATE member
+		SET status = 'N'
+		WHERE member_id = #{member_id}
+	</update>
 </mapper>
