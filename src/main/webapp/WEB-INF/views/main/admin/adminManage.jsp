@@ -94,21 +94,8 @@
     </section>
 
     <!-- Main content -->
-<!--     <section class="content"> -->
-<!--       <div class="card"> -->
-<!--         <div class="card-header"> -->
-<!--           <h3 class="card-title">회원관리</h3> -->
-<!--         </div> -->
-        <!-- /.card-header -->
-<!--         <div class="card-body"> -->
-          <table id="adminList"></table>
-          <div id="paginate" style=text-align:center;></div>
-<!--         </div> -->
-        <!-- /.card-body -->
-<!--       </div> -->
-      <!-- /.card -->
-<!--     </section> -->
-    <!-- /.content -->
+    <table id="adminList"></table>
+    <div id="paginate" style=text-align:center;></div>
   </div>
 <script>
 function hideLoadingMessage() {
@@ -206,46 +193,56 @@ $(document).ready(function () {
 	
     // jqGrid 설정
     $("#adminList").jqGrid({
-        datatype: "local", // 데이터를 로컬에서 가져오기
-//         data: data.adminList, // JSON 데이터 배열
-        colNames: ['아이디', '이름', '비밀번호', '전화번호', '이메일', '나이', '성별', '직위'],
-        colModel: [
-            { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
-            { label: '이름', name: 'name', index: 'name' },
-            { label: '비밀번호', name: 'pwd', index: 'pwd' },
-            { label: '전화번호', name: 'phone', index: 'phone' },
-            { label: '이메일', name: 'email', index: 'email' },
-            { label: '나이', name: 'age', index: 'age' },
-            { label: '성별', name: 'gender', index: 'gender' },
-            { label: '직위', name: 'roles', index: 'roles'}
-        ],
-        loadonce: true,
-        viewrecords: true,
-        autowidth: true,
-        height: 690,
-        rowNum: 30,
-        rowList: [30, 50, 100],
-        pager: '#paginate',
-        pgtext: 'Page {0} of {1}',
-        sortorder: 'desc',
-        caption: '관리자리스트',
-        loadui: "enable",
-        loadComplete: function (data) {
-        	
-        	var allRowsInGrid = jQuery('#adminList').jqGrid('getGridParam', 'records');
-        	$("#NoData").html("");
-        	if(allRowsInGrid == 0){
-        		$("#NoData").html("<br>데이터가 없습니다.<br>");
-        	}
-        	
-        	initPage($("#adminList").getGridParam('page'));
-        	
-            var allRow = jQuery("#adminList").jqGrid('getGridParam', 'records');
-            if (allRow == 0) {
-                $("#adminList > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
+    datatype: "local",
+    colNames: ['아이디', '이름', '직위'],
+    colModel: [
+        { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
+        { label: '이름', name: 'name', index: 'name' },
+        {
+            label: '직위', name: 'roles', index: 'roles',
+            editable: true,
+            edittype: 'select',
+            editoptions: {
+                dataUrl: '/getRoles', // 수정 필요 - 실제로 데이터를 가져오는 URL로 변경
+                buildSelect: function (data) {
+                    var response = JSON.parse(data);
+                    var html = '<select>';
+                    for (var i = 0; i < response.length; i++) {
+                        html += '<option value="' + response[i].value + '">' + response[i].text + '</option>';
+                    }
+                    html += '</select>';
+                    return html;
+                }
             }
         }
-    });
+    ],
+    loadonce: true,
+    viewrecords: true,
+    autowidth: true,
+    height: 690,
+    rowNum: 30,
+    rowList: [30, 50, 100],
+    pager: '#paginate',
+    pgtext: 'Page {0} of {1}',
+    sortorder: 'desc',
+    caption: '관리자리스트',
+    loadui: "enable",
+    rownumbers: true,
+    loadComplete: function (data) {
+        var allRowsInGrid = jQuery('#adminList').jqGrid('getGridParam', 'records');
+        $("#NoData").html("");
+        if (allRowsInGrid == 0) {
+            $("#NoData").html("<br>데이터가 없습니다.<br>");
+        }
+
+        initPage($("#adminList").getGridParam('page'));
+
+        var allRow = jQuery("#adminList").jqGrid('getGridParam', 'records');
+        if (allRow == 0) {
+            $("#adminList > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
+        }
+    }
+});
 	loadGridData();
 });
 //그리드 첫 페이지로 이동
@@ -307,56 +304,6 @@ function fn_delete(rowid, member_id) {
     console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
     $("#click_result").html(str);
 }
-
-// $(document).ready(function () {
-//     $.ajax({
-//         url: '/adminList', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
-//         dataType: 'json',
-//         success: function (data) {
-//             console.log(data); // 데이터가 제대로 수신되었는지 확인하기 위해 콘솔에 출력
-
-//             // jqGrid 설정
-//             $("#adminList").jqGrid({
-//                 datatype: "local", // 데이터를 로컬에서 가져오기
-//                 data: data.adminList, // JSON 데이터 배열
-//                 colNames: ['아이디', '이름', '비밀번호', '전화번호', '이메일', '나이', '성별', '직위'],
-//                 colModel: [
-//                     { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
-//                     { label: '이름', name: 'name', index: 'name' },
-//                     { label: '비밀번호', name: 'pwd', index: 'pwd' },
-//                     { label: '전화번호', name: 'phone', index: 'phone' },
-//                     { label: '이메일', name: 'email', index: 'email' },
-//                     { label: '나이', name: 'age', index: 'age' },
-//                     { label: '성별', name: 'gender', index: 'gender' },
-//                     { label: '직위', name: 'roles', index: 'roles'}
-//                 ],
-//                 loadonce: true,
-//                 viewrecords: true,
-//                 autowidth: true,
-//                 height: 690,
-//                 rowNum: 30,
-//                 rowList: [30, 50, 100],
-//                 pager: '#Pager',
-//                 pgtext: 'Page {0} of {1}',
-//                 sortorder: 'desc',
-//                 caption: '관리자리스트',
-//                 loadui: "enable",
-//                 loadComplete: function (data) {
-//                     var allRow = jQuery("#adminList").jqGrid('getGridParam', 'records');
-//                     if (allRow == 0) {
-//                         $("#adminList > tbody").append("<tr><td align='center' colspan='10' style=''>조회된 데이터가 없습니다.</td></tr>");
-//                     }
-
-//                     var idArray = $("#adminList").jqGrid('getDataIDs');
-//                 }
-//             });
-//         },
-//         error: function (error) {
-//             console.error("Error:", error);
-//         }
-//     });
-//     $("#adminList").jqGrid('setFrozenColumns');
-// });
 </script>
 
 </body>

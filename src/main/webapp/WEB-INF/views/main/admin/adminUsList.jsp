@@ -87,7 +87,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">동행관리</li>
+              <li class="breadcrumb-item active" style=text-align:center;>동행관리</li>
             </ol>
           </div>
         </div>
@@ -227,6 +227,7 @@ $(document).ready(function () {
         sortorder: 'desc',
         caption: '동행리스트',
         loadui: "enable",
+        rownumbers: true,
         loadComplete: function (data) {
         	
         	var allRowsInGrid = jQuery('#usGrid').jqGrid('getGridParam', 'records');
