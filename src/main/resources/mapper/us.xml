@@ -112,10 +112,11 @@
 		    WHERE ROWNUM &lt;= 3
 		</select>
 <!-- 관리자 -->
-<!-- 동행 리스트 가져오기 -->
+<!-- 신고받은 동행 리스트 가져오기 -->
 	<select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
-		SELECT * from us where reportcnt > 0
+		SELECT * from us where reportcnt > 0 ORDER BY STATUS desc
 	</select>
+<<<<<<< HEAD
 	
 	<!--us에 fileno저장  -->
 	<update id="updateFile" parameterType="com.team1.project.dto.UsFileDTO">
@@ -123,4 +124,30 @@
 		where us_num=#{usNum}
 	</update>
 	
+=======
+<!-- 신고받은 동행 리스트 차트 연습용 -->
+	<select id="usReportList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
+	  <![CDATA[
+	    SELECT TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate, COUNT(*) AS post_count, reportcnt
+	    FROM US
+	    WHERE reportcnt >= 1
+	    GROUP BY TO_CHAR(regdate, 'YYYY-MM-DD'), reportcnt
+	    ORDER BY regdate
+	  ]]>
+	</select>
+	
+<!-- 관리자 동행 게시글 삭제 처리 -->
+	<update id="ausDelete">
+		UPDATE us
+		SET status = 'Y'
+		WHERE us_num = #{us_num}
+	</update>
+	
+<!-- 관리자 동행 게시글 복구 -->
+	<update id="ausChange">
+		UPDATE us
+		SET status = 'N'
+		WHERE us_num = #{us_num}
+	</update>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </mapper>

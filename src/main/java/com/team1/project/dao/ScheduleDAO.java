@@ -4,41 +4,50 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team1.project.dto.CityDTO;
+import com.team1.project.dto.DayDTO;
 import com.team1.project.dto.ScheduleDTO;
-import com.team1.project.dto.UsDTO;
 
 @Mapper
 public interface ScheduleDAO {
 
-	//동행 전체 목록
+	//일정 전체 목록
 	public List<ScheduleDTO> getScheduleList(ScheduleDTO schdule) throws Exception;
 	
-	//동행 전체 게시글 증가
-	public int totalCount(ScheduleDTO schdule) throws Exception;
-
-	// 동행 조회수증가
-	public int viewCount(int scheduleNum) throws Exception;
-
-	// 내 일정 정보 얻기
-	public List<ScheduleDTO> getMyScheduleList(String member_Id);
+    //일정 글쓰기
+	public int writeInsert(ScheduleDTO schdule) throws Exception;
 	
+	//일정 지역 번호 가져오기
+	public List<ScheduleDTO> Doenum(ScheduleDTO doe_Num) throws Exception;
+
+	// 도시 위도, 경도 가져오기
+	public CityDTO selectCity(ScheduleDTO schedule);
+	
+	//day일정 추가
+	public int day(DayDTO dayDTO) throws Exception;
+	
+	
+//
+//	// 일정 조회수증가
+//	public int viewCount(int scheduleNum) throws Exception;
+//	
 //	//2. 메인에 TOP5 출력하기
-//    public List<UsDTO> usTop5() throws Exception;
-//		
-//    //동행 글쓰기
-//	public boolean writeInsert(UsDTO us) throws Exception;
+//	public List<ScheduleDTO> schduleTop5() throws Exception;
+//			
+	// 일정 상세보기
+	public ScheduleDTO schduleDetail(int schedule_Num) throws Exception;
+
+	// 도시 위도, 경도 가져오기
+
+
+	// 일정 수정하기
+	public boolean schduleUpdate(ScheduleDTO schdule) throws Exception;
 //
-//	// 동행 상세보기
-//	public UsDTO usDetail(Long us_num) throws Exception;
-//
-//	// 동행 수정하기
-//	public boolean usUpdate(UsDTO us) throws Exception;
-//
-//	// 동행 삭제하기
-//	public boolean usDelete(int usNum) throws Exception;
+//	// 일정 삭제하기
+//	public boolean schduleDelete(int schedule_Num) throws Exception;
 //
 //	//답글 폼
-//	public int reply(UsDTO us) throws Exception;
+//	public int reply(ScheduleDTO schdule) throws Exception;
 }
 	
 

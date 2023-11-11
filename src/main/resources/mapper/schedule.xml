@@ -2,84 +2,133 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.ScheduleDAO">
+	
+	<resultMap type="com.team1.project.dto.CityDTO" id="CityMap">
+		<result property="cityNum" column="city_num" />
+		<result property="doeNum" column="doe_num" />
+		<result property="cityName" column="city_name" />
+		<result property="LATITUDE" column="LATITUDE" />
+		<result property="LONGITUDE" column="LONGITUDE" />
+	</resultMap>
 
+	<resultMap type="com.team1.project.dto.DayDTO" id="DayMap">
+    <result property="dayId" column="day_id" />
+    <result property="schedule_Num" column="schedule_Num" />
+    <result property="dayDate" column="dayDate" />
+<!--     <result property="place" column="place" /> -->
+<!--     <result property="memo" column="memo" /> -->
+	</resultMap>
+	
 <select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-    <![CDATA[
-        SELECT a.schedule_num AS schedule_Num, a.member_Id, a.city_Num, a.start_Num, a.end_Date, a.reg_Date, a.memo
-        FROM (
-            SELECT rownum AS rnum, a.schedule_num, a.member_Id, a.city_Num, a.start_Num, a.end_Date, a.reg_Date, a.delete_Yn, a.memo
-            FROM schedule a
-            WHERE rownum BETWEEN #{startNo} AND #{endNo}
-        ) a
-        JOIN city b ON a.city_Num = b.city_Num
-        WHERE a.rnum BETWEEN #{startNo} AND #{endNo}
-    ]]>
+    SELECT * 
+    FROM (
+      SELECT 
+        a.*, 
+        ROW_NUMBER() OVER (ORDER BY SCHEDULE_NUM) AS rnum 
+      FROM SCHEDULE a
+    ) 
+    WHERE rnum BETWEEN #{startNo} AND #{endNo}
 </select>
 
-
-<!--메인 탑5 노출 -->
-<select id="usTop5" resultType="com.team1.project.dto.ScheduleDTO">
-	<![CDATA[
-		SELECT 
-			ROWNUM AS nrow, SUB.*
-		FROM ( 
-			SELECT 
-				US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT
-			FROM us 
-			ORDER BY us_num DESC
-		) SUB  
-		WHERE ROWNUM <= 5
-	]]>
-</select>
-
-<!-- 전체 게시글 수 -->
-<select id="totalCount" resultType="int">
-		select count(*)
-		from us
+<!--일정 글등록 --> 
+    <insert id="writeInsert">
+    <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
+        select sc.nextval as schedule_Num from dual
+    </selectKey> 
+    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE)
+values(
+	#{schedule_Num},
+    #{member_Id},
+    #{place},
+    #{start_Num},
+    #{end_Date},
+    SYSDATE)
+<!--     #{schedule_Num}, -->
+<!--     #{member_Id}, -->
+<!--     DOE_NUM = #{place}, -->
+<!--     START_NUM = #{start_num}, -->
+<!--     END_DATE = #{end_date}, -->
+<!--     TO_DATE(#{scheduleList[0]}, 'yyyy-MM-dd') as START_NUM, -->
+<!--     TO_DATE(#{scheduleList[0]}, 'yyyy-MM-dd') as END_DATE, -->
+<!--     REG_DATE = sysdate -->
+<!-- from dual -->
+<!-- where not exists (select 1 from schedule where SCHEDULE_NUM = #{schedule_Num}) -->
+</insert>
+     
+    <!--day1 day2 만들기 --> 
+<insert id="day">
+    INSERT INTO Day (day_id, schedule_Num, day_date, place, memo)
+    VALUES (sc.nextval, #{schedule_Num}, TO_DATE(#{dayDate}, 'yyyy-MM-dd'), #{place}, #{memo})
+</insert>
+     
+    <!--지역번호 만들기 --> 
+    <select id="Doenum" resultMap="CityMap">
+		 SELECT city_num, city_name
+        FROM city
+        WHERE doe_num = #{doe_Num}
+	</select>
+    
+  <!--지역의 위도, 경도 데이터 가져오기 --> 
+    <select id="selectCity" resultMap="CityMap">
+		SELECT  LATITUDE, LONGITUDE
+        FROM city
+        WHERE city_name = #{city_name}
 	</select>
 
-<!-- 동행 글쓰기 -->
-    <insert id="writeInsert"> 
-    INSERT INTO us ( 
-        US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE , CONTENT
-    ) VALUES ( 
-        #{us_num}, #{city_name}, #{writer}, #{us_cnt},  #{start_Date}, #{end_Date}, #{title}, #{content} 
-    )
-</insert>
+      <select id="schduleDetail" resultType="com.team1.project.dto.ScheduleDTO">  
+      SELECT  
+      schedule_Num,member_Id, DOE_NAME, WRITER, START_DATE, END_DATE, mod_Date, memo  
+      FROM SCHEDULE   
+      WHERE Schedule_Num = #{schedule_Num}   
+	</select>
+     
+    <!-- <![CDATA[ 
+     INSERT INTO schedule (schedule_Num, doe_Name, start_Num, end_Date, memo, img)
+SELECT 
+    u.schedule_Num, 
+    u.doe_Name, 
+    u.start_Num, 
+    u.end_Date, 
+    u.memo, 
+    d.doe_img
+FROM 
+    (
+        SELECT sc.nextval AS schedule_Num, 
+               #{doe_Name} AS doe_Name, 
+               #{start_Num} AS start_Num, 
+               #{end_Date} AS end_Date, 
+               #{memo} AS memo 
+        FROM dual
+    ) u
+JOIN doe d ON u.doe_Name = d.doe_Name;
+ ]]> -->
 
-<!-- 상세보기 -->
-    <select id="usDetail" resultType="com.team1.project.dto.ScheduleDTO">
-    SELECT 
-    US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
-    FROM US 
-    WHERE US_NUM = #{us_num}
-</select>
+<!-- 전체 게시글 수 -->
+<!-- <select id="totalCount" resultType="int"> -->
+<!-- 		select count(*) -->
+<!-- 		from us -->
+<!-- 	</select> -->
 
-<!-- 수정하기 -->
-   <update id="usUpdate"> 
-    UPDATE US 
-    SET 
-    CITY_NAME = #{city_name},
-    WRITER = #{writer}, 
-    US_CNT = #{us_cnt}, 
-    START_DATE = #{start_Date}, 
-    END_DATE = #{end_Date}, 
-    TITLE = #{title}, 
-    CONTENT = #{content} 
-    WHERE US_NUM = #{us_num} 
-</update>
+ 
+ <!-- 수정하기 -->
+<!--    <update id="schduleUpdate">  -->
+<!--     UPDATE US  -->
+<!--     SET  -->
+<!--     CITY_NAME = #{city_name}, -->
+<!--     WRITER = #{writer},  -->
+<!--     US_CNT = #{us_cnt},  -->
+<!--     START_DATE = #{start_Date},  -->
+<!--     END_DATE = #{end_Date},  -->
+<!--     TITLE = #{title},  -->
+<!--     CONTENT = #{content}  -->
+<!--     WHERE US_NUM = #{us_num}  -->
+<!-- </update> -->
    
 <!--삭제하기 -->
-     <delete id="usDelete"> 
-         DELETE FROM US 
-         WHERE US_NUM = #{us_num} 
-     </delete> 
-     
-     <!-- 내 일정 정보 얻기 -->
-     <select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-     	select * from SCHEDULE
-     	where MEMBER_ID=#{member_Id}
-     </select>
+<!--      <delete id="usDelete">  -->
+<!--          DELETE FROM US  -->
+<!--          WHERE US_NUM = #{us_num}  -->
+<!--      </delete>  -->
      
 </mapper>
  

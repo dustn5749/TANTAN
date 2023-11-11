@@ -110,5 +110,15 @@ https://templatemo.com/tm-559-zay-shop
 	})
 	
 	</script>
+	
+	<!-- 관리자 사용자 데이터 가져오기 -->
+	<script>
+//  	(async function() {
+//  		const res = await fetch('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A296855898&dimensions=ga%3Asource%2Cga%3Akeyword&metrics=ga%3Ausers%2Cga%3AavgSessionDuration%2Cga%3AavgTimeOnPage%2Cga%3AsearchResultViews%2Cga%3AavgPageLoadTime&start-date=7daysAgo&end-date=yesterday');
+//  		const data = await res.json();
+		
+//  		console.log(data);
+//  	})();
+ 	</script> 
 </body>
 </html>

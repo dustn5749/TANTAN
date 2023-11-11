@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri= "http://java.sun.com/jsp/jstl/functions" %>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal"/>
@@ -15,8 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
 <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
-<link rel="stylesheet" href="/assets/sns/css/modal.css">
-<link rel="stylesheet" href="/assets/sns/css/message.css">
+<link rel="stylesheet" href="/assets/sns/css/Modal.css">
 
 
 <style type="text/css">
@@ -193,7 +193,6 @@ a {
                         </div>
                     </div>
 					
-
 					
 					<!-- 버튼 영역에 대한 div  -->
 					<c:choose>
@@ -202,18 +201,18 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('friend-list-modal')">
 						    <i class="fa-solid fa-user-group"></i>
 						</button>
-						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('message-modal')">
+						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('chat-modal')">
 						    <i class="fa-regular fa-message"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
 						</button>
-						<button class="nav-icon position-relative text-decoration-none" onclick="openBell()">
+						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('alarm-modal')">
 						    <i class="fa-regular fa-bell"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+20</span>
 						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
-					<c:if test="${principal.user.roles=='Admin'}">
+					<c:if test="${fn:endsWith(principal.user.roles, 'Admin')}">
 						<a class="admin_btn" href="/admin">	
 							<img src="/assets/img/key.png" width="25px">관리자
 						</a>
@@ -285,7 +284,7 @@ a {
                       <!-- 블루뱃지 -->
                       <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
-                    <p class="intro-txt">소개글입니다.</p>
+                    <p class="intro-txt">소개글</p>
                   </div>
                 </div>
                 <!-- END 친구 프사 & 이름 -->
@@ -312,7 +311,7 @@ a {
                       <!-- 블루뱃지 -->
                       <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
                     </div>
-                    <p class="intro-txt">소개글입니다.</p>
+                    <p class="intro-txt">소개글</p>
                   </div>
                 </div>
                 <!-- END 친구 프사 & 이름 -->
@@ -526,214 +525,726 @@ a {
 
         <div class="chat-modal-bottom">
           <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됩니다. -->
-          <button id="chat-modal-confirm-btn" type="button" disabled class="btn confirm-btn">확인</button>
+          <button id="" type="button" disabled class="btn confirm-btn chat-modal-confirm-btn">확인</button>
           <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal')">취소</button>
         </div>
       </div>
     </div>
     <!-- END 2. 채팅 초대 모달 팝업창 -->
 	
-	<!-- 메시지 모달 팝업창 -->
-<!-- 	<div id="message-modal" class="popCont">
-  	모달 오버레이
-    <div class="modal-overlay" onclick="cloaseModal('message-modal')"></div>
-      		  	
-	  	<button type="button" class="popClose" onclick="closeModal('message-modal')">
-        <img src="assets/sns/images/xBtn.png" alt="">
-      	</button>
-	  	
-		<div class="messageWrap">			
-			<section class="left">
-				<section class="messageArea">
-					<div class="top">
-						<span class="tit">Messages</span>
-						<button class="btn" onclick="openModal('chat-invite-modal')">
-				          <img src="assets/sns/images/message-circle-plus.svg" alt="초대 아이콘" class="icon">
-				        </button>						
-					</div>
-					<div class="searchWrap1">
-						<input type="text" placeholder="닉네임 검색" class="inputTxt">
-					</div>
-					<div class="messageList">
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv on">
-							<div class="uImg"><img alt="" src="/assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-						<div class="messageDiv">
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="sumBox">
-								<p class="nick">쥐<span class="">ㆍ</span><span class="time">3s</span></p>
-								<p class="msg">머해?</p>
-							</div>
-						</div>
-					</div>
-				</section>
-				<section class="friendsList">
-					<div class="tab">
-						<button type="button" class="friend">
-						    <span class="friendIcon">
-						      <img src="assets/sns/images/friendBtn.png" alt="친구 아이콘" class="icon2">
-						    </span>
-						</button>
-					</div>
-					<div class="searchWrap2">
-						<input type="text" placeholder="닉네임 검색" class="inputTxt">
-					</div>
-					<div class="friendBox">
-						<div class="friendDiv">
-		
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="friendInfo">
-								<p class="nick">Gee</p>
-								<p class="txt">Toni Kroos</p>
-								<button type="button" class="folBtn">
-								    <span class="friendSendMsgBtn">
-								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
-								    </span>
-								</button>
-							</div>
-						</div>
-						<div class="friendDiv">
-							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="friendInfo">
-								<p class="nick">Gee</p>
-								<p class="txt">Toni Kroos</p>
-								<button type="button" class="folBtn">
-								    <span class="friendSendMsgBtn">
-								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
-								    </span>
-								</button>
-							</div>
-						</div>
-						
-						<div class="friendDiv">
-							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="friendInfo">
-								<p class="nick">Gee</p>
-								<p class="txt">Toni Kroos</p>
-								<button type="button" class="folBtn">
-								    <span class="friendSendMsgBtn">
-								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
-								    </span>
-								</button>
-							</div>
-						</div>
-						<div class="friendDiv">
-							
-							<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-							<div class="friendInfo">
-								<p class="nick">Gee</p>
-								<p class="txt">Toni Kroos</p>
-								<button type="button" class="folBtn">
-								    <span class="friendSendMsgBtn">
-								      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
-								    </span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</section>
-			</section>
-			
-			<section class="chatArea">
-				<div class="top">
-					
-					<h3>쥐</h3>
-					
-				</div>
-				<div class="chatWrap">
-					<div class="userinfo">
-						<div class="uImg"><img alt="" src="./assets/sns/images/mouse.jpg"></div>
-						<p class="nick">쥐</p>				
-					
-					</div>
-					<div class="chat">
-						<div class="rtm"><span>ㅎㅇ</span></div>
-						<div class="rtTime"><span>4:43 PMㆍSent</span></div>
-						<div class="rtm"><span>머해?</span></div>
-						<div class="rtTime"><span>4:44 PMㆍSent</span></div>
-						<div class="ltm"><span>그냥있어</span></div>
-						<div class="ltTime"><span>4:46 PMㆍreceived</span></div>
-					</div>
-				</div>
+	
+  	<!--  1. 알림 모달 -->
+    <div id="alarm-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeModal('alarm-modal')"></div>
 
-			 	<div class="message-container">
-				  <button type="button" class="imgBtn">
-				    <span class="addImg">
-				      <img src="assets/sns/images/sendMessageBtn.png" alt="이미지 아이콘" class="icon">
-				    </span>
-				  </button>
-				  <div class="message-content">
-				    <div class="input_area">
-				      <textarea id="message_content" name="message_content" placeholder="내용을 입력하세요"></textarea>		
-				    </div>
-				  </div>
-				  <button type="button" class="sendMessageBtn">
-				    <span class="sendIco">
-				      <img src="assets/sns/images/sendMessageBtn.png" alt="전송 아이콘" class="icon">
-				    </span>
-				  </button>
-				</div>
+      <div class="common-modal narrow-modal w-400">
+        <!-- 제목 + 닫기버튼 -->
+        <div class="common-modal-top">
+          <h2 class="ttl">알림</h2>
+          <div class="btn-wrap">
+            <!-- 비우기버튼 -->
+            <button type="button" class="icon-btn">
+              <img src="/assets/sns/images/icon-trash.svg" alt="">
+            </button>
+            <!-- END 비우기버튼 -->
+            <!-- 닫기버튼 -->
+            <button type="button" class="icon-btn" onclick="closeModal('alarm-modal')">
+              <img src="/assets/sns/images/icon-close.svg" alt="">
+            </button>
+            <!-- END 닫기버튼 -->
+          </div>
+        </div>
+        <!-- END 제목 + 닫기버튼 -->
 
-				
-			</section>
-			
-		</div>
-  	</div> -->
-  	<!--END 메시지 모달 팝업창 -->
-  	
+        <!-- 알림 모달 내용들 -->
+        <div class="alarm-modal-contents">
+          <!-- 날짜 + 알림 목록들 -->
+          <div class="alarm-content">
+            <!-- 날짜 -->
+            <div class="alarm-list-grp-top-ttl">어제</div>
+            <!-- END 날짜 -->
+            <!-- 알림 목록들 -->
+            <div class="alarm-list-grp">
+              <!-- 알람 리스트 -->
+              <div class="alarm-list">
+                <div class="alarm-item">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
+                  </figure>
+
+                  <div class="alarm-txt-grp">
+                    <p class="txt"><span class="name"><img src="/assets/sns/images/badge-certify.svg" class="badge-certify"
+                          alt="">jessica</span>님이 회원님의 스토리를 좋아합니다.</p>
+                    <span class="date">3일</span>
+                  </div>
+                </div>
+
+                <img src="/assets/sns/images/thumbnail-img03.png" alt="" class="alarm-preview-img">
+
+                <button type="button" class="alarm-del-btn">
+                  <span class="txt-hidden">이 알람 삭제</span>
+                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
+                </button>
+              </div>
+              <!-- END 알람 리스트 -->
+            </div>
+            <!-- END 알림 목록들 -->
+          </div>
+          <!-- END 날짜 + 알림 목록들 -->
+
+          <!-- 날짜 + 알림 목록들 -->
+          <div class="alarm-content">
+            <!-- 날짜 -->
+            <div class="alarm-list-grp-top-ttl">최근 7일</div>
+            <!-- END 날짜 -->
+            <!-- 알림 목록들 -->
+            <div class="alarm-list-grp">
+              <!-- 알람 리스트 -->
+              <div class="alarm-list">
+                <div class="alarm-item">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                  </figure>
+
+                  <div class="alarm-txt-grp">
+                    <p class="txt"><span class="name">favor_list</span>님이 회원님의 스토리를 좋아합니다.</p>
+                    <span class="date">3일</span>
+                  </div>
+                </div>
+
+                <img src="/assets/sns/images/thumbnail-img01.jpeg" alt="" class="alarm-preview-img">
+
+                <button type="button" class="alarm-del-btn">
+                  <span class="txt-hidden">이 알람 삭제</span>
+                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
+                </button>
+              </div>
+              <!-- END 알람 리스트 -->
+
+              <!-- 알람 리스트 -->
+              <div class="alarm-list">
+                <div class="alarm-item">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                  </figure>
+
+                  <div class="alarm-txt-grp">
+                    <p class="txt"><span class="name">favor_list</span>님이 회원님의 스토리를 좋아합니다.</p>
+                    <span class="date">3일</span>
+                  </div>
+                </div>
+
+                <img src="/assets/sns/images/thumbnail-img01.jpeg" alt="" class="alarm-preview-img">
+
+                <button type="button" class="alarm-del-btn">
+                  <span class="txt-hidden">이 알람 삭제</span>
+                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
+                </button>
+              </div>
+              <!-- END 알람 리스트 -->
+            </div>
+            <!-- END 알림 목록들 -->
+          </div>
+          <!-- END 날짜 + 알림 목록들 -->
+        </div>
+        <!-- END 알림 모달 내용들 -->
+      </div>
+    </div>
+    <!-- END  1. 알림 모달 -->
+
+    <!--  2-1. 채팅목록 + 채팅창 모달 -->
+    <div id="chat-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeModal('chat-modal')"></div>
+
+      <div class="common-modal narrow-modal chat-modal-container">
+        <!-- 채팅목록 -->
+        <div id="chat-list" class="chat-list-wrapper">
+          <div class="container">
+            <div class="container-hd">
+              <!-- 제목 + 닫기버튼 -->
+              <div class="common-modal-top">
+                <h2 class="ttl">대화목록</h2>
+                <div class="btn-wrap">
+                  <!-- 닫기버튼 -->
+                  <button type="button" class="icon-btn" onclick="closeModal('chat-modal')">
+                    <img src="/assets/sns/images/icon-close.svg" alt="">
+                  </button>
+                  <!-- END 닫기버튼 -->
+                </div>
+              </div>
+              <!-- END 제목 + 닫기버튼 -->
+
+              <!-- 친구이름 검색 & 채팅초대 버튼 -->
+              <div class="common-search-inp-grp">
+                <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
+                <button class="btn" onclick="openModal('chat-invite-modal02')">
+                  <img src="/assets/sns/images/message-circle-plus.svg" alt="" class="icon">
+                </button>
+              </div>
+              <!-- END 친구이름 검색 & 채팅초대 버튼 -->
+
+              <!-- 그룹 대화 / 1:1 대화 탭 버튼 -->
+              <div class="common-tabs">
+                <!-- ↓ 활성화된 탭은 active 달면 돼요 -->
+                <div class="tab active" data-show="tab-chat-group">
+                  <span class="txt-badge">그룹대화</span>
+                </div>
+                <div class="tab" data-show="tab-chat-private">
+                  <span class="txt-badge">1:1 대화</span>
+                </div>
+              </div>
+              <!-- END 그룹 대화 / 1:1 대화 탭 버튼 -->
+            </div>
+
+            <div class="container-content">
+              <!-- 탭/그룹대화) 그룹대화시 보이는 내용 -->
+              <div id="tab-chat-group" class="common-tab-content chat-list-grp active">
+                <!-- 대화 목록 -->
+                <div class="chat-list" onclick="chatView('open')">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-default.png" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>[후쿠오카] 유저1, 유저2, 유저3, 유저4, 유저가 많아질 수록 말줄임 표시</p>
+                      <span class="num">13</span>
+                    </div>
+                    <p class="chat-txt">죄송해요 잘못 보냈습니다.</p>
+                    <div class="chat-date">
+                      <span class="txt">13일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+
+                <!-- 대화 목록 -->
+                <div class="chat-list">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>[제주도] favor_list, minisooni</p>
+                      <span class="num">2</span>
+                    </div>
+                    <p class="chat-txt">떠나요 제주로~~</p>
+                    <div class="chat-date">
+                      <span class="txt">5일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+
+                <!-- 대화 목록 -->
+                <div class="chat-list">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>[유럽] 유럽이조아, 유럽사랑, 유럽낭만</p>
+                      <span class="num">3</span>
+                    </div>
+                    <p class="chat-txt">유럽여행은 요새 어떤가요?</p>
+                    <div class="chat-date">
+                      <span class="txt">13일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+              </div>
+
+              <!-- 탭/1:1대화) 1:1 대화시 보이는 내용 -->
+              <div id="tab-chat-private" class="common-tab-content chat-list-grp">
+                <!-- 대화 목록 -->
+                <div class="chat-list">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>choi_seung_hyun_tttop - jessica</p>
+                      <span class="num">2</span>
+                    </div>
+                    <p class="chat-txt">시카야 안녕?</p>
+                    <div class="chat-date">
+                      <span class="txt">1일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+
+                <!-- 대화 목록 -->
+                <div class="chat-list">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-default.png" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>choi_seung_hyun_tttop - 유럽이조아</p>
+                      <span class="num">2</span>
+                    </div>
+                    <p class="chat-txt">유럽 여행하기 좀 예산이 부족한데.... 얼마정도가 괜찮을까요? 길게 보내면 말줄임표가 뜨구.. 2줄 이상 안보입니다.</p>
+                    <div class="chat-date">
+                      <span class="txt">5일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+
+                <!-- 대화 목록 -->
+                <div class="chat-list">
+                  <figure class="mini-thumnail">
+                    <img src="/assets/sns/images/profile-img-default.png" alt="">
+                  </figure>
+
+                  <!-- 대화 목록에서 볼 수 있는 정보들 -->
+                  <div class="chat-info-grp">
+                    <div class="chat-ttl-wrap">
+                      <p>choi_seung_hyun_tttop - mini-thumnail</p>
+                      <span class="num">2</span>
+                    </div>
+                    <p class="chat-txt">제주도보다 유럽이 괜찮지않나요?</p>
+                    <div class="chat-date">
+                      <span class="txt">13일전</span>
+                    </div>
+                  </div>
+                  <!-- END 대화 목록에서 볼 수 있는 정보들 -->
+                </div>
+                <!-- END 대화 목록 -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END 채팅목록 -->
+
+        <!-- 채팅창 -->
+        <div id="chat-view" class="chat-view-wrapper">
+          <div class="container">
+            <div class="container-hd">
+              <!-- 뒤로가기버튼 + 제목 + 목록버튼 -->
+              <div class="common-modal-top">
+                <div class="left-ttl-wrap">
+                  <!-- 뒤로가기버튼 -->
+                  <button type="button" class="icon-btn" onclick="chatView('close')">
+                    <img src="/assets/sns/images/icon-chevron-left.svg" alt="">
+                  </button>
+                  <!-- END 뒤로가기버튼 -->
+
+                  <div class="ttl">
+                    <p>[동행] 유저1, 유저2, 유저3, 유저4</p>
+                    <span class="num">2</span>
+                  </div>
+                </div>
+                <div class="btn-wrap">
+                  <!-- 목록버튼 -->
+                  <button type="button" class="icon-btn" onclick="chatParticipants('open');">
+                    <img src="/assets/sns/images/icon-list-black.svg" alt="">
+                  </button>
+                  <!-- END 목록버튼 -->
+                </div>
+              </div>
+              <!-- END 뒤로가기버튼 + 제목 + 목록버튼 -->
+            </div>
+
+            <div class="container-content">
+              <!-- 채팅화면 -->
+              <div id="chat-view-scroll" class="chat-view">
+                <!-- 상태 텍스트 (날짜나 들어올 때 / 나갈 때) -->
+                <div class="status-txt">
+                  2023년 10월 24일
+                </div>
+                <!-- END 상태 텍스트 (날짜나 들어올 때 / 나갈 때) -->
+                <!-- 상태 텍스트 (날짜나 들어올 때 / 나갈 때) -->
+                <div class="status-txt">
+                  choi_seung_hyun_tttop님이 들어왔습니다.
+                </div>
+                <!-- END 상태 텍스트 (날짜나 들어올 때 / 나갈 때) -->
+
+                <!-- 대화 말풍선 -->
+                <div class="chat-bubble-wrapper">
+                  <div class="chat-bubble-grp">
+                    <!-- 상대방 프사 (본인일 때는 안보임) -->
+                    <figure class="mini-thumnail">
+                      <img src="/assets/sns/images/profile-img-default.png" alt="">
+                    </figure>
+                    <!-- END 상대방 프사 (본인일 때는 안보임) -->
+
+                    <!-- 말풍선 & 보낸시간 -->
+                    <div class="chat-bubble">
+                      <!-- 닉네임 (본인일 때는 안보임) -->
+                      <div class="name-wrap">
+                        <h6 class="name">minisooni</h6>
+                        <!-- 블루뱃지 -->
+                        <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      </div>
+                      <!-- END 닉네임 (본인일 때는 안보임) -->
+
+                      <div class="bubble-wrap">
+                        <div class="bubble">안녕하세요! 여행 일정이 어떻게 되실까요?</div>
+                        <span class="date">오후 6:46</span>
+                      </div>
+                    </div>
+                    <!-- END 말풍선 & 보낸시간 -->
+                  </div>
+                </div>
+                <!-- END 대화 말풍선 -->
+
+                <!-- 대화 말풍선 -->
+                <!-- *** 보내는 사람일 때는 send 클래스가 붙음. -->
+                <div class="chat-bubble-wrapper send">
+                  <div class="chat-bubble-grp">
+                    <!-- 상대방 프사 (본인일 때는 안보임) -->
+                    <!-- <figure class="mini-thumnail">
+                      <img src="/assets/sns/images/profile-img-default.png" alt="">
+                    </figure> -->
+                    <!-- END 상대방 프사 (본인일 때는 안보임) -->
+
+                    <!-- 말풍선 & 보낸시간 -->
+                    <div class="chat-bubble">
+                      <!-- 닉네임 (본인일 때는 안보임) -->
+                      <!-- <div class="name-wrap">
+                        <h6 class="name">minisooni</h6>
+                      </div> -->
+                      <!-- END 닉네임 (본인일 때는 안보임) -->
+
+                      <div class="bubble-wrap">
+                        <div class="bubble">죄송하지만...</div>
+                        <span class="date">오후 6:47</span>
+                      </div>
+                    </div>
+                    <!-- END 말풍선 & 보낸시간 -->
+                  </div>
+                </div>
+                <!-- *** 보내는 사람일 때는 send 클래스가 붙음. -->
+                <!-- END 대화 말풍선 -->
+
+                <!-- 대화 말풍선 -->
+                <!-- *** 보내는 사람일 때는 send 클래스가 붙음. -->
+                <div class="chat-bubble-wrapper send">
+                  <div class="chat-bubble-grp">
+                    <!-- 상대방 프사 (본인일 때는 안보임) -->
+                    <!-- <figure class="mini-thumnail">
+                      <img src="/assets/sns/images/profile-img-default.png" alt="">
+                    </figure> -->
+                    <!-- END 상대방 프사 (본인일 때는 안보임) -->
+
+                    <!-- 말풍선 & 보낸시간 -->
+                    <div class="chat-bubble">
+                      <!-- 닉네임 (본인일 때는 안보임) -->
+                      <!-- <div class="name-wrap">
+                        <h6 class="name">minisooni</h6>
+                      </div> -->
+                      <!-- END 닉네임 (본인일 때는 안보임) -->
+
+                      <div class="bubble-wrap">
+                        <div class="bubble">아직 여행일정을 짜지 못했습니다 ㅠㅠ</div>
+                        <span class="date">오후 6:48</span>
+                      </div>
+                    </div>
+                    <!-- END 말풍선 & 보낸시간 -->
+                  </div>
+                </div>
+                <!-- *** 보내는 사람일 때는 send 클래스가 붙음. -->
+                <!-- END 대화 말풍선 -->
+
+                <!-- 대화 말풍선 -->
+                <div class="chat-bubble-wrapper">
+                  <div class="chat-bubble-grp">
+                    <!-- 상대방 프사 (본인일 때는 안보임) -->
+                    <figure class="mini-thumnail">
+                      <img src="/assets/sns/images/profile-img-default.png" alt="">
+                    </figure>
+                    <!-- END 상대방 프사 (본인일 때는 안보임) -->
+
+                    <!-- 말풍선 & 보낸시간 -->
+                    <div class="chat-bubble">
+                      <!-- 닉네임 (본인일 때는 안보임) -->
+                      <div class="name-wrap">
+                        <h6 class="name">minisooni</h6>
+                        <!-- 블루뱃지 -->
+                        <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                      </div>
+                      <!-- END 닉네임 (본인일 때는 안보임) -->
+
+                      <div class="bubble-wrap">
+                        <div class="bubble">그러시군요 ㅠㅠ</div>
+                        <span class="date">오후 6:50</span>
+                      </div>
+                    </div>
+                    <!-- END 말풍선 & 보낸시간 -->
+                  </div>
+                </div>
+                <!-- END 대화 말풍선 -->                
+              </div>
+              <!-- END 채팅화면 -->
+
+              <!-- 채팅 입력 -->
+              <div class="chat-create">
+                <button type="button" class="btn file-btn">
+                  <img src="/assets/sns/images/icon-file-blue.svg" alt="">
+                </button>
+
+                <div class="create-wrap">
+                  <textarea id="chat-textarea" rows="1" data-autoresize placeholder="대화를 입력하세요..."
+                    class="textarea"></textarea>
+                  <button type="button" class="btn send-btn" disabled>
+                    <img src="/assets/sns/images/icon-send-before.svg" alt="" class="icon icon-before">
+                    <img src="/assets/sns/images/icon-send-after.svg" alt="" class="icon icon-after">
+                  </button>
+                </div>
+              </div>
+              <!-- END 채팅 입력 -->
+            </div>
+          </div>
+        </div>
+        <!-- END 채팅창 -->
+
+        <!-- 채팅참여자 목록 -->
+        <div id="chat-participants" class="chat-participants-wrapper">
+          <div class="overlay" onclick="chatParticipants('close');"></div>
+
+          <div class="container">
+            <div class="container-hd">
+              <!-- 제목 + 닫기버튼 -->
+              <div class="common-modal-top">
+                <div class="left-ttl-wrap">
+                  <div class="ttl">
+                    <p>[동행] 유저1, 유저2, 유저3, 유저4</p>
+                    <span class="num">2</span>
+                  </div>
+                </div>
+                <div class="btn-wrap">
+                  <!-- 닫기버튼  -->
+                  <button type="button" class="icon-btn" onclick="chatParticipants('close');">
+                    <img src="/assets/sns/images/icon-close.svg" alt="">
+                  </button>
+                  <!-- END 닫기버튼  -->
+                </div>
+              </div>
+              <!-- END 제목 + 닫기버튼  -->
+            </div>
+
+            <div class="container-content">
+              <div class="ptc-count-view">
+                <span class="txt">현재 대화 참여자 2명</span>
+              </div>
+              <div class="ptc-list-view">
+                <div class="friend-list-grp">
+                  <!-- 친구 -->
+                  <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 돼요! status-active 클래스 달을 경우 좌측에 초록 동그라미 뜹니다. -->
+                  <div class="friend-list status-active">
+                    <!-- 친구 프사 & 이름 -->
+                    <div class="person-item">
+                      <figure class="mini-thumnail">
+                        <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                      </figure>
+                      <div class="person-profile">
+                        <div class="name-wrap">
+                          <h6 class="name">choi_seung_hyun_tttop</h6>
+                          <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                          <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END 친구 프사 & 이름 -->
+
+                    <!-- 버튼 -->
+                    <div class="btn-wrap">
+                      <button type="button" class="btn blue-btn" onclick="openModal('chat-exit-confirm-modal')">나가기</button>
+                    </div>
+                    <!-- END 버튼 -->
+                  </div>
+
+                  <!-- 친구 -->
+                  <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 돼요! status-active 클래스 달을 경우 좌측에 초록 동그라미 뜹니다. -->
+                  <div class="friend-list status-active">
+                    <!-- 친구 프사 & 이름 -->
+                    <div class="person-item">
+                      <figure class="mini-thumnail">
+                        <img src="/assets/sns/images/profile-img-default.png" alt="">
+                      </figure>
+                      <div class="person-profile">
+                        <div class="name-wrap">
+                          <h6 class="name">minisooni</h6>
+                          <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                          <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END 친구 프사 & 이름 -->
+
+                    <!-- 버튼 -->
+                    <div class="btn-wrap">
+                      <button type="button" class="btn blue-btn">1:1 대화</button>
+                    </div>
+                    <!-- END 버튼 -->
+                  </div>
+                </div>
+              </div>
+              <div class="ptc-btn-view">
+                <button type="button" class="btn go-list-btn" onclick="chatParticipants('go-list')">목록으로</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END 채팅참여자 목록 -->
+      </div>
+    </div>
+    <!-- END  2-1. 채팅목록 + 채팅창 모달 -->
+
+    <!--  2-2. 채팅 초대 모달 -->
+    <div id="chat-invite-modal02" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeChatModal('chat-invite-modal02')"></div>
+
+      <div class="common-modal narrow-modal">
+        <!-- 닫기버튼 -->
+        <button type="button" class="icon-btn close-btn" onclick="closeChatModal('chat-invite-modal02')">
+          <img src="/assets/sns/images/icon-close.svg" alt="">
+        </button>
+        <!-- END 닫기버튼 -->
+
+        <!-- 팝업 제목 -->
+        <div class="common-modal-ttl">
+          <h3>그룹대화 상대 선택</h3>
+        </div>
+        <!-- END 팝업 제목 -->
+
+        <!-- 스크롤 영역 -->
+        <div class="chat-modal-content">
+          <!-- 친구이름 검색 -->
+          <div class="friend-modal-hd">
+            <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
+          </div>
+          <!-- END 친구이름 검색 -->
+
+          <div class="gray-txt-wrap">
+            <h6 class="gray-txt">친구 <span>3</span>명</h6>
+          </div>
+
+          <!-- 친구 목록 -->
+          <div class="friend-list-grp">
+            <!-- 친구 -->
+            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
+            <input type="checkbox" name="chat-friend" id="chatfriend01" class="friend-list-checkbox">
+            <label class="friend-list" for="chatfriend01">
+              <!-- 친구 프사 & 이름 -->
+              <span class="person-item">
+                <span class="mini-thumnail">
+                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                </span>
+                <span class="person-profile">
+                  <span class="name-wrap">
+                    <span class="name">choi_seung_hyun_tttop</span>
+                    <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                  </span>
+                </span>
+              </span>
+              <!-- END 친구 프사 & 이름 -->
+
+              <!-- 체크박스 -->
+              <span class="checkbox"></span>
+              <!-- END 체크박스 -->
+            </label>
+
+            <!-- 친구 -->
+            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
+            <input type="checkbox" name="chat-friend" id="chatfriend02" class="friend-list-checkbox">
+            <label class="friend-list" for="chatfriend02">
+              <!-- 친구 프사 & 이름 -->
+              <span class="person-item">
+                <span class="mini-thumnail">
+                  <img src="/assets/sns/images/profile-img-jessica.png" alt="">
+                </span>
+                <span class="person-profile">
+                  <span class="name-wrap">
+                    <span class="name">jessica</span>
+                    <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
+                  </span>
+                </span>
+              </span>
+              <!-- END 친구 프사 & 이름 -->
+
+              <!-- 체크박스 -->
+              <span class="checkbox"></span>
+              <!-- END 체크박스 -->
+            </label>
+
+            <!-- 친구 -->
+            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트-->
+            <input type="checkbox" name="chat-friend" id="chatfriend03" class="friend-list-checkbox">
+            <label class="friend-list" for="chatfriend03">
+              <!-- 친구 프사 & 이름 -->
+              <span class="person-item">
+                <span class="mini-thumnail">
+                  <img src="/assets/sns/images/profile-img-default.png" alt="">
+                </span>
+                <span class="person-profile">
+                  <span class="name-wrap">
+                    <span class="name">minisooni</span>
+                    <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                    <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
+                  </span>
+                </span>
+              </span>
+              <!-- END 친구 프사 & 이름 -->
+
+              <!-- 체크박스 -->
+              <span class="checkbox"></span>
+              <!-- END 체크박스 -->
+            </label>
+          </div>
+          <!-- END 친구 목록 -->
+        </div>
+        <!-- END 스크롤 영역 -->
+
+        <div class="chat-modal-bottom">
+          <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됩니다. -->
+          <button id="" type="button" disabled class="btn confirm-btn chat-modal-confirm-btn">확인</button>
+          <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal02')">취소</button>
+        </div>
+      </div>
+    </div>
+    <!-- END  2-2. 채팅 초대 모달 -->
+
+    <!--  2-3. 채팅창 나가기 모달 -->
+    <div id="chat-exit-confirm-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeChatModal('chat-exit-confirm-modal')"></div>
+
+      <div class="common-modal system-modal">
+        <h6 class="system-modal-hd">채팅방 나가기</h6>
+        <div class="system-modal-content">
+          <p class="txt">[동행] 후쿠오카 10.28-10.31 동행모집에서 나가시겠습니까?</p>
+        </div>
+        <div class="system-modal-btn-wrap">
+          <button type="button" class="btn gray-btn" onclick="closeChatModal('chat-exit-confirm-modal')">취소</button>
+          <button type="button" class="btn blue-btn">확인</button>
+        </div>
+      </div>
+    </div>
+    <!-- END  2-3. 채팅창 나가기 모달 -->
 	
 	
 	
   <script>
-    // 1. 친구 목록에서 탭버튼 활성화
+    // 친구 목록에서 탭버튼 활성화
     $(".friend-modal-tab").on('click', function () {
       var showTabContent = $(this).attr('data-show');
 
@@ -757,11 +1268,11 @@ a {
     // 채팅 초대 친구목록 2명 이상일 시 버튼 활성화
     $('input[name="chat-friend"]').change(function () {
       if ($('input:checkbox[name="chat-friend"]:checked').length >= 2) {
-        $('#chat-modal-confirm-btn').addClass('active');
-        $('#chat-modal-confirm-btn').attr('disabled', false);
+        $('.chat-modal-confirm-btn').addClass('active');
+        $('.chat-modal-confirm-btn').attr('disabled', false);
       } else {
-        $('#chat-modal-confirm-btn').removeClass('active');
-        $('#chat-modal-confirm-btn').attr('disabled', true);
+        $('.chat-modal-confirm-btn').removeClass('active');
+        $('.chat-modal-confirm-btn').attr('disabled', true);
       }
     })
 
@@ -777,6 +1288,76 @@ a {
       // 검색 입력창 초기화
       $('.chat-modal-content .search-inp').val('');
     }
+    
+ 	// 대화 그룹대화 / 1:1대화 목록에서 탭버튼 활성화
+    $(".common-tabs .tab").on('click', function () {
+      var showTabContent = $(this).attr('data-show');
+
+      $('.common-tabs .tab').removeClass('active');
+      $(this).addClass('active');
+
+      $('.common-tab-content').removeClass('active');
+      $('#' + showTabContent).addClass('active');
+    })
+
+    // 채팅창에서 입력할 때 높이 높아지는거
+    $('#chat-textarea').on('input', function () {
+      if ($(this).val()) {
+        $(this).siblings('.send-btn').addClass('active');
+        $(this).siblings('.send-btn').attr('disabled', false);
+      } else {
+        $(this).siblings('.send-btn').removeClass('active');
+        $(this).siblings('.send-btn').attr('disabled', true);
+      }
+    })
+
+    // 채팅참여자 목록 모달 열고닫기 기능
+    function chatParticipants(status) {
+      var view = $('#chat-participants');
+      if (status === 'open') {
+        if (view.hasClass('inactive')) {
+          view.removeClass('inactive');
+        }
+
+        view.addClass('active');
+      }
+
+      if (status === 'close') {
+        view.addClass('inactive');
+      }
+
+      if (status === 'go-list') {
+        view.addClass('inactive');
+        chatView('close');
+      }
+    }
+
+    // 채팅창 열고닫기 기능
+    function chatView(status) {
+      var view = $('#chat-view');
+
+      if (status === 'open') {
+        view.addClass('active');
+      }
+
+      if (status === 'close') {
+        view.removeClass('active');
+      }
+    }
+    
+ 	//textarea resize 기능
+    $('textarea[data-autoresize]').each(function () {
+      var offset = this.offsetHeight - this.clientHeight;
+
+      var resizeTextarea = function (el) {
+        $(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+      };
+
+      $(this).on('keyup input', function () { resizeTextarea(this); }).removeAttr('data-autoresize');
+    })
+    
+    
+    
     
     //마이페이지로 이동
     

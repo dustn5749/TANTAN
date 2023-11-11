@@ -47,4 +47,10 @@ public interface MemberDao {
 
 	// 회원 정보 수정하기
 	public boolean modify(MemberDTO member); 
+	
+	// 관리자 회원 정지
+	public boolean memberStop(String member_id);
+	
+	// 관리자 회원 정지 해제
+	public boolean memberRelease(String member_id);
 }

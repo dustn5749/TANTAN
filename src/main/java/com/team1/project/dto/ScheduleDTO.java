@@ -3,6 +3,9 @@ package com.team1.project.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,16 +18,22 @@ import lombok.NoArgsConstructor;
 
 public class ScheduleDTO {
 
-	 private int schedule_Num;
+		private int schedule_Num;
 	    private String member_Id;
-	    private int city_Num;
+	    private String doe_Name;
+	    private String doe_Num;
+	    private String city_name;
 	    private Date start_Num;
 	    private Date end_Date;
 	    private Date reg_Date;
+	    private Date day_date;
 	    private Date mod_Date;
 	    private String delete_Yn;
 	    private String memo;
-	    
+	    private String img;
+	    private String place;
+	    private String memoList;
+//	    private String []scheduleList;
 
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호
@@ -35,7 +44,6 @@ public class ScheduleDTO {
 		private int navSize = 10;      // 페이지 하단에 출력되는 페이지의 항목 수
 		private int navStart = 0;      // 페이지 하단에 출력되는 페이지 시작 번호
 		private int navEnd = 0;        // 페이지 하단에 출력되는 페이지 끝 번호
-
 		
 		public void getTotalCount(int totalCount) {
 			this.totalCount = totalCount;

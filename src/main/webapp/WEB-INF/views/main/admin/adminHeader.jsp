@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,9 +51,6 @@ jQuery.browser = {};
 	      <li class="nav-item d-none d-sm-inline-block">
 	        <a href="/" class="nav-link">Home</a>
 	      </li>
-	      <li class="nav-item d-none d-sm-inline-block">
-	        <a href="#" class="nav-link">Contact</a>
-	      </li>
 	    </ul>
 	  </nav>
 	  
@@ -72,7 +73,7 @@ jQuery.browser = {};
           <img src="admin/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block">${principal.user.name}</a>
         </div>
       </div>
 

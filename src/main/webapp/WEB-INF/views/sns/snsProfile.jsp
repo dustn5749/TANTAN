@@ -24,37 +24,7 @@
 
 <body>
 <div id="app">
-    <!--     <header class="header"> -->
-    <!--       <div class="header-inner"> -->
-    <!--         <h1 class="logo"> -->
-    <!--           <a href="#"> -->
-    <!--             <img src="/assets/sns/images/logo.png" alt=""> -->
-    <!--           </a> -->
-    <!--         </h1> -->
 
-    <!--         <div class="header-menu"> -->
-    <!--           <button type="button" class="hd-btn"> -->
-    <!--             <span class="txt-hidden">친구</span> -->
-    <!--             <img src="/assets/sns/images/icon-users.svg" alt="" class="icon"> -->
-    <!--           </button> -->
-
-    <!--           <button type="button" class="hd-btn"> -->
-    <!--             <span class="txt-hidden">메세지</span> -->
-    <!--             <img src="/assets/sns/images/icon-mail.svg" alt="" class="icon"> -->
-    <!--           </button> -->
-
-    <!--           <button type="button" class="hd-btn"> -->
-    <!--             <span class="txt-hidden">알림</span> -->
-    <!--             <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon"> -->
-    <!--           </button> -->
-
-    <!--           <button type="button" class="hd-btn hd-mypage-btn"> -->
-    <!--             <span class="txt-hidden">마이페이지</span> -->
-    <!--             <img src="/assets/sns/images/icon-user-filled.svg" alt="" class="icon"> -->
-    <!--           </button> -->
-    <!--         </div> -->
-    <!--       </div> -->
-    <!--     </header> -->
     <!--좌측의 사이드바 -->
     <div class="sidebar-wrapper">
         <div class="sidebar">
@@ -188,7 +158,7 @@
                         <div class="grid">
                             <!-- 각 이미지 카드를 클릭시 JS함수와 연결 -->
                             <figure class="feed-item-card" onclick="openModal(${board.boardNum})">
-                                <img src="" alt="" class="thumbnail-img">
+                                <img src="${board.realName}" alt="" class="thumbnail-img">
                                 <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->
                                 <div class="overlay">
                                     <div class="overlay-content">
@@ -197,7 +167,7 @@
                                                 <img src="/assets/sns/images/icon-heart-filled-white.svg" alt=""
                                                      class="icon">
                                             </dt>
-                                            <dd>200</dd>
+                                            <dd>${board.likeCount}</dd>
                                         </dl>
 
                                         <dl class="icon-msg-txt">
@@ -206,7 +176,7 @@
                                                      alt=""
                                                      class="icon">
                                             </dt>
-                                            <dd>200</dd>
+                                            <dd>${board.commentCount}</dd>
                                         </dl>
                                     </div>
                                 </div>

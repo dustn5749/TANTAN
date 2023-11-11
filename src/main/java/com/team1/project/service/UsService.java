@@ -109,6 +109,22 @@ public class UsService {
 		return usDAO.usList();
 	}
 
+	// 관리자 신고 리스트
+	public List<UsDTO> usReportList() throws Exception{
+		return usDAO.usReportList();
+	}
+	
+	// 관리자 동행 게시글 삭제
+	public boolean ausDelete(int us_num) throws Exception{
+		
+		return usDAO.ausDelete(us_num);
+	}
+	
+	// 관리자 동행 게시글 복구
+	public boolean ausChange(int us_num) throws Exception{
+		
+		return usDAO.ausChange(us_num);
+	}
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");
