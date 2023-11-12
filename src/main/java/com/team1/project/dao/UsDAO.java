@@ -43,7 +43,6 @@ public interface UsDAO {
 	
 	//관리자 동행 리스트
 	public List<UsDTO> usList();
-<<<<<<< HEAD
 
 	//us_num의 번호 가져오기
 	public int nextUsNum();
@@ -51,8 +50,6 @@ public interface UsDAO {
 	//us에 fileno저장
 	public void updateFile(UsFileDTO file);
 
-=======
-	
 	//관리자 신고 리스트
 	public List<UsDTO> usReportList();
 	
@@ -61,5 +58,4 @@ public interface UsDAO {
 	
 	//관리자 동행글 복구하기
 	public boolean ausChange(int us_num) throws Exception;
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 }
