@@ -224,9 +224,9 @@ public class MemberController {
 	    System.out.println("membercontroller.mySchedule()");
 	    String viewPage = "mySchedule";
 	    if(principal != null) {
-	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
-	    	System.out.println("list = " + list);
-	    	request.setAttribute("scheduleList", list);	    	
+//	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
+//	    	System.out.println("list = " + list);
+//	    	request.setAttribute("scheduleList", list);
 	    }
 	    
 		mv.setViewName(viewPage);
