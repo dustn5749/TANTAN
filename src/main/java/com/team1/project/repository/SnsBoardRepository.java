@@ -1,6 +1,6 @@
-package com.team1.project.sns.board.repository;
+package com.team1.project.repository;
 
-import com.team1.project.sns.board.entity.SnsBoard;
+import com.team1.project.entity.SnsBoard;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

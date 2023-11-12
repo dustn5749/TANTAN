@@ -1,4 +1,4 @@
-package com.team1.project.sns.board.entity;
+package com.team1.project.entity;
 
 import lombok.*;
 
@@ -18,7 +18,7 @@ import java.util.Date;
 public class SnsLike {
     //https://abbo.tistory.com/329
     @Id
-    private Long memberId;
+    private String memberId;
 
     @Id
     private Long boardNum;
@@ -27,8 +27,11 @@ public class SnsLike {
 
     @Setter
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class SnsLikePK implements Serializable {
-        private Long memberId;
+        private String memberId;
         private Long boardNum;
     }
 

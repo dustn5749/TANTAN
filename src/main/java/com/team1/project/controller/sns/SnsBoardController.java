@@ -1,16 +1,17 @@
-package com.team1.project.sns.board;
+package com.team1.project.controller.sns;
 
 import java.util.List;
 
+import com.team1.project.service.auth.AuthService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.project.dto.MemberDTO;
-import com.team1.project.sns.board.entity.SnsBoard;
-import com.team1.project.sns.board.service.SnsBoardService;
-import com.team1.project.sns.board.service.SnsLikeService;
+import com.team1.project.entity.SnsBoard;
+import com.team1.project.service.sns.SnsBoardService;
+import com.team1.project.service.sns.SnsLikeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class SnsBoardController {
 
     private final SnsBoardService service;
     private final SnsLikeService likeService;
+    private final AuthService authService;
 
     @GetMapping("/boards")
     public List<SnsBoard> getList() {
@@ -32,18 +34,20 @@ public class SnsBoardController {
     @GetMapping("/boards/insert/dummny")
     public void dummy(MemberDTO ddd, Authentication authentication) {
 
+        String memberId = authService.getMemberId(authentication);
+
         service.registerBoard(SnsBoard.builder()
                 .title("ssssss111s")
                 .content("sssssss11")
                 .deleteYn("N")
                 .viewCount(0L)
-                .memberId(7800L)
+                .memberId(memberId)
                 .build());        
     }
     
     @GetMapping("/boards/like/{id}")
-    public void dummy(@PathVariable Long id) {
-        Long memberId = 7800L;
+    public void dummy(@PathVariable Long id,Authentication authentication) {
+        String memberId = authService.getMemberId(authentication);
         likeService.registerLike(id,memberId);
     }
 

@@ -1,10 +1,10 @@
-package com.team1.project.sns.board.service;
+package com.team1.project.service.sns;
 
 import com.team1.project.dao.SnsDAO;
 import com.team1.project.dto.SnsBoardDTO;
-import com.team1.project.sns.board.entity.SnsBoard;
-import com.team1.project.sns.board.repository.SnsBoardRepository;
-import com.team1.project.sns.board.repository.SnsLikeRepository;
+import com.team1.project.entity.SnsBoard;
+import com.team1.project.repository.SnsBoardRepository;
+import com.team1.project.repository.SnsLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

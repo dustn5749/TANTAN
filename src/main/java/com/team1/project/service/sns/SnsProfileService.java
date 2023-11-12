@@ -1,6 +1,6 @@
-package com.team1.project.sns.profile.service;
+package com.team1.project.service.sns;
 
-import com.team1.project.sns.board.repository.SnsBoardRepository;
+import com.team1.project.repository.SnsBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

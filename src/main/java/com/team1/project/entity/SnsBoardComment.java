@@ -1,4 +1,4 @@
-package com.team1.project.sns.board.entity;
+package com.team1.project.entity;
 
 import lombok.Getter;
 import lombok.Setter;
