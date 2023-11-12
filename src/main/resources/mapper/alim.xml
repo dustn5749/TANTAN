@@ -17,7 +17,7 @@
         from alim al
          inner join member m on (m.member_id = al.SEND_MEMBER_ID)
         where 1 = 1
-          and al.receive_member_id = ${memberId}
+          and al.receive_member_id = #{memberId}
           and al.read_yn = 'N'
         order by
             al.ALIM_ID desc
@@ -29,7 +29,7 @@
         <![CDATA[
         select count(*) from alim al
         where 1 = 1
-        and al.receive_member_id = ${memberId}
+        and al.receive_member_id = #{memberId}
         and al.read_yn = 'N'
         ]]>
     </select>
@@ -39,7 +39,7 @@
         update alim al
             set al.read_yn = 'Y'
          where 1 = 1
-          and al.receive_member_id = ${memberId}
+          and al.receive_member_id = #{memberId}
           and al.read_yn = 'N'
         ]]>
     </update>
@@ -49,7 +49,7 @@
         update alim al
         set al.read_yn = 'Y'
         where 1 = 1
-          and al.alim_id = ${alimId}
+          and al.alim_id = #{alimId}
           and al.read_yn = 'N'
         ]]>
     </update>
