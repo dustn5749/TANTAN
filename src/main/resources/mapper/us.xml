@@ -4,20 +4,41 @@
 <mapper namespace="com.team1.project.dao.UsDAO">
 
 <!-- 전체목록조회 -->
+<!-- <select id="getUsList" resultType="com.team1.project.dto.UsDTO"> -->
+<!--       SELECT * FROM ( -->
+<!--           SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
+<!--           FROM (  -->
+<!--               SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
+<!--               FROM us a  -->
+<!--               WHERE rownum BETWEEN #{startNo} AND #{endNo} -->
+<!--               order by us_num desc -->
+<!--          <if test="start_Date != null and end_Date != null"> -->
+<!--              AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
+<!--          </if> -->
+<!--           ) -->
+<!--       ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
+<!-- </select> -->
+
+<!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO">
-      SELECT * FROM (
-          SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
-          FROM ( 
-              SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
-              FROM us a 
-              WHERE rownum BETWEEN #{startNo} AND #{endNo}
-              order by us_num desc
-         <if test="start_Date != null and end_Date != null">
-             AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
-         </if>
-          )
-      ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
+    SELECT * FROM (
+        SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+        FROM (
+            SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+            FROM us a 
+            WHERE rownum BETWEEN #{startNo} AND #{endNo}
+            <!-- start_Date와 end_Date에 대한 조건이 있는 경우 -->
+            <if test="start_Date != null and end_Date != null">
+                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
+            </if>
+            <!-- 페이징과 조건이 모두 적용된 경우 ORDER BY 추가 -->
+            <if test="start_Date != null and end_Date != null">
+                ORDER BY us_num DESC
+            </if>
+        )
+    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
 </select>
+
 
 <!-- 메인 탑5 노출 -->
 <select id="usTop5" resultType="com.team1.project.dto.UsDTO">

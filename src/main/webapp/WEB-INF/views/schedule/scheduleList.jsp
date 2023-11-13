@@ -309,12 +309,12 @@
             list-style: none;
         }
      .schedule_btn {
-     	cursor: pointer !important;
+        cursor: pointer !important;
      
      }
      .us_btn:hover {
-     	background-color: black !important;
-     	color : white !important;
+        background-color: black !important;
+        color : white !important;
      }
      
      .py-5 {
@@ -625,7 +625,7 @@
 <!--     </div> -->
 <!-- </div> -->
 
-				<div class="contents subNews">
+            <div class="contents subNews">
                 <ul id="newslist">
                     <c:forEach var="schedule" items="${result.scheduleList}">
                     <li>
@@ -633,10 +633,10 @@
                         <h3>${li.title}</h3>
                         <a href="/mobile/newsview.do?seq_no=${li.seq_no}"></a>
                     </li>
-               	</c:forEach>
+                  </c:forEach>
                 </ul>
-                	<a id="moreView">더보기</a>
-        	    </div>
+                   <a id="moreView">더보기</a>
+               </div>
 <script>
 $(document).ready(function() {
     var page = 1; // 페이지 번호 초기화
@@ -733,7 +733,7 @@ function jsPageNo(pageNo) {
 }
 
 document.querySelector(".us_btn").addEventListener("click", function () {
-	location.href="/us/list";
+   location.href="/us/list";
 }
 )
 $(".detailBtn").on("click", function(e) {
@@ -745,8 +745,8 @@ $(".detailBtn").on("click", function(e) {
         const schedule_num = schedule_num_element.value;
 
         if (schedule_num.trim() !== "") {
-        	console.log("Redirecting to: /detail?schedule_Num=" + schedule_num);
-        	location.href = "/detail?schedule_Num=" + schedule_num;
+           console.log("Redirecting to: /detail?schedule_Num=" + schedule_num);
+           location.href = "/schedule/detail?schedule_Num=" + schedule_num;
 
             console.error("schedule_num이 비어 있습니다.");
         }
@@ -755,13 +755,7 @@ $(".detailBtn").on("click", function(e) {
     }
 });
 
-
-
-
-
-
 </script>
       </div>
 </body>
 </html>
-

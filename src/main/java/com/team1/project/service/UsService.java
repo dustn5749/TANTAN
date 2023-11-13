@@ -17,7 +17,7 @@ public class UsService {
 	@Autowired
 	private UsDAO usDAO;
 	
-	// 1. 동행 목록 조회
+//	 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
 		// 1. 전체 건수를 얻기
 		us.setTotalCount(usDAO.totalCount(us)); //여기서 전체 게시글 수를 불러와서 저장함.
@@ -34,6 +34,8 @@ public class UsService {
 		return result;
 	}
 
+	
+	
 	// 메인 top5
 	public List<UsDTO> usTop5() throws Exception {
 		return usDAO.usTop5();

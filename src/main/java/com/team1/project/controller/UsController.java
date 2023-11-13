@@ -38,7 +38,7 @@ public class UsController {
 
 		System.out.println("us = " + us);
 		model.addAttribute("result", usService.usPageList(us));
-	return "usList"; //타일즈랑 리턴값이랑 동일해야함.
+	return "usList"; 
 	} 
 	
 	//글쓰기 페이징 이동

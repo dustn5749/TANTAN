@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
+import com.team1.project.dto.UsDTO;
+import com.team1.project.service.MemberService;
 import com.team1.project.service.ScheduleService;
 
 import lombok.extern.log4j.Log4j2;
@@ -28,6 +30,10 @@ public class ScheduleController {
 
 	@Autowired
 	private ScheduleService scheduleService;
+	
+	@Autowired
+	 private MemberService memberservice;
+	
 	
 	//일정목록보기
 	@GetMapping(value = "/list")
@@ -103,19 +109,23 @@ public class ScheduleController {
     //    }   
     
     
-  //일정상세보기
-    @RequestMapping(value = "/Detail") 
-    public String detail(@RequestParam("sc	hedule_Num") int schedule_Num, Model model) throws Exception {
-	      System.out.println("schedule = " + schedule_Num);
-	      ScheduleDTO schduleDetail = scheduleService.schduleDetail(schedule_Num);
-//	      MemberDTO writer = memberservice.member_Id(usDetail.member_Id());
-	      System.out.println("scheduleDetail = " + schduleDetail);
-	      System.out.println("일정 상세보기 컨트롤러");
-	      model.addAttribute("schedule", schduleDetail);
-	      return "scheduleDetail";
-	    }
-	
+    //일정상세보기이동
+    @RequestMapping(value = "/detail")
+    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
+       System.out.println("scheduleController.detail()");
+       System.out.println("schedule_Num = " + schedule_Num);
+    return "scheduleDetail";
+
+    }
     
+    //일정상세보기
+//	@ResponseBody
+//	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
+//	public ScheduleDTO Scheduledetail(@RequestParam("schedule_Num") int usschedule_num_num) throws Exception {                       
+//		ScheduleDTO schedule = scheduleService.scheduleDetail(schedule_Num);
+//	    System.out.println("동행 상세보기 컨트롤러");
+//	    return detail;
+//	}
 
    //수정하기
 	@ResponseBody

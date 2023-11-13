@@ -78,8 +78,7 @@ public class UsDTO {
    }
    
 //   // 검색 필드
-//   private String searchTitle = "";  // 검색 제목 (미사용)
-//   
-//}
-
+   private String searchTitle = "";  // 검색 제목 (미사용)
+   
 }
+
