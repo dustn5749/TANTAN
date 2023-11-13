@@ -27,6 +27,7 @@
 	.inquiry_title {
 		width: 100%;
 		background-color:  rgb(87, 87, 87);
+		background-color:  rgb(173, 211, 254);
 		color : white;
 		padding-right: 30px;
 		height: 50px;
@@ -43,7 +44,7 @@
 		text-align: left;
 	}
 	.title_right {
-		width: 20%;
+		width: 30%;
 		font-family: 'Pretendard-Regular';
 		font-size: 20px !important;
 		padding-right: 20px;
