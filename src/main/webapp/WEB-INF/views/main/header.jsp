@@ -168,7 +168,7 @@ a {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/customer/inquiry">고객센터</a>
+                            <a class="nav-link" href="/customer/inquiryList">고객센터</a>
                         </li>
                         <!-- 로그인 유무 -->
 	                    <li class="nav-item">

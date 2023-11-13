@@ -39,14 +39,16 @@ public class ScheduleController {
     return "scheduleWrite";
    }
     
-<<<<<<< HEAD
   
     
     //일정상세보기
     @RequestMapping(value = "/detail")
     public String detail(ScheduleDTO schedule) throws Exception {
     return "scheduleDetail";
-=======
+
+    }
+    
+    
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -72,9 +74,7 @@ public class ScheduleController {
             result.put("message", "일부 또는 전체 일정 등록에 실패했습니다.");
             result.put("result", false);
         }
-
         return result;
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     }
 
     

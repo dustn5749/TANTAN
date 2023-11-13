@@ -4,18 +4,19 @@
 <mapper namespace="com.team1.project.dao.UsDAO">
 
 <!-- 전체목록조회 -->
-<select id="getUsList" resultType="com.team1.project.dto.UsDTO">
-		SELECT * FROM (
-		    SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
-		    FROM ( 
-		        SELECT rownum AS us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
-		        FROM us a 
-		        WHERE rownum BETWEEN #{startNo} AND #{endNo}
-			<if test="start_Date != null and end_Date != null">
-			    AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
-			</if>
-		    )
-		) WHERE nrow BETWEEN #{startNo} AND #{endNo}
+<select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
+    SELECT * FROM (
+        SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+        FROM (
+            SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+            FROM us a 
+            WHERE rownum BETWEEN #{startNo} AND #{endNo}
+            <if test="start_Date != null and end_Date != null">
+                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
+            </if>
+            order by us_num desc
+        )
+    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
 </select>
 
 <!-- 메인 탑5 노출 -->

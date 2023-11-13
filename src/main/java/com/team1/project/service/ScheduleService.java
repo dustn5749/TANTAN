@@ -1,6 +1,7 @@
 package com.team1.project.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class ScheduleService {
 			System.out.println("schduleService: " + result);
 			return result;
 		}
+		
+		
 		//일정 작성하기
 		public boolean writeInsert(ScheduleDTO schedule) throws Exception {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
@@ -107,6 +110,14 @@ public class ScheduleService {
 //		int result = ScheduleDAO.reply(us);
 //
 //		return result;
+
+		
+		// 내 일정 정보 얻기
+		public List<ScheduleDTO> getMyScheduleList(String member_Id) {
+			System.out.println("scheduleservice.getMyScheduleList()");
+			System.out.println("member = " + member_Id);
+			return schduleDAO.getMyScheduleList(member_Id);
+		}
 		
 }
 	

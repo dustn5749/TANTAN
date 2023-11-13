@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.UsDAO;
+import com.team1.project.dao.UsFileDAO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.dto.UsFileDTO;
@@ -19,7 +20,7 @@ public class UsService {
 	private UsDAO usDAO;
 	
 	@Autowired
-	private UsFileService usfileService;
+	private UsFileDAO usfileDAO;
 	
 	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
@@ -54,7 +55,9 @@ public class UsService {
 			file.setUsNum(usNum);
 			file.setMemberId(us.getWriter());
 			System.out.println("file " + file);
-			int fileNo = usfileService.add(file);
+			usfileDAO.add(file);
+			int fileNo = usfileDAO.getFileNo(file.getUsNum());
+			System.out.println("fileNo = " + fileNo);
 			file.setUsFileNum(fileNo);
 			usDAO.updateFile(file);
 		}

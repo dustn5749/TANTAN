@@ -265,6 +265,21 @@
 	font-size: 14px !important;
 	color : rgb(121, 121, 121);
 }
+
+/* 상세 보기 버튼 */
+.detailBtn {
+	background: white;
+	border: none;
+	width: 120px;
+	height: 45px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-family: 'Pretendard-Regular' !important;
+}
+.detailBtn:hover {
+	background-color: black;
+	color : white;
+}
 </style>
 </head>
 <body>
@@ -405,7 +420,8 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
+					            <input type="hidden" value="${item.us_num}" class="us_num">
+                                <div class="text-center"><button class="detailBtn">상세보기</button></div>
                             </div>
                         </div>
                     </div>
@@ -507,7 +523,15 @@
         </div>
     </section>
     <!-- End Featured Product -->
-<script src="/assets/js/main.js">
+<script>
+	/* 동행 상세보기 */
+	$(".detailBtn").on("click", function(e){
+	console.log("상세보기")
+    const us_num = e.target.closest(".card-footer").querySelector(".us_num").value;
+   
+  	location.href="/us/Detail?us_num="+us_num;
+});
+
 </script>	
 
 </body>

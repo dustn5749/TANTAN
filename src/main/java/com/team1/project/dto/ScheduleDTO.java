@@ -69,4 +69,5 @@ public class ScheduleDTO {
 		public int getEndNo() {
 			return pageNo * pageLength;  // 페이지의 마지막 게시글 번호 계산
 		}
+
 	}

@@ -18,6 +18,7 @@ public class UsFileService {
     // 첨부파일 추가하기
     public int add(UsFileDTO file) throws Exception {
         System.out.println("UsFileService.add()");
+        System.out.println("file = " + file);
         return usFileDAO.add(file);
     }
 
@@ -44,6 +45,8 @@ public class UsFileService {
         System.out.println("UsFileService.deletes()");
         return usFileDAO.deletes(deleteNumList);
     }
+
+
     
 
 }

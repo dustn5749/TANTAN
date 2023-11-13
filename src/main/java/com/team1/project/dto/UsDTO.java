@@ -9,10 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
-@Builder
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class UsDTO {
 	
 	private int us_num; // 객체의 고유 식별 번호입니다.
@@ -24,15 +25,11 @@ public class UsDTO {
 	private int us_cnt; // 객체와 관련된 수치적 값 또는 카운트입니다.
 	private Date regdate; // 객체의 등록 날짜입니다.
 	private String writer; // 객체를 작성한 사람의 이름 또는 식별자입니다.
-<<<<<<< HEAD
 	private int reportcnt;
 	private int fileNo; //첨부파일 번호
 	private List<UsFileDTO> file;
-=======
 	// 관리자 기능
-	private int reportcnt; // 동행 게시글 신고횟수
 	private String status; // 동행 게시글 상태
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
 	//관리자 동행 목록 가져오기
 	public List<UsDTO> usList() {

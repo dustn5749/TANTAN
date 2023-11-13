@@ -5,6 +5,13 @@
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
    .us_container{
       width: 80%;
       margin: 0 auto;
@@ -330,6 +337,24 @@
             display: none; 
         }
      
+   /* 일정 상세보기 버튼 */
+   .detailButton {
+   		background: white;
+   		width: 120px;
+   		height: 45px;
+   		border: none;
+   		border-radius: 8px;
+   		font-family: 'Pretendard-Regular' !important;
+   		
+   }
+   .detailButton:hover {
+   		background: black;
+   		color:white;
+   }
+	.schedule_container > input, button, p, span, div, ul, li {
+   		font-family: 'Pretendard-Regular' !important;		
+	}
+   
 </style>
 </head>
 
@@ -399,7 +424,7 @@
                            <button value="${result.list[item].schedule_Num}" class="detailButton">상세보기 </button>
                      </div>
                      </div>
-                     </div>
+                   </div>
             </div>
         </c:forEach>
     </div>
@@ -434,7 +459,8 @@
         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
     </div>
 </div>
-
+</div>
+</div>
 <script>
 function jsPageNo(pageNo) {
     document.getElementById("pageNo").value = pageNo;

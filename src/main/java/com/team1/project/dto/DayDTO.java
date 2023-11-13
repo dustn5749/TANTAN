@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class DayDTO {
 	   private int dayId;
 	   private int schedule_Num;
