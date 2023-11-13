@@ -1,6 +1,7 @@
 package com.team1.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,4 +21,12 @@ public class CustomerController {
 		model.addAttribute("result", customerService.getInquiryList(inquiry));
 		return "inquiry";
 	}
+	
+	// 1대1 문의사항 글쓰기
+	@RequestMapping("/write")
+	public String write() {
+		return "inquiry_write";
+	}
+	
+	
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.project.dao.CustomerDAO">
+	<!-- 문의 목록 가져오기 -->
+  <select id="getInquiryList" resultType="com.team1.project.dto.InquiryDTO">
+    SELECT *
+    FROM (
+        SELECT
+            ROWNUM AS rnum,
+            t.*
+        FROM (
+            SELECT
+                i.inquiry_num,
+                i.category_num,
+                c.category,
+                i.member_id,
+                i.title,
+                i.content,
+                i.regdate,
+                i.answer_yn
+            FROM 
+                inquiry i
+                
+            JOIN 
+                INQURY_CATEGORY c ON i.category_num = c.category_num
+            WHERE
+                i.title LIKE '%' || #{searchTitle, jdbcType=VARCHAR} || '%'
+            ORDER BY
+                i.inquiry_num DESC
+        ) t
+        WHERE ROWNUM <![CDATA[<=]]> #{endNo, jdbcType=NUMERIC}
+    )
+    WHERE rnum <![CDATA[>=]]> #{startNo, jdbcType=NUMERIC}
+</select>
+    
+    <select id="getTotalCount" resultType="int">
+    	select count(*) from inquiry
+    </select>
+</mapper>
