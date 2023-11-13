@@ -105,9 +105,10 @@ public class ScheduleController {
     
   //일정상세보기
     @RequestMapping(value = "/Detail") 
-    public String detail(@RequestParam("schedule_Num") int schedule_Num, Model model) throws Exception {
+    public String detail(@RequestParam("sc	hedule_Num") int schedule_Num, Model model) throws Exception {
 	      System.out.println("schedule = " + schedule_Num);
 	      ScheduleDTO schduleDetail = scheduleService.schduleDetail(schedule_Num);
+//	      MemberDTO writer = memberservice.member_Id(usDetail.member_Id());
 	      System.out.println("scheduleDetail = " + schduleDetail);
 	      System.out.println("일정 상세보기 컨트롤러");
 	      model.addAttribute("schedule", schduleDetail);
