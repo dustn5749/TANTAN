@@ -52,7 +52,7 @@
        height: 44px;
        margin-top: 20px;
        padding: 0px 0px 20px;
-/*        background-color: rgb(255, 255, 255); */
+       background-color: rgb(255, 255, 255);
    }
    .us_header4 {
    z-index: 9;
@@ -432,7 +432,6 @@
 }
 /* 이미지 div */
 .img_div {
-<<<<<<< HEAD
    display: flex;
 }
 .us_content_img {
@@ -455,6 +454,7 @@ div, input, p, span, button, h2 {
    
 }
 
+
 /* 상세 보기 버튼 */
 .detailBtn {
    background: white;
@@ -467,41 +467,6 @@ div, input, p, span, button, h2 {
 .detailBtn:hover {
    background-color: black;
    color : white;
-	display: flex;
-}
-.us_content_img {
-	border: none;
-	box-shadow: 1px 1px 1px 1px rgb(237, 237, 237);
-	 width:95%;
-	 height:200px;
-}
-.fw-bolder {
-	font-size: 20px !important;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	font-weight: bold;
-	font-family: 'Pretendard-Regular';
-	
-}
-
-div, input, p, span, button, h2 {
-	font-family: 'Pretendard-Regular' !important;
-	
-}
-
-
-/* 상세 보기 버튼 */
-.detailBtn {
-	background: white;
-	border: none;
-	width: 120px;
-	height: 45px;
-	border-radius: 8px;
-	 cursor: pointer;
-}
-.detailBtn:hover {
-	background-color: black;
-	color : white;
 }
 
 </style>
@@ -572,13 +537,7 @@ div, input, p, span, button, h2 {
                         </div>
                        <div class="us_cnt_div">
                              <span class="menu">모집 인원</span> : <span>${item.us_cnt} 명</span>
-                       		<img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
-                        </div>
-                        <h5 class="fw-bolder">${item.title}</h5>
-                        <p>${item.writer}</p>
-                        <div class="us_day">
-                        	<p class="menu">모집기간</p>
-	                        <span id="start_day"> ${item.start_Date} ~ </span> 
+                       </div>
                     </div>
                 </div>
                 <input type="hidden" value="${item.us_num}" class="us_num">
@@ -642,13 +601,13 @@ function city_btn1() {
         }
     });
 
-  	/* 동행 상세보기 */
-   		$(".detailBtn").on("click", function(e){
-    		console.log("상세보기")
-    	    const us_num = e.target.closest(".card").querySelector(".us_num").value;
-    	   
-    	  	location.href="/us/Detail?us_num="+us_num;
-    	});
+     /* 동행 상세보기 */
+         $(".detailBtn").on("click", function(e){
+          console.log("상세보기")
+           const us_num = e.target.closest(".card").querySelector(".us_num").value;
+          
+            location.href="/us/Detail?us_num="+us_num;
+       });
 
     
 </script> 

@@ -459,17 +459,18 @@
             onclick="getLocation(this)" data-value="10"> 전북 </a></li>
       </ul>
    </div>
+   
    <input type="hidden" id="doe_location">
    <div class="schedule_container">
       <div class="cont_top">
          <div class="schedule">
-         
             <form>
                <input type="date" class="form-control mt-1" id="start_Date" name="start_Date" placeholder="Choose Date"> 
                <input type="date" class="form-control mt-1" id="end_Date" name="end_Date" placeholder="Choose Date">
             </form>
          </div>
       </div>
+      
             <div class="cont_bottom">
                <div class="map-section">
                   <!--<h1>지도</h1> -->
@@ -483,27 +484,18 @@
                            <span>day<em class="day_num">1</em></span><em class="day_date"><input type="date" class="detail_scedule" ></em>
                         </p>
                         <div>
-    <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
+    <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>${schedule.place}
                            <input type="text" readonly="readonly" id="select_city_area" class="day-1 placeList" name="location1"/>${schedule.place}                 
                         </div>
                            <!-- 메모 부분 수정 -->
-                     <div class="memo-div">
-                         <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this)">메모수정</button>
-                         <input type="text" readonly="readonly" id="memo_area_1" name="memo_area_1" class="memoList">${schedule.memo}
-                     </div>
-                     <!-- 메모 모달창 -->
-                     <div class="memo-modal" style="display: none;">
-                         <div class="modal-content">
-                             <p>
-                                 <span>day <em class="memo_day_num"></em></span><em class="memo_day_date"></em>
-                             </p>
-                             <textarea class="memo-content" placeholder="여행일정을 메모해보세요" ></textarea>
-                             <div class="button-container1">
-                                 <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo(this)">취소</button>
-                                 <button class="schedule-btn-grp complete-btn" onclick="completeMemo(this)">작성완료</button>
-                             </div>
-                             <div class="memo-display" style="display: none;"></div>
-                         </div>
+               <div class="memo-div">
+    <div class="schedule-btn-grp">
+        <button class="memo-add-btn" onclick="addMemo(this)">메모수정</button>
+        <input type="text" value="${schedule.memo}" id="memoInput">
+        <button class="memo-save-btn" onclick="saveMemo()">수정완료</button>
+    </div>
+</div>
+
                      </div>
                      
                <!--장소선택버튼 -->
@@ -525,22 +517,39 @@
                </div>
                </li>
    </ul>
-               <!-- 일정 추가 버튼 -->
                <div class="day_li_btn_div">
-                  <button class="add_shedule_btn">다른일정수정</button>
-                  <button class="minus_shedule_btn">일정삭제</button>
-               </div>
-         <!--일정 등록하기 버튼 -->
-         <div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
-            <a href="javascript:void(0);" onclick="sendDataToServer()">일정수정완료</a>
+    <button class="add_shedule_btn">다른일정수정</button>
+    <button class="minus_shedule_btn">일정삭제</button>
+</div>
+
+<div class="button-group">
+  
+    
+    
+    <!-- Schedule Registration Button -->
+    <div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
+        <a href="javascript:void(0);" onclick="sendDataToServer()">일정수정완료</a>
+    </div>
+</div>
+
+            
          </div>
-         </div>         
-         </div>
-         <div class="goBack" style="text-align: center;">
-            <a href="/schedule/list">뒤로가기</a>
-         </div>
-   </div>
+        </div>
+        </div>
+        
+   
 <script>
+function saveMemo() {
+    var updatedMemo = document.getElementById("memoInput").value;
+    document.getElementById("displayedMemo").textContent = updatedMemo;
+    document.getElementById("memoInput").value = "";
+    alert("수정완료 되었습니다.");
+}
+
+function sendDataToServer() {
+    alert('모든 일정이 수정 완료되었습니다!');
+}
+
          
 /* 일정 추가 날짜 범위 지정하기 */
 
@@ -698,8 +707,6 @@
           
           SelectBox(dataValue);
       }
-      
-      
       
       //도 선택
       function SelectBox(doeNum) {

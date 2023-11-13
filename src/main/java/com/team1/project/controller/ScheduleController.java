@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
-import com.team1.project.service.MemberService;
 import com.team1.project.service.ScheduleService;
 
 import lombok.extern.log4j.Log4j2;
@@ -29,10 +28,6 @@ public class ScheduleController {
 
 	@Autowired
 	private ScheduleService scheduleService;
-	
-	@Autowired
-	 private MemberService memberservice;
-	
 	
 	//일정목록보기
 	@GetMapping(value = "/list")
@@ -48,16 +43,7 @@ public class ScheduleController {
     return "scheduleWrite";
    }
     
-
-    
-    //일정상세보기
-    @RequestMapping(value = "/detail")
-    public String detail(ScheduleDTO schedule) throws Exception {
-
-    return "scheduleDetail";
-
-    }
-
+    //일정 글 작성이동
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -83,9 +69,9 @@ public class ScheduleController {
             result.put("message", "일부 또는 전체 일정 등록에 실패했습니다.");
             result.put("result", false);
         }
+
         return result;
     }
-
     
     //도시 가져오기 
     @ResponseBody
@@ -107,17 +93,7 @@ public class ScheduleController {
     	   return result;
     } 
 
-    // 일정1일 일정2일 가져오기
-    //    @ResponseBody
-    //    @RequestMapping (value = "/day")
-    //    public Map<String, Object> day(@RequestBody ScheduleDTO schedule)throws Exception {
-    //    	System.out.println(" 일정1일 일정2일 가져오기" + schedule);
-    //    	Map<String, Object> result = scheduleService.day(schedule);
-    //    	return result;
-    //    }   
-    
-    
-    //일정상세보기이동
+    //일정상세보기
     @RequestMapping(value = "/detail")
     public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
        System.out.println("scheduleController.detail()");
@@ -126,16 +102,6 @@ public class ScheduleController {
 
     }
     
-    //일정상세보기
-	@ResponseBody
-	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
-	public ScheduleDTO Scheduledetail(@RequestParam("schedule_Num") int schedule_Num, Model model) throws Exception {                       
-		ScheduleDTO schedule = scheduleService.schduleDetail(schedule_Num);
-		model.addAttribute("result", schedule);
-	    System.out.println("동행 상세보기 컨트롤러");
-	    return schedule;
-	}
-
    //수정하기
 	@ResponseBody
 	@PostMapping("/update")
@@ -167,7 +133,20 @@ public class ScheduleController {
 	    }
     return result;
 	}
-    
+
+	
+//	// 더보기
+//	@RequestMapping(value = "/THEBOGI")
+//	@ResponseBody 
+//	public List<ScheduleDTO> THEBOGI(ScheduleDTO schedule, Model model
+//			, @RequestParam(value="startNum", required=false)String startNum) throws Exception {
+//		System.out.println("페이징 브이오다"+vo);
+//		scheduleDTO.setStart(Integer.parseInt(startNum));
+//		scheduleDTO.setEnd(5);
+//		return service.selectBoard(vo);
+//	}
+	
+	
 	//하트색
 	@PostMapping("/updateHeartColor")
 	@ResponseBody
@@ -182,5 +161,4 @@ public class ScheduleController {
 	    }
 	    return response;
 	}
-	
 }
