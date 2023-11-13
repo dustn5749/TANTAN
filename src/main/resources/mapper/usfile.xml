@@ -21,8 +21,8 @@
     WHERE USFILENUM = #{usFileNum}
 </select>
 <!-- 첨부파일 추가하기 -->
-<insert id="add" useGeneratedKeys="true" keyProperty="USFILENUM">
-    <selectKey keyProperty="USFILENUM" resultType="int" order="BEFORE">
+ <insert id="add" useGeneratedKeys="true" keyProperty="usFileNum">
+    <selectKey keyProperty="usFileNum" resultType="int" order="BEFORE">
         SELECT us_file_sq.nextval FROM dual
     </selectKey>
     INSERT INTO us_file (
@@ -35,7 +35,7 @@
         FILETYPE,
         REGDATE
     ) VALUES (
-        #{USFILENUM},
+        us_file_sq.nextval,
         #{usNum},
         #{memberId},
         #{length},
@@ -44,7 +44,18 @@
         #{fileType},
         sysdate
     )
-</insert>
+</insert> 
+<!-- <insert id="add" parameterType="java.util.HashMap" statementType="CALLABLE">
+	{call insert_us_file(
+		#{usNum},
+		#{memberId},
+		#{length},
+		#{uploadName},
+		#{realName},
+		#{fileType},
+		#{p_out
+	)}
+</insert> -->
 
 <delete id="delete">
     DELETE FROM attach_file
@@ -59,7 +70,10 @@
     </foreach>
 </delete>
 
-
-
+<!-- 첨부파일 번호 얻기 -->
+<select id="getFileNo" resultType="int">
+	select USFILENUM from US_FILE 
+	WHERE US_NUM=#{usNum}
+</select>
 
 </mapper> 

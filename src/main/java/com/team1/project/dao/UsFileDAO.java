@@ -24,5 +24,10 @@ public interface UsFileDAO {
     // 첨부파일 삭제하기 (여러개, 게시판에 따른 삭제)
     boolean deletes(int[] deleteNumList) throws Exception;
 
+    // 게시물 번호에 따른 첨부파일 번호 얻기
+	int getFileNo(int usNum);
+
+
+
 
 }

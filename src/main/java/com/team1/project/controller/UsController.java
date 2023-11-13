@@ -29,8 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.dto.UsFileDTO;
+import com.team1.project.service.MemberService;
 import com.team1.project.service.UsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +45,9 @@ public class UsController {
 	
 	@Autowired
 	private UsService usService;
+	
+	@Autowired
+	private MemberService memberservice;
 	
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\file_repo";
 
@@ -148,23 +153,18 @@ public class UsController {
 	
 	//글쓰기 상세보기 페이지 이동
 	@RequestMapping(value = "/Detail" ) 
-	public String detailUs(@RequestBody UsDTO us, Model model) throws Exception {
-		System.out.println("us = " + us);
+	public String detailUs(@RequestParam("us_num") int us_num, Model model) throws Exception {
+		System.out.println("us = " + us_num);
 		log.info("");
-		UsDTO usDetail = usService.usDetail(us.getUs_num());
+		UsDTO usDetail = usService.usDetail(us_num);
+		System.out.println("usDetail = " + usDetail);
+		MemberDTO writer = memberservice.findById(usDetail.getWriter());
 		System.out.println("동행 상세보기 컨트롤러");
+		model.addAttribute("writer", writer);
 		model.addAttribute("us", usDetail);
     return "usDetail";
     }
 	
-//	
-//	@ResponseBody
-//	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
-//	public UsDTO detail(@RequestParam("us_num") int us_num) throws Exception {                       
-//	    UsDTO us = usService.usDetail(us_num);
-//	    System.out.println("동행 상세보기 컨트롤러");
-//	    return us;
-//	}
 
 //	 수정하기
 	@ResponseBody
