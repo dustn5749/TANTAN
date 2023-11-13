@@ -215,7 +215,7 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
-					<c:if test="${fn:endsWith(principal.user.roles, 'Admin')}">
+					<c:if test="${fn:endsWith(principal.user.member_id, 'admin')}">
 						<a class="admin_btn" href="/admin">	
 							<img src="/assets/img/key.png" width="25px">관리자
 						</a>

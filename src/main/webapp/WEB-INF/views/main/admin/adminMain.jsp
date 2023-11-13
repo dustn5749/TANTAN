@@ -74,25 +74,24 @@ border:1px solid black;
     		<div class="tab-content p-3" id="nav-tabContent">
     		<!-- 회원 탭 카드 -->
               <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
-	              <hr>
+<!-- 	              <hr> -->
 		          <div class="row">
 			          <div class="col-12">
 			            <!-- interactive chart -->
-			              <div class="card-header">
-			                <h3 class="card-title">
-			                  <i class="far fa-chart-bar"></i>
-			                  Interactive Area Chart
-			                </h3>
-			              </div>
-			              <div class="card-body">
-			                <div id="interactive" style="height: 300px;"></div>
-			                </div>
-			                <div class="card-header">
-			                
-			                <div class="card-body">
-			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
-			                </div>
-			                </div>
+<!-- 			              <div class="card-header"> -->
+<!-- 			                <h3 class="card-title"> -->
+<!-- 			                  <i class="far fa-chart-bar"></i> -->
+<!-- 			                  Interactive Area Chart -->
+<!-- 			                </h3> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="card-body"> -->
+<!-- 			                <div id="interactive" style="height: 300px;"></div> -->
+<!-- 			                </div> -->
+<!-- 			                <div class="card-header"> -->
+<!-- 			                </div> -->
+<!-- 			                <div class="card-body"> -->
+<!-- 			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 			                </div> -->
 			                <div class="card-body">
 			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
 			                </div>
@@ -109,63 +108,63 @@ border:1px solid black;
               <!-- 회원 탭 카드 종료 -->
               
               <!-- 게시글 탭 카드 -->
-	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab">
-		              <div class="row">
-			              <div class="col-md-6">
-			                  <div >
-			                      <div class="card-header" id="pop-board">
-			                          <h3 class="card-title">
-			                          <i class="far fa-chart-bar"></i>
-			                          인기 게시글
-			                          </h3>
-				                      <div class="card-body">
-				                      <hr>
-				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
-				                      </div>
-				                  </div>
-			              <!-- /.card-body-->
-			                  </div>
-			              </div>
-			              <div class="col-md-6">
-			                  <div>
-			                      <div class="card-header" id="pop-us">
-		   	                          <h3 class="card-title">
-			                          <i class="far fa-chart-bar"></i>
-			                          인기 동행글
-			                          </h3>
-				                      <div class="card-body">
-				                      <hr>
-				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
-				                      </div>
-			                      </div>
-			                  </div>
-			              </div>
-		              </div>
-	              </div>
-               <!-- 게시글 탭 카드 종료 -->
+<!-- 	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab"> -->
+<!-- 		              <div class="row"> -->
+<!-- 			              <div class="col-md-6"> -->
+<!-- 			                  <div > -->
+<!-- 			                      <div class="card-header" id="pop-board"> -->
+<!-- 			                          <h3 class="card-title"> -->
+<!-- 			                          <i class="far fa-chart-bar"></i> -->
+<!-- 			                          인기 게시글 -->
+<!-- 			                          </h3> -->
+<!-- 				                      <div class="card-body"> -->
+<!-- 				                      <hr> -->
+<!-- 				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 				                      </div> -->
+<!-- 				                  </div> -->
+<!-- 			              /.card-body -->
+<!-- 			                  </div> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="col-md-6"> -->
+<!-- 			                  <div> -->
+<!-- 			                      <div class="card-header" id="pop-us"> -->
+<!-- 		   	                          <h3 class="card-title"> -->
+<!-- 			                          <i class="far fa-chart-bar"></i> -->
+<!-- 			                          인기 동행글 -->
+<!-- 			                          </h3> -->
+<!-- 				                      <div class="card-body"> -->
+<!-- 				                      <hr> -->
+<!-- 				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 				                      </div> -->
+<!-- 			                      </div> -->
+<!-- 			                  </div> -->
+<!-- 			              </div> -->
+<!-- 		              </div> -->
+<!-- 	              </div> -->
+<!--                게시글 탭 카드 종료 -->
                
-	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab">
-		            <!-- Bar chart -->
-			            <div>
-			              <div class="card-header">
-			                <h3 class="card-title">
-			                  <i class="far fa-chart-bar"></i>
-			                  인기 여행지
-			                </h3>
-			              </div>
-			              <div class="card-body">
-<!-- 			              	<div id="bar-chart" style="height: 300px;"></div> -->
-							<canvas id="stackedBarChart"></canvas>
-			              </div>
-			              <!-- /.card-body-->
-            			</div>
-    				</div>
+<!-- 	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab"> -->
+<!-- 		            Bar chart -->
+<!-- 			            <div> -->
+<!-- 			              <div class="card-header"> -->
+<!-- 			                <h3 class="card-title"> -->
+<!-- 			                  <i class="far fa-chart-bar"></i> -->
+<!-- 			                  인기 여행지 -->
+<!-- 			                </h3> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="card-body"> -->
+<!-- <!-- 			              	<div id="bar-chart" style="height: 300px;"></div> --> -->
+<!-- 							<canvas id="stackedBarChart"></canvas> -->
+<!-- 			              </div> -->
+<!-- 			              /.card-body -->
+<!--             			</div> -->
+<!--     				</div> -->
             	</div>
     		</div>
     	</div>
     </div>
     <!-- /.content -->
-  </div>
+<!--   </div> -->
   <!-- /.content-wrapper -->
 
 <script>
@@ -176,96 +175,96 @@ border:1px solid black;
      */
     // We use an inline data source in the example, usually data would
     // be fetched from a server
-    var data        = [],
-        totalPoints = 100
+//     var data        = [],
+//         totalPoints = 100
 
-    function getRandomData() {
+//     function getRandomData() {
 
-      if (data.length > 0) {
-        data = data.slice(1)
-      }
+//       if (data.length > 0) {
+//         data = data.slice(1)
+//       }
 
-      // Do a random walk
-      while (data.length < totalPoints) {
+//       // Do a random walk
+//       while (data.length < totalPoints) {
 
-        var prev = data.length > 0 ? data[data.length - 1] : 50,
-            y    = prev + Math.random() * 10 - 5
+//         var prev = data.length > 0 ? data[data.length - 1] : 50,
+//             y    = prev + Math.random() * 10 - 5
 
-        if (y < 0) {
-          y = 0
-        } else if (y > 100) {
-          y = 100
-        }
+//         if (y < 0) {
+//           y = 0
+//         } else if (y > 100) {
+//           y = 100
+//         }
 
-        data.push(y)
-      }
+//         data.push(y)
+//       }
 
-      // Zip the generated y values with the x values
-      var res = []
-      for (var i = 0; i < data.length; ++i) {
-        res.push([i, data[i]])
-      }
+//       // Zip the generated y values with the x values
+//       var res = []
+//       for (var i = 0; i < data.length; ++i) {
+//         res.push([i, data[i]])
+//       }
 
-      return res
-    }
+//       return res
+//     }
 
-    var interactive_plot = $.plot('#interactive', [
-        {
-          data: getRandomData(),
-        }
-      ],
-      {
-        grid: {
-          borderColor: '#f3f3f3',
-          borderWidth: 1,
-          tickColor: '#f3f3f3'
-        },
-        series: {
-          color: '#3c8dbc',
-          lines: {
-            lineWidth: 2,
-            show: true,
-            fill: true,
-          },
-        },
-        yaxis: {
-          min: 0,
-          max: 100,
-          show: true
-        },
-        xaxis: {
-          show: true
-        }
-      }
-    )
+//     var interactive_plot = $.plot('#interactive', [
+//         {
+//           data: getRandomData(),
+//         }
+//       ],
+//       {
+//         grid: {
+//           borderColor: '#f3f3f3',
+//           borderWidth: 1,
+//           tickColor: '#f3f3f3'
+//         },
+//         series: {
+//           color: '#3c8dbc',
+//           lines: {
+//             lineWidth: 2,
+//             show: true,
+//             fill: true,
+//           },
+//         },
+//         yaxis: {
+//           min: 0,
+//           max: 100,
+//           show: true
+//         },
+//         xaxis: {
+//           show: true
+//         }
+//       }
+//     )
 
-    var updateInterval = 500 //Fetch data ever x milliseconds
-    var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
-    function update() {
+//     var updateInterval = 500 //Fetch data ever x milliseconds
+//     var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
+//     function update() {
 
-      interactive_plot.setData([getRandomData()])
+//       interactive_plot.setData([getRandomData()])
 
-      // Since the axes don't change, we don't need to call plot.setupGrid()
-      interactive_plot.draw()
-      if (realtime === 'on') {
-        setTimeout(update, updateInterval)
-      }
-    }
+//       // Since the axes don't change, we don't need to call plot.setupGrid()
+//       interactive_plot.draw()
+//       if (realtime === 'on') {
+//         setTimeout(update, updateInterval)
+//       }
+//     }
 
-    //INITIALIZE REALTIME DATA FETCHING
-    if (realtime === 'on') {
-      update()
-    }
-    //REALTIME TOGGLE
-    $('#realtime .btn').click(function () {
-      if ($(this).data('toggle') === 'on') {
-        realtime = 'on'
-      }
-      else {
-        realtime = 'off'
-      }
-      update()
-    })
+//     //INITIALIZE REALTIME DATA FETCHING
+//     if (realtime === 'on') {
+//       update()
+//     }
+//     //REALTIME TOGGLE
+//     $('#realtime .btn').click(function () {
+//       if ($(this).data('toggle') === 'on') {
+//         realtime = 'on'
+//       }
+//       else {
+//         realtime = 'off'
+//       }
+//       update()
+//     })
     /*
      * END INTERACTIVE CHART
      */
