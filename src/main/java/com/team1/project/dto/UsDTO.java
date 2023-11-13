@@ -1,3 +1,4 @@
+
 package com.team1.project.dto;
 
 
@@ -9,11 +10,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
 public class UsDTO {
 	
 	private int us_num; // 객체의 고유 식별 번호입니다.
@@ -28,7 +28,6 @@ public class UsDTO {
 	private int reportcnt;
 	private int fileNo; //첨부파일 번호
 	private List<UsFileDTO> file;
-	// 관리자 기능
 	private String status; // 동행 게시글 상태
 
 	//관리자 동행 목록 가져오기

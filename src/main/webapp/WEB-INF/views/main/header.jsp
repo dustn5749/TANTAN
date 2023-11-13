@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri= "http://java.sun.com/jsp/jstl/functions" %>
@@ -17,6 +16,9 @@
 <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
 <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
 <link rel="stylesheet" href="/assets/sns/css/Modal.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js" integrity="sha512-5yJ548VSnLflcRxWNqVWYeQZnby8D8fJTmYRLyvs445j1XmzR8cnWi85lcHx3CUEeAX+GrK3TqTfzOO6LKDpdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.2.0/stomp.min.js" integrity="sha512-8gcNcTAF0ZFd2LC6OUiO6UMEOhJ5Zejj1CU8XfCsjk2rDdcDudpn013YuTRWQAugs0nh1ixye6c0przHz3oFRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <style type="text/css">
@@ -205,9 +207,10 @@ a {
 						    <i class="fa-regular fa-message"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
 						</button>
-						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('alarm-modal')">
+						<button id = 'alarm-count-button' class="nav-icon position-relative text-decoration-none" onclick="openAlimModal()">
 						    <i class="fa-regular fa-bell"></i>
-						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+20</span>
+
+<%--						    <span id='alarm-count' class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+20</span>--%>
 						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
@@ -535,120 +538,7 @@ a {
 	
   	<!--  1. 알림 모달 -->
     <div id="alarm-modal" class="modal-wrapper">
-      <div class="modal-overlay" onclick="closeModal('alarm-modal')"></div>
 
-      <div class="common-modal narrow-modal w-400">
-        <!-- 제목 + 닫기버튼 -->
-        <div class="common-modal-top">
-          <h2 class="ttl">알림</h2>
-          <div class="btn-wrap">
-            <!-- 비우기버튼 -->
-            <button type="button" class="icon-btn">
-              <img src="/assets/sns/images/icon-trash.svg" alt="">
-            </button>
-            <!-- END 비우기버튼 -->
-            <!-- 닫기버튼 -->
-            <button type="button" class="icon-btn" onclick="closeModal('alarm-modal')">
-              <img src="/assets/sns/images/icon-close.svg" alt="">
-            </button>
-            <!-- END 닫기버튼 -->
-          </div>
-        </div>
-        <!-- END 제목 + 닫기버튼 -->
-
-        <!-- 알림 모달 내용들 -->
-        <div class="alarm-modal-contents">
-          <!-- 날짜 + 알림 목록들 -->
-          <div class="alarm-content">
-            <!-- 날짜 -->
-            <div class="alarm-list-grp-top-ttl">어제</div>
-            <!-- END 날짜 -->
-            <!-- 알림 목록들 -->
-            <div class="alarm-list-grp">
-              <!-- 알람 리스트 -->
-              <div class="alarm-list">
-                <div class="alarm-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
-                  </figure>
-
-                  <div class="alarm-txt-grp">
-                    <p class="txt"><span class="name"><img src="/assets/sns/images/badge-certify.svg" class="badge-certify"
-                          alt="">jessica</span>님이 회원님의 스토리를 좋아합니다.</p>
-                    <span class="date">3일</span>
-                  </div>
-                </div>
-
-                <img src="/assets/sns/images/thumbnail-img03.png" alt="" class="alarm-preview-img">
-
-                <button type="button" class="alarm-del-btn">
-                  <span class="txt-hidden">이 알람 삭제</span>
-                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
-                </button>
-              </div>
-              <!-- END 알람 리스트 -->
-            </div>
-            <!-- END 알림 목록들 -->
-          </div>
-          <!-- END 날짜 + 알림 목록들 -->
-
-          <!-- 날짜 + 알림 목록들 -->
-          <div class="alarm-content">
-            <!-- 날짜 -->
-            <div class="alarm-list-grp-top-ttl">최근 7일</div>
-            <!-- END 날짜 -->
-            <!-- 알림 목록들 -->
-            <div class="alarm-list-grp">
-              <!-- 알람 리스트 -->
-              <div class="alarm-list">
-                <div class="alarm-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
-                  </figure>
-
-                  <div class="alarm-txt-grp">
-                    <p class="txt"><span class="name">favor_list</span>님이 회원님의 스토리를 좋아합니다.</p>
-                    <span class="date">3일</span>
-                  </div>
-                </div>
-
-                <img src="/assets/sns/images/thumbnail-img01.jpeg" alt="" class="alarm-preview-img">
-
-                <button type="button" class="alarm-del-btn">
-                  <span class="txt-hidden">이 알람 삭제</span>
-                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
-                </button>
-              </div>
-              <!-- END 알람 리스트 -->
-
-              <!-- 알람 리스트 -->
-              <div class="alarm-list">
-                <div class="alarm-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
-                  </figure>
-
-                  <div class="alarm-txt-grp">
-                    <p class="txt"><span class="name">favor_list</span>님이 회원님의 스토리를 좋아합니다.</p>
-                    <span class="date">3일</span>
-                  </div>
-                </div>
-
-                <img src="/assets/sns/images/thumbnail-img01.jpeg" alt="" class="alarm-preview-img">
-
-                <button type="button" class="alarm-del-btn">
-                  <span class="txt-hidden">이 알람 삭제</span>
-                  <img src="/assets/sns/images/icon-trash-white.svg" alt="">
-                </button>
-              </div>
-              <!-- END 알람 리스트 -->
-            </div>
-            <!-- END 알림 목록들 -->
-          </div>
-          <!-- END 날짜 + 알림 목록들 -->
-        </div>
-        <!-- END 알림 모달 내용들 -->
-      </div>
     </div>
     <!-- END  1. 알림 모달 -->
 
@@ -1364,6 +1254,90 @@ a {
     function openUserProfile(){
     	location.href="/member/mypage.do"
     }
+
+    function openAlimModal() {
+      $('#alarm-modal').load("/page/alim", "", () => {
+        $('#alarm-modal').addClass('active');
+      });
+    }
+
+    $(function(){
+      <c:if test="${not empty principal}">
+      let memberId = '${principal.user.member_id}';
+      if(memberId !== ''){
+
+        const callAlim = () => {
+          let url = '/alim/count';
+          let id = '#alarm-count';
+          $.ajax({
+            url : url,
+            success : function (data){
+              if(!data || data <= 0){
+                return false;
+              }
+
+              if($(id).length === 0){
+                $('<span>').attr({
+                  'id' : 'alarm-count',
+                  'class' : 'position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark'
+                }).text('+'+data).data({ 'value' : data}).appendTo($('#alarm-count-button'));
+              } else {
+                $(id).text('+'+data).data({ 'value' : data});
+              }
+            }
+          });
+        };
+
+        callAlim();
+
+
+        // websocket & stomp 초기화
+        const sock = new SockJS("<c:url value='/ws-stomp'/>");
+        const ws = Stomp.over(sock);
+
+        //메시지 수신 이벤트 핸들러 등록
+        //구독을 등록한다
+        const subscribe = () => {
+          subscription = ws.subscribe("<c:url value='/sub/alim/'/>"+memberId
+                  , message => {
+                    const recv = JSON.parse(message.body);
+                    recvMessage(recv);
+                  }, {}
+          );
+        }
+
+        const recvMessage = recv =>  {
+          callAlim();
+          console.log(recv);
+        }
+
+
+        //메시지 수신를 해제 한다
+        //구독을 해제한다
+        const unsubscribe = () => {
+          console.log("subscription", subscription);
+
+          if(subscription != null) {
+            subscription.unsubscribe();
+            subscription = null;
+          }
+        }
+
+        let subscription = null;
+
+        console.log("ws", ws);
+        // pub/sub 이벤트 설정
+        ws.connect({}, function(frame) {
+          //메시지 수신 이벤트 핸들러 등록
+          subscribe();
+        }, error => {
+          // alert("error " + error);
+        });
+
+      }
+      </c:if>
+
+    });
   </script>
 
 </body>

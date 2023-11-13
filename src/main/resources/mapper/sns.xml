@@ -7,7 +7,15 @@
         select
             rownum as rnum,
             sb.board_num as boardNum,
-            sb.*,
+            sb.MEMBER_ID as memberId,
+            sb.TITLE as title,
+            sb.CONTENT as content,
+            sb.VIEW_COUNT as viewCount,
+            sb.REG_DATE as regDate,
+            sb.MOD_DATE as modDate,
+            sb.DELETE_YN as deleteYn,
+            sb.LIKE_COUNT as likeCount,
+            sb.COMMENT_COUNT as commentCount,
             (case when sl.board_num is not null then 1
                   else 0
                 end )

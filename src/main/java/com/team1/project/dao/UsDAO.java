@@ -50,7 +50,6 @@ public interface UsDAO {
 	//us에 fileno저장
 	public void updateFile(UsFileDTO file);
 
-	
 	//관리자 신고 리스트
 	public List<UsDTO> usReportList();
 	
