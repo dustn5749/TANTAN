@@ -33,7 +33,8 @@ public class ScheduleDTO {
 	    private String img;
 	    private String place;
 	    private String memoList;
-//	    private String []scheduleList;
+	    private String []scheduleList;
+	    private String Like_CNT;
 
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호

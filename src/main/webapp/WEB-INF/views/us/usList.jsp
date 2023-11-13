@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>동행 목록조회</title>
 <style>
+
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
    .us_container{
          width: 94%; 
         margin: 0 auto; 
@@ -44,7 +52,7 @@
        height: 44px;
        margin-top: 20px;
        padding: 0px 0px 20px;
-       background-color: rgb(255, 255, 255);
+/*        background-color: rgb(255, 255, 255); */
    }
    .us_header4 {
    z-index: 9;
@@ -129,22 +137,22 @@
    }
    /* 동행 생성하기 버튼 div */
    .make_us {
-   		display: flex;
-   		float: right;
-   		width: 90%;
+         display: flex;
+         float: right;
+         width: 90%;
    }
    .make_us > button {
-   		width: 150px;
-   		height: 35px;
-   		background-color: rgb(81, 174, 255);
-   		border-radius: 7px;
+         width: 150px;
+         height: 35px;
+         background-color: rgb(81, 174, 255);
+         border-radius: 7px;
    }
    .us_fillter {
-   	margin: 0 auto;
-   	width: 1260px;
+      margin: 0 auto;
+      width: 1260px;
    }
    .fillter_btn_area {
-   	  display: flex;
+        display: flex;
       width: 300px;
 /*       magin:100px; */
    }
@@ -156,7 +164,7 @@
       color: white;
    }
    .fillter_btn +.fillter_btn  {
-   	margin: 0 10px;
+      margin: 0 10px;
    }
    .fillter_btn:hover {
       background-color: white;
@@ -320,80 +328,80 @@
             list-style: none;
         }
      .schedule_btn {
-     		cursor: pointer !important;
+           cursor: pointer !important;
      }
      .schedule_btn:hover {
-     		background-color: black !important;
-     		color : white !important;
+           background-color: black !important;
+           color : white !important;
      }
      .py-5 {
-     		padding: 10px;
+           padding: 10px;
      }
-	 .schedule_container {
+    .schedule_container {
         width: 70%; 
         margin: 0 auto; 
     }
-	ul > li {
-	position:relative;
-	}
-	ul. {
-	position: abd
-	}
-	
-	
+   ul > li {
+   position:relative;
+   }
+   ul. {
+   position: abd
+   }
+   
+   
 .nav-wrap {
-	position:relative;
-	margin: 50px auto 0;
-	width: 1000px;
-	height: 50px;
+   position:relative;
+   margin: 50px auto 0;
+   width: 1000px;
+   height: 50px;
 }
 
 .nav-wrap:after {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 0 ;
-	margin-top: -15px;
-	width: 6px;
-	height: 30px;
-	background-color: #0099FF;
+   content: "";
+   position: absolute;
+   top: 50%;
+   left: 0 ;
+   margin-top: -15px;
+   width: 6px;
+   height: 30px;
+   background-color: #0099FF;
 }
 .nav-wrap h2 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width : 100px;
-	height: 30px;
-	line-height: 50px;
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width : 100px;
+   height: 30px;
+   line-height: 50px;
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
 }
 
 .nav-wrap .nav-ul {
-	margin: 0 0 0 100px;
-	padding: 0;
-	width: 900px;
-	list-style: none;
+   margin: 0 0 0 100px;
+   padding: 0;
+   width: 900px;
+   list-style: none;
 }
 
 .nav-li {
-	float: left;
-	width: 100px;
-	height: 50px;
+   float: left;
+   width: 100px;
+   height: 50px;
 }
 
 .nav-li:hover a {
-	color: #0099FF;
+   color: #0099FF;
 }
 
 .nav-li a {
-	display: block;
-	line-height: 50px;
-	text-decoration: none;
-	font-size: 16px;
-	font-weight: 400;
-	color: #999;
+   display: block;
+   line-height: 50px;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: 400;
+   color: #999;
 }
 
 /* 사용자 정의 스타일 */
@@ -421,6 +429,44 @@
 .dropdown-menu .nav-li a:hover {
     background-color: #cce5ff; /* 호버 색상 */
     color: #0069d9; /* 호버 텍스트 색상 */
+}
+/* 이미지 div */
+.img_div {
+   display: flex;
+}
+.us_content_img {
+   border: none;
+   box-shadow: 1px 1px 1px 1px rgb(237, 237, 237);
+    width:95%;
+    height:200px;
+}
+.fw-bolder {
+   font-size: 20px !important;
+   margin-bottom: 10px;
+   margin-top: 10px;
+   font-weight: bold;
+   font-family: 'Pretendard-Regular';
+   
+}
+
+div, input, p, span, button, h2 {
+   font-family: 'Pretendard-Regular' !important;
+   
+}
+
+
+/* 상세 보기 버튼 */
+.detailBtn {
+   background: white;
+   border: none;
+   width: 120px;
+   height: 45px;
+   border-radius: 8px;
+    cursor: pointer;
+}
+.detailBtn:hover {
+   background-color: black;
+   color : white;
 }
 
 </style>
@@ -474,23 +520,30 @@
         </div>
         
   <div class="row">
-    <c:forEach var="item" begin="0" end="19"> 
+    <c:forEach var="item" items="${result.list}"> 
         <div class="col-md-3 mb-4">
             <div class="card box-shadow">
                 <div class="card-body p-4">
                     <div class="text-center">
-                        <h5 class="fw-bolder">${result.list[item].title}</h5>
-                        <p>${result.list[item].writer}</p>
-                        <p>${result.list[item].regdate}</p>
-                        <p>${result.list[item].start_Date}</p>
-                        <p>${result.list[item].end_Date}</p>
-                        <p>${result.list[item].us_cnt}</p>
-                       <p id="us_num2">${result.list[item].us_num}</p>
+                        <div class="img_div">
+                             <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
+                        </div>
+                        <h5 class="fw-bolder">${item.title}</h5>
+                        <p>${item.writer}</p>
+                        <div class="us_day">
+                           <p class="menu">모집기간</p>
+                           <span id="start_day"> ${item.start_Date} ~ </span> 
+                           <span id="end_day">${item.end_Date}</span>                        
+                        </div>
+                       <div class="us_cnt_div">
+                             <span class="menu">모집 인원</span> : <span>${item.us_cnt} 명</span>
+                       </div>
                     </div>
                 </div>
+                <input type="hidden" value="${item.us_num}" class="us_num">
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <input type="button" value="상세보기" class="btn btn-outline-dark mt-auto" id="detailButton">
+                        <input type="button" value="상세보기" class="detailBtn" >
                     </div>
                 </div>
             </div>
@@ -498,7 +551,7 @@
     </c:forEach>
 </div>
 
-       		 
+              
         </div>
 <form id="mForm" action="/us/list" method="POST">
     <input type="hidden" id="pageNo" name="pageNo" value="" />
@@ -527,7 +580,7 @@
         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
     </div>
 </div>
-
+</div>
 <script>
 function city_btn1() {
     window.location.href = '/us/write';
@@ -548,33 +601,13 @@ function city_btn1() {
         }
     });
 
-  	/* 동행 상세보기 */
-    	document.getElementById('detailButton').addEventListener('click', function() {
-    	    const us_num2Element = document.getElementById('us_num2');
-    	    const us_num = us_num2Element.innerText;
-    	    console.log("us_num" + us_num);
-    	   
-    	    const param = {
-    	        us_num: us_num
-    	    };
-    	    
-    	    console.log("param" + param);
-    	    fetch("/us/Detail", {
-    	            method: "POST",
-    	            headers: {
-    	                "Content-Type": "application/json; charset=UTF-8",
-    	            },
-    	            body: JSON.stringify(param)
-    	        })
-    	        .then(response => response.json())
-    	        .then(json => {
-    	         
-    	        	location.href = "/us/Detail"; 
-    	        })
-    	        .catch(error => {
-    	            console.error("오류 발생:", error);
-    	        });
-    	});
+     /* 동행 상세보기 */
+         $(".detailBtn").on("click", function(e){
+          console.log("상세보기")
+           const us_num = e.target.closest(".card").querySelector(".us_num").value;
+          
+            location.href="/us/Detail?us_num="+us_num;
+       });
 
     
 </script> 

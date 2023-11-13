@@ -2,17 +2,28 @@
 	pageEncoding="UTF-8"%>
 
 
+
+
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 <title>Kakao Maps</title>
+
 <script src="//code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous"></script>
+
 <?php // http://craftpip.github.io/jquery-confirm/ ?>
+
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f&libraries=services,clusterer,drawing"></script>
+
 </head>
+
 <style>
 .nav-wrap {
 	position: relative;
@@ -380,10 +391,8 @@
 .bg_white {
 	background: #fff;
 }
-
-
 </style>
-<body >
+<body>
 	<div class="nav-wrap">
 		<h2>한국</h2>
 		<!--지역 선택하기 -->
@@ -404,7 +413,6 @@
 				onclick="getLocation(this)" data-value="16"> 부산 </a></li>
 			<li class="nav-li"><a href="javascript:void(0);"
 				onclick="getLocation(this)" data-value="14"> 경남 </a></li>
-
 			<li class="nav-li"><a href="javascript:void(0);"
 				onclick="getLocation(this)" data-value="7"> 대전 </a></li>
 			<li class="nav-li"><a href="javascript:void(0);"
@@ -423,7 +431,6 @@
 				onclick="getLocation(this)" data-value="10"> 전북 </a></li>
 		</ul>
 	</div>
-
 	<div class="container">
 		<div class="cont_top">
 			<div class="schedule">
@@ -436,78 +443,80 @@
 				</form>
 			</div>
 		</div>
-				<div class="cont_bottom">
-					<div class="map-section">
-						<!--<h1>지도</h1> -->
-						<div class="evt-map" id="map" style="width: 100%; height: 600px;"></div>
-					</div>
-
-						<div class="schedule-list">
-					    <ul>
-					    	<!--일정1 -->
-					        <li class="schedule-item day-1">
+		<div class="cont_bottom">
+			<div class="map-section">
+				<!--<h1>지도</h1> -->
+				<div class="evt-map" id="map" style="width: 100%; height: 600px;"></div>
+			</div>
+			<div class="schedule-list">
+				<ul>
+					<!--일정1 -->
+					<li class="schedule-item day-1">
 						<p>
 							<span>day<em class="day_num">1</em></span><em class="day_date"></em>
 						</p>
 						<div>
 							<button class="schedule-btn-grp" onclick="openModal(this, 1)">장소추가</button>
-							<input type="text" readonly="readonly" id="select_city_area" class="day-1 placeList" name="location1"/>						
+							<input type="text" readonly="readonly" id="select_city_area"
+								class="day-1 placeList" name="location1" />
+						</div> <!-- 메모 부분 수정 -->
+						<div class="memo-div">
+							<button class="schedule-btn-grp memo-add-btn"
+								onclick="addMemo(this, 1)">메모추가</button>
+							<input type="text" readonly="readonly" id="memo_area_1"
+								name="memo_area_1" class="memoList">
+						</div> <!-- 메모 모달창 -->
+						<div class="memo-modal" style="display: none;">
+							<div class="modal-content">
+								<p>
+									<span>day <em class="memo_day_num">1</em></span><em
+										class="memo_day_date">10.31</em>
+								</p>
+								<textarea class="memo-content" placeholder="여행일정을 메모해보세요"></textarea>
+								<div class="button-container1">
+									<button class="schedule-btn-grp cancel-btn"
+										onclick="cancelMemo()">취소</button>
+									<button class="schedule-btn-grp complete-btn"
+										onclick="completeMemo(1)">작성완료</button>
+								</div>
+								<div class="memo-display" style="display: none;"></div>
+							</div>
+						</div> <!--일정2 -->
+					<li class="schedule-item day-2">
+						<p>
+							<span>day <em class="day_num">2</em></span><em class="day_date"></em>
+						</p>
+						<div>
+							<button class="schedule-btn-grp" onclick="openModal(this, 2)">장소추가</button>
+							<input type="text" readonly="readonly" id="select_city_area"
+								class="day-2 placeList" name="location2" />
+						</div> <!-- 2번째 일정의 메모 부분 -->
+						<div class="memo-div">
+							<button class="schedule-btn-grp memo-add-btn"
+								onclick="addMemo(this, 2)">메모추가</button>
+							<input type="text" readonly="readonly" id="memo_area_2"
+								name="memo_area_2" class="memoList">
+						</div> <!-- 메모 모달창 -->
+						<div class="memo-modal" style="display: none;">
+							<div class="modal-content">
+								<p>
+									<span>day <em class="memo_day_num">2</em></span><em
+										class="memo_day_date"></em>
+								</p>
+								<textarea class="memo-content" placeholder="여행일정을 메모해보세요"></textarea>
+								<div class="button-container1">
+									<button class="schedule-btn-grp cancel-btn"
+										onclick="cancelMemo()">취소</button>
+									<button class="schedule-btn-grp complete-btn"
+										onclick="completeMemo(2)">작성완료</button>
+								</div>
+							</div>
+						</div> <!--일정 등록하기 버튼 -->
+						<div class="mySchedule"
+							style="text-align: center; margin-bottom: 20px;">
+							<a href="javascript:void(0);" onclick="sendDataToServer()">일정등록하기</a>
 						</div>
-		          	<!-- 메모 부분 수정 -->
-				<div class="memo-div">
-				    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this, 1)">메모추가</button>
-				    <input type="text" readonly="readonly" id="memo_area_1" name="memo_area_1" class="memoList">
-				</div>
-				
-				<!-- 메모 모달창 -->
-				<div class="memo-modal" style="display: none;">
-				    <div class="modal-content">
-				        <p>
-				            <span>day <em class="memo_day_num">1</em></span><em class="memo_day_date">10.31</em>
-				        </p>
-				        <textarea class="memo-content" placeholder="여행일정을 메모해보세요" ></textarea>
-				        <div class="button-container1">
-				            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo()">취소</button>
-				            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(1)">작성완료</button>
-				        </div>
-				        <div class="memo-display" style="display: none;"></div>
-				    </div>
-				</div>
-					
-					<!--일정2 -->
-			        <li class="schedule-item day-2">
-			            <p>
-						        <span>day <em class="day_num">2</em></span><em class="day_date"></em>
-						    </p>
-						    <div>
-						    <button class="schedule-btn-grp" onclick="openModal(this, 2)">장소추가</button>
-						    <input type="text" readonly="readonly" id="select_city_area" class="day-2 placeList" name="location2" />
-						   </div>
-						   	<!-- 2번째 일정의 메모 부분 -->
-			           <div class="memo-div">
-				    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this, 2)">메모추가</button>
-				    <input type="text" readonly="readonly" id="memo_area_2" name="memo_area_2" class="memoList">
-				</div>
-				<!-- 메모 모달창 -->
-				<div class="memo-modal" style="display: none;">
-				    <div class="modal-content">
-				        <p>
-				            <span>day <em class="memo_day_num">2</em></span><em class="memo_day_date"></em>
-				        </p>
-				        <textarea class="memo-content" placeholder="여행일정을 메모해보세요"></textarea>
-				        <div class="button-container1">
-				            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo()">취소</button>
-				            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(2)">작성완료</button>
-				        </div>
-				    </div>
-				</div>
-			
-			<!--일정 등록하기 버튼 -->
-			<div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
-				<a href="javascript:void(0);" onclick="sendDataToServer()">일정등록하기</a>
 			</div>
-			</div>			
-
 			<!--장소선택버튼 -->
 			<input type="hidden" id="Doenum">
 			<div id="myModal" class="modal" style="display: none;">
@@ -525,108 +534,74 @@
 					</div>
 				</div>
 			</div>
-			</div>
-
-			<div class="goBack" style="text-align: center;">
-				<a href="/schedule/list">뒤로가기</a>
-			</div>
-
-			<script>
+		</div>
+		<div class="goBack" style="text-align: center;">
+			<a href="/schedule/list">뒤로가기</a>
+		</div>
+		<script>
 			function toggleMemoModal(day) {
 			    const memoModal = document.querySelector(`.day-${day} .memo-modal`);
 			    memoModal.style.display = (memoModal.style.display === 'none' || memoModal.style.display === '') ? 'block' : 'none';
+
 			}
-
 			function completeMemo(day) {
-
-				
 				console.log(day + " 메모추가");
 			    var memo_content = $(".memo-modal").eq(day - 1).find(".memo-content").val(); // 해당 day에 해당하는 memo-content 내용을 가져옴
 			    $("#memo_area_" + day).val(memo_content); // 해당 day에 해당하는 memo_area에 내용 적용
 			    console.log("memo_content: " + memo_content);
-			    
 			    $(".memo-modal").eq(day - 1).hide(); // 해당 day에 해당하는 메모 모달창 숨김				
-	
 			}
-
-
 			//날짜 day+1추가
 			document.addEventListener("DOMContentLoaded", function() {
 			    const startDateInput = document.getElementById('start_Date');
 			    const endDateInput = document.getElementById('end_Date');
-
 			    startDateInput.addEventListener('change', function() {
 			        const startDate = new Date(startDateInput.value);
 			        const endDate = new Date(startDate);
 			        endDate.setDate(startDate.getDate() + 1);
-
 			        const day1DateElement = document.querySelector('.day-1 .day_date');
 			        const day2DateElement = document.querySelector('.day-2 .day_date');
-
 			        day1DateElement.textContent = startDate.toISOString().slice(0, 10);
 			        day2DateElement.textContent = endDate.toISOString().slice(0, 10);
 			    });
 			});
-
-
 			// 모든 장소선택 버튼 가져오기
 			var selectPlaceButtons = document.querySelectorAll('.schedule-btn-grp');
-
 				selectPlaceButtons.forEach(function(button, index) {
 			    button.addEventListener('click', function() {
-			   
 			        var liElement = this.closest("li");
-
-		
 			        var selectedPlace = liElement.querySelector('.day_date').innerText;
 			        var selectedPlace = liElement.querySelector('.schedule-btn-grp').innerText;
-
-// 			        // 각 버튼 다음의 input 요소 가져오기
-// 			        var inputField = liElement.querySelector('input[type="text"][readonly]');
-// 			        inputField.value = selectedPlace;
 			    });
 			});
-			
 			//장소추가
 	        function openModal(element, day) {
 			    var modal = document.getElementById("myModal");
 			    modal.style.display = "block";
 			    modal.dataset.day = day; // day 값을 modal 요소에 저장
 			}
-			
 			//메모
 	    	let selectedDayForMemo = null;
-			
 			function addMemo(element, day) {
 				console.log(element, day)
-
 			    const scheduleItem = element.closest('.schedule-item');
 			    const memoModal = scheduleItem.querySelector('.memo-modal');
-
 	 		    memoModal.style.display = 'block';
-			
 			}
-		
-
 		//지역 선택
 		function getLocation(element) {
 		    var dataValue = element.getAttribute("data-value");
-		
 		    var doeNameElement = document.getElementById("doe-name");
 		    if (doeNameElement) {
 		        doeNameElement.value = dataValue;
 		    }
-		
 		    var activeElements = document.getElementsByClassName("active_doe");
 		    for (var i = 0; i < activeElements.length; i++) {
 		        activeElements[i].classList.remove("active_doe");
 		    }
-		
 		    element.classList.add("active_doe");
-		    
 		    SelectBox(dataValue);
 		}
-		
 		//도 선택
 		function SelectBox(doeNum) {
 		    $.ajax({
@@ -638,19 +613,15 @@
 		            var selectBox = document.getElementById("selectBox");
 					var cityList = data.result;
 		            selectBox.innerHTML = "";
-					
 		            cityList.forEach(city => {
 		                console.log(city.cityNum);
 		            	var option = document.createElement("option");
 		                option.value = city.cityNum;
 		                option.text = city.cityName;
-
 		                selectBox.appendChild(option);
-		                
 		                $("option").on("click", function(){
 		                	mapDisplay(city.LATITUDE, city.LONGITUDE);
 		                    modal.style.display = "none";
-
 		                })
 		            });
 		        },
@@ -659,14 +630,12 @@
 		        }
 		    });
 		}
-		
 		// 위도 경도 전달
 		function selectLocation() {
 	    var modal = document.getElementById("myModal");
 	    var selectElement = modal.querySelector('select');
 	    var selectedText = selectElement.options[selectElement.selectedIndex].text;
 	    var day = modal.dataset.day;
-	
 	    var inputField = document.querySelector('#select_city_area.day-' + day);
 	    if (selectElement) {
 	        inputField.value = selectedText;
@@ -679,80 +648,35 @@
 	                var city = data.city;
 	                var x = city.latitude;
 	                var y = city.longitude;
-	                
 	                mapDisplay(x, y);
-	                
 	                var memoInputField = document.querySelector('#memo.day-' + day);
 	                var memo = "This is the memo for day " + day + ": Lat - " + x + ", Long - " + y;
 	                if (memoInputField) {
 	                    memoInputField.value = memo;
 	                }
-	
 	                modal.style.display = "none";
 	            },
 	            error: function () {
 	                console.error("도시 정보를 불러오는 중 오류가 발생했습니다.");
 	            }
 	        });
-	
 	        modal.style.display = "none"; 
 	    }
 	}
-
-			
-// 		function sendScheduleData() {
-// // 		const place = document.querySelector('#select_city_area').val();
-// 	 	const scheduleData = [
-// 	    {
-// 	      dayId: 1,
-// 	      schedule_Num: schedule_Num,
-// 	      dayDate: start_Date,
-// 	      place:place,
-// // 	      memo: memo
-// 	    },
-// 	    {
-// 	      dayId: 2,
-// 	      schedule_Num: schedule_Num,
-// 	      dayDate: start_Date,
-// 	      place:place,
-// // 	      memo: memo
-// 	    }
-// 	  ];
-	
-// 	  $.ajax({
-// 	    url: "/schedule/day",
-// 	    type: 'POST',
-// 	    contentType: 'application/json',
-// 	    data: JSON.stringify(scheduleData),
-// 	    success: function(response) {
-// 	      console.log('데이터가 성공적으로 전송되었습니다.', response);
-// 	      alert('일정이 성공적으로 추가되었습니다.'); // 성공 알람창
-// 	    },
-// 	    error: function(xhr, status, error) {
-// 	      console.error('데이터 전송 중 오류가 발생했습니다.', error);
-// 	      alert('일정 추가 중 오류가 발생했습니다.'); // 오류 알람창
-// 	    }
-// 	  });
-// 	}
-
 		//서버 전달
 		function sendDataToServer() {
 		    const scheduleItems = document.querySelectorAll(".schedule-item");
 		    const schedules = [];
-		    
 		    for (i=0;i<scheduleItems.length;i++) {
 		    	schedules.push({
-// 		    		day_date : scheduleItems[i].querySelector(".day_date").innerText,
 		    		place : scheduleItems[i].querySelector(".placeList").value,
 			    	memoList : scheduleItems[i].querySelector(".memoList").value,
 			    	start_Num : "2023-11-10",
 			    	end_Date: "2023-11-11"
 		    	});
 		    }
-
 		    console.log(schedules);
 		    console.log(JSON.stringify(schedules));
-				
     		$.ajax({
     	       url : "/schedule/writeInsert",
     	       type: 'POST',
@@ -767,7 +691,6 @@
     	      }
     	   	}) 
 		}
-	
 		// 지도를 표시할 div 
 		function mapDisplay(x, y){
 			var mapContainer = document.getElementById('map'), 
@@ -775,33 +698,25 @@
 			    center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
 			    level: 3 // 지도의 확대 레벨
 			};
-			
 			//지도 생성
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
-			
 			var points = [
 			    new kakao.maps.LatLng(x,y)
 			];
-
 			var bounds = new kakao.maps.LatLngBounds();    
-			
 			var i, marker;
 			for (i = 0; i < points.length; i++) {
 			marker =     new kakao.maps.Marker({ position : points[i] });
 			marker.setMap(map);
-			
 			bounds.extend(points[i]);
 			}
-			
 			function setBounds() {
 			map.setBounds(bounds);
 			}
 		}
-		
 	       window.onload = function() {
 	            mapDisplay('37.4474916666666','127.147719444444');
 	        };
-
 			 // 주소검색 이벤트 -- 검색 버튼 클릭 시
 			$(document).on('click','.evt-search',function(e){
 				var address = $('.evt-address').val();
@@ -829,6 +744,7 @@
 		        }
 		    } 
 </script>
-			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+
 </html>

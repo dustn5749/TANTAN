@@ -1,28 +1,24 @@
 package com.team1.project.controller;
 
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
+import com.team1.project.service.MemberService;
 import com.team1.project.service.UsService;
 
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 @Controller
@@ -31,6 +27,9 @@ public class UsController {
 	
 	@Autowired
 	private UsService usService;
+	
+	@Autowired
+	 private MemberService memberservice;
 	
 	// 1. 동행 전체 목록 페이지
 	@RequestMapping(value = "/list")
@@ -63,32 +62,36 @@ public class UsController {
         }
     return result;
     }
+
+	 //글쓰기 상세보기 페이지 이동
+	   @RequestMapping(value = "/Detail" ) 
+	   public String detailUs(@RequestParam("us_num") int us_num, Model model) throws Exception {
+	      System.out.println("us = " + us_num);
+	      log.info("");
+	      UsDTO usDetail = usService.usDetail(us_num);
+	      System.out.println("usDetail = " + usDetail);
+	      MemberDTO writer = memberservice.findById(usDetail.getWriter());
+	      System.out.println("동행 상세보기 컨트롤러");
+	      model.addAttribute("writer", writer);
+	      model.addAttribute("us", usDetail);
+	    return "usDetail";
+	    }
 	
-	//글쓰기 상세보기 페이지 이동
 	
-	@RequestMapping(value = "/Detail" ) 
-	public String detailUs(@RequestBody UsDTO us, Model model) throws Exception {
-		System.out.println("us = " + us);
-		log.info("");
-		UsDTO usDetail = usService.usDetail(us.getUs_num());
-		System.out.println("동행 상세보기 컨트롤러");
-		model.addAttribute("us", usDetail);
-    return "usDetail";
-    }
-	
-//	
-//	@ResponseBody
-//	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
-//	public UsDTO detail(@RequestParam("us_num") int us_num) throws Exception {                       
-//	    UsDTO us = usService.usDetail(us_num);
-//	    System.out.println("동행 상세보기 컨트롤러");
-//	    return us;
-//	}
+	@ResponseBody
+	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
+	public UsDTO detail(@RequestParam("us_num") int us_num) throws Exception {                       
+	    UsDTO us = usService.usDetail(us_num);
+	    System.out.println("동행 상세보기 컨트롤러");
+	    return us;
+	}
 
 //	 수정하기
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Map<String, Object> update(@RequestBody UsDTO us) throws Exception {
+		System.out.println("us = " + us);
+		System.out.println("작성자 = " + us.getWriter());
 	    boolean update = usService.usUpdate(us);
 	    Map<String, Object> result = new HashMap<>();
 	    if (update) {

@@ -63,26 +63,22 @@ public class ScheduleService {
 			return result;
 		}
 		
-//		// 일정추가 
-//		public Map<String, Object> day(ScheduleDTO schedule) {
-//			Map<String, Object> result = new HashMap<>();
-//			result.put("day", schduleDAO.day(schedule)); 
-//			System.out.println(result);			
-//			return result;
-//		}
-//		
-//		
-	
+		// 일정추가 
+		//		public Map<String, Object> day(ScheduleDTO schedule) {
+		//			Map<String, Object> result = new HashMap<>();
+		//			result.put("day", schduleDAO.day(schedule)); 
+		//			System.out.println(result);			
+		//			return result;
+		//		}
 		
-//	// 메인 top5
-//	public List<ScheduleDTO> ScheduleTop5() throws Exception {
-//		return ScheduleDAO.schduleTop5;
-//	}
+		// 메인 top5
+		//	public List<ScheduleDTO> ScheduleTop5() throws Exception {
+		//		return ScheduleDAO.schduleTop5;
+		//	}
 
-	
- //일정 상세보기
+		//일정 상세보기
 		public ScheduleDTO schduleDetail(int schedule_num) throws Exception {
-			System.out.println("us.service.schedukeDetail() 함수가 호출되었습니다");
+			System.out.println("scheduleservice.schduleDetail() 함수가 호출되었습니다");
 		    return schduleDAO.schduleDetail(schedule_num) ;		    
 		}
 	
@@ -91,22 +87,23 @@ public class ScheduleService {
 		    System.out.println("schedule.service.usUpdate() 함수가 호출되었습니다");
 			return schduleDAO.schduleUpdate(schedule);
 		}
-//		// 일정 삭제하기
-//		public boolean usDelete(int usNum) throws Exception {
-//		    System.out.println("us.service.usDelete() 함수가 호출되었습니다");
-//		    return ScheduleDAO.usDelete(usNum);
-//		}
-//
-//		//일저 댓글 등록
-//		public int reply(UsDTO us) throws Exception {
-//		System.out.println("동행 댓글 호출됨");
-//
-//		int level = us.getLevel();
-//		us.setLevel(level + 1);
-//
-//		int result = ScheduleDAO.reply(us);
-//
-//		return result;
 		
+		// 일정 삭제하기
+		public boolean scheduleDelete(int schedule_num) throws Exception {
+		System.out.println("scheduleservice.scheduleDelete() 함수가 호출되었습니다");
+		    return schduleDAO.schduleDelete(schedule_num);
+		}
+
+		//일정 댓글 등록
+		public int reply(ScheduleDTO schedule) throws Exception {
+		System.out.println("일정 댓글 호출됨");
+
+		int level = schedule.getLevel();
+		schedule.setLevel(level + 1);
+
+		int result = schduleDAO.reply(schedule);
+
+		return result;
+		
+		}
 }
-	

@@ -71,9 +71,7 @@ public class UsService {
 	int result = usDAO.reply(us);
 
 	return result;
-	
-	
-	
+
 }
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
@@ -105,6 +103,7 @@ public class UsService {
 		
 		return usDAO.ausChange(us_num);
 	}
+	
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

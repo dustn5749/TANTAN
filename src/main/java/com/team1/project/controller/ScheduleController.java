@@ -1,6 +1,7 @@
 package com.team1.project.controller;
 
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,15 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.ScheduleService;
 
+import lombok.extern.log4j.Log4j2;
+@Log4j2
 @Controller
 @RequestMapping("/schedule")
 public class ScheduleController {
@@ -90,26 +94,28 @@ public class ScheduleController {
     } 
 
     // 일정1일 일정2일 가져오기
-//    @ResponseBody
-//    @RequestMapping (value = "/day")
-//    public Map<String, Object> day(@RequestBody ScheduleDTO schedule)throws Exception {
-//    	System.out.println(" 일정1일 일정2일 가져오기" + schedule);
-//    	Map<String, Object> result = scheduleService.day(schedule);
-//    	return result;
-//    } 
-//    
+    //    @ResponseBody
+    //    @RequestMapping (value = "/day")
+    //    public Map<String, Object> day(@RequestBody ScheduleDTO schedule)throws Exception {
+    //    	System.out.println(" 일정1일 일정2일 가져오기" + schedule);
+    //    	Map<String, Object> result = scheduleService.day(schedule);
+    //    	return result;
+    //    }   
     
     
-//   //일정상세보기
-   @GetMapping(value = "/detail/{schedule_Num}")
-   public String detailService(@PathVariable int schedule_Num, Model model)throws Exception {
-   	ScheduleDTO schduleDetail = scheduleService.schduleDetail(schedule_Num);
-   	System.out.println("일정 상세보기 컨트롤러");
-    	  model.addAttribute("schedule", schduleDetail);
-   	  return "scheduleDetail";
-    }
+  //일정상세보기
+    @RequestMapping(value = "/Detail") 
+    public String detail(@RequestParam("schedule_Num") int schedule_Num, Model model) throws Exception {
+	      System.out.println("schedule = " + schedule_Num);
+	      ScheduleDTO schduleDetail = scheduleService.schduleDetail(schedule_Num);
+	      System.out.println("scheduleDetail = " + schduleDetail);
+	      System.out.println("일정 상세보기 컨트롤러");
+	      model.addAttribute("schedule", schduleDetail);
+	      return "scheduleDetail";
+	    }
+	
+    
 
-   
    //수정하기
 	@ResponseBody
 	@PostMapping("/update")
@@ -128,17 +134,33 @@ public class ScheduleController {
     return result;
 	}
 
-	// // 동행 삭제하기
-//	@ResponseBody
-//	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-//	public Map<String, Object> delete(@RequestBody UsDTO us) throws Exception {
-//	    Map<String, Object> result = new HashMap<>();
-//	    if (ScheduleService.scheduleDelete(schedule.getsShedule_Num())) {
-//	        result.put("message", "삭제가 완료했습니다!");
-//	    } else {
-//	        result.put("message", "삭제에 실패했습니다.");
-//	    }
-//	    return result;
-//	}
+	// 일정 삭제하기
+	@ResponseBody
+	@RequestMapping(value = "/delete")
+	public Map<String, Object> delete(@RequestBody ScheduleDTO schedule) throws Exception {
+	    Map<String, Object> result = new HashMap<>();
+	  
+	    if (scheduleService.scheduleDelete(schedule.getSchedule_Num())) {
+	        result.put("message", "삭제가 완료했습니다!");
+	    } else {
+	        result.put("message", "삭제에 실패했습니다.");
+	    }
+    return result;
+	}
     
+	//하트색
+	@PostMapping("/updateHeartColor")
+	@ResponseBody
+	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum) {
+	    Map<String, Object> response = new HashMap<>();
+	    try {
+
+	        response.put("success", true);
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("error", e.getMessage());
+	    }
+	    return response;
+	}
+	
 }
