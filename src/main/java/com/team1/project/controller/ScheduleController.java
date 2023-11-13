@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.ScheduleDTO;
@@ -43,9 +44,13 @@ public class ScheduleController {
     
     //일정상세보기
     @RequestMapping(value = "/detail")
-    public String detail(ScheduleDTO schedule) throws Exception {
-        return "scheduleDetail";
+    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
+    	System.out.println("scheduleController.detail()");
+    	System.out.println("schedule_Num = " + schedule_Num);
+    return "scheduleDetail";
+
     }
+
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -71,7 +76,6 @@ public class ScheduleController {
             result.put("message", "일부 또는 전체 일정 등록에 실패했습니다.");
             result.put("result", false);
         }
-
         return result;
     }
 

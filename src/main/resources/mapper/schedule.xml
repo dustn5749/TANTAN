@@ -130,5 +130,12 @@ JOIN doe d ON u.doe_Name = d.doe_Name;
 <!--          WHERE US_NUM = #{us_num}  -->
 <!--      </delete>  -->
      
+     
+   <!--  내 일정 정보 얻기  -->
+<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO"> 
+select * from SCHEDULE where MEMBER_ID=#{member_Id} 
+</select>
+
+
 </mapper>
  

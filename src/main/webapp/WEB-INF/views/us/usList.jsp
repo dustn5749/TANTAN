@@ -453,6 +453,22 @@ div, input, p, span, button, h2 {
 	font-family: 'Pretendard-Regular' !important;
 	
 }
+
+
+/* 상세 보기 버튼 */
+.detailBtn {
+	background: white;
+	border: none;
+	width: 120px;
+	height: 45px;
+	border-radius: 8px;
+	 cursor: pointer;
+}
+.detailBtn:hover {
+	background-color: black;
+	color : white;
+}
+
 </style>
 </head>
 
@@ -504,29 +520,30 @@ div, input, p, span, button, h2 {
         </div>
         
   <div class="row">
-    <c:forEach var="item" begin="0" end="19"> 
+    <c:forEach var="item" items="${result.list}"> 
         <div class="col-md-3 mb-4">
             <div class="card box-shadow">
                 <div class="card-body p-4">
                     <div class="text-center">
                         <div class="img_div">
-                       		<img src="/file/displayImage.do?usFileNum=${result.list[item].fileNo}" alt="동행이미지 사진" class="us_content_img">
+                       		<img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
                         </div>
-                        <h5 class="fw-bolder">${result.list[item].title}</h5>
-                        <p>${result.list[item].writer}</p>
+                        <h5 class="fw-bolder">${item.title}</h5>
+                        <p>${item.writer}</p>
                         <div class="us_day">
                         	<p class="menu">모집기간</p>
-	                        <span id="start_day"> ${result.list[item].start_Date} ~ </span> 
-	                        <span id="end_day">${result.list[item].end_Date}</span>                        
+	                        <span id="start_day"> ${item.start_Date} ~ </span> 
+	                        <span id="end_day">${item.end_Date}</span>                        
                         </div>
                        <div class="us_cnt_div">
-                       		<span class="menu">모집 인원</span> : <span>${result.list[item].us_cnt} 명</span>
+                       		<span class="menu">모집 인원</span> : <span>${item.us_cnt} 명</span>
                        </div>
                     </div>
                 </div>
+                <input type="hidden" value="${item.us_num}" class="us_num">
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <input type="button" value="상세보기" class="btn btn-outline-dark mt-auto" id="detailButton">
+                        <input type="button" value="상세보기" class="detailBtn" >
                     </div>
                 </div>
             </div>
@@ -585,31 +602,11 @@ function city_btn1() {
     });
 
   	/* 동행 상세보기 */
-    	document.getElementById('detailButton').addEventListener('click', function() {
-    	    const us_num2Element = document.getElementById('us_num2');
-    	    const us_num = us_num2Element.innerText;
-    	    console.log("us_num" + us_num);
+   		$(".detailBtn").on("click", function(e){
+    		console.log("상세보기")
+    	    const us_num = e.target.closest(".card").querySelector(".us_num").value;
     	   
-    	    const param = {
-    	        us_num: us_num
-    	    };
-    	    
-    	    console.log("param" + param);
-    	    fetch("/us/Detail", {
-    	            method: "POST",
-    	            headers: {
-    	                "Content-Type": "application/json; charset=UTF-8",
-    	            },
-    	            body: JSON.stringify(param)
-    	        })
-    	        .then(response => response.json())
-    	        .then(json => {
-    	         
-    	        	location.href = "/us/Detail"; 
-    	        })
-    	        .catch(error => {
-    	            console.error("오류 발생:", error);
-    	        });
+    	  	location.href="/us/Detail?us_num="+us_num;
     	});
 
     

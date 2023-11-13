@@ -14,6 +14,14 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f&libraries=services,clusterer,drawing"></script>
 </head>
 <style>
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
 .nav-wrap {
 	position: relative;
 	margin: 50px auto 0;
@@ -70,11 +78,14 @@
 	color: #999;
 }
 
-.container {
+.schedule_container {
 	margin: 20px auto 0;
 	width: 1000px;
 }
+.schedule_container > input, button, p, em, div, span, a{
+	font-family: 'Pretendard-Regular';
 
+}
 .schedule em {
 	width: 100px;
 	line-height: 30px;
@@ -380,8 +391,33 @@
 .bg_white {
 	background: #fff;
 }
+/* 디테일 일정창 */
+.detail_scedule {
+	border: none;
+	margin-left: 10px;
+}
 
+/* 일정 추가 버튼 div  */
+.day_li_btn_div {
+	margin-top: 30px;
+	height: 50px;
+	margin-bottom: 20px;
+	width: 100%;
+    text-align: center;
+}
+.day_li_btn_div > button {
+	width: 120px;
+	height: 35px;
+	border: none;
+	background-color:rgb(255, 215, 215);
+	border-radius: 7px;
+	text-align: center;
 
+}
+.day_li_btn_div > button:hover{
+	background-color:rgb(249, 179, 179);
+	color: white;
+}
 </style>
 <body >
 	<div class="nav-wrap">
@@ -423,16 +459,14 @@
 				onclick="getLocation(this)" data-value="10"> 전북 </a></li>
 		</ul>
 	</div>
-
-	<div class="container">
+	<input type="hidden" id="doe_location">
+	<div class="schedule_container">
 		<div class="cont_top">
 			<div class="schedule">
 				<br> <em>날짜 선택</em>
 				<form>
-					<input type="date" class="form-control mt-1" id="start_Date"
-						name="start_Date" placeholder="Choose Date"> <input
-						type="date" class="form-control mt-1" id="end_Date"
-						name="end_Date" placeholder="Choose Date">
+					<input type="date" class="form-control mt-1" id="start_Date" name="start_Date" placeholder="Choose Date"> 
+					<input type="date" class="form-control mt-1" id="end_Date" name="end_Date" placeholder="Choose Date">
 				</form>
 			</div>
 		</div>
@@ -443,131 +477,179 @@
 					</div>
 
 						<div class="schedule-list">
-					    <ul>
-					    	<!--일정1 -->
+					    <ul class="schedule-ul">
+					    	<!--일정 -->
 					        <li class="schedule-item day-1">
-						<p>
-							<span>day<em class="day_num">1</em></span><em class="day_date"></em>
-						</p>
-						<div>
-							<button class="schedule-btn-grp" onclick="openModal(this, 1)">장소추가</button>
-							<input type="text" readonly="readonly" id="select_city_area" class="day-1 placeList" name="location1"/>						
-						</div>
-		          	<!-- 메모 부분 수정 -->
-				<div class="memo-div">
-				    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this, 1)">메모추가</button>
-				    <input type="text" readonly="readonly" id="memo_area_1" name="memo_area_1" class="memoList">
-				</div>
+								<p>
+									<span>day<em class="day_num">1</em></span><em class="day_date"><input type="date" class="detail_scedule" ></em>
+								</p>
+								<div>
+									<button class="schedule-btn-grp" onclick="openModal(this)">장소추가</button>
+									<input type="text" readonly="readonly" id="select_city_area" class="day-1 placeList" name="location1"/>						
+								</div>
+					          	<!-- 메모 부분 수정 -->
+							<div class="memo-div">
+							    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this)">메모추가</button>
+							    <input type="text" readonly="readonly" id="memo_area_1" name="memo_area_1" class="memoList">
+							</div>
 				
-				<!-- 메모 모달창 -->
-				<div class="memo-modal" style="display: none;">
-				    <div class="modal-content">
-				        <p>
-				            <span>day <em class="memo_day_num">1</em></span><em class="memo_day_date">10.31</em>
-				        </p>
-				        <textarea class="memo-content" placeholder="여행일정을 메모해보세요" ></textarea>
-				        <div class="button-container1">
-				            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo()">취소</button>
-				            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(1)">작성완료</button>
-				        </div>
-				        <div class="memo-display" style="display: none;"></div>
-				    </div>
-				</div>
-					
+							<!-- 메모 모달창 -->
+							<div class="memo-modal" style="display: none;">
+							    <div class="modal-content">
+							        <p>
+							            <span>day <em class="memo_day_num"></em></span><em class="memo_day_date"></em>
+							        </p>
+							        <textarea class="memo-content" placeholder="여행일정을 메모해보세요" ></textarea>
+							        <div class="button-container1">
+							            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo(this)">취소</button>
+							            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(this)">작성완료</button>
+							        </div>
+							        <div class="memo-display" style="display: none;"></div>
+							    </div>
+							</div>
+							
+					<!--장소선택버튼 -->
+					<input type="hidden" id="Doenum">
+					<div id="myModal" class="modal" style="display: none;">
+						<div class="modal-content">
+							<select id="selectBox" class="select-styling">
+								<option value="" disabled selected>전체를 선택하세요</option>
+							</select>
+							<div class="selection-text">
+								<p>가고 싶은 장소를 선택해주세요!</p>
+							</div>
+							<div class="button-container">
+								<button class="modal-button select-button"
+									onclick="selectLocation(this)">선택하기</button>
+								<button class="modal-button go-back-button" onclick="cancleLocation()">뒤로가기</button>
+							</div>
+						</div>
+					</div>
+					</li>
+
+						
+						
 					<!--일정2 -->
-			        <li class="schedule-item day-2">
+<!-- 			        <li class="schedule-item day-2">
 			            <p>
-						        <span>day <em class="day_num">2</em></span><em class="day_date"></em>
-						    </p>
-						    <div>
+						   <span>day <em class="day_num">2</em></span><em class="day_date"></em>
+						 </p>
+						 <div>
 						    <button class="schedule-btn-grp" onclick="openModal(this, 2)">장소추가</button>
 						    <input type="text" readonly="readonly" id="select_city_area" class="day-2 placeList" name="location2" />
-						   </div>
-						   	<!-- 2번째 일정의 메모 부분 -->
-			           <div class="memo-div">
-				    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this, 2)">메모추가</button>
-				    <input type="text" readonly="readonly" id="memo_area_2" name="memo_area_2" class="memoList">
-				</div>
-				<!-- 메모 모달창 -->
-				<div class="memo-modal" style="display: none;">
-				    <div class="modal-content">
-				        <p>
-				            <span>day <em class="memo_day_num">2</em></span><em class="memo_day_date"></em>
-				        </p>
-				        <textarea class="memo-content" placeholder="여행일정을 메모해보세요"></textarea>
-				        <div class="button-container1">
-				            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo()">취소</button>
-				            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(2)">작성완료</button>
-				        </div>
-				    </div>
-				</div>
-			
+						  </div>
+						   	2번째 일정의 메모 부분
+			           	<div class="memo-div">
+						    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this, 2)">메모추가</button>
+						    <input type="text" readonly="readonly" id="memo_area_2" name="memo_area_2" class="memoList">
+						</div>
+						메모 모달창
+						<div class="memo-modal" style="display: none;">
+						    <div class="modal-content">
+						        <p>
+						            <span>day <em class="memo_day_num">2</em></span><em class="memo_day_date"></em>
+						        </p>
+						        <textarea class="memo-content" placeholder="여행일정을 메모해보세요"></textarea>
+						        <div class="button-container1">
+						            <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo()">취소</button>
+						            <button class="schedule-btn-grp complete-btn" onclick="completeMemo(2)">작성완료</button>
+						        </div>
+						    </div>
+						</div>
+						</li> -->
+					</ul>
+					<!-- 일정 추가 버튼 -->
+					<div class="day_li_btn_div">
+						<button class="add_shedule_btn">일정추가하기</button>
+						<button class="minus_shedule_btn">일정삭제하기</button>
+					</div>
 			<!--일정 등록하기 버튼 -->
 			<div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
 				<a href="javascript:void(0);" onclick="sendDataToServer()">일정등록하기</a>
 			</div>
 			</div>			
 
-			<!--장소선택버튼 -->
-			<input type="hidden" id="Doenum">
-			<div id="myModal" class="modal" style="display: none;">
-				<div class="modal-content">
-					<select id="selectBox" class="select-styling">
-						<option value="" disabled selected>전체를 선택하세요</option>
-					</select>
-					<div class="selection-text">
-						<p>가고 싶은 장소를 선택해주세요!</p>
-					</div>
-					<div class="button-container">
-						<button class="modal-button select-button"
-							onclick="selectLocation()">선택하기</button>
-						<a href="/schedule/write" class="modal-button go-back-button">뒤로가기</a>
-					</div>
-				</div>
-			</div>
+
 			</div>
 
 			<div class="goBack" style="text-align: center;">
 				<a href="/schedule/list">뒤로가기</a>
 			</div>
+	</div>
+<script>
+			
+/* 일정 추가 날짜 범위 지정하기 */
 
-			<script>
-			function toggleMemoModal(day) {
-			    const memoModal = document.querySelector(`.day-${day} .memo-modal`);
-			    memoModal.style.display = (memoModal.style.display === 'none' || memoModal.style.display === '') ? 'block' : 'none';
-			}
+	const startDateInput = document.getElementById('start_Date');
+	const endDateInput = document.getElementById('end_Date');
+	const detailScheduleInputs = document.querySelectorAll('.detail_scedule');
+		
+	function setMinMax() {
+		detailScheduleInputs.forEach(function (input) {
+		input.setAttribute('min', startDateInput.value);
+		input.setAttribute('max', endDateInput.value);
+	});
+	}
+		
+	// 최초 실행
+	setMinMax();
+		
+	// 시작 날짜 입력 시
+	startDateInput.addEventListener('input', setMinMax);
+		
+	// 종료 날짜 입력 시
+	endDateInput.addEventListener('input', setMinMax);
 
-			function completeMemo(day) {
-
-				
-				console.log(day + " 메모추가");
-			    var memo_content = $(".memo-modal").eq(day - 1).find(".memo-content").val(); // 해당 day에 해당하는 memo-content 내용을 가져옴
-			    $("#memo_area_" + day).val(memo_content); // 해당 day에 해당하는 memo_area에 내용 적용
-			    console.log("memo_content: " + memo_content);
+	/* 일정 추가하기 */
+	$(".add_shedule_btn").on("click", function() {
+	var lastScheduleItem = $(".schedule-ul li:last-child");
+			
+	// 복제된 일정 아이템을 새로운 일정으로 설정
+	var newScheduleItem = lastScheduleItem.clone();
+			
+	var currentDayNum = newScheduleItem.find(".day_num").text();
+	newScheduleItem.find(".day_num").text(parseInt(currentDayNum) + 1);
+			
+	// 새로운 일정을 schedule-ul에 추가
+	$(".schedule-ul").append(newScheduleItem);
 			    
-			    $(".memo-modal").eq(day - 1).hide(); // 해당 day에 해당하는 메모 모달창 숨김				
+	setMinMax();
+				
+	// 시작 날짜 입력 시
+	startDateInput.addEventListener('input', setMinMax);
+
+	// 종료 날짜 입력 시
+	endDateInput.addEventListener('input', setMinMax);
+	});	
+					
+	/* 일정 삭제하기 */
+	$(".minus_shedule_btn").on("click", function(){
+	var lastScheduleItem = $(".schedule-ul li:last-child");	
+	lastScheduleItem.remove();
+	})
 	
-			}
+			
+	function toggleMemoModal(day) {
+		const memoModal = document.querySelector(`.day-${day} .memo-modal`);
+		memoModal.style.display = (memoModal.style.display === 'none' || memoModal.style.display === '') ? 'block' : 'none';
+		}
+
+	// 메모 작성 완료 
+	function completeMemo(element) {
+	    var li = findClosestParent(element, ".schedule-item");
+	    var day = li.querySelector(".day_num").innerText;
+	
+	    console.log(day + " 메모추가");
+	    var memo_content = li.querySelector(".memo-modal .memo-content").value; // 해당 day에 해당하는 memo-content 내용을 가져옴
+	    var memo_input = li.querySelector(".memo-div .memoList");
+	    memo_input.value = memo_content; // 해당 day에 해당하는 memo_area에 내용 적용
+	    console.log("memo_input: " + memo_input.value);
+	
+	    li.querySelector(".memo-modal").style.display = "none"; // 해당 day에 해당하는 메모 모달창 숨김
+	}
 
 
-			//날짜 day+1추가
-			document.addEventListener("DOMContentLoaded", function() {
-			    const startDateInput = document.getElementById('start_Date');
-			    const endDateInput = document.getElementById('end_Date');
-
-			    startDateInput.addEventListener('change', function() {
-			        const startDate = new Date(startDateInput.value);
-			        const endDate = new Date(startDate);
-			        endDate.setDate(startDate.getDate() + 1);
-
-			        const day1DateElement = document.querySelector('.day-1 .day_date');
-			        const day2DateElement = document.querySelector('.day-2 .day_date');
-
-			        day1DateElement.textContent = startDate.toISOString().slice(0, 10);
-			        day2DateElement.textContent = endDate.toISOString().slice(0, 10);
-			    });
-			});
-
+		
 
 			// 모든 장소선택 버튼 가져오기
 			var selectPlaceButtons = document.querySelectorAll('.schedule-btn-grp');
@@ -575,49 +657,80 @@
 				selectPlaceButtons.forEach(function(button, index) {
 			    button.addEventListener('click', function() {
 			   
-			        var liElement = this.closest("li");
+			    	var liElement = findClosestParent(this, "li");
 
 		
 			        var selectedPlace = liElement.querySelector('.day_date').innerText;
 			        var selectedPlace = liElement.querySelector('.schedule-btn-grp').innerText;
 
-// 			        // 각 버튼 다음의 input 요소 가져오기
-// 			        var inputField = liElement.querySelector('input[type="text"][readonly]');
-// 			        inputField.value = selectedPlace;
 			    });
 			});
 			
-			//장소추가
-	        function openModal(element, day) {
-			    var modal = document.getElementById("myModal");
-			    modal.style.display = "block";
-			    modal.dataset.day = day; // day 값을 modal 요소에 저장
-			}
+	//장소추가
+	function openModal(element) {
+	    var modal = document.getElementById("myModal");
+	    modal.style.display = "block";
+	
+	    // 가장 가까운 상위 li 태그를 찾아서 day_num 값을 가져옴
+	    var dayNum = findClosestParent(element, ".schedule-item").querySelector(".day_num").innerText;
+	
+	    // modal에 day 값을 저장
+	    modal.dataset.day = dayNum;
+	}
+	
+	// 가장 가까운 상위 요소를 찾는 함수
+	function findClosestParent(element, selector) {
+	    while ((element = element.parentElement) && !element.matches(selector));
+	    return element;
+	}
+		// 장소 추가 모달창 닫기(뒤로가기)
+		function cancleLocation(){
+		    var modal = document.getElementById("myModal");
+		    modal.style.display = "none";
 			
-			//메모
-	    	let selectedDayForMemo = null;
-			
-			function addMemo(element, day) {
-				console.log(element, day)
+		}
+	//메모
+	let selectedDayForMemo = null;
+	
+	//메모추가
+	function addMemo(element) {
+	    // 현재 일정 아이템에서 day_num 값을 가져옴
+	    var dayNum = findClosestParent(element, ".schedule-item").querySelector(".day_num").innerText;
 
-			    const scheduleItem = element.closest('.schedule-item');
-			    const memoModal = scheduleItem.querySelector('.memo-modal');
+	    // 메모 모달의 day_num 텍스트 업데이트
+	    $(".memo_day_num").text(dayNum);
 
-	 		    memoModal.style.display = 'block';
+	    // 현재 일정 아이템에서 detail_scedule 값을 가져와서 메모 모달의 day_date 텍스트 업데이트
+	    var day = findClosestParent(element, ".schedule-item").querySelector(".detail_scedule").value;
+	    $(".memo_day_date").text(day);
+
+	    // 모달 열기
+	    const scheduleItem = findClosestParent(element, ".schedule-item");
+	    const memoModal = scheduleItem.querySelector('.memo-modal');
+	    memoModal.style.display = 'block';
 			
-			}
+	}
+	
+	// 메모 취소 (모달 닫기)
+	function cancelMemo(element){
+	    const scheduleItem = findClosestParent(element, ".schedule-item");
+		const memoModal = scheduleItem.querySelector('.memo-modal');
+	    memoModal.style.display = 'none';
 		
+	}
+			
 
 		//지역 선택
 		function getLocation(element) {
 		    var dataValue = element.getAttribute("data-value");
-		
+			
 		    var doeNameElement = document.getElementById("doe-name");
 		    if (doeNameElement) {
 		        doeNameElement.value = dataValue;
 		    }
-		
-		    var activeElements = document.getElementsByClassName("active_doe");
+		    var doe_name = element.closest("a").innerText;
+			$("#doe_location").val(doe_name);
+			var activeElements = document.getElementsByClassName("active_doe");
 		    for (var i = 0; i < activeElements.length; i++) {
 		        activeElements[i].classList.remove("active_doe");
 		    }
@@ -626,6 +739,8 @@
 		    
 		    SelectBox(dataValue);
 		}
+		
+		
 		
 		//도 선택
 		function SelectBox(doeNum) {
@@ -661,13 +776,17 @@
 		}
 		
 		// 위도 경도 전달
-		function selectLocation() {
+		function selectLocation(element) {
 	    var modal = document.getElementById("myModal");
 	    var selectElement = modal.querySelector('select');
 	    var selectedText = selectElement.options[selectElement.selectedIndex].text;
 	    var day = modal.dataset.day;
-	
-	    var inputField = document.querySelector('#select_city_area.day-' + day);
+		console.log("day" + day);
+		console.log("selectedText = " +selectedText )
+   		var scheduleItem = findClosestParent(element, ".schedule-item");
+		
+		var inputField = scheduleItem.querySelector(".day-1.placeList");
+
 	    if (selectElement) {
 	        inputField.value = selectedText;
 	        $.ajax({
@@ -700,53 +819,24 @@
 	}
 
 			
-// 		function sendScheduleData() {
-// // 		const place = document.querySelector('#select_city_area').val();
-// 	 	const scheduleData = [
-// 	    {
-// 	      dayId: 1,
-// 	      schedule_Num: schedule_Num,
-// 	      dayDate: start_Date,
-// 	      place:place,
-// // 	      memo: memo
-// 	    },
-// 	    {
-// 	      dayId: 2,
-// 	      schedule_Num: schedule_Num,
-// 	      dayDate: start_Date,
-// 	      place:place,
-// // 	      memo: memo
-// 	    }
-// 	  ];
-	
-// 	  $.ajax({
-// 	    url: "/schedule/day",
-// 	    type: 'POST',
-// 	    contentType: 'application/json',
-// 	    data: JSON.stringify(scheduleData),
-// 	    success: function(response) {
-// 	      console.log('데이터가 성공적으로 전송되었습니다.', response);
-// 	      alert('일정이 성공적으로 추가되었습니다.'); // 성공 알람창
-// 	    },
-// 	    error: function(xhr, status, error) {
-// 	      console.error('데이터 전송 중 오류가 발생했습니다.', error);
-// 	      alert('일정 추가 중 오류가 발생했습니다.'); // 오류 알람창
-// 	    }
-// 	  });
-// 	}
+
+
 
 		//서버 전달
 		function sendDataToServer() {
 		    const scheduleItems = document.querySelectorAll(".schedule-item");
 		    const schedules = [];
 		    
+		    
+		    
 		    for (i=0;i<scheduleItems.length;i++) {
 		    	schedules.push({
-// 		    		day_date : scheduleItems[i].querySelector(".day_date").innerText,
+ 		    		day_date : scheduleItems[i].querySelector(".day_num").innerText,
 		    		place : scheduleItems[i].querySelector(".placeList").value,
 			    	memoList : scheduleItems[i].querySelector(".memoList").value,
-			    	start_Num : "2023-11-10",
-			    	end_Date: "2023-11-11"
+			    	start_Num : $("#start_Date").val(),
+			    	end_Date: $("#end_Date").val(),
+			 	  	doe_Name :$("#doe_location").val()
 		    	});
 		    }
 

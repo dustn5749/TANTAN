@@ -33,6 +33,7 @@ public class UsFileController {
 	       System.out.println("displayImage().usFileNum = " + usFileNum);
 		   OutputStream out = response.getOutputStream();
 	       UsFileDTO usFile = usFileService.getUsFile(usFileNum);
+	       
 	       if (usFile != null) {
 	    	   System.out.println("usFile = " + usFile);
 	           String filePath = CURR_IMAGE_REPO_PATH + usFile.getRealName();

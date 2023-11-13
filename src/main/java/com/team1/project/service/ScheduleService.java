@@ -1,6 +1,7 @@
 package com.team1.project.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +31,27 @@ public class ScheduleService {
 			System.out.println("schduleService: " + result);
 			return result;
 		}
+		
+		
 		//일정 작성하기
 		public boolean writeInsert(ScheduleDTO schedule) throws Exception {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
-		schduleDAO.writeInsert(schedule);
+		int result = schduleDAO.writeInsert(schedule);
 		schedule.getSchedule_Num();
-//		for(int i =0;i<schedule.getMemoList().length;i++) {
+		
 		DayDTO in = DayDTO.builder()
 							.schedule_Num(schedule.getSchedule_Num())
 							.dayDate(schedule.getStart_Num())
 							.place(schedule.getPlace())
 							.memo(schedule.getMemoList())
 							.build();
-		schduleDAO.day(in);
-//		}
-		return true;
+		int result2 =  schduleDAO.day(in);
+		System.out.println("result = " + result);
+		System.out.println("result2 = " + result2);
+		if(result == 1 && result == 1) {
+			return true;
+		}
+		return false;
 		}
 		
 		//일정 지역 번호 가져오기
@@ -107,6 +114,14 @@ public class ScheduleService {
 //		int result = ScheduleDAO.reply(us);
 //
 //		return result;
+
+		
+		// 내 일정 정보 얻기
+		public List<ScheduleDTO> getMyScheduleList(String member_Id) {
+			System.out.println("scheduleservice.getMyScheduleList()");
+			System.out.println("member = " + member_Id);
+			return schduleDAO.getMyScheduleList(member_Id);
+		}
 		
 }
 	
