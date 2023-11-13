@@ -1,27 +1,22 @@
 package com.team1.project.controller;
 
+import java.security.Principal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.net.http.HttpRequest;
-import java.security.Principal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -36,14 +31,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team1.project.config.auth.PrincipalDetails;
+import com.team1.project.dto.KakaoProfile;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.OAuthToken;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.ScheduleService;
-import com.team1.project.config.auth.PrincipalDetails;
-import com.team1.project.config.auth.PrincipalDetailsService;
-import com.team1.project.dto.KakaoProfile;
 
 @Controller
 @RequestMapping("/member")
@@ -218,22 +212,22 @@ public class MemberController {
 	}
 	
 	//내 일정으로 가기
-	@RequestMapping("/mySchedule.do")
-	public ModelAndView  mySchedule(ModelAndView mv, HttpServletRequest request,
-			Principal principal) {
-	    System.out.println("membercontroller.mySchedule()");
-	    String viewPage = "mySchedule";
-	    if(principal != null) {
-	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
-	    	System.out.println("list = " + list);
-	    	request.setAttribute("scheduleList", list);	    	
-	    	request.setAttribute("scheduleList", list);
-	    }
-	    
-		mv.setViewName(viewPage);
-	    return mv;
-	}
-	
+//	@RequestMapping("/mySchedule.do")
+//	public ModelAndView  mySchedule(ModelAndView mv, HttpServletRequest request,
+//			Principal principal) {
+//	    System.out.println("membercontroller.mySchedule()");
+//	    String viewPage = "mySchedule";
+//	    if(principal != null) {
+//	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
+//	    	System.out.println("list = " + list);
+//	    	request.setAttribute("scheduleList", list);	    	
+//	    	request.setAttribute("scheduleList", list);
+//	    }
+//	    
+//		mv.setViewName(viewPage);
+//	    return mv;
+//	}
+//	
 
 	
 

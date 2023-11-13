@@ -19,9 +19,12 @@ public class CustomerService {
 	// 고객센터 목록 가져오기
 	public Map<String, Object> getInquiryList(InquiryDTO inquiry) {
 		System.out.println("customerService.getInquiryList(inquiry)");
-		System.out.println("inquiry = " + inquiry);
 		Map<String, Object> map = new HashMap<>();
-		inquiry.setTotalCount(customerDAO.getTotalCount(inquiry));
+		int totalCount = customerDAO.getTotalCount(inquiry);
+		
+		inquiry.setTotalCount(totalCount);
+		System.out.println("totalCount = " + totalCount);
+		System.out.println("inquiry = " + inquiry);
 		map.put("inquiry", inquiry);
 		map.put("inquiryList", customerDAO.getInquiryList(inquiry));
 		return map;

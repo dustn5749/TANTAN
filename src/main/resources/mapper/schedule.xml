@@ -51,6 +51,21 @@ values(
     VALUES (sc.nextval, #{schedule_Num}, TO_DATE(#{dayDate}, 'yyyy-MM-dd'), #{place}, #{memo})
 </insert>
 
+<!-- 더보기 -->
+
+<select id="selectchedule" resultType="com.team1.project.dto.ScheduleDTO">
+		SELECT
+	    SCHEDULE_NUM,
+	    MEMBER_ID,
+	    DOE_NAME,
+	    TO_CHAR(REG_DATE, 'YYYY.MM.DD') AS create_dt,
+	    MOD_DATE AS update_dt
+	FROM
+	    SCHEDULE
+	ORDER BY
+	    SCHEDULE_NUM DESC
+	FETCH FIRST 10 ROWS ONLY;
+</select>
      
     <!--지역번호 만들기 --> 
     <select id="Doenum" resultMap="CityMap">
@@ -103,13 +118,5 @@ values(
     WHERE
         SCHEDULE_NUM = #{schedule_Num}  
      </delete>  
-
-     
-     
-   <!--  내 일정 정보 얻기  -->
-<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO"> 
-select * from SCHEDULE where MEMBER_ID=#{member_Id} 
-</select>
-
 
 </mapper>

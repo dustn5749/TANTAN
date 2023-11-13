@@ -43,7 +43,21 @@ public class ScheduleController {
     return "scheduleWrite";
    }
     
+<<<<<<< HEAD
     //일정 글 작성이동
+=======
+
+    
+    //일정상세보기
+    @RequestMapping(value = "/detail")
+    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
+    	System.out.println("scheduleController.detail()");
+    	System.out.println("schedule_Num = " + schedule_Num);
+    return "scheduleDetail";
+
+    }
+
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
