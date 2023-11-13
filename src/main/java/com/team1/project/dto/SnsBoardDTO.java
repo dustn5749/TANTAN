@@ -1,3 +1,4 @@
+
 package com.team1.project.dto;
 
 import lombok.*;
@@ -18,7 +19,7 @@ public class SnsBoardDTO {
 
     private String deleteYn; // 삭제 여부
 
-    private Long memberId; //회원 아이디
+    private String memberId; //회원 아이디
 
     private Long viewCount; //조회수
 

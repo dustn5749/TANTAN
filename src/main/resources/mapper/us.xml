@@ -4,22 +4,6 @@
 <mapper namespace="com.team1.project.dao.UsDAO">
 
 <!-- 전체목록조회 -->
-<!-- <select id="getUsList" resultType="com.team1.project.dto.UsDTO"> -->
-<!--       SELECT * FROM ( -->
-<!--           SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
-<!--           FROM (  -->
-<!--               SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
-<!--               FROM us a  -->
-<!--               WHERE rownum BETWEEN #{startNo} AND #{endNo} -->
-<!--               order by us_num desc -->
-<!--          <if test="start_Date != null and end_Date != null"> -->
-<!--              AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
-<!--          </if> -->
-<!--           ) -->
-<!--       ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
-<!-- </select> -->
-
-<!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO">
     SELECT * FROM (
         SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
@@ -35,9 +19,22 @@
             <if test="start_Date != null and end_Date != null">
                 ORDER BY us_num DESC
             </if>
-        )
-    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
-</select>
+</select> 
+<!-- <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map"> -->
+<!--     SELECT * FROM ( -->
+<!--         SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
+<!--         FROM ( -->
+<!--             SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content -->
+<!--             FROM us a  -->
+<!--             WHERE rownum BETWEEN #{startNo} AND #{endNo} -->
+<!--             <if test="start_Date != null and end_Date != null"> -->
+<!--                 AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
+<!--             </if> -->
+<!--             order by us_num desc -->
+<!-- >>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git -->
+<!--         ) -->
+<!--     ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
+<!-- </select> -->
 
 
 <!-- 메인 탑5 노출 -->
@@ -62,14 +59,40 @@
  	</select>
 
 <!-- 동행 글쓰기 -->
-    <insert id="writeInsert"> 
-    INSERT INTO us ( 
-        US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE , CONTENT
-    ) VALUES ( 
-        #{us_num}, #{city_name}, #{writer}, #{us_cnt},  #{start_Date}, #{end_Date}, #{title}, #{content} 
+<insert id="writeInsert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
+    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
+        SELECT us_sq.nextval as us_num FROM dual
+    </selectKey>
+    insert into us (
+        us_num,
+        city_name,
+        writer,
+        us_cnt,
+        regdate,
+        start_date,
+        end_date,
+        title,
+        content,
+        status,
+        reportcnt
+    ) VALUES (
+        us_sq.nextval,
+        #{city_name},
+        #{writer},
+        #{us_cnt},
+        sysdate,
+        #{start_Date},
+        #{end_Date},
+        #{title},
+        #{content},
+        'N',
+        0
     )
 </insert>
 
+	<select id="nextUsNum" resultType="int">
+	    SELECT max(us_num) from us
+	</select>
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
@@ -107,11 +130,21 @@
 		    )
 		    WHERE ROWNUM &lt;= 3
 		</select>
+		
+		
+		
 <!-- 관리자 -->
 <!-- 신고받은 동행 리스트 가져오기 -->
 	<select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
 		SELECT * from us where reportcnt > 0 ORDER BY STATUS desc
 	</select>
+	
+	<!--us에 fileno저장  -->
+	<update id="updateFile" parameterType="com.team1.project.dto.UsFileDTO">
+		update us set  FILENO=#{usFileNum}
+		where us_num=#{usNum}
+	</update>
+	
 <!-- 신고받은 동행 리스트 차트 연습용 -->
 	<select id="usReportList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
 	  <![CDATA[

@@ -25,6 +25,10 @@
         <put-attribute name="body" value=""/>
     </definition>
 
+    <definition name="alim" extends="feed-detail">
+        <put-attribute name="body" value="/WEB-INF/views/main/alim/alim.jsp"/>
+    </definition>
+
     <definition name="sns-detail" extends="feed-detail">
         <put-attribute name="body" value="/WEB-INF/views/sns/feed-detail.jsp"/>
     </definition>

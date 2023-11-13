@@ -58,7 +58,6 @@ public class MemberService {
 		}
 	}
 	
-	// 기존 회원인지 체크하기
 	public boolean checkMember(MemberDTO member) {
 		System.out.println("memberserviec.checkMeber. 기존 회원인지 체크하기");
 		return memberDao.checkMember(member) != 0;
@@ -100,7 +99,6 @@ public class MemberService {
 	
 	// 관리자 회원 정지
 	public boolean memberStop(String member_id) throws Exception{
-		
 		return memberDao.memberStop(member_id);
 	}
 
@@ -108,4 +106,7 @@ public class MemberService {
 	public boolean memberRelease(String member_id) throws Exception{
 		return memberDao.memberRelease(member_id);
 	}
+	
+	
+	
 }

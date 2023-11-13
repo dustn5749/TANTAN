@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.UsDAO;
+import com.team1.project.dao.UsFileDAO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
+import com.team1.project.dto.UsFileDTO;
 
 @Service
 public class UsService {
@@ -17,7 +19,10 @@ public class UsService {
 	@Autowired
 	private UsDAO usDAO;
 	
-//	 1. 동행 목록 조회
+	@Autowired
+	private UsFileDAO usfileDAO;
+	
+	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
 		// 1. 전체 건수를 얻기
 		us.setTotalCount(usDAO.totalCount(us)); //여기서 전체 게시글 수를 불러와서 저장함.
@@ -42,8 +47,26 @@ public class UsService {
 	}
 	//동행 글쓰기
 	public boolean writeInsert(UsDTO us) throws Exception {
+		System.out.println("usService.writeInsert()");
 		System.out.println("us =" + us);
-	return usDAO.writeInsert(us);
+		boolean result = false;
+		usDAO.writeInsert(us);
+		int usNum = usDAO.nextUsNum();
+		System.out.println("usNum = " + usNum);
+		for(UsFileDTO file : us.getFile()) {
+			file.setUsNum(usNum);
+			file.setMemberId(us.getWriter());
+			System.out.println("file " + file);
+			usfileDAO.add(file);
+			int fileNo = usfileDAO.getFileNo(file.getUsNum());
+			System.out.println("fileNo = " + fileNo);
+			file.setUsFileNum(fileNo);
+			usDAO.updateFile(file);
+		}
+		if(usNum != 0) {
+			result = true;
+		}
+	return result;
 	}
 	
 	// 동행 상세보기

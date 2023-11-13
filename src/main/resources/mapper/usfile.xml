@@ -3,54 +3,59 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team1.project.dao.usFile">
+<mapper namespace="com.team1.project.dao.UsFileDAO">
 
-<select id="getFiles" resultType="com.team1.project.dto.UsFileDTO">
 
+
+<select id="getUsFile" resultType="com.team1.project.dto.UsFileDTO">
     SELECT
-        fileNo AS fileNo,
-        BOARDNUM AS boardNum,
-        file_Name_Org AS fileNameOrg,
-        file_Name_real AS fileNameReal,
-        length AS length,
-        content_type AS contentType,
-        reg_date AS regDate
-    FROM attach_file
-    WHERE BOARDNUM = #{boardNum}
-    ORDER BY fileNo
+        USFILENUM,
+        US_NUM,
+        MEMBER_ID,
+        LENGTH,
+        UPLOADNAME,
+        REALNAME,
+       FILETYPE,
+       REGDATE
+   	FROM US_FILE
+    WHERE USFILENUM = #{usFileNum}
 </select>
-
-<select id="getAttacheFile" resultType="com.team1.project.dto.UsFileDTO">
-    SELECT
-        fileNo AS fileNo,
-        BOARDNUM AS boardNum,
-        file_Name_Org AS fileNameOrg,
-        file_Name_real AS fileNameReal,
-        length AS length,
-        content_type AS contentType,
-        reg_date AS regDate
-    FROM attach_file
-    WHERE fileNo = #{fileNo}
-    ORDER BY fileNo
-</select>
-
-<insert id="add">
-    INSERT INTO attach_file (
-        fileNo,
-        BOARDNUM,
-        file_Name_Org,
-        file_Name_real,
-        length,
-        content_type
+<!-- 첨부파일 추가하기 -->
+ <insert id="add" useGeneratedKeys="true" keyProperty="usFileNum">
+    <selectKey keyProperty="usFileNum" resultType="int" order="BEFORE">
+        SELECT us_file_sq.nextval FROM dual
+    </selectKey>
+    INSERT INTO us_file (
+        USFILENUM,
+        US_NUM,
+        MEMBER_ID,
+        LENGTH,
+        UPLOADNAME,
+        REALNAME,
+        FILETYPE,
+        REGDATE
     ) VALUES (
-        FILE_NO_SEQ.nextval,
-        #{boardNum},
-        #{fileNameOrg},
-        #{fileNameReal},
+        us_file_sq.nextval,
+        #{usNum},
+        #{memberId},
         #{length},
-        #{contentType}
+        #{uploadName},
+        #{realName},
+        #{fileType},
+        sysdate
     )
-</insert>
+</insert> 
+<!-- <insert id="add" parameterType="java.util.HashMap" statementType="CALLABLE">
+	{call insert_us_file(
+		#{usNum},
+		#{memberId},
+		#{length},
+		#{uploadName},
+		#{realName},
+		#{fileType},
+		#{p_out
+	)}
+</insert> -->
 
 <delete id="delete">
     DELETE FROM attach_file
@@ -64,5 +69,11 @@
         #{boardnum}
     </foreach>
 </delete>
+
+<!-- 첨부파일 번호 얻기 -->
+<select id="getFileNo" resultType="int">
+	select USFILENUM from US_FILE 
+	WHERE US_NUM=#{usNum}
+</select>
 
 </mapper> 

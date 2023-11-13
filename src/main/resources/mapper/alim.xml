@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.AlimDAO">
+
+    <select id="getAlimListByReceiveMember" resultType="com.team1.project.dto.AlimDTO" parameterType="java.lang.String">
+        <![CDATA[
+        select
+            al.ALIM_ID  as alimId,
+            al.RECEIVE_MEMBER_ID as receiveMemberId,
+            al.SEND_MEMBER_ID as sendMemberId,
+            al.CONTENT as content,
+            al.CREATE_TIME as createTime,
+            al.READ_YN as readYn,
+            al.URL as url,
+            m.nickname
+        from alim al
+         inner join member m on (m.member_id = al.SEND_MEMBER_ID)
+        where 1 = 1
+          and al.receive_member_id = #{memberId}
+          and al.read_yn = 'N'
+        order by
+            al.ALIM_ID desc
+        ]]>
+    </select>
+
+
+    <select id="getCount" resultType="java.lang.Long" parameterType="java.lang.String">
+        <![CDATA[
+        select count(*) from alim al
+        where 1 = 1
+        and al.receive_member_id = #{memberId}
+        and al.read_yn = 'N'
+        ]]>
+    </select>
+
+    <update id="updateReadYnByMemberId">
+        <![CDATA[
+        update alim al
+            set al.read_yn = 'Y'
+         where 1 = 1
+          and al.receive_member_id = #{memberId}
+          and al.read_yn = 'N'
+        ]]>
+    </update>
+
+    <update id="updateReadYnByAlimId">
+        <![CDATA[
+        update alim al
+        set al.read_yn = 'Y'
+        where 1 = 1
+          and al.alim_id = #{alimId}
+          and al.read_yn = 'N'
+        ]]>
+    </update>
+
+
+</mapper>
+ 

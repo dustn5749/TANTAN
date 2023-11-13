@@ -157,7 +157,7 @@
                     <c:forEach items="${boardList}" var="board">
                         <div class="grid">
                             <!-- 각 이미지 카드를 클릭시 JS함수와 연결 -->
-                            <figure class="feed-item-card" onclick="openModal(${board.boardNum})">
+                            <figure class="feed-item-card" onclick="openBoardModal(${board.boardNum})">
                                 <img src="${board.realName}" alt="" class="thumbnail-img">
                                 <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->
                                 <div class="overlay">
@@ -237,7 +237,7 @@
         })
     })
 
-    function openModal(id) {
+    function openBoardModal(id) {
         $('#feed-modal').load("/sns/board/detail/" + id, "", () => {
             $('#feed-modal').addClass('active');
         });

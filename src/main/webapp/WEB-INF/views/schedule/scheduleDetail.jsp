@@ -874,7 +874,7 @@
               }
           } 
           
-       // 동행게시글 상세보기
+       // 일정 상세보기
           function DetailForm(schedule_Num) {
               const url = "/RealDetail" + schedule_Num;
               fetch(url, {

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.ScheduleDTO;
-import com.team1.project.dto.UsDTO;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.ScheduleService;
 
@@ -49,6 +48,16 @@ public class ScheduleController {
     return "scheduleWrite";
    }
     
+
+    
+    //일정상세보기
+    @RequestMapping(value = "/detail")
+    public String detail(ScheduleDTO schedule) throws Exception {
+
+    return "scheduleDetail";
+
+    }
+
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -74,7 +83,6 @@ public class ScheduleController {
             result.put("message", "일부 또는 전체 일정 등록에 실패했습니다.");
             result.put("result", false);
         }
-
         return result;
     }
 
@@ -119,13 +127,14 @@ public class ScheduleController {
     }
     
     //일정상세보기
-//	@ResponseBody
-//	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
-//	public ScheduleDTO Scheduledetail(@RequestParam("schedule_Num") int usschedule_num_num) throws Exception {                       
-//		ScheduleDTO schedule = scheduleService.scheduleDetail(schedule_Num);
-//	    System.out.println("동행 상세보기 컨트롤러");
-//	    return detail;
-//	}
+	@ResponseBody
+	@RequestMapping(value = "/RealDetail", method = RequestMethod.POST)
+	public ScheduleDTO Scheduledetail(@RequestParam("schedule_Num") int schedule_Num, Model model) throws Exception {                       
+		ScheduleDTO schedule = scheduleService.schduleDetail(schedule_Num);
+		model.addAttribute("result", schedule);
+	    System.out.println("동행 상세보기 컨트롤러");
+	    return schedule;
+	}
 
    //수정하기
 	@ResponseBody

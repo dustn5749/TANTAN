@@ -5,6 +5,13 @@
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
    .us_container{
       width: 80%;
       margin: 0 auto;
@@ -329,6 +336,7 @@
       #korea {
             display: none; 
         }
+<<<<<<< HEAD
       #myModal {
     display: none;
     position: fixed;
@@ -402,6 +410,27 @@
   .button-container {
     text-align: center;
   }
+=======
+     
+   /* 일정 상세보기 버튼 */
+   .detailButton {
+   		background: white;
+   		width: 120px;
+   		height: 45px;
+   		border: none;
+   		border-radius: 8px;
+   		font-family: 'Pretendard-Regular' !important;
+   		
+   }
+   .detailButton:hover {
+   		background: black;
+   		color:white;
+   }
+	.schedule_container > input, button, p, span, div, ul, li {
+   		font-family: 'Pretendard-Regular' !important;		
+	}
+   
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </style>
 </head>
 
@@ -514,6 +543,7 @@
       <div class="container">
    
    
+<<<<<<< HEAD
 <!--     <div class="row"> -->
 <%--         <c:forEach var="schedule" items="${result.scheduleList}"> --%>
 <!--             <div class="col-md-3 mb-4"> -->
@@ -540,6 +570,29 @@
 <%--         </c:forEach> --%>
 <!--     </div> -->
 <!-- </div> -->
+=======
+    <div class="row">
+        <c:forEach var="schedule" items="${result.scheduleList}">
+            <div class="col-md-3 mb-4">
+                <div class="card box-shadow">
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">${schedule.member_Id}</h5>
+                            <p>${schedule.schedule_Num}</p>
+                            <p>${schedule.doe_Name}</p>
+                               <p>${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                                <p>${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+                            <p>${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
+                            <p>${schedule.memo != null ? schedule.memo : ""}</p>
+                           <button value="${result.list[item].schedule_Num}" class="detailButton">상세보기 </button>
+                     </div>
+                     </div>
+                   </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
       
 <div class="cy5jw6o dir dir-ltr" role="group" data-testid="card-container" aria-labelledby="title_896641117667634802">
     <div class="lxq01kf l1tup9az dir dir-ltr">
@@ -615,6 +668,7 @@
 <!--         </svg> -->
 <!--     </button> -->
 
+<<<<<<< HEAD
 <!--     페이지 이동 -->
 <!--     <div class="sc-73e2cff1-2 ekMLCz"> -->
 <!--         <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button> -->
@@ -637,6 +691,19 @@
                 </ul>
                    <a id="moreView">더보기</a>
                </div>
+=======
+    <!-- 페이지 이동 -->
+    <div class="sc-73e2cff1-2 ekMLCz">
+        <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button>
+        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
+    </div>
+</div>
+</div>
+</div>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 <script>
 $(document).ready(function() {
     var page = 1; // 페이지 번호 초기화
