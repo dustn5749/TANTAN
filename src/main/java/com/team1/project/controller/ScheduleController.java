@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.ScheduleService;
 
@@ -42,6 +43,11 @@ public class ScheduleController {
     return "scheduleWrite";
    }
     
+<<<<<<< HEAD
+    //일정 글 작성이동
+=======
+
+    
     //일정상세보기
     @RequestMapping(value = "/detail")
     public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
@@ -51,6 +57,7 @@ public class ScheduleController {
 
     }
 
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -100,7 +107,14 @@ public class ScheduleController {
     	   return result;
     } 
 
-  
+    //일정상세보기
+    @RequestMapping(value = "/detail")
+    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
+       System.out.println("scheduleController.detail()");
+       System.out.println("schedule_Num = " + schedule_Num);
+    return "scheduleDetail";
+
+    }
     
    //수정하기
 	@ResponseBody

@@ -45,4 +45,8 @@ public class UsFileService {
         System.out.println("UsFileService.deletes()");
         return usFileDAO.deletes(deleteNumList);
     }
+
+
+    
+
 }
