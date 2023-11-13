@@ -107,11 +107,7 @@
                             <dl>
                                 <dt>친구수</dt>
                                 <dd>105</dd>
-                            </dl>
-                            <dl>
-                                <dt>팔로우</dt>
-                                <dd>1</dd>
-                            </dl>
+                            </dl>                            
                         </div>
                         <div class="info02">
                             <p>안녕하세요~</p>
