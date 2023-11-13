@@ -21,37 +21,37 @@ import net.coobird.thumbnailator.Thumbnails;
 @Controller
 public class UsFileController {
 
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\file_repo";
+   private static final String CURR_IMAGE_REPO_PATH = "C:\\file_repo";
 
-	@Autowired
-	private UsFileService usFileService;
+   @Autowired
+   private UsFileService usFileService;
 
-	
-	   // 파일 출력하기 ( 썸네일 )
-	   @RequestMapping("/displayImage.do")
-	   public void displayImage(@RequestParam("usFileNum") int usFileNum, HttpServletResponse response) throws Exception {
-	       System.out.println("displayImage().usFileNum = " + usFileNum);
-		   OutputStream out = response.getOutputStream();
-	       UsFileDTO usFile = usFileService.getUsFile(usFileNum);
-	       
-	       if (usFile != null) {
-	    	   System.out.println("usFile = " + usFile);
-	           String filePath = CURR_IMAGE_REPO_PATH + usFile.getRealName();
-	           File images = new File(filePath);
-	           String getFileName = usFile.getUploadName();
-	           int lastIndex = getFileName.lastIndexOf(".");
-			   String extension = getFileName.substring(lastIndex);
-			   if(extension.contains("jpg") || extension.contains("png") || extension.contains("jpeg")) {
-				   File thumbnail = new File(CURR_IMAGE_REPO_PATH + "/thumbnails");
-				   System.out.println("file = " + thumbnail);
-		           if (images.exists()) {
-		        	   System.out.println("images = " +images.exists() );
-		        	   thumbnail.getParentFile().mkdirs();
-		               Thumbnails.of(images).forceSize(4500, 3000).outputFormat("png").toOutputStream(out);
-		           }
-			   }
-	         
-	       }
-	       out.close();
-	   }
+   
+      // 파일 출력하기 ( 썸네일 )
+      @RequestMapping("/displayImage.do")
+      public void displayImage(@RequestParam("usFileNum") int usFileNum, HttpServletResponse response) throws Exception {
+          System.out.println("displayImage().usFileNum = " + usFileNum);
+         OutputStream out = response.getOutputStream();
+          UsFileDTO usFile = usFileService.getUsFile(usFileNum);
+          
+          if (usFile != null) {
+             System.out.println("usFile = " + usFile);
+              String filePath = CURR_IMAGE_REPO_PATH + usFile.getRealName();
+              File images = new File(filePath);
+              String getFileName = usFile.getUploadName();
+              int lastIndex = getFileName.lastIndexOf(".");
+            String extension = getFileName.substring(lastIndex);
+            if(extension.contains("jpg") || extension.contains("png") || extension.contains("jpeg")) {
+               File thumbnail = new File(CURR_IMAGE_REPO_PATH + "/thumbnails");
+               System.out.println("file = " + thumbnail);
+                 if (images.exists()) {
+                    System.out.println("images = " +images.exists() );
+                    thumbnail.getParentFile().mkdirs();
+                     Thumbnails.of(images).forceSize(4500, 3000).outputFormat("png").toOutputStream(out);
+                 }
+            }
+            
+          }
+          out.close();
+      }
 }
