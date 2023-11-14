@@ -26,7 +26,7 @@ public class UsService {
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
 		// 1. 전체 건수를 얻기
 		us.setTotalCount(usDAO.totalCount(us)); //여기서 전체 게시글 수를 불러와서 저장함.
-		
+		System.out.println("startNo, endNo : " + us.getStartNo() + ", " + us.getEndNo());
 		Map<String, Object> result = new HashMap<>();
 		try {
 		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회

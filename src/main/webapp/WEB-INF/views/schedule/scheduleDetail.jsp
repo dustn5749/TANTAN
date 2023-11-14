@@ -459,23 +459,23 @@
             onclick="getLocation(this)" data-value="10"> 전북 </a></li>
       </ul>
    </div>
-   
    <input type="hidden" id="doe_location">
    <div class="schedule_container">
       <div class="cont_top">
          <div class="schedule">
+            <br> <em>날짜 선택</em>
             <form>
                <input type="date" class="form-control mt-1" id="start_Date" name="start_Date" placeholder="Choose Date"> 
                <input type="date" class="form-control mt-1" id="end_Date" name="end_Date" placeholder="Choose Date">
             </form>
          </div>
       </div>
-      
             <div class="cont_bottom">
                <div class="map-section">
                   <!--<h1>지도</h1> -->
                   <div class="evt-map" id="map" style="width: 100%; height: 600px;"></div>
                </div>
+
                   <div class="schedule-list">
                    <ul class="schedule-ul">
                       <!--일정 -->
@@ -484,18 +484,32 @@
                            <span>day<em class="day_num">1</em></span><em class="day_date"><input type="date" class="detail_scedule" ></em>
                         </p>
                         <div>
-    <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>${schedule.place}
-                           <input type="text" readonly="readonly" id="select_city_area" class="day-1 placeList" name="location1"/>${schedule.place}                 
+                           <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
+                           <input type="text" readonly="readonly" id="select_city_area_1" class="day-1 placeList" name="location1" value="${scheduleList[0].place1}" />
+                           <input type="hidden" id="select_city_area_2" value="${scheduleList[0].place2}" />
+                                 
                         </div>
-                           <!-- 메모 부분 수정 -->
-               <div class="memo-div">
-    <div class="schedule-btn-grp">
-        <button class="memo-add-btn" onclick="addMemo(this)">메모수정</button>
-        <input type="text" value="${schedule.memo}" id="memoInput">
-        <button class="memo-save-btn" onclick="saveMemo()">수정완료</button>
-    </div>
-</div>
+                            <!-- 메모 부분 수정 -->
+                  <div class="memo-div">
+    <button class="schedule-btn-grp memo-add-btn" onclick="addMemo(this)">메모수정</button>
+    <input type="text" readonly="readonly" id="select_city_area_1" class="day-1 placeList memoList" name="location1" value="${scheduleList[0].memo1}" />
+    <input type="hidden" id="select_city_memo_2" value="${scheduleList[0].memo2}" />
+ 
 
+           
+                     <!-- 메모 모달창 -->
+                     <div class="memo-modal" style="display: none;">
+                         <div class="modal-content">
+                             <p>
+                                 <span>day <em class="memo_day_num"></em></span><em class="memo_day_date"></em>
+                             </p>
+                             <textarea class="memo-content" placeholder="여행일정을 메모해보세요" ></textarea>
+                             <div class="button-container1">
+                                 <button class="schedule-btn-grp cancel-btn" onclick="cancelMemo(this)">취소</button>
+                                 <button class="schedule-btn-grp complete-btn" onclick="completeMemo(this)">작성완료</button>
+                             </div>
+                             <div class="memo-display" style="display: none;"></div>
+                         </div>
                      </div>
                      
                <!--장소선택버튼 -->
@@ -516,40 +530,113 @@
                   </div>
                </div>
                </li>
-   </ul>
+
+               </ul>
+               <!-- 일정 추가 버튼 -->
                <div class="day_li_btn_div">
-    <button class="add_shedule_btn">다른일정수정</button>
-    <button class="minus_shedule_btn">일정삭제</button>
-</div>
+                  <button class="add_shedule_btn">다른일정수정</button>
+                  <button class="minus_shedule_btn">일정삭제</button>
+               </div>
+         <!--일정 수정하기 버튼 -->
+      <div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
+    <a href="javascript:void(0);" id="saveEntryBtn">수정완료</a>
+	</div>
+      </div> 
+       </div>
+       </div>         
 
-<div class="button-group">
-  
-    
-    
-    <!-- Schedule Registration Button -->
-    <div class="mySchedule" style="text-align: center; margin-bottom: 20px;">
-        <a href="javascript:void(0);" onclick="sendDataToServer()">일정수정완료</a>
-    </div>
-</div>
-
-            
-         </div>
-        </div>
-        </div>
-        
-   
 <script>
-function saveMemo() {
-    var updatedMemo = document.getElementById("memoInput").value;
-    document.getElementById("displayedMemo").textContent = updatedMemo;
-    document.getElementById("memoInput").value = "";
-    alert("수정완료 되었습니다.");
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('deleteBtn').addEventListener('click', deleteEntry);
+    document.getElementById('saveEntryBtn').addEventListener('click', saveEntry);
+});
+
+
+
+//수정한 내용 저장 버튼
+function saveEntry() {
+    // 수정할 스케줄 정보 가져오기
+    const scheduleList = document.querySelectorAll('.schedule-item');
+
+    // 저장할 데이터 배열 초기화
+    const data = [];
+
+  // 스케줄 정보를 data 배열에 추가
+scheduleList.forEach((schedule, index) => {
+    const schedule_Num = document.getElementById(`schedule_Num${index}`).textContent;
+    const memo1Element = document.getElementById(`memo1_${index}`);
+    const memo1 = memo1Element ? memo1Element.innerText : ''; 
+    const memo2 = document.getElementById(`memo2_${index}`).innerText;
+    const place1 = document.getElementById(`place1${index}`).innerText;
+    const place2 = document.getElementById(`place2${index}`).value;
+
+    data.push({
+        schedule_Num: schedule_Num,
+        memo1: memo1,
+        memo2: memo2,
+        place1: place1,
+        place2: place2
+    });
+});
+
+    // 서버로 데이터 전송
+    fetch('/schedule/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        if (json.message === "수정 성공했습니다!") {
+            alert('수정이 완료되었습니다.');
+            // 여기에서 수정이 완료된 후 수행할 작업을 추가할 수 있습니다.
+        } else {
+            alert('수정에 실패했습니다.');
+            // 수정에 실패한 경우에 대한 처리를 추가할 수 있습니다.
+        }
+    })
+    .catch(error => {
+        console.error('수정 중 오류 발생:', error);
+    });
 }
 
-function sendDataToServer() {
-    alert('모든 일정이 수정 완료되었습니다!');
+// 삭제하기
+function deleteEntry() {
+    const schedule_Num = document.getElementById('schedule_Num').textContent;
+
+    fetch('/schedule/delete', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({ schedule_Num: parseInt(schedule_Num) }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // 여기에서 삭제 후 수행할 작업을 추가할 수 있습니다.
+    })
+    .catch(error => {
+        console.error('에러:', error);
+    });
 }
 
+// 홈페이지로 이동
+function goToHomepage() {
+    window.location.href = '/schedule/list';
+}
+     
+function saveEntry() {
+    // 일정 수정이 완료되었습니다 알림창 띄우기
+    alert('일정 수정이 완료되었습니다.');
+
+    // 페이지 이동
+    window.location.href = '/schedule/list'; // 적절한 URL로 변경
+}     
          
 /* 일정 추가 날짜 범위 지정하기 */
 
@@ -582,6 +669,9 @@ function sendDataToServer() {
          
    var currentDayNum = newScheduleItem.find(".day_num").text();
    newScheduleItem.find(".day_num").text(parseInt(currentDayNum) + 1);
+
+   newScheduleItem.find(".placeList").val($("#select_city_area_2").val());
+   newScheduleItem.find(".memoList").val($("#select_city_memo_2").val());
          
    // 새로운 일정을 schedule-ul에 추가
    $(".schedule-ul").append(newScheduleItem);
@@ -595,13 +685,16 @@ function sendDataToServer() {
    endDateInput.addEventListener('input', setMinMax);
    });   
                
-   /* 일정 삭제하기 */
-   $(".minus_shedule_btn").on("click", function(){
-   var lastScheduleItem = $(".schedule-ul li:last-child");   
-   lastScheduleItem.remove();
-   })
-   
-         
+  /* 일정 삭제하기 */
+$(".minus_shedule_btn").on("click", function(){
+    var lastScheduleItem = $(".schedule-ul li:last-child");   
+    lastScheduleItem.remove();
+    
+    // 일정 삭제가 완료되었습니다 알림창 띄우기
+    alert('일정 삭제가 완료되었습니다.');
+});
+
+      
    function toggleMemoModal(day) {
       const memoModal = document.querySelector(`.day-${day} .memo-modal`);
       memoModal.style.display = (memoModal.style.display === 'none' || memoModal.style.display === '') ? 'block' : 'none';
@@ -620,6 +713,8 @@ function sendDataToServer() {
    
        li.querySelector(".memo-modal").style.display = "none"; // 해당 day에 해당하는 메모 모달창 숨김
    }
+
+
          // 모든 장소선택 버튼 가져오기
          var selectPlaceButtons = document.querySelectorAll('.schedule-btn-grp');
 
@@ -688,6 +783,7 @@ function sendDataToServer() {
       
    }
          
+
       //지역 선택
       function getLocation(element) {
           var dataValue = element.getAttribute("data-value");
@@ -707,6 +803,8 @@ function sendDataToServer() {
           
           SelectBox(dataValue);
       }
+      
+      
       
       //도 선택
       function SelectBox(doeNum) {
@@ -784,13 +882,12 @@ function sendDataToServer() {
        }
    }
 
+         
       //서버 전달
       function sendDataToServer() {
           const scheduleItems = document.querySelectorAll(".schedule-item");
           const schedules = [];
-          
-          
-          
+
           for (i=0;i<scheduleItems.length;i++) {
              schedules.push({
                  day_date : scheduleItems[i].querySelector(".day_num").innerText,
@@ -820,6 +917,7 @@ function sendDataToServer() {
              }) 
       }
    
+  
       // 지도를 표시할 div 
       function mapDisplay(x, y){
          var mapContainer = document.getElementById('map'), 
@@ -856,7 +954,7 @@ function sendDataToServer() {
 
           // 주소검색 이벤트 -- 검색 버튼 클릭 시
          $(document).on('click','.evt-search',function(e){
-            var address = $('.evt-address').val();                                                          
+            var address = $('.evt-address').val();
             if( $.trim(address) == ''){ alert("주소를 입력해주세요."); return false; }
             map.search('map',address);
          });
@@ -881,83 +979,7 @@ function sendDataToServer() {
               }
           } 
           
-       // 일정 상세보기
-          function DetailForm(schedule_Num) {
-              const url = "/RealDetail" + schedule_Num;
-              fetch(url, {
-                  method: "GET",
-                  headers: {
-                      "Content-Type": "application/json; charset=UTF-8",
-                  },
-              })
-              .then(response => response.json())
-              .then(json => {
-                  document.getElementById("member_Id").textContent = json.writer;
-                  document.getElementById("doe_Name").textContent = json.title;
-                  document.getElementById("doe_Num").textContent = json.content;
-                  document.getElementById("start_Num").value = json.start_Date; 
-                  document.getElementById("end_Date").value = json.end_Date; 
-                  document.getElementById("schedule_Num").textContent = json.us_num;
-                  document.getElementById("place").textContent = json.us_num;
-                  document.getElementById("memo").textContent = json.us_cnt;
-              })
-              .catch(error => {
-                  console.error("오류 발생:", error);
-              });
-              return false;
-          }
-       
-       // 수정하기
-       function editEntry() {
-           const place = document.getElementById('place');
-           const memo = document.getElementById('memo');
-           const start_Num = document.getElementById('start_Num'); 
-           const end_Date = document.getElementById('end_Date'); 
-
-           title.contentEditable = true;
-           content.contentEditable = true;
-           dateStart.readOnly = false;
-           dateEnd.readOnly = false;
-       }
-       
-     //수정한거 저장버튼
-       function saveEntry() {
-           const place = document.getElementById('place').innerText;
-           const memo = document.getElementById('memo').innerText;
-           const start_Num = document.getElementById('start_Num').value;
-           const end_Date = document.getElementById('end_Date').value;
-           
-           const data = {
-        	   schedule_Num: schedule_Num,
-        	   place: place,
-        	   memo: memo,
-        	   start_Num: start_Num,
-        	   end_Date: end_Date
-           };
-
-           fetch('/us/update', {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/json; charset=UTF-8',
-               },
-               body: JSON.stringify(data),
-           })
-           .then(response => response.json())
-           .then(json => {
-               console.log(json);
-               if (json.message === "수정 성공했습니다!") {
-                   alert('수정이 완료되었습니다.');
-                   // 여기에서 수정이 완료된 후 수행할 작업을 추가할 수 있습니다.
-               } else {
-                   alert('수정에 실패했습니다.');
-                   // 수정에 실패한 경우에 대한 처리를 추가할 수 있습니다.
-               }
-           })
-           .catch(error => {
-               console.error('수정 중 오류 발생:', error);
-           });
-       }
-       
+          
 </script>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>

@@ -27,7 +27,7 @@ public interface ScheduleDAO {
 	public int day(DayDTO dayDTO) throws Exception;
 	
 	// 일정 상세보기
-	public ScheduleDTO schduleDetail(int schedule_Num) throws Exception;
+	List<ScheduleDTO> schduleDetail(int schedule_Num);
 
 	// 일정 조회수증가
 	public int viewCount(int scheduleNum) throws Exception;

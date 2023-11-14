@@ -313,7 +313,7 @@
 
         
   // 동행게시글 상세보기
-function DetailForm(us_num) {
+	function DetailForm(us_num) {
     const url = "/RealDetail" + us_num;
     fetch(url, {
         method: "GET",
@@ -388,7 +388,7 @@ function saveEntry() {
         console.error('수정 중 오류 발생:', error);
     });
 }
-
+// 삭제하기
 function deleteEntry() {
     const us_num = document.getElementById('us_num').textContent;
 

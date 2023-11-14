@@ -1,6 +1,7 @@
 package com.team1.project.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +36,23 @@ public class ScheduleService {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
 		int result = schduleDAO.writeInsert(schedule);
 		schedule.getSchedule_Num();
+		schedule.getDoe_Name();
+		schedule.getStart_Num();
+		schedule.getEndNo();
+		schedule.getPlace1();
+		schedule.getPlace2();
+		schedule.getMemo1();
+		schedule.getMemo2();
 		
-		DayDTO in = DayDTO.builder()
-							.schedule_Num(schedule.getSchedule_Num())
-							.dayDate(schedule.getStart_Num())
-							.place(schedule.getPlace())
-							.memo(schedule.getMemoList())
-							.build();
-		int result2 =  schduleDAO.day(in);
+//		DayDTO in = DayDTO.builder()
+//							.schedule_Num(schedule.getSchedule_Num())
+//							.dayDate(schedule.getStart_Num())
+//							.place(schedule.getPlace())
+//							.memo(schedule.getMemoList())
+//							.build();
+//		int result2 =  schduleDAO.day(in);
 		System.out.println("result = " + result);
-		System.out.println("result2 = " + result2);
+//		System.out.println("result2 = " + result2);
 		if(result == 1 && result == 1) {
 			return true;
 		}
@@ -75,15 +83,10 @@ public class ScheduleService {
 		//			return result;
 		//		}
 		
-		// 메인 top5
-		//	public List<ScheduleDTO> ScheduleTop5() throws Exception {
-		//		return ScheduleDAO.schduleTop5;
-		//	}
-
+	
 		//일정 상세보기
-		public ScheduleDTO schduleDetail(int schedule_num) throws Exception {
-			System.out.println("scheduleservice.schduleDetail() 함수가 호출되었습니다");
-		    return schduleDAO.schduleDetail(schedule_num) ;		    
+		public List<ScheduleDTO> getScheduleDetail(int schedule_Num) {
+		    return schduleDAO.schduleDetail(schedule_Num);
 		}
 	
 		// 일정 수정하기

@@ -35,38 +35,20 @@
     <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
         select sc.nextval as schedule_Num from dual
     </selectKey> 
-    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE)
+    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2, MEMO1,MOMO2)
 values(
 	#{schedule_Num},
     #{member_Id},
-    #{place},
+    #{doe_name},    
     #{start_Num},
     #{end_Date},
-    SYSDATE)
+    SYSDATE,
+	#{PLACE1},
+	#{PLACE2},
+	#{MEMO1},
+	#{MEMO2})
 </insert>
 
-    <!--day1 day2 만들기 --> 
-<insert id="day">
-    INSERT INTO Day (day_id, schedule_Num, day_date, place, memo)
-    VALUES (sc.nextval, #{schedule_Num}, TO_DATE(#{dayDate}, 'yyyy-MM-dd'), #{place}, #{memo})
-</insert>
-
-<!-- 더보기 -->
-
-<select id="selectchedule" resultType="com.team1.project.dto.ScheduleDTO">
-		SELECT
-	    SCHEDULE_NUM,
-	    MEMBER_ID,
-	    DOE_NAME,
-	    TO_CHAR(REG_DATE, 'YYYY.MM.DD') AS create_dt,
-	    MOD_DATE AS update_dt
-	FROM
-	    SCHEDULE
-	ORDER BY
-	    SCHEDULE_NUM DESC
-	FETCH FIRST 10 ROWS ONLY;
-</select>
-     
     <!--지역번호 만들기 --> 
     <select id="Doenum" resultMap="CityMap">
 		 SELECT city_num, city_name
@@ -83,14 +65,23 @@ values(
 	</select>
 
 <!-- 상세보기 -->
-      <select id="schduleDetail" resultType="com.team1.project.dto.ScheduleDTO">  
-        SELECT
-        SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, MOD_DATE, MEMO
+<select id="schduleDetail" resultType="com.team1.project.dto.ScheduleDTO">  
+    SELECT
+        S.SCHEDULE_NUM,
+        S.MEMBER_ID,
+        S.DOE_NAME,
+        S.START_NUM,
+        S.END_DATE,
+        S.MOD_DATE,
+        S.PLACE1,
+        S.PLACE2,
+        S.MEMO1,
+        S.MEMO2
     FROM
-        SCHEDULE
+        SCHEDULE S
     WHERE
-        Schedule_Num = #{schedule_Num}
-	</select>
+        S.SCHEDULE_NUM = #{schedule_Num}
+</select>
 
 <!-- 전체 게시글 수 -->
  <select id="totalCount" resultType="int"> 
@@ -99,18 +90,22 @@ values(
  	</select>
 
  <!-- 수정하기 -->
-    <update id="schduleUpdate">  
-      UPDATE SCHEDULE
+  <update id="scheduleUpdate">
+    UPDATE SCHEDULE
     SET
-        CITY_NAME = #{city_name},
-        US_CNT = #{us_cnt},
+        MEMBER_ID = #{member_Id},
+        DOE_NAME = #{doe_name},
         START_NUM = #{start_Num},
         END_DATE = #{end_Date},
-        TITLE = #{title},
-        CONTENT = #{content}
+        REG_DATE = SYSDATE,
+        PLACE1 = #{PLACE1},
+        PLACE2 = #{PLACE2},
+        MEMO1 = #{MEMO1},
+        MEMO2 = #{MEMO2}
     WHERE
-        SCHEDULE_NUM = #{schedule_Num} 
- </update> 
+        SCHEDULE_NUM = #{schedule_Num}
+</update>
+
    
 <!--삭제하기 -->
      <delete id="schduleDelete">  
@@ -118,5 +113,25 @@ values(
     WHERE
         SCHEDULE_NUM = #{schedule_Num}  
      </delete>  
+
+<!-- 좋아요 검색  -->
+	<select id="searchLike" resultType="int">
+		SELECT COUNT(*) FROM snslike
+		WHERE bno = #{bno} AND userId = #{userId}
+	</select>
+	
+	<!-- 좋아요 등록  -->
+	<insert id="createLike">
+		INSERT INTO snslike(bno, userId, lno) 
+		VALUES(#{bno}, #{userId}, snslike_seq.NEXTVAL)
+	</insert>
+	
+	<!-- 좋아요 삭제  --> 
+	<delete id="deleteLike">
+		DELETE FROM snslike
+		WHERE bno = #{bno} AND userID = #{userId}	
+	</delete>
+
+
 
 </mapper>

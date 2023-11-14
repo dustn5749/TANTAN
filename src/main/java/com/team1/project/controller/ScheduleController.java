@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,22 +43,9 @@ public class ScheduleController {
     public String write(ScheduleDTO schedule) throws Exception {
     return "scheduleWrite";
    }
-    
-<<<<<<< HEAD
-    //일정 글 작성이동
-=======
 
-    
-    //일정상세보기
-    @RequestMapping(value = "/detail")
-    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
-    	System.out.println("scheduleController.detail()");
-    	System.out.println("schedule_Num = " + schedule_Num);
-    return "scheduleDetail";
 
-    }
-
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
+//글작성
     @ResponseBody
     @RequestMapping(value = "/writeInsert")
     public Map<String, Object> writeInsert(@RequestBody List<ScheduleDTO> schedules) throws Exception {
@@ -107,13 +95,22 @@ public class ScheduleController {
     	   return result;
     } 
 
-    //일정상세보기
+ // 일정상세보기
     @RequestMapping(value = "/detail")
-    public String detail(@RequestParam("schedule_Num")int schedule_Num) throws Exception {
-       System.out.println("scheduleController.detail()");
-       System.out.println("schedule_Num = " + schedule_Num);
-    return "scheduleDetail";
+    public String getScheduleDetail(@RequestParam("schedule_Num") int schedule_Num, Model model) {
+        try {
+            List<ScheduleDTO> result = scheduleService.getScheduleDetail(schedule_Num);
 
+            // 여기서 결과를 적절히 처리
+            model.addAttribute("scheduleList", result);
+            System.out.println(result);
+
+            return "scheduleDetail"; // 적절한 뷰 이름으로 변경
+        } catch (Exception e) {
+            // 예외 처리
+            e.printStackTrace();
+            return "errorPage"; // 적절한 에러 페이지로 변경
+        }
     }
     
    //수정하기
@@ -149,17 +146,7 @@ public class ScheduleController {
 	}
 
 	
-//	// 더보기
-//	@RequestMapping(value = "/THEBOGI")
-//	@ResponseBody 
-//	public List<ScheduleDTO> THEBOGI(ScheduleDTO schedule, Model model
-//			, @RequestParam(value="startNum", required=false)String startNum) throws Exception {
-//		System.out.println("페이징 브이오다"+vo);
-//		scheduleDTO.setStart(Integer.parseInt(startNum));
-//		scheduleDTO.setEnd(5);
-//		return service.selectBoard(vo);
-//	}
-	
+
 	
 	//하트색
 	@PostMapping("/updateHeartColor")

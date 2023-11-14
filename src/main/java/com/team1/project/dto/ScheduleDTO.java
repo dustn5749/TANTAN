@@ -2,6 +2,7 @@ package com.team1.project.dto;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,13 +30,22 @@ public class ScheduleDTO {
 	    private Date day_date;
 	    private Date mod_Date;
 	    private String delete_Yn;
-	    private String memo;
+	    private String memo1;
+	    private String memo2;
+	    private String place1;
+	    private String place2;
 	    private String img;
-	    private String place;
+	    
+	    private List<ScheduleDTO> scheduleList;
+	 
 	    private String memoList;
-	    private String []scheduleList;
+//	    private String []scheduleList;
 	    private String Like_CNT;
 	    private String TITLE;
+	    
+	    
+	    
+	    
 
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호

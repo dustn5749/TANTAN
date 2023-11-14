@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <meta charset="UTF-8">
 <title>동행 목록조회</title>
 <style>
@@ -509,6 +510,12 @@ div, input, p, span, button, h2 {
     </div>
 </div>
     
+    <form name="pageForm" id="pageForm" action="/us/list" method="post">
+    <input type="hidden" name="pageNo" id="pageNo" value="${result.us.pageNo}">
+</form>
+
+	<input type="hidden" id="pageNo2" name="pageNo" value="${result.us.pageNo}">
+    
     <div class="city_btn_wrap" style="text-align: right;">
 <button class="city_btn1" onclick="city_btn1()" style="cursor: pointer;">글쓰기</button>
         </div>
@@ -551,36 +558,29 @@ div, input, p, span, button, h2 {
     </c:forEach>
 </div>
 
-              
-        </div>
-<form id="mForm" action="/us/list" method="POST">
-    <input type="hidden" id="pageNo" name="pageNo" value="" />
-</form>
 
-<div class="sc-73e2cff1-0 ehUQiC">
-    <button disabled="" class="sc-73e2cff1-1 fcWStM">
-        <!-- 이전 버튼 SVG 아이콘 -->
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-        </svg>
-    </button>
-    <button disabled="" class="sc-73e2cff1-1 fdmLWW">
-        <!-- 다음 버튼 SVG 아이콘 -->
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-        </svg>
-    </button>
+<!-- 페이징 처리 -->
+      <div class="nav_div" style="text-align: center; margin-top: 10px;">
+    <c:if test="${result.us.navStart != 1}">
+        <a href="#" onclick="jsPageNo(${result.us.navStart-1})" class="pageArrow">&lt;</a>
+    </c:if>
 
-    <!-- 페이지 이동 -->
-    <div class="sc-73e2cff1-2 ekMLCz">
-        <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
-    </div>
+    <c:forEach var="item"  begin="${result.us.navStart}" end="${result.us.navEnd}">
+        <c:choose>
+            <c:when test="${result.us.pageNo != item}">
+                <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>  
+            </c:when>
+            <c:otherwise>
+                <strong>${item}</strong>   
+            </c:otherwise>
+        </c:choose> 			
+    </c:forEach>
+
+    <c:if test="${result.us.navEnd != result.us.totalPageSize}">
+        <a href="/us/write" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
+    </c:if>
 </div>
-</div>
+
 <script>
 function city_btn1() {
     window.location.href = '/us/write';
@@ -588,7 +588,7 @@ function city_btn1() {
 
     function jsPageNo(pageNo) {
         document.getElementById("pageNo").value = pageNo;
-        document.getElementById("mForm").submit();
+        document.getElementById("pageForm").submit();
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -609,7 +609,6 @@ function city_btn1() {
             location.href="/us/Detail?us_num="+us_num;
        });
 
-    
 </script> 
 
 </body>
