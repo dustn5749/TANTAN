@@ -84,7 +84,7 @@
 	text-align: center;
 }
 .editer_inner_div > textarea{
-	width: 1000px;;
+	width: 100%;
 	height: 700px;
 	
 }
