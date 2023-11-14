@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AlimContentEnum {
 
-    LIKE("님이 회원님의 게시물을 좋아합니다."),
-    FOLLOW("님이 회원님을 팔로우 합니다."),
+    LIKE("님이 회원님의 게시물을 좋아합니다.")
 
 
     ;
