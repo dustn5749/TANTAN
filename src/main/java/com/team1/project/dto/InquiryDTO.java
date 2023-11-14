@@ -1,6 +1,7 @@
 package com.team1.project.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class InquiryDTO {
     public String content;
     public Date regdate;
     public String answer_yn;
+    public List<Integer> file_id;
     
     // 페이징
     public String searchTitle;

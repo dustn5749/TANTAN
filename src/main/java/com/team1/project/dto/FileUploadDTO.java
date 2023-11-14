@@ -18,6 +18,7 @@ public class FileUploadDTO {
 	private String real_filename;
 	private String content_type;
 	private long  length;
+	private int inquiry_num;
 	
 	public static FileUploadDTO of(String token, String real_filename, MultipartFile file) {
 		return FileUploadDTO.builder()

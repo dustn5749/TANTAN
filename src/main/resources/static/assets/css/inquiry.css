@@ -27,7 +27,6 @@
 	.inquiry_title {
 		width: 100%;
 		background-color:  rgb(87, 87, 87);
-		background-color:  rgb(173, 211, 254);
 		color : white;
 		padding-right: 30px;
 		height: 50px;
@@ -35,6 +34,14 @@
 		align-content: center;
 		align-items: center;
 
+	}
+	a.title{
+		color:  white;
+		text-decoration: none;
+	}
+	a.title:hover {
+		color: #0069d9;
+		
 	}
 	.title {
 		font-family: 'Pretendard-Regular';

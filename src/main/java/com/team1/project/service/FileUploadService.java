@@ -60,13 +60,19 @@ public class FileUploadService {
 
 		fileUploadDAO.insert(fileUploadVO);
 		
-		return fileUploadVO.getFile_id();
+		int file_id = fileUploadVO.getFile_id();
+		System.out.println("file_id = " + file_id);
+		return file_id;
 	}
 	
 	public FileUploadDTO findById(int file_id) {
 		return fileUploadDAO.findById(file_id);
 	}
 
+	// 토큰으로 파일 아이디 찾기 
+	public List<Integer> findByIdtoToken(String token){
+		return fileUploadDAO.findByIdtoToken(token);
+	}
 	@Transactional
 	public void updateUseStatus(Map<String, Object> param) {
 		String token = (String) param.get("token");

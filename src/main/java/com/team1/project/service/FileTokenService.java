@@ -20,7 +20,8 @@ public class FileTokenService {
 	@Transactional
 	public String getToken() {
 		final String token = UUID.randomUUID().toString(); 
-		
+		System.out.println("Generated Token: " + token);
+
 		fileTokenDAO.insert(token);
 		
 		return token;

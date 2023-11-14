@@ -612,8 +612,7 @@
          
    // 새로운 일정을 schedule-ul에 추가
    $(".schedule-ul").append(newScheduleItem);
-             
-   setMinMax();
+                setMinMax();
             
    // 시작 날짜 입력 시
    startDateInput.addEventListener('input', setMinMax);
@@ -831,12 +830,12 @@
           
           for (i=0;i<scheduleItems.length;i++) {
              schedules.push({
-                 day_date : scheduleItems[i].querySelector(".day_num").innerText,
+                day_date : scheduleItems[i].querySelector(".day_num").innerText,
                 place : scheduleItems[i].querySelector(".placeList").value,
                 memoList : scheduleItems[i].querySelector(".memoList").value,
                 start_Num : $("#start_Date").val(),
                 end_Date: $("#end_Date").val(),
-                  doe_Name :$("#doe_location").val()
+                doe_Name :$("#doe_location").val()
              });
           }
 

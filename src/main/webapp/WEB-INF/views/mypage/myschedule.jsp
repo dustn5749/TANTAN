@@ -176,7 +176,7 @@
 	            <%for (ScheduleDTO vo : scheduleList) {%>
 	            {
 	            	
-	            	title : '<%=vo.getMemo()%>',
+	            	title : '<%=vo.getMemo1()%>',
 	                start : '<%=vo.getStart_Num()%>',
 	                end : '<%=vo.getEnd_Date()%>',
 	                color : '#' + Math.round(Math.random() * 0xffffff).toString(16)

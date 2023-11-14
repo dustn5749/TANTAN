@@ -7,21 +7,23 @@
 
 	<insert id="insert">
 		<selectKey order="AFTER" keyProperty="file_id" resultType="int">
-			select LAST_INSERT_ID() file_id
+			select max(file_id) from file_upload
 		</selectKey>
 		
 		insert into file_upload (
-			 token
+			file_id
+			,token
 			,original_filename
 			,real_filename
 			,content_type
-			,size
+			,length
 		) values (
-			 #{token}
+			FILE_UPLOAD_SQ.nextval
+			,#{token}
 			,#{original_filename}
 			,#{real_filename}
 			,#{content_type}
-			,#{size}
+			,#{length}
 		) 
 	</insert>
 
@@ -29,11 +31,11 @@
 	<select id="findById" resultType="com.team1.project.dto.FileUploadDTO">
 		SELECT  
 			 file_id 
-			 token
+			 ,token
 			,original_filename
 			,real_filename
 			,content_type
-			,size
+			,length
 		FROM  file_upload 
 		where file_id = #{file_id}
 	</select>
@@ -75,5 +77,9 @@
 		</foreach> 
 	</delete>
 
+	<select id="findByIdtoToken" resultType="int">
+		select FILE_ID from file_upload
+		where token=#{token}
+	</select>
 
 </mapper>

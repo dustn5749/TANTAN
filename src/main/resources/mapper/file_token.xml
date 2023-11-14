@@ -22,10 +22,12 @@
 	<select id="listToken" resultType="com.team1.project.dto.FileTokenDTO">
 		<!--  현재 시간 기준으로 10분전에 추가되고 사용중이 아닌 것을 얻는다 -->
 		<![CDATA[
-			SELECT  
-				 token 
-			FROM  file_token 
-			where status = 0 and make_date < DATE_ADD(now(), INTERVAL -10 MINUTE)
+			SELECT 
+    token
+FROM 
+    file_token
+WHERE 
+    status = 0 AND make_date < (SYSTIMESTAMP - INTERVAL '10' MINUTE)
 		]]>
 	</select>
 
