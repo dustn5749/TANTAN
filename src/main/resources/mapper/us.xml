@@ -6,9 +6,9 @@
 <!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
     SELECT * FROM (
-        SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+        SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content, fileno
         FROM (
-            SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+            SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content, fileno
             FROM us a 
             WHERE rownum BETWEEN #{startNo} AND #{endNo}
             <if test="start_Date != null and end_Date != null">
