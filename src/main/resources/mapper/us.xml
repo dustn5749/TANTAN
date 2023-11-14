@@ -17,7 +17,8 @@
         start_Date,
         end_Date,
         title, 
-        content
+        content,
+        fileno
         FROM (
             SELECT rownum  AS 
             nrow,
@@ -29,7 +30,8 @@
             start_Date,
             end_Date,
             title,
-            content
+            content,
+           fileno
             FROM us a 
             WHERE rownum BETWEEN 1 AND #{endNo}
             <if test="start_Date != null and end_Date != null">
