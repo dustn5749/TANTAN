@@ -60,12 +60,12 @@ border:1px solid black;
     			<div class="card-body table-responsive p-0">
    					<div class="card-tools">
    						<div class="input-group input-group-sm" style="width:150px; float:right;">
-						<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-								</button>
-							</div>
+<!-- 						<input type="text" name="table_search" class="form-control float-right" placeholder="Search"> -->
+<!-- 							<div class="input-group-append"> -->
+<!-- 								<button type="submit" class="btn btn-default"> -->
+<!-- 								<i class="fas fa-search"></i> -->
+<!-- 								</button> -->
+<!-- 							</div> -->
    						</div>
    					</div>
     			</div>
@@ -93,10 +93,12 @@ border:1px solid black;
 <!-- 			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
 <!-- 			                </div> -->
 			                <div class="card-body">
-			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
+<!-- 			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
+								<canvas id="monthMember"></canvas>
 			                </div>
+			                <hr>
 			                <div class="card-body">
-			                <canvas id="stackedBarChart"></canvas>
+			                <canvas id="reportChart"></canvas>
 			                </div>
 			              </div>
 			              <!-- /.card-body-->
@@ -153,7 +155,7 @@ border:1px solid black;
 <!-- 			                </h3> -->
 <!-- 			              </div> -->
 <!-- 			              <div class="card-body"> -->
-<!-- <!-- 			              	<div id="bar-chart" style="height: 300px;"></div> --> -->
+<!-- 			              	<div id="bar-chart" style="height: 300px;"></div> -->
 <!-- 							<canvas id="stackedBarChart"></canvas> -->
 <!-- 			              </div> -->
 <!-- 			              /.card-body -->
@@ -346,6 +348,80 @@ border:1px solid black;
      * FULL WIDTH STATIC AREA CHART
      * -----------------
      */
+     const urlMonth = "/monthMember";
+
+     $.ajax({
+         url: urlMonth,
+         method: "GET",
+         success: function (data) {
+             console.log(data);
+             const monthData = data.monthMember.map(function (item) {
+                 console.log(item.month);
+                 return item.month;
+             });
+             const counts = data.monthMember.map(function (item) {
+                 console.log(item.signup_count);
+                 return item.signup_count;
+             });
+             var stackedChartData = {
+                 labels: monthData,
+                 datasets: [
+                     {
+                         label: "월별 가입자 현황",
+                         backgroundColor: "rgba(60,141,188,0.9)",
+                         borderColor: "rgba(60,141,188,0.8)",
+                         pointRadius: false,
+                         pointColor: "#3b8bba",
+                         pointStrokeColor: "rgba(60,141,188,1)",
+                         pointHighlightFill: "#fff",
+                         pointHighlightStroke: "rgba(60,141,188,1)",
+                         data: counts,
+                     },
+                 ],
+             };
+             var barChartData = $.extend(true, {}, stackedChartData);
+             var stackedBarChartCanvas = $("#monthMember")
+                 .get(0)
+                 .getContext("2d");
+             var stackedBarChartData = $.extend(true, {}, barChartData);
+             var stackedBarChartOptions = {
+                 responsive: true,
+                 maintainAspectRadio: false,
+                 scales: {
+                     xAxes: [
+                         {
+                             type: 'time',
+                             time: {
+                                 unit: 'month',
+                                 displayFormats: {
+                                     month: 'MM'
+                                 }
+                             },
+                             distribution: 'series', // 추가 부분
+                             ticks: {
+                                 source: 'labels', // 추가 부분
+                             },
+                         },
+                     ],
+                     yAxes: [
+                         {
+                             stacked: true,
+                         },
+                     ],
+                 },
+             };
+             new Chart(stackedBarChartCanvas, {
+                 type: "bar",
+                 data: stackedBarChartData,
+                 options: stackedBarChartOptions,
+             });
+         },
+         error: function (error) {
+             console.error("Error", error);
+         },
+     });
+
+     
      const url = "/usReportList";
 //      const labels = [];
 
@@ -377,7 +453,7 @@ border:1px solid black;
          };
 
          var barChartData = $.extend(true, {}, stackedChartData);
-         var stackedBarChartCanvas = $("#stackedBarChart")
+         var stackedBarChartCanvas = $("#reportChart")
            .get(0)
            .getContext("2d");
          var stackedBarChartData = $.extend(true, {}, barChartData);
@@ -386,17 +462,17 @@ border:1px solid black;
            maintainAspectRatio: false,
            scales: {
         	   xAxes: [
-        		      {
-        		        stacked: true,
-        		        type: 'time', // X축 스케일을 시간형식으로 설정
-        		        time: {
-        		          unit: 'day', // 날짜 간격을 일(day)로 설정
-        		          displayFormats: {
-        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
-        		          }
-        		        }
-        		      }
-        		    ],
+	        		      {
+	        		        stacked: true,
+	        		        type: 'time', // X축 스케일을 시간형식으로 설정
+	        		        time: {
+	        		          unit: 'day', // 날짜 간격을 일(day)로 설정
+	        		          displayFormats: {
+	        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
+	        		          }
+	        		        }
+	        		      }
+       		    		],
              yAxes: [
                {
                  stacked: true,

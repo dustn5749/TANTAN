@@ -28,6 +28,9 @@ public class MemberDTO {
 	private int reportcnt;
 	private int page;
     private int pageSize; // 페이지 크기
+    private String register_time;
+    private String month;
+    private int signup_count;
 //	private String introduce;
 	
 	//카카오 인증에 대한 필드
@@ -44,11 +47,11 @@ public class MemberDTO {
 		return pwd.equals(pwd);
 	}
 	
-	public List<String> getRoleList(){
-			if(this.roles.length() > 0) {
-				return Arrays.asList(this.roles.split(","));
-			}
-		return new ArrayList<>();
+	public List<String> getRoleList() {
+	    if (this.roles != null && !this.roles.isEmpty()) {
+	        return Arrays.asList(this.roles.split(","));
+	    }
+	    return new ArrayList<>();
 	}
 
 //	관리자

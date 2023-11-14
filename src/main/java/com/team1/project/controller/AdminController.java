@@ -52,6 +52,16 @@ public class AdminController {
 	}
 	
 // 1.1 관리자 메인 페이지 로드시 리스트 함수
+	@RequestMapping("/monthMember")
+	@ResponseBody
+	public Map<String, Object> monthMember() throws Exception{
+		List<MemberDTO> monthMember = memberservice.monthMember();
+		System.out.println("controller.monthMember -> " + memberservice.monthMember());
+		Map<String, Object> map = new HashMap<>();
+		map.put("monthMember", monthMember);
+//		System.out.println("controller.monthMap -> " + map);
+		return map;
+	}
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
@@ -68,10 +78,10 @@ public class AdminController {
 	public Map<String, Object> memberList() throws Exception {
 		
 		List<MemberDTO> memberList = memberservice.memberList();
-		System.out.println("controller.memberList -> " + memberservice.memberList());
+//		System.out.println("controller.memberList -> " + memberservice.memberList());
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberList",memberList);
-		System.out.println("controller.map -> " + map);
+//		System.out.println("controller.map -> " + map);
 		return map;
 	}
 	
@@ -126,10 +136,10 @@ public class AdminController {
 	public Map<String, Object> adminUsList() throws Exception {
 		
 		List<UsDTO> usList = usService.usList();
-		System.out.println("controller.adminUsList -> " + usService.usList());
+//		System.out.println("controller.adminUsList -> " + usService.usList());
 		Map<String, Object> map = new HashMap<>();
 		map.put("usList",usList);
-		System.out.println("controller.map -> " + map);
+//		System.out.println("controller.map -> " + map);
 		return map;
 	}
 	
@@ -139,7 +149,7 @@ public class AdminController {
 	public Map<String,Object> usReportList() throws Exception{
 		
 		List<UsDTO> usReportList = usService.usReportList();
-		System.out.println("usReportList -> " + usReportList);
+//		System.out.println("usReportList -> " + usReportList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("usReportList",usReportList);
 		return map;
@@ -186,10 +196,10 @@ public class AdminController {
 	public Map<String, Object> adminMember() throws Exception {
 		
 		List<MemberDTO> adminList = memberservice.adminList();
-		System.out.println("controller.memberList -> " + memberservice.adminList());
+//		System.out.println("controller.memberList -> " + memberservice.adminList());
 		Map<String, Object> map = new HashMap<>();
 		map.put("adminList",adminList);
-		System.out.println("controller.map -> " + map);
+//		System.out.println("controller.map -> " + map);
 		return map;
 	}
 	
