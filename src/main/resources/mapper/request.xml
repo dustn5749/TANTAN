@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.FriendDAO">
+
+    <select id="getFriendRequest" resultType="com.team1.project.dto.FriendRequestDTO" parameterType="java.lang.String">
+        <![CDATA[
+        select
+            fr.friend_req_id as id,
+            fr.send_member_id as sendMemberId,
+            fr.receive_member_id as receiveMemberId,
+            fr.req_date as reqDate,
+            m.nickname as sendNickName
+        from friend_request fr
+                 inner join member m on (m.member_id = fr.send_member_id)
+        where
+            1 = 1
+          and fr.receive_member_id = #{memberId}
+
+        order by fr.req_date
+        ]]>
+    </select>
+
+
+
+
+
+</mapper>
+ 
