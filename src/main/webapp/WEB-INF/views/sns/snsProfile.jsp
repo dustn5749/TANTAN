@@ -114,7 +114,7 @@
                         </div>
                         <div class="btn-wrap">
                             <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                            <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
+                            <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
                         </div>
                     </div>
                 </div>
@@ -242,6 +242,14 @@
     function closeModal(id) {
         $('#' + id).removeClass('active');
     }
+    
+    function snsProfileModify() {
+        // 프로필 편집 페이지로 리다이렉션
+        location.href = "/sns/snsProfileModify";
+    }
+    
+ 
+    
 </script>
 </body>
 
