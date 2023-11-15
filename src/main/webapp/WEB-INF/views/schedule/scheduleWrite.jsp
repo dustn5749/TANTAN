@@ -646,22 +646,18 @@
        console.log("memo_input: " + memo_input.value);
    
        li.querySelector(".memo-modal").style.display = "none"; // 해당 day에 해당하는 메모 모달창 숨김
-   }
-
-
-      
 
          // 모든 장소선택 버튼 가져오기
          var selectPlaceButtons = document.querySelectorAll('.schedule-btn-grp');
 
-            selectPlaceButtons.forEach(function(button, index) {
-             button.addEventListener('click', function() {
+        selectPlaceButtons.forEach(function(button, index) {
+        button.addEventListener('click', function() {
             
-                var liElement = findClosestParent(this, "li");
+        var liElement = findClosestParent(this, "li");
 
       
-                 var selectedPlace = liElement.querySelector('.day_date').innerText;
-                 var selectedPlace = liElement.querySelector('.schedule-btn-grp').innerText;
+       var selectedPlace = liElement.querySelector('.day_date').innerText;
+      var selectedPlace = liElement.querySelector('.schedule-btn-grp').innerText;
 
              });
          });

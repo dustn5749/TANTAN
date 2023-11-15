@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team1.project.dto.AccompanyList;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.dto.UsFileDTO;
 
@@ -34,7 +35,7 @@ public interface UsDAO {
 
 	// 동행 삭제하기
 	public boolean usDelete(int usNum) throws Exception;
-
+	
 	//답글 폼
 	public int reply(UsDTO us) throws Exception;
 
@@ -58,4 +59,7 @@ public interface UsDAO {
 	
 	//관리자 동행글 복구하기
 	public boolean ausChange(int us_num) throws Exception;
+	
+	//크롤링 url
+	 public int insertUsList(UsDTO usDTO) throws Exception;
 }

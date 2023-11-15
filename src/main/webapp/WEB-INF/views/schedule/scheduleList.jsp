@@ -587,18 +587,12 @@
         </div>
         </div>
         </div>
-        
-
-      
-      
-
-
             <div class="contents">
                 <ul id="schedulelist">
+                <section id = ""list=wrap">
                     <c:forEach var="schedule" items="${result.scheduleList}">
                     <li>
                         <h2>${schedule.member_Id}</h2>
-                        <h3>${li.title}</h3>
                                                              <p>${schedule.schedule_Num}</p>
                                             <p>지역:${schedule.doe_Name}</p>
                                             <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
@@ -606,132 +600,139 @@
                                             <p>게시일:${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
                                             <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num">
                    
-  <a href="/mobile/newsview.do?seq_no=${li.seq_no}"></a>
                     </li>
                   </c:forEach>
                 </ul>
-                   <a id="Thebogi">더보기</a>
                </div>
-               
-               
-               
+</div>            
 <script>
-$(document).ready(function() {
-    var page = 1; // 페이지 번호 초기화
-    var loading = false; // 여러 번의 요청을 방지하기 위한 플래그
 
-    // 뉴스 항목을 더 불러오는 함수
-    function loadMoreNews() {
-        if (!loading) {
-            loading = true;
+var start = 1; // 시작 위치
 
-            // 뉴스 항목을 불러오기 위한 AJAX 요청
-            $.ajax({
-                url: '/your-server-endpoint', // 서버 엔드포인트로 교체하세요
-                method: 'GET',
-                data: { page: page },
-                success: function(response) {
-                    if (response.length > 0) {
-                        // 새로운 뉴스 항목을 목록에 추가
-                        $('#newslist').append(response);
-                        page++;
-                    } else {
-                        // 더 이상 항목이 없으면 "더보기" 버튼 숨김
-                        $('#moreView').hide();
-                    }
-                },
-                complete: function() {
-                    loading = false;
-                }
-            });
-        }
-    }
-
-    // "더보기" 버튼 클릭 이벤트 핸들러
-    $('#moreView').on('click', function() {
-        loadMoreNews();
-    });
-});
-
-function moveToSelectedRegion() {
-    // Show an alert
-    alert('메뉴화면으로 이동!');
-
-    // Redirect to the menu screen ("/schedule/list")
-    window.location.href = '/schedule/list';
-}
-
-    $(document).ready(function () {
-        $('.heartIcon').click(function () {
-            var scheduleNum = $(this).data('schedule-num');
-            var heartIcon = $(this);
-
-            $.ajax({
-                url: '/schedule/updateHeartColor', 
-                method: 'POST',
-                data: { scheduleNum: scheduleNum },
-                success: function (response) {
-                    if (response.success) {
-                        var currentColor = heartIcon.css('fill');
-                        var newColor = (currentColor === 'rgba(0, 0, 0, 0.5)') ? 'red' : 'rgba(0, 0, 0, 0.5)';
-                        heartIcon.css('fill', newColor);
-                    } else {
-                        console.error('Failed to update heart color.');
-                    }
-                },
-                error: function () {
-                    console.error('Error during AJAX request.');
-                }
-            });
-        });
-    });
-
-//Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("categoryButton");
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-
-function jsPageNo(pageNo) {
-    document.getElementById("pageNo").value = pageNo;
-    document.getElementById("mForm").submit();
-}
-
-document.querySelector(".us_btn").addEventListener("click", function () {
-   location.href="/us/list";
-}
-)
-$(".detailBtn").on("click", function(e) {
-    console.log("상세보기");
-
-    const schedule_num_element = e.currentTarget.closest(".card").querySelector(".schedule_num");
-
-    if (schedule_num_element) {
-        const schedule_num = schedule_num_element.value;
-
-        if (schedule_num.trim() !== "") {
-           console.log("Redirecting to: /detail?schedule_Num=" + schedule_num);
-           location.href = "/schedule/detail?schedule_Num=" + schedule_num;
-
-            console.error("schedule_num이 비어 있습니다.");
-        }
-    } else {
-        console.error("schedule_num 요소를 찾을 수 없습니다.");
+$(window).scroll(function () {
+    const { clientHeight, scrollTop, scrollHeight } = document.documentElement;
+    if (clientHeight + scrollTop >= scrollHeight - 400) {
+        start += 1;
+        loadMoreData(start);
     }
 });
+
+function loadMoreData(start) {
+    var member_Id = "member_id"; 
+    var doe_Name = "doe_name"; 
+    var schedule_Num = "schedule_num"; 
+    var end_Date = "end_date";
+    var reg_Date = "reg_date"; 
+
+    $.ajax({
+        type: "POST",
+        url: "/schedule/list",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+            start: start,
+            member_Id: member_Id,
+            doe_Name: doe_Name,
+            schedule_Num: schedule_Num,
+            end_Date: end_Date,
+            reg_Date: reg_Date
+        }),
+        success: function (response) {
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
+        }
+    });
+}
+
+            function moveToSelectedRegion() {
+                // Show an alert
+                alert('메뉴화면으로 이동!');
+
+                // Redirect to the menu screen ("/schedule/list")
+                window.location.href = '/schedule/list';
+            }
+
+            $(document).ready(function () {
+                $('.heartIcon').click(function () {
+                    var scheduleNum = $(this).data('schedule-num');
+                    var heartIcon = $(this);
+
+                    $.ajax({
+                        url: '/schedule/updateHeartColor',
+                        method: 'POST',
+                        data: { scheduleNum: scheduleNum },
+                        success: function (response) {
+                            if (response.success) {
+                                var currentColor = heartIcon.css('fill');
+                                var newColor = (currentColor === 'rgba(0, 0, 0, 0.5)') ? 'red' : 'rgba(0, 0, 0, 0.5)';
+                                heartIcon.css('fill', newColor);
+                            } else {
+                                console.error('Failed to update heart color.');
+                            }
+                        },
+                        error: function () {
+                            console.error('Error during AJAX request.');
+                        }
+                    });
+                });
+
+                //Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("categoryButton");
+
+                // When the user clicks the button, open the modal
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                };
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+
+                function jsPageNo(pageNo) {
+                    document.getElementById("pageNo").value = pageNo;
+                    document.getElementById("mForm").submit();
+                }
+
+                document.querySelector(".us_btn").addEventListener("click", function () {
+                    location.href = "/us/list";
+                });
+
+                $(".detailBtn").on("click", function (e) {
+                    console.log("상세보기");
+
+                    const schedule_num_element = e.currentTarget.closest(".card").querySelector(".schedule_num");
+
+                    if (schedule_num_element) {
+                        const schedule_num = schedule_num_element.value;
+
+                        if (schedule_num.trim() !== "") {
+                            console.log("Redirecting to: /detail?schedule_Num=" + schedule_num);
+                            location.href = "/schedule/detail?schedule_Num=" + schedule_num;
+                        } else {
+                            console.error("schedule_num이 비어 있습니다.");
+                        }
+                    } else {
+                        console.error("schedule_num 요소를 찾을 수 없습니다.");
+                    }
+                });
+            });
+
+            $(window).scroll(e => {
+                const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement;
+                if (clientHeight + scrollTop >= scrollHeight - 400) {
+                    start += 1;
+                    loadMoreData(start);
+                }
+            });
+
+
+
 </script>
       </div>
 </body>

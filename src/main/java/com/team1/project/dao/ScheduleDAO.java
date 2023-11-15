@@ -43,4 +43,32 @@ public interface ScheduleDAO {
 
 	//답글 폼
 	public int reply(ScheduleDTO schdule) throws Exception;
+	
+	//무한 스크롤
+
+//
+//	//검색 갯수
+//	public int getSearchCount(String keyword) {
+//		int result = 0;
+//		try (SqlSession session = MybatisManager.getInstance().openSession()) {
+//			result = (int) session.selectOne("service.getSearchCount", "%"+keyword+"%");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+//
+//	//마지막 글번호 불러오기
+//	public int MaxCidx() {
+//		int result = 0;
+//		try (SqlSession session = MybatisManager.getInstance().openSession()) {
+//			result = (int) session.selectOne("service.MaxCidx");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+
 }
+
+

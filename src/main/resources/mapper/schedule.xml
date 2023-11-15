@@ -19,14 +19,17 @@
 	</resultMap>
 
 <select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-    SELECT * 
+      SELECT
+      a.*,
+      d.doe_img
     FROM (
-      SELECT 
-        a.*, 
-        ROW_NUMBER() OVER (ORDER BY SCHEDULE_NUM) AS rnum 
-      FROM SCHEDULE a
-    ) 
-    WHERE rnum BETWEEN #{startNo} AND #{endNo}
+      SELECT
+        s.*,
+        ROW_NUMBER() OVER (ORDER BY SCHEDULE_NUM) AS rnum
+      FROM SCHEDULE s
+    ) a
+    JOIN DOE d ON a.doe_name = d.doe_name
+    WHERE a.rnum BETWEEN #{startNo} AND #{endNo}
 
 </select>
 
@@ -131,7 +134,17 @@ values(
 		DELETE FROM snslike
 		WHERE bno = #{bno} AND userID = #{userId}	
 	</delete>
-
-
-
+	
+	 <!-- 컨텐츠 검색 갯수 -->
+  <select id="getSearchCount" resultType="int">
+    select count(*) from contents
+    where subject like #{keyword} or content like #{keyword} and show='y'
+  </select>
+  
+  <!-- 마지막 게시물 번호 불러오기 -->
+  <select id="MaxCidx" resultType="int">
+	select MAX(c_idx) from contents  
+  </select>
+	
+	
 </mapper>
