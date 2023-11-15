@@ -204,13 +204,9 @@ a {
 						    <i class="fa-solid fa-user-group"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
 						        <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
-<<<<<<< HEAD
 						        <img src="/assets/sns/images/redCircle.png" alt="빨간표시등">
-=======
-<%--						        <img src="이미지_파일_경로" alt="이미지 대체 텍스트">--%>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
-						    </span>
-						</button>	
+						        </span>
+						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('chat-modal')">
 						    <i class="fa-regular fa-message"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>

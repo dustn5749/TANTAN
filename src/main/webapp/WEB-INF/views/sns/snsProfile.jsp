@@ -114,19 +114,14 @@
                             <p>안녕하세요~</p>
                         </div>
                         <div class="btn-wrap">
-<<<<<<< HEAD
-                            <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                            <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
-=======
                             <c:choose>
                                 <c:when test="${principal.user.member_id == member.member_id}">
-                                    <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
                                 </c:when>
                                 <c:otherwise>
                                     <button type="button" class="btn solid-btn blue-btn" onclick="requestFriend('${member.member_id}')">친구 추가</button>
                                 </c:otherwise>
                             </c:choose>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
                         </div>
                     </div>
                 </div>
@@ -254,7 +249,6 @@
     function closeModal(id) {
         $('#' + id).removeClass('active');
     }
-<<<<<<< HEAD
     
     function snsProfileModify() {
         // 프로필 편집 페이지로 리다이렉션
@@ -263,7 +257,6 @@
     
  
     
-=======
 
     function requestFriend(id){
       $.ajax({
@@ -275,7 +268,6 @@
       })
       $('#' + id).removeClass('active');
     }
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 </script>
 </body>
 
