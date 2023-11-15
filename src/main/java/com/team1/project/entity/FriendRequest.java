@@ -38,4 +38,7 @@ public class FriendRequest {
   @Column(name = "REQ_DATE", nullable = false)
   private LocalDate reqDate;
 
+  @Column(name = "ACCEPT_YN", nullable = false)
+  private String acceptYn;
+
 }

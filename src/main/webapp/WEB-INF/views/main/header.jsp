@@ -204,7 +204,7 @@ a {
 						    <i class="fa-solid fa-user-group"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
 						        <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
-						        <img src="이미지_파일_경로" alt="이미지 대체 텍스트">
+<%--						        <img src="이미지_파일_경로" alt="이미지 대체 텍스트">--%>
 						    </span>
 						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('chat-modal')">

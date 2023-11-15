@@ -22,10 +22,25 @@
 
             <!-- 확인 & 요청 삭제 버튼 -->
             <div class="btn-wrap">
-                <button type="button" class="btn blue-btn">확인</button>
+                <button type="button" class="btn blue-btn" onclick="acceptReq('${friend.id}')">확인</button>
                 <button type="button" class="btn gray-btn">요청 삭제</button>
             </div>
             <!-- END 확인 & 요청 삭제 버튼 -->
         </div>
     </c:forEach>
 </div>
+<script>
+    function acceptReq(reqId){
+      $.ajax({
+        url : '/friend/accept/'+reqId,
+        method: 'POST',
+        success : function (data) {
+          $('.friend-modal-tab').trigger('click');
+        }
+      });
+    }
+
+    $(function (){
+
+    });
+</script>
