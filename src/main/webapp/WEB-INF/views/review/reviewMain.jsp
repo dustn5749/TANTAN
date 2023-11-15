@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html;
- charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!DOCTYPE html> <html> <head> <meta charset="UTF-8"> <title>리뷰페이지</title> <style> @font-face {
+ charset=UTF-8" pageEncoding="UTF-8"%> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+ <!DOCTYPE html> 
+ <html> 
+ <head> 
+ <meta charset="UTF-8"> 
+ <title>리뷰페이지</title> 
+ <style> 
+ @font-face {
      font-family: 'Pretendard-Regular';
      src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
      font-weight: 400;
@@ -8,7 +17,15 @@
  .review_container {
      margin: 0 auto;
      padding: 10px;
+     align-items: flex-start !important;
+     justify-content: flex-start !important;
+     align-content:flex-start !important;
+     height: 1300px;
+     padding-top: 30px;
 }
+
+
+
  .boardmap_container {
      width: 90% !important;
      padding: 3% !important;
@@ -288,7 +305,21 @@
             max-width: 100%;
             height: auto;
         }
-    
+        
+    /* 선택된 지역 이름 */
+    #img_title{
+		font-size: 40px !important;
+		color : #565656;
+		 font-family: 'Pretendard-Regular' !important;
+		 margin-top: 20px;
+		 margin-bottom: 20px;
+		 font-weight: bold;
+    }
+    /* 지역 별점 div */
+    .avlStar {
+    	display: none;
+
+    }
      </style> 
      </head> 
      <body> 
@@ -301,66 +332,68 @@
      			<div class="col-md-6" id="map_div" style="margin: 0; width: 300px; top: 100px;"> 
      				<div class="map_div_inner" > 
 						<!--전남 -->
-     					<a href='전남' onfocus='this.blur()' onmouseover=mus_on('mus1') 
-     					onmouseout=mus_off('mus1') onclick=smenu_click('mus1')> 
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus1') 
+     					onmouseout=mus_off('mus1') onclick=smenu_click('전남',2)> 
      						<img src='/assets/img/map2/m061.gif' alt='' border='0' name='mus1' class='list1' >
      					</a> 
 						<!--전북 -->
-     					<a href='전북' onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_clic('mus2')>
+     					<a href="" onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_click('전북',10)>
      					<img src='/assets/img/map2/m063.gif' alt='' border='0' name='mus2' class='list2' >
      					<!--경남 -->
-     					</a><a href='./bbs/board.php?bo_table=m101&sca=경남' onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('mus3')>
+     					</a><a href="#" onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('경남',14)>
      						<img src='/assets/img/map2/m055.gif' alt='' border='0' name='mus3' class='list3' >
      					</a>
      					<!--강원 -->
-     					<a href='./bbs/board.php?bo_table=m101&sca=강원' onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('mus4')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('강원',4)>
      						<img src='/assets/img/map2/m033.gif' alt='' border='0' name='mus4' class='list4' >
      					</a>
      					<!--충남 -->
-     					<a href='./bbs/board.php?bo_table=m101&sca=충남' onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('mus5')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('충남',6)>
      						<img src='/assets/img/map2/m041.gif' alt='' border='0' name='mus5' class='list5' >
      					</a>
      					<!--경기 -->
-     					<a href='./bbs/board.php?bo_table=m101&sca=경기' onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('mus6')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('경기',3)>
      						<img src='/assets/img/map2/m031.gif' alt='' border='0' name='mus6' class='list6' >
      					</a>
      					<!--충북 -->
-     					<a href='./bbs/board.php?bo_table=m101&sca=충북' onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('mus7')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('충북',5)>
      						<img src='/assets/img/map2/m043.gif' alt='' border='0' name='mus7' class='list7' >
      					</a>
      					<!--경북-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=경북' onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('mus8')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('경북',8)>
      						<img src='/assets/img/map2/m054.gif' alt='' border='0' name='mus8' class='list8' >
      					</a>
      					<!--제주-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=제주' onfocus='this.blur()' onmouseover=mus_on('mus9') onmouseout=mus_off('mus9') onclick=smenu_click('mus9')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus9') onmouseout=mus_off('mus9') onclick=smenu_click('제주',13)>
      						<img src='/assets/img/map2/m064.gif' alt='' border='0' name='mus9' class='list9' >
      					</a>
-     					<a href='./bbs/board.php?bo_table=m101&sca=서울' onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('mus10')>
+     					<!--서울  -->
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('서울',1)>
      						<img src='/assets/img/map2/m02.gif' alt='' border='0' name='mus10' class='list10' >
      					</a>
+     					
      					<!--인천-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=인천' onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('mus11')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('인천',2)>
      						<img src='/assets/img/map2/m032.gif' alt='' border='0' name='mus11' class='list11' >
      					</a>
      					<!--대전-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=대전' onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('mus12')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('대전',7)>
      						<img src='/assets/img/map2/m042.gif' alt='' border='0' name='mus12' class='list12' >
      					</a>
      					<!--광주-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=광주' onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('mus13')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('광주',11)>
      						<img src='/assets/img/map2/m062.gif' alt='' border='0' name='mus13' class='list13' >
      					</a>
      					<!--대구 -->
-     					<a href='./bbs/board.php?bo_table=m101&sca=대구' onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('mus14')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('대구',9)>
      						<img src='/assets/img/map2/m053.gif' alt='' border='0' name='mus14' class='list14' >
      					</a>
      					<!--울산-->
-     					<a href='./bbs/board.php?bo_table=m101&sca=울산' onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('mus15')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('울산',15)>
      						<img src='/assets/img/map2/m052.gif' alt='' border='0' name='mus15' class='list15' >
      					</a>
      					<!---->
-     					<a href='./bbs/board.php?bo_table=m101&sca=부산' onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('mus16')>
+     					<a href="#" onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('부산',16)>
      					<img src='/assets/img/map2/m051.gif' alt='' border='0' name='mus16' class='list16' >
      					</a> 
      				</div>
@@ -375,7 +408,27 @@
      							</button> 
      						</div> 
      						
-     						<div>이미지 들어가는 칸</div>
+     						<div class="img_div">
+     							<div class="img_title_div"><p id="img_title"></p></div>
+     							<div class="img_content_div">
+     								<img class="region_img" >
+     							</div>     							
+     						</div>
+     						<div class="avlStar">
+     							<p id="avl_text">평균 별점 : </p>
+     							    <div class="star-rating"> 
+     									<input type="radio" id="5-stars" name="rating" value="5" /> 
+     									<label for="5-stars" class="star">&#9733; </label> 
+     									<input type="radio" id="4-stars" name="rating" value="4" /> 
+     									<label for="4-stars" class="star">&#9733;</label> 
+     									<input type="radio" id="3-stars" name="rating" value="3" /> 
+     									<label for="3-stars" class="star">&#9733; </label> 
+     									<input type="radio" id="2-stars" name="rating" value="2" /> 
+     									<label for="2-stars" class="star">&#9733;</label> 
+     									<input type="radio" id="1-star" name="rating" value="1" /> 
+     									<label for="1-star" class="star">&#9733;</label> 
+     								</div>
+     						</div>
      						<div class="seachcity" style="margin-bottom: 10px;"></div> 
      						<div class="row"> 
      							<input type="hidden" name="rate" id="rate" value="0" style="margin-bottom: 10px;"> 
@@ -424,9 +477,11 @@
      		  }
      		}
      	
+/*     document.addEventListener('DOMContentLoaded', function(){
+    	//별점 인스턴스 생성
      	let rating = new Rating();
-    //별점 인스턴스 생성document.addEventListener('DOMContentLoaded', function(){
-         //별점선택 이벤트 리스너 document.querySelector('.rating').addEventListener('click',function(e){
+         //별점선택 이벤트 리스너 
+         document.querySelector('.rating').addEventListener('click',function(e){
              let elem = e.target;
              if(elem.classList.contains('rate_radio')){
                  rating.setRate(parseInt(elem.value));
@@ -434,8 +489,8 @@
         }
         ) 
     }
-    );
-
+    ); */
+/* 
          let lengthCheckEx = /^.{
             400,
         }
@@ -451,7 +506,7 @@
              return false;
         }
     }
-   );
+   ); */
 
      function calculateAverageRating(ratings) {
          if (ratings.length === 0) {
@@ -467,14 +522,14 @@
              addComment(comment);
              document.getElementById('comment').value = '';
         }
-    }
+   
          const commentList = document.getElementById('commentList');
          const li = document.createElement('li');
          li.classList.add('comment');
          li.innerText = comment;
          commentList.appendChild(li);
-    }
      console.log('Average Rating Percentage:', averageRatingPercentage);
+    }
      </script> 
      
      <script> 
@@ -555,83 +610,76 @@
      function mus_off(musName) {
          if(cMuName!=musName) document [musName].src = eval(musName + 'off.src');
     }
-     function smenu_click(musName){
-         cMuName=musName;
-         document [musName].src = eval(musName + 'on.src');
+     
+     // 지도 클릭시 이벤트 
+     function smenu_click(musName, doe_Num){
+    	 const regionImages = {
+     	        '전남': '/assets/img/doereview/jeonnam.png',
+     	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
+     	        '경남': '/assets/img/doereview/Gyeongnam.jpg',
+     	        '강원': '/assets/img/doereview/Gandwon.jpg',
+     	        '충남': '/assets/img/doereview/chungnam.jpg',
+     	        '경기': '/assets/img/doereview/Gyeonggi.jpg',
+     	        '충북': '/assets/img/doereview/Chungbok.jpg',
+     	        '제주': '/assets/img/doereview/jeju.jpg',
+     	        '서울': '/assets/img/doereview/Seoul.jpg',
+     	        '인천': '/assets/img/doereview/Inchon.jpg',
+     	        '대전': '/assets/img/doereview/Daejeon.jpg',
+     	        '광주': '/assets/img/doereview/Gwangju.jpg',
+     	        '대구': '/assets/img/doereview/Daegu.jpg',
+     	        '울산': '/assets/img/doereview/Ulsan.jpg',
+     	        '부산': '/assets/img/doereview/Busan.jpg',
+     	        '경북': '/assets/img/doereview/Gyeongbuk.jpg'
+     	    };
+    	 
+        
+     	 $("#img_title").text(musName);
+     	  $(".region_img").attr("src", regionImages[musName]);
+     	 $(".region_img").css({
+     	    "width": "100%",
+     	    "height": "300px"
+     	});
+     	 
+     	$(".avlStar").css({
+     		"display":"block"
+     	})	 
+     	$("#avl_text").css({
+        	"font-family": "'Pretendard-Regular' !important",
+        	"font-size": "20px !important",
+        	"color" : "rgb(0, 0, 121)"
+     	})
+     	
+     	$.ajax({
+     		
+     	})
+     	
+     	var param = {
+     			doeName : musName,
+     			doeNUm : doe_Num
+     	}
+     	
+    	$.ajax({
+    		url : "/review/display",
+    	    type: 'POST',
+    	    contentType: "application/json; charset=UTF-8",
+    	    data: JSON.stringify(param),
+    	    dataType: "json",
+    	    success: function (data) {
+    			if(data.result){
+    			
+		    //    $(".avlStar .star-rating input[value='5']").prop("checked", true);
+    				
+    				
+    			}
+    		}
+    	})
+     	
+
     }
-     window.onload = function() {
-         for (i = 1;
-         i < 17;
-         i++) {
-             if ('<%=request.getParameter("req")%>' == exx[i]) {
-                 cMuName = 'mus' + i;
-                 document[cMuName].src = eval(cMuName + 'on.src');
-                 onclick = smenu_click(cMuName);
-            }
-        }
-    }
-     document.addEventListener('DOMContentLoaded', function () {
-    	    const regionImages = {
-    	        '전남': '/assets/img/doereview/jeonnam.jpg',
-    	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
-    	        '경남': '/assets/img/doereview/Gyeongnam.jpg',
-    	        '강원': '/assets/img/doereview/Gangwon.jpg',
-    	        '충남': '/assets/img/doereview/Chungnam.jpg',
-    	        '경기': '/assets/img/doereview/Gyeonggi.jpg',
-    	        '충북': '/assets/img/doereview/Chungbuk.jpg',
-    	        '제주': '/assets/img/doereview/Jeju.jpg',
-    	        '서울': '/assets/img/doereview/Seoul.jpg',
-    	        '인천': '/assets/img/doereview/Incheon.jpg',
-    	        '대전': '/assets/img/doereview/Daejeon.jpg',
-    	        '광주': '/assets/img/doereview/Dwangju.jpg',
-    	        '대구': '/assets/img/doereview/Daegu.jpg',
-    	        '울산': '/assets/img/doereview/Ulsan.jpg',
-    	        '부산': '/assets/img/doereview/Busan.jpg',
-    	    };
+     
+     
 
-    	    const regionImageContainer = document.getElementById('regionImageContainer');
-
-    	    function handlerMapClick(region) {
-    	        regionImageContainer.innerHTML = '';
-
-    	        const regionImage = document.createElement('img');
-
-    	        if (regionImages[region]) {
-    	            regionImage.src = regionImages[region];
-    	        } else {
-    	            regionImage.src = 'path/to/defaultImage.png';
-    	        }
-
-    	        regionImage.classList.add('selected-region-img');
-    	        regionImageContainer.appendChild(regionImage);
-    	    }
-
-    	    function search() {
-    	        const searchValue = document.getElementById("search_bar_input").value;
-    	        const resultElement = document.getElementById("result");
-
-    	        if (searchValue.trim() !== "") {
-    	            resultElement.innerHTML = "검색된 지역: " + searchValue;
-    	            handlerMapClick(searchValue);
-    	        } else {
-    	            resultElement.innerHTML = "지역을 입력하세요.";
-    	        }
-    	    }
-
-    	    // 클릭 이벤트 리스너 추가
-    	    document.getElementById('search_bar_input').addEventListener('click', function () {
-    	    });
-
-    	    // 추가: 지역 이미지 클릭 시
-    	    document.querySelectorAll('.map-img').forEach(function (img) {
-    	        img.addEventListener('click', function () {
-    	            const region = img.alt; // 이미지의 alt 속성을 이용하여 지역을 가져옴
-    	            search(); // 검색과 동일한 동작 수행
-    	            handlerMapClick(region);
-    	        });
-    	    });
-    	});
-
+  
      </script>
      </body>
       </html>

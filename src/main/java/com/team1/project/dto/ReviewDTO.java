@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 
 public class ReviewDTO {
 	private int reviewNum;
-    private int cityNum;
+    private String doeName;
+    private int doeNum;
     private String memberId;
     private int score;
     private String content;
     private Date regdate;
     private String deleteYn;
-    private String reviewImg;
     
     
 	private MultipartFile file;

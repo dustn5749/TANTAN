@@ -35,7 +35,7 @@ public class FileUpload {
 	}
 	
 	
-	reviewDto.setReviewImg("upload\\"+imageUploadForder+"\\"+reviewImgName);
+	//reviewDto.setReviewImg("upload\\"+imageUploadForder+"\\"+reviewImgName);
 	
 	
 	return true;
