@@ -98,6 +98,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/customer/inquiry_write.jsp"></put-attribute>
 	</definition>
 
+<!-- 문의사항 상세보기 -->
+	<definition name="inquiry_detail" extends="baseLayout">
+		<put-attribute name="title" value="문의사항"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/customer/inquiry_detail.jsp"></put-attribute>
+	</definition>
+	
 <!-- 관리자 페이지 시작 -->
 
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">

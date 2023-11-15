@@ -83,9 +83,9 @@
 	margin: 0 auto;
 	text-align: center;
 }
-.editer_inner_div > textarea{
-	width: 1000px;;
-	height: 700px;
+#editor{
+	width: 100%;
+	height: 1000px;
 	
 }
 /* 작성 완료 버튼 div */
@@ -111,9 +111,13 @@
 	background: rgb(173, 211, 254);
 	color: black;
 }
-</style>
-<script src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+  .ck-editor__editable { height: 700px; }
+
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 </head>
 <body>
  	<div class="inquiry_container">
@@ -125,6 +129,7 @@
  			</div>
  		</div>
  		<div class="editer_div">
+			<form id="mform" method="post">
 			<div class="editer_title_div">글 작성하기</div>
 			<div class="editer_inner_div">
 				<div class="inquiry_detail_area">
@@ -134,7 +139,7 @@
 						<div class="inquiry_input_div">
 							<c:choose>
 								<c:when test="${!empty principal}">
-									<input type="text" readonly="readonly" id="member_id" value="${principal.user.member_id}">														
+									<input type="text" readonly="readonly" id="member_id" value="${principal.user.member_id}" name="member_id">														
 								</c:when>
 							<c:otherwise>
 								<input type="text" readonly="readonly" id="member_id" value="">													
@@ -147,7 +152,7 @@
 					<div class="inquiry_detail_div">
 						<div class="inquiry_menu_div">글제목</div>
 						<div class="inquiry_input_div">							
-							<input type="text"  id="title" >						
+							<input type="text"  id="title" name="title">						
 						</div>
 					</div>
 					
@@ -155,7 +160,7 @@
 					<div class="inquiry_detail_div">
 						<div class="inquiry_menu_div">문의 유형</div>
 						<div class="inquiry_input_div">							
-							<select id="inquiry_category">
+							<select id="inquiry_category" name="category_num">
 								<option value="1">동행 문의</option>
 								<option value="2">일정 문의</option>
 								<option value="3">SNS 문의</option>
@@ -166,31 +171,71 @@
 						</div>
 					</div>
 				</div>
-				 <textarea rows="20" name="form-control" id="form-control"></textarea>
+				 <textarea rows="20" name="editor" id="editor"></textarea>
 			</div>
 			<div class="eidter_btn_div">
-				<button id="submit_btn">작성완료</button>
+				<input type="submit" id="submit_btn" value="작성완료">
 			</div>
+			</form>
  		</div>
  	</div>
 
 	<script>
 	
-	//스마트 에디터 열기
-	$(document).ready(function () {
+	let editor;
+	ClassicEditor
+	.create(document.querySelector('#editor'),{
+		ckfinder: {
+			uploadUrl : '/imageUpload?token=${token}'
+		}
+	})
+	.then(editor => {
+		console.log('Editor was initialized');
+		window.editor = editor;
+	})
+	.catch(error => {
+		console.error(error);
+	});
+	
+	document.querySelector('#mform').addEventListener("submit", e => {
+		e.preventDefault();
 		
-		<!-- SmartEditor2 텍스트편집기 -->
-		var oEditors = [];
-		function smartEditorIFrame() {
-			
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef : oEditors,
-				elPlaceHolder : "form-control",
-				sSkinURI : "/smarteditor2/SmartEditor2Skin.html",
-				fCreator : "createSEditor2"
-			});
-	      }
-		smartEditorIFrame();
+		var content; 
+	    var content;
+	    var ckContentP = document.querySelector(".ck.ck-content p");
+	    
+	    if (ckContentP && ckContentP.innerText.trim() !== "") {
+	        content = ckContentP.innerText;
+	    }
+
+		console.log(content);
+		
+		
+		
+
+		fetch("/ckeditorWrite", {
+			method: "POST",
+			headers: {
+			    "Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				token: '${token}',
+				member_id : $("#member_id").val(),
+				title: document.querySelector("#title").value,
+				content: content,
+				editor: document.querySelector("#editor").value,
+				category_num: $("#inquiry_category").val()
+			}),
+		})
+		.then(response => response.json())
+		.then((data)=>{
+			if(data.result){
+				alert("문의사항 등록에 성공하였습니다.");
+				location.href="/customer/inquiryList";
+			}
+		});
+		
+		return false;
 	});
 	
 	

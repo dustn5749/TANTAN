@@ -53,4 +53,7 @@ public interface MemberDao {
 	
 	// 관리자 회원 정지 해제
 	public boolean memberRelease(String member_id);
+	
+	// 관리자 월별 가입자 현황 리스트
+	public List<MemberDTO> monthMember();
 }

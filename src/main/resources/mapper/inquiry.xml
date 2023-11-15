@@ -36,4 +36,39 @@
     <select id="getTotalCount" resultType="int">
     	select count(*) from inquiry
     </select>
+    
+    
+    <!-- 문의사항 추가하기 -->
+    
+    <insert id="insert">
+    	insert into inquiry(
+    		inquiry_num,
+    		category_num,
+    		member_id,
+    		title,
+    		content,
+    		regdate,
+    		answer_yn,
+    		file_id
+    	) values (
+    		INQUIRY_SQ.nextval,
+    		#{category_num},
+    		#{member_id},
+    		#{title},
+    		#{content},
+    		sysdate,
+    		'N',
+    		 INQUIRY_ARRAYTYPE(
+            <foreach collection="file_id" item="item" separator=",">
+                #{item}
+            </foreach>
+        )
+    	)
+    </insert>
+    
+    <!-- 문의사항 상세보기 -->
+    <select id="getInquiry" resultType="com.team1.project.dto.InquiryDTO">
+    	select * from 
+    	inquiry where inquiry_num=#{inquiry_num}
+    </select>
 </mapper>

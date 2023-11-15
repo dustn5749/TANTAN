@@ -200,11 +200,15 @@ a {
 					<c:choose>
 					<c:when test="${!empty principal}">
 						<div class="btn_div">
-						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('friend-list-modal')">
+						<button class="nav-icon position-relative text-decoration-none" onclick="openFriendModal()">
 						    <i class="fa-solid fa-user-group"></i>
 						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
 						        <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
+<<<<<<< HEAD
 						        <img src="/assets/sns/images/redCircle.png" alt="빨간표시등">
+=======
+<%--						        <img src="이미지_파일_경로" alt="이미지 대체 텍스트">--%>
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 						    </span>
 						</button>	
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('chat-modal')">
@@ -219,7 +223,7 @@ a {
 						<button class="nav-icon position-relative text-decoration-none" onclick="openUserProfile()">
 						    <i class="fa-regular fa-user"></i>    
 					</button>
-					<c:if test="${fn:endsWith(principal.user.roles, 'Admin')}">
+					<c:if test="${fn:endsWith(principal.user.member_id, 'admin')}">
 						<a class="admin_btn" href="/admin">	
 							<img src="/assets/img/key.png" width="25px">관리자
 						</a>
@@ -242,184 +246,7 @@ a {
     <!-- page-wrapper 가 닫히는 div 밑에 놔두면 됨 -->
     <!-- START 친구 목록 / 친구 요청 모달 팝업창 -->
     <div id="friend-list-modal" class="modal-wrapper">
-      <div class="modal-overlay" onclick="closeModal('friend-list-modal')"></div>
 
-      <div class="common-modal narrow-modal">
-        <!-- 닫기버튼 -->
-        <button type="button" class="icon-btn close-btn" onclick="closeModal('friend-list-modal')">
-          <img src="/assets/sns/images/icon-close.svg" alt="">
-        </button>
-        <!-- END 닫기버튼 -->
-
-        <!-- 친구이름 검색 & 채팅초대 버튼 -->
-        <div class="friend-modal-hd">
-          <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
-          <button class="btn" onclick="openModal('chat-invite-modal')">
-            <img src="/assets/sns/images/message-circle-plus.svg" alt="" class="icon">
-          </button>
-        </div>
-        <!-- END 친구이름 검색 & 채팅초대 버튼 -->
-
-        <!-- 친구 목록과 / 친구 요청 탭 버튼 -->
-        <div class="friend-modal-tabs">
-          <!-- ↓ 활성화된 탭은 active 달면 됨 -->
-          <div class="friend-modal-tab active" data-show="tab-friend-list">
-            <p>친구 <span>200</span>명</p>
-          </div>
-          <div class="friend-modal-tab" data-show="tab-friend-invite">
-            친구요청
-          </div>
-        </div>
-        <!-- END 친구 목록과 / 친구 요청 탭 버튼 -->
-
-        <!-- 친구 목록과 / 친구 요청 탭 컨텐츠 -->
-        <div class="friend-modal-contents">
-          <!-- 01) 친구목록 -->
-          <div id="tab-friend-list" class="friend-modal-content active">
-            <div class="friend-list-grp">
-              <!-- 친구 -->
-              <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 됨. status-active 클래스 달을 경우 좌측에 초록 동그라미가 뜸. -->
-              <div class="friend-list status-active">
-                <!-- 친구 프사 & 이름 -->
-                <div class="person-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
-                  </figure>
-                  <div class="person-profile">
-                    <div class="name-wrap">
-                      <h6 class="name">choi_seung_hyun_tttop</h6>
-                      <!-- 블루뱃지 -->
-                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                    </div>
-                    <p class="intro-txt">소개글</p>
-                  </div>
-                </div>
-                <!-- END 친구 프사 & 이름 -->
-
-                <!-- 메세지 보내기 & 삭제 버튼 -->
-                <div class="btn-wrap">
-                  <button type="button" class="btn blue-btn">메세지 보내기</button>
-                  <button type="button" class="btn gray-btn">삭제</button>
-                </div>
-                <!-- END 메세지 보내기 & 삭제 버튼 -->
-              </div>
-
-              <!-- 친구 -->
-              <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 됨. status-active 클래스 달을 경우 좌측에 초록 동그라미가 뜸. -->
-              <div class="friend-list status-active">
-                <!-- 친구 프사 & 이름 -->
-                <div class="person-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
-                  </figure>
-                  <div class="person-profile">
-                    <div class="name-wrap">
-                      <h6 class="name">choi_seung_hyun_tttop</h6>
-                      <!-- 블루뱃지 -->
-                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                    </div>
-                    <p class="intro-txt">소개글</p>
-                  </div>
-                </div>
-                <!-- END 친구 프사 & 이름 -->
-
-                <!-- 메세지 보내기 & 삭제 버튼 -->
-                <div class="btn-wrap">
-                  <button type="button" class="btn blue-btn">메세지 보내기</button>
-                  <button type="button" class="btn gray-btn">삭제</button>
-                </div>
-                <!-- END 메세지 보내기 & 삭제 버튼 -->
-              </div>
-              
-              <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 됨. status-active 클래스 달을 경우 좌측에 초록 동그라미가 뜸. -->
-              <div class="friend-list status-active">
-              <!-- 친구 프사 & 이름 -->
-                <div class="person-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/mouse.jpg" alt="">
-                  </figure>
-                  <div class="person-profile">
-                    <div class="name-wrap">
-                      <h6 class="name">쥐</h6>
-                      <!-- 블루뱃지 -->
-                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                    </div>
-                    <p class="intro-txt">나는 쥐</p>
-                  </div>
-                </div>
-                <!-- END 친구 프사 & 이름 -->
-
-                <!-- 메세지 보내기 & 삭제 버튼 -->
-                <div class="btn-wrap">
-                  <button type="button" class="btn blue-btn">메세지 보내기</button>
-                  <button type="button" class="btn gray-btn">삭제</button>
-                </div>
-                <!-- END 메세지 보내기 & 삭제 버튼 -->
-              </div>
-            </div>
-          </div>
-          <!-- END 01) 친구목록 -->
-
-          <!-- 02) 친구요청 탭 -->
-          <div id="tab-friend-invite" class="friend-modal-content">
-            <div class="friend-list-grp">
-              <!-- 친구 -->
-              <div class="friend-list">
-                <!-- 친구 프사 & 이름 -->
-                <div class="person-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img-jessica.png" alt="">
-                  </figure>
-                  <div class="person-profile">
-                    <div class="name-wrap">
-                      <h6 class="name">jessica</h6>
-                      <!-- 블루뱃지 -->
-                      <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                    </div>
-                    <p class="intro-txt">제시카입니다</p>
-                  </div>
-                </div>
-                <!-- END 친구 프사 & 이름 -->
-
-                <!-- 확인 & 요청 삭제 버튼 -->
-                <div class="btn-wrap">
-                  <button type="button" class="btn blue-btn">확인</button>
-                  <button type="button" class="btn gray-btn">요청 삭제</button>
-                </div>
-                <!-- END 확인 & 요청 삭제 버튼 -->
-              </div>
-
-              <!-- 친구 -->
-              <div class="friend-list">
-                <!-- 친구 프사 & 이름 -->
-                <div class="person-item">
-                  <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img-default.png" alt="">
-                  </figure>
-                  <div class="person-profile">
-                    <div class="name-wrap">
-                      <h6 class="name">minisooni</h6>
-                      <!-- 블루뱃지 -->
-                      <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
-                    </div>
-                    <p class="intro-txt">미니수니</p>
-                  </div>
-                </div>
-                <!-- END 친구 프사 & 이름 -->
-
-                <!-- 확인 & 요청 삭제 버튼 -->
-                <div class="btn-wrap">
-                  <button type="button" class="btn blue-btn">확인</button>
-                  <button type="button" class="btn gray-btn">요청 삭제</button>
-                </div>
-                <!-- END 확인 & 요청 삭제 버튼 -->
-              </div>
-            </div>
-          </div>
-          <!-- END 02) 친구요청 -->
-        </div>
-        <!-- END 친구 목록과 / 친구 요청 탭 컨텐츠 -->
-      </div>
     </div>
     <!-- END 친구 목록 / 친구 요청 모달 팝업창 -->
 
@@ -1138,17 +965,6 @@ a {
 	
 	
   <script>
-    // 친구 목록에서 탭버튼 활성화
-    $(".friend-modal-tab").on('click', function () {
-      var showTabContent = $(this).attr('data-show');
-
-      $('.friend-modal-tab').removeClass('active');
-      $(this).addClass('active');
-
-      $('.friend-modal-content').removeClass('active');
-      $('#' + showTabContent).addClass('active');
-    })
-
     // Modal 열기
     function openModal(id) {
       $('#' + id).addClass('active');
@@ -1157,6 +973,7 @@ a {
     // Modal 닫기
     function closeModal(id) {
       $('#' + id).removeClass('active');
+
     }
 
     // 채팅 초대 친구목록 2명 이상일 시 버튼 활성화
@@ -1259,6 +1076,13 @@ a {
     	location.href="/member/mypage.do"
     }
 
+    function openFriendModal() {
+      $('#friend-list-modal').load("/page/friend/modal", "", () => {
+        $('#friend-list-modal').addClass('active');
+      });
+    }
+
+
     function openAlimModal() {
       $('#alarm-modal').load("/page/alim", "", () => {
         $('#alarm-modal').addClass('active');
@@ -1276,16 +1100,23 @@ a {
           $.ajax({
             url : url,
             success : function (data){
+              console.log(data);
+
               if(!data || data <= 0){
+                if($(id).length !== 0){
+                  $(id).remove();
+                }
                 return false;
               }
 
               if($(id).length === 0){
+                console.log("length == 0");
                 $('<span>').attr({
                   'id' : 'alarm-count',
                   'class' : 'position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark'
                 }).text('+'+data).data({ 'value' : data}).appendTo($('#alarm-count-button'));
               } else {
+                console.log("length == 1");
                 $(id).text('+'+data).data({ 'value' : data});
               }
             }
@@ -1313,6 +1144,11 @@ a {
         const recvMessage = recv =>  {
           callAlim();
           console.log(recv);
+        }
+
+        closeModal = function (id) {
+          $('#' + id).removeClass('active');
+          callAlim();
         }
 
 

@@ -10,10 +10,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class UsDTO {
 	
 	private int us_num; // 객체의 고유 식별 번호입니다.
@@ -30,27 +30,28 @@ public class UsDTO {
 	private List<UsFileDTO> file;
 	private String status; // 동행 게시글 상태
 
-	//관리자 동행 목록 가져오기
-	public List<UsDTO> usList() {
-		return usList();
-	}
-	
-	public List<UsDTO> usReportList() {
-		return usReportList();
-	}
-	private int level = 1;         // 게시글 레벨 (기본값 1)
-	private int pageNo = 1;        // 현재 페이지 번호
-	private int totalCount;        // 전체 게시글 건수
-	private int totalPageSize;     // 전체 페이지 수
-	private int pageLength = 20;   // 한 페이지의 길이
-	
-	private int navSize = 10;      // 페이지 하단에 출력되는 페이지의 항목 수
-	private int navStart = 0;      // 페이지 하단에 출력되는 페이지 시작 번호
-	private int navEnd = 0;        // 페이지 하단에 출력되는 페이지 끝 번호
-
-	private String [] ids;          // 아이디 배열 (미사용)
-
-	public void getTotalCount(int totalCount) {
+   //관리자 동행 목록 가져오기
+   public List<UsDTO> usList() {
+      return usList();
+   }
+   
+   public List<UsDTO> usReportList() {
+      return usReportList();
+   }
+   // 페이징
+   public String searchTitle;
+   public int level = 1;
+   public int pageNo = 1;
+   public int totalCount;
+   public int totalPageSize;
+   public int pageLength = 16;
+   
+   private int navSize = 10;
+   private int navStart = 0;
+   private int navEnd = 0;
+   
+   
+   public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		
 		// 2. 전체 페이지 건수를 계산한다
@@ -75,10 +76,6 @@ public class UsDTO {
 	public int getEndNo() {
 		return pageNo * pageLength;  // 페이지의 마지막 게시글 번호 계산
 	}
-	
-//	// 검색 필드
-//	private String searchTitle = "";  // 검색 제목 (미사용)
-//	
-//}
-
+   
 }
+

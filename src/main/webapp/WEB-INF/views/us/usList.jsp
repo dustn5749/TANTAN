@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <meta charset="UTF-8">
 <title>동행 목록조회</title>
 <style>
@@ -137,22 +138,22 @@
    }
    /* 동행 생성하기 버튼 div */
    .make_us {
-   		display: flex;
-   		float: right;
-   		width: 90%;
+         display: flex;
+         float: right;
+         width: 90%;
    }
    .make_us > button {
-   		width: 150px;
-   		height: 35px;
-   		background-color: rgb(81, 174, 255);
-   		border-radius: 7px;
+         width: 150px;
+         height: 35px;
+         background-color: rgb(81, 174, 255);
+         border-radius: 7px;
    }
    .us_fillter {
-   	margin: 0 auto;
-   	width: 1260px;
+      margin: 0 auto;
+      width: 1260px;
    }
    .fillter_btn_area {
-   	  display: flex;
+        display: flex;
       width: 300px;
 /*       magin:100px; */
    }
@@ -164,7 +165,7 @@
       color: white;
    }
    .fillter_btn +.fillter_btn  {
-   	margin: 0 10px;
+      margin: 0 10px;
    }
    .fillter_btn:hover {
       background-color: white;
@@ -328,80 +329,80 @@
             list-style: none;
         }
      .schedule_btn {
-     		cursor: pointer !important;
+           cursor: pointer !important;
      }
      .schedule_btn:hover {
-     		background-color: black !important;
-     		color : white !important;
+           background-color: black !important;
+           color : white !important;
      }
      .py-5 {
-     		padding: 10px;
+           padding: 10px;
      }
-	 .schedule_container {
+    .schedule_container {
         width: 70%; 
         margin: 0 auto; 
     }
-	ul > li {
-	position:relative;
-	}
-	ul. {
-	position: abd
-	}
-	
-	
+   ul > li {
+   position:relative;
+   }
+   ul. {
+   position: abd
+   }
+   
+   
 .nav-wrap {
-	position:relative;
-	margin: 50px auto 0;
-	width: 1000px;
-	height: 50px;
+   position:relative;
+   margin: 50px auto 0;
+   width: 1000px;
+   height: 50px;
 }
 
 .nav-wrap:after {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 0 ;
-	margin-top: -15px;
-	width: 6px;
-	height: 30px;
-	background-color: #0099FF;
+   content: "";
+   position: absolute;
+   top: 50%;
+   left: 0 ;
+   margin-top: -15px;
+   width: 6px;
+   height: 30px;
+   background-color: #0099FF;
 }
 .nav-wrap h2 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width : 100px;
-	height: 30px;
-	line-height: 50px;
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width : 100px;
+   height: 30px;
+   line-height: 50px;
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
 }
 
 .nav-wrap .nav-ul {
-	margin: 0 0 0 100px;
-	padding: 0;
-	width: 900px;
-	list-style: none;
+   margin: 0 0 0 100px;
+   padding: 0;
+   width: 900px;
+   list-style: none;
 }
 
 .nav-li {
-	float: left;
-	width: 100px;
-	height: 50px;
+   float: left;
+   width: 100px;
+   height: 50px;
 }
 
 .nav-li:hover a {
-	color: #0099FF;
+   color: #0099FF;
 }
 
 .nav-li a {
-	display: block;
-	line-height: 50px;
-	text-decoration: none;
-	font-size: 16px;
-	font-weight: 400;
-	color: #999;
+   display: block;
+   line-height: 50px;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: 400;
+   color: #999;
 }
 
 /* 사용자 정의 스타일 */
@@ -432,41 +433,41 @@
 }
 /* 이미지 div */
 .img_div {
-	display: flex;
+   display: flex;
 }
 .us_content_img {
-	border: none;
-	box-shadow: 1px 1px 1px 1px rgb(237, 237, 237);
-	 width:95%;
-	 height:200px;
+   border: none;
+   box-shadow: 1px 1px 1px 1px rgb(237, 237, 237);
+    width:95%;
+    height:200px;
 }
 .fw-bolder {
-	font-size: 20px !important;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	font-weight: bold;
-	font-family: 'Pretendard-Regular';
-	
+   font-size: 20px !important;
+   margin-bottom: 10px;
+   margin-top: 10px;
+   font-weight: bold;
+   font-family: 'Pretendard-Regular';
+   
 }
 
 div, input, p, span, button, h2 {
-	font-family: 'Pretendard-Regular' !important;
-	
+   font-family: 'Pretendard-Regular' !important;
+   
 }
 
 
 /* 상세 보기 버튼 */
 .detailBtn {
-	background: white;
-	border: none;
-	width: 120px;
-	height: 45px;
-	border-radius: 8px;
-	 cursor: pointer;
+   background: white;
+   border: none;
+   width: 120px;
+   height: 45px;
+   border-radius: 8px;
+    cursor: pointer;
 }
 .detailBtn:hover {
-	background-color: black;
-	color : white;
+   background-color: black;
+   color : white;
 }
 
 </style>
@@ -509,6 +510,12 @@ div, input, p, span, button, h2 {
     </div>
 </div>
     
+    <form name="pageForm" id="pageForm" action="/us/list" method="post">
+    <input type="hidden" name="pageNo" id="pageNo" value="${result.us.pageNo}">
+</form>
+
+	<input type="hidden" id="pageNo2" name="pageNo" value="${result.us.pageNo}">
+    
     <div class="city_btn_wrap" style="text-align: right;">
 <button class="city_btn1" onclick="city_btn1()" style="cursor: pointer;">글쓰기</button>
         </div>
@@ -526,17 +533,17 @@ div, input, p, span, button, h2 {
                 <div class="card-body p-4">
                     <div class="text-center">
                         <div class="img_div">
-                       		<img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
+                             <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
                         </div>
                         <h5 class="fw-bolder">${item.title}</h5>
                         <p>${item.writer}</p>
                         <div class="us_day">
-                        	<p class="menu">모집기간</p>
-	                        <span id="start_day"> ${item.start_Date} ~ </span> 
-	                        <span id="end_day">${item.end_Date}</span>                        
+                           <p class="menu">모집기간</p>
+                           <span id="start_day"> ${item.start_Date} ~ </span> 
+                           <span id="end_day">${item.end_Date}</span>                        
                         </div>
                        <div class="us_cnt_div">
-                       		<span class="menu">모집 인원</span> : <span>${item.us_cnt} 명</span>
+                             <span class="menu">모집 인원</span> : <span>${item.us_cnt} 명</span>
                        </div>
                     </div>
                 </div>
@@ -551,36 +558,29 @@ div, input, p, span, button, h2 {
     </c:forEach>
 </div>
 
-       		 
-        </div>
-<form id="mForm" action="/us/list" method="POST">
-    <input type="hidden" id="pageNo" name="pageNo" value="" />
-</form>
 
-<div class="sc-73e2cff1-0 ehUQiC">
-    <button disabled="" class="sc-73e2cff1-1 fcWStM">
-        <!-- 이전 버튼 SVG 아이콘 -->
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-        </svg>
-    </button>
-    <button disabled="" class="sc-73e2cff1-1 fdmLWW">
-        <!-- 다음 버튼 SVG 아이콘 -->
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-            <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path>
-        </svg>
-    </button>
+<!-- 페이징 처리 -->
+      <div class="nav_div" style="text-align: center; margin-top: 10px;">
+    <c:if test="${result.us.navStart != 1}">
+        <a href="#" onclick="jsPageNo(${result.us.navStart-1})" class="pageArrow">&lt;</a>
+    </c:if>
 
-    <!-- 페이지 이동 -->
-    <div class="sc-73e2cff1-2 ekMLCz">
-        <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button>
-        <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button>
-    </div>
+    <c:forEach var="item"  begin="${result.us.navStart}" end="${result.us.navEnd}">
+        <c:choose>
+            <c:when test="${result.us.pageNo != item}">
+                <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>  
+            </c:when>
+            <c:otherwise>
+                <strong>${item}</strong>   
+            </c:otherwise>
+        </c:choose> 			
+    </c:forEach>
+
+    <c:if test="${result.us.navEnd != result.us.totalPageSize}">
+        <a href="/us/write" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
+    </c:if>
 </div>
-</div>
+
 <script>
 function city_btn1() {
     window.location.href = '/us/write';
@@ -588,7 +588,7 @@ function city_btn1() {
 
     function jsPageNo(pageNo) {
         document.getElementById("pageNo").value = pageNo;
-        document.getElementById("mForm").submit();
+        document.getElementById("pageForm").submit();
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -601,15 +601,14 @@ function city_btn1() {
         }
     });
 
-  	/* 동행 상세보기 */
-   		$(".detailBtn").on("click", function(e){
-    		console.log("상세보기")
-    	    const us_num = e.target.closest(".card").querySelector(".us_num").value;
-    	   
-    	  	location.href="/us/Detail?us_num="+us_num;
-    	});
+     /* 동행 상세보기 */
+         $(".detailBtn").on("click", function(e){
+          console.log("상세보기")
+           const us_num = e.target.closest(".card").querySelector(".us_num").value;
+          
+            location.href="/us/Detail?us_num="+us_num;
+       });
 
-    
 </script> 
 
 </body>

@@ -107,6 +107,9 @@ public class MemberService {
 		return memberDao.memberRelease(member_id);
 	}
 	
-	
-	
+	// 관리자 월별 가입자 수
+	public List<MemberDTO> monthMember() throws Exception{
+		System.out.println("service.monthMember -> " + memberDao.monthMember());
+		return memberDao.monthMember();
+	}
 }

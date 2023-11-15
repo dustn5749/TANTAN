@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.project.dao.ReviewDAO">
+	<select id="getReviewList" resultType="com.team1.project.dto.ReviewDTO">
+  SELECT
+            REVIEW_NUM,
+            CITY_NUM,
+            MEMBER_ID,
+            SCORE,
+            CONTENT,
+            REGDATE,
+            DELETEYN,
+            REVIEWIMG
+        FROM
+            REVIEW
+        WHERE
+            REVIEW_NUM = #{reviewNum}
+            AND MEMBER_ID = #{memberId}
+            AND CITY_NUM = #{cityNum}
+            AND SCORE >= #{score}
+        ORDER BY
+            REGDATE DESC;
+</select>
+
+<insert id="reviewWrite">
+		INSERT INTO DL_REVIEW (
+		    ORDER_NUM
+		    ,STORE_ID
+		    ,REVIEW_CONTENT
+		    ,USER_ID
+		    ,SCORE
+		    ,REVIEW_IMG 
+		) VALUES (
+			${orderNum }
+			,#{storeId }
+			,#{reviewContent }
+			,#{userId}
+			,#{score}
+			,#{reviewImg }
+		)		
+	</insert>
+	
+	<update id="reviewModify">
+    UPDATE DL_REVIEW SET
+        REVIEW_CONTENT = #{reviewContent }
+        ,SCORE = #{score}
+        
+        <if test="reviewImg != null">
+        ,REVIEW_IMG = #{reviewImg }
+        </if>
+        
+    WHERE
+        ORDER_NUM = ${orderNum }    
+	</update>
+
+</mapper>

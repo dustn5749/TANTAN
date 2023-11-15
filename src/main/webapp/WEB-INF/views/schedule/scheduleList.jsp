@@ -443,7 +443,6 @@
         </div>
               
 <!-- 필터 모달 -->
-       
    <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
@@ -503,16 +502,12 @@
 
   </div>
 </div>
-  
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
             <button class="fillter_btn">댓글순</button>
             <button class="fillter_btn">조회순</button>
             <button class="fillter_btn">인기순</button>
         </div>
-     
-     
       <div class="container">
-   
    
 <!--     <div class="row"> -->
 <%--         <c:forEach var="schedule" items="${result.scheduleList}"> --%>
@@ -557,7 +552,8 @@
                                     
                                         <div class="text-center" style="position: relative;">
                                             <!-- Image Container -->
-    <img src="/asset/imag/local/Busan.png" style="max-width: 100%; height: auto; --dls-liteimage-object-fit: cover;">
+ <img src="/assets/img/local/Busan.png" style="max-width: 100%; height: auto; object-fit: cover;">
+
 
                                                 
                                            <!-- Heart Icon -->
@@ -573,7 +569,6 @@
                                             <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                             <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
                                             <p>게시일:${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
-                                            <p>${schedule.memo != null ? schedule.memo : ""}</p>
                                             <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num">
                                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                                 <div class="text-center">
@@ -596,47 +591,30 @@
 
       
       
-<!--       페이징 관련 -->
-<!--    <form id="mForm" action="/schedule/list/method" method="POST"> -->
-<!--     <input type="hidden" id="pageNo" name="pageNo" value="" /> -->
-<!-- </form> -->
-  
-<!-- <div class="sc-73e2cff1-0 ehUQiC"> -->
-<!--     <button disabled="" class="sc-73e2cff1-1 fcWStM"> -->
-<!--         이전 버튼 SVG 아이콘 -->
-<!--         <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;"> -->
-<!--             <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path> -->
-<!--         </svg> -->
-<!--     </button> -->
-<!--     <button disabled="" class="sc-73e2cff1-1 fdmLWW"> -->
-<!--         다음 버튼 SVG 아이콘 -->
-<!--         <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;"> -->
-<!--             <path d="M8 2L2 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="square"></path> -->
-<!--         </svg> -->
-<!--     </button> -->
 
-<!--     페이지 이동 -->
-<!--     <div class="sc-73e2cff1-2 ekMLCz"> -->
-<!--         <button class="sc-73e2cff1-3 bwuLmH" onclick="jsPageNo(1)">1</button> -->
-<!--         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(2)">2</button> -->
-<!--         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(3)">3</button> -->
-<!--         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(4)">4</button> -->
-<!--         <button class="sc-73e2cff1-3 bPLlTV" onclick="jsPageNo(5)">5</button> -->
-<!--     </div> -->
-<!-- </div> -->
 
-            <div class="contents subNews">
-                <ul id="newslist">
+            <div class="contents">
+                <ul id="schedulelist">
                     <c:forEach var="schedule" items="${result.scheduleList}">
                     <li>
-                        <h2>${li.create_dt}</h2>
+                        <h2>${schedule.member_Id}</h2>
                         <h3>${li.title}</h3>
-                        <a href="/mobile/newsview.do?seq_no=${li.seq_no}"></a>
+                                                             <p>${schedule.schedule_Num}</p>
+                                            <p>지역:${schedule.doe_Name}</p>
+                                            <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                                            <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+                                            <p>게시일:${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
+                                            <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num">
+                   
+  <a href="/mobile/newsview.do?seq_no=${li.seq_no}"></a>
                     </li>
                   </c:forEach>
                 </ul>
-                   <a id="moreView">더보기</a>
+                   <a id="Thebogi">더보기</a>
                </div>
+               
+               
+               
 <script>
 $(document).ready(function() {
     var page = 1; // 페이지 번호 초기화
@@ -754,12 +732,6 @@ $(".detailBtn").on("click", function(e) {
         console.error("schedule_num 요소를 찾을 수 없습니다.");
     }
 });
-
-
-
-
-
-
 </script>
       </div>
 </body>

@@ -60,12 +60,12 @@ border:1px solid black;
     			<div class="card-body table-responsive p-0">
    					<div class="card-tools">
    						<div class="input-group input-group-sm" style="width:150px; float:right;">
-						<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-								</button>
-							</div>
+<!-- 						<input type="text" name="table_search" class="form-control float-right" placeholder="Search"> -->
+<!-- 							<div class="input-group-append"> -->
+<!-- 								<button type="submit" class="btn btn-default"> -->
+<!-- 								<i class="fas fa-search"></i> -->
+<!-- 								</button> -->
+<!-- 							</div> -->
    						</div>
    					</div>
     			</div>
@@ -74,30 +74,31 @@ border:1px solid black;
     		<div class="tab-content p-3" id="nav-tabContent">
     		<!-- 회원 탭 카드 -->
               <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
-	              <hr>
+<!-- 	              <hr> -->
 		          <div class="row">
 			          <div class="col-12">
 			            <!-- interactive chart -->
-			              <div class="card-header">
-			                <h3 class="card-title">
-			                  <i class="far fa-chart-bar"></i>
-			                  Interactive Area Chart
-			                </h3>
-			              </div>
-			              <div class="card-body">
-			                <div id="interactive" style="height: 300px;"></div>
-			                </div>
-			                <div class="card-header">
-			                
+<!-- 			              <div class="card-header"> -->
+<!-- 			                <h3 class="card-title"> -->
+<!-- 			                  <i class="far fa-chart-bar"></i> -->
+<!-- 			                  Interactive Area Chart -->
+<!-- 			                </h3> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="card-body"> -->
+<!-- 			                <div id="interactive" style="height: 300px;"></div> -->
+<!-- 			                </div> -->
+<!-- 			                <div class="card-header"> -->
+<!-- 			                </div> -->
+<!-- 			                <div class="card-body"> -->
+<!-- 			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 			                </div> -->
 			                <div class="card-body">
-			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
+<!-- 			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
+								<canvas id="monthMember"></canvas>
 			                </div>
-			                </div>
+			                <hr>
 			                <div class="card-body">
-			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
-			                </div>
-			                <div class="card-body">
-			                <canvas id="stackedBarChart"></canvas>
+			                <canvas id="reportChart"></canvas>
 			                </div>
 			              </div>
 			              <!-- /.card-body-->
@@ -109,63 +110,63 @@ border:1px solid black;
               <!-- 회원 탭 카드 종료 -->
               
               <!-- 게시글 탭 카드 -->
-	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab">
-		              <div class="row">
-			              <div class="col-md-6">
-			                  <div >
-			                      <div class="card-header" id="pop-board">
-			                          <h3 class="card-title">
-			                          <i class="far fa-chart-bar"></i>
-			                          인기 게시글
-			                          </h3>
-				                      <div class="card-body">
-				                      <hr>
-				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div>
-				                      </div>
-				                  </div>
-			              <!-- /.card-body-->
-			                  </div>
-			              </div>
-			              <div class="col-md-6">
-			                  <div>
-			                      <div class="card-header" id="pop-us">
-		   	                          <h3 class="card-title">
-			                          <i class="far fa-chart-bar"></i>
-			                          인기 동행글
-			                          </h3>
-				                      <div class="card-body">
-				                      <hr>
-				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div>
-				                      </div>
-			                      </div>
-			                  </div>
-			              </div>
-		              </div>
-	              </div>
-               <!-- 게시글 탭 카드 종료 -->
+<!-- 	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab"> -->
+<!-- 		              <div class="row"> -->
+<!-- 			              <div class="col-md-6"> -->
+<!-- 			                  <div > -->
+<!-- 			                      <div class="card-header" id="pop-board"> -->
+<!-- 			                          <h3 class="card-title"> -->
+<!-- 			                          <i class="far fa-chart-bar"></i> -->
+<!-- 			                          인기 게시글 -->
+<!-- 			                          </h3> -->
+<!-- 				                      <div class="card-body"> -->
+<!-- 				                      <hr> -->
+<!-- 				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 				                      </div> -->
+<!-- 				                  </div> -->
+<!-- 			              /.card-body -->
+<!-- 			                  </div> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="col-md-6"> -->
+<!-- 			                  <div> -->
+<!-- 			                      <div class="card-header" id="pop-us"> -->
+<!-- 		   	                          <h3 class="card-title"> -->
+<!-- 			                          <i class="far fa-chart-bar"></i> -->
+<!-- 			                          인기 동행글 -->
+<!-- 			                          </h3> -->
+<!-- 				                      <div class="card-body"> -->
+<!-- 				                      <hr> -->
+<!-- 				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
+<!-- 				                      </div> -->
+<!-- 			                      </div> -->
+<!-- 			                  </div> -->
+<!-- 			              </div> -->
+<!-- 		              </div> -->
+<!-- 	              </div> -->
+<!--                게시글 탭 카드 종료 -->
                
-	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab">
-		            <!-- Bar chart -->
-			            <div>
-			              <div class="card-header">
-			                <h3 class="card-title">
-			                  <i class="far fa-chart-bar"></i>
-			                  인기 여행지
-			                </h3>
-			              </div>
-			              <div class="card-body">
+<!-- 	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab"> -->
+<!-- 		            Bar chart -->
+<!-- 			            <div> -->
+<!-- 			              <div class="card-header"> -->
+<!-- 			                <h3 class="card-title"> -->
+<!-- 			                  <i class="far fa-chart-bar"></i> -->
+<!-- 			                  인기 여행지 -->
+<!-- 			                </h3> -->
+<!-- 			              </div> -->
+<!-- 			              <div class="card-body"> -->
 <!-- 			              	<div id="bar-chart" style="height: 300px;"></div> -->
-							<canvas id="stackedBarChart"></canvas>
-			              </div>
-			              <!-- /.card-body-->
-            			</div>
-    				</div>
+<!-- 							<canvas id="stackedBarChart"></canvas> -->
+<!-- 			              </div> -->
+<!-- 			              /.card-body -->
+<!--             			</div> -->
+<!--     				</div> -->
             	</div>
     		</div>
     	</div>
     </div>
     <!-- /.content -->
-  </div>
+<!--   </div> -->
   <!-- /.content-wrapper -->
 
 <script>
@@ -176,96 +177,96 @@ border:1px solid black;
      */
     // We use an inline data source in the example, usually data would
     // be fetched from a server
-    var data        = [],
-        totalPoints = 100
+//     var data        = [],
+//         totalPoints = 100
 
-    function getRandomData() {
+//     function getRandomData() {
 
-      if (data.length > 0) {
-        data = data.slice(1)
-      }
+//       if (data.length > 0) {
+//         data = data.slice(1)
+//       }
 
-      // Do a random walk
-      while (data.length < totalPoints) {
+//       // Do a random walk
+//       while (data.length < totalPoints) {
 
-        var prev = data.length > 0 ? data[data.length - 1] : 50,
-            y    = prev + Math.random() * 10 - 5
+//         var prev = data.length > 0 ? data[data.length - 1] : 50,
+//             y    = prev + Math.random() * 10 - 5
 
-        if (y < 0) {
-          y = 0
-        } else if (y > 100) {
-          y = 100
-        }
+//         if (y < 0) {
+//           y = 0
+//         } else if (y > 100) {
+//           y = 100
+//         }
 
-        data.push(y)
-      }
+//         data.push(y)
+//       }
 
-      // Zip the generated y values with the x values
-      var res = []
-      for (var i = 0; i < data.length; ++i) {
-        res.push([i, data[i]])
-      }
+//       // Zip the generated y values with the x values
+//       var res = []
+//       for (var i = 0; i < data.length; ++i) {
+//         res.push([i, data[i]])
+//       }
 
-      return res
-    }
+//       return res
+//     }
 
-    var interactive_plot = $.plot('#interactive', [
-        {
-          data: getRandomData(),
-        }
-      ],
-      {
-        grid: {
-          borderColor: '#f3f3f3',
-          borderWidth: 1,
-          tickColor: '#f3f3f3'
-        },
-        series: {
-          color: '#3c8dbc',
-          lines: {
-            lineWidth: 2,
-            show: true,
-            fill: true,
-          },
-        },
-        yaxis: {
-          min: 0,
-          max: 100,
-          show: true
-        },
-        xaxis: {
-          show: true
-        }
-      }
-    )
+//     var interactive_plot = $.plot('#interactive', [
+//         {
+//           data: getRandomData(),
+//         }
+//       ],
+//       {
+//         grid: {
+//           borderColor: '#f3f3f3',
+//           borderWidth: 1,
+//           tickColor: '#f3f3f3'
+//         },
+//         series: {
+//           color: '#3c8dbc',
+//           lines: {
+//             lineWidth: 2,
+//             show: true,
+//             fill: true,
+//           },
+//         },
+//         yaxis: {
+//           min: 0,
+//           max: 100,
+//           show: true
+//         },
+//         xaxis: {
+//           show: true
+//         }
+//       }
+//     )
 
-    var updateInterval = 500 //Fetch data ever x milliseconds
-    var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
-    function update() {
+//     var updateInterval = 500 //Fetch data ever x milliseconds
+//     var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
+//     function update() {
 
-      interactive_plot.setData([getRandomData()])
+//       interactive_plot.setData([getRandomData()])
 
-      // Since the axes don't change, we don't need to call plot.setupGrid()
-      interactive_plot.draw()
-      if (realtime === 'on') {
-        setTimeout(update, updateInterval)
-      }
-    }
+//       // Since the axes don't change, we don't need to call plot.setupGrid()
+//       interactive_plot.draw()
+//       if (realtime === 'on') {
+//         setTimeout(update, updateInterval)
+//       }
+//     }
 
-    //INITIALIZE REALTIME DATA FETCHING
-    if (realtime === 'on') {
-      update()
-    }
-    //REALTIME TOGGLE
-    $('#realtime .btn').click(function () {
-      if ($(this).data('toggle') === 'on') {
-        realtime = 'on'
-      }
-      else {
-        realtime = 'off'
-      }
-      update()
-    })
+//     //INITIALIZE REALTIME DATA FETCHING
+//     if (realtime === 'on') {
+//       update()
+//     }
+//     //REALTIME TOGGLE
+//     $('#realtime .btn').click(function () {
+//       if ($(this).data('toggle') === 'on') {
+//         realtime = 'on'
+//       }
+//       else {
+//         realtime = 'off'
+//       }
+//       update()
+//     })
     /*
      * END INTERACTIVE CHART
      */
@@ -347,6 +348,80 @@ border:1px solid black;
      * FULL WIDTH STATIC AREA CHART
      * -----------------
      */
+     const urlMonth = "/monthMember";
+
+     $.ajax({
+         url: urlMonth,
+         method: "GET",
+         success: function (data) {
+             console.log(data);
+             const monthData = data.monthMember.map(function (item) {
+                 console.log(item.month);
+                 return item.month;
+             });
+             const counts = data.monthMember.map(function (item) {
+                 console.log(item.signup_count);
+                 return item.signup_count;
+             });
+             var stackedChartData = {
+                 labels: monthData,
+                 datasets: [
+                     {
+                         label: "월별 가입자 현황",
+                         backgroundColor: "rgba(60,141,188,0.9)",
+                         borderColor: "rgba(60,141,188,0.8)",
+                         pointRadius: false,
+                         pointColor: "#3b8bba",
+                         pointStrokeColor: "rgba(60,141,188,1)",
+                         pointHighlightFill: "#fff",
+                         pointHighlightStroke: "rgba(60,141,188,1)",
+                         data: counts,
+                     },
+                 ],
+             };
+             var barChartData = $.extend(true, {}, stackedChartData);
+             var stackedBarChartCanvas = $("#monthMember")
+                 .get(0)
+                 .getContext("2d");
+             var stackedBarChartData = $.extend(true, {}, barChartData);
+             var stackedBarChartOptions = {
+                 responsive: true,
+                 maintainAspectRadio: false,
+                 scales: {
+                     xAxes: [
+                         {
+                             type: 'time',
+                             time: {
+                                 unit: 'month',
+                                 displayFormats: {
+                                     month: 'MM'
+                                 }
+                             },
+                             distribution: 'series', // 추가 부분
+                             ticks: {
+                                 source: 'labels', // 추가 부분
+                             },
+                         },
+                     ],
+                     yAxes: [
+                         {
+                             stacked: true,
+                         },
+                     ],
+                 },
+             };
+             new Chart(stackedBarChartCanvas, {
+                 type: "bar",
+                 data: stackedBarChartData,
+                 options: stackedBarChartOptions,
+             });
+         },
+         error: function (error) {
+             console.error("Error", error);
+         },
+     });
+
+     
      const url = "/usReportList";
 //      const labels = [];
 
@@ -378,7 +453,7 @@ border:1px solid black;
          };
 
          var barChartData = $.extend(true, {}, stackedChartData);
-         var stackedBarChartCanvas = $("#stackedBarChart")
+         var stackedBarChartCanvas = $("#reportChart")
            .get(0)
            .getContext("2d");
          var stackedBarChartData = $.extend(true, {}, barChartData);
@@ -387,17 +462,17 @@ border:1px solid black;
            maintainAspectRatio: false,
            scales: {
         	   xAxes: [
-        		      {
-        		        stacked: true,
-        		        type: 'time', // X축 스케일을 시간형식으로 설정
-        		        time: {
-        		          unit: 'day', // 날짜 간격을 일(day)로 설정
-        		          displayFormats: {
-        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
-        		          }
-        		        }
-        		      }
-        		    ],
+	        		      {
+	        		        stacked: true,
+	        		        type: 'time', // X축 스케일을 시간형식으로 설정
+	        		        time: {
+	        		          unit: 'day', // 날짜 간격을 일(day)로 설정
+	        		          displayFormats: {
+	        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
+	        		          }
+	        		        }
+	        		      }
+       		    		],
              yAxes: [
                {
                  stacked: true,

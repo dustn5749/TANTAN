@@ -15,13 +15,10 @@
  	
  	//페이지 상세보기 
  	$(".inq_title").on("click", function(e){
- 		console.log("페이지 상세보기")
 		var tr = $(this).closest("tr");
 
     var inquiry_num = tr.find(".inquiry_input#inquiry_num").text().trim();
-	
-	
-   
+		location.href="/customer/detail?inquiry_num="+inquiry_num;
  	})
  	
  	// 글쓰기

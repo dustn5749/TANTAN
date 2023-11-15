@@ -3,14 +3,37 @@
 
 <mapper namespace="com.team1.project.dao.UsDAO">
 
-<!-- 전체목록조회 -->
+ <!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
-    SELECT * FROM (
-        SELECT rownum AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+    SELECT * 
+    FROM (
+        SELECT 
+        rownum AS nrow, 
+        us_num, 
+        city_name,
+        writer, 
+        us_cnt,
+        regdate,
+        start_Date,
+        end_Date,
+        title, 
+        content,
+        fileno
         FROM (
-            SELECT rownum  AS nrow, us_num, city_name, writer, us_cnt, regdate, start_Date, end_Date, title, content
+            SELECT rownum  AS 
+            nrow,
+            us_num,
+            city_name,
+            writer,
+            us_cnt,
+            regdate,
+            start_Date,
+            end_Date,
+            title,
+            content,
+           fileno
             FROM us a 
-            WHERE rownum BETWEEN #{startNo} AND #{endNo}
+            WHERE rownum BETWEEN 1 AND #{endNo}
             <if test="start_Date != null and end_Date != null">
                 AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
             </if>
@@ -19,26 +42,27 @@
     ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
 </select>
 
+   
 <!-- 메인 탑5 노출 -->
 <select id="usTop5" resultType="com.team1.project.dto.UsDTO">
-	<![CDATA[
- 		SELECT 
- 			ROWNUM AS nrow, SUB.* 
- 		FROM (  
- 			SELECT  
- 				US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
- 			FROM us  
- 			ORDER BY us_num DESC 
- 		) SUB   
- 		WHERE ROWNUM <= 5 
- 	]]> 
+   <![CDATA[
+       SELECT 
+          ROWNUM AS nrow, SUB.* 
+       FROM (  
+          SELECT  
+             US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
+          FROM us  
+          ORDER BY us_num DESC 
+       ) SUB   
+       WHERE ROWNUM <= 5 
+    ]]> 
 </select>
 
 <!-- 전체 게시글 수 -->
 <select id="totalCount" resultType="int">
-		select count(*)
-		from us
- 	</select>
+      select count(*)
+      from us
+    </select>
 
 <!-- 동행 글쓰기 -->
 <insert id="writeInsert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
@@ -72,13 +96,13 @@
     )
 </insert>
 
-	<select id="nextUsNum" resultType="int">
-	    SELECT max(us_num) from us
-	</select>
+   <select id="nextUsNum" resultType="int">
+       SELECT max(us_num) from us
+   </select>
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
-    	US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
+       US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
     FROM US 
     WHERE US_NUM = #{us_num}
  </select> 
@@ -105,50 +129,50 @@
      
      
      <!-- 최신 동행 모집글 -->
-		<select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
-		    SELECT * FROM (
-		        SELECT * FROM us
-		        ORDER BY regdate DESC
-		    )
-		    WHERE ROWNUM &lt;= 3
-		</select>
-		
-		
-		
+      <select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
+          SELECT * FROM (
+              SELECT * FROM us
+              ORDER BY regdate DESC
+          )
+          WHERE ROWNUM &lt;= 3
+      </select>
+      
+      
+      
 <!-- 관리자 -->
 <!-- 신고받은 동행 리스트 가져오기 -->
-	<select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
-		SELECT * from us where reportcnt > 0 ORDER BY STATUS desc
-	</select>
-	
-	<!--us에 fileno저장  -->
-	<update id="updateFile" parameterType="com.team1.project.dto.UsFileDTO">
-		update us set  FILENO=#{usFileNum}
-		where us_num=#{usNum}
-	</update>
-	
+   <select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
+      SELECT * from us where reportcnt > 0 ORDER BY STATUS desc
+   </select>
+   
+   <!--us에 fileno저장  -->
+   <update id="updateFile" parameterType="com.team1.project.dto.UsFileDTO">
+      update us set  FILENO=#{usFileNum}
+      where us_num=#{usNum}
+   </update>
+   
 <!-- 신고받은 동행 리스트 차트 연습용 -->
-	<select id="usReportList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
-	  <![CDATA[
-	    SELECT TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate, COUNT(*) AS post_count, reportcnt
-	    FROM US
-	    WHERE reportcnt >= 1
-	    GROUP BY TO_CHAR(regdate, 'YYYY-MM-DD'), reportcnt
-	    ORDER BY regdate
-	  ]]>
-	</select>
-	
+   <select id="usReportList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
+     <![CDATA[
+       SELECT TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate, COUNT(*) AS post_count, reportcnt
+       FROM US
+       WHERE reportcnt >= 1
+       GROUP BY TO_CHAR(regdate, 'YYYY-MM-DD'), reportcnt
+       ORDER BY regdate
+     ]]>
+   </select>
+   
 <!-- 관리자 동행 게시글 삭제 처리 -->
-	<update id="ausDelete">
-		UPDATE us
-		SET status = 'Y'
-		WHERE us_num = #{us_num}
-	</update>
-	
+   <update id="ausDelete">
+      UPDATE us
+      SET status = 'Y'
+      WHERE us_num = #{us_num}
+   </update>
+   
 <!-- 관리자 동행 게시글 복구 -->
-	<update id="ausChange">
-		UPDATE us
-		SET status = 'N'
-		WHERE us_num = #{us_num}
-	</update>
+   <update id="ausChange">
+      UPDATE us
+      SET status = 'N'
+      WHERE us_num = #{us_num}
+   </update>
 </mapper>

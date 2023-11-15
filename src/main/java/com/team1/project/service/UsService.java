@@ -25,8 +25,11 @@ public class UsService {
 	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
 		// 1. 전체 건수를 얻기
-		us.setTotalCount(usDAO.totalCount(us)); //여기서 전체 게시글 수를 불러와서 저장함.
-		
+
+		int totalCount = usDAO.totalCount(us);
+		us.setTotalCount(totalCount); //여기서 전체 게시글 수를 불러와서 저장함.
+		System.out.println("totalCount = " + totalCount);
+		System.out.println("us = " + us);
 		Map<String, Object> result = new HashMap<>();
 		try {
 		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회
@@ -39,6 +42,8 @@ public class UsService {
 		return result;
 	}
 
+	
+	
 	// 메인 top5
 	public List<UsDTO> usTop5() throws Exception {
 		return usDAO.usTop5();
@@ -94,9 +99,7 @@ public class UsService {
 	int result = usDAO.reply(us);
 
 	return result;
-	
-	
-	
+
 }
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
@@ -128,6 +131,7 @@ public class UsService {
 		
 		return usDAO.ausChange(us_num);
 	}
+	
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

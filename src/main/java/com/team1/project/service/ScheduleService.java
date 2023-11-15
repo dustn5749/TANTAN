@@ -31,23 +31,28 @@ public class ScheduleService {
 			System.out.println("schduleService: " + result);
 			return result;
 		}
-		
-		
 		//일정 작성하기
 		public boolean writeInsert(ScheduleDTO schedule) throws Exception {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
 		int result = schduleDAO.writeInsert(schedule);
 		schedule.getSchedule_Num();
+		schedule.getDoe_Name();
+		schedule.getStart_Num();
+		schedule.getEndNo();
+		schedule.getPlace1();
+		schedule.getPlace2();
+		schedule.getMemo1();
+		schedule.getMemo2();
 		
-		DayDTO in = DayDTO.builder()
-							.schedule_Num(schedule.getSchedule_Num())
-							.dayDate(schedule.getStart_Num())
-							.place(schedule.getPlace())
-							.memo(schedule.getMemoList())
-							.build();
-		int result2 =  schduleDAO.day(in);
+//		DayDTO in = DayDTO.builder()
+//							.schedule_Num(schedule.getSchedule_Num())
+//							.dayDate(schedule.getStart_Num())
+//							.place(schedule.getPlace())
+//							.memo(schedule.getMemoList())
+//							.build();
+//		int result2 =  schduleDAO.day(in);
 		System.out.println("result = " + result);
-		System.out.println("result2 = " + result2);
+//		System.out.println("result2 = " + result2);
 		if(result == 1 && result == 1) {
 			return true;
 		}
@@ -70,27 +75,18 @@ public class ScheduleService {
 			return result;
 		}
 		
-//		// 일정추가 
-//		public Map<String, Object> day(ScheduleDTO schedule) {
-//			Map<String, Object> result = new HashMap<>();
-//			result.put("day", schduleDAO.day(schedule)); 
-//			System.out.println(result);			
-//			return result;
-//		}
-//		
-//		
-	
+		// 일정추가 
+		//		public Map<String, Object> day(ScheduleDTO schedule) {
+		//			Map<String, Object> result = new HashMap<>();
+		//			result.put("day", schduleDAO.day(schedule)); 
+		//			System.out.println(result);			
+		//			return result;
+		//		}
 		
-//	// 메인 top5
-//	public List<ScheduleDTO> ScheduleTop5() throws Exception {
-//		return ScheduleDAO.schduleTop5;
-//	}
-
 	
- //일정 상세보기
-		public ScheduleDTO schduleDetail(int schedule_num) throws Exception {
-			System.out.println("us.service.schedukeDetail() 함수가 호출되었습니다");
-		    return schduleDAO.schduleDetail(schedule_num) ;		    
+		//일정 상세보기
+		public List<ScheduleDTO> getScheduleDetail(int schedule_Num) {
+		    return schduleDAO.schduleDetail(schedule_Num);
 		}
 	
 		// 일정 수정하기
@@ -98,30 +94,23 @@ public class ScheduleService {
 		    System.out.println("schedule.service.usUpdate() 함수가 호출되었습니다");
 			return schduleDAO.schduleUpdate(schedule);
 		}
-//		// 일정 삭제하기
-//		public boolean usDelete(int usNum) throws Exception {
-//		    System.out.println("us.service.usDelete() 함수가 호출되었습니다");
-//		    return ScheduleDAO.usDelete(usNum);
-//		}
-//
-//		//일저 댓글 등록
-//		public int reply(UsDTO us) throws Exception {
-//		System.out.println("동행 댓글 호출됨");
-//
-//		int level = us.getLevel();
-//		us.setLevel(level + 1);
-//
-//		int result = ScheduleDAO.reply(us);
-//
-//		return result;
-
 		
-		// 내 일정 정보 얻기
-		public List<ScheduleDTO> getMyScheduleList(String member_Id) {
-			System.out.println("scheduleservice.getMyScheduleList()");
-			System.out.println("member = " + member_Id);
-			return schduleDAO.getMyScheduleList(member_Id);
+		// 일정 삭제하기
+		public boolean scheduleDelete(int schedule_num) throws Exception {
+		System.out.println("scheduleservice.scheduleDelete() 함수가 호출되었습니다");
+		    return schduleDAO.schduleDelete(schedule_num);
 		}
+
+		//일정 댓글 등록
+		public int reply(ScheduleDTO schedule) throws Exception {
+		System.out.println("일정 댓글 호출됨");
+
+		int level = schedule.getLevel();
+		schedule.setLevel(level + 1);
+
+		int result = schduleDAO.reply(schedule);
+
+		return result;
 		
+		}
 }
-	
