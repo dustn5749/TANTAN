@@ -116,7 +116,7 @@
                         <div class="btn-wrap">
                             <c:choose>
                                 <c:when test="${principal.user.member_id == member.member_id}">
-                                    <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
                                 </c:when>
                                 <c:otherwise>
                                     <button type="button" class="btn solid-btn blue-btn" onclick="requestFriend('${member.member_id}')">친구 추가</button>
@@ -249,6 +249,14 @@
     function closeModal(id) {
         $('#' + id).removeClass('active');
     }
+    
+    function snsProfileModify() {
+        // 프로필 편집 페이지로 리다이렉션
+        location.href = "/sns/snsProfileModify";
+    }
+    
+ 
+    
 
     function requestFriend(id){
       $.ajax({

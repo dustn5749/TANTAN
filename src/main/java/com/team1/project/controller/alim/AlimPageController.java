@@ -18,13 +18,14 @@ public class AlimPageController {
     private final AlimService service;
     private final AuthService authService;
 
-
+    //알림 페이지 조회
     @GetMapping("/page/alim")
     public String getAlim(HttpServletRequest request, Authentication authentication){
 
         String memberId = authService.getMemberId(authentication);
 
         log.info("/page/alim/{}" , memberId);
+        // 현재 로그인한 사용자가 받은 알림 목록을 알림 페이지에 전달
         request.setAttribute("alimList", service.getAlimListByReceiveMember(memberId));
         return "alim";
     }

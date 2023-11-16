@@ -63,6 +63,6 @@ public class AlimDataController {
         String memberId = authService.getMemberId(authentication);
         service.readAlimByAlimId(alimId);
     }
-
+    
 
 }

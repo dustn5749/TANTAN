@@ -12,7 +12,7 @@
         </figure>
         <div class="person-profile">
           <div class="name-wrap">
-            <h6 class="name">choi_seung_hyun_tttop</h6>
+            <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
             <!-- 블루뱃지 -->
             <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
           </div>

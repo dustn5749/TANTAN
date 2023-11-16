@@ -1,8 +1,7 @@
 package com.team1.project.controller.friend;
 
+import com.team1.project.dto.FriendDTO;
 import com.team1.project.dto.FriendRequestDTO;
-import com.team1.project.entity.Friend;
-import com.team1.project.entity.FriendRequest;
 import com.team1.project.service.auth.AuthService;
 import com.team1.project.service.friend.FriendService;
 import java.util.List;
@@ -25,7 +24,7 @@ public class FriendPageController {
   @GetMapping("/page/friend/modal")
   public String friendModal(HttpServletRequest request, Authentication authentication) {
     String memberId = authService.getMemberId(authentication);
-    List<Friend> friendList = friendService.getFriendList(memberId);
+    List<FriendDTO> friendList = friendService.getFriendList(memberId);
 
     request.setAttribute("friendSize", CollectionUtils.isEmpty(friendList) ? "0" : friendList.size());
     request.setAttribute("friendList", friendList);
@@ -36,7 +35,7 @@ public class FriendPageController {
   @GetMapping("/page/friend/list")
   public String friendList(HttpServletRequest request, Authentication authentication) {
     String memberId = authService.getMemberId(authentication);
-    List<Friend> friendList = friendService.getFriendList(memberId);
+    List<FriendDTO> friendList = friendService.getFriendList(memberId);
 
     request.setAttribute("friendSize", CollectionUtils.isEmpty(friendList) ? "0" : friendList.size());
     request.setAttribute("friendList", friendList);
