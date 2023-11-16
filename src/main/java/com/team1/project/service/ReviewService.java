@@ -10,7 +10,9 @@ import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team1.project.dao.DoeDAO;
 import com.team1.project.dao.ReviewDAO;
+import com.team1.project.dto.DoeDTO;
 import com.team1.project.dto.ReviewDTO;
 
 @Service
@@ -19,11 +21,27 @@ public class ReviewService {
 	@Autowired
 	private ReviewDAO reviewDAO;
 	
+	@Autowired
+	private DoeDAO doeDAO;
     
     //도 선택에 따른 리뷰리스트 목록 조회
-	public List<ReviewDTO> getReview(ReviewDTO review) {
-		System.out.println();
-		return null;
+	public List<ReviewDTO> getReview(ReviewDTO review) throws Exception {
+		System.out.println("reviewService.getReview()");
+		List<ReviewDTO> reviewList = reviewDAO.getReviewList(review);
+		System.out.println("reviewList = " + reviewList);
+		return reviewList;
+	}
+
+	// 도 평균 내기
+	public void averageDoe(int doeNum) {
+		System.out.println("reviewService.averageDoe()");
+		System.out.println("doeNum = " + doeNum);
+		double average = reviewDAO.averageDoe(doeNum);
+		System.out.println("average = " + average);
+		
+		DoeDTO doe = DoeDTO.builder().doe_num(doeNum).average(average).build();
+		
+		doeDAO.updateAverage(doe);
 	}
     
     

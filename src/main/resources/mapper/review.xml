@@ -4,26 +4,33 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.project.dao.ReviewDAO">
 	<select id="getReviewList" resultType="com.team1.project.dto.ReviewDTO">
-  SELECT
-            REVIEW_NUM,
-            CITY_NUM,
-            MEMBER_ID,
-            SCORE,
-            CONTENT,
-            REGDATE,
-            DELETEYN,
-            REVIEWIMG
-        FROM
-            REVIEW
-        WHERE
-            REVIEW_NUM = #{reviewNum}
-            AND MEMBER_ID = #{memberId}
-            AND CITY_NUM = #{cityNum}
-            AND SCORE >= #{score}
-        ORDER BY
-            REGDATE DESC;
+		SELECT
+		    R.REVIEW_NUM,
+		    D.DOE_NAME,
+		    R.DOE_NUM,
+		    R.MEMBER_ID,
+		    R.SCORE,
+		    R.CONTENT,
+		    R.REGDATE,
+		    R.DELETEYN
+		FROM
+		    REVIEW R
+		JOIN
+		    DOE D ON R.DOE_NUM = D.DOE_NUM
+		WHERE
+		    R.DOE_NUM = #{doe_num}
+		ORDER BY
+		    R.REGDATE DESC
 </select>
 
+
+ <!-- 도 평균내기  -->
+<select id="averageDoe" resultType="double">
+	select avg(score) from review
+	where doe_num=#{doe_num}
+</select>
+
+<!-- 
 <insert id="reviewWrite">
 		INSERT INTO DL_REVIEW (
 		    ORDER_NUM
@@ -53,6 +60,6 @@
         
     WHERE
         ORDER_NUM = ${orderNum }    
-	</update>
+	</update> -->
 
 </mapper>

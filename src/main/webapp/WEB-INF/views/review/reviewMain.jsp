@@ -32,6 +32,7 @@
      margin: 0 auto;
      display: flex;
      justify-content: center;
+     
 }
  .row {
      display: flex;
@@ -267,6 +268,7 @@
          padding: 0 .2em;
          text-align: center;
          width: 5em;
+         height: 30px;
     }
      .star-rating input {
          display: none;
@@ -319,6 +321,47 @@
     .avlStar {
     	display: none;
 
+    }
+    
+    
+    /* 평점 리스트 */
+    .reviewList{
+    	height: 300px;
+    	overflow: scroll;
+    }
+    .review_area {
+     	display : flex;
+     	justify-content: center;
+     	text-align: center;
+     
+    }
+    .member_id_div {
+    	display: flex;
+    	margin-right: 20px;
+    	width: 100px;
+    	text-align: left;
+    	
+    }
+    .member_id_div > p {
+    	margin-left: 2px;
+    	margin-right: 2px;
+    	font-family: 'Pretendard-Regular' !important;
+    	color : grey;
+    	font-size: small;
+    }
+    .content {
+    	font-weight: bold !important;
+    	font-family: 'Pretendard-Regular' !important;
+    	font-size: 12px !important;
+    	width: 150px;
+    	text-align: left;
+    }
+    
+    .score_span {
+    	font-family: 'Pretendard-Regular' !important;
+    	color : red;
+    	margin-left: 15px;
+    	width: 30px;
     }
      </style> 
      </head> 
@@ -447,11 +490,13 @@
      								</div> 
      								<div class="review_contents" style="margin-bottom: 10px;"> 
      									<div class="warning_msg_comment">5자 이상으로 작성해 주세요.</div> 
-     									<textarea rows="10" class="review_textarea" style="width: 100%;"></textarea> 
+     									<textarea rows="2" class="review_textarea" style="width: 100%;"></textarea> 
      								</div> 
      								<div class="cmd"> 
      									<input type="button" name="save" id="save" value="등록"> 
      								</div> 
+     								
+     								<div class="reviewList"></div>
      							</div> 
      						</div> 
      					</div> 
@@ -613,6 +658,10 @@
      
      // 지도 클릭시 이벤트 
      function smenu_click(musName, doe_Num){
+    	 
+    	
+    	
+    	 
     	 const regionImages = {
      	        '전남': '/assets/img/doereview/jeonnam.png',
      	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
@@ -648,36 +697,71 @@
         	"font-size": "20px !important",
         	"color" : "rgb(0, 0, 121)"
      	})
-     	
-     	$.ajax({
-     		
-     	})
-     	
+
      	var param = {
-     			doeName : musName,
-     			doeNUm : doe_Num
+     			doe_name : musName,
+     			doe_num : doe_Num
      	}
      	
-    	$.ajax({
-    		url : "/review/display",
-    	    type: 'POST',
-    	    contentType: "application/json; charset=UTF-8",
-    	    data: JSON.stringify(param),
-    	    dataType: "json",
-    	    success: function (data) {
-    			if(data.result){
-    			
-		    //    $(".avlStar .star-rating input[value='5']").prop("checked", true);
-    				
-    				
-    			}
-    		}
-    	})
-     	
+     	$.ajax({
+     	    url: "/review/display",
+     	    type: 'POST',
+     	    contentType: "application/json; charset=UTF-8",
+     	    data: JSON.stringify(param),
+     	    dataType: "json",
+     	    success: function (data) {
+     	        if (data.result) {
+     	            var reviewListDiv = $('.reviewList');
+     	           reviewListDiv.empty();
+     	            var average = Math.round(data.doe.average);
+     	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
+     	            var reviewList = data.reviewList;
+
+     	            reviewList.forEach(function (e) {
+     	                var div = document.createElement("div");
+     	                $(div).addClass("review_area");
+
+     	                var member_id = document.createElement("div");
+     	                var member_img = document.createElement("img");
+     	               $(member_img).attr("src", "/assets/img/userReview.png");
+     	              $(member_img).css({
+     	            		"width" : "25px"  
+     	              })
+     	                var member_id_p = document.createElement("p");
+     	                $(member_id_p).text(e.member_id);
+     	                $(member_id).addClass("member_id_div");
+	     	            $(member_id_p).addClass("member_id");
+	     	            
+	     	            $(member_id).append(member_img);
+	     	            $(member_id).append(member_id_p);
+
+     	                var content = document.createElement("p");
+     	                $(content).addClass("content");
+     	                $(content).text(e.content);
+
+     	                var scoreSpan = document.createElement("span");
+     	                $(scoreSpan).text(e.score + "점");
+     	               $(scoreSpan).addClass("score_span");
+     	                
+     	                $(div).append(member_id);
+     	                $(div).append(content);
+     	                $(div).append(scoreSpan);
+
+     	                $(reviewListDiv).append(div);
+     	            });
+     	        }
+     	    }
+     	});
 
     }
      
-     
+     // 평점 등록하기
+  /*    $("#save").on("click", function(){
+    	var param = {
+    			doe_name =  
+    			
+    	}
+     }) */
 
   
      </script>
