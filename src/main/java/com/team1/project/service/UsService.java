@@ -132,6 +132,11 @@ public class UsService {
 		return usDAO.ausChange(us_num);
 	}
 	
+	// 관리자 월별 작성된 동행 리스트
+	public List<UsDTO> monthUs() {
+		return usDAO.monthUs();
+	}
+	
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

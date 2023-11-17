@@ -58,4 +58,7 @@ public interface UsDAO {
 	
 	//관리자 동행글 복구하기
 	public boolean ausChange(int us_num) throws Exception;
+	
+	// 관리자 월별 작성된 게시글 리스트
+	public List<UsDTO> monthUs();
 }

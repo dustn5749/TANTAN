@@ -29,6 +29,8 @@ public class UsDTO {
 	private int fileNo; //첨부파일 번호
 	private List<UsFileDTO> file;
 	private String status; // 동행 게시글 상태
+	private String month;
+	private int write_count;
 
    //관리자 동행 목록 가져오기
    public List<UsDTO> usList() {
