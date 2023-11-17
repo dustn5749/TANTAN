@@ -1,6 +1,7 @@
 package com.team1.project.service.friend;
 
 import com.team1.project.dao.FriendDAO;
+import com.team1.project.dto.FriendDTO;
 import com.team1.project.dto.FriendRequestDTO;
 import com.team1.project.entity.Alim;
 import com.team1.project.entity.AlimContentEnum;
@@ -44,6 +45,7 @@ public class FriendService {
               .receiveMemberId(receiveMemberId)
               .sendMemberId(sendMemberId)
               .reqDate(LocalDate.now())
+              .acceptYn("N")
               .build()
       );
 
@@ -67,8 +69,8 @@ public class FriendService {
     return friendDAO.getFriendRequest(receiveMemberId);
   }
 
-  public List<Friend> getFriendList(String memberId) {
-    return friendRepository.findByResId(memberId);
+  public List<FriendDTO> getFriendList(String memberId) {
+    return friendDAO.getFriendList(memberId);
   }
 
   @Transactional
@@ -94,6 +96,8 @@ public class FriendService {
               .build()
       );
 
+      value.setAcceptYn("Y");
+      friendRequestRepository.save(value);
     });
   }
 }

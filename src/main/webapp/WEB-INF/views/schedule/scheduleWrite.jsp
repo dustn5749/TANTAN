@@ -418,6 +418,20 @@
    background-color:rgb(249, 179, 179);
    color: white;
 }
+
+/* 글 제목 div */
+.title_div {
+	margin: 0 auto;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+.title_div > input {
+	width: 250px;
+	border-radius: 2px;
+	padding-left: 5px;
+	margin-left: 10px;
+}
 </style>
 <body >
    <div class="nav-wrap">
@@ -477,6 +491,7 @@
                </div>
 
                   <div class="schedule-list">
+                  <div class="title_div"><span>글 제목 : </span><input type="text" id="title"></div>
                    <ul class="schedule-ul">
                       <!--일정 -->
                        <li class="schedule-item day-1">
@@ -776,6 +791,7 @@
       
       // 위도 경도 전달
       function selectLocation(element) {
+    	  
        var modal = document.getElementById("myModal");
        var selectElement = modal.querySelector('select');
        var selectedText = selectElement.options[selectElement.selectedIndex].text;
@@ -825,11 +841,10 @@
       function sendDataToServer() {
           const scheduleItems = document.querySelectorAll(".schedule-item");
           const schedules = [];
-          
-          
-          
+		console.log($("#doe_location").val())
           for (i=0;i<scheduleItems.length;i++) {
              schedules.push({
+            	title : $("#title").val(),
                 day_date : scheduleItems[i].querySelector(".day_num").innerText,
                 place : scheduleItems[i].querySelector(".placeList").value,
                 memoList : scheduleItems[i].querySelector(".memoList").value,

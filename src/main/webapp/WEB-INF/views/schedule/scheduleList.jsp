@@ -563,8 +563,8 @@
         d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
     </path>
 </svg></a>
-                                            <h5 class="fw-bolder">${schedule.member_Id}</h5>
-                                            <p>${schedule.schedule_Num}</p>
+                                            <h5 class="fw-bolder">${schedule.title}</h5>
+                                            <p>${schedule.member_Id}</p>
                                             <p>지역:${schedule.doe_Name}</p>
                                             <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                             <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>

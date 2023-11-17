@@ -18,7 +18,8 @@
         end_Date,
         title, 
         content,
-        fileno
+        fileno,
+        imageurl
         FROM (
             SELECT rownum  AS 
             nrow,
@@ -31,7 +32,8 @@
             end_Date,
             title,
             content,
-           fileno
+           fileno,
+           imageurl
             FROM us a 
             WHERE rownum BETWEEN 1 AND #{endNo}
             <if test="start_Date != null and end_Date != null">

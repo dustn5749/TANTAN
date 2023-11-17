@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ScheduleDTO {
 
 		private int schedule_Num;
@@ -41,7 +40,7 @@ public class ScheduleDTO {
 	    private String memoList;
 //	    private String []scheduleList;
 	    private String Like_CNT;
-	    private String TITLE;
+	    private String title;
 	    
 	    
 	    

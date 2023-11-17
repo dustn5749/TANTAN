@@ -113,4 +113,12 @@ public class ScheduleService {
 		return result;
 		
 		}
+		
+		// 내일정 정보 불러오기
+		public List<ScheduleDTO> getMyScheduleList(String member_id) {
+			System.out.println("scheduleService.getMyScheduleList()");
+			System.out.println("name = " + member_id);
+			
+			return schduleDAO.getMyScheduleList(member_id);
+		}
 }

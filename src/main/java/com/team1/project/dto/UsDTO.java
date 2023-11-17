@@ -31,6 +31,7 @@ public class UsDTO {
 	private String status; // 동행 게시글 상태
 	private String month;
 	private int write_count;
+	private String imageUrl;
 
    //관리자 동행 목록 가져오기
    public List<UsDTO> usList() {

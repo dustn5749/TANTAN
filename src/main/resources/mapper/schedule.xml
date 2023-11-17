@@ -35,18 +35,19 @@
     <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
         select sc.nextval as schedule_Num from dual
     </selectKey> 
-    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2, MEMO1,MOMO2)
+    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2, MEMO1,MOMO2, title)
 values(
 	#{schedule_Num},
     #{member_Id},
-    #{doe_name},    
+    #{doe_Name},    
     #{start_Num},
     #{end_Date},
     SYSDATE,
 	#{PLACE1},
 	#{PLACE2},
 	#{MEMO1},
-	#{MEMO2})
+	#{MEMO2},
+	#{title})
 </insert>
 
     <!--지역번호 만들기 --> 
@@ -76,7 +77,8 @@ values(
         S.PLACE1,
         S.PLACE2,
         S.MEMO1,
-        S.MEMO2
+        S.MEMO2,
+        S.TITLE
     FROM
         SCHEDULE S
     WHERE
@@ -101,7 +103,8 @@ values(
         PLACE1 = #{PLACE1},
         PLACE2 = #{PLACE2},
         MEMO1 = #{MEMO1},
-        MEMO2 = #{MEMO2}
+        MEMO2 = #{MEMO2},
+        TITLE = #{title}
     WHERE
         SCHEDULE_NUM = #{schedule_Num}
 </update>
@@ -132,6 +135,9 @@ values(
 		WHERE bno = #{bno} AND userID = #{userId}	
 	</delete>
 
-
-
+	<!-- 내 일정 정보 가져오기  -->
+	<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+		select * from SCHEDULE
+		where member_id=#{member_id}
+	</select>
 </mapper>
