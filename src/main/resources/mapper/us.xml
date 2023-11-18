@@ -2,32 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.UsDAO">
-
- <!--데이터삽입 -->
-<!--    <insert id="insertUsList" >
-        INSERT INTO us(
-        title, 
-        content, 
-        writer, 
-        us_cnt, 
-        regdate, 
-        start_date, 
-        end_date ,
-        imageurl
-       )
-        VALUES
-        <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.title},
-             #{item.content},
-             #{item.writer}, 
-             #{item.us_cnt}, 
-             #{item.regdate}, 
-             #{item.start_Date},
-             #{item.end_Date},
-             #{item.imageUrl}
-            )
-        </foreach>
-    </insert> -->
  
 <insert id="insertUsList" parameterType="com.team1.project.dto.UsDTO">
     <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
@@ -40,6 +14,7 @@
         CONTENT, 
         WRITER, 
         US_CNT, 
+        REGDATE,
         START_DATE, 
         END_DATE
         <if test="imageUrl != null and imageUrl != ''">
@@ -51,15 +26,15 @@
         #{title},
         #{content},
         #{writer}, 
-        #{us_cnt}, 
-        #{start_Date},
-        #{end_Date}
+        #{us_cnt},
+        TO_DATE(#{regdate}, 'YYYY-MM-DD HH24:MI:SS'),
+        TO_DATE(#{start_Date}, 'YYYY-MM-DD HH24:MI:SS'),
+        TO_DATE(#{end_Date}, 'YYYY-MM-DD HH24:MI:SS')
         <if test="imageUrl != null and imageUrl != ''">
             , #{imageUrl}
         </if>
     )
 </insert>
-
 
  
   <!-- 전체목록조회 -->

@@ -1,6 +1,7 @@
 package com.team1.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,6 +17,9 @@ public interface ScheduleDAO {
 	 
     //일정 글쓰기
 	public int writeInsert(ScheduleDTO schdule) throws Exception;
+	
+	//일정 전체게시글
+	public int totalCount(ScheduleDTO schdule) throws Exception;
 	
 	//일정 지역 번호 가져오기
 	public List<ScheduleDTO> Doenum(ScheduleDTO doe_Num) throws Exception;
@@ -36,7 +40,7 @@ public interface ScheduleDAO {
 	//	public List<ScheduleDTO> schduleTop5() throws Exception;
 			
 	// 일정 수정하기
-	public boolean schduleUpdate(ScheduleDTO schdule) throws Exception;
+	public boolean scheduleUpdate(Map<String, Object> params) throws Exception;
 
 	// 일정 삭제하기
 	public boolean schduleDelete(int schedule_Num) throws Exception;

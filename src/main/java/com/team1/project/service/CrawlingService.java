@@ -1,4 +1,5 @@
 package com.team1.project.service;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,20 +24,18 @@ public class CrawlingService {
     
 //    @Transactional
 //    @Scheduled(fixedDelay = 300000)
-    
-    
-    
-    
-    
-    
+//    
+
     public void fileTokenAutoDelete() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Root> response = restTemplate.getForEntity(
                 "https://api.tripsoda.com/accompany/list?page=1&limit=2377", Root.class);
         Root root = response.getBody();
-        
+     
+  
         if (root != null && root.getAccompanyList() != null) {
             List<UsDTO> list = new ArrayList<>();
+            
             for (AccompanyList accompany : root.getAccompanyList()) {
                 UsDTO usDTO = new UsDTO();
                 usDTO.setTitle(accompany.getTitle());
@@ -50,6 +49,7 @@ public class CrawlingService {
            
                 usDAO.insertUsList(usDTO);
                 list.add(usDTO);
+                System.out.println("usDTO"+ usDTO);
             }
             
             // List<UsDTO>를 List<AccompanyList>로 변환하여 전달

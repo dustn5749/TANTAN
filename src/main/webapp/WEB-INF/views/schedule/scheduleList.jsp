@@ -509,32 +509,7 @@
         </div>
       <div class="container">
    
-<!--     <div class="row"> -->
-<%--         <c:forEach var="schedule" items="${result.scheduleList}"> --%>
-<!--             <div class="col-md-3 mb-4"> -->
-<!--                 <div class="card box-shadow"> -->
-<!--                     <div class="card-body p-4"> -->
-<!--                         <div class="text-center"> -->
-<%--                             <h5 class="fw-bolder">${schedule.member_Id}</h5> --%>
-<%--                             <p>${schedule.schedule_Num}</p> --%>
-<%--                             <p>${schedule.doe_Name}</p> --%>
-<%--                             <p>${schedule.start_Num != null ? schedule.start_Num : ""}</p> --%>
-<%--                             <p>${schedule.end_Date != null ? schedule.end_Date : ""}</p> --%>
-<%--                             <p>${schedule.reg_Date != null ? schedule.reg_Date : ""}</p> --%>
-<%--                             <p>${schedule.memo != null ? schedule.memo : ""}</p> --%>
-<%--                              <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num"> --%>
-<!--                               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent"> -->
-<!--                           <div class="text-center">     -->
-<!--                             <input type="button" value="상세보기" class="detailBtn" > -->
-<!--                             </div> -->
-<!--                             </div> -->
-<!--                      </div> -->
-<!--                      </div> -->
-<!--                      </div> -->
-<!--             </div> -->
-<%--         </c:forEach> --%>
-<!--     </div> -->
-<!-- </div> -->
+
       
 <div class="cy5jw6o dir dir-ltr" role="group" data-testid="card-container" aria-labelledby="title_896641117667634802">
     <div class="lxq01kf l1tup9az dir dir-ltr">
@@ -552,10 +527,6 @@
                                     
                                         <div class="text-center" style="position: relative;">
                                             <!-- Image Container -->
- <img src="/assets/img/local/Busan.png" style="max-width: 100%; height: auto; object-fit: cover;">
-
-
-                                                
                                            <!-- Heart Icon -->
 <svg id="heartIcon"  viewBox="0 0 32 32" aria-hidden="true"role="presentation" focusable="false"
     style="position: absolute; top: 0; left: 0; fill: rgba(0, 0, 0, 0.5); height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
@@ -563,12 +534,18 @@
         d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
     </path>
 </svg></a>
-                                            <h5 class="fw-bolder">${schedule.member_Id}</h5>
-                                            <p>${schedule.schedule_Num}</p>
+										
+										<img src="/assets/img/local/${schedule.doe_img}" style="max-width: 100%; height: 200px; object-fit: cover;">
+                                       <input type="hidden" name="memberId" value="${schedule.member_id}">
+                                       <input type="hidden" name="schedule_Num" value="${schedule.schedule_Num}">
+                                               <p>${schedule.title}</p>
                                             <p>지역:${schedule.doe_Name}</p>
                                             <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                             <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
-                                            <p>게시일:${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
+                                              
+                                        <input type="hidden" name="regDate" value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
+
+                                            
                                             <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num">
                                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                                 <div class="text-center">
@@ -587,37 +564,51 @@
         </div>
         </div>
         </div>
-            <div class="contents">
-                <ul id="schedulelist">
-                <section id = ""list=wrap">
-                    <c:forEach var="schedule" items="${result.scheduleList}">
-                    <li>
-                        <h2>${schedule.member_Id}</h2>
-                                                             <p>${schedule.schedule_Num}</p>
-                                            <p>지역:${schedule.doe_Name}</p>
-                                            <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
-                                            <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
-                                            <p>게시일:${schedule.reg_Date != null ? schedule.reg_Date : ""}</p>
-                                            <input type="hidden" value="${schedule.schedule_Num}" class="schedule_num">
-                   
-                    </li>
-                  </c:forEach>
-                </ul>
-               </div>
-</div>            
+
+
+    <form name="pageForm" id="pageForm" action="/schedule/list" method="post">
+    <input type="hidden" name="pageNo" id="pageNo" value="${result.schedule.pageNo}">
+<%--<input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">--%>
+	</form>
+	</div>
+	
+<!-- 페이징 처리 -->
+</div>   
+
+  <!-- Display page numbers -->
+<div style="text-align: center;">
+    <c:forEach var="item" begin="${result.schedule.navStart}" end="${result.schedule.navEnd}">
+        <c:choose>
+            <c:when test="${result.schedule.pageNo != item}">
+                <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
+            </c:when>
+            <c:otherwise>
+                <strong>${item}</strong>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+
+
+<!-- Display next page link if there are more pages -->
+<c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
+    <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})" class="pageArrow">&gt;</a> 
+</c:if>
+</div>
+</div>
+
+
+
+
 <script>
-
-var start = 1; // 시작 위치
-
-$(window).scroll(function () {
-    const { clientHeight, scrollTop, scrollHeight } = document.documentElement;
-    if (clientHeight + scrollTop >= scrollHeight - 400) {
-        start += 1;
-        loadMoreData(start);
+    function jsPageNo(pageNo) {
+    	console.log("pageNo" + pageNo);
+        document.getElementById("pageNo").value = pageNo;
+        document.getElementById("pageForm").submit();
     }
-});
-
-function loadMoreData(start) {
+ </script>
+ <script>
+	function loadMoreData(start) {
     var member_Id = "member_id"; 
     var doe_Name = "doe_name"; 
     var schedule_Num = "schedule_num"; 
@@ -630,7 +621,7 @@ function loadMoreData(start) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
             start: start,
-            member_Id: member_Id,
+            member_id: member_Id,
             doe_Name: doe_Name,
             schedule_Num: schedule_Num,
             end_Date: end_Date,
@@ -643,12 +634,8 @@ function loadMoreData(start) {
         }
     });
 }
-
             function moveToSelectedRegion() {
-                // Show an alert
                 alert('메뉴화면으로 이동!');
-
-                // Redirect to the menu screen ("/schedule/list")
                 window.location.href = '/schedule/list';
             }
 
@@ -676,33 +663,20 @@ function loadMoreData(start) {
                     });
                 });
 
-                //Get the modal
-                var modal = document.getElementById("myModal");
-
-                // Get the button that opens the modal
-                var btn = document.getElementById("categoryButton");
-
-                // When the user clicks the button, open the modal
-                btn.onclick = function () {
-                    modal.style.display = "block";
-                };
-
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                };
-
+              
                 function jsPageNo(pageNo) {
                     document.getElementById("pageNo").value = pageNo;
-                    document.getElementById("mForm").submit();
+                    document.getElementById("pageForm").submit();
                 }
 
+                
+                //일정목록으로 이동 
                 document.querySelector(".us_btn").addEventListener("click", function () {
                     location.href = "/us/list";
                 });
 
+                
+                //상세보기
                 $(".detailBtn").on("click", function (e) {
                     console.log("상세보기");
 
@@ -721,14 +695,6 @@ function loadMoreData(start) {
                         console.error("schedule_num 요소를 찾을 수 없습니다.");
                     }
                 });
-            });
-
-            $(window).scroll(e => {
-                const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement;
-                if (clientHeight + scrollTop >= scrollHeight - 400) {
-                    start += 1;
-                    loadMoreData(start);
-                }
             });
 
 

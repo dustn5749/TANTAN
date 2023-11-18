@@ -28,8 +28,7 @@ public class UsService {
 
 		int totalCount = usDAO.totalCount(us);
 		us.setTotalCount(totalCount); //여기서 전체 게시글 수를 불러와서 저장함.
-		System.out.println("totalCount = " + totalCount);
-		System.out.println("us = " + us);
+	
 		Map<String, Object> result = new HashMap<>();
 		try {
 		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회

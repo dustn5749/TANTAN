@@ -1,5 +1,6 @@
 package com.team1.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +32,12 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	//일정목록보기
-	@GetMapping(value = "/list")
+	@RequestMapping (value = "/list")
     public String schedule(Model model, ScheduleDTO schedule)
-    		throws Exception {
-		model.addAttribute("result", scheduleService.usPageList(schedule));
-	    System.out.println("일정 목록 출력: " + schedule);
+    throws Exception {
+	model.addAttribute("result", scheduleService.schedulePageList(schedule));
+	    System.out.println("일정 목록 출력: " + scheduleService.schedulePageList(schedule));
+	    System.out.println("일정 페이지출력: " + scheduleService.schedulePageList(schedule));
     return "scheduleList";
    } 
 	
@@ -55,15 +57,36 @@ public class ScheduleController {
         // 일정이 하나라도 실패하면 이 값을 false로 변경
         boolean allSucceeded = true;
         
+        ScheduleDTO insertDto = new ScheduleDTO();
         // 여러 일정에 대한 처리
-        for (ScheduleDTO schedule : schedules) {
-            schedule.setMember_Id("user123");
-            
-            // 일정 등록에 실패하면 allSucceeded를 false로 변경
-            if (!scheduleService.writeInsert(schedule)) {
-                allSucceeded = false;
-            }
+        for (int i = 0; i < schedules.size(); i++) {
+        	ScheduleDTO dto = schedules.get(i);
+        	insertDto.setMember_id("user123");
+        	insertDto.setStart_Num(dto.getStart_Num());
+        	insertDto.setEnd_Date(dto.getEnd_Date());
+        	insertDto.setDoe_Name(dto.getDoe_Name());
+        	insertDto.setTitle(dto.getTitle());
+        	
+        	if (i == 0) {
+        		insertDto.setPlace1(dto.getPlace1());
+        		insertDto.setMemo1(dto.getMemo1());
+        		insertDto.setDate1(dto.getDate1());
+        	} else if (i == 1) {
+        		insertDto.setPlace2(dto.getPlace1());
+        		insertDto.setMemo2(dto.getMemo1());
+        		insertDto.setDate2(dto.getDate1());
+        	} else if (i == 2) {
+        		insertDto.setPlace3(dto.getPlace1());
+        		insertDto.setMemo3(dto.getMemo1());
+        		insertDto.setDate3(dto.getDate1());
+        	}
         }
+        
+        // 일정 등록에 실패하면 allSucceeded를 false로 변경
+        if (!scheduleService.writeInsert(insertDto)) {
+            allSucceeded = false;
+        }
+        
         
         if (allSucceeded) {
             result.put("message", "모든 일정이 성공적으로 등록되었습니다.");
@@ -101,24 +124,79 @@ public class ScheduleController {
     public String getScheduleDetail(@RequestParam("schedule_Num") int schedule_Num, Model model) {
         try {
             List<ScheduleDTO> result = scheduleService.getScheduleDetail(schedule_Num);
+            
+            List<ScheduleDTO> transList = new ArrayList<>();
+            for (int i =0; i< result.size(); i ++) { 
+            	ScheduleDTO current = result.get(i);
+            	ScheduleDTO dto = new ScheduleDTO();
+            	dto.setTitle(current.getTitle());
+            	dto.setStart_Num(current.getStart_Num());
+            	dto.setEnd_Date(current.getEnd_Date());
+            	dto.setMember_id(current.getMember_id());
+            	dto.setSchedule_Num(current.getSchedule_Num());
+            	dto.setDoe_Name(current.getDoe_Name());
+            	dto.setCity_latitude(current.getCity_latitude());
+            	dto.setCity_longitude(current.getCity_longitude());
+            	
+            	if (i == 0) {
+            		dto.setPlace1(current.getPlace1());
+            		dto.setDate1(current.getDate1());
+            		dto.setMemo1(current.getMemo1());
+            	} else if (i == 1) {
+            		dto.setPlace1(current.getPlace2());
+            		dto.setDate1(current.getDate2());
+            		dto.setMemo1(current.getMemo2());
+            	} else if (i == 2) {
+            		dto.setPlace1(current.getPlace3());
+            		dto.setDate1(current.getDate3());
+            		dto.setMemo1(current.getMemo3());
+            	}
+            	
+            	transList.add(dto);
+            }
 
             // 여기서 결과를 적절히 처리
-            model.addAttribute("scheduleList", result);
+            model.addAttribute("scheduleList", transList);
             System.out.println(result);
 
-            return "scheduleDetail"; // 적절한 뷰 이름으로 변경
+            return "scheduleDetail";
         } catch (Exception e) {
             // 예외 처리
             e.printStackTrace();
-            return "errorPage"; // 적절한 에러 페이지로 변경
+            return "errorPage"; 
         }
     }
     
    //수정하기
 	@ResponseBody
-	@PostMapping("/update")
-	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
-	    boolean update = scheduleService.scheduleUpdate(schedule);
+	@PostMapping("/update/{scheduleNum}")
+	public Map<String, Object> update(@RequestBody List<ScheduleDTO> schedules, @PathVariable("scheduleNum") int scheduleNum) throws Exception {
+        ScheduleDTO insertDto = new ScheduleDTO();
+        // 여러 일정에 대한 처리
+        for (int i = 0; i < schedules.size(); i++) {
+        	ScheduleDTO dto = schedules.get(i);
+        	insertDto.setMember_id("user123");
+        	insertDto.setStart_Num(dto.getStart_Num());
+        	insertDto.setEnd_Date(dto.getEnd_Date());
+        	insertDto.setDoe_Name(dto.getDoe_Name());
+        	insertDto.setTitle(dto.getTitle());
+        	
+        	if (i == 0) {
+        		insertDto.setPlace1(dto.getPlace1());
+        		insertDto.setMemo1(dto.getMemo1());
+        		insertDto.setDate1(dto.getDate1());
+        	} else if (i == 1) {
+        		insertDto.setPlace2(dto.getPlace1());
+        		insertDto.setMemo2(dto.getMemo1());
+        		insertDto.setDate2(dto.getDate1());
+        	} else if (i == 2) {
+        		insertDto.setPlace3(dto.getPlace1());
+        		insertDto.setMemo3(dto.getMemo1());
+        		insertDto.setDate3(dto.getDate1());
+        	}
+        }
+		
+	    boolean update = scheduleService.scheduleUpdate(scheduleNum, insertDto);
 	    Map<String, Object> result = new HashMap<>();
 	    if (update) {
 	        result.put("message", "수정 성공했습니다!");
@@ -127,10 +205,28 @@ public class ScheduleController {
 	    }
 	    result.put("schedule", update);
 
-	    System.out.println("수정하기 확인 " + schedule);
-
     return result;
 	}
+    
+//	@ResponseBody
+//	@PostMapping("/update")
+//	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
+//	    boolean update = scheduleService.scheduleUpdate(schedule);
+//	    Map<String, Object> result = new HashMap<>();
+//	    if (update) {
+//	        result.put("message", "수정 성공했습니다!");
+//	    } else {
+//	        result.put("message", "수정 실패했습니다.");
+//	    }
+//	    result.put("schedule", update);
+//
+//	    System.out.println("수정하기 확인 " + schedule);
+//
+//    return result;
+//	}
+	
+	
+	
 
 	// 일정 삭제하기
 	@ResponseBody
