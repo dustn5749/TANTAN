@@ -97,9 +97,9 @@ border:1px solid black;
 								<canvas id="monthMember"></canvas>
 			                </div>
 			                <hr>
-			                <div class="card-body">
-			                <canvas id="reportChart"></canvas>
-			                </div>
+<!-- 			                <div class="card-body"> -->
+<!-- 			                <canvas id="reportChart"></canvas> -->
+<!-- 			                </div> -->
 			              </div>
 			              <!-- /.card-body-->
 			            <!-- /.card -->
@@ -348,7 +348,7 @@ border:1px solid black;
      * FULL WIDTH STATIC AREA CHART
      * -----------------
      */
-     const urlMonth = "/monthMember";
+     const urlMonth = "/monthData";
 
      $.ajax({
          url: urlMonth,
@@ -363,10 +363,14 @@ border:1px solid black;
                  console.log(item.signup_count);
                  return item.signup_count;
              });
+             const write_count = data.monthUs.map(function (item) {
+//             	 console.log(item.write_count);
+            	 return item.write_count;
+             })
              var stackedChartData = {
                  labels: monthData,
                  datasets: [
-                     {
+                	 {
                          label: "월별 가입자 현황",
                          backgroundColor: "rgba(60,141,188,0.9)",
                          borderColor: "rgba(60,141,188,0.8)",
@@ -377,6 +381,17 @@ border:1px solid black;
                          pointHighlightStroke: "rgba(60,141,188,1)",
                          data: counts,
                      },
+                     {
+                         label: "월별 작성된 게시글",
+                         backgroundColor: "rgba(92,184,92,0.9)",  // 초록색
+                         borderColor: "rgba(92,184,92,0.8)",     // 초록색
+                         pointRadius: false,
+                         pointColor: "#5cb85c",                  // 초록색
+                         pointStrokeColor: "rgba(92,184,92,1)",  // 초록색
+                         pointHighlightFill: "#fff",
+                         pointHighlightStroke: "rgba(92,184,92,1)",  // 초록색
+                         data: write_count,
+                     }
                  ],
              };
              var barChartData = $.extend(true, {}, stackedChartData);
@@ -406,7 +421,14 @@ border:1px solid black;
                      yAxes: [
                          {
                              stacked: true,
+                             position:'left',
+                             id: 'y-axis-0', // y축 식별자
                          },
+                         {
+                        	 stacked:false,
+                        	 position: 'right',
+                        	 id: 'y-axis-1', // y축 식별자
+                         }
                      ],
                  },
              };
@@ -422,75 +444,75 @@ border:1px solid black;
      });
 
      
-     const url = "/usReportList";
-//      const labels = [];
+//      const url = "/usReportList";
+// //      const labels = [];
 
-     $.ajax({
-       url: url,
-       method: "GET",
-       success: function (data) {
-    	   const dayData = data.usReportList.map(function (item) {
-    		    return item.reportcnt;
-    		  });
-    	   const labels = data.usReportList.map(function (item) {
-    		    return item.regdate; // 날짜 데이터를 가져와서 레이블로 사용
-    		  });
-         var stackedChartData = {
-			labels: labels,
-           datasets: [
-             {
-               label: "일자별 신고받은 게시글 수",
-               backgroundColor: "rgba(60,141,188,0.9)",
-               borderColor: "rgba(60,141,188,0.8)",
-               pointRadius: false,
-               pointColor: "#3b8bba",
-               pointStrokeColor: "rgba(60,141,188,1)",
-               pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(60,141,188,1)",
-               data: dayData,
-             },
-           ],
-         };
+//      $.ajax({
+//        url: url,
+//        method: "GET",
+//        success: function (data) {
+//     	   const dayData = data.usReportList.map(function (item) {
+//     		    return item.reportcnt;
+//     		  });
+//     	   const labels = data.usReportList.map(function (item) {
+//     		    return item.regdate; // 날짜 데이터를 가져와서 레이블로 사용
+//     		  });
+//          var stackedChartData = {
+// 			labels: labels,
+//            datasets: [
+//              {
+//                label: "일자별 신고받은 게시글 수",
+//                backgroundColor: "rgba(60,141,188,0.9)",
+//                borderColor: "rgba(60,141,188,0.8)",
+//                pointRadius: false,
+//                pointColor: "#3b8bba",
+//                pointStrokeColor: "rgba(60,141,188,1)",
+//                pointHighlightFill: "#fff",
+//                pointHighlightStroke: "rgba(60,141,188,1)",
+//                data: dayData,
+//              },
+//            ],
+//          };
 
-         var barChartData = $.extend(true, {}, stackedChartData);
-         var stackedBarChartCanvas = $("#reportChart")
-           .get(0)
-           .getContext("2d");
-         var stackedBarChartData = $.extend(true, {}, barChartData);
-         var stackedBarChartOptions = {
-           responsive: true,
-           maintainAspectRatio: false,
-           scales: {
-        	   xAxes: [
-	        		      {
-	        		        stacked: true,
-	        		        type: 'time', // X축 스케일을 시간형식으로 설정
-	        		        time: {
-	        		          unit: 'day', // 날짜 간격을 일(day)로 설정
-	        		          displayFormats: {
-	        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
-	        		          }
-	        		        }
-	        		      }
-       		    		],
-             yAxes: [
-               {
-                 stacked: true,
-               },
-             ],
-           },
-         };
-         new Chart(stackedBarChartCanvas, {
-           type: "bar",
-           data: stackedBarChartData,
-           options: stackedBarChartOptions,
-         });
-       },
-       error: function (error) {
-         // Handle the error here
-         console.error("Error:", error);
-       },
-     });
+//          var barChartData = $.extend(true, {}, stackedChartData);
+//          var stackedBarChartCanvas = $("#reportChart")
+//            .get(0)
+//            .getContext("2d");
+//          var stackedBarChartData = $.extend(true, {}, barChartData);
+//          var stackedBarChartOptions = {
+//            responsive: true,
+//            maintainAspectRatio: false,
+//            scales: {
+//         	   xAxes: [
+// 	        		      {
+// 	        		        stacked: true,
+// 	        		        type: 'time', // X축 스케일을 시간형식으로 설정
+// 	        		        time: {
+// 	        		          unit: 'day', // 날짜 간격을 일(day)로 설정
+// 	        		          displayFormats: {
+// 	        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
+// 	        		          }
+// 	        		        }
+// 	        		      }
+//        		    		],
+//              yAxes: [
+//                {
+//                  stacked: true,
+//                },
+//              ],
+//            },
+//          };
+//          new Chart(stackedBarChartCanvas, {
+//            type: "bar",
+//            data: stackedBarChartData,
+//            options: stackedBarChartOptions,
+//          });
+//        },
+//        error: function (error) {
+//          // Handle the error here
+//          console.error("Error:", error);
+//        },
+//      });
 
     /* END AREA CHART */
 
