@@ -212,22 +212,22 @@ public class MemberController {
 	}
 	
 	//내 일정으로 가기
-//	@RequestMapping("/mySchedule.do")
-//	public ModelAndView  mySchedule(ModelAndView mv, HttpServletRequest request,
-//			Principal principal) {
-//	    System.out.println("membercontroller.mySchedule()");
-//	    String viewPage = "mySchedule";
-//	    if(principal != null) {
-//	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
-//	    	System.out.println("list = " + list);
-//	    	request.setAttribute("scheduleList", list);	    	
-//	    	request.setAttribute("scheduleList", list);
-//	    }
-//	    
-//		mv.setViewName(viewPage);
-//	    return mv;
-//	}
-//	
+	@RequestMapping("/mySchedule.do")
+	public ModelAndView  mySchedule(ModelAndView mv, HttpServletRequest request,
+			Principal principal) {
+	    System.out.println("membercontroller.mySchedule()");
+	    String viewPage = "mySchedule";
+	    if(principal != null) {
+	    	List<ScheduleDTO> list = scheduleservice.getMyScheduleList(principal.getName());
+	    	System.out.println("list = " + list);
+	    	request.setAttribute("scheduleList", list);	    	
+	    	request.setAttribute("scheduleList", list);
+	    }
+	    
+		mv.setViewName(viewPage);
+	    return mv;
+	}
+	
 
 	
 

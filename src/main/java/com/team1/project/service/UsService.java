@@ -1,5 +1,6 @@
 package com.team1.project.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,7 +105,8 @@ public class UsService {
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
 		System.out.println("usService.getUsRecentList()");
-		return usDAO.getUsRecentList();
+		// usDAO.getUsRecentList();
+		return new ArrayList<>();
 	}
 
 	// 관리자 리스트 가져오기

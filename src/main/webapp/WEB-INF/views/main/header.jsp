@@ -202,9 +202,9 @@ a {
 						<div class="btn_div">
 						<button class="nav-icon position-relative text-decoration-none" onclick="openFriendModal()">
 						    <i class="fa-solid fa-user-group"></i>
-						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+						    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill text-dark">
 						        <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
-						        <img src="/assets/sns/images/redCircle.png" alt="빨간표시등">
+						        <span class="red-circle"></span>
 						        </span>
 						</button>
 						<button class="nav-icon position-relative text-decoration-none" onclick="openModal('chat-modal')">
@@ -244,124 +244,7 @@ a {
     <div id="friend-list-modal" class="modal-wrapper">
 
     </div>
-    <!-- END 친구 목록 / 친구 요청 모달 팝업창 -->
-
-    <!-- 2. 채팅 초대 모달 팝업창 -->
-    <div id="chat-invite-modal" class="modal-wrapper">
-      <div class="modal-overlay" onclick="closeChatModal('chat-invite-modal')"></div>
-
-      <div class="common-modal narrow-modal">
-        <!-- 닫기버튼 -->
-        <button type="button" class="icon-btn close-btn" onclick="closeChatModal('chat-invite-modal')">
-          <img src="/assets/sns/images/icon-close.svg" alt="">
-        </button>
-        <!-- END 닫기버튼 -->
-
-        <!-- 팝업 제목 -->
-        <div class="common-modal-ttl">
-          <h3>대화상대 선택</h3>
-        </div>
-        <!-- END 팝업 제목 -->
-
-        <!-- 스크롤 영역 -->
-        <div class="chat-modal-content">
-          <!-- 친구이름 검색 -->
-          <div class="friend-modal-hd">
-            <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
-          </div>
-          <!-- END 친구이름 검색 -->
-
-          <div class="gray-txt-wrap">
-            <h6 class="gray-txt">친구 <span>3</span>명</h6>
-          </div>
-
-          <!-- 친구 목록 -->
-          <div class="friend-list-grp">
-            <!-- 친구 -->
-            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
-            <input type="checkbox" name="chat-friend" id="friend01" class="friend-list-checkbox">
-            <label class="friend-list" for="friend01">
-              <!-- 친구 프사 & 이름 -->
-              <span class="person-item">
-                <span class="mini-thumnail">
-                  <img src="/assets/sns/images/profile-img.jpeg" alt="">
-                </span>
-                <span class="person-profile">
-                  <span class="name-wrap">
-                    <span class="name">choi_seung_hyun_tttop</span>
-                    <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
-                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                  </span>
-                </span>
-              </span>
-              <!-- END 친구 프사 & 이름 -->
-
-              <!-- 체크박스 -->
-              <span class="checkbox"></span>
-              <!-- END 체크박스 -->
-            </label>
-
-            <!-- 친구 -->
-            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
-            <input type="checkbox" name="chat-friend" id="friend02" class="friend-list-checkbox">
-            <label class="friend-list" for="friend02">
-              <!-- 친구 프사 , 이름 -->
-              <span class="person-item">
-                <span class="mini-thumnail">
-                  <img src="/assets/sns/images/profile-img-jessica.png" alt="">
-                </span>
-                <span class="person-profile">
-                  <span class="name-wrap">
-                    <span class="name">jessica</span>
-                    <!-- 블루뱃지 -->
-                    <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt="">
-                  </span>
-                </span>
-              </span>
-              <!-- END 친구 프사 & 이름 -->
-
-              <!-- 체크박스 -->
-              <span class="checkbox"></span>
-              <!-- END 체크박스 -->
-            </label>
-
-            <!-- 친구 -->
-            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
-            <input type="checkbox" name="chat-friend" id="friend03" class="friend-list-checkbox">
-            <label class="friend-list" for="friend03">
-              <!-- 친구 프사 & 이름 -->
-              <span class="person-item">
-                <span class="mini-thumnail">
-                  <img src="/assets/sns/images/profile-img-default.png" alt="">
-                </span>
-                <span class="person-profile">
-                  <span class="name-wrap">
-                    <span class="name">minisooni</span>
-                    <!-- 블루뱃지 -->
-                    <!-- <img src="/assets/sns/images/badge-certify.svg" class="badge-certify" alt=""> -->
-                  </span>
-                </span>
-              </span>
-              <!-- END 친구 프사 & 이름 -->
-
-              <!-- 체크박스 -->
-              <span class="checkbox"></span>
-              <!-- END 체크박스 -->
-            </label>
-          </div>
-          <!-- END 친구 목록 -->
-        </div>
-        <!-- END 스크롤 영역 -->
-
-        <div class="chat-modal-bottom">
-          <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됩니다. -->
-          <button id="" type="button" disabled class="btn confirm-btn chat-modal-confirm-btn">확인</button>
-          <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal')">취소</button>
-        </div>
-      </div>
-    </div>
-    <!-- END 2. 채팅 초대 모달 팝업창 -->
-	
+    <!-- END 친구 목록 / 친구 요청 모달 팝업창 -->	
 	
   	<!--  1. 알림 모달 -->
     <div id="alarm-modal" class="modal-wrapper">
@@ -394,7 +277,7 @@ a {
               <!-- 친구이름 검색 & 채팅초대 버튼 -->
               <div class="common-search-inp-grp">
                 <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
-                <button class="btn" onclick="openModal('chat-invite-modal02')">
+                <button class="btn" onclick="openModal('chat-invite-modal')">
                   <img src="/assets/sns/images/message-circle-plus.svg" alt="" class="icon">
                 </button>
               </div>
@@ -826,12 +709,12 @@ a {
     <!-- END  2-1. 채팅목록 + 채팅창 모달 -->
 
     <!--  2-2. 채팅 초대 모달 -->
-    <div id="chat-invite-modal02" class="modal-wrapper">
-      <div class="modal-overlay" onclick="closeChatModal('chat-invite-modal02')"></div>
+    <div id="chat-invite-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeChatModal('chat-invite-modal')"></div>
 
       <div class="common-modal narrow-modal">
         <!-- 닫기버튼 -->
-        <button type="button" class="icon-btn close-btn" onclick="closeChatModal('chat-invite-modal02')">
+        <button type="button" class="icon-btn close-btn" onclick="closeChatModal('chat-invite-modal')">
           <img src="/assets/sns/images/icon-close.svg" alt="">
         </button>
         <!-- END 닫기버튼 -->
@@ -934,8 +817,9 @@ a {
 
         <div class="chat-modal-bottom">
           <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됩니다. -->
-          <button id="" type="button" disabled class="btn confirm-btn chat-modal-confirm-btn">확인</button>
-          <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal02')">취소</button>
+          <button id="" type="button" onclick="openModal('chat-name-setting-modal')" disabled
+            class="btn confirm-btn chat-modal-confirm-btn">확인</button>
+          <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal')">취소</button>
         </div>
       </div>
     </div>
@@ -956,11 +840,84 @@ a {
         </div>
       </div>
     </div>
-    <!-- END  2-3. 채팅창 나가기 모달 -->
+    <!-- END  2-3. 채팅창 나가기 모달 -->		
 	
-	
-	
+	<!--  2-4. 그룹채팅방 이름설정 모달 -->
+    <div id="chat-name-setting-modal" class="modal-wrapper">
+      <div class="modal-overlay" onclick="closeNameSettingModal('chat-name-setting-modal')"></div>
+
+      <div class="common-modal narrow-modal namesetting-modal">
+        <!-- 제목 + 닫기버튼 -->
+        <div class="common-modal-top">
+          <h2 class="ttl">그룹채팅방 정보 설정</h2>
+          <div class="btn-wrap">
+            <!-- 닫기버튼 -->
+            <button type="button" class="icon-btn" onclick="closeNameSettingModal('chat-name-setting-modal')">
+              <img src="/assets/sns/images/icon-close.svg" alt="">
+            </button>
+            <!-- END 닫기버튼 -->
+          </div>
+        </div>
+        <!-- END 제목 + 닫기버튼 -->
+
+        <div class="namesetting-modal-content">
+          <div class="participant-txt">
+            <p>대화참여자 2명</p>
+          </div>
+
+          <div class="inp-unit">
+            <input id="text-box" type="text" class="inp" maxlength="50">
+            <span class="unit">
+              <span class="text-count">0</span><span>/50</span>
+            </span>
+          </div>
+
+          <div class="bottom-btn-wrap">
+            <button type="button" class="btn gray-btn"
+              onclick="closeNameSettingModal('chat-name-setting-modal')">취소</button>
+            <button type="button" class="btn blue-btn">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END  2-4. 그룹채팅방 이름설정 모달 -->
+  	
+  	
   <script>
+  
+	// 인풋 입력할 때 입력 글자수 세기
+	$(window).on('click', function(e) {
+		console.log(e.target);
+	})
+	  $('#text-box').keyup(function (e) {
+	    let content = $(this).val();
+	
+	    // 글자수 세기
+	    if (content.length == 0 || content == '') {
+	      $('.text-count').text('0');
+	    } else {
+	      $('.text-count').text(content.length);
+	    }
+	
+	    // 글자수 제한
+	    if (content.length > 50) {
+	      // 200자 부터는 타이핑 되지 않도록
+	      $(this).val($(this).val().substring(0, 200));
+	      // 200자 넘으면 알림창 뜨도록
+	      alert('글자수는 50자까지 입력 가능합니다.');
+	    };
+	  });
+
+  // 채팅 정보 입력 모달창 닫을 때 초기화
+  function closeNameSettingModal(id) {
+    $('#' + id).removeClass('active');
+
+    $('#text-box').val('');
+    if ($('#text-box').val().length == 0 || $('#text-box').val() == '') {
+      $('.text-count').text('0');
+    }
+  }
+  
     // Modal 열기
     function openModal(id) {
       $('#' + id).addClass('active');

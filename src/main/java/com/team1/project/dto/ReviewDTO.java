@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class ReviewDTO {
-	private int reviewNum;
-    private int cityNum;
-    private String memberId;
+	private int review_num;
+    private String doe_name;
+    private int doe_num;
+    private String member_id;
     private int score;
     private String content;
     private Date regdate;
     private String deleteYn;
-    private String reviewImg;
     
     
 	private MultipartFile file;
@@ -30,10 +30,6 @@ public class ReviewDTO {
 	private int reviewCount;
 	private int likesCount;
 	
-	private int score1; // 리뷰 1점
-	private int score2; // 리뷰 2점
-	private int score3; // 리뷰 3점
-	private int score4; // 리뷰 4점
-	private int score5; // 리뷰 5점	
+	
 
 }
