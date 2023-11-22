@@ -19,16 +19,18 @@ public class UsDTO {
 	private int us_num; // 객체의 고유 식별 번호입니다.
 	private String city_name; // 객체와 연관된 도시의 이름입니다.
 	private String content; // 객체와 관련된 상세한 내용이나 정보입니다.
-	private Date start_Date; // 객체와 관련된 시간 범위의 시작 날짜입니다.
-	private Date end_Date; // 객체와 관련된 시간 범위의 종료 날짜입니다.
+	private String start_Date; // 객체와 관련된 시간 범위의 시작 날짜입니다.
+	private String end_Date; // 객체와 관련된 시간 범위의 종료 날짜입니다.
 	private String title; // 객체와 관련된 제목이나 헤드라인입니다.
 	private int us_cnt; // 객체와 관련된 수치적 값 또는 카운트입니다.
-	private Date regdate; // 객체의 등록 날짜입니다.
+	private String regdate; // 객체의 등록 날짜입니다.
 	private String writer; // 객체를 작성한 사람의 이름 또는 식별자입니다.
 	private int reportcnt;
 	private int fileNo; //첨부파일 번호
 	private List<UsFileDTO> file;
 	private String status; // 동행 게시글 상태
+	private String month;
+	private int write_count;
 	private String imageUrl;
 
    //관리자 동행 목록 가져오기

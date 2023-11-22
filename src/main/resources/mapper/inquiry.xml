@@ -71,4 +71,26 @@
     	select * from 
     	inquiry where inquiry_num=#{inquiry_num}
     </select>
+    
+    <!-- 관리자 문의사항 리스트 출력 -->
+    <select id="inquiryList" resultType="com.team1.project.dto.InquiryDTO">
+            SELECT
+                i.inquiry_num,
+                i.category_num,
+                c.category,
+                i.member_id,
+                i.title,
+                i.content,
+                i.regdate,
+                i.answer_yn
+            FROM 
+                inquiry i
+                
+            JOIN 
+                INQURY_CATEGORY c ON i.category_num = c.category_num
+            WHERE
+                i.title LIKE '%' || #{searchTitle, jdbcType=VARCHAR} || '%'
+            ORDER BY
+                i.inquiry_num DESC
+    </select>
 </mapper>

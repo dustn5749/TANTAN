@@ -140,7 +140,7 @@ jQuery.browser = {};
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/11" class="nav-link">
+                <a href="/inquiryList" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>1:1문의하기</p>
                 </a>

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dto.InquiryDTO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
+import com.team1.project.service.CustomerService;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.UsService;
 
@@ -46,22 +48,37 @@ public class AdminController {
 	@Autowired
 	private UsService usService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 	@RequestMapping("/admin")
 	public String Admin() {
 		return "admin";
 	}
 	
 // 1.1 관리자 메인 페이지 로드시 리스트 함수
-	@RequestMapping("/monthMember")
+	@RequestMapping("/monthData")
 	@ResponseBody
 	public Map<String, Object> monthMember() throws Exception{
 		List<MemberDTO> monthMember = memberservice.monthMember();
+		List<UsDTO> monthUs = usService.monthUs();
 		System.out.println("controller.monthMember -> " + memberservice.monthMember());
+		System.out.println("controller.monthUs -> " + usService.monthUs());
 		Map<String, Object> map = new HashMap<>();
 		map.put("monthMember", monthMember);
+		map.put("monthUs", monthUs);
 //		System.out.println("controller.monthMap -> " + map);
 		return map;
 	}
+	
+//	@RequestMapping("/monthUs")
+//	@ResponseBody
+//	public Map<String, Object> monthUs() throws Exception{
+//		List<UsDTO> monthUs = usService.monthUs();
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("monthUs", monthUs);
+//		return map;
+//	}
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
@@ -131,7 +148,7 @@ public class AdminController {
 	}
 	
 	//3.1 관리자 동행 리스트 불러오기
-	@RequestMapping("/usListG")
+	@RequestMapping("/usList.do")
 	@ResponseBody
 	public Map<String, Object> adminUsList() throws Exception {
 		
@@ -206,14 +223,25 @@ public class AdminController {
 // 5. 관리자 공지사항 페이지
 // 관리자 페이지에서 공지사항으로 이동
 	@RequestMapping("/noticeList")
-	public String AdminNoticeList() {
+	public String adminNoticeList() {
 		return "adminNoticeList";
 	}
 	
 // 6. 관리자 1:1 문의하기 페이지
 // 관리자 페이지에서 1:1 문의하기 페이지로 이동
-	@RequestMapping("/11")
-	public String Admin11() {
-		return "admin11";
+	@RequestMapping("/inquiryList")
+	public String adminInquiryList() {
+		return "adminInquiryList";
+	}
+	
+// 6.1 관리자 1:1 문의사항 리스트 가져오기
+	@RequestMapping("/inquiryList.do")
+	@ResponseBody
+	public Map<String, Object> getInquiryList() throws Exception {
+		List<InquiryDTO> inquiryList = customerService.inquiryList();
+		System.out.println("controller.inquiryList -> " + inquiryList);
+		Map<String, Object> map = new HashMap<>();
+		map.put("inquiryList", inquiryList);
+		return map;
 	}
 }

@@ -42,4 +42,9 @@ public class CustomerService {
 		System.out.println("customerService.getInquiry()");
 		return customerDAO.getInquiry(inquiry_num);
 	}
+	
+	// 관리자 문의사항 리스트 가져오기
+	public List<InquiryDTO> inquiryList() throws Exception{
+		return customerDAO.inquiryList();
+	}
 }
