@@ -532,16 +532,16 @@ div, input, p, span, button, h2 {
                 <div class="card-body p-4">
                     <div class="text-center">
                         <div class="img_div">
-							
-							    <c:if test="${!empty item.fileNo}">
-							        <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
-							    </c:if>
-							    <c:if test="${!empty item.imageUrl}">
-							        <img src="${item.imageUrl}" class="us_content_img">
-							    </c:if>
-							    <c:if test="${empty item.imageUrl && empty item.fileNo}">
-							        <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
-							    </c:if>
+						
+							<c:if test="${item.fileNo!=0}">
+							    <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
+							</c:if>
+							<c:if test="${!empty item.imageUrl}">
+							    <img src="${item.imageUrl}" class="us_content_img">
+							</c:if>
+							<c:if test="${empty item.imageUrl&& item.fileNo==0}">
+							    <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
+							</c:if>
 					
                         </div>
                         <h5 class="fw-bolder">${item.title}</h5>
@@ -567,7 +567,6 @@ div, input, p, span, button, h2 {
     </c:forEach>
 </div>
 
-
 <!-- 페이징 처리 -->
       <div class="nav_div" style="text-align: center; margin-top: 10px;">
     <c:if test="${result.us.navStart != 1}">
@@ -590,6 +589,7 @@ div, input, p, span, button, h2 {
 	    <a href="#" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
 	</c:if>
 
+</div>
 </div>
 
 <script>

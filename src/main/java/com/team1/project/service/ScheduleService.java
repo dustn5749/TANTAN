@@ -121,4 +121,10 @@ public class ScheduleService {
 			
 			return schduleDAO.getMyScheduleList(member_id);
 		}
+		
+		// TOP3 스케쥴 목록 가져오기
+		public List<ScheduleDTO> getTop3ScheduleList() {
+			System.out.println("scheduleService.getTOP3scheduleList()");
+			return schduleDAO.getTop3ScheduleList();
+		}
 }

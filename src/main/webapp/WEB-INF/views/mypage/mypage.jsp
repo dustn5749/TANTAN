@@ -259,10 +259,7 @@
 					<img src="/assets/img/calendar.png" width="40px">
 					<a class="menu_a_class" href="/member/mySchedule.do" id="mySchedule">내 일정</a>
 				</div>
-				<div class="menu_div_inner">
-					<img src="/assets/img/friend.png" width="40px">
-					<a class="menu_a_class" href="/member/friend.do" id="friendList">친구 관리</a>
-				</div>
+
 			</div>
 		</div>
 	</div>

@@ -74,6 +74,10 @@ dependencies {
    implementation 'com.oracle.database.security:oraclepki:23.2.0.0'
    implementation 'com.oracle.database.security:osdt_core'
  
+	// 스프링 배치
+	implementation 'org.springframework.boot:spring-boot-starter-batch'	
+	
+	
 	
 	/*redis 관련 설정 추가 */
 	//implementation 'org.springframework.session:spring-session-data-redis'

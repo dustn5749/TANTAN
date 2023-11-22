@@ -86,7 +86,43 @@
    font-family: 'Pretendard-Regular';
 
 }
-.schedule em {
+/* 날짜 선택 div */
+.schedule{
+	margin-top: 80px !important;
+	display: flex;
+	width: 100%;
+	text-align: center;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.schedule > form {
+	display: flex;
+	text-align: center;
+}
+.startDate_div, .endDate_div {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	color: grey;
+}
+.Date_title {
+	width: 120px;
+}
+ /* 날짜 선택 부분 */
+.schedule_title {
+	margin-right: 50px;
+	font-weight: bold;
+	font-size: 20px !important;
+
+}
+
+.form-control {
+	width: 300px;
+	padding: 1%;
+}
+/* .schedule em {
    width: 100px;
    line-height: 30px;
    font-style: normal;
@@ -120,7 +156,7 @@
 
 .schedule form input#date_end {
    margin-left: 4% !important;
-}
+} */
 
 .cont_bottom {
    position: relative;
@@ -148,6 +184,8 @@
 .schedule-list {
    margin-left: 540px;
    width: calc(100% - 540px);
+   height: 800px;
+   overflow: auto;
 }
 
 .schedule-list ul {
@@ -437,50 +475,50 @@
    <div class="nav-wrap">
       <h2>한국</h2>
       <!--지역 선택하기 -->
-      <ul class="nav-ul">
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="1"> 서울 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="3"> 경기 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="2"> 인천 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="4"> 강원 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="13"> 제주 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="12"> 전남 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="16"> 부산 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="14"> 경남 </a></li>
+	   <div class="container">
+	    <div class="row">
+	        <div class="col-md-6">
+	            <ul class="nav-ul">
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="1"> 서울 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="3"> 경기 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="2"> 인천 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="4"> 강원 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="13"> 제주 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="12"> 전남 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="16"> 부산 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="14"> 경남 </a></li>
+	            </ul>
+	        </div>
+	        </div>
+	        <div class="col-md-6">
+	            <ul class="nav-ul">
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="8"> 경북 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="9"> 대구 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="15"> 울산 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="5"> 충북 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="6"> 충남 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="11"> 광주 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="10"> 전북 </a></li>
+	                <li class="nav-li"><a href="javascript:void(0);" onclick="getLocation(this)" data-value="7"> 대전 </a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
 
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="7"> 대전 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="8"> 경북 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="9"> 대구 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="15"> 울산 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="5"> 충북 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="6"> 충남 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="11"> 광주 </a></li>
-         <li class="nav-li"><a href="javascript:void(0);"
-            onclick="getLocation(this)" data-value="10"> 전북 </a></li>
-      </ul>
-   </div>
    <input type="hidden" id="doe_location">
    <div class="schedule_container">
       <div class="cont_top">
          <div class="schedule">
-            <br> <em>날짜 선택</em>
+            <div class="schedule_title">날짜선택</div>
             <form>
-               <input type="date" class="form-control mt-1" id="start_Date" name="start_Date" placeholder="Choose Date"> 
-               <input type="date" class="form-control mt-1" id="end_Date" name="end_Date" placeholder="Choose Date">
+            	<div class="startDate_div">
+					<p class="Date_title">시작 날짜 : </p>
+	               <input type="date" class="form-control mt-1" id="start_Date" name="start_Date" placeholder="Choose Date">         	
+            	</div>
+            	<div class="endDate_div">
+	    			<p class="Date_title">마감 날짜 : </p>
+	               <input type="date" class="form-control mt-1" id="end_Date" name="end_Date" placeholder="Choose Date">
+            	</div>
             </form>
          </div>
       </div>
@@ -587,9 +625,9 @@
 
          </div>
 
-         <div class="goBack" style="text-align: center;">
+ <!--         <div class="goBack" style="text-align: center;">
             <a href="/schedule/list">뒤로가기</a>
-         </div>
+         </div> -->
    </div>
 <script>
          

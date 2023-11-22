@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,14 +42,16 @@ public class ReviewController {
     @RequestMapping("/display")
     public Map<String, Object> displayReviewDoe(@RequestBody ReviewDTO review) throws Exception {
     	System.out.println("reviewController.displayReviewDoe(review)" + review);
+    	Map<String, Object> result= new HashMap<>();
     	
-    	List<ReviewDTO> reviewList =  reviewService.getReview(review);
+    	int doe_num = doeService.findDoeNum(review.getDoe_name());
+    	review.setDoe_num(doe_num);
+    	
+    	List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
 
     	reviewService.averageDoe(review.getDoe_num());
     	DoeDTO doe = doeService.getDoe(review.getDoe_num());
-    	
-    	
-    	Map<String, Object> result= new HashMap<>();
+
     	result.put("reviewList",reviewList);
     	result.put("doe", doe);
     	result.put("result", true);
@@ -58,18 +61,38 @@ public class ReviewController {
 
     
     
-//	//리뷰 작성
-//	@PostMapping("/write") 
-//	public ResponseEntity<String> reviewWrite(ReviewDTO review){
-//		
-//		ReviewDTO.setUserId(review.memberId());
-//		if(reviewService.reviewWrite(review))
-//			return ResponseEntity.ok().body("리뷰 작성 완료");
-//		
-//		
-//		return ResponseEntity.badRequest().body("파일 저장 실패");
-//		
-//	}
+	//리뷰 작성
+    @ResponseBody
+	@RequestMapping("/insert") 
+	public Map<String, Object> reviewWrite(@RequestBody ReviewDTO review, Authentication auth) throws Exception{
+		System.out.println("reviewController.reviewWrite()");
+		System.out.println("review = " + review);
+
+		Map<String,Object> result = new HashMap<>();
+		int doe_num = doeService.findDoeNum(review.getDoe_name());
+		System.out.println("doe_num = " + doe_num);
+		review.setDoe_num(doe_num);
+		
+		
+		if(auth.getName()== null) {
+			result.put("result", false);
+		} else {
+			review.setMember_id(auth.getName());
+			
+			if(reviewService.insert(review)) {
+		    	List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
+
+		    	reviewService.averageDoe(review.getDoe_num());
+		    	DoeDTO doe = doeService.getDoe(review.getDoe_num());
+
+		    	result.put("reviewList",reviewList);
+		    	result.put("doe", doe);
+		    	result.put("result", true);
+			}
+		}
+		return result;
+		
+	}
 //	
 //	//리뷰 수정
 //	@PutMapping("/modify") 

@@ -14,4 +14,12 @@
 		average =#{average}
 		where doe_num=#{doe_num}
 	</update>
+	
+	
+	<!-- 도 이름으로 도 번호 찾기  -->
+	<select id="findDoeNum" resultType="int">
+		SELECT doe_num FROM DOE
+		WHERE DOE_NAME= #{doe_name}
+	</select>
+	
 </mapper>

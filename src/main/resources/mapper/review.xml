@@ -30,6 +30,30 @@
 	where doe_num=#{doe_num}
 </select>
 
+
+<!-- 리뷰 작성하기 -->
+<insert id="insert">
+	insert into review(
+		REVIEW_NUM,
+		DOE_NUM,
+		MEMBER_ID,
+		SCORE,
+		CONTENT,
+		REGDATE,
+		DELETEYN
+	)
+	values (
+		REVIEW_SQ.NEXTVAL,
+		#{doe_num},
+		#{member_id},
+		#{score},
+		#{content},
+		SYSDATE,
+		'N'
+	)
+	
+	
+</insert>
 <!-- 
 <insert id="reviewWrite">
 		INSERT INTO DL_REVIEW (

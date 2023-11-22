@@ -1,5 +1,7 @@
 package com.team1.project.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,10 @@ public class DoeService {
 	@Autowired
 	public DoeDAO doeDAO;
 	
-	
-
-	
 	// 스케쥴러를 이용해서 도의 평균내기
 	@Scheduled(fixedDelay = 60000)
 	@Transactional
-	public DoeDTO ScheduleAverageDoe(String  doe_name) {
+	public List<DoeDTO> ScheduleAverageDoe(String  doe_name) {
 		
 		return doeDAO.ScheduleAverageDoe(doe_name);
 	}
@@ -31,4 +30,13 @@ public class DoeService {
 		System.out.println("doeService.getDoe()");
 		return doeDAO.getDoe(doe_num);
 	}
+	
+	// 도 이름으로 도 번호 찾기
+	public int findDoeNum(String doe_name) {
+		System.out.println("doeServiec.findDoeNum");
+		return doeDAO.findDoeNum(doe_name);
+	}
+
+	
+
 }

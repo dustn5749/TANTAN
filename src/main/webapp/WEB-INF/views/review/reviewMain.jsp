@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html;
  charset=UTF-8" pageEncoding="UTF-8"%> 
- <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> 
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+ 
+  
  <!DOCTYPE html> 
  <html> 
  <head> 
@@ -255,34 +262,40 @@
          top: 263px;
          left: 179px;
     }
-     .star-rating {
-         border: solid 1px #ccc;
-         justify-content: flex-end;
-         align-content: center;
-         text-align: center;
-         margin: 0 auto;
-         display: flex;
-         flex-direction: row-reverse;
-         font-size: 3em;
-         justify-content: space-around;
-         padding: 0 .2em;
-         text-align: center;
-         width: 5em;
-         height: 30px;
-    }
-     .star-rating input {
-         display: none;
-    }
-     .star-rating label {
-         color: #ccc;
-         cursor: pointer;
-    }
-     .star-rating :checked ~ label {
-         color: #f90;
-    }
-     .star-rating label:hover, .star-rating label:hover ~ label {
-         color: #fc0;
-    }
+	.star-rating {
+	    border: solid 1px #ccc;
+	    justify-content: flex-end;
+	    align-content: center;
+	    text-align: center;
+	    margin: 0 auto;
+	    display: flex;
+	    flex-direction: row-reverse;
+	    font-size: 3em;
+	    justify-content: space-around;
+	    padding: 0 .2em;
+	    text-align: center;
+	    width: 5em;
+	    height: 30px;
+	}
+	
+	.star-rating input {
+	    display: none;
+	}
+	
+	.star-rating label {
+	    color: #ccc;
+	    cursor: pointer;
+	}
+
+
+	
+	.star-rating input:checked ~ label {
+	    color: #f90;
+	}
+	
+	.star-rating label:hover, .star-rating label:hover ~ label {
+	    color: #fc0;
+	}
      .cmd {
          height: 75px;
          margin: 0 atuo;
@@ -460,15 +473,15 @@
      						<div class="avlStar">
      							<p id="avl_text">평균 별점 : </p>
      							    <div class="star-rating"> 
-     									<input type="radio" id="5-stars" name="rating" value="5" /> 
+     									<input type="radio" id="5-stars" name="rating" class="star_score"  value="5" /> 
      									<label for="5-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="4-stars" name="rating" value="4" /> 
+     									<input type="radio" id="4-stars" name="rating" class="star_score"  value="4" /> 
      									<label for="4-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="3-stars" name="rating" value="3" /> 
+     									<input type="radio" id="3-stars" name="rating" class="star_score"  value="3" /> 
      									<label for="3-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="2-stars" name="rating" value="2" /> 
+     									<input type="radio" id="2-stars" name="rating" class="star_score"  value="2" /> 
      									<label for="2-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="1-star" name="rating" value="1" /> 
+     									<input type="radio" id="1-star" name="rating" class="star_score"  value="1" /> 
      									<label for="1-star" class="star">&#9733;</label> 
      								</div>
      						</div>
@@ -476,18 +489,18 @@
      						<div class="row"> 
      							<input type="hidden" name="rate" id="rate" value="0" style="margin-bottom: 10px;"> 
      								<div class="warning_msg" >별점을 선택해 주세요</div> 
-     								<div class="star-rating"> 
-     									<input type="radio" id="5-stars" name="rating" value="5" /> 
+										<div class="star-rating"> 
+     									<input type="radio" id="5-stars" name="rating" class="star_score"  value="5" /> 
      									<label for="5-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="4-stars" name="rating" value="4" /> 
+     									<input type="radio" id="4-stars" name="rating" class="star_score"  value="4" /> 
      									<label for="4-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="3-stars" name="rating" value="3" /> 
+     									<input type="radio" id="3-stars" name="rating" class="star_score"  value="3" /> 
      									<label for="3-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="2-stars" name="rating" value="2" /> 
+     									<input type="radio" id="2-stars" name="rating" class="star_score"  value="2" /> 
      									<label for="2-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="1-star" name="rating" value="1" /> 
+     									<input type="radio" id="1-star" name="rating" class="star_score"  value="1" /> 
      									<label for="1-star" class="star">&#9733;</label> 
-     								</div> 
+     									</div>
      								<div class="review_contents" style="margin-bottom: 10px;"> 
      									<div class="warning_msg_comment">5자 이상으로 작성해 주세요.</div> 
      									<textarea rows="2" class="review_textarea" style="width: 100%;"></textarea> 
@@ -504,78 +517,16 @@
      			</div> 
 				<div id="regionImageContainer">
 				</div>
-     		</div> 
-     	<script>
-     	function search() {
-   
-       var searchValue = document.getElementById("search_bar_input").value;
+     		</div>
+     		<c:choose>
+     			<c:when test="${!empty principal}">
+	     			 <input type="hidden" value="${principal.user.member_id}" id="member_id">     			
+     			</c:when>
+     			<c:otherwise>
+     					 <input type="hidden" value="" id="member_id">
+     			</c:otherwise>
+     		</c:choose> 
 
-   
-     		  var resultElement = document.getElementById("result");
-
-    
-     		  if (searchValue.trim() !== "") {
-     		   
-     		    resultElement.innerHTML = "검색된 지역: " + searchValue;
-     		  } else {
-     		    resultElement.innerHTML = "지역을 입력하세요.";
-     		  }
-     		}
-     	
-/*     document.addEventListener('DOMContentLoaded', function(){
-    	//별점 인스턴스 생성
-     	let rating = new Rating();
-         //별점선택 이벤트 리스너 
-         document.querySelector('.rating').addEventListener('click',function(e){
-             let elem = e.target;
-             if(elem.classList.contains('rate_radio')){
-                 rating.setRate(parseInt(elem.value));
-            }
-        }
-        ) 
-    }
-    ); */
-/* 
-         let lengthCheckEx = /^.{
-            400,
-        }
-        $/;
-         if(lengthCheckEx.test(review.value)){
-        }
-    }
-    );
-             rating.showMessage('rate');
-             return false;
-        }
-             rating.showMessage('review');
-             return false;
-        }
-    }
-   ); */
-
-     function calculateAverageRating(ratings) {
-         if (ratings.length === 0) {
-             return 0;
-             // 기본적으로 0 리턴 
-        }
-         const sum = ratings.reduce((total, rating) => total + rating, 0);
-         const average = sum / ratings.length;
-    }
-     function submitReview() {
-         const comment = document.getElementById('comment').value;
-         if (comment.trim() !== '') {
-             addComment(comment);
-             document.getElementById('comment').value = '';
-        }
-   
-         const commentList = document.getElementById('commentList');
-         const li = document.createElement('li');
-         li.classList.add('comment');
-         li.innerText = comment;
-         commentList.appendChild(li);
-     console.log('Average Rating Percentage:', averageRatingPercentage);
-    }
-     </script> 
      
      <script> 
      mus1on = new Image( );
@@ -659,26 +610,23 @@
      // 지도 클릭시 이벤트 
      function smenu_click(musName, doe_Num){
     	 
-    	
-    	
-    	 
     	 const regionImages = {
      	        '전남': '/assets/img/doereview/jeonnam.png',
      	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
      	        '경남': '/assets/img/doereview/Gyeongnam.jpg',
-     	        '강원': '/assets/img/doereview/Gandwon.jpg',
+     	        '강원': '/assets/img/doereview/Gangwon.jpg',
      	        '충남': '/assets/img/doereview/chungnam.jpg',
      	        '경기': '/assets/img/doereview/Gyeonggi.jpg',
      	        '충북': '/assets/img/doereview/Chungbok.jpg',
      	        '제주': '/assets/img/doereview/jeju.jpg',
-     	        '서울': '/assets/img/doereview/Seoul.jpg',
+     	        '서울': '/assets/img/doereview/seoul.jpg',
      	        '인천': '/assets/img/doereview/Inchon.jpg',
      	        '대전': '/assets/img/doereview/Daejeon.jpg',
-     	        '광주': '/assets/img/doereview/Gwangju.jpg',
+     	        '광주': '/assets/img/doereview/Gawngju.jpg',
      	        '대구': '/assets/img/doereview/Daegu.jpg',
      	        '울산': '/assets/img/doereview/Ulsan.jpg',
-     	        '부산': '/assets/img/doereview/Busan.jpg',
-     	        '경북': '/assets/img/doereview/Gyeongbuk.jpg'
+     	        '부산': '/assets/img/doereview/busan.jpg',
+     	        '경북': '/assets/img/doereview/geoungju.png'
      	    };
     	 
         
@@ -714,7 +662,9 @@
      	            var reviewListDiv = $('.reviewList');
      	           reviewListDiv.empty();
      	            var average = Math.round(data.doe.average);
+     	            console.log(average);
      	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
+     	            $(".avlStar .star-rating input").prop("disabled", true);
      	            var reviewList = data.reviewList;
 
      	            reviewList.forEach(function (e) {
@@ -756,14 +706,182 @@
     }
      
      // 평점 등록하기
-  /*    $("#save").on("click", function(){
-    	var param = {
-    			doe_name =  
-    			
-    	}
-     }) */
+     $("#save").on("click", function(){
+    	 var doe_name = $("#img_title").text()
+    	 var score = $(".row .star-rating input:checked").val();
+		 var content = $(".review_textarea").val();
+		 var memberId = $("#member_id").val();
+		 
+    	 if(memberId == ""){
+    		alert("로그인 후 이용해주세요")
+    	 } else if(doe_name==""){
+    		 alert("지역을 먼저 선택해주세요");
+    	 } else if(score == ""){
+    		 alert("점수를 선택해주세요")
+    	 } else if(content == ""){
+    		 alert("내용을 입력해주세요")
+    	 } else {
+	    	var param = {
+	    			doe_name :  doe_name,
+	    			score : score,
+	    			content : content
+	    	}
+	    	
+			$.ajax({
+				url : "/review/insert",
+				type: 'POST',
+		     	contentType: "application/json; charset=UTF-8",
+		     	data: JSON.stringify(param),
+		     	dataType: "json",
+		     	success: function (data){
+		     		if(data.result){
+		     			alert("일정이 성공적으로 등록되었습니다");
+		 	            var reviewListDiv = $('.reviewList');
+		     	           reviewListDiv.empty();
+		     	            var average = Math.round(data.doe.average);
+		     	            console.log(average);
+		     	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
+		     	            $(".avlStar .star-rating input").prop("disabled", true);
+		     	            var reviewList = data.reviewList;
 
-  
+		     	            reviewList.forEach(function (e) {
+		     	                var div = document.createElement("div");
+		     	                $(div).addClass("review_area");
+
+		     	                var member_id = document.createElement("div");
+		     	                var member_img = document.createElement("img");
+		     	               $(member_img).attr("src", "/assets/img/userReview.png");
+		     	              $(member_img).css({
+		     	            		"width" : "25px"  
+		     	              })
+		     	                var member_id_p = document.createElement("p");
+		     	                $(member_id_p).text(e.member_id);
+		     	                $(member_id).addClass("member_id_div");
+			     	            $(member_id_p).addClass("member_id");
+			     	            
+			     	            $(member_id).append(member_img);
+			     	            $(member_id).append(member_id_p);
+
+		     	                var content = document.createElement("p");
+		     	                $(content).addClass("content");
+		     	                $(content).text(e.content);
+
+		     	                var scoreSpan = document.createElement("span");
+		     	                $(scoreSpan).text(e.score + "점");
+		     	               $(scoreSpan).addClass("score_span");
+		     	                
+		     	                $(div).append(member_id);
+		     	                $(div).append(content);
+		     	                $(div).append(scoreSpan);
+
+		     	                $(reviewListDiv).append(div);
+		     	            });
+		     			
+		     		} else {
+		     			alert("로그인 후 이용해주세요")
+		     			
+		     		}
+		     		
+		     	} 
+			})
+    		 
+    		 
+    	 }
+     }) 
+	// 지역 검색하기
+	$("#search_btn").on("click", function(){
+		var doe_name = $("#search_bar_input").val();
+		if(doe_name==""){
+			alert("지역 이름을 입력해주세요");
+		} else {
+			var param ={
+					doe_name : doe_name
+			}
+			
+	    	 const regionImages = {
+	     	        '전남': '/assets/img/doereview/jeonnam.png',
+	     	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
+	     	        '경남': '/assets/img/doereview/Gyeongnam.jpg',
+	     	        '강원': '/assets/img/doereview/Gangwon.jpg',
+	     	        '충남': '/assets/img/doereview/chungnam.jpg',
+	     	        '경기': '/assets/img/doereview/Gyeonggi.jpg',
+	     	        '충북': '/assets/img/doereview/Chungbok.jpg',
+	     	        '제주': '/assets/img/doereview/jeju.jpg',
+	     	        '서울': '/assets/img/doereview/seoul.jpg',
+	     	        '인천': '/assets/img/doereview/Inchon.jpg',
+	     	        '대전': '/assets/img/doereview/Daejeon.jpg',
+	     	        '광주': '/assets/img/doereview/Gawngju.jpg',
+	     	        '대구': '/assets/img/doereview/Daegu.jpg',
+	     	        '울산': '/assets/img/doereview/Ulsan.jpg',
+	     	        '부산': '/assets/img/doereview/busan.jpg',
+	     	        '경북': '/assets/img/doereview/geoungju.png'
+	     	    };
+	    	 
+	        
+	     	 $("#img_title").text(doe_name);
+	     	  $(".region_img").attr("src", regionImages[doe_name]);
+	     	 $(".region_img").css({
+	     	    "width": "100%",
+	     	    "height": "300px"
+	     	});
+			
+	     	$.ajax({
+	     	    url: "/review/display",
+	     	    type: 'POST',
+	     	    contentType: "application/json; charset=UTF-8",
+	     	    data: JSON.stringify(param),
+	     	    dataType: "json",
+	     	    success: function (data) {
+	     	        if (data.result) {
+	     	            var reviewListDiv = $('.reviewList');
+	     	           reviewListDiv.empty();
+	     	            var average = Math.round(data.doe.average);
+	     	            console.log(average);
+	     	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
+	     	            $(".avlStar .star-rating input").prop("disabled", true);
+	     	            var reviewList = data.reviewList;
+
+	     	            reviewList.forEach(function (e) {
+	     	                var div = document.createElement("div");
+	     	                $(div).addClass("review_area");
+
+	     	                var member_id = document.createElement("div");
+	     	                var member_img = document.createElement("img");
+	     	               $(member_img).attr("src", "/assets/img/userReview.png");
+	     	              $(member_img).css({
+	     	            		"width" : "25px"  
+	     	              })
+	     	                var member_id_p = document.createElement("p");
+	     	                $(member_id_p).text(e.member_id);
+	     	                $(member_id).addClass("member_id_div");
+		     	            $(member_id_p).addClass("member_id");
+		     	            
+		     	            $(member_id).append(member_img);
+		     	            $(member_id).append(member_id_p);
+
+	     	                var content = document.createElement("p");
+	     	                $(content).addClass("content");
+	     	                $(content).text(e.content);
+
+	     	                var scoreSpan = document.createElement("span");
+	     	                $(scoreSpan).text(e.score + "점");
+	     	               $(scoreSpan).addClass("score_span");
+	     	                
+	     	                $(div).append(member_id);
+	     	                $(div).append(content);
+	     	                $(div).append(scoreSpan);
+
+	     	                $(reviewListDiv).append(div);
+	     	            });
+	     	        }
+	     	    }
+	     	});
+			
+			
+		}
+		
+	})
+	
      </script>
      </body>
       </html>
