@@ -29,4 +29,22 @@ public class CustomerService {
 		map.put("inquiryList", customerDAO.getInquiryList(inquiry));
 		return map;
 	}
+
+	// 문의사항 추가하기
+	public int insert(InquiryDTO inquiry) {
+		System.out.println("customerService.insert()");
+		System.out.println("inquiry = " + inquiry);
+		return customerDAO.insert(inquiry);
+	}
+
+	// 문의사항 상세보기
+	public InquiryDTO getInquiry(int inquiry_num) {
+		System.out.println("customerService.getInquiry()");
+		return customerDAO.getInquiry(inquiry_num);
+	}
+	
+	// 관리자 문의사항 리스트 가져오기
+	public List<InquiryDTO> inquiryList() throws Exception{
+		return customerDAO.inquiryList();
+	}
 }

@@ -26,5 +26,8 @@ public interface FileUploadDAO {
 	//스케줄러에서 임시 파일 삭제을 삭제한다  
 	public int deleteTokenList(Map<String, Object> map);
 	
+	//토큰에 따른 파일 아이디 찾기
+	public List<Integer> findByIdtoToken(String token);
+	
 }
 

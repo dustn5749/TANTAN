@@ -280,6 +280,17 @@
 	background-color: black;
 	color : white;
 }
+
+ /* 최신 동행 모집 사진 이미지  */
+ 
+ .img_div {
+ 	width: 100%;
+ 	height: 300px;
+ }
+ #us_file_img{
+ 	width: 100%;
+ 	height: 100%;
+ }
 </style>
 </head>
 <body>

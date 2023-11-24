@@ -22,10 +22,6 @@
 	</resultMap>
 
 
-
-
-
-
 <select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
     SELECT *
     FROM (
@@ -58,6 +54,7 @@ values(
 	#{schedule_Num},
     #{member_id},
     #{title},
+    #{member_Id},
     #{doe_Name},    
     #{start_Num},
     #{end_Date},
@@ -72,6 +69,7 @@ values(
 	#{date2, jdbcType=DATE},
 	#{date3, jdbcType=DATE}
 	)
+	
 </insert>
 
     <!--지역번호 만들기 --> 
@@ -116,6 +114,7 @@ values(
                     or s.place2 = c.city_name
                     or s.place3 = c.city_name
             WHERE s.schedule_num = ${scheduleNum}
+
 </select>
 
 <!-- 전체 게시글 수 -->
@@ -171,7 +170,7 @@ values(
 		DELETE FROM snslike
 		WHERE bno = #{bno} AND userID = #{userId}	
 	</delete>
-	
+
 	 <!-- 컨텐츠 검색 갯수 -->
   <select id="getSearchCount" resultType="int">
     select count(*) from contents
@@ -182,6 +181,9 @@ values(
   <select id="MaxCidx" resultType="int">
 	select MAX(c_idx) from contents  
   </select>
-	
-	
+	<!-- 내 일정 정보 가져오기  -->
+	<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+		select * from SCHEDULE
+		where member_id=#{member_id}
+	</select>
 </mapper>

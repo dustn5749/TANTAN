@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.ChatRoomDAO">
+
+    <insert id="registerChatRoom" parameterType="com.team1.project.dto.chat.room.ChatRoom" >
+        insert into CHATROOM
+        (ROOM_NUM, ROOM_NAME, CREATE_TIME,TYPE)
+        values
+        (ROOM_SEQ.nextval, #{roomName}, sysdate , #{type.value})
+
+        <selectKey resultType="long" keyProperty="roomNum" order="AFTER">
+            SELECT ROOM_SEQ.currval from dual
+        </selectKey>
+    </insert>
+
+
+
+
+
+
+
+</mapper>
+ 

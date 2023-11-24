@@ -47,6 +47,7 @@ public interface ScheduleDAO {
 
 	//답글 폼
 	public int reply(ScheduleDTO schdule) throws Exception;
+
 	
 	//무한 스크롤
 
@@ -73,6 +74,9 @@ public interface ScheduleDAO {
 //		return result;
 //	}
 
-}
 
+
+	// 내 일정 정보 가져오기 
+	public List<ScheduleDTO> getMyScheduleList(String member_id);
+}
 

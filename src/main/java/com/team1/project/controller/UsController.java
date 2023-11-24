@@ -36,7 +36,7 @@ public class UsController {
 	public String list( UsDTO us, Model model) throws Exception {
 		System.out.println("uscontroller.list()");
 
-		System.out.println("us = " + us);
+		System.out.println("us = " + us.getPageNo());
 		model.addAttribute("result", usService.usPageList(us));
 	return "usList"; 
 	} 

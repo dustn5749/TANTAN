@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.project.dao.DoeDAO">
+	
+	<!-- 도의 정보 가져오기  -->
+	<select id="getDoe" resultType="com.team1.project.dto.DoeDTO">
+		SELECT * FROM DOE
+		WHERE DOE_NUM=#{doe_num}
+	</select>
+
+	<!-- 도의 평균 업데이트하기  -->
+	<update id="updateAverage">
+		update doe set
+		average =#{average}
+		where doe_num=#{doe_num}
+	</update>
+</mapper>

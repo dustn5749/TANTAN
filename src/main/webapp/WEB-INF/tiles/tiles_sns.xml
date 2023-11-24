@@ -21,15 +21,27 @@
         <put-attribute name="body" value="/WEB-INF/views/sns/message.jsp"/>
     </definition>
 
-    <definition name="feed-detail" template="/WEB-INF/views/sns/sns-detail-layout.jsp">
+    <definition name="non-layout" template="/WEB-INF/views/sns/sns-detail-layout.jsp">
         <put-attribute name="body" value=""/>
     </definition>
 
-    <definition name="alim" extends="feed-detail">
+    <definition name="alim" extends="non-layout">
         <put-attribute name="body" value="/WEB-INF/views/main/alim/alim.jsp"/>
     </definition>
 
-    <definition name="sns-detail" extends="feed-detail">
+    <definition name="friend-modal" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-modal.jsp"/>
+    </definition>
+
+    <definition name="friend-list" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-list.jsp"/>
+    </definition>
+
+    <definition name="friend-req" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-req.jsp"/>
+    </definition>
+
+    <definition name="sns-detail" extends="non-layout">
         <put-attribute name="body" value="/WEB-INF/views/sns/feed-detail.jsp"/>
     </definition>
 

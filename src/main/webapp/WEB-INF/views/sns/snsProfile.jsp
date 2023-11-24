@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal" var="principal"/>
@@ -16,10 +17,10 @@
 
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
-    <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
-    <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
+    <link rel="stylesheet" href="<c:url value="/assets/sns/css/profileReset.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/sns/css/proflieStyle.css"/>">
 
-    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <script src="<c:url value="/assets/js/jquery-1.11.0.min.js"/>"></script>
 </head>
 
 <body>
@@ -32,32 +33,32 @@
                 <div class="sidebar-menu">
                     <!--사이드바 버튼들 -->
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon">
                         <span class="txt">일정</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-send.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon">
                         <span class="txt">메세지</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
                         <span class="txt">알림</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt="" class="icon">
                         <span class="txt">저장됨</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="/assets/sns/images/icon-activity.svg" alt="" class="icon">
+                        <img src="<c:url value="/assets/sns/images/icon-activity.svg"/>" alt="" class="icon">
                         <span class="txt">내 활동</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
                         <figure class="mini-thumnail">
-                            <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                            <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
                         </figure>
                         <span class="txt">프로필</span>
                     </button>
@@ -82,11 +83,11 @@
                     <figure class="thumbnail">
 
 		               <c:choose>
-			              <c:when test="${empty principal.user.profile_img}">
-			                 <img alt="" src="/assets/sns/images/profile-img-default.png">
+			              <c:when test="${empty member.profile_img}">
+			                 <img alt="" src="<c:url value="/assets/sns/images/profile-img-default.png"/>">
 			              </c:when>
 			              <c:otherwise>
-			                 <img src="<c:out value='${principal.user.profile_img}'/>" alt="">                      
+			                 <img src="<c:out value='${member.profile_img}'/>" alt="">
 			              </c:otherwise>
 		           </c:choose>
                     </figure>
@@ -94,27 +95,33 @@
                     <div class="profile-info">
                         <div class="name">
                             <h2>
-                                <span>${principal.user.nickname}</span>
-                                <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
+                                <span>${member.nickname}</span>
+                                <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" alt="" class="badge-certify">
                             </h2>
                             <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
                         </div>
                         <div class="info01">
                             <dl>
                                 <dt>게시물</dt>
-                                <dd>88</dd>
+                                <dd>${fn:length(boardList)}</dd>
                             </dl>
                             <dl>
                                 <dt>친구수</dt>
-                                <dd>105</dd>
+                                <dd>${fn:length(friendList)}</dd>
                             </dl>                            
                         </div>
                         <div class="info02">
                             <p>안녕하세요~</p>
                         </div>
                         <div class="btn-wrap">
-                            <button type="button" class="btn solid-btn blue-btn">친구 추가</button>
-                            <button type="button" class="btn solid-btn gray-btn">프로필 편집</button>
+                            <c:choose>
+                                <c:when test="${principal.user.member_id == member.member_id}">
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn solid-btn blue-btn" onclick="requestFriend('${member.member_id}')">친구 추가</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -124,15 +131,15 @@
                         <div class="info03">
                             <dl>
                                 <dt>지역</dt>
-                                <dd>${principal.user.address}</dd>
+                                <dd>${member.address}</dd>
                             </dl>
                             <dl>
                                 <dt>나이</dt>
-                                <dd>${principal.user.age}세</dd>
+                                <dd>${member.age}세</dd>
                             </dl>
                             <dl>
                                 <dt>성별</dt>
-                                 <dd>${principal.user.gender}</dd>
+                                 <dd>${member.gender}</dd>
                             </dl>
                             <dl>
                                 <dt>소개글</dt>
@@ -241,6 +248,25 @@
 
     function closeModal(id) {
         $('#' + id).removeClass('active');
+    }
+    
+    function snsProfileModify() {
+        // 프로필 편집 페이지로 리다이렉션
+        location.href = "/sns/snsProfileModify";
+    }
+    
+ 
+    
+
+    function requestFriend(id){
+      $.ajax({
+        url : '/friend/request/'+id,
+        method : 'POST',
+        success : function (data) {
+
+        }
+      })
+      $('#' + id).removeClass('active');
     }
 </script>
 </body>

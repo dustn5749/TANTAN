@@ -15,4 +15,6 @@ public interface InquiryDAO {
    // 전체 문의 갯수 가져오기
    public int getTotalCount(InquiryDTO inquiry);
 
+   // 관리자 문의사항 리스트 가져오기
+   public List<InquiryDTO> inquiryList();
 }

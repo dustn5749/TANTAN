@@ -1,6 +1,5 @@
 package com.team1.project.dto;
 
-
 import java.sql.Date;
 import java.util.List;
 
@@ -9,11 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-
 public class ScheduleDTO {
 
 		private int schedule_Num;
@@ -48,7 +46,7 @@ public class ScheduleDTO {
 //	    private String []scheduleList;
 	    private String Like_CNT;
 	    private String title;
-	   
+
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호
 		private int totalCount;        // 전체 게시글 건수

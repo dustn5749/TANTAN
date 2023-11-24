@@ -17,4 +17,7 @@ public interface ReviewDAO {
 	
 	//리뷰 수정
 	public void reviewModify(ReviewDTO review);
+
+	//도 평균내기
+	public double averageDoe(int doeNum);
 }

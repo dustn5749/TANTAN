@@ -173,7 +173,7 @@ function initPage(currentPage) {
 function loadGridData() {
     $("#paginate").hide();
     $.ajax({
-        url: 'usListG',
+        url: 'usList.do',
         dataType: 'json',
         data: {
             page: currentPage,
@@ -207,7 +207,7 @@ $("#usGrid").jqGrid({
         { label: '작성자', name: 'writer', index: 'writer' },
         { label: '등록일', name: 'regdate', index: 'regdate' },
         { label: '조회수', name: 'us_cnt', index: 'us_cnt' },
-        { label: '여행지', name: 'city_name', index: 'city_name' },
+        { label: '여행지', name: 'content', index: 'content' },
         { label: '신고 횟수', name: 'reportcnt', index: 'reportcnt' },
         { label: '상태', name: 'status', index: 'status' },
         { name: 'deleteBtn', formatter: formatOpt1, sortable: false },
@@ -299,21 +299,21 @@ function fn_restore(rowid, us_num) {
 
 //그리드 첫 페이지로 이동
 function firstPage() {
-    $("#memberGrid").jqGrid('setGridParam', {
+    $("#usGrid").jqGrid('setGridParam', {
         page: 1
     }).trigger("reloadGrid");
 }
 
 //그리드 이전 페이지로 이동
 function prePage() {
-    var currentPage = $("#memberGrid").getGridParam('page');
+    var currentPage = $("#usGrid").getGridParam('page');
     var pageCount = 30; // 한 페이지에 보여줄 데이터 수
 
     // 이전 10페이지로 이동
     var newPage = currentPage - 10;
     if (newPage < 1) newPage = 1;
 
-    $("#memberGrid").jqGrid('setGridParam', {
+    $("#usGrid").jqGrid('setGridParam', {
         page: newPage
     }).trigger("reloadGrid");
 
@@ -322,15 +322,15 @@ function prePage() {
 
 //그리드 다음 페이지로 이동
 function nextPage() {
-    var currentPage = $("#memberGrid").getGridParam('page');
+    var currentPage = $("#usGrid").getGridParam('page');
     var pageCount = 30; // 한 페이지에 보여줄 데이터 수
 
     // 다음 10페이지로 이동
     var newPage = currentPage + 10;
-    var totalPage = Math.ceil(totalSize / $('#memberGrid').getGridParam('rowNum'));
+    var totalPage = Math.ceil(totalSize / $('#usGrid').getGridParam('rowNum'));
     if (newPage > totalPage) newPage = totalPage;
 
-    $("#memberGrid").jqGrid('setGridParam', {
+    $("#usGrid").jqGrid('setGridParam', {
         page: newPage
     }).trigger("reloadGrid");
 
@@ -339,21 +339,21 @@ function nextPage() {
 
 // 그리드 마지막 페이지로 이동
 function lastPage() {
-    var totalPage = Math.ceil(totalSize / $('#memberGrid').getGridParam('rowNum'));
-    $("#memberGrid").jqGrid('setGridParam', {
+    var totalPage = Math.ceil(totalSize / $('#usGrid').getGridParam('rowNum'));
+    $("#usGrid").jqGrid('setGridParam', {
         page: totalPage
     }).trigger("reloadGrid");
 }
 
 //그리드 페이지로 이동
 function goPage(num) {
-    $("#memberGrid").jqGrid('setGridParam', {
+    $("#usGrid").jqGrid('setGridParam', {
         page: num
     }).trigger("reloadGrid");
 }
 
-function fn_delete(rowid, member_id) {
-    console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
+function fn_delete(rowid, us_num) {
+    console.log("rowid는 " + rowid + " / us_num은 " + us_num + "입니다.");
     $("#click_result").html(str);
 }
 

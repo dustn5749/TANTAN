@@ -22,9 +22,9 @@ public class CrawlingService {
 
     private final UsDAO usDAO;
     
-//    @Transactional
-//    @Scheduled(fixedDelay = 300000)
-//    
+    @Transactional
+    @Scheduled(fixedDelay = 300000)
+   
 
     public void fileTokenAutoDelete() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
@@ -49,28 +49,7 @@ public class CrawlingService {
            
                 usDAO.insertUsList(usDTO);
                 list.add(usDTO);
-                System.out.println("usDTO"+ usDTO);
             }
-            
-            // List<UsDTO>를 List<AccompanyList>로 변환하여 전달
-           // List<AccompanyList> accompanyList = convertToAccompanyList(list);
-            System.out.println("UsDTO List: " + list);
-            System.out.println("Data inserted into the database successfully.");
         }
     }
-
-	/*
-	 * private List<AccompanyList> convertToAccompanyList(List<UsDTO> usDTOList) {
-	 * List<AccompanyList> accompanyList = new ArrayList<>(); for (UsDTO usDTO :
-	 * usDTOList) { AccompanyList accompany = new AccompanyList();
-	 * accompany.setTitle(usDTO.getTitle()); accompany.setArea(usDTO.getContent());
-	 * accompany.setNickName(usDTO.getWriter());
-	 * accompany.setIsRecruit(usDTO.getUs_cnt());
-	 * accompany.setCreatedAt(usDTO.getRegdate());
-	 * accompany.setStartAt(usDTO.getStart_Date());
-	 * accompany.setEndAt(usDTO.getEnd_Date());
-	 * accompany.setImageId(usDTO.getFileNo());
-	 * 
-	 * accompanyList.add(accompany); } return accompanyList; }
-	 */
 }

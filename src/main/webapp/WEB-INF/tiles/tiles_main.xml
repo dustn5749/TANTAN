@@ -98,6 +98,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/customer/inquiry_write.jsp"></put-attribute>
 	</definition>
 
+<!-- 문의사항 상세보기 -->
+	<definition name="inquiry_detail" extends="baseLayout">
+		<put-attribute name="title" value="문의사항"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/customer/inquiry_detail.jsp"></put-attribute>
+	</definition>
+	
 <!-- 관리자 페이지 시작 -->
 
 	<definition name="adminLayout" template="/WEB-INF/views/adminIndex.jsp">
@@ -133,9 +139,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminNoticeList.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="admin11" extends="adminLayout">
+	<definition name="adminInquiryList" extends="adminLayout">
 		<put-attribute name="title" value="관리자 1:1 문의하기 페이지"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/admin/admin11.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/admin/adminInquiryList.jsp"></put-attribute>
 	</definition>
 
 
