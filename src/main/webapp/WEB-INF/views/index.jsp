@@ -43,13 +43,13 @@ https://templatemo.com/tm-559-zay-shop
 <style type="text/css">
 
 /* 마우스 커서에 대한 설정 */
- body {
+/*  body {
     cursor: url('/assets/img/cursor2.png'), auto !important;
    }
 
    a:hover {
        cursor: url('/assets/img/cursor.png'), auto !important;       
-   }
+   } */
 
 
 

@@ -20,4 +20,7 @@ public interface ReviewDAO {
 
 	//도 평균내기
 	public double averageDoe(int doeNum);
+
+	// 리뷰 추가하기
+	public int insert(ReviewDTO review);
 }

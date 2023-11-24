@@ -92,7 +92,7 @@ public class ReviewService {
 	private DoeDAO doeDAO;
     
     //도 선택에 따른 리뷰리스트 목록 조회
-	public List<ReviewDTO> getReview(ReviewDTO review) throws Exception {
+	public List<ReviewDTO> getReviewList(ReviewDTO review) throws Exception {
 		System.out.println("reviewService.getReview()");
 		List<ReviewDTO> reviewList = reviewDAO.getReviewList(review);
 		System.out.println("reviewList = " + reviewList);
@@ -109,6 +109,13 @@ public class ReviewService {
 		DoeDTO doe = DoeDTO.builder().doe_num(doeNum).average(average).build();
 		
 		doeDAO.updateAverage(doe);
+	}
+
+	// 리뷰 추가하기
+	public boolean insert(ReviewDTO review) {
+		System.out.println("reviewService.insert()");
+		System.out.println("review = " + review);
+		return reviewDAO.insert(review) != 0;
 	}
     
     

@@ -78,5 +78,8 @@ public interface ScheduleDAO {
 
 	// 내 일정 정보 가져오기 
 	public List<ScheduleDTO> getMyScheduleList(String member_id);
-}
 
+
+	// top3 스케쥴 목록 가져오기
+	public List<ScheduleDTO> getTop3ScheduleList();
+}

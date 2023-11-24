@@ -123,6 +123,7 @@
    <div class="mypage_container">
       <div class="mypage_content_div">
 
+<<<<<<< HEAD
          <div class="content_div">
             <p id="member_setting">
             <img src="/assets/img/calendar.png" width="60px">
@@ -154,6 +155,73 @@
       </div>
    </div>
    <script type="text/javascript">
+=======
+				</div>
+			</div>
+		</div>
+		<div class="mypage_title_div">
+			<div class="menu_div">
+				<div class="menu_div_inner">
+					<img src="/assets/img/user.png" width="40px">
+					<p class="menu_a_class">${principal.user.member_id}</p>
+				</div>
+				<div class="menu_div_inner">
+					<img src="/assets/img/setting.png" width="40px">
+					<a class="menu_a_class" href="/member/mypage.do">회원정보 설정</a>
+				</div>
+				<div class="menu_div_inner">
+					<img src="/assets/img/calendar.png" width="40px">
+					<a class="menu_a_class" href="/member/mySchedule.do" id="mySchedule">내 일정</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	/* 수정하기  */
+		$("#modify_btn").on("click", function(){
+		    var btn_html = ($("#modify_btn").html() === "수정하기");
+		    var oauth = $("#oauth").val();
+		
+		    if (btn_html) {
+		        if (oauth !== "kakao") {
+		            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", false);
+		            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", false);
+		            $("#modify_btn").html("수정완료");
+		        } else {
+		            alert("카카오 로그인은 수정이 불가능합니다.");
+		        }
+		    } else {
+		    	var send = {
+		    			member_id: $("#member_id").val(),
+		    			name : $("#name").val(),
+		    			pwd : $("#pwd").val(),
+		    			phone: $("#phone").val(),
+		    			email: $("#email").val(),
+		    			nickname : $("#nickname").val()	
+		    	}
+		    	$.ajax({
+		    		url : "/member/modify.do",
+		    	    type: 'POST',
+		    	    contentType:   "application/json; charset=UTF-8",
+		    	    data: JSON.stringify(send),
+		    	    dataType: "json",
+		    	    success: function (data) {
+		    			if(data.result){
+		    				alert("회원정보를 수정했습니다");
+		    		        $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", true);
+		    	            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", true);
+							$("#name").val(data.member.name);
+							$("#gender").val(data.member.gender);
+							$("#email").val(data.member.email);
+							$("#pwd").val(data.member.pwd);
+							$("#nickname").val(data.member.nickname);
+							
+		    		        $("#modify_btn").html("수정하기");
+		    			}
+		    		}
+		    	})
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
 
       
    /* 캘린더 설정 */

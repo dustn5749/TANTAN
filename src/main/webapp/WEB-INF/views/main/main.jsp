@@ -291,6 +291,16 @@
  	width: 100%;
  	height: 100%;
  }
+ 
+ /* 일정 공유 section  */
+ .bg-light {
+    background-color: rgb(236, 245, 255) !important;
+}
+ .schedule_h1 {
+ 	font-family: 'Pretendard-Regular' !important;
+ 	font-weight: bold;
+ 	font-size: 50px !important;
+ }
 </style>
 </head>
 <body>
@@ -365,34 +375,34 @@
         <div class="best_top5_city_inner">
             <div class="case">
                 <div class="top5_city">
-                	<img src="/assets/img/seoul.jpg" class="city_img">
+                	<img src="/assets/img/doereview/seoul.jpg" class="city_img">
                 </div>
                     <p class="city_name">서울</p>
             </div>
             <div class="case">
                 <div class="top5_city">
-                    <img src="/assets/img/busan.jpg" class="city_img">
+                    <img src="/assets/img/doereview/busan.jpg" class="city_img">
                 </div>
                     <p class="city_name">부산</p>
             </div>
             <div class="case">
                 <div class="top5_city">
-                <img src="/assets/img/geoungju.png" class="city_img">
+                <img src="/assets/img/doereview/geoungju.png" class="city_img">
                 </div>
-                    <p class="city_name">경주</p>
+                    <p class="city_name">경북</p>
             </div>
             <div class="case">
                 <div class="top5_city">
-                 <img src="/assets/img/jeju2.jpg" class="city_img">
+                 <img src="/assets/img/doereview/jeju.jpg" class="city_img">
                  
                 </div>
                     <p class="city_name">제주</p>
             </div>
             <div class="case">
                 <div class="top5_city">
-                <img src="/assets/img/Gangneung.jpg" class="city_img">
+                <img src="/assets/img/doereview/Gangwon.jpg" class="city_img">
                 </div>
-                    <p class="city_name">강릉</p>
+                    <p class="city_name">강원</p>
             </div>
         </div>
     </div>
@@ -418,7 +428,17 @@
                         <div class="card h-100">
                             <!-- Product image-->
                             <div class="img_div">
-									<img class="card-img-top" src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행사진" id="us_file_img"/>
+                            
+                            <c:if test="${item.fileNo!=0}">
+							    <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" id="us_file_img">
+							</c:if>
+							<c:if test="${!empty item.imageUrl}">
+							    <img src="${item.imageUrl}" id="us_file_img">
+							</c:if>
+							<c:if test="${empty item.imageUrl&& item.fileNo==0}">
+							    <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" id="us_file_img">
+							</c:if>
+                                                        
                             </div>
                             <!-- Product details-->
                             <div class="card-body p-4">
@@ -448,10 +468,11 @@
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">일정공유</h1>
+                    <h1 class="schedule_h1">일정공유</h1>
                 </div>
             </div>
             <div class="row" id="schedule">
+            <%-- <c:forEach> --%>
 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-5">
 		                    <div class="card h-100">
@@ -478,25 +499,26 @@
 		                    </div>
 	                    </div>
 	            </div>
-	            <div class="col-12 col-md-4 p-5 mt-3">
+<%-- 	            </c:forEach>
+ --%><!-- 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-5">
 		                    <div class="card h-100">
-		                        <!-- Product image-->
+		                        Product image
 		                        <img class="card-img-top" src="assets/img/busan.jpg" />
 		                        
-		                        <!-- Product details-->
+		                        Product details
 		                        <div class="card-body p-6">
 		                            <div class="text-center">
 		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
 		                            <p style=text-align:left;>부산
 		                            <hr>
-		                                <!-- Product name-->
+		                                Product name
 		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
 		                                <hr>
-		                                <!-- Product price-->
+		                                Product price
 		                            </div>
 		                        </div>
-		                        <!-- Product actions-->
+		                        Product actions
 		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
 		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
 		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
@@ -507,29 +529,29 @@
 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-5">
 		                    <div class="card h-100">
-		                        <!-- Product image-->
+		                        Product image
 		                        <img class="card-img-top" src="assets/img/busan.jpg" />
 		                        
-		                        <!-- Product details-->
+		                        Product details
 		                        <div class="card-body p-6">
 		                            <div class="text-center">
 		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
 		                            <p style=text-align:left;>부산
 		                            <hr>
-		                                <!-- Product name-->
+		                                Product name
 		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
 		                                <hr>
-		                                <!-- Product price-->
+		                                Product price
 		                            </div>
 		                        </div>
-		                        <!-- Product actions-->
+		                        Product actions
 		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
 		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
 		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
 		                        </div>
 		                    </div>
 	                    </div>
-	            </div>
+	            </div> -->
             </div>
         </div>
     </section>

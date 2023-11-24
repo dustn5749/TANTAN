@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,15 +57,11 @@ public class ReviewController {
        result.put("result", true);
        return result;
     }
-
-
-    
     
    //리뷰 작성
     @ResponseBody
    @RequestMapping("/insert") 
-   public Map<String, Object> reviewWrite
-  (@RequestBody ReviewDTO review, Authentication auth) throws Exception{
+   public Map<String, Object> reviewWrite(@RequestBody ReviewDTO review, Authentication auth) throws Exception{
       System.out.println("reviewController.reviewWrite()");
       System.out.println("review = " + review);
 
