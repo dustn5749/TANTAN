@@ -19,30 +19,30 @@ public class ScheduleService {
 	private ScheduleDAO schduleDAO;
 	
 	// 1. 일정 목록 조회
-		public Map<String, Object> usPageList(ScheduleDTO schdule) throws Exception {
+		public Map<String, Object> schedulePageList(ScheduleDTO schdule) throws Exception {
+		
+			int totalCount = schduleDAO.totalCount(schdule);
+			System.out.println("totalCount " + totalCount );
+			System.out.println("totalCount " + schdule.getNavStart() );
+			schdule.setTotalCount(totalCount);
+			
 			Map<String, Object> result = new HashMap<>();
 			try {
 			result.put("scheduleList", schduleDAO.getScheduleList(schdule)); // 게시글 목록 조회
-			result.put("schdule", schdule);
+			result.put("schedule", schdule);
 			} catch (Exception e) {
 				result.put("message", "서버 오류 발생");
 				e.printStackTrace();
 			}
-			System.out.println("schduleService: " + result);
+			System.out.println("schduleService: " + schduleDAO.getScheduleList(schdule));
+//			System.out.println("schduleService: " + result);
 			return result;
+			
 		}
 		//일정 작성하기
 		public boolean writeInsert(ScheduleDTO schedule) throws Exception {
 		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
 		int result = schduleDAO.writeInsert(schedule);
-		schedule.getSchedule_Num();
-		schedule.getDoe_Name();
-		schedule.getStart_Num();
-		schedule.getEndNo();
-		schedule.getPlace1();
-		schedule.getPlace2();
-		schedule.getMemo1();
-		schedule.getMemo2();
 		
 //		DayDTO in = DayDTO.builder()
 //							.schedule_Num(schedule.getSchedule_Num())
@@ -90,9 +90,13 @@ public class ScheduleService {
 		}
 	
 		// 일정 수정하기
-		public boolean scheduleUpdate(ScheduleDTO schedule) throws Exception {
-		    System.out.println("schedule.service.usUpdate() 함수가 호출되었습니다");
-			return schduleDAO.schduleUpdate(schedule);
+		public boolean scheduleUpdate(int scheduleNum, ScheduleDTO schedule) throws Exception {
+		    System.out.println("schedule.service.scheduleUpdate() 함수가 호출되었습니다");
+		    Map<String, Object> params = new HashMap<>();
+		    params.put("scheduleNum", scheduleNum);
+		    params.put("schedule", schedule);
+		    
+			return schduleDAO.scheduleUpdate(params);
 		}
 		
 		// 일정 삭제하기

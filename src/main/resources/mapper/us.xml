@@ -2,8 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.UsDAO">
+ 
+<insert id="insertUsList" parameterType="com.team1.project.dto.UsDTO">
+    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
+        SELECT NVL(MAX(US_NUM), 0) + 1 FROM US
+    </selectKey>
 
- <!-- 전체목록조회 -->
+    INSERT INTO US (
+        US_NUM,
+        TITLE, 
+        CONTENT, 
+        WRITER, 
+        US_CNT, 
+        REGDATE,
+        START_DATE, 
+        END_DATE
+        <if test="imageUrl != null and imageUrl != ''">
+            , IMAGEURL
+        </if>
+    )
+    VALUES (
+        #{us_num},
+        #{title},
+        #{content},
+        #{writer}, 
+        #{us_cnt},
+        TO_DATE(#{regdate}, 'YYYY-MM-DD HH24:MI:SS'),
+        TO_DATE(#{start_Date}, 'YYYY-MM-DD HH24:MI:SS'),
+        TO_DATE(#{end_Date}, 'YYYY-MM-DD HH24:MI:SS')
+        <if test="imageUrl != null and imageUrl != ''">
+            , #{imageUrl}
+        </if>
+    )
+</insert>
+
+ 
+  <!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
     SELECT * 
     FROM (

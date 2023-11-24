@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 
+
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.team1.project.dao.ScheduleDAO">
 
 	<resultMap type="com.team1.project.dto.CityDTO" id="CityMap">
@@ -18,36 +21,55 @@
 <!--     <result property="memo" column="memo" /> -->
 	</resultMap>
 
-<select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-    SELECT * 
-    FROM (
-      SELECT 
-        a.*, 
-        ROW_NUMBER() OVER (ORDER BY SCHEDULE_NUM) AS rnum 
-      FROM SCHEDULE a
-    ) 
-    WHERE rnum BETWEEN #{startNo} AND #{endNo}
 
+<select id="getScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+    SELECT *
+    FROM (
+        SELECT
+            a.*,
+            ROWNUM AS rnum
+        FROM (
+            SELECT
+                s.*,
+                d.doe_img
+            FROM SCHEDULE s
+            JOIN DOE d ON s.doe_name = d.doe_name
+            ORDER BY s.SCHEDULE_NUM DESC
+        ) a
+        WHERE ROWNUM <![CDATA[<=]]> #{endNo}
+    )
+<!--     WHERE rnum BETWEEN #{startNo} AND #{endNo} -->
+    WHERE rnum <![CDATA[>=]]> #{startNo}
 </select>
+
+
 
 <!--일정 글등록 --> 
     <insert id="writeInsert">
     <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
         select sc.nextval as schedule_Num from dual
     </selectKey> 
-    insert into schedule(SCHEDULE_NUM, MEMBER_ID, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2, MEMO1,MOMO2, title)
+    insert into schedule(SCHEDULE_NUM, MEMBER_ID, TITLE, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2,PLACE3, MEMO1,MEMO2,MEMO3, DATE1, DATE2, DATE3)
 values(
 	#{schedule_Num},
+    #{member_id},
+    #{title},
     #{member_Id},
     #{doe_Name},    
     #{start_Num},
     #{end_Date},
     SYSDATE,
-	#{PLACE1},
-	#{PLACE2},
-	#{MEMO1},
-	#{MEMO2},
-	#{title})
+	#{place1, jdbcType=VARCHAR},
+	#{place2, jdbcType=VARCHAR},
+	#{place3, jdbcType=VARCHAR},
+	#{memo1, jdbcType=CLOB},
+	#{memo2, jdbcType=VARCHAR},
+	#{memo3, jdbcType=VARCHAR},
+	#{date1, jdbcType=DATE},
+	#{date2, jdbcType=DATE},
+	#{date3, jdbcType=DATE}
+	)
+	
 </insert>
 
     <!--지역번호 만들기 --> 
@@ -67,22 +89,32 @@ values(
 
 <!-- 상세보기 -->
 <select id="schduleDetail" resultType="com.team1.project.dto.ScheduleDTO">  
-    SELECT
-        S.SCHEDULE_NUM,
-        S.MEMBER_ID,
-        S.DOE_NAME,
-        S.START_NUM,
-        S.END_DATE,
-        S.MOD_DATE,
-        S.PLACE1,
-        S.PLACE2,
-        S.MEMO1,
-        S.MEMO2,
-        S.TITLE
-    FROM
-        SCHEDULE S
-    WHERE
-        S.SCHEDULE_NUM = #{schedule_Num}
+       SELECT 
+            S.SCHEDULE_NUM,
+            S.MEMBER_ID,
+            S.DOE_NAME,
+            S.START_NUM,
+            S.END_DATE,
+            S.MOD_DATE,
+            S.TITLE,
+            S.PLACE1,
+            S.PLACE2,
+            S.PLACE3,
+            S.MEMO1,
+            S.MEMO2,
+            S.MEMO3,
+            S.DATE1,
+            S.DATE2,
+            S.DATE3,
+            C.LATITUDE AS CITY_LATITUDE,
+            C.LONGITUDE AS CITY_LONGITUDE
+            FROM schedule s
+            JOIN city c
+                ON s.place1 = c.city_name
+                    or s.place2 = c.city_name
+                    or s.place3 = c.city_name
+            WHERE s.schedule_num = ${scheduleNum}
+
 </select>
 
 <!-- 전체 게시글 수 -->
@@ -92,21 +124,25 @@ values(
  	</select>
 
  <!-- 수정하기 -->
-  <update id="scheduleUpdate">
+  <update id="scheduleUpdate" parameterType="map">
     UPDATE SCHEDULE
     SET
-        MEMBER_ID = #{member_Id},
-        DOE_NAME = #{doe_name},
-        START_NUM = #{start_Num},
-        END_DATE = #{end_Date},
-        REG_DATE = SYSDATE,
-        PLACE1 = #{PLACE1},
-        PLACE2 = #{PLACE2},
-        MEMO1 = #{MEMO1},
-        MEMO2 = #{MEMO2},
-        TITLE = #{title}
+	    MEMBER_ID = #{schedule.member_id},
+	    TITLE = #{schedule.title},
+	    DOE_NAME = #{schedule.doe_Name},    
+	    START_NUM = #{schedule.start_Num},
+	    END_DATE = #{schedule.end_Date},
+		PLACE1 = #{schedule.place1, jdbcType=VARCHAR},
+		PLACE2 = #{schedule.place2, jdbcType=VARCHAR},
+		PLACE3 = #{schedule.place3, jdbcType=VARCHAR},
+		MEMO1= #{schedule.memo1, jdbcType=CLOB},
+		MEMO2 = #{schedule.memo2, jdbcType=VARCHAR},
+		MEMO3 = #{schedule.memo3, jdbcType=VARCHAR},
+		DATE1 = #{schedule.date1, jdbcType=DATE},
+		DATE2 = #{schedule.date2, jdbcType=DATE},
+		DATE3 = #{schedule.date3, jdbcType=DATE}
     WHERE
-        SCHEDULE_NUM = #{schedule_Num}
+        SCHEDULE_NUM = #{scheduleNum}
 </update>
 
    
@@ -135,6 +171,16 @@ values(
 		WHERE bno = #{bno} AND userID = #{userId}	
 	</delete>
 
+	 <!-- 컨텐츠 검색 갯수 -->
+  <select id="getSearchCount" resultType="int">
+    select count(*) from contents
+    where subject like #{keyword} or content like #{keyword} and show='y'
+  </select>
+  
+  <!-- 마지막 게시물 번호 불러오기 -->
+  <select id="MaxCidx" resultType="int">
+	select MAX(c_idx) from contents  
+  </select>
 	<!-- 내 일정 정보 가져오기  -->
 	<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
 		select * from SCHEDULE

@@ -21,7 +21,7 @@ public class DoeService {
 	@Scheduled(fixedDelay = 60000)
 	@Transactional
 	public List<DoeDTO> ScheduleAverageDoe(String  doe_name) {
-		
+	
 		return doeDAO.ScheduleAverageDoe(doe_name);
 	}
 	
@@ -30,13 +30,12 @@ public class DoeService {
 		System.out.println("doeService.getDoe()");
 		return doeDAO.getDoe(doe_num);
 	}
-	
 	// 도 이름으로 도 번호 찾기
-	public int findDoeNum(String doe_name) {
-		System.out.println("doeServiec.findDoeNum");
-		return doeDAO.findDoeNum(doe_name);
-	}
+    public int findDoeNum(String doe_name) {
+        System.out.println("doeServiec.findDoeNum");
+        return doeDAO.findDoeNum(doe_name);
+    }
+    
 
-	
 
 }

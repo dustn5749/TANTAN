@@ -53,7 +53,7 @@
        height: 44px;
        margin-top: 20px;
        padding: 0px 0px 20px;
-       background-color: rgb(255, 255, 255);
+/*        background-color: rgb(255, 255, 255); */
    }
    .us_header4 {
    z-index: 9;
@@ -511,6 +511,8 @@ div, input, p, span, button, h2 {
 </div>
     
     <form name="pageForm" id="pageForm" action="/us/list" method="post">
+       <input type="hidden" name="pageNo" id="pageNo" value="${result.us.pageNo}">
+   </form>
     	<input type="hidden" name="pageNo" id="pageNo" value="${result.us.pageNo}">
 	</form>
 
@@ -532,7 +534,8 @@ div, input, p, span, button, h2 {
                 <div class="card-body p-4">
                     <div class="text-center">
                         <div class="img_div">
-						
+          
+               
 							<c:if test="${item.fileNo!=0}">
 							    <img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
 							</c:if>
@@ -543,6 +546,7 @@ div, input, p, span, button, h2 {
 							    <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
 							</c:if>
 					
+
                         </div>
                         <h5 class="fw-bolder">${item.title}</h5>
                         <p>${item.writer}</p>
@@ -573,6 +577,18 @@ div, input, p, span, button, h2 {
         <a href="#" onclick="jsPageNo(${result.us.navStart-1})" class="pageArrow">&lt;</a>
     </c:if>
 
+
+   <c:forEach var="item"  begin="${result.us.navStart}" end="${result.us.navEnd}">
+       <c:choose>
+           <c:when test="${result.us.pageNo != item}">
+               <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>  
+           </c:when>
+           <c:otherwise>
+               <strong>${item}</strong>   
+           </c:otherwise>
+       </c:choose>          
+   </c:forEach>
+
 	<c:forEach var="item"  begin="${result.us.navStart}" end="${result.us.navEnd}">
 	    <c:choose>
 	        <c:when test="${result.us.pageNo != item}">
@@ -584,10 +600,15 @@ div, input, p, span, button, h2 {
 	    </c:choose>          
 	</c:forEach>
 
+   <c:if test="${result.us.navEnd != result.us.totalPageSize}">
+       <a href="#" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
+   </c:if>
 
+</div>
 	<c:if test="${result.us.navEnd != result.us.totalPageSize}">
 	    <a href="#" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
 	</c:if>
+
 
 </div>
 </div>

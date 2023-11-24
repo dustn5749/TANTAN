@@ -23,14 +23,14 @@ import com.team1.project.service.ReviewService;
 @RequestMapping("/review")
 public class ReviewController {
 
-	@Autowired
-	public ReviewService reviewService;
+   @Autowired
+   public ReviewService reviewService;
 
-	
-	 @Autowired 
-	 public DoeService doeService;
-	 
-	
+   
+    @Autowired 
+    public DoeService doeService;
+    
+   
     // 리뷰 메인
     @RequestMapping(value = "/main")
     public String Main(ReviewDTO board) throws Exception {
@@ -41,69 +41,66 @@ public class ReviewController {
     @ResponseBody
     @RequestMapping("/display")
     public Map<String, Object> displayReviewDoe(@RequestBody ReviewDTO review) throws Exception {
-    	System.out.println("reviewController.displayReviewDoe(review)" + review);
-    	Map<String, Object> result= new HashMap<>();
-    	
-    	int doe_num = doeService.findDoeNum(review.getDoe_name());
-    	review.setDoe_num(doe_num);
-    	
-    	List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
+       System.out.println("reviewController.displayReviewDoe(review)" + review);
+       Map<String, Object> result= new HashMap<>();
+       
+       int doe_num = doeService.findDoeNum(review.getDoe_name());
+       review.setDoe_num(doe_num);
+       
+       List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
 
-    	reviewService.averageDoe(review.getDoe_num());
-    	DoeDTO doe = doeService.getDoe(review.getDoe_num());
+       reviewService.averageDoe(review.getDoe_num());
+       DoeDTO doe = doeService.getDoe(review.getDoe_num());
 
-    	result.put("reviewList",reviewList);
-    	result.put("doe", doe);
-    	result.put("result", true);
-    	return result;
+       result.put("reviewList",reviewList);
+       result.put("doe", doe);
+       result.put("result", true);
+       return result;
     }
-
-
     
-    
-	//리뷰 작성
+   //리뷰 작성
     @ResponseBody
-	@RequestMapping("/insert") 
-	public Map<String, Object> reviewWrite(@RequestBody ReviewDTO review, Authentication auth) throws Exception{
-		System.out.println("reviewController.reviewWrite()");
-		System.out.println("review = " + review);
+   @RequestMapping("/insert") 
+   public Map<String, Object> reviewWrite(@RequestBody ReviewDTO review, Authentication auth) throws Exception{
+      System.out.println("reviewController.reviewWrite()");
+      System.out.println("review = " + review);
 
-		Map<String,Object> result = new HashMap<>();
-		int doe_num = doeService.findDoeNum(review.getDoe_name());
-		System.out.println("doe_num = " + doe_num);
-		review.setDoe_num(doe_num);
-		
-		
-		if(auth.getName()== null) {
-			result.put("result", false);
-		} else {
-			review.setMember_id(auth.getName());
-			
-			if(reviewService.insert(review)) {
-		    	List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
+      Map<String,Object> result = new HashMap<>();
+      int doe_num = doeService.findDoeNum(review.getDoe_name());
+      System.out.println("doe_num = " + doe_num);
+      review.setDoe_num(doe_num);
+      
+      
+      if(auth.getName()== null) {
+         result.put("result", false);
+      } else {
+         review.setMember_id(auth.getName());
+         
+         if(reviewService.insert(review)) {
+             List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
 
-		    	reviewService.averageDoe(review.getDoe_num());
-		    	DoeDTO doe = doeService.getDoe(review.getDoe_num());
+             reviewService.averageDoe(review.getDoe_num());
+             DoeDTO doe = doeService.getDoe(review.getDoe_num());
 
-		    	result.put("reviewList",reviewList);
-		    	result.put("doe", doe);
-		    	result.put("result", true);
-			}
-		}
-		return result;
-		
-	}
-//	
-//	//리뷰 수정
-//	@PutMapping("/modify") 
-//	public ResponseEntity<String> reviewModify(ReviewDTO review){
-//		reviewDTO.setUserId(review.getmemberId());
-//		if(reviewService.reviewModify(review))
-//			return ResponseEntity.ok().body("리뷰 수정 완료");
-//		
-//		
-//		return ResponseEntity.badRequest().body("파일 저장 실패");
-		
-//	}
+             result.put("reviewList",reviewList);
+             result.put("doe", doe);
+             result.put("result", true);
+         }
+      }
+      return result;
+      
+   }
+//   
+//   //리뷰 수정
+//   @PutMapping("/modify") 
+//   public ResponseEntity<String> reviewModify(ReviewDTO review){
+//      reviewDTO.setUserId(review.getmemberId());
+//      if(reviewService.reviewModify(review))
+//         return ResponseEntity.ok().body("리뷰 수정 완료");
+//      
+//      
+//      return ResponseEntity.badRequest().body("파일 저장 실패");
+      
+//   }
     
 }
