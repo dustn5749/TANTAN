@@ -3,7 +3,7 @@
 
 <mapper namespace="com.team1.project.dao.ChatMemberDAO">
 
-    <insert id="registerChatMember" parameterType="chatMemberList">
+   <insert id="registerChatMember" >
         insert into CHATTER
         (MEMBER_ID, ROOM_NUM, JOIN_TIME)
         <foreach collection="memberIds" item="item" separator="UNION ALL" >
