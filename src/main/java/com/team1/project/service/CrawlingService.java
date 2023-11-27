@@ -22,9 +22,9 @@ public class CrawlingService {
 
     private final UsDAO usDAO;
     
-    @Transactional
-    @Scheduled(fixedDelay = 300000)
-   
+//    @Transactional
+//    @Scheduled(fixedDelay = 300000)
+//   
 
     public void fileTokenAutoDelete() throws Exception {
         RestTemplate restTemplate = new RestTemplate();

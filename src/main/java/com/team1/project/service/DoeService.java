@@ -16,14 +16,14 @@ public class DoeService {
 
 	@Autowired
 	public DoeDAO doeDAO;
-	
-	// 스케쥴러를 이용해서 도의 평균내기
-	@Scheduled(fixedDelay = 60000)
-	@Transactional
-	public List<DoeDTO> ScheduleAverageDoe(String  doe_name) {
-	
-		return doeDAO.ScheduleAverageDoe(doe_name);
-	}
+//	
+//	// 스케쥴러를 이용해서 도의 평균내기
+//	@Scheduled(fixedDelay = 60000)
+//	@Transactional
+//	public List<DoeDTO> ScheduleAverageDoe(String  doe_name) {
+//	
+//		return doeDAO.ScheduleAverageDoe(doe_name);
+//	}
 	
 	// 도의 정보가져오기
 	public DoeDTO getDoe(int doe_num) {

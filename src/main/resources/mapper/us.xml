@@ -39,43 +39,47 @@
  
   <!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
-    SELECT * 
-    FROM (
-        SELECT 
-        rownum AS nrow, 
-        us_num, 
-        city_name,
-        writer, 
-        us_cnt,
-        regdate,
-        start_Date,
-        end_Date,
-        title, 
-        content,
-        fileno,
-        imageurl
-        FROM (
-            SELECT rownum  AS 
-            nrow,
-            us_num,
-            city_name,
-            writer,
-            us_cnt,
-            regdate,
-            start_Date,
-            end_Date,
-            title,
-            content,
-           fileno,
-           imageurl
-            FROM us a 
-            WHERE rownum BETWEEN 1 AND #{endNo}
-            <if test="start_Date != null and end_Date != null">
-                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
-            </if>
-            order by us_num desc
-        )
-    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
+SELECT u.*, uf.usfilenum as fileNo
+	FROM (
+		SELECT * 
+	    FROM (
+	        SELECT 
+	        rownum AS nrow, 
+	        us_num, 
+	        city_name,
+	        writer, 
+	        us_cnt,
+	        regdate,
+	        start_Date,
+	        end_Date,
+	        title, 
+	        content,
+	        imageurl
+	        FROM (
+	            SELECT rownum  AS 
+	            nrow,
+	            us_num,
+	            city_name,
+	            writer,
+	            us_cnt,
+	            regdate,
+	            start_Date,
+	            end_Date,
+	            title,
+	            content,
+	           imageurl
+	            FROM us a 
+	            WHERE 1=1 
+	            <if test="start_Date != null and end_Date != null">
+	                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
+	            </if>
+	            order by us_num desc
+	        )
+	    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
+	) u
+	left outer join us_file uf
+		on u.us_num = uf.us_num
+
 </select>
 
    
@@ -138,9 +142,21 @@
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
-       US_NUM, CITY_NAME, WRITER, US_CNT, START_DATE, END_DATE, TITLE, CONTENT
-    FROM US 
-    WHERE US_NUM = #{us_num}
+        u.us_num, 
+        u.city_name,
+        u.writer, 
+        u.us_cnt,
+        u.regdate,
+        u.start_Date,
+        u.end_Date,
+        u.title, 
+        u.content,
+        u.imageurl,
+       uf.usfilenum as fileNo
+    FROM US u 
+   	left outer join us_file uf
+   		on u.us_num = uf.us_num
+    WHERE u.US_NUM = #{us_num}
  </select> 
 
 <!-- 수정하기 -->
@@ -148,7 +164,6 @@
     UPDATE US 
     SET 
     CITY_NAME = #{city_name},
-    WRITER = #{writer}, 
     US_CNT = #{us_cnt}, 
     START_DATE = #{start_Date}, 
     END_DATE = #{end_Date}, 
