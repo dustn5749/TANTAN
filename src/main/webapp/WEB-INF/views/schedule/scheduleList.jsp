@@ -5,13 +5,25 @@
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
+
+   @font-face {
+       font-family: 'Pretendard-Regular';
+       src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+       font-weight: 400;
+       font-style: normal;
+   }
+
    .us_container{
       width: 80%;
       margin: 0 auto;
       padding: 3%;
    }
-    
-    
+     .us_container> div, input, button, span {
+            font-family: 'Pretendard-Regular';
+     }
+    .card-body > input, button, span, strong, p, a {
+           font-family: 'Pretendard-Regular';    
+    }
     .us_header_size{
     float: right;
     width: 27%;
@@ -135,6 +147,7 @@
    position: relative;
    left: -820px; 
    width: 78%;
+   margin-bottom: 20px;
 }
    .fillter_btn {
       width: 80px;
@@ -142,6 +155,7 @@
       border-radius: 10px;
       background-color: black;
       color: white;
+      margin: 2px;
    }
    .fillter_btn:hover {
       background-color: white;
@@ -402,6 +416,40 @@
   .button-container {
     text-align: center;
   }
+  
+  /* 페이징 처리 */
+  #pagingDiv {
+  	height: 80px;
+  	padding-top:20px;
+  	text-align: center;
+  	margin: 0 auto;
+  	justify-content: center;
+  	align-content: center;
+  	align-items: center;
+  }
+  
+  #pagingDiv >a, strong{
+  	font-size: 20px !important;
+  	margin-left: 5px;
+  	margin-right: 5px;
+  	cursor: pointer !important;
+  }
+  
+  /* 상세보기 버튼 */
+  .detailBtn{
+  	margin-top: 10px;
+  	border-radius: 5px;
+  	cursor: pointer;
+  	width: 100px;
+  	height: 35px;
+  	border: none;
+  	background:rgb(219, 219, 219);
+  }
+    .detailBtn:hover{
+    	color: white;
+    	background: grey;
+    }
+  
 </style>
 </head>
 
@@ -503,9 +551,9 @@
   </div>
 </div>
         <div class="fillter_btn_area" style="display: flex; justify-content: flex-end;">
-            <button class="fillter_btn">댓글순</button>
-            <button class="fillter_btn">조회순</button>
-            <button class="fillter_btn">인기순</button>
+            <button class="fillter_btn" id="commentBtn">댓글순</button>
+            <button class="fillter_btn" id="regDateBtn">조회순</button>
+            <button class="fillter_btn" id="likeBtn">인기순</button>
         </div>
       <div class="container">
    
@@ -534,19 +582,17 @@
         d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
     </path>
 </svg></a>
-<<<<<<< HEAD
-										
-										<img src="/assets/img/local/${schedule.doe_img}" style="max-width: 100%; height: 200px; object-fit: cover;">
+
+                              
+                              <img src="/assets/img/local/${schedule.doe_img}" style="max-width: 100%; height: 200px; object-fit: cover;">
                                        <input type="hidden" name="memberId" value="${schedule.member_id}">
                                        <input type="hidden" name="schedule_Num" value="${schedule.schedule_Num}">
-                                               <p>${schedule.title}</p>
-=======
+                                       		
                                             <h5 class="fw-bolder">${schedule.title}</h5>
-                                            <p>${schedule.member_Id}</p>
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
-                                            <p>지역:${schedule.doe_Name}</p>
-                                            <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
-                                            <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+                                            <p>${schedule.member_id}</p>
+                                            <p>지역 : ${schedule.doe_Name}</p>
+                                            <p>여행시작 : ${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                                            <p>여행끝 : ${schedule.end_Date != null ? schedule.end_Date : ""}</p>
                                               
                                         <input type="hidden" name="regDate" value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
 
@@ -574,14 +620,14 @@
     <form name="pageForm" id="pageForm" action="/schedule/list" method="post">
     <input type="hidden" name="pageNo" id="pageNo" value="${result.schedule.pageNo}">
 <%--<input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">--%>
-	</form>
-	</div>
-	
+   </form>
+   </div>
+   
 <!-- 페이징 처리 -->
 </div>   
 
   <!-- Display page numbers -->
-<div style="text-align: center;">
+<div style="text-align: center;" id="pagingDiv">
     <c:forEach var="item" begin="${result.schedule.navStart}" end="${result.schedule.navEnd}">
         <c:choose>
             <c:when test="${result.schedule.pageNo != item}">
@@ -592,14 +638,10 @@
             </c:otherwise>
         </c:choose>
     </c:forEach>
-
-
-
-<!-- Display next page link if there are more pages -->
-<c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
-    <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})" class="pageArrow">&gt;</a> 
-</c:if>
-</div>
+		<!-- Display next page link if there are more pages -->
+		<c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
+		    <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})" class="pageArrow">&gt;</a> 
+		</c:if>
 </div>
 
 
@@ -607,13 +649,13 @@
 
 <script>
     function jsPageNo(pageNo) {
-    	console.log("pageNo" + pageNo);
+       console.log("pageNo" + pageNo);
         document.getElementById("pageNo").value = pageNo;
         document.getElementById("pageForm").submit();
     }
  </script>
  <script>
-	function loadMoreData(start) {
+   function loadMoreData(start) {
     var member_Id = "member_id"; 
     var doe_Name = "doe_name"; 
     var schedule_Num = "schedule_num"; 
@@ -686,7 +728,6 @@
                     console.log("상세보기");
 
                     const schedule_num_element = e.currentTarget.closest(".card").querySelector(".schedule_num");
-
                     if (schedule_num_element) {
                         const schedule_num = schedule_num_element.value;
 
@@ -702,7 +743,8 @@
                 });
             });
 
-
+            /* 인기순 정렬 */
+		
 
 </script>
       </div>

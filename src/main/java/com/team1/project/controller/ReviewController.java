@@ -37,6 +37,8 @@ public class ReviewController {
         return "reviewMain";
     }
     
+    
+    
     // 리뷰 상세보기
     @ResponseBody
     @RequestMapping("/display")
@@ -48,7 +50,8 @@ public class ReviewController {
        review.setDoe_num(doe_num);
        
        List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
-
+       System.out.println("reviewList = " + reviewList);
+       
        reviewService.averageDoe(review.getDoe_num());
        DoeDTO doe = doeService.getDoe(review.getDoe_num());
 
@@ -59,7 +62,7 @@ public class ReviewController {
     }
     
    //리뷰 작성
-    @ResponseBody
+   @ResponseBody
    @RequestMapping("/insert") 
    public Map<String, Object> reviewWrite(@RequestBody ReviewDTO review, Authentication auth) throws Exception{
       System.out.println("reviewController.reviewWrite()");
@@ -90,17 +93,6 @@ public class ReviewController {
       return result;
       
    }
-//   
-//   //리뷰 수정
-//   @PutMapping("/modify") 
-//   public ResponseEntity<String> reviewModify(ReviewDTO review){
-//      reviewDTO.setUserId(review.getmemberId());
-//      if(reviewService.reviewModify(review))
-//         return ResponseEntity.ok().body("리뷰 수정 완료");
-//      
-//      
-//      return ResponseEntity.badRequest().body("파일 저장 실패");
-      
-//   }
+
     
 }

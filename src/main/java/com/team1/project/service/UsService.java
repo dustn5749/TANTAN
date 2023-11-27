@@ -104,8 +104,8 @@ public class UsService {
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
 		System.out.println("usService.getUsRecentList()");
-		// usDAO.getUsRecentList();
-		return new ArrayList<>();
+		
+		return usDAO.getUsRecentList();
 	}
 
 	// 관리자 리스트 가져오기

@@ -477,7 +477,7 @@
 		<!--지역 선택하기 -->
 		<div class="container">
 			<div class="row">
-				<input type="hidden" id="doe_location" value=${scheduleList[0].doe_Name }/>
+				<input type="hidden" id="doe_location" value="${scheduleList[0].doe_Name}"/>
 				<div class="col-md-6">
 					<ul class="nav-ul">
 						<li class="nav-li"><a href="javascript:void(0);"
@@ -799,7 +799,8 @@ function saveEntry() {
     
     const scheduleItems = document.querySelectorAll(".schedule-item");
     const schedules = [];
-	console.log($("#doe_location").val())
+	var doe_name = $("#doe_location").val();
+
     for (i=0;i<scheduleItems.length;i++) {
        schedules.push({
          title : $("#title").val(),
@@ -1124,7 +1125,7 @@ $(".minus_shedule_btn").on("click", function(){
     // 지도의 기본 옵션을 설정합니다.
     var mapOption = {
         center: new kakao.maps.LatLng(37.5, 128),
-        level: 12
+        level: 13
     };
 
     // 지도를 생성합니다.

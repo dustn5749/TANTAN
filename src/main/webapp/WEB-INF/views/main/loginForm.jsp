@@ -51,6 +51,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script type="text/javascript" src="/assets/js/loginForm.js"></script>
 </body>
 </html>

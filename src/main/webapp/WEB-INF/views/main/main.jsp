@@ -254,12 +254,14 @@
 /* 최신 동행 모집 title */
 .fw-bolder {
 	font-size: 23px !important;
-	height: 30px;
+	height: 100px;
 	margin-bottom:10px;
 	font-weight: bold;
 	font-family: 'Pretendard-Regular' !important;
 	
 }
+
+
 /* 날짜 */
 .date {
 	font-size: 14px !important;
@@ -285,7 +287,11 @@
  
  .img_div {
  	width: 100%;
- 	height: 300px;
+ 	height: 250px;
+ }
+ .img_div >img {
+ 	height: 100%;
+ 	width: 100%;
  }
  #us_file_img{
  	width: 100%;
@@ -300,6 +306,15 @@
  	font-family: 'Pretendard-Regular' !important;
  	font-weight: bold;
  	font-size: 50px !important;
+ }
+ 
+.card.h-100 {
+	height: 500px !important;
+}
+ 
+ /* 일정공유 이미지 */
+ .card-img-top{
+ 	height: 280px !important;
  }
 </style>
 </head>
@@ -370,40 +385,17 @@
 	<!-- best top5 지역 -->
 	
     <div class="best_top5_city">
-        <p class="best_city_title">BEST 여행지 TOP5</p>
+        <p class="best_city_title">BEST 여행지</p>
         <div class="plus_div"><a class="plus_a" href="/review/main">+더보기</a></div>
         <div class="best_top5_city_inner">
-            <div class="case">
+        <c:forEach items="${doeList}" var="item">
+             <div class="case">
                 <div class="top5_city">
-                	<img src="/assets/img/doereview/seoul.jpg" class="city_img">
+                	<img src="/assets/img/doereview/${item.doe_review}" class="city_img">
                 </div>
-                    <p class="city_name">서울</p>
+                    <p class="city_name">${item.doe_name}</p>
             </div>
-            <div class="case">
-                <div class="top5_city">
-                    <img src="/assets/img/doereview/busan.jpg" class="city_img">
-                </div>
-                    <p class="city_name">부산</p>
-            </div>
-            <div class="case">
-                <div class="top5_city">
-                <img src="/assets/img/doereview/geoungju.png" class="city_img">
-                </div>
-                    <p class="city_name">경북</p>
-            </div>
-            <div class="case">
-                <div class="top5_city">
-                 <img src="/assets/img/doereview/jeju.jpg" class="city_img">
-                 
-                </div>
-                    <p class="city_name">제주</p>
-            </div>
-            <div class="case">
-                <div class="top5_city">
-                <img src="/assets/img/doereview/Gangwon.jpg" class="city_img">
-                </div>
-                    <p class="city_name">강원</p>
-            </div>
+        </c:forEach>
         </div>
     </div>
 
@@ -418,6 +410,7 @@
         </div>
         <!-- 최신 동행 모집 div -->
         <div class="row">
+        
          <c:forEach items="${usList}" var="item">
         	 <div class="col-12 col-md-4 p-5 mt-3">
             	<div class="card-header" style=border-radius:5%;>
@@ -468,25 +461,26 @@
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="schedule_h1">일정공유</h1>
+                    <h1 class="schedule_h1">가장 인기 있는 일정 공유</h1>
                 </div>
             </div>
             <div class="row" id="schedule">
-            <%-- <c:forEach> --%>
+            
+           <c:forEach items="${scheduleList}" var="item" >
 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-5">
 		                    <div class="card h-100">
 		                        <!-- Product image-->
-		                        <img class="card-img-top" src="assets/img/busan.jpg" />
+		                        <img class="card-img-top" src="/assets/img/doereview/${item.doe_img}" />
 		                        
 		                        <!-- Product details-->
 		                        <div class="card-body p-6">
 		                            <div class="text-center">
 		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-		                            <p style=text-align:left;>부산
+		                            <p style=text-align:left;>${item.doe_Name}</p>
 		                            <hr>
 		                                <!-- Product name-->
-		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
+		                                <h5 class="fw-bolder" style=display:inline;>${item.member_id}</h5>
 		                                <hr>
 		                                <!-- Product price-->
 		                            </div>
@@ -499,59 +493,8 @@
 		                    </div>
 	                    </div>
 	            </div>
-<%-- 	            </c:forEach>
- --%><!-- 	            <div class="col-12 col-md-4 p-5 mt-3">
-	                	<div class="col mb-5">
-		                    <div class="card h-100">
-		                        Product image
-		                        <img class="card-img-top" src="assets/img/busan.jpg" />
-		                        
-		                        Product details
-		                        <div class="card-body p-6">
-		                            <div class="text-center">
-		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-		                            <p style=text-align:left;>부산
-		                            <hr>
-		                                Product name
-		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
-		                                <hr>
-		                                Product price
-		                            </div>
-		                        </div>
-		                        Product actions
-		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
-		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-		                        </div>
-		                    </div>
-	                    </div>
-	            </div>
-	            <div class="col-12 col-md-4 p-5 mt-3">
-	                	<div class="col mb-5">
-		                    <div class="card h-100">
-		                        Product image
-		                        <img class="card-img-top" src="assets/img/busan.jpg" />
-		                        
-		                        Product details
-		                        <div class="card-body p-6">
-		                            <div class="text-center">
-		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-		                            <p style=text-align:left;>부산
-		                            <hr>
-		                                Product name
-		                                <h5 class="fw-bolder" style=display:inline;>User1님의 여행일정</h5>
-		                                <hr>
-		                                Product price
-		                            </div>
-		                        </div>
-		                        Product actions
-		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
-		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
-		                        </div>
-		                    </div>
-	                    </div>
-	            </div> -->
+	            </c:forEach>
+ 
             </div>
         </div>
     </section>
@@ -564,6 +507,8 @@
    
   	location.href="/us/Detail?us_num="+us_num;
 });
+	
+	/* 리뷰 상세보기 */
 
 </script>	
 

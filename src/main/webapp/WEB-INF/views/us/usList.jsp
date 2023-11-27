@@ -153,8 +153,9 @@
       width: 1260px;
    }
    .fillter_btn_area {
-        display: flex;
+      display: flex;
       width: 300px;
+      margin-bottom: 20px;
 /*       magin:100px; */
    }
    .fillter_btn {
@@ -163,6 +164,7 @@
       border-radius: 10px;
       background-color: black;
       color: white;
+      margin: 2px;
    }
    .fillter_btn +.fillter_btn  {
       margin: 0 10px;
@@ -454,7 +456,10 @@ div, input, p, span, button, h2 {
    font-family: 'Pretendard-Regular' !important;
    
 }
-
+/* 카드박스 */
+.card.box-shadow{
+	height: 480px;
+}
 
 /* 상세 보기 버튼 */
 .detailBtn {
@@ -589,25 +594,13 @@ div, input, p, span, button, h2 {
        </c:choose>          
    </c:forEach>
 
-	<c:forEach var="item"  begin="${result.us.navStart}" end="${result.us.navEnd}">
-	    <c:choose>
-	        <c:when test="${result.us.pageNo != item}">
-	            <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>  
-	        </c:when>
-	        <c:otherwise>
-	            <strong>${item}</strong>   
-	        </c:otherwise>
-	    </c:choose>          
-	</c:forEach>
+
 
    <c:if test="${result.us.navEnd != result.us.totalPageSize}">
        <a href="#" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
    </c:if>
 
-</div>
-	<c:if test="${result.us.navEnd != result.us.totalPageSize}">
-	    <a href="#" onclick="jsPageNo(${result.us.navEnd+1})" class="pageArrow">&gt;</a> 
-	</c:if>
+
 
 
 </div>

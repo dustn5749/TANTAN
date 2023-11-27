@@ -69,9 +69,9 @@
            fileno,
            imageurl
             FROM us a 
-            WHERE rownum BETWEEN 1 AND #{endNo}
             <if test="start_Date != null and end_Date != null">
-                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date})
+                WHERE start_Date <![CDATA[>=]]> TO_DATE( #{start_Date}, 'YYYY-MM-DD') 
+          		AND end_Date <![CDATA[<=]]> TO_DATE(#{end_Date}, 'YYYY-MM-DD')
             </if>
             order by us_num desc
         )
@@ -168,7 +168,7 @@
       <select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
           SELECT * FROM (
               SELECT * FROM us
-              ORDER BY regdate DESC
+              ORDER BY us_num DESC
           )
           WHERE ROWNUM &lt;= 3
       </select>

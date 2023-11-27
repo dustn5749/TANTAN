@@ -54,36 +54,7 @@
 	
 	
 </insert>
-<!-- 
-<insert id="reviewWrite">
-		INSERT INTO DL_REVIEW (
-		    ORDER_NUM
-		    ,STORE_ID
-		    ,REVIEW_CONTENT
-		    ,USER_ID
-		    ,SCORE
-		    ,REVIEW_IMG 
-		) VALUES (
-			${orderNum }
-			,#{storeId }
-			,#{reviewContent }
-			,#{userId}
-			,#{score}
-			,#{reviewImg }
-		)		
-	</insert>
-	
-	<update id="reviewModify">
-    UPDATE DL_REVIEW SET
-        REVIEW_CONTENT = #{reviewContent }
-        ,SCORE = #{score}
-        
-        <if test="reviewImg != null">
-        ,REVIEW_IMG = #{reviewImg }
-        </if>
-        
-    WHERE
-        ORDER_NUM = ${orderNum }    
-	</update> -->
+
+
 
 </mapper>

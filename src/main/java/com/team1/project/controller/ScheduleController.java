@@ -172,6 +172,7 @@ public class ScheduleController {
 	@PostMapping("/update/{scheduleNum}")
 	public Map<String, Object> update(@RequestBody List<ScheduleDTO> schedules, @PathVariable("scheduleNum") int scheduleNum) throws Exception {
         ScheduleDTO insertDto = new ScheduleDTO();
+        System.out.println("들어온 데이터 = " + schedules);
         // 여러 일정에 대한 처리
         for (int i = 0; i < schedules.size(); i++) {
         	ScheduleDTO dto = schedules.get(i);

@@ -62,7 +62,15 @@
 					        <td class="inquiry_input_title"><a class="inq_title">${item.title}</a></td>
 					        <td class="inquiry_input">${item.member_id}</td>
 					        <td class="inquiry_input">${item.regdate}</td>
-					        <td class="inquiry_input">${item.answer_yn}</td>
+					        <c:choose>
+					        	<c:when test="${item.answer_yn=='Y'}">
+					        		<td class="inquiry_input">답변 완료</td>
+					        	</c:when>
+					        	<c:otherwise>
+					        		<td class="inquiry_input">답변 진행중</td>
+					        	</c:otherwise>
+					        </c:choose>
+					        
 					    </tr>
 					</c:forEach>
  				</table>

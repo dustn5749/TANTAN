@@ -36,8 +36,6 @@ public interface ScheduleDAO {
 	// 일정 조회수증가
 	public int viewCount(int scheduleNum) throws Exception;
 
-	//2. 메인에 TOP5 출력하기
-	//	public List<ScheduleDTO> schduleTop5() throws Exception;
 			
 	// 일정 수정하기
 	public boolean scheduleUpdate(Map<String, Object> params) throws Exception;
@@ -48,6 +46,16 @@ public interface ScheduleDAO {
 	//답글 폼
 	public int reply(ScheduleDTO schdule) throws Exception;
 
+	
+
+	// 내 일정 정보 가져오기 
+	public List<ScheduleDTO> getMyScheduleList(String member_id);
+
+
+	// top3 스케쥴 목록 가져오기
+	public List<ScheduleDTO> getTop3ScheduleList();
+	
+	
 	
 	//무한 스크롤
 
@@ -76,10 +84,4 @@ public interface ScheduleDAO {
 
 
 
-	// 내 일정 정보 가져오기 
-	public List<ScheduleDTO> getMyScheduleList(String member_id);
-
-
-	// top3 스케쥴 목록 가져오기
-	public List<ScheduleDTO> getTop3ScheduleList();
 }

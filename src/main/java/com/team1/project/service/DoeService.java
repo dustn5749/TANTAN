@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.DoeDAO;
 import com.team1.project.dto.DoeDTO;
+import com.team1.project.dto.ReviewDTO;
 
 @Service
 public class DoeService {
@@ -17,14 +18,18 @@ public class DoeService {
 	@Autowired
 	public DoeDAO doeDAO;
 	
-	// 스케쥴러를 이용해서 도의 평균내기
+	
+	// 평점 순 리뷰리스트 
 	@Scheduled(fixedDelay = 60000)
-	@Transactional
-	public List<DoeDTO> ScheduleAverageDoe(String  doe_name) {
-	
-		return doeDAO.ScheduleAverageDoe(doe_name);
+	public List<DoeDTO> getTopReviewList() {
+		System.out.println("시간마다 파일 리뷰 평점 순위 데이터 가져오기");
+		// 전체 도 평균 내기
+		doeDAO.averageDoeTotal();
+		List<DoeDTO> doeList = doeDAO.getTopReviewList();
+		System.out.println("doeList = " + doeList);
+		return doeList;
 	}
-	
+    
 	// 도의 정보가져오기
 	public DoeDTO getDoe(int doe_num) {
 		System.out.println("doeService.getDoe()");
@@ -35,6 +40,14 @@ public class DoeService {
         System.out.println("doeServiec.findDoeNum");
         return doeDAO.findDoeNum(doe_name);
     }
+    
+    // 도 리뷰 이미지 가져오기
+	public String getDoeImg(String doe_Name) {
+		System.out.println("doeService.getDoeImg(doe_name) = " + doe_Name);
+		String doe_img =  doeDAO.getDoeImg(doe_Name);
+		System.out.println("doe_img = " + doe_img);
+		return doe_img;
+	}
     
 
 

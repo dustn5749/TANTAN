@@ -220,9 +220,9 @@
             <p id="content">내용: <span>${us.content}</span></p>
             <p>이메일: <span>${writer.email}</span></p>
             <p>전화번호: <span>${writer.phone}</span></p>
-            <p>시작 날짜: <input type="date" id="start_Date" value="${us.start_Date}" readonly="readonly"></p>
-            <p>시작 날짜: <input type="date" id="start_Date" value="${us.start_Date}"readonly="readonly"></p>
-            <p>종료 날짜: <input type="date" id="end_Date" value="${us.end_Date}" readonly="readonly"></p>
+           
+            <p>시작 날짜: <input type="text" id="start_Date" value="${us.start_Date}"readonly="readonly"></p>
+            <p>종료 날짜: <input type="text" id="end_Date" value="${us.end_Date}" readonly="readonly"></p>
             <p>게시글 번호: <span id="us_num">${us.us_num}</span></p>
             <p>동행 수: <span id="us_cnt">${us.us_cnt}</span></p>
         </div>

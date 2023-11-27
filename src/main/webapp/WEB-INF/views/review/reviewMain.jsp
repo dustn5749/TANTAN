@@ -626,7 +626,7 @@
      	        '대구': '/assets/img/doereview/Daegu.jpg',
      	        '울산': '/assets/img/doereview/Ulsan.jpg',
      	        '부산': '/assets/img/doereview/busan.jpg',
-     	        '경북': '/assets/img/doereview/geoungju.png'
+     	        '경북': '/assets/img/doereview/Gyeongbuk.png'
      	    };
     	 
         
@@ -666,7 +666,7 @@
      	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
      	            $(".avlStar .star-rating input").prop("disabled", true);
      	            var reviewList = data.reviewList;
-
+					
      	            reviewList.forEach(function (e) {
      	                var div = document.createElement("div");
      	                $(div).addClass("review_area");
@@ -814,7 +814,7 @@
 	     	        '대구': '/assets/img/doereview/Daegu.jpg',
 	     	        '울산': '/assets/img/doereview/Ulsan.jpg',
 	     	        '부산': '/assets/img/doereview/busan.jpg',
-	     	        '경북': '/assets/img/doereview/geoungju.png'
+	     	        '경북': '/assets/img/doereview/Gyeongbuk.png'
 	     	    };
 	    	 
 	        

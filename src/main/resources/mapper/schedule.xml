@@ -54,7 +54,6 @@ values(
 	#{schedule_Num},
     #{member_id},
     #{title},
-    #{member_Id},
     #{doe_Name},    
     #{start_Num},
     #{end_Date},
@@ -189,7 +188,11 @@ values(
 	
 	<!--top3 스케쥴목록 가져오기  -->
 	<select id="getTop3ScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-		select * from SCHEDULE
+		     SELECT * FROM (
+              SELECT * FROM SCHEDULE
+              ORDER BY LIKECNT DESC
+          )
+          WHERE ROWNUM &lt;= 3
 	</select>
 
 </mapper>
