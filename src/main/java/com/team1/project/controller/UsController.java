@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.MemberService;
+import com.team1.project.service.UsCommentService;
 import com.team1.project.service.UsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,9 @@ public class UsController {
 	
 	@Autowired
 	 private MemberService memberservice;
+	
+	@Autowired
+	private UsCommentService usCommentService;
 	
 	// 1. 동행 전체 목록 페이지
 	@RequestMapping(value = "/list")
@@ -74,6 +78,7 @@ public class UsController {
 	      System.out.println("동행 상세보기 컨트롤러");
 	      model.addAttribute("writer", writer);
 	      model.addAttribute("us", usDetail);
+	      model.addAttribute("commentList", usCommentService.getUsCommentList(us_num));
 	    return "usDetail";
 	    }
 	

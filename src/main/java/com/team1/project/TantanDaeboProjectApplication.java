@@ -17,9 +17,7 @@ import com.team1.project.dto.UsDTO;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.team1.project")
 public class TantanDaeboProjectApplication {
-	
-	
-	
+
     public static void main(String[] args) {
         SpringApplication.run(TantanDaeboProjectApplication.class, args);
     }

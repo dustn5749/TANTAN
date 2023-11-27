@@ -2,6 +2,13 @@
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -176,10 +183,19 @@
             text-align: center;
         }
 		/*  */
-		#replyContainer > div > button {
-		font-family: 'Pretendard-Regular';
+		#replyContainer {
+			display: flex;
+			width: 100%;
+			text-align: center;
 		}
-
+		#replyContainer > div  {
+		font-family: 'Pretendard-Regular';
+		margin-right: 20px;
+		}
+		#replyContainer > button {
+			font-family: 'Pretendard-Regular';
+			width: 150px;
+		}
 
         /* 신고 모달 스타일 */
         .reportmodal {
@@ -292,6 +308,49 @@
    			font-size: 20px !important;
   			font-family: 'Pretendard-Regular';
         }
+        
+        /* 댓글 작성 div */
+        .reply_content {
+        	display: flex;
+        	width: 100%;
+        	border: 1px solid grey;
+        	border-radius: 7px;
+        	
+        }
+        .reply_content > textarea{
+        	width: 100%;
+        	border: none;
+        }
+
+        
+        /* 댓글 리스트 */
+        .commnet_area {
+        	text-align: center;
+        	margin-top: 30px !important;
+        	margin-bottom: 50px !important;
+        	margin: 0 auto;
+        	align-content: center;
+        	align-items: center;
+        	justify-content: center;
+        	padding-left: 50px;
+        }
+        .comment_area_inner {
+        	display: flex;
+			text-align: left;
+			height: 40px;
+		
+
+        }
+        .member_id_div{
+        	display: flex;
+        	margin-right: 30px;
+        	width: 120px;
+        	
+        }
+        .member_id_div > p {
+        	font-size: 20px !important;
+        	color : grey;
+        }
     </style>
 </head>
 
@@ -342,20 +401,37 @@
 		        <!-- 버튼 그룹 -->
 		        <div class="button-group">
 		            <button class="report-button" onclick="openModal()">신고하기</button>
+		           <c:if test="${principal.user.member_id == us.writer}">
 		            <button class="orange-btn" onclick="editEntry()">수정하기</button>
 		            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
 		            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
+		            </c:if>
 		        </div>
 		        
 		        <!-- 댓글 섹션 -->
 		        <div class="reply-section">
 		            <div id="replyContainer">
-		                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
+		             	<div class="reply_content">
+			                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
+		             	</div>
+			                <button class="insertBtn" onclick="btnInsert()">댓글쓰기</button>	             	
+		            </div>
+		            
+		            <div class="commnet_area">
+		        
+		            	<c:forEach items="${commentList}" var="item">
+		            		<div class="comment_area_inner">
+		            			<div class="member_id_div">
+		            				<img src="/assets/img/userReview.png" width="30px">
+		            				<p class="member_id">${item.writer}</p>
+		            			</div>
+		            			<div class="content_area">${item.content}</div>
+		            		</div>
+		            	</c:forEach>
+		            </div>
 		                <div class="reply-form-button-wrapper">
-		                    <button class="orange-btn" onclick="btnInsert()">댓글쓰기</button>
 		                    <button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
 		                </div>
-		            </div>
 		        </div>
 		</div>
 	        <!-- 신고 모달 -->
@@ -381,7 +457,15 @@
 	            </div>
 	        </div>
 	 </div>
-
+		<c:choose>
+		    <c:when test="${!empty principal}">
+		        <input type="hidden" value="${principal.user.member_id}" class="member">			
+		    </c:when>
+		    <c:otherwise>
+		        <input type="hidden" value="null" class="member">
+		    </c:otherwise>		
+		</c:choose>
+		<input type="hidden" id="us_num" value="${us.us_num}">
     <script>
     
           document.addEventListener("DOMContentLoaded", function () {
@@ -530,35 +614,77 @@ function goToHomepage() {
 const replyContainer = document.getElementById('replyContainer');
 
 function btnInsert() {
-    const loggedInUserId = "사용자의 ID"; // 사용자의 ID를 가져와야 함
+    const loggedInUserId = $(".member").val(); // 사용자의 ID를 가져와야 함
     const replyContent = document.getElementById('reply-form').value;
+	const us_num = $("#us_num").val();
+	
+	 if(loggedInUserId != ""){ 
+		 if(replyContent != ""){
+			  const data = {
+				    	us_num : us_num,
+				    	writer: loggedInUserId,
+				        content: replyContent
+				    };
+				
+					$.ajax({
+						url : "/comment/insertComment",
+					    type: 'POST',
+					    contentType: "application/json; charset=UTF-8",
+					    data: JSON.stringify(data),
+					    dataType: "json",
+					    success: function (data) {
+							alert(data.message);
+							if(data.status){
+								var commentList = data.commentList;
+								var commentArea = $(".commnet_area");
+								commentArea.empty();
+								
+								commentList.forEach(function(e) {
+									var div = document.createElement("div");
+									$(div).addClass("comment_area_inner");
+									
+			     	                var member_id = document.createElement("div");
+			     	                var member_img = document.createElement("img");
+			     	               $(member_img).attr("src", "/assets/img/userReview.png");
+			     	              $(member_img).css({
+			     	            		"width" : "30px"  
+			     	              })
+			     	                var member_id_p = document.createElement("p");
+			     	                $(member_id_p).text(e.writer);
+			     	                $(member_id).addClass("member_id_div");
+				     	            $(member_id_p).addClass("member_id");
+				     	            
+				     	            $(member_id).append(member_img);
+				     	            $(member_id).append(member_id_p);
+				     	            
+									
+									var content = document.createElement("div");
+									$(content).addClass("content_area");
+									$(content).text(e.content);
+									
+									 $(div).append(member_id);
+									 $(div).append(content);
+									 
+									 
+									 $(commentArea).append(div);
 
-    const data = {
-        userId: loggedInUserId,
-        content: replyContent
-    };
+								});
+								
+								
+							}
+						}
+					})
+					
+		 } else {
+			 alert("댓글 내용을 입력해주세요");
+		 }
+	  
+		
+	 } else {
+		alert("로그인 후 이용해주세요")
+	} 
+    
 
-    fetch('/comments/insertComment', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        const newReply = document.createElement('div');
-        newReply.classList.add('reply');
-        newReply.textContent = replyContent;
-
-        const replyContainer = document.getElementById('replyContainer');
-        replyContainer.appendChild(newReply);
-
-        document.getElementById('reply-form').value = '';
-    })
-    .catch(error => {
-        console.error("댓글 추가 중 오류 발생:", error);
-    });
 }
 
     </script>

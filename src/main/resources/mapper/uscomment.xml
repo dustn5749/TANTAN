@@ -3,16 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team1.project.dto.UsDTO">
+<mapper namespace="com.team1.project.dao.UsCommentDAO">
     <!-- 댓글 등록 -->
     <insert id="insertCommentUS">
-        <selectKey keyProperty="commentid" resultType="int" order="BEFORE">
-            select SEQ_COMMENT.nextval as commentid from dual
-        </selectKey>
         INSERT INTO US_COMMENT (
-            COMMENTID, CONTENTS, WRITER, REGDATE, US_NUM
+            COMMENTID,US_NUM, CONTENT, WRITER, REGDATE
         ) VALUES (
-            #{commentid}, #{content}, #{writer}, SYSDATE, #{us_num}
+            SEQ_COMMENT.nextval, #{us_num}, #{content}, #{writer}, SYSDATE
         )
     </insert>
+    
+    <!-- 댓글 목록 가져오기 -->
+    <select id="getUsCommentList" resultType="com.team1.project.dto.UsCommentDTO">
+    	select * from us_comment
+    	where us_num=#{us_num}
+    </select>
 </mapper>
