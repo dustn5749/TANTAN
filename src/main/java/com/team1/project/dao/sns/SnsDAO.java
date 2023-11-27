@@ -5,6 +5,7 @@ import com.team1.project.entity.SnsBoard;
 import com.team1.project.entity.SnsBoardFile;
 import com.team1.project.service.sns.SnsBoardRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,5 +28,7 @@ public interface SnsDAO {
 
   void saveFile(SnsBoardFile snsBoardFile);
 
-  void updateProfile(String memberId, String key);
+  void updateProfile(Map<String,Object> map );
+
+  List<SnsBoardFile> getFile(Long id);
 }

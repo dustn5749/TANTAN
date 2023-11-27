@@ -53,6 +53,7 @@ public class SnsBoardService {
     	// 주어진 게시물 번호에 해당하는 게시물을 반환
     	// 게시물이 없는 경우 기본적으로 빈 'SnsBoard' 객체를 반환
         SnsBoard byId = snsDAO.findById(id);
+        byId.setFiles(snsDAO.getFile(id));
         return Objects.nonNull(byId) ? byId : new SnsBoard();
     }
 

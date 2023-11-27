@@ -6,6 +6,7 @@ import com.team1.project.dto.SnsBoardDTO;
 import com.team1.project.entity.Friend;
 import com.team1.project.entity.FriendRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,7 +17,7 @@ public interface FriendDAO {
 
     List<FriendDTO> getFriendList(String memberId);
 
-    FriendRequest findByReceiveMemberIdAndSendMemberId(String receiveMemberId, String sendMemberId);
+    FriendRequest findByReceiveMemberIdAndSendMemberId(Map<String,Object> map);
 
     void save(FriendRequest n);
 
@@ -30,9 +31,9 @@ public interface FriendDAO {
 
     FriendDTO getFriendInfo(Long friendId);
 
-    FriendDTO getFriendInfoByRegIdResId(String regId, String resId);
+    FriendDTO getFriendInfoByRegIdResId(Map<String,Object> map);
 
     void deleteFriendId(Long friendId);
 
-    void deleteFriendReq(String regId, String resId);
+    void deleteFriendReq(Map<String,Object> map);
 }

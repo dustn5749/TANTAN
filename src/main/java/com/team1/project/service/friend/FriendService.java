@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -32,8 +33,8 @@ public class FriendService {
 
   @Transactional
   public void requestFriend(String receiveMemberId, String sendMemberId){
-
-    FriendRequest request = friendDAO.findByReceiveMemberIdAndSendMemberId(receiveMemberId, sendMemberId);
+    //String receiveMemberId, String sendMemberId
+    FriendRequest request = friendDAO.findByReceiveMemberIdAndSendMemberId(Map.of("receiveMemberId",receiveMemberId, "sendMemberId", sendMemberId));
 
     if(Objects.isNull(request)){
       friendDAO.save(
@@ -99,16 +100,16 @@ public class FriendService {
   public void deleteFriend(Long friendId, String memberId) {
 
     FriendDTO friendInfo = friendDAO.getFriendInfo(friendId);
-    FriendDTO res = friendDAO.getFriendInfoByRegIdResId(friendInfo.getRegId(),
-        friendInfo.getResId());
+    // String regId, String resId
+    FriendDTO res = friendDAO.getFriendInfoByRegIdResId(Map.of("regId",friendInfo.getRegId(),"resId",friendInfo.getResId()));
 
     friendDAO.deleteFriendId(res.getId());
-    FriendDTO req = friendDAO.getFriendInfoByRegIdResId(friendInfo.getResId(),
-        friendInfo.getRegId());
+    FriendDTO req = friendDAO.getFriendInfoByRegIdResId(Map.of("regId",friendInfo.getResId(),"resId",friendInfo.getRegId()));
 
     friendDAO.deleteFriendId(req.getId());
 
-    friendDAO.deleteFriendReq(friendInfo.getRegId(),  friendInfo.getResId());
-    friendDAO.deleteFriendReq(friendInfo.getResId(),  friendInfo.getRegId());
+    //String regId, String resId
+    friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getRegId(), "resId", friendInfo.getResId()));
+    friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getResId(), "resId", friendInfo.getRegId()));
   }
 }

@@ -10,6 +10,7 @@ import com.team1.project.entity.SnsLike;
 import com.team1.project.service.alim.AlimSendService;
 import com.team1.project.service.alim.AlimService;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class SnsLikeService {
 
         } else {
         	 // 이미 좋아요가 등록되어 있는 경우, 좋아요를 취소
-            snsLikeDAO.deleteByMemberIdAndBoardNum(memberId,boardNum);
+            snsLikeDAO.deleteByMemberIdAndBoardNum(Map.of("memberId", memberId, "boardNum", boardNum));
         }
 
     }

@@ -42,11 +42,9 @@
     <div class="lg-thumbnail-container">
         <!--큰 이미지-->
         <div class="lg-thumbnail">
-            ${board}
-
             <c:if test="${board.files != null}">
                 <div class="thumnail-img-box">
-                    <img src="<c:url value="${board.files[0].uploadName}"/>" alt="">
+                    <img src="${board.files[0].realName}" alt="">
                 </div>
             </c:if>
 

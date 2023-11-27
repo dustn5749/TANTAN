@@ -5,6 +5,7 @@ import com.team1.project.dto.chat.ChatMember;
 import com.team1.project.dto.chat.ChatMemberList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,6 @@ public class ChatMemberService {
   }
 
   public void deleteMemberRoom(Long roomNum, String memberId) {
-    chatMemberDAO.deleteMemberRoom(roomNum,memberId);
+    chatMemberDAO.deleteMemberRoom(Map.of("roomNum", roomNum, "memberId", memberId));
   }
 }

@@ -129,8 +129,21 @@ update SNS_BOARD
       and sb.BOARD_NUM = #{boardNum}
       and sb.delete_yn = 'N'
   </select>
+  <select id="getFile" resultType="com.team1.project.entity.SnsBoardFile">
+    select
+        file_num fileNum,
+        board_num boardNum,
+        member_id memberId,
+        length length,
+        upload_name uploadName,
+        real_name realName,
+        file_type fileType,
+        reg_date regDate,
+        order_num orderNum
+    from SNS_FILE sf
+    where sf.BOARD_NUM = #{boardNum}
 
-
+  </select>
 
 
 </mapper>
