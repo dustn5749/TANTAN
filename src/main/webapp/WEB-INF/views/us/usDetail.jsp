@@ -23,6 +23,10 @@
     font-weight: 400;
     font-style: normal;
 }
+
+input, span, div, p, button, a, h2 {
+    font-family: 'Pretendard-Regular';
+}
  
  /* 상세보기 페이지 전체 div */
     .usDetail_div {
@@ -402,9 +406,9 @@
 		        <div class="button-group">
 		            <button class="report-button" onclick="openModal()">신고하기</button>
 		           <c:if test="${principal.user.member_id == us.writer}">
-		            <button class="orange-btn" onclick="editEntry()">수정하기</button>
-		            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
-		            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
+			            <button class="orange-btn" onclick="editEntry()">수정하기</button>
+			            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
+			            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
 		            </c:if>
 		        </div>
 		        
