@@ -68,9 +68,8 @@ SELECT u.*, uf.usfilenum as fileNo
 	            end_Date,
 	            title,
 	            content,
-	           imageurl
+	            imageurl
 	            FROM us a 
-	            WHERE 1=1 
 	            <if test="start_Date != null and end_Date != null">
 	                WHERE start_Date <![CDATA[>=]]> TO_DATE( #{start_Date}, 'YYYY-MM-DD') 
           			AND end_Date <![CDATA[<=]]> TO_DATE(#{end_Date}, 'YYYY-MM-DD')
@@ -81,7 +80,6 @@ SELECT u.*, uf.usfilenum as fileNo
 	) u
 	left outer join us_file uf
 		on u.us_num = uf.us_num
-
 </select>
 
    

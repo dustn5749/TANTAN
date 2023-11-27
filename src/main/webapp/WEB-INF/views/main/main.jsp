@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
 <html>
@@ -254,7 +255,7 @@
 /* 최신 동행 모집 title */
 .fw-bolder {
 	font-size: 23px !important;
-	height: 100px;
+	height: 80px;
 	margin-bottom:10px;
 	font-weight: bold;
 	font-family: 'Pretendard-Regular' !important;
@@ -439,7 +440,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${item.title}</h5>
                                     <!-- Product price-->
-                                   <span class="date">${item.start_Date}</span> ~ <span  class="date">${item.end_Date}</span>
+                                   <span class="date">${fn:substring(item.start_Date, 0, 10) }</span> ~ <span  class="date">${fn:substring(item.end_Date, 0, 10) }</span>
                                 </div>
                             </div>
                             <!-- Product actions-->

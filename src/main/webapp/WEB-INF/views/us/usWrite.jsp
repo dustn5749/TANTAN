@@ -82,6 +82,7 @@ cursor: pointer;
         /* 페이지 전체 container */
         .us_write_container {
             padding: 3%;
+            margin-left: 200px;
         }
 
         /* 드랍다운 container */
@@ -95,18 +96,18 @@ cursor: pointer;
         }
 
         .dropdown_btn_container {
-            width: 100px;
+         	width: 100%;
         }
 
         .dropdown_btn {
             font-family: 'Pretendard-Regular' !important;
-            width: 70px;
+            width: 100px;
             border: none;
             border-radius: 5px;
             color: white;
             background-color: #0d6efd;
             cursor: pointer;
-            height: 40px;
+            height: 50px;
         }
 
         .dropdown_btn:hover {
@@ -117,7 +118,7 @@ cursor: pointer;
         .dropdown_btn + .dropdown-menu {
             position: absolute;
             top: 0;
-            left: 230%;
+            left: 120%;
             border: 1px solid #ccc;
             border-radius: 3px;
             z-index: 1;
@@ -366,9 +367,7 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">부산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">대구</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">인천</li>
-                
-
-<li class="nav-li" onclick="select_area(this.innerText)">광주</li>
+				<li class="nav-li" onclick="select_area(this.innerText)">광주</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">대전</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">울산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">세종</li>
@@ -379,15 +378,11 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">전북</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">전남</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">경북</li>
-                
-               
-<li class="nav-li" onclick="select_area(this.innerText)">경남</li>
+				<li class="nav-li" onclick="select_area(this.innerText)">경남</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">제주</li>
             </ul>
         </div>
-    
-   
-</div>
+	</div>
 </div>
 
   

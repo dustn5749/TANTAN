@@ -33,6 +33,28 @@
    display: flex;
 }
 
+.card.box-shadow{
+	height: 500px;
+}
+
+
+.card-body.p-4{
+	height: 450px;
+}
+.card-footer.p-4.pt-0.border-top-0.bg-transparent{
+	height: 45px;
+	margin-bottom: 5px;
+}
+.text-center {
+	height: 100%;
+	
+}
+.text-center > button {
+	height: 100%;
+}
+.fw-bolder {
+	margin-bottom: 10px;
+}
 }
 .us_header {
    position: sticky;
@@ -169,7 +191,7 @@
 .fillter_btn_area {
    display: flex;
    width: 300px;
-   /*       magin:100px; */
+   margin-bottom: 30px;
 }
 
 .fillter_btn {
@@ -506,6 +528,29 @@ div, input, p, span, button, h2 {
    background-color: black;
    color: white;
 }
+
+/* 페이징 처리 */
+.nav_div {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	
+}
+
+.nav_div > a {
+	font-size: 20px !important;
+	cursor: pointer !important;
+}
+.nav_div > a:hover {
+	color : red;
+}
+.nav_div  > strong {
+	font-size: 24px !important;
+	background-color: rgb(248, 248, 248);
+}
+.nav_div> a,strong {
+	margin-left: 10px;
+}
+
 </style>
 </head>
 

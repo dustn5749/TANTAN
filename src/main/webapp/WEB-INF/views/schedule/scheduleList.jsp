@@ -6,6 +6,18 @@
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
+@font-face {
+   font-family: 'Pretendard-Regular';
+   src:
+      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff');
+   font-weight: 400;
+   font-style: normal;
+}
+
+input, button, div, span, h2, p, h5{
+ font-family: 'Pretendard-Regular';
+}
 .us_container {
    width: 80%;
    margin: 0 auto;
@@ -140,6 +152,7 @@
    position: relative;
    left: -820px;
    width: 78%;
+   margin-bottom: 30px;
 }
 
 .fillter_btn {
@@ -420,6 +433,52 @@ ul>li {
 .button-container {
    text-align: center;
 }
+.card.box-shadow{
+	height: 450px;
+}
+.schedule_detail {
+	height: 130px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.detail_btn_area {
+	margin-top: 20px;
+	height: 50px;
+}
+.detailBtn{
+	background: white;
+	border: none;
+	width: 100px;
+	height: 40px;
+	border-radius: 7px;
+}
+.detailBtn:hover{
+	background: black;
+	color: white;
+}
+
+/* 페이징 처리 */
+.nav_div {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	
+}
+
+.nav_div > a {
+	font-size: 20px !important;
+	cursor: pointer !important;
+}
+.nav_div > a:hover {
+	color : red;
+}
+.nav_div  > strong {
+	font-size: 24px !important;
+	background-color: rgb(248, 248, 248);
+}
+.nav_div> a,strong {
+	margin-left: 10px;
+}
+
 </style>
 </head>
 
@@ -591,7 +650,9 @@ ul>li {
                                                 value="${schedule.member_id}"> <input
                                                 type="hidden" name="schedule_Num"
                                                 value="${schedule.schedule_Num}">
-                                             <%--<p>${schedule.title}</p> --%>
+                                                
+                                                
+                                            <div class="schedule_detail">
                                              <h5 class="fw-bolder">${schedule.title}</h5>
                                              <p>${schedule.member_id}</p>
                                              <p>지역:${schedule.doe_Name}</p>
@@ -601,9 +662,10 @@ ul>li {
                                                 value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
                                              <input type="hidden" value="${schedule.schedule_Num}"
                                                 class="schedule_num">
-                                             <div
+                                          </div>
+                                             <div 
                                                 class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center">
+                                                <div class="detail_btn_area">
                                                    <input type="button" value="상세보기" class="detailBtn">
                                                 </div>
                                              </div>
@@ -629,32 +691,35 @@ ul>li {
          </form>
       </div>
 
-      <!-- 페이징 처리 -->
    </div>
-
-   <!-- Display page numbers -->
-   <div style="text-align: center;">
-      <c:forEach var="item" begin="${result.schedule.navStart}"
-         end="${result.schedule.navEnd}">
-         <c:choose>
-            <c:when test="${result.schedule.pageNo != item}">
-               <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
-            </c:when>
-            <c:otherwise>
-               <strong>${item}</strong>
-            </c:otherwise>
-         </c:choose>
-      </c:forEach>
+         <!-- 페이징 처리 -->
+         <div class="nav_div" style="text-align: center; margin-top: 10px;">
+            <c:if test="${result.schedule.navStart != 1}">
+               <a href="#" onclick="jsPageNo(${result.schedule.navStart-1})"
+                  class="pageArrow">&lt;</a>
+            </c:if>
 
 
+            <c:forEach var="item" begin="${result.schedule.navStart}"
+               end="${result.schedule.navEnd}">
+               <c:choose>
+                  <c:when test="${result.schedule.pageNo != item}">
+                     <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
+                  </c:when>
+                  <c:otherwise>
+                     <strong>${item}</strong>
+                  </c:otherwise>
+               </c:choose>
+            </c:forEach>
 
-      <!-- Display next page link if there are more pages -->
-      <c:if
-         test="${result.schedule.navEnd != result.schedule.totalPageSize}">
-         <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
-            class="pageArrow">&gt;</a>
-      </c:if>
-   </div>
+
+            <c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
+               <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
+                  class="pageArrow">&gt;</a>
+            </c:if>
+
+         </div>
+
 
 
    <script>
@@ -691,7 +756,6 @@ ul>li {
     });
 }
             function moveToSelectedRegion() {
-                alert('메뉴화면으로 이동!');
                 window.location.href = '/schedule/list';
             }
 
