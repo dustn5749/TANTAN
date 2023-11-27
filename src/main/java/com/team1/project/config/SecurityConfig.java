@@ -64,9 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/main.do","/assets/sns/**", "/assets/**", "/assets/admin/**",
 						"/main/**", "/member/loginForm.do", "/member/**", "/**"
 					).permitAll() // 해당 경로들은 접근을 허용
-			.antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN") //여러개의 권한 중 하나라도 있으면 성공 
+			.antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN") //여러개의 권한 중 하나라도 있으면 성공
+			//.antMatchers("/page/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN") //여러개의 권한 중 하나라도 있으면 성공
 			.antMatchers("/manager/**").hasAnyAuthority("ROLE_MANAGER","ROLE_ADMIN") //MANAGER, ADMIN 권한만 허가 됨 
-			.antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN") //ADMIN 권한만 허가  
+			.antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN") //ADMIN 권한만 허가
+			.antMatchers("/pgae/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN") //여러개의 권한 중 하나라도 있으면 성공허가
+				.antMatchers("/chat/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN") //여러개의 권한 중 하나라도 있으면 성공허가
 			.anyRequest() // 다른 모든 요청은
 			.authenticated() // 인증된 유저만 접근을 허용
 		.and()

@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,11 @@ public class FriendDataController {
   @PostMapping("/friend/request/{receiveMemberId}")
   public void registerFriend(@PathVariable String receiveMemberId, Authentication authentication){
     service.requestFriend(receiveMemberId, authService.getMemberId(authentication));
+  }
+
+  @DeleteMapping("/friend/{friendId}")
+  public void registerFriend(@PathVariable Long friendId, Authentication authentication){
+    service.deleteFriend(friendId, authService.getMemberId(authentication));
   }
 
   @GetMapping("/friend/request/{receiveMemberId}")

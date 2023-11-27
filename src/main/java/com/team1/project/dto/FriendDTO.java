@@ -13,5 +13,6 @@ public class FriendDTO {
   private LocalDate resDate;
 
   private String nickname;
+  private String profileImg;
 
 }

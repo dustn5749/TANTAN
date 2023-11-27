@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+
+    <definition name="non-layout" template="/WEB-INF/views/sns/sns-detail-layout.jsp">
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <definition name="friend-modal" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-modal.jsp"/>
+    </definition>
+
+    <definition name="friend-list" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-list.jsp"/>
+    </definition>
+
+    <definition name="friend-req" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/friend/friend-req.jsp"/>
+    </definition>
+
+</tiles-definitions>

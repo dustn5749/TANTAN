@@ -4,21 +4,18 @@
 <div class="modal-overlay" onclick="closeModal('friend-list-modal')"></div>
 
 <div class="common-modal narrow-modal">
-    <div class="common-modal-top">
-                <h2 class="ttl">친구</h2>
-                <div class="btn-wrap">
     <!-- 닫기버튼 -->
     <button type="button" class="icon-btn close-btn" onclick="closeModal('friend-list-modal')">
         <img src="<c:url value="/assets/sns/images/icon-close.svg"/>" alt="">
     </button>
     <!-- END 닫기버튼 -->
-		</div>
-    </div>
-    <!-- END 제목 + 닫기버튼 -->
-    
+
     <!-- 친구이름 검색 & 채팅초대 버튼 -->
     <div class="friend-modal-hd">
         <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
+        <button class="btn" onclick="openInviteModal()">
+            <img src="<c:url value="/assets/sns/images/message-circle-plus.svg"/>" alt="" class="icon">
+        </button>
     </div>
     <!-- END 친구이름 검색 & 채팅초대 버튼 -->
 
@@ -69,9 +66,6 @@
         } else {
           $('#tab-friend-invite').load('/page/friend/request').addClass('active');
         }
-
-        // $('#' + showTabContent).addClass('active');
       });
-
     });
 </script>

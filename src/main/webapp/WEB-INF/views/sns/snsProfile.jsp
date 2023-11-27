@@ -98,7 +98,7 @@
                                 <span>${member.nickname}</span>
                                 <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" alt="" class="badge-certify">
                             </h2>
-                            <button type="button" class="btn solid-btn blue-btn">메세지 보내기</button>
+                            <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
                         </div>
                         <div class="info01">
                             <dl>
@@ -152,7 +152,8 @@
             <!-- 프로필 영역 아래 부분 -->
             <div class="profile-bottom">
                 <div class="btn-wrap">
-                    <button type="button" class="btn txt-btn blue-btn">+ 새 컬렉션</button>
+                    <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button>
+                    <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
                 </div>
 
                 <!--게시물 목록 영역 -->
@@ -206,6 +207,34 @@
 
 <script>
 
+  $(function(){
+    $('#collectionBtn').on('click',function(){
+      $('#boardFile').trigger('click');
+    });
+    $('#boardFile').on('change',function(){
+      var file = this.files[0];
+
+      // FormData 객체 생성
+      var formData = new FormData();
+      formData.append("file", file);
+
+      $.ajax({
+        url: "/boards/upload",  // 원하는 엔드포인트로 수정
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          console.log("File uploaded successfully:", response);
+          location.reload();
+        },
+        error: function(error) {
+          console.error("Failed to upload the file:", error);
+        }
+      });
+    });
+  })
+
     $('textarea[data-autoresize]').each(function () {
         var offset = this.offsetHeight - this.clientHeight;
 
@@ -241,7 +270,7 @@
     })
 
     function openBoardModal(id) {
-        $('#feed-modal').load("/sns/board/detail/" + id, "", () => {
+        $('#feed-modal').load("/sns/board/detail/" + id, () => {
             $('#feed-modal').addClass('active');
         });
     }
@@ -252,7 +281,7 @@
     
     function snsProfileModify() {
         // 프로필 편집 페이지로 리다이렉션
-        location.href = "/sns/snsProfileModify";
+        location.href = "/sns/profile/modify";
     }
     
  
@@ -267,6 +296,11 @@
         }
       })
       $('#' + id).removeClass('active');
+    }
+
+    function fileChange(){
+
+      //$('#boardFile').
     }
 </script>
 </body>
