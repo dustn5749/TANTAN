@@ -151,9 +151,7 @@ img {
   cursor: pointer;
 }
 
-.sidebar-btn.active {
-  border: 1px solid #393939;
-}
+
 
 .sidebar-btn .icon {
   width: 32px;

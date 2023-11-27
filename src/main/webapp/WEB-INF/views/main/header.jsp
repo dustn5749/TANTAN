@@ -66,9 +66,9 @@
       text-align: center;
 
 
-      /* 버튼 아이콘의 크기를 조절 */
+      /* 버튼 아이콘의 크기 조절 */
       .nav-icon i {
-        font-size: 30px; /* 원하는 크기로 조절합니다. */
+        font-size: 30px; 
       }
 
 

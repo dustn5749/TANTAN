@@ -174,14 +174,6 @@
                         <span class="txt">알림</span>
                     </button>
                     <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
-                        <span class="txt">저장됨</span>
-                    </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-activity.svg" alt="" class="icon">
-                        <span class="txt">내 활동</span>
-                    </button>
-                    <button type="button" class="sidebar-btn">
                         <figure class="mini-thumnail">
                             <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
@@ -231,7 +223,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="account">
-                            <input type="radio" name="account_open_yn" value="y">공개
+                            <input type="radio" name="account_open_yn" value="y" checked>공개
                             <input type="radio" name="account_open_yn" value="n">비공개
                         </div>
                         <div class="detail_content_inner">
@@ -259,7 +251,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="gender">
-                            <input type="radio" name="gender_open_yn" value="y">공개
+                            <input type="radio" name="gender_open_yn" value="y" checked>공개
                             <input type="radio" name="gender_open_yn" value="n">비공개
                         </div>
                     </div>
@@ -273,7 +265,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="city">
-                            <input type="radio" name="city_open_yn" value="y">공개
+                            <input type="radio" name="city_open_yn" value="y" checked>공개
                             <input type="radio" name="city_open_yn" value="n">비공개
                         </div>
                     </div>
@@ -286,21 +278,26 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="age">
-                            <input type="radio" name="age_open_yn" value="y">공개
+                            <input type="radio" name="age_open_yn" value="y" checked>공개
                             <input type="radio" name="age_open_yn" value="n">비공개
                         </div>
-                    </div>
+                    d</div>
                 </div>
             </div>
             <!-- 편집 나가기 버튼 -->
             <div class="btn_area">
-                <button class="back_btn">편집 끝내기</button>
+                <button type="button" class="back_btn" onclick="ModifyComplete()">편집 끝내기</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+	function ModifyComplete() {
+	    // 프로필 페이지로 리다이렉션
+	    location.href = "/sns/profile/";
+	}
+
   function modifyProfile(){
     $('#boardFile').trigger('click');
 

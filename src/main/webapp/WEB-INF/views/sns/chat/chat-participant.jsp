@@ -36,7 +36,6 @@
             <div class="friend-list-grp">
                 <c:forEach items="${chatRoom.chatters}" var="chatter">
                     <!-- 친구 -->
-                    <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 돼요! status-active 클래스 달을 경우 좌측에 초록 동그라미 뜹니다. -->
                     <div class="friend-list status-active">
                         <!-- 친구 프사 & 이름 -->
                         <div class="person-item">
@@ -46,7 +45,7 @@
                             <div class="person-profile">
                                 <div class="name-wrap">
                                     <h6 class="name">${chatter.nickname}</h6>
-                                    <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                                    <!-- 블루뱃지 -->
                                     <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
                                 </div>
                             </div>

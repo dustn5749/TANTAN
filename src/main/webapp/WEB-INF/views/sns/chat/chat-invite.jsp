@@ -34,7 +34,7 @@
         <!-- 친구 목록 -->
         <div class="friend-list-grp">
             <!-- 친구 -->
-            <!-- * 중요 * 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
+            <!-- 아래의 checkbox input과 바로 뒤의 label 태그 friend-list는 세트 -->
             <c:forEach items="${friendList}" var="friend">
                 <input type="checkbox" name="chat-friend" id="friend${friend.regId}" value="${friend.regId}" class="friend-list-checkbox">
                 <label class="friend-list" for="friend${friend.regId}">
@@ -46,7 +46,7 @@
                 <span class="person-profile">
                   <span class="name-wrap">
                     <span class="name">${empty friend.nickname ? friend.regId : friend.nickname}</span>
-                      <!-- 블루뱃지 있을 경우 하단 주석을 푸세요 -->
+                      <!-- 블루뱃지 -->
                     <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
                   </span>
                 </span>
@@ -61,7 +61,7 @@
     <!-- END 스크롤 영역 -->
 
     <div class="chat-modal-bottom">
-        <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됩니다. -->
+        <!-- 선택한 친구가 2명 이상이면 active 클래스가 추가됨 -->
         <button id="applyChatRoom" type="button" class="btn active confirm-btn chat-modal-confirm-btn" onclick="">확인</button>
         <button type="button" class="btn" onclick="closeChatModal('chat-invite-modal')">취소</button>
     </div>
