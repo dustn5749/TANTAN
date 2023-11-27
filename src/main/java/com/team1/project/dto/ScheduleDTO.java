@@ -38,6 +38,8 @@ public class ScheduleDTO {
 	    private Date date2;
 	    private Date date3;
 	    
+		private String imageUrl;
+		
 	    private double city_latitude;
 	    private double city_longitude;
 	    
@@ -46,6 +48,9 @@ public class ScheduleDTO {
 //	    private String []scheduleList;
 	    private String Like_CNT;
 	    private String title;
+	    
+	    private boolean isLike;		// 좋아요 여부
+	    private String order;		// 정렬 순서
 
 		private int level = 1;         // 게시글 레벨 (기본값 1)
 		private int pageNo = 1;        // 현재 페이지 번호

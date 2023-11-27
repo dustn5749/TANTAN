@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.project.dao.ScheduleDAO;
+import com.team1.project.dao.ScheduleLikeDAO;
 import com.team1.project.dto.DayDTO;
 import com.team1.project.dto.ScheduleDTO;
 
@@ -18,23 +19,34 @@ public class ScheduleService {
 	@Autowired
 	private ScheduleDAO schduleDAO;
 	
+	@Autowired
+	private ScheduleLikeDAO scheduleLikeDAO;
+	
 	// 1. 일정 목록 조회
-		public Map<String, Object> schedulePageList(ScheduleDTO schdule) throws Exception {
+		public Map<String, Object> schedulePageList(ScheduleDTO schdule, String memberId) throws Exception {
 		
 			int totalCount = schduleDAO.totalCount(schdule);
 			System.out.println("totalCount " + totalCount );
 			System.out.println("totalCount " + schdule.getNavStart() );
 			schdule.setTotalCount(totalCount);
 			
+			Map<String, Object> param = new HashMap<>();
+			param.put("MEMBER_ID", memberId);
+			param.put("endNo", schdule.getEndNo());
+			param.put("startNo", schdule.getStartNo());
+			param.put("DOE_NAME", schdule.getDoe_Name());
+			param.put("ORDER", schdule.getOrder());
+			
+			System.out.println("param: " + param);
+			
 			Map<String, Object> result = new HashMap<>();
 			try {
-			result.put("scheduleList", schduleDAO.getScheduleList(schdule)); // 게시글 목록 조회
-			result.put("schedule", schdule);
+				result.put("scheduleList", schduleDAO.getScheduleList(param)); // 게시글 목록 조회
+				result.put("schedule", schdule);
 			} catch (Exception e) {
 				result.put("message", "서버 오류 발생");
 				e.printStackTrace();
 			}
-			System.out.println("schduleService: " + schduleDAO.getScheduleList(schdule));
 //			System.out.println("schduleService: " + result);
 			return result;
 			
@@ -130,5 +142,18 @@ public class ScheduleService {
 		public List<ScheduleDTO> getTop3ScheduleList() {
 			System.out.println("scheduleService.getTOP3scheduleList()");
 			return schduleDAO.getTop3ScheduleList();
+		}
+		
+		public void updateLike(String member_id, String scheduleNum, boolean isLike) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("USERID", member_id);
+			param.put("SCHEDULE_NUM", scheduleNum);
+			if (isLike) {	// 좋아요 추가
+				scheduleLikeDAO.insert(param);
+				schduleDAO.plusLikeCnt(param);
+			} else { // 좋아요 취소
+				scheduleLikeDAO.delete(param);
+				schduleDAO.minusLikeCnt(param);
+			}
 		}
 }

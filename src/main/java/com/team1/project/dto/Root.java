@@ -18,4 +18,5 @@ public class Root{
     public int totalCount;
     
     public List<AccompanyList> accompanyList;
+    public List<PlanList> planList;
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.ScheduleLikeDAO">
+
+<!--일정 글등록 --> 
+<insert id="insert" parameterType="map">
+    <selectKey order="BEFORE" keyProperty="LNO" resultType="int">
+        select sc.nextval as LNO from dual
+    </selectKey> 
+	INSERT INTO SCHEDULELIKE(LNO, SCHEDULE_NUM, USERID)
+		VALUES (${LNO}, #{SCHEDULE_NUM}, #{USERID})    
+</insert>
+
+<delete id="delete" parameterType="map">
+	DELETE FROM SCHEDULELIKE
+		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
+			AND USERID = #{USERID}
+</delete>
+
+</mapper>

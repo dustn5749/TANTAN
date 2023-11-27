@@ -8,12 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 import com.team1.project.dto.CityDTO;
 import com.team1.project.dto.DayDTO;
 import com.team1.project.dto.ScheduleDTO;
+import com.team1.project.dto.UsDTO;
 
 @Mapper
 public interface ScheduleDAO {
 
 	//일정 전체 목록
-	public List<ScheduleDTO> getScheduleList(ScheduleDTO schdule) throws Exception;
+	public List<ScheduleDTO> getScheduleList(Map<String, Object> param) throws Exception;
 	 
     //일정 글쓰기
 	public int writeInsert(ScheduleDTO schdule) throws Exception;
@@ -46,7 +47,9 @@ public interface ScheduleDAO {
 	//답글 폼
 	public int reply(ScheduleDTO schdule) throws Exception;
 
-	
+
+	//크롤링 url
+	 public int insertScheduleList(ScheduleDTO schduleDTO) throws Exception;	
 
 	// 내 일정 정보 가져오기 
 	public List<ScheduleDTO> getMyScheduleList(String member_id);
@@ -54,34 +57,8 @@ public interface ScheduleDAO {
 
 	// top3 스케쥴 목록 가져오기
 	public List<ScheduleDTO> getTop3ScheduleList();
-	
-	
-	
-	//무한 스크롤
 
-//
-//	//검색 갯수
-//	public int getSearchCount(String keyword) {
-//		int result = 0;
-//		try (SqlSession session = MybatisManager.getInstance().openSession()) {
-//			result = (int) session.selectOne("service.getSearchCount", "%"+keyword+"%");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
-//
-//	//마지막 글번호 불러오기
-//	public int MaxCidx() {
-//		int result = 0;
-//		try (SqlSession session = MybatisManager.getInstance().openSession()) {
-//			result = (int) session.selectOne("service.MaxCidx");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	public void plusLikeCnt(Map<String, Object> param);
 
-
-
+	public void minusLikeCnt(Map<String, Object> param);
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,22 +10,9 @@
     <title>여행 상세 정보</title>
 
  <style>
-      body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
+    
 
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
+      
         button {
             background-color: #4CAF50;
             color: white;
@@ -198,7 +187,28 @@
             color: green;
             font-weight: bold;
         }
-        
+        .profile-details {
+            text-align: left;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center; /* 세로 중앙 정렬 */
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        .user-details {
+            margin-left: 20px; /* 프로필 이미지와 아이디 사이 여백 조절 */
+        }
+
+        .user-details h2 {
+            margin: 0;
+        }   
         
     </style>
 </head>
@@ -209,23 +219,36 @@
 <div id="reportSubmissionMessage" style="text-align: center; color: green; margin-top: 10px;"></div>
  
  
-    <div class="container">
-        <!-- 프로필 세부 정보 -->
-        <div class="profile-details">
-            <div class="profile-image">
-                <img src="images/profile-image.jpg" alt="프로필 이미지">
-            </div>
-            <h2 id="writer">${us.writer}</h2>
+  <div class="profile-details">
+     <div>
+        <c:choose>
+           <c:when test="${us.fileNo!=0}">
+              <img style="width:400px; height: 400px" src="/file/displayImage.do?usFileNum=${us.fileNo}" alt="동행이미지 사진" class="us_content_img">
+           </c:when>
+           <c:when test="${!empty us.imageUrl}">
+              <img style="width:400px; height: 400px" src="${us.imageUrl}" class="us_content_img">
+           </c:when>
+           <c:when test="${empty us.imageUrl&& us.fileNo==0}">
+              <img style="width:400px; height: 400px" src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
+           </c:when>
+        </c:choose>
+        
+     </div>
+    <div class="profile-image">
+        <img src="/assets/img/no_profile.png" alt="프로필 이미지">
+    </div>
+    <div class="user-details">
+        <h2 id="writer">${us.writer}</h2>
+    </div>
+</div>        
             <p id="title">제목: <span>${us.title}</span></p>
             <p id="content">내용: <span>${us.content}</span></p>
-            <p>이메일: <span>${writer.email}</span></p>
-            <p>전화번호: <span>${writer.phone}</span></p>
-           
-            <p>시작 날짜: <input type="text" id="start_Date" value="${us.start_Date}"readonly="readonly"></p>
-            <p>종료 날짜: <input type="text" id="end_Date" value="${us.end_Date}" readonly="readonly"></p>
+            <p>게시글 번호: <span id="us_num">${us.us_num}</span></p>
+            <p>시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"></p>
+            <p>종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
             <p>게시글 번호: <span id="us_num">${us.us_num}</span></p>
             <p>동행 수: <span id="us_cnt">${us.us_cnt}</span></p>
-        </div>
+        
 
         <!-- 버튼 그룹 -->
         <div class="button-group">
@@ -272,7 +295,7 @@
 
     <script>
     
-   		 document.addEventListener("DOMContentLoaded", function () {
+          document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('deleteBtn').addEventListener('click', deleteEntry);
         document.getElementById('saveButton').addEventListener('click', saveEntry);
     });
@@ -313,7 +336,7 @@
 
         
   // 동행게시글 상세보기
-	function DetailForm(us_num) {
+   function DetailForm(us_num) {
     const url = "/RealDetail" + us_num;
     fetch(url, {
         method: "GET",
@@ -402,6 +425,7 @@ function deleteEntry() {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
+        goToHomepage();
     })
     .catch(error => {
         console.error('에러:', error);

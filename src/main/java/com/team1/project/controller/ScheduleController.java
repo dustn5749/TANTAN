@@ -1,5 +1,6 @@
 package com.team1.project.controller;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.config.auth.PrincipalDetails;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.ScheduleService;
@@ -33,11 +36,14 @@ public class ScheduleController {
 	
 	//일정목록보기
 	@RequestMapping (value = "/list")
-    public String schedule(Model model, ScheduleDTO schedule)
-    throws Exception {
-	model.addAttribute("result", scheduleService.schedulePageList(schedule));
-	    System.out.println("일정 목록 출력: " + scheduleService.schedulePageList(schedule));
-	    System.out.println("일정 페이지출력: " + scheduleService.schedulePageList(schedule));
+    public String schedule(Model model, ScheduleDTO schedule) throws Exception {
+		MemberDTO member = getCurrentMember();
+		String memberId = member == null ? null : member.getMember_id();
+		
+		Map<String, Object> result = scheduleService.schedulePageList(schedule, memberId);
+		model.addAttribute("result", result);
+	    System.out.println("일정 목록 출력: " + result);
+	    System.out.println("일정 페이지출력: " + result);
     return "scheduleList";
    } 
 	
@@ -297,7 +303,13 @@ public class ScheduleController {
 	//하트색
 	@PostMapping("/updateHeartColor")
 	@ResponseBody
-	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum) {
+	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum, @RequestParam("isLike") boolean isLike) {
+		// isLike가 true면 좋아요 개수 올려주기
+		// false면 좋아요 취소
+		
+		MemberDTO member = getCurrentMember();
+		scheduleService.updateLike(member.getMember_id(), scheduleNum, isLike);
+		
 	    Map<String, Object> response = new HashMap<>();
 	    try {
 
@@ -307,5 +319,16 @@ public class ScheduleController {
 	        response.put("error", e.getMessage());
 	    }
 	    return response;
+	}
+	
+	// 로그인 상태가 아니라면. null 리턴
+	private MemberDTO getCurrentMember() {
+		try {
+			return (MemberDTO)((PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+		} catch (ClassCastException e) {
+			// TODO: handle exception
+			return null;
+		}
+		
 	}
 }
