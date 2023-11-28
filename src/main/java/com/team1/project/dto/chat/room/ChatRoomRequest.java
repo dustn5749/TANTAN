@@ -6,8 +6,9 @@ import lombok.Data;
 @Data
 public class ChatRoomRequest {
 
-  private RoomType type;
+  private RoomType roomType;
   private String roomName;
-  private List<String> memberList;
+  private List<String> memberIds;
+  private String senderMemberId;
 
 }

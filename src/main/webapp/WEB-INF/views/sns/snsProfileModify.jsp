@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +20,6 @@
     <style>
         .page-wrapper {
             margin: 0 atuo !important;
-
         }
 
         .page-wrapper-inner {
@@ -171,14 +174,6 @@
                         <span class="txt">알림</span>
                     </button>
                     <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-bookmark-filled.svg" alt="" class="icon">
-                        <span class="txt">저장됨</span>
-                    </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-activity.svg" alt="" class="icon">
-                        <span class="txt">내 활동</span>
-                    </button>
-                    <button type="button" class="sidebar-btn">
                         <figure class="mini-thumnail">
                             <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
@@ -209,14 +204,15 @@
                 <div class="profile_img_name">
                     <div class="img_area">
                         <figure class="thumbnail">
-                            <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                            <img src="${member.profile_img}" alt="">
                         </figure>
                     </div>
                     <div class="name">
                         <h2>
-                            <p id="nickname_area">choi_seung_hyun_tttop</p>
+                            <p id="nickname_area">${member.nickname}</p>
                         </h2>
-                        <a class="profile_img_modify" href="#">프로필 사진 바꾸기</a>
+                        <a class="profile_img_modify" href="#" onclick="modifyProfile();">프로필 사진 바꾸기</a>
+                        <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
                     </div>
                 </div>
 
@@ -227,7 +223,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="account">
-                            <input type="radio" name="account_open_yn" value="y">공개
+                            <input type="radio" name="account_open_yn" value="y" checked>공개
                             <input type="radio" name="account_open_yn" value="n">비공개
                         </div>
                         <div class="detail_content_inner">
@@ -255,7 +251,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="gender">
-                            <input type="radio" name="gender_open_yn" value="y">공개
+                            <input type="radio" name="gender_open_yn" value="y" checked>공개
                             <input type="radio" name="gender_open_yn" value="n">비공개
                         </div>
                     </div>
@@ -269,7 +265,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="city">
-                            <input type="radio" name="city_open_yn" value="y">공개
+                            <input type="radio" name="city_open_yn" value="y" checked>공개
                             <input type="radio" name="city_open_yn" value="n">비공개
                         </div>
                     </div>
@@ -282,21 +278,54 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area" id="age">
-                            <input type="radio" name="age_open_yn" value="y">공개
+                            <input type="radio" name="age_open_yn" value="y" checked>공개
                             <input type="radio" name="age_open_yn" value="n">비공개
                         </div>
-                    </div>
+                    d</div>
                 </div>
             </div>
             <!-- 편집 나가기 버튼 -->
             <div class="btn_area">
-                <button class="back_btn">편집 끝내기</button>
+                <button type="button" class="back_btn" onclick="ModifyComplete()">편집 끝내기</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+	function ModifyComplete() {
+	    // 프로필 페이지로 리다이렉션
+	    location.href = "/sns/profile/";
+	}
+
+  function modifyProfile(){
+    $('#boardFile').trigger('click');
+
+  }
+  $(function(){
+    $('#boardFile').on('change',function(){
+      var file = this.files[0];
+
+      // FormData 객체 생성
+      var formData = new FormData();
+      formData.append("file", file);
+
+      $.ajax({
+        url: "/sns/profile",  // 원하는 엔드포인트로 수정
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          console.log("File uploaded successfully:", response);
+          location.reload();
+        },
+        error: function(error) {
+          console.error("Failed to upload the file:", error);
+        }
+      });
+    });
+  });
     <!--    특정속성을 가진 모든 텍스트영역을 내용이 잘리지 않기 위한 텍스트 영역을 자동으로 크기 조절해줌 -->
     $('textarea[data-autoresize]').each(function () {
         var offset = this.offsetHeight - this.clientHeight;

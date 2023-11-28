@@ -7,13 +7,14 @@ import com.team1.project.entity.Alim;
 import com.team1.project.entity.AlimContentEnum;
 import com.team1.project.entity.Friend;
 import com.team1.project.entity.FriendRequest;
-import com.team1.project.repository.FriendRepository;
-import com.team1.project.repository.FriendRequestRepository;
 import com.team1.project.service.alim.AlimSendService;
 import com.team1.project.service.alim.AlimService;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class FriendService {
 
-  private final FriendRequestRepository friendRequestRepository;
-  private final FriendRepository friendRepository;
-
   private final FriendDAO friendDAO;
 
   private final AlimService alimService;
@@ -35,16 +33,15 @@ public class FriendService {
 
   @Transactional
   public void requestFriend(String receiveMemberId, String sendMemberId){
+    //String receiveMemberId, String sendMemberId
+    FriendRequest request = friendDAO.findByReceiveMemberIdAndSendMemberId(Map.of("receiveMemberId",receiveMemberId, "sendMemberId", sendMemberId));
 
-    Optional<FriendRequest> optional = friendRequestRepository.findByReceiveMemberIdAndSendMemberId(
-        receiveMemberId, sendMemberId);
-
-    if(optional.isEmpty()){
-      friendRequestRepository.save(
+    if(Objects.isNull(request)){
+      friendDAO.save(
           FriendRequest.builder()
               .receiveMemberId(receiveMemberId)
               .sendMemberId(sendMemberId)
-              .reqDate(LocalDate.now())
+              .reqDate(LocalDateTime.now())
               .acceptYn("N")
               .build()
       );
@@ -53,6 +50,7 @@ public class FriendService {
           .receiveMemberId(receiveMemberId)
           .sendMemberId(sendMemberId)
           .content(AlimContentEnum.FRIEND_REQ)
+          .url("")
           .readYn("N")
           .createTime(new Date())
           .build();
@@ -62,7 +60,7 @@ public class FriendService {
   }
 
   public List<FriendRequest> getRequestList(String receiveMemberId) {
-    return friendRequestRepository.findByReceiveMemberId(receiveMemberId);
+    return friendDAO.findByReceiveMemberId(receiveMemberId);
   }
 
   public List<FriendRequestDTO> getRequestDTOList(String receiveMemberId) {
@@ -75,29 +73,43 @@ public class FriendService {
 
   @Transactional
   public void acceptRequest(Long reqId) {
-    Optional<FriendRequest> byId = friendRequestRepository.findById(reqId);
-    byId.ifPresent(value -> {
+    FriendRequest byId = friendDAO.findById(reqId);
+    if(Objects.nonNull(byId)){
+      friendDAO.saveFriend(Friend.builder()
+              .regId(byId.getReceiveMemberId())
+              .resId(byId.getSendMemberId())
+              .reqDate(byId.getReqDate())
+              .resDate(LocalDateTime.now())
+              .build());
 
-      friendRepository.save(
+      friendDAO.saveFriend(
           Friend.builder()
-              .regId(value.getReceiveMemberId())
-              .resId(value.getSendMemberId())
-              .reqDate(value.getReqDate())
-              .resDate(LocalDate.now())
+              .regId(byId.getSendMemberId())
+              .resId(byId.getReceiveMemberId())
+              .reqDate(LocalDateTime.now())
+              .resDate(LocalDateTime.now())
               .build()
       );
 
-      friendRepository.save(
-          Friend.builder()
-              .regId(value.getSendMemberId())
-              .resId(value.getReceiveMemberId())
-              .reqDate(LocalDate.now())
-              .resDate(LocalDate.now())
-              .build()
-      );
+      byId.setAcceptYn("Y");
+      log.info("FriendRequest byId = {}", byId);
+      friendDAO.updateRequest(byId);
+    }
+  }
 
-      value.setAcceptYn("Y");
-      friendRequestRepository.save(value);
-    });
+  public void deleteFriend(Long friendId, String memberId) {
+
+    FriendDTO friendInfo = friendDAO.getFriendInfo(friendId);
+    // String regId, String resId
+    FriendDTO res = friendDAO.getFriendInfoByRegIdResId(Map.of("regId",friendInfo.getRegId(),"resId",friendInfo.getResId()));
+
+    friendDAO.deleteFriendId(res.getId());
+    FriendDTO req = friendDAO.getFriendInfoByRegIdResId(Map.of("regId",friendInfo.getResId(),"resId",friendInfo.getRegId()));
+
+    friendDAO.deleteFriendId(req.getId());
+
+    //String regId, String resId
+    friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getRegId(), "resId", friendInfo.getResId()));
+    friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getResId(), "resId", friendInfo.getRegId()));
   }
 }

@@ -1,11 +1,18 @@
 package com.team1.project.controller.sns;
 
+import com.team1.project.service.NCloudFileService;
+import com.team1.project.service.sns.SnsBoardRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import com.team1.project.service.auth.AuthService;
+import java.util.UUID;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.project.dto.MemberDTO;
@@ -15,6 +22,7 @@ import com.team1.project.service.sns.SnsLikeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,31 +32,43 @@ public class SnsBoardController {
     private final SnsBoardService service;
     private final SnsLikeService likeService;
     private final AuthService authService;
+    private final NCloudFileService nCloudFileService;
 
     @GetMapping("/boards")
-    public List<SnsBoard> getList() {
-        return service.getList();
+    public List<SnsBoard> getList(
+        @RequestParam SnsBoardRequest request
+    ) {
+        return service.getList(request);
     }
-
-    // title과 content를 뺄까 아니면 임의로만 집어넣고 화면에서 출력은 안되게 할 지 고민중이라서 일단 아무렇게나 적어서 집어 넣음
-    @GetMapping("/boards/insert/dummny")
-    public void dummy(MemberDTO ddd, Authentication authentication) {
-
-        String memberId = authService.getMemberId(authentication);
-
-        service.registerBoard(SnsBoard.builder()
-                .title("ssssss111s")
-                .content("sssssss11")
-                .deleteYn("N")
-                .viewCount(0L)
-                .memberId(memberId)
-                .build());        
-    }
-    
     @GetMapping("/boards/like/{id}")
     public void dummy(@PathVariable Long id,Authentication authentication) {
         String memberId = authService.getMemberId(authentication);
         likeService.registerLike(id,memberId);
+    }
+
+    @PostMapping("/boards/upload")
+    public void file(
+        @RequestParam MultipartFile file,
+        Authentication authentication
+    ) throws IOException {
+        String key = nCloudFileService.fileUpload(UUID.randomUUID().toString(), file);
+
+        String memberId = authService.getMemberId(authentication);
+
+        service.registerBoard(SnsBoard.builder()
+            .title(key)
+            .content(key)
+            .deleteYn("N")
+            .viewCount(0L)
+            .memberId(memberId)
+            .build(), key);
+
+    }
+
+    private File convertMultiPartToFile(MultipartFile file) throws IOException {
+        File convertedFile = new File(file.getOriginalFilename());
+        file.transferTo(convertedFile);
+        return convertedFile;
     }
 
 }

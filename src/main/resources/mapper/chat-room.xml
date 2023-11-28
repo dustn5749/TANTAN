@@ -5,19 +5,76 @@
 
     <insert id="registerChatRoom" parameterType="com.team1.project.dto.chat.room.ChatRoom" >
         insert into CHATROOM
-        (ROOM_NUM, ROOM_NAME, CREATE_TIME,TYPE)
+        (ROOM_NUM, ROOM_NAME, CREATE_TIME,TYPE, CREATE_MEMBER_ID)
         values
-        (ROOM_SEQ.nextval, #{roomName}, sysdate , #{type.value})
+        (ROOM_SEQ.nextval, #{roomName}, #{creatTime} , #{type.value}, #{createMemberId})
 
         <selectKey resultType="long" keyProperty="roomNum" order="AFTER">
             SELECT ROOM_SEQ.currval from dual
         </selectKey>
     </insert>
 
+    <update id="updateChatRoom">
+        update CHATROOM
+        set ROOM_NAME = #{roomName},
+            TYPE = #{type.value}
+        where ROOM_NUM = #{roomNum}
+    </update>
 
+    <delete id="deleteChatRoom">
+        delete from CHATROOM
+        where ROOM_NUM = #{roomNum}
+    </delete>
+    <select id="selectChatRoom" resultType="com.team1.project.dto.chat.room.ChatRoomDTO">
+        select
+            CR.ROOM_NUM as roomNum,
+            CR.ROOM_NAME as roomName,
+            CR.CREATE_TIME as createTime,
+            CR.TYPE as type,
+            (select count(*) from CHATTER a where a.ROOM_NUM = CR.ROOM_NUM) as memberCnt,
+            (select mes.contents from
+            (
+                select room_num, max(message_num) max_message_num from message b
+                where b.room_num = CR.room_num
+                group by b.room_num
+            ) a inner join message mes on (mes.message_num = a.max_message_num)) as lastText
 
+        from CHATROOM CR
+        inner join CHATTER C on CR.ROOM_NUM = C.ROOM_NUM
+        where C.MEMBER_ID = #{memberId}
+        <if test="searchTxt != null and searchTxt != ''">
+            and CR.ROOM_NAME like CONCAT(#{searchTxt},'%')
+        </if>
+        and CR.TYPE = #{type.value}
+        order by C.ROOM_NUM DESC
+    </select>
+  <select id="selectChatRoomById" resultType="com.team1.project.dto.chat.room.ChatRoom">
+      select
+          CR.ROOM_NUM as roomNum,
+          CR.ROOM_NAME as roomName,
+          CR.CREATE_TIME as createTime,
+          CR.TYPE as type
+      from CHATROOM CR
+      where CR.ROOM_NUM = #{chatRoomId}
+  </select>
+    <select id="getRoomAlreadyExist" resultType="com.team1.project.dto.chat.room.ChatRoom">
+        select
+            CR.ROOM_NUM as roomNum,
+            CR.ROOM_NAME as roomName,
+            CR.CREATE_TIME as createTime,
+            CR.TYPE as type
+        from CHATROOM CR
+             inner join CHATTER C on CR.ROOM_NUM = C.ROOM_NUM
+        where
+            C.MEMBER_ID in
+            <foreach collection="memberIds" item="memberId" open="(" close=")" separator=",">
+                #{memberId}
+            </foreach>
+          and CR.TYPE = #{roomType.value}
+        GROUP BY CR.ROOM_NUM, CR.ROOM_NAME, CR.CREATE_TIME, CR.TYPE
+        HAVING COUNT(DISTINCT C.MEMBER_ID) = #{size}
 
-
+    </select>
 
 
 </mapper>

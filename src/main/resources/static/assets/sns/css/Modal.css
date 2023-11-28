@@ -310,7 +310,6 @@ label.friend-list .checkbox {
   cursor: default;
 }
 
-/* 1108에 추가된 모달 스타일 */
 .w-400 {
   max-width: 400px;
 }
@@ -1105,7 +1104,6 @@ label.friend-list .checkbox {
   font-weight: 600;
 }
 
-/* 1117 이름설정모달 */
 .namesetting-modal .namesetting-modal-content {
   padding: 20px;
 }
