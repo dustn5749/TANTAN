@@ -61,6 +61,7 @@
 /* 페이지 번호 스타일 조정 (예시) */
 .customPageNumberBtn {
     margin-right: 5px; /* 페이지 번호 간격 조절 예시 */
+    cursor: pointer;  /* 커서 속성 추가해서 마우스 오버 시 포인터 모양으로 변경 */
 }
 
 /* 선택된 페이지 번호 스타일 조정 (예시) */
@@ -70,7 +71,9 @@
     padding: 5px 10px;
     border-radius: 5px;
 }
+
 </style>
+
 </head>
 <body>
 <div class="loading-overlay" id="loadingOverlay">Loading...</div>
@@ -94,8 +97,8 @@
     </section>
 
     <!-- Main content -->
-	          	<table id="memberGrid" style=text-align:center;></table>
-	          	<div id="paginate" style=text-align:center;></div>
+   	<table id="memberGrid" style=text-align:center;></table>
+   	<div id="paginate" style=text-align:center;></div>
   </div>
 
 <script>
@@ -104,7 +107,7 @@ function hideLoadingMessage() {
 }
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
-var pageSize = 30;
+var pageSize = 26;
 
 function showPage() {
   document.getElementById("loader").style.display = "none";
@@ -113,8 +116,7 @@ function showPage() {
 
 // 페이징 관련 함수를 초기화합니다.
 function initPage(currentPage) {
-    var pageCount = 10; // 한번에 보여줄 페이지 버튼 개수
-    var totalPage = Math.ceil(totalSize / $('#memberGrid').getGridParam('rowNum'));
+    var totalPage = Math.ceil(totalSize / pageSize);
 
     var pageInner = "";
 
@@ -125,6 +127,8 @@ function initPage(currentPage) {
         pageInner += "<span class='customPageMoveBtn'><a class='first' href='javascript:firstPage();' title='첫 페이지로 이동'><i class='fa fa-fast-backward faPointer'></i></a></span>";
         pageInner += "<span class='customPageMoveBtn'><a class='pre' href='javascript:prePage();' title='이전 페이지로 이동'><i class='fa fa-step-backward faPointer'></i></a></span>";
     }
+
+    var pageCount = Math.min(totalPage, 10); // 페이지 개수를 전체 페이지 또는 10으로 제한
 
     var startPage = 1;
     if (currentPage > 10) {
@@ -157,28 +161,31 @@ function initPage(currentPage) {
     $("#paginate").append(pageInner);
 }
 
-function loadGridData() {
-	$("#paginate").hide();
+function loadGridData(page) {
+    $("#paginate").hide();
+    // Ajax 요청을 통한 데이터 로딩
     $.ajax({
-        url: '/memberList', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
+        url: '/memberList',
         dataType: 'json',
         data: {
-        	page: currentPage,
-        	pageSize: pageSize
+            page: page,
+            pageSize: pageSize
         },
         success: function (data) {
+            console.log("로드 완료");
             console.log(data);
-            totalSize = data.memberList.length; // 데이터 수 업데이트
+            totalSize = data.totalSize;
 
             $("#memberGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
-                data: data.memberList,
+                data: data.memberList.memberList,
                 datatype: 'local'
             }).trigger('reloadGrid');
+            console.log(pageSize);
+            console.log(currentPage);
+            initPage(page); // 페이지 초기화
 
-            initPage(currentPage); // 페이지 초기화
-            
             hideLoadingMessage(); // 로딩 메시지 숨기기
-            
+
             // 페이징 컴포넌트 다시 보이게 하기
             $("#paginate").show();
         },
@@ -190,8 +197,10 @@ function loadGridData() {
 
 // jqGrid 설정
 $("#memberGrid").jqGrid({
-    datatype: "local", // 데이터를 로컬에서 가져오기
-    colNames: ['아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수','상태 변경'],
+    datatype: "json", // 데이터를 서버에서 가져오기
+    url: '/memberList', // 데이터를 가져올 URL 설정 (컨트롤러 엔드포인트 URL로 변경해야 합니다.)
+    mtype: 'GET', // HTTP 요청 방식 (GET 또는 POST)
+    colNames: ['아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
     colModel: [
         { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
         { label: '이름', name: 'name', index: 'name' },
@@ -199,24 +208,31 @@ $("#memberGrid").jqGrid({
         { label: '이메일', name: 'email', index: 'email' },
         { label: '나이', name: 'age', index: 'age' },
         { label: '성별', name: 'gender', index: 'gender' },
-        { label: '정지유무', name: 'status', index: 'status'},
-        { label: '신고횟수', name:'reportcnt', index: 'reportcnt'},
-        { name: 'statusBtn', formatter: staOpt1, sortable: false}
-//         { name: 'member_id', index: 'member_id', hidden: true}
+        {
+            label: '정지유무', name: 'status', index: 'status',
+            formatter: function (cellValue, options, rowObject) {
+                if (rowObject.status === 'Y') {
+                    return '<span style="text-align:center; background-color: #FFCCCC; color:red; border: 1px solid #FF0000;">정지됨</span>';
+                } else if (rowObject.status === 'N') {
+                    return '<span style="background-color: #CCFFCC; color: green; border: 1px solid #008000;">활성화됨</span>';
+                }
+            },
+            sortable: false
+        },
+        { label: '신고횟수', name: 'reportcnt', index: 'reportcnt' },
+        { name: 'statusBtn', formatter: staOpt1, sortable: false }
     ],
     viewrecords: true,
     height: 690,
     autowidth: true,
     rowNum: 26,
     rownumbers: true,
-    rowList: [30, 50, 100],
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',
     caption: '회원리스트',
     loadui: "enable",
     loadComplete: function (data) {
-//     	$("#memberGrid").setGridWidth($(window).width() );
         var allRowsInGrid = jQuery('#memberGrid').jqGrid('getGridParam', 'records');
         $("#NoData").html("");
         if (allRowsInGrid == 0) {
@@ -231,7 +247,7 @@ $("#memberGrid").jqGrid({
         }
     },
 });
-loadGridData();
+loadGridData(1);
 
 function staOpt1(cellvalue, options, rowObject) {
     var str = "";
@@ -335,18 +351,27 @@ function lastPage() {
     }).trigger("reloadGrid");
 }
 
-//그리드 페이지로 이동
+// //그리드 페이지로 이동
+// function goPage(num) {
+// 	currentPage = num;
+//     $("#memberGrid").jqGrid('setGridParam', {
+//     	page: num
+//     }).trigger("reloadGrid");
+//     	console.log("페이지 버튼 누름" + num);
+// }
+
+// // 그리드 페이지로 이동
 function goPage(num) {
-    $("#memberGrid").jqGrid('setGridParam', {
-        page: num
-    }).trigger("reloadGrid");
+    currentPage = num;  // 현재 페이지 업데이트
+    loadGridData(currentPage);  // 페이지 번호를 인자로 전달하여 데이터 로드
+page: num
+    console.log("페이지 버튼 누름" + num);
 }
 
 function fn_delete(rowid, member_id) {
     console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
     $("#click_result").html(str);
 }
-
 </script>
 </body>
 </html>
