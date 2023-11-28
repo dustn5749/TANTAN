@@ -122,20 +122,7 @@ input, span, div, p, button, a, h2 {
    .profile-image > img{
    	 width: 50px;
    }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
 
-        button:hover {
-            background-color: #45a049;
-        }
 
         .button-group {
             text-align: center;
@@ -164,11 +151,20 @@ input, span, div, p, button, a, h2 {
         .orange-btn {
             background-color: #0099ff;
             color: white;
+            width: 100%;
+            height: 50px;
+            border-radius: 4px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: none;
+            
         }
-
         .orange-btn:hover {
-            background-color: #0088dd;
-        }
+            background-color: rgb(0, 71, 119);
+            color : white;
+        } 
+
+  
 
         .reply-section {
             margin-top: 20px;
@@ -199,8 +195,15 @@ input, span, div, p, button, a, h2 {
 		#replyContainer > button {
 			font-family: 'Pretendard-Regular';
 			width: 150px;
+			background:  #0099ff;
+			border: none;
+			border-radius: 7px;
 		}
-
+		
+		#replyContainer > button:hover {
+            background-color: rgb(0, 71, 119);
+            color : white;
+		}
         /* 신고 모달 스타일 */
         .reportmodal {
             display: none;
@@ -430,6 +433,13 @@ input, span, div, p, button, a, h2 {
 		            				<p class="member_id">${item.writer}</p>
 		            			</div>
 		            			<div class="content_area">${item.content}</div>
+		            			<c:if test="${item.writer==principal.user.member_id}">
+		            				<div class="btnarea">
+		            					<button class="modifybtn">수정하기</button>
+		            					<button class="deleteBtn">삭제하기</button>
+		            				</div>
+		            			
+		            			</c:if>
 		            		</div>
 		            	</c:forEach>
 		            </div>
@@ -666,8 +676,25 @@ function btnInsert() {
 									$(content).addClass("content_area");
 									$(content).text(e.content);
 									
-									 $(div).append(member_id);
-									 $(div).append(content);
+									$(div).append(member_id);
+									$(div).append(content);
+									
+		/* 							if(e.writer == loggedInUserId){
+										var btnarea = document.createElement("div");
+										$(btnarea).addClass("btnarea");
+										var btn1 = document.createElement("button");
+										$(btn1).addClass("modifyBtn");
+										$(btn1).text("수정하기");			
+										var btn2 = document.createElement("button");
+										$(btn2).addClass("deleteBtn");
+										$(btn2).text("삭제하기");
+										$(btnarea).append(btn1);
+										$(btnarea).append(btn2);
+										
+										$(div).append(btnarea);
+									} */
+
+									
 									 
 									 
 									 $(commentArea).append(div);

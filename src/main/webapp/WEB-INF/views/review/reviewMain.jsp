@@ -465,11 +465,32 @@
      						</div> 
      						
      						<div class="img_div">
-     							<div class="img_title_div"><p id="img_title"></p></div>
+     							<div class="img_title_div">
+     							<c:choose>     							
+	     							<c:when test="${!empty doe}">
+	     								<p id="img_title">${doe.doe_name}</p>
+	     							</c:when>
+	     							<c:otherwise>
+		     							<p id="img_title"></p>	     							
+	     							</c:otherwise>
+     							</c:choose>
+     							
+     							</div>
      							<div class="img_content_div">
-     								<img class="region_img" >
+     								<c:choose>     							
+	     							<c:when test="${!empty doe}">
+	     								<img class="region_img" src="/assets/img/doereview/${doe.doe_review}" width="100%" height="300px">
+	     							</c:when>
+	     							<c:otherwise>
+		     							<img class="region_img" >     							
+	     							</c:otherwise>
+     							</c:choose>
+
      							</div>     							
      						</div>
+    
+     				
+     						
      						<div class="avlStar">
      							<p id="avl_text">평균 별점 : </p>
      							    <div class="star-rating"> 
