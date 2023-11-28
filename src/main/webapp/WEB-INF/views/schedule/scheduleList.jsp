@@ -6,6 +6,18 @@
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
+@font-face {
+   font-family: 'Pretendard-Regular';
+   src:
+      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff');
+   font-weight: 400;
+   font-style: normal;
+}
+
+input, button, div, span, h2, p, h5{
+ font-family: 'Pretendard-Regular';
+}
 .us_container {
    width: 80%;
    margin: 0 auto;
@@ -14,7 +26,7 @@
 
 .us_header_size {
    float: right;
-   width: 27%;
+   width: 19%;
    top: 80px;
    height: fit-content;
    /*     background-color: rgb(255, 255, 255); */
@@ -137,13 +149,15 @@
 }
 
 .fillter_btn_area {
-   position: relative;
-   left: -820px;
+
+/*    left: -820px; */
    width: 78%;
+
 }
 
 .fillter_btn {
    width: 80px;
+   margin:34px;
    height: 40px;
    border-radius: 10px;
    background-color: black;
@@ -420,6 +434,52 @@ ul>li {
 .button-container {
    text-align: center;
 }
+.card.box-shadow{
+   height: 450px;
+}
+.schedule_detail {
+   height: 130px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+.detail_btn_area {
+   margin-top: 20px;
+   height: 50px;
+}
+.detailBtn{
+   background: white;
+   border: none;
+   width: 100px;
+   height: 40px;
+   border-radius: 7px;
+}
+.detailBtn:hover{
+   background: black;
+   color: white;
+}
+
+/* 페이징 처리 */
+.nav_div {
+   margin-top: 30px;
+   margin-bottom: 30px;
+   
+}
+
+.nav_div > a {
+   font-size: 20px !important;
+   cursor: pointer !important;
+}
+.nav_div > a:hover {
+   color : red;
+}
+.nav_div  > strong {
+   font-size: 24px !important;
+   background-color: rgb(248, 248, 248);
+}
+.nav_div> a,strong {
+   margin-left: 10px;
+}
+
 </style>
 </head>
 
@@ -509,19 +569,19 @@ ul>li {
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gyeonggiCheckbox" value="경기"> <label class="form-check-label"
-                        for="gyeonggiCheckbox">경기도</label>
+                        for="gyeonggiCheckbox">경기</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="chungcheongCheckbox"> <label
-                        class="form-check-label" for="chungcheongCheckbox">충청도</label>
+                        class="form-check-label" for="chungcheongCheckbox">충북</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gyeongsangCheckbox"> <label class="form-check-label"
-                        for="gyeongsangCheckbox">경상도</label>
+                        for="gyeongsangCheckbox">경북</label>
                   </div>
 
                   <div class="form-check">
@@ -547,16 +607,16 @@ ul>li {
 
             </div>
          </div>
-         <div class="fillter_btn_area"
-            style="display: flex; justify-content: flex-end;">
-            <button class="fillter_btn">댓글순</button>
-            <button class="fillter_btn">조회순</button>
-            <button class="fillter_btn" onclick="order('like')">인기순</button>
-         </div>
+
+         
          <div class="container">
-
-
-
+         
+                  <div class="fillter_btn_area" justify-content: flex-end;">
+            <button class="fillter_btn" onclick="order('hh')">최신순</button>
+            <button class="fillter_btn" style="margin-left: -28px;"
+} onclick="order('like')">인기순</button>
+         </div>
+         
             <div class="cy5jw6o dir dir-ltr" role="group"
                data-testid="card-container"
                aria-labelledby="title_896641117667634802">
@@ -591,19 +651,21 @@ ul>li {
                                                 value="${schedule.member_id}"> <input
                                                 type="hidden" name="schedule_Num"
                                                 value="${schedule.schedule_Num}">
-                                             <%--<p>${schedule.title}</p> --%>
+                                            <div class="schedule_detail">
                                              <h5 class="fw-bolder">${schedule.title}</h5>
                                              <p>${schedule.member_id}</p>
                                              <p>지역:${schedule.doe_Name}</p>
                                              <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                              <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+<%--                                       	     <p>좋아요 수: ${schedule.LikeCNT != null ? schedule.LikeCNT : ""}</p> --%>
                                              <input type="hidden" name="regDate"
                                                 value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
                                              <input type="hidden" value="${schedule.schedule_Num}"
                                                 class="schedule_num">
-                                             <div
+                                          </div>
+                                             <div 
                                                 class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center">
+                                                <div class="detail_btn_area">
                                                    <input type="button" value="상세보기" class="detailBtn">
                                                 </div>
                                              </div>
@@ -625,45 +687,86 @@ ul>li {
             method="post">
             <input type="hidden" name="pageNo" id="pageNo"
                value="${result.schedule.pageNo}">
-            <%--<input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">--%>
+            <input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">
          </form>
+         
+         
       </div>
 
-      <!-- 페이징 처리 -->
    </div>
-
-   <!-- Display page numbers -->
-   <div style="text-align: center;">
-      <c:forEach var="item" begin="${result.schedule.navStart}"
-         end="${result.schedule.navEnd}">
-         <c:choose>
-            <c:when test="${result.schedule.pageNo != item}">
-               <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
-            </c:when>
-            <c:otherwise>
-               <strong>${item}</strong>
-            </c:otherwise>
-         </c:choose>
-      </c:forEach>
+         <!-- 페이징 처리 -->
+         <div class="nav_div" style="text-align: center; margin-top: 10px;">
+            <c:if test="${result.schedule.navStart != 1}">
+               <a href="#" onclick="jsPageNo(${result.schedule.navStart-1})"
+                  class="pageArrow">&lt;</a>
+            </c:if>
 
 
+            <c:forEach var="item" begin="${result.schedule.navStart}"
+               end="${result.schedule.navEnd}">
+               <c:choose>
+                  <c:when test="${result.schedule.pageNo != item}">
+                     <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
+                  </c:when>
+                  <c:otherwise>
+                     <strong>${item}</strong>
+                  </c:otherwise>
+               </c:choose>
+            </c:forEach>
 
-      <!-- Display next page link if there are more pages -->
-      <c:if
-         test="${result.schedule.navEnd != result.schedule.totalPageSize}">
-         <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
-            class="pageArrow">&gt;</a>
-      </c:if>
-   </div>
+
+            <c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
+               <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
+                  class="pageArrow">&gt;</a>
+            </c:if>
+         </div>
+
+<!--            <form name="searchForm" id="searchForm" action="/schedule/list" method="post"> -->
+<%--              <input type="hidden" id="pageNo2" name="pageNo" value="${result.inquiry.pageNo}"> --%>
+<!--              <div class="search_area"> -->
+<!--                 <div class="search_menu_div"> -->
+<!--                    <select id="search_menu_selects"> -->
+<!--                       <option>제목</option> -->
+<!--                       <option>유형</option> -->
+<!--                       <option>작성일</option> -->
+<!--                       <option>작성자</option> -->
+<!--                       <option>진행상태</option> -->
+<!--                    </select> -->
+<!--                 </div> -->
+<!--                 <div class="search_input_div"> -->
+<!--                    <input type="text" id="search_input" name="searchTitle"> -->
+<!--                    <button id="search_btn"><img src="/assets/img/search.png" width="30px"></button> -->
+<!--                 </div> -->
+<!--              </div> -->
+<!--              </form> -->
 
 
    <script>
-    function jsPageNo(pageNo) {
-       console.log("pageNo" + pageNo);
-        document.getElementById("pageNo").value = pageNo;
-        document.getElementById("pageForm").submit();
-    }
+   function jsPageNo(pageNo) {
+	    // 현재 URL 가져오기
+	    var currentUrl = window.location.href;
 
+	    // 기존의 pageNo 매개변수 제거
+	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+	    currentUrl = currentUrl.replace(regex, '$2');
+
+	    // 현재 URL에 페이지 번호 추가
+	    var newUrl;
+	    if (currentUrl.indexOf('?') !== -1) {
+	        newUrl = currentUrl + "&pageNo=" + pageNo;
+	    } else {
+	        newUrl = currentUrl + "?pageNo=" + pageNo;
+	    }
+
+	    // 새로운 URL을 폼의 액션으로 설정
+	    document.getElementById("pageForm").action = newUrl;
+
+	    // 페이지 번호 설정 및 폼 제출
+	    document.getElementById("pageNo").value = pageNo;
+	    document.getElementById("pageForm").submit();
+	}
+
+   
    function loadMoreData(start) {
     var member_Id = "member_id"; 
     var doe_Name = "doe_name"; 
@@ -691,7 +794,6 @@ ul>li {
     });
 }
             function moveToSelectedRegion() {
-                alert('메뉴화면으로 이동!');
                 window.location.href = '/schedule/list';
             }
 

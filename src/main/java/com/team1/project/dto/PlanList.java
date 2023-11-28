@@ -1,5 +1,7 @@
 package com.team1.project.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,26 +14,27 @@ import lombok.NoArgsConstructor;
 
 public class PlanList {
 	
-	private int id;
-    private String memberKey;
-    private String mdDetailPlanId;
-    private String imageUrl;
-    private String title;
-    private String[] area;
-    private String startAt;
-    private String endAt;
-    private int days;
-    private int isPublic;
-    private int isMine;
-    private String createdAt;
-    private String updatedAt;
-    private String nickName;
-    private String profile;
-    private String information;
-    private String tendency;
-    private String gender;
-    private int age;
-    private String[] placeIdList;
+	   private String memberKey;
+	    private String nickName;
+	    private String profile;
+	    private String tendency;
+	    private String gender;
+	    private int age;
+
+	    private int planId;
+	    private String mdDetailPlanId;
+	    private String imageUrl;
+	    private String title;
+	    private List<String> area;
+	    private String startAt;
+	    private String endAt;
+	    private int days;
+	    private int isPublic;
+	    private int isMine;
+	    private String createdAt;
+	    private String updatedAt;
+
+	    private List<String> placeIdList;
 
 }
 

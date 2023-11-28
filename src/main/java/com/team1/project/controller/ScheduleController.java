@@ -37,13 +37,13 @@ public class ScheduleController {
 	//일정목록보기
 	@RequestMapping (value = "/list")
     public String schedule(Model model, ScheduleDTO schedule) throws Exception {
+		System.out.println("schedule" + schedule);
 		MemberDTO member = getCurrentMember();
 		String memberId = member == null ? null : member.getMember_id();
 		
 		Map<String, Object> result = scheduleService.schedulePageList(schedule, memberId);
 		model.addAttribute("result", result);
-	    System.out.println("일정 목록 출력: " + result);
-	    System.out.println("일정 페이지출력: " + result);
+	   
     return "scheduleList";
    } 
 	
@@ -215,26 +215,6 @@ public class ScheduleController {
     return result;
 	}
     
-//	@ResponseBody
-//	@PostMapping("/update")
-//	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
-//	    boolean update = scheduleService.scheduleUpdate(schedule);
-//	    Map<String, Object> result = new HashMap<>();
-//	    if (update) {
-//	        result.put("message", "수정 성공했습니다!");
-//	    } else {
-//	        result.put("message", "수정 실패했습니다.");
-//	    }
-//	    result.put("schedule", update);
-//
-//	    System.out.println("수정하기 확인 " + schedule);
-//
-//    return result;
-//	}
-	
-	
-	
-
 	// 일정 삭제하기
 	@ResponseBody
 	@RequestMapping(value = "/delete")
@@ -248,57 +228,7 @@ public class ScheduleController {
 	    }
     return result;
 	}
-//
-//	@Controller
-//	@RequestMapping("/ajax_page")
-//	public class AjaxListController {
-//
-//
-//	@GetMapping
-//	   public String ajaxList(
-//	        @RequestParam(value = "keyword", defaultValue = "") String keyword,
-//	        @RequestParam(value = "order", defaultValue = "") String order,
-//	        @RequestParam(value = "curPage", defaultValue = "1") int curPage,
-//	        Model model) {
-//
-//	        int count = dao.getSearchCount(keyword);
-//	        Pager pager = new Pager(count, curPage);
-//	        int start = pager.getPageBegin();
-//	        int end = pager.getPageEnd();
-//	        int totPage = pager.getTotPage();
-//
-////	        List<ScheduleDTO> list = s.getSearchList(start, end, order, keyword);
-//
-//	        model.addAttribute("List", scheduleList);
-//	        model.addAttribute("page", pager);
-//	        model.addAttribute("pageNo", totPage);
-//	        model.addAttribute("count", count);
-//	        model.addAttribute("keyword", keyword);
-//
-//	        return "ajax_list";
-//	    }
-//	}
-//
-//	//무한 스크크롤
-//    @GetMapping("/list")
-//    public String mainPage(Model model, @RequestParam(value = "page",defaultValue = "1") int pageNo) 			{
-//        int count = dao.getContentsCount();
-//        Pager pager = new Pager(count, pageNo);
-//        int start = pager.getstart_Num();
-//        int end = pager.getend_Date();
-//        int totPage = pager.getTotalCount();
-//        String order = "view_cnt";
-//
-//        List<ScheduleDTO> list = schedule.ScheduleList(start, end, order);
-//
-//        model.addAttribute("list", list);
-//        model.addAttribute("page", pager);
-//        model.addAttribute("totalPageSize", totalPageSize);
-//        model.addAttribute("count", count);
-//
-//        return "scheduleList";
-//    }
-//	
+
 	
 	//하트색
 	@PostMapping("/updateHeartColor")

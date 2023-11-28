@@ -13,7 +13,7 @@ import com.team1.project.dto.UsFileDTO;
 public interface UsDAO {
 	
 	//동행 전체 목록
-	public List<UsDTO> getUsList(UsDTO us) throws Exception;
+	public List<UsDTO> getUsList(Map<String, Object> param) throws Exception;
 	
 	//동행 전체 게시글 증가
 	public int totalCount(UsDTO us) throws Exception;
@@ -26,7 +26,7 @@ public interface UsDAO {
 		
     //동행 글쓰기
 	public int writeInsert(UsDTO us) throws Exception;
-
+	
 	// 동행 상세보기
 	public UsDTO usDetail(int us_num) throws Exception;
 
@@ -59,7 +59,6 @@ public interface UsDAO {
 	
 	//관리자 동행글 복구하기
     public boolean ausChange(int us_num) throws Exception;
-
 	
 	//크롤링 url
 	 public int insertUsList(UsDTO usDTO) throws Exception;
@@ -67,4 +66,14 @@ public interface UsDAO {
 	// 관리자 월별 작성된 게시글 리스트
 	public List<UsDTO> monthUs();
 
+	
+	//댓글 증가
+	public void commentplus(int us_num);
+
+	public int doe_nametotalCount(UsDTO us);
+
+	
+	
+	
+	
 }

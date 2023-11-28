@@ -15,88 +15,202 @@
     <result property="dayId" column="day_id" />
     <result property="schedule_Num" column="schedule_Num" />
     <result property="dayDate" column="dayDate" />
-<!--     <result property="place" column="place" /> -->
-<!--     <result property="memo" column="memo" /> -->
+
 	</resultMap>
 
 
+<insert id="insertScheduleList" parameterType="com.team1.project.dto.ScheduleDTO">
+    <!-- Use a sequence to generate the SCHEDULE_NUM before the insert -->
+    <selectKey order="BEFORE" keyProperty="schedule_Num" resultType="int">
+        SELECT sc.nextval as schedule_Num FROM dual
+    </selectKey>
+    INSERT INTO schedule (
+        SCHEDULE_NUM,  <!-- Use the generated SCHEDULE_NUM here -->
+        MEMBER_ID,
+        TITLE,
+        START_NUM,
+        END_DATE,
+        REG_DATE
+    ) VALUES (
+        #{schedule_Num, jdbcType=INTEGER}, 
+        #{member_id, jdbcType=VARCHAR},
+        #{title, jdbcType=VARCHAR},
+        <if test="start_Num != null">#{start_Num, jdbcType=INTEGER}</if>
+        <if test="start_Num == null">NULL</if>,
+        <if test="end_Date != null">TO_DATE(#{end_Date, jdbcType=TIMESTAMP}, 'YYYY-MM-DD HH24:MI:SS')</if>
+        <if test="end_Date == null">NULL</if>,
+        SYSDATE  <!-- Use the current date for REG_DATE -->
+    )
+</insert>
+
 <select id="getScheduleList" parameterType="map" resultType="com.team1.project.dto.ScheduleDTO">
-	<!--  로그인 상태인 경우. 좋아요 정보를 가져오기 위한 쿼리 -->
-	<if test='MEMBER_ID != null'>
-		SELECT s.*,
-		    CASE   
-		      WHEN sl.LNO is null THEN 'false'   
-		      ELSE 'true'   
-		    END AS "isLike"
-			FROM (
-			    SELECT *
-				    FROM (
-				        SELECT
-				            a.*,
-				            ROWNUM AS rnum
-				        FROM (
-				            SELECT
-				                s.*,
-				                d.doe_img
-				            FROM SCHEDULE s
-				            JOIN DOE d ON s.doe_name = d.doe_name
-				            
-				            <if test='DOE_NAME != null'>
-				            	WHERE s.DOE_NAME = #{DOE_NAME}
-				            </if>
-				            
-				            <choose>
-				            	<when test="ORDER == 'like'">
-				            		ORDER BY s.LIKECNT DESC
-				            	</when>
-				            	<otherwise>
-				            		ORDER BY s.SCHEDULE_NUM DESC
-				            	</otherwise>
-				            </choose>
-				            
-				        ) a
-				        WHERE ROWNUM <![CDATA[<=]]> #{endNo}
-				    )
-				<!--     WHERE rnum BETWEEN #{startNo} AND #{endNo} -->
-				    WHERE rnum <![CDATA[>=]]> #{startNo}
-		    ) s
-		    	LEFT OUTER JOIN SCHEDULELIKE sl
-		    		on s.schedule_Num = sl.schedule_Num
-		    		and sl.userid = #{MEMBER_ID}
- 	</if>
- 	
- 	<!--  비로그인 상태에서 목록 가져오는 쿼리 -->
-	<if test='MEMBER_ID == null'>
-	    SELECT *
-		    FROM (
-		        SELECT
-		            a.*,
-		            ROWNUM AS rnum
-		        FROM (
-		            SELECT
-		                s.*,
-		                d.doe_img
-		            FROM SCHEDULE s
-		            JOIN DOE d ON s.doe_name = d.doe_name
-         			<if test='DOE_NAME != null'>
-				    	WHERE s.DOE_NAME = #{DOE_NAME}
-				    </if>
-		            <choose>
-		            	<when test="ORDER == 'like'">
-		            		ORDER BY s.LIKECNT DESC
-		            	</when>
-		            	<otherwise>
-		            		ORDER BY s.SCHEDULE_NUM DESC
-		            	</otherwise>
-		            </choose>
-		        ) a
-		        WHERE ROWNUM <![CDATA[<=]]> #{endNo}
-		    )
-		<!--     WHERE rnum BETWEEN #{startNo} AND #{endNo} -->
-		    WHERE rnum <![CDATA[>=]]> #{startNo}
- 	</if>
+    <!-- 로그인 상태인 경우. 좋아요 정보를 가져오기 위한 쿼리 -->
+    <if test='MEMBER_ID != null'>
+        SELECT s.*,
+            CASE   
+                WHEN sl.LNO IS NULL THEN 'false'   
+                ELSE 'true'   
+            END AS "isLike"
+        FROM (
+            SELECT *
+            FROM (
+                SELECT
+                    a.*,
+                    ROWNUM AS rnum
+                FROM (
+                    SELECT
+                        s.*,
+                        d.doe_img
+                    FROM SCHEDULE s
+                    JOIN DOE d ON s.doe_name = d.doe_name
+                    WHERE s.DELETEYN = 'N'
+                    <if test='DOE_NAME != null'>
+                        AND s.DOE_NAME = #{DOE_NAME} 
+                    </if>
+                    <choose>
+                        <when test="ORDER == 'like'">
+                            ORDER BY s.LIKECNT ASC 
+                        </when>
+                        <when test="ORDER == 'hh'">
+                            ORDER BY s.SCHEDULE_NUM DESC
+                        </when>
+                        <otherwise>
+                            ORDER BY s.SCHEDULE_NUM ASC 
+                        </otherwise>
+                    </choose>
+                ) a
+                WHERE ROWNUM <![CDATA[<=]]> #{endNo}
+            )
+            WHERE rnum <![CDATA[>=]]> #{startNo}
+        ) s
+        LEFT OUTER JOIN SCHEDULELIKE sl
+            ON s.schedule_Num = sl.schedule_Num
+            AND sl.userid = #{MEMBER_ID}
+    </if>
+    
+    <!-- 비로그인 상태에서 목록 가져오는 쿼리 -->
+    <if test='MEMBER_ID == null'>
+        SELECT *
+        FROM (
+            SELECT
+                a.*,
+                ROWNUM AS rnum
+            FROM (
+                SELECT
+                    s.*,
+                    d.doe_img
+                FROM SCHEDULE s
+                JOIN DOE d ON s.doe_name = d.doe_name
+                WHERE s.DELETEYN = 'N'
+                <if test='DOE_NAME != null'>
+                    AND s.DOE_NAME = #{DOE_NAME} 
+                </if>
+                <choose>
+                    <when test="ORDER == 'like'">
+                        ORDER BY s.LIKECNT ASC 
+                    </when>
+                    <when test="ORDER == 'hh'">
+                        ORDER BY s.SCHEDULE_NUM DESC
+                    </when>
+                    <otherwise>
+                        ORDER BY s.SCHEDULE_NUM ASC 
+                    </otherwise>
+                </choose>
+            ) a
+            WHERE ROWNUM <![CDATA[<=]]> #{endNo}
+        )
+        WHERE rnum <![CDATA[>=]]> #{startNo}
+    </if>
 </select>
 
+    <select id="doe_nametotalCount" resultType="int">
+      select count(*)
+      from schedule where doe_name = #{doe_Name}
+    </select>
+
+
+<!-- <select id="getScheduleList" parameterType="map" resultType="com.team1.project.dto.ScheduleDTO"> -->
+<!--     로그인 상태인 경우. 좋아요 정보를 가져오기 위한 쿼리 -->
+<!--     <if test='MEMBER_ID != null'> -->
+<!--         SELECT s.*, -->
+<!--             CASE    -->
+<!--                 WHEN sl.LNO IS NULL THEN 'false'    -->
+<!--                 ELSE 'true'    -->
+<!--             END AS "isLike" -->
+<!--         FROM ( -->
+<!--             SELECT * -->
+<!--             FROM ( -->
+<!--                 SELECT -->
+<!--                     a.*, -->
+<!--                     ROWNUM AS rnum -->
+<!--                 FROM ( -->
+<!--                     SELECT -->
+<!--                         s.*, -->
+<!--                         d.doe_img -->
+<!--                     FROM SCHEDULE s -->
+<!--                     JOIN DOE d ON s.doe_name = d.doe_name -->
+<!--                        WHERE s.DELETEYN = 'N' -->
+<!--                     <if test='DOE_NAME != null'> -->
+<!--                         WHERE s.DOE_NAME = #{DOE_NAME} -->
+<!--                     </if> -->
+<!--                     <choose> -->
+<!--                         <when test="ORDER == 'like'"> -->
+<!--                             ORDER BY s.LIKECNT ASC  -->
+<!--                         </when> -->
+<!--                           <when test="ORDER == 'hh'"> -->
+<!--                     ORDER BY s.SCHEDULE_NUM DESC -->
+<!--                 </when> -->
+<!--                         <otherwise> -->
+<!--                             ORDER BY s.SCHEDULE_NUM ASC  -->
+<!--                         </otherwise> -->
+<!--                     </choose> -->
+<!--                 ) a -->
+<!--                 WHERE ROWNUM <![CDATA[<=]]> #{endNo} -->
+<!--             ) -->
+<!--             WHERE rnum <![CDATA[>=]]> #{startNo} -->
+<!--         ) s -->
+<!--         LEFT OUTER JOIN SCHEDULELIKE sl -->
+<!--             ON s.schedule_Num = sl.schedule_Num -->
+<!--             AND sl.userid = #{MEMBER_ID} -->
+<!--     </if> -->
+    
+<!--     비로그인 상태에서 목록 가져오는 쿼리 -->
+<!--     <if test='MEMBER_ID == null'> -->
+<!--         SELECT * -->
+<!--         FROM ( -->
+<!--             SELECT -->
+<!--                 a.*, -->
+<!--                 ROWNUM AS rnum -->
+<!--             FROM ( -->
+<!--                 SELECT -->
+<!--                     s.*, -->
+<!--                     d.doe_img -->
+<!--                 FROM SCHEDULE s -->
+<!--                 JOIN DOE d ON s.doe_name = d.doe_name -->
+<!--                   WHERE s.DELETEYN = 'N' -->
+<!--                 <if test='DOE_NAME != null'> -->
+               
+<!--                     WHERE s.DOE_NAME = #{DOE_NAME} -->
+                    
+<!--                 </if> -->
+<!--                <choose> -->
+<!--                 <when test="ORDER == 'like'"> -->
+<!--                     ORDER BY s.LIKECNT ASC  -->
+<!--                 </when> -->
+<!--                 <when test="ORDER == 'hh'"> -->
+<!--                     ORDER BY s.SCHEDULE_NUM DESC -->
+<!--                 </when> -->
+<!--                 <otherwise> -->
+<!--                     ORDER BY s.SCHEDULE_NUM ASC  -->
+<!--                 </otherwise> -->
+<!--             </choose> -->
+<!--             ) a -->
+<!--             WHERE ROWNUM <![CDATA[<=]]> #{endNo} -->
+<!--         ) -->
+<!--         WHERE rnum BETWEEN #{startNo} AND #{endNo} -->
+<!--         WHERE rnum <![CDATA[>=]]> #{startNo} -->
+<!--     </if> -->
+<!-- </select> -->
 
 
 <!--일정 글등록 --> 
@@ -123,7 +237,6 @@ values(
 	#{date2, jdbcType=DATE},
 	#{date3, jdbcType=DATE}
 	)
-	
 </insert>
 
     <!--지역번호 만들기 --> 
@@ -168,18 +281,19 @@ values(
                     or s.place2 = c.city_name
                     or s.place3 = c.city_name
             WHERE s.schedule_num = ${scheduleNum}
-
 </select>
 
 <!-- 전체 게시글 수 -->
  <select id="totalCount" resultType="int"> 
  		select count(*) 
  		from schedule 
- 		where 1=1
+ 		where DELETEYN = 'N'
         <if test='doe_Name != null'>
         	AND DOE_NAME = #{doe_Name}
         </if>
  	</select>
+
+
 
  <!-- 수정하기 -->
   <update id="scheduleUpdate" parameterType="map">
@@ -204,13 +318,33 @@ values(
 </update>
 
    
-<!--삭제하기 -->
-     <delete id="schduleDelete">  
-          DELETE FROM SCHEDULE
-    WHERE
-        SCHEDULE_NUM = #{schedule_Num}  
-     </delete>  
+ 	<!--삭제하기 -->  
+<!--           <delete id="schduleDelete">      -->
+<!--               DELETE FROM SCHEDULE   -->
+<!--       		  WHERE      -->
+<!--            SCHEDULE_NUM = #{schedule_Num}    -->
+<!--      </delete>     -->
 
+
+ <delete id="schduleDelete" parameterType="map"> 
+   
+     <![CDATA[ 
+           	 UPDATE SCHEDULE SET DELETEYN= 'Y'
+             WHERE SCHEDULE_NUM = #{schedule_Num}
+     ]]> 
+ </delete> 
+
+
+
+
+	<!-- 좋아요 삭제  --> 
+	<delete id="deleteLike">
+		DELETE FROM snslike
+		WHERE bno = #{bno} AND userID = #{userId}	
+	</delete>
+ 
+ 
+ 
 <!-- 좋아요 검색  -->
 	<select id="searchLike" resultType="int">
 		SELECT COUNT(*) FROM snslike
@@ -223,11 +357,7 @@ values(
 		VALUES(#{bno}, #{userId}, snslike_seq.NEXTVAL)
 	</insert>
 	
-	<!-- 좋아요 삭제  --> 
-	<delete id="deleteLike">
-		DELETE FROM snslike
-		WHERE bno = #{bno} AND userID = #{userId}	
-	</delete>
+
 
 	 <!-- 컨텐츠 검색 갯수 -->
   <select id="getSearchCount" resultType="int">
@@ -267,5 +397,8 @@ values(
 			SET LIKECNT = LIKECNT - 1
 		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
 	</update>
+
+
+
 
 </mapper>

@@ -22,9 +22,10 @@ public class ScheduleDTO {
 	    private Date start_Num;
 	    private Date end_Date;
 	    private Date reg_Date;
+
 	    private Date day_date;
 	    private Date mod_Date;
-	    private String delete_Yn;
+	    private String DELETEYN;
 	    private String memo1;
 	    private String memo2;
 	    private String place1;
@@ -34,9 +35,9 @@ public class ScheduleDTO {
 	    private String place3;
 	    private String memo3;
 	    
-	    private Date date1;
-	    private Date date2;
-	    private Date date3;
+	    private String date1;
+	    private String date2;
+	    private String date3;
 	    
 		private String imageUrl;
 		
@@ -45,7 +46,7 @@ public class ScheduleDTO {
 	    
 	    private List<ScheduleDTO> scheduleList;
 	    private String memoList;
-//	    private String []scheduleList;
+	    private String area; 
 	    private String Like_CNT;
 	    private String title;
 	    
@@ -87,4 +88,10 @@ public class ScheduleDTO {
 		public int getEndNo() {
 			return pageNo * pageLength;  // 페이지의 마지막 게시글 번호 계산
 		}
+
+	
+	    public void setReg_Date(Date date) {
+	        this.reg_Date = date;
+	    }
+	    
 	}

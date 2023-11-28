@@ -30,14 +30,20 @@
 
 /* 날짜 선택 div */
 .schedule {
-   margin-top: 80px !important;
-   display: flex;
-   width: 100%;
-   text-align: center;
-   justify-content: center;
-   align-content: center;
-   align-items: center;
+    margin-top: 50px !important;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    padding: 5px;
+/*     transform: translate(-50%, -50%); */
 }
+
+
 
 .schedule>form {
    display: flex;
@@ -469,6 +475,30 @@
 .content {
    width: 800px;
 }
+
+ .center-align {
+ 	padding: 35px;
+    text-align: center;
+    margin: auto;
+  }
+
+  /* 간격 추가 스타일 */
+ .spacing {
+    margin-bottom: 20px;
+  }
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .memo-modal {
+    margin-top: 20px;
+  }
+
+  .day_li_btn_div button {
+    margin-right: 10px;
+  }
+  
+  
 </style>
 <body>
 
@@ -525,7 +555,7 @@
 
    <div class="scheduleDetailContent">
       <div class="schedule">
-         <div class="schedule_title">날짜선택</div>
+<!--          <div class="schedule_title">날짜선택</div> -->
          <form>
             <div class="startDate_div">
                <p class="Date_title">시작 날짜 :</p>
@@ -550,9 +580,14 @@
 
             <div class="schedule-list">
                <div class="title_div">
-                  <span> 제목 </span><input type="text" id="title"
-                     value="${scheduleList[0].title }">
-               </div>
+                 
+    <div class="title-container center-align">
+  <span>제목</span>
+  <input type="text" id="title" value="${scheduleList[0].title}">
+</div>
+
+               
+               
                <ul class="schedule-ul">
                   <c:forEach items="${scheduleList}" var="item" varStatus="status">
                      <li class="schedule-item day-${status.count }"><input

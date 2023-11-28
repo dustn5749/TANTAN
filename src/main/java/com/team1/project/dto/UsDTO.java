@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class UsDTO {
 	
 	private int us_num; // 객체의 고유 식별 번호입니다.
-	private String city_name; // 객체와 연관된 도시의 이름입니다.
+	private String member_id;
+	private String doe_Name; // 객체와 연관된 도시의 이름입니다.
+	private String area; // 지역
 	private String content; // 객체와 관련된 상세한 내용이나 정보입니다.
 	private String start_Date; // 객체와 관련된 시간 범위의 시작 날짜입니다.
 	private String end_Date; // 객체와 관련된 시간 범위의 종료 날짜입니다.
@@ -26,7 +28,12 @@ public class UsDTO {
 	private int fileNo; //첨부파일 번호
 	private List<UsFileDTO> file;
 	private String status; // 동행 게시글 상태
-  
+	
+	private int viewCount; //조회수 증가 
+	private String ORDER;		// 정렬 순서
+
+	
+	private String comment;
 	//관리자 동행 목록 가져오기
 
 	private String month;
