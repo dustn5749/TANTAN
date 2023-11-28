@@ -183,7 +183,7 @@ SELECT u.*, uf.usfilenum as fileNo
       <select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
           SELECT * FROM (
               SELECT * FROM us
-              ORDER BY us_num DESC
+              ORDER BY us_num 
           )
           WHERE ROWNUM &lt;= 3
       </select>

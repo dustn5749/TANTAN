@@ -248,67 +248,17 @@ public class ScheduleController {
 	    }
     return result;
 	}
-//
-//	@Controller
-//	@RequestMapping("/ajax_page")
-//	public class AjaxListController {
-//
-//
-//	@GetMapping
-//	   public String ajaxList(
-//	        @RequestParam(value = "keyword", defaultValue = "") String keyword,
-//	        @RequestParam(value = "order", defaultValue = "") String order,
-//	        @RequestParam(value = "curPage", defaultValue = "1") int curPage,
-//	        Model model) {
-//
-//	        int count = dao.getSearchCount(keyword);
-//	        Pager pager = new Pager(count, curPage);
-//	        int start = pager.getPageBegin();
-//	        int end = pager.getPageEnd();
-//	        int totPage = pager.getTotPage();
-//
-////	        List<ScheduleDTO> list = s.getSearchList(start, end, order, keyword);
-//
-//	        model.addAttribute("List", scheduleList);
-//	        model.addAttribute("page", pager);
-//	        model.addAttribute("pageNo", totPage);
-//	        model.addAttribute("count", count);
-//	        model.addAttribute("keyword", keyword);
-//
-//	        return "ajax_list";
-//	    }
-//	}
-//
-//	//무한 스크크롤
-//    @GetMapping("/list")
-//    public String mainPage(Model model, @RequestParam(value = "page",defaultValue = "1") int pageNo) 			{
-//        int count = dao.getContentsCount();
-//        Pager pager = new Pager(count, pageNo);
-//        int start = pager.getstart_Num();
-//        int end = pager.getend_Date();
-//        int totPage = pager.getTotalCount();
-//        String order = "view_cnt";
-//
-//        List<ScheduleDTO> list = schedule.ScheduleList(start, end, order);
-//
-//        model.addAttribute("list", list);
-//        model.addAttribute("page", pager);
-//        model.addAttribute("totalPageSize", totalPageSize);
-//        model.addAttribute("count", count);
-//
-//        return "scheduleList";
-//    }
-//	
+	
 	
 	//하트색
 	@PostMapping("/updateHeartColor")
 	@ResponseBody
-	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum, @RequestParam("isLike") boolean isLike) {
+	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") int schedule_Num, @RequestParam("isLike") boolean isLike) {
 		// isLike가 true면 좋아요 개수 올려주기
 		// false면 좋아요 취소
 		
 		MemberDTO member = getCurrentMember();
-		scheduleService.updateLike(member.getMember_id(), scheduleNum, isLike);
+		scheduleService.updateLike(member.getMember_id(), schedule_Num, isLike);
 		
 	    Map<String, Object> response = new HashMap<>();
 	    try {
@@ -330,5 +280,17 @@ public class ScheduleController {
 			return null;
 		}
 		
+	}
+	
+	
+	
+	// 일정 위시리스트 목록 가져오기
+	@RequestMapping("/likeScheduleList")
+	public String getLikeScheduleList(@RequestParam("member_id") String member_id, Model model,ScheduleDTO schedule) {
+		System.out.println("getLikeScheduleList.member_id = " + member_id);
+		Map<String, Object> result = scheduleService.getLikeScheduleList(member_id, schedule);
+		System.out.println("result = " + result);
+		model.addAttribute("result", result);
+		return "wishList";
 	}
 }

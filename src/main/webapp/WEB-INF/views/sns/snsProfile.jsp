@@ -96,7 +96,6 @@
                         <div class="name">
                             <h2>
                                 <span>${member.nickname}</span>
-                                <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" alt="" class="badge-certify">
                             </h2>
                             <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
                         </div>
@@ -129,10 +128,6 @@
                 <div class="profile-top-right">
                     <div class="profile-info">
                         <div class="info03">
-                            <dl>
-                                <dt>지역</dt>
-                                <dd>${member.address}</dd>
-                            </dl>
                             <dl>
                                 <dt>나이</dt>
                                 <dd>${member.age}세</dd>

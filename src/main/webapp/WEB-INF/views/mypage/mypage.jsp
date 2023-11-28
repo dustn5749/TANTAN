@@ -195,10 +195,11 @@
 						<div class="member_value">
 							<c:choose>
 							<c:when test="${principal.user.oauth == 'kakao'}">
-								<input type="text" value="카카오 로그인" readonly="readonly" disabled="disabled" id="pwd"> 
+								<input type="text" value="카카오 로그인" readonly="readonly" disabled="disabled" id="outh"> 
 							</c:when>
 							<c:otherwise>
-								<input type="text" value="${principal.user.pwd}" readonly="readonly" disabled="disabled" id="pwd"> 
+								<input type="text" value="1234" readonly="readonly" disabled="disabled" id="pwd"> 
+								<input type="hidden" value="${principal.user.pwd}" readonly="readonly" disabled="disabled" id="pwd2"> 
 							</c:otherwise>
 						</c:choose>
 						</div>
@@ -257,82 +258,98 @@
 				</div>
 				<div class="menu_div_inner">
 					<img src="/assets/img/calendar.png" width="40px">
-					<a class="menu_a_class" href="/member/mySchedule.do" id="mySchedule">내 일정</a>
+					<a class="menu_a_class" href="/member/mySchedule.do" id="mySchedule"  style="color: grey">내 일정</a>
 				</div>
-
+				<div class="menu_div_inner">
+					<img src="/assets/img/friend.png" width="40px">
+					<a class="menu_a_class" href="#" id="likeScheduleList"  style="color: grey">일정 위시리스트</a>
+					<input type="hidden" value="${principal.user.member_id}" class="memberId"> 
+				</div>
 			</div>
 		</div>
-	</div>
-	<script type="text/javascript">
+	
+	<script>
+	
 	/* 수정하기  */
-		$("#modify_btn").on("click", function(){
-		    var btn_html = ($("#modify_btn").html() === "수정하기");
-		    var oauth = $("#oauth").val();
-		
-		    if (btn_html) {
-		        if (oauth !== "kakao") {
-		            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", false);
-		            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", false);
-		            $("#modify_btn").html("수정완료");
-		        } else {
-		            alert("카카오 로그인은 수정이 불가능합니다.");
-		        }
-		    } else {
-		    	var send = {
-		    			member_id: $("#member_id").val(),
-		    			name : $("#name").val(),
-		    			pwd : $("#pwd").val(),
-		    			phone: $("#phone").val(),
-		    			email: $("#email").val(),
-		    			nickname : $("#nickname").val()	
-		    	}
-		    	$.ajax({
-		    		url : "/member/modify.do",
-		    	    type: 'POST',
-		    	    contentType:   "application/json; charset=UTF-8",
-		    	    data: JSON.stringify(send),
-		    	    dataType: "json",
-		    	    success: function (data) {
-		    			if(data.result){
-		    				alert("회원정보를 수정했습니다");
-		    		        $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", true);
-		    	            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", true);
-							$("#name").val(data.member.name);
-							$("#gender").val(data.member.gender);
-							$("#email").val(data.member.email);
-							$("#pwd").val(data.member.pwd);
-							$("#nickname").val(data.member.nickname);
-							
-		    		        $("#modify_btn").html("수정하기");
-		    			}
-		    		}
-		    	})
+	$("#modify_btn").on("click", function(){
+	    var btn_html = ($("#modify_btn").html() === "수정하기");
+	    var oauth = $("#oauth").val();
+	
+	    if (btn_html) {
+	        if (oauth !== "kakao") {
+	            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", false);
+	            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", false);
+	            $("#modify_btn").html("수정완료");
+	        } else {
+	            alert("카카오 로그인은 수정이 불가능합니다.");
+	        }
+	    } else {
+	    	var send = {
+	    			member_id: $("#member_id").val(),
+	    			name : $("#name").val(),
+	    			pwd : $("#pwd").val(),
+	    			phone: $("#phone").val(),
+	    			email: $("#email").val(),
+	    			nickname : $("#nickname").val()	
+	    	}
+	    	$.ajax({
+	    		url : "/member/modify.do",
+	    	    type: 'POST',
+	    	    contentType:   "application/json; charset=UTF-8",
+	    	    data: JSON.stringify(send),
+	    	    dataType: "json",
+	    	    success: function (data) {
+	    			if(data.result){
+	    				alert("회원정보를 수정했습니다");
+	    		        $("#name, #gender, #email, #pwd, #nickname, #phone").prop("readonly", true);
+	    	            $("#name, #gender, #email, #pwd, #nickname, #phone").prop("disabled", true);
+						$("#name").val(data.member.name);
+						$("#gender").val(data.member.gender);
+						$("#email").val(data.member.email);
+						$("#pwd").val(data.member.pwd);
+						$("#nickname").val(data.member.nickname);
+						
+	    		        $("#modify_btn").html("수정하기");
+	    			}
+	    		}
+	    	})
 
-		    }
-		});
-	
-	
-	/* 회원 탈퇴하기 */
-	$("#deleteMember").on("click", function(){
-		var password = prompt("정말 탈퇴하시겠습니까? 탈퇴하시려면 비밀번호를 입력해주세요")
-		send={ 
-			member_id: $("#member_id").val(),
-			pwd : password }
+	    }
+	});
+
+
+/* 회원 탈퇴하기 */
+$("#deleteMember").on("click", function(){
+	var password = prompt("정말 탈퇴하시겠습니까? 탈퇴하시려면 비밀번호를 입력해주세요");
+	if(password==$("#pwd").val()){
+			send={ 
+				member_id: $("#member_id").val(),
+				pwd : $("#pwd2").val() }
+			
+			$.ajax({
+				url : "/member/deleteMember",
+			    type: 'POST',
+			    contentType:   "application/json; charset=UTF-8",
+			    data: JSON.stringify(send),
+			    dataType: "json",
+			    success: function (data) {
+					if(data.result){
+						alert("성공적으로 회원 탈퇴에 성공하였습니다.");
+				     	location.href="/main";
+					}
+				}
+			})
 		
-    	$.ajax({
-    		url : "/member/deleteMember",
-    	    type: 'POST',
-    	    contentType:   "application/json; charset=UTF-8",
-    	    data: JSON.stringify(send),
-    	    dataType: "json",
-    	    success: function (data) {
-    			if(data.result){
-    				alert("성공적으로 회원 탈퇴에 성공하였습니다.");
-    		     	location.href="/main";
-    			}
-    		}
-    	})
-	})
+		
+	}
+})
+
+
+/* 일정 위시리스트 */
+$("#likeScheduleList").on("click", function(){
+	var member_id = $(".memberId").val();
+	location.href="/schedule/likeScheduleList?member_id="+member_id;
+})
 	</script>
 </body>
 </html>

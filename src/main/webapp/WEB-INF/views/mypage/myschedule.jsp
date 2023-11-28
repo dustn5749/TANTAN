@@ -140,7 +140,7 @@
 				</div>
 				<div class="menu_div_inner">
 					<img src="/assets/img/setting.png" width="40px">
-					<a class="menu_a_class" href="/member/mypage.do">회원정보 설정</a>
+					<a class="menu_a_class" href="/member/mypage.do"  style="color: grey">회원정보 설정</a>
 				</div>
 				<div class="menu_div_inner">
 					<img src="/assets/img/calendar.png" width="40px">
@@ -148,11 +148,12 @@
 				</div>
 				<div class="menu_div_inner">
 					<img src="/assets/img/friend.png" width="40px">
-					<a class="menu_a_class" href="/member/friend.do" id="friendList">친구 관리</a>
+					<a class="menu_a_class" href="#" id="likeScheduleList"  style="color: grey">일정 위시리스트</a>
 				</div>
 			</div>
 		</div>
 	</div>
+					<input type="hidden" value="${principal.user.member_id}" class="memberId"> 
 	<script type="text/javascript">
 
 		
@@ -189,6 +190,13 @@
 				calendar.render();
 			});
 		
+	
+		/* 일정 위시리스트 */
+		$("#likeScheduleList").on("click", function(){
+			var member_id = $(".memberId").val();
+			location.href="/schedule/likeScheduleList?member_id="+member_id;
+		})
+	
 	</script>
 </body>
 </html>

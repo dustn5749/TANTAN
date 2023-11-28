@@ -144,10 +144,11 @@ public class ScheduleService {
 			return schduleDAO.getTop3ScheduleList();
 		}
 		
-		public void updateLike(String member_id, String scheduleNum, boolean isLike) {
+		// 좋아요 
+		public void updateLike(String member_id, int schedule_Num, boolean isLike) {
 			Map<String, Object> param = new HashMap<>();
 			param.put("USERID", member_id);
-			param.put("SCHEDULE_NUM", scheduleNum);
+			param.put("SCHEDULE_NUM", schedule_Num);
 			if (isLike) {	// 좋아요 추가
 				scheduleLikeDAO.insert(param);
 				schduleDAO.plusLikeCnt(param);
@@ -161,5 +162,25 @@ public class ScheduleService {
 			int todayScheduleCount = schduleDAO.todaySchedule(schedule).getTodaySchedule();
 			
 			return todayScheduleCount;
+		}
+		// 일정 위시리스트 가져오기
+		public Map<String, Object> getLikeScheduleList(String member_id, ScheduleDTO schedule) {
+			int totalCount = schduleDAO.LikeTotalCount(schedule);
+			Map<String, Object> result = new HashMap<>();
+			schedule.setTotalCount(totalCount);
+			
+			Map<String, Object> param = new HashMap<>();
+			param.put("MEMBER_ID", member_id);
+			param.put("endNo", schedule.getEndNo());
+			param.put("startNo", schedule.getStartNo());
+
+			try {
+				result.put("scheduleList", schduleDAO.getLikeScheduleList(param)); // 게시글 목록 조회
+				result.put("schedule", schedule);
+			} catch (Exception e) {
+				result.put("message", "서버 오류 발생");
+				e.printStackTrace();
+			}
+			return result;
 		}
 }

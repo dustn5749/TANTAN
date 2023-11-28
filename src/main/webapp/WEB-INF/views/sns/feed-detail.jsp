@@ -304,7 +304,7 @@
                                             </div>
                                         </div>
                                         <div class="recomment-wrap">
-                                            <!-- open 클래스 달리면 답댓글들 다~보임 -->
+                                            <!-- open 클래스 달리면 답댓글들 다 보임 -->
                                             <div class="recomment-top">
                                                 <button type="button" data-count="4"
                                                         class="toggle-recomment-btn gray-txt txt-btn">답글 보기(4개)

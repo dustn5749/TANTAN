@@ -156,6 +156,7 @@ values(
             S.DATE1,
             S.DATE2,
             S.DATE3,
+            S.LIKECNT,
             C.LATITUDE AS CITY_LATITUDE,
             C.LONGITUDE AS CITY_LONGITUDE
             FROM schedule s
@@ -208,22 +209,22 @@ values(
      </delete>  
 
 <!-- 좋아요 검색  -->
-	<select id="searchLike" resultType="int">
+<!-- 	<select id="searchLike" resultType="int">
 		SELECT COUNT(*) FROM snslike
 		WHERE bno = #{bno} AND userId = #{userId}
 	</select>
 	
-	<!-- 좋아요 등록  -->
+	좋아요 등록 
 	<insert id="createLike">
 		INSERT INTO snslike(bno, userId, lno) 
 		VALUES(#{bno}, #{userId}, snslike_seq.NEXTVAL)
 	</insert>
 	
-	<!-- 좋아요 삭제  --> 
+	좋아요 삭제  
 	<delete id="deleteLike">
 		DELETE FROM snslike
 		WHERE bno = #{bno} AND userID = #{userId}	
-	</delete>
+	</delete> -->
 
 	 <!-- 컨텐츠 검색 갯수 -->
   <select id="getSearchCount" resultType="int">
@@ -250,6 +251,7 @@ values(
           WHERE ROWNUM &lt;= 3
 	</select>
 	
+	<!-- 좋아요 테이블에 추가 -->
 	<update id="plusLikeCnt" parameterType="map">
 		UPDATE
 			SCHEDULE
@@ -257,6 +259,7 @@ values(
 		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
 	</update>
 	
+	<!-- 좋아요 테이블 삭제 -->
 		<update id="minusLikeCnt" parameterType="map">
 		UPDATE
 			SCHEDULE
@@ -270,5 +273,20 @@ values(
 	    SELECT COUNT(*) AS todaySchedule
 	    FROM schedule
 	    WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+    </select>
+	<!-- 위시리스트 총 갯수 세기 -->
+	<select id="LikeTotalCount" resultType="int">
+		SELECT COUNT(*) FROM SCHEDULELIKE
+		WHERE USERID=#{member_id}
+	</select>
+
+	<!-- 일정 위시리스트 -->
+	<select id="getLikeScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+		SELECT S.*, D.doe_img
+		FROM SCHEDULE S
+		JOIN SCHEDULELIKE SL ON SL.SCHEDULE_NUM = S.SCHEDULE_NUM
+		JOIN DOE D ON S.doe_name = D.doe_name
+		WHERE SL.USERID = #{MEMBER_ID}
+		ORDER BY S.SCHEDULE_NUM
 	</select>
 </mapper>

@@ -4,7 +4,7 @@
   <!-- 친구 -->
   <!-- ↓ 만약에 활동중이면 status-active 클래스 달면 됨. status-active 클래스 달을 경우 좌측에 초록 동그라미가 뜸. -->
   <c:forEach items="${friendList}" var="friend">
-    <div id='friend-list${friend.id}' class="friend-list status-active">
+    <div id='friend-list${friend.id}' class="friend-list">
       <!-- 친구 프사 & 이름 -->
       <div class="person-item">
         <figure class="mini-thumnail">
@@ -13,8 +13,6 @@
         <div class="person-profile">
           <div class="name-wrap">
             <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
-            <!-- 블루뱃지 -->
-            <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
           </div>
           <p class="intro-txt">소개글</p>
         </div>

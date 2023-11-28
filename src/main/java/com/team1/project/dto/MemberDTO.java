@@ -91,7 +91,9 @@ public class MemberDTO {
 		public int getStartNo() {
 			return (pageNo - 1) * pageLength + 1;  // 페이지의 시작 게시글 번호 계산
 		}
-		
+
+
+
 		public int getEndNo() {
 			return pageNo * pageLength;  // 페이지의 마지막 게시글 번호 계산
 		}

@@ -36,7 +36,7 @@
             <div class="friend-list-grp">
                 <c:forEach items="${chatRoom.chatters}" var="chatter">
                     <!-- 친구 -->
-                    <div class="friend-list status-active">
+                    <div class="friend-list">
                         <!-- 친구 프사 & 이름 -->
                         <div class="person-item">
                             <figure class="mini-thumnail">
@@ -44,9 +44,7 @@
                             </figure>
                             <div class="person-profile">
                                 <div class="name-wrap">
-                                    <h6 class="name">${chatter.nickname}</h6>
-                                    <!-- 블루뱃지 -->
-                                    <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
+                                    <h6 class="name">${chatter.nickname}</h6>                                   
                                 </div>
                             </div>
                         </div>

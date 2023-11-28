@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page session="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <meta charset="UTF-8">
 <title>동행 목록조회</title>
 <style>
@@ -596,7 +600,7 @@ div, input, p, span, button, h2 {
                   </span>
                </button>
 
-               <button class="city_btn1" onclick="window.location.href ='write'"
+               <button class="city_btn1"
                   style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
             </div>
 
@@ -616,8 +620,20 @@ div, input, p, span, button, h2 {
                      <div class="card-body p-4">
                         <div class="text-center">
                            <div class="img_div">
-
-                              <c:if test="${item.fileNo!=0}">
+							<c:choose>
+								<c:when test="${item.fileNo!=0}">
+									<img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
+								</c:when>
+								<c:when test="${!empty item.imageUrl}">
+								 	<img src="${item.imageUrl}" class="us_content_img">
+								</c:when>
+								<c:when test="${empty item.imageUrl&& item.fileNo==0}">
+								    <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207"
+                                    class="us_content_img">
+								</c:when>
+							</c:choose>
+							
+      <%--                         <c:if test="${item.fileNo!=0}">
                                  <img src="/file/displayImage.do?usFileNum=${item.fileNo}"
                                     alt="동행이미지 사진" class="us_content_img">
                               </c:if>
@@ -628,7 +644,7 @@ div, input, p, span, button, h2 {
                                  <img
                                     src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207"
                                     class="us_content_img">
-                              </c:if>
+                              </c:if> --%>
 
 
                            </div>
@@ -692,11 +708,26 @@ div, input, p, span, button, h2 {
          </div>
       </div>
    </div>
+		<c:choose>
+		    <c:when test="${empty principal}">
+		        <input type="hidden" value="${principal.user.member_id}" class="member">			
+		    </c:when>
+		    <c:otherwise>
+		        <input type="hidden" value="null" class="member">
+		    </c:otherwise>		
+		</c:choose>
+
+
 
    <script>
-function city_btn1() {
-    window.location.href = '/us/write';
-}
+ $(".city_btn1").on("click", function() {
+		if($(".member").val()!=""){
+			location.href="/us/write";		
+		} else {
+			alert("로그인 후 이용해주세요")
+		}
+	 
+	})
 
     function jsPageNo(pageNo) {
         document.getElementById("pageNo").value = pageNo;

@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.DoeDTO;
@@ -59,6 +61,22 @@ public class ReviewController {
        result.put("doe", doe);
        result.put("result", true);
        return result;
+    }
+    
+    // 리뷰 상세보기
+    @RequestMapping("/display2")
+    public String displayReviewDoe2(@RequestParam("doe_name") String doe_name, Model model) throws Exception {
+       System.out.println("reviewController.displayReviewDoe2(doe_name)" + doe_name);
+       int doe_num = doeService.findDoeNum(doe_name);
+       ReviewDTO  review = new ReviewDTO(); 
+       review.setDoe_num(doe_num);
+       List<ReviewDTO> reviewList =  reviewService.getReviewList(review);
+       reviewService.averageDoe(review.getDoe_num());
+       DoeDTO doe = doeService.getDoe(review.getDoe_num());
+       System.out.println("doe = " + doe);
+       model.addAttribute("reviewList",reviewList);
+       model.addAttribute("doe", doe);
+       return "reviewMain";
     }
     
    //리뷰 작성

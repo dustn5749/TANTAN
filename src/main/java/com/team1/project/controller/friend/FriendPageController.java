@@ -28,7 +28,7 @@ public class FriendPageController {
 
     request.setAttribute("friendSize", CollectionUtils.isEmpty(friendList) ? "0" : friendList.size());
     request.setAttribute("friendList", friendList);
-
+    			
     return "friend-modal";
   }
 

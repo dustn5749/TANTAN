@@ -97,9 +97,9 @@
 
         <!-- 채팅 입력 -->
         <div class="chat-create">
-            <button type="button" class="btn file-btn">
-                <img src="<c:url value="/assets/sns/images/icon-file-blue.svg"/>" alt="">
-            </button>
+<!--             <button type="button" class="btn file-btn"> -->
+<%--                 <img src="<c:url value="/assets/sns/images/icon-file-blue.svg"/>" alt=""> --%>
+<!--             </button> -->
 
             <div class="create-wrap">
                   <textarea id="chat-textarea" rows="1" data-autoresize placeholder="대화를 입력하세요..."
