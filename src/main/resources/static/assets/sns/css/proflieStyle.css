@@ -151,9 +151,7 @@ img {
   cursor: pointer;
 }
 
-.sidebar-btn.active {
-  border: 1px solid #393939;
-}
+
 
 .sidebar-btn .icon {
   width: 32px;
@@ -514,10 +512,12 @@ img {
 .common-modal {
   transform: translateY(60px);
   transition: all 0.3s;
+  pointer-events: none;
 }
 
 .modal-wrapper.active .common-modal {
   transform: translateY(0);
+  pointer-events: visible;
 }
 
 .ctrl-modal {
@@ -976,4 +976,12 @@ img {
 
 .recomment-list:last-child {
   margin-bottom: 0;
+}
+
+.red-circle {
+  width: 8px;
+  height: 8px;
+  background-color: rgb(255, 53, 53);
+  border-radius: 50%;
+  display: inline-block;
 }

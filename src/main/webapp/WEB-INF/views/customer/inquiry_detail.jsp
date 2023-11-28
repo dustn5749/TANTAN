@@ -112,6 +112,33 @@
 	border: none;
 	background-color: none;
 }
+/* 답변 div */
+.commentDiv{
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.commentDiv_inner {
+	display: flex;
+	background-color: white;
+	height: 100px;
+	padding-top: 30px;
+	
+}
+
+.commentTitle {
+	text-align: left;
+	padding-left: 30px;
+	margin-right: 20px;
+	font-size: 20px !important;
+	font-weight: bold;
+}
+.comment_content > input {
+	border: none;
+	width: 600px;
+	overflow: auto;
+}
+
 /* 버튼 */
 .btn_div{
 	margin:0 auto;
@@ -136,6 +163,7 @@
 	background: rgb(173, 211, 254);
 	color: black;
 }
+
 </style>
 
 </head>
@@ -186,6 +214,24 @@
 				 	</c:if>
 				</div>
 				
+				<!-- 답변 div  -->
+				<div class="commentDiv">
+					<hr>
+					<div class="commentDiv_inner">
+						<div class="commentTitle">답변 : </div>
+						<div class="comment_content">
+							<c:choose>
+								<c:when test="${inquiry.answer_yn=='Y'}">
+									<input type="text" value="네 고객님 불편하게 해드려 죄송합니다. 자세한 답변 사항은 이메일을 확인해주세요." readonly="readonly" style="color: red">
+								</c:when>
+								<c:otherwise>
+									<input type="text" value="답변이 아직 작성되지 않았습니다." readonly="readonly" style="color: grey">
+								
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+				</div>
 				<!-- 버튼  -->
 				<div class="btn_div">
 					<button class="backbtn">뒤로가기</button>
@@ -196,7 +242,10 @@
  	</div>
 
 	<script>
-	
+	/* 뒤로 가기 */
+	$(".backbtn").on("click", function(){
+		location.href="/customer/inquiryList"
+	})
 	
 </script>
 </body>

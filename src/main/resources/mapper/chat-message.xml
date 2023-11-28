@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.ChatMessageDAO">
+  <insert id="insertMessage">
+    insert into MESSAGE
+    (MESSAGE_NUM, MEMBER_ID, ROOM_NUM, CONTENTS, MESSAGE_TYPE)
+    values
+      (MESSAGE_SEQ.nextval, #{memberId}, #{roomNum}, #{contents}, #{messageType.value})
+
+    <selectKey resultType="long" keyProperty="messageNum" order="AFTER">
+      SELECT MESSAGE_SEQ.currval from dual
+    </selectKey>
+  </insert>
+
+  <select id="getList" resultType="com.team1.project.dto.chat.message.ChatMessageDTO">
+
+    select
+        ROWNUM as rnum,
+        a.MEMBER_ID as senderId,
+        a.ROOM_NUM as roomNum,
+        a.MESSAGE_NUM as messageNum,
+        a.MESSAGE_TYPE as messageType,
+        a.NICKNAME as senderNickName,
+        a.CONTENTS as contents,
+        a.SEND_TIME as sendTime,
+        a.PROFILE_IMG as profileImg
+    from (
+      select
+        mss.*,
+        m.NICKNAME,
+        m.PROFILE_IMG
+      from
+        MESSAGE mss
+        inner join ADMIN.MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
+      where mss.ROOM_NUM = #{roomNum}
+      <if test="lastId != null">
+        <![CDATA[
+        and mss.MESSAGE_NUM < #{lastId}
+        ]]>
+      </if>
+      order by mss.MESSAGE_NUM desc
+    ) a
+    <![CDATA[
+    where ROWNUM <= #{size}
+    ]]>
+  </select>
+
+  <select id="getMessageById" resultType="com.team1.project.dto.chat.message.ChatMessageDTO">
+
+    select
+      mss.MEMBER_ID as senderId,
+      mss.ROOM_NUM as roomNum,
+      mss.MESSAGE_NUM as messageNum,
+      mss.MESSAGE_TYPE as messageType,
+      m.NICKNAME as senderNickName,
+      mss.CONTENTS as contents,
+      mss.SEND_TIME as sendTime
+    from
+    MESSAGE mss
+    inner join ADMIN.MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
+    where 1 = 1
+    and mss.MESSAGE_NUM = #{messageNum}
+
+  </select>
+
+</mapper>
+ 

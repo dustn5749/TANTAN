@@ -14,5 +14,6 @@ public class DoeDTO {
 	public int doe_num;
 	public String doe_name;
 	public String doe_img;
+	public String doe_review;
 	public double average;
 }

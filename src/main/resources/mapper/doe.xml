@@ -14,4 +14,40 @@
 		average =#{average}
 		where doe_num=#{doe_num}
 	</update>
+	
+	
+	<!-- 도 이름으로 도 번호 찾기  -->
+	<select id="findDoeNum" resultType="int">
+		SELECT doe_num FROM DOE
+		WHERE DOE_NAME= #{doe_name}
+	</select>
+	
+	
+	<!-- 도 리뷰 이미지 가져오기 -->
+	<select id="getDoeImg" resultType="String">
+  		SELECT doe_review FROM doe WHERE doe_name = #{doe_Name}
+	</select>
+	
+	<!-- 도 전체 평균 내기 -->
+	<update id="averageDoeTotal">
+	    MERGE INTO doe target
+		    USING (
+		        SELECT doe_num, AVG(score) as average
+		        FROM review
+		        GROUP BY doe_num
+		    ) source
+		    ON (target.doe_num = source.doe_num)
+		    WHEN MATCHED THEN
+		    UPDATE SET target.average = source.average
+	</update>
+	
+	
+	<!--top5 도 리스트 -->
+	<select id="getTopReviewList" resultType="com.team1.project.dto.DoeDTO">
+		 SELECT * FROM (
+              SELECT * FROM doe
+              ORDER BY average DESC
+          )
+          WHERE ROWNUM &lt;= 5
+	</select>
 </mapper>

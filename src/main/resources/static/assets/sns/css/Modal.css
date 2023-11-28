@@ -1,11 +1,12 @@
 .btn_div {
-	position:  relative;
-	display: flex;
+  position: relative;
+  display: flex;
 }
-.btn_div > button {
-	border:  none;
-	background-color: transparent;
-	}
+
+.btn_div>button {
+  border: none;
+  background-color: transparent;
+}
 
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.55);
@@ -309,7 +310,6 @@ label.friend-list .checkbox {
   cursor: default;
 }
 
-/* 1108에 추가된 모달 스타일 */
 .w-400 {
   max-width: 400px;
 }
@@ -1102,4 +1102,53 @@ label.friend-list .checkbox {
   padding: 12px 15px;
   font-size: 16px;
   font-weight: 600;
+}
+
+.namesetting-modal .namesetting-modal-content {
+  padding: 20px;
+}
+
+.namesetting-modal .participant-txt {
+  text-align: left;
+  color: gray;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.namesetting-modal .inp-unit {
+  width: 100%;
+  position: relative;
+}
+
+.namesetting-modal .inp-unit .inp {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #000;
+  height: 45px;
+  padding-right: 50px;
+  font-size: 17px;
+  outline: none;
+}
+
+.namesetting-modal .inp-unit .unit {
+  position: absolute;
+  top: 14px;
+  font-size: 14px;
+  right: 0;
+  color: #b0b0b0;
+}
+
+.namesetting-modal .bottom-btn-wrap {
+  width: 100%;
+  margin-top: 20px;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.namesetting-modal .bottom-btn-wrap .btn {
+  width: 100%;
+  height: 48px;
+  font-size: 17px;
 }

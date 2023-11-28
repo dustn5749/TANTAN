@@ -14,10 +14,13 @@ public interface ReviewDAO {
 	
 	//검색기능
 	public void reviewWrite(ReviewDTO review);
-	
-	//리뷰 수정
-	public void reviewModify(ReviewDTO review);
 
 	//도 평균내기
 	public double averageDoe(int doeNum);
+
+	// 리뷰 추가하기
+	public int insert(ReviewDTO review);
+
+
+
 }

@@ -30,36 +30,31 @@
 	where doe_num=#{doe_num}
 </select>
 
-<!-- 
-<insert id="reviewWrite">
-		INSERT INTO DL_REVIEW (
-		    ORDER_NUM
-		    ,STORE_ID
-		    ,REVIEW_CONTENT
-		    ,USER_ID
-		    ,SCORE
-		    ,REVIEW_IMG 
-		) VALUES (
-			${orderNum }
-			,#{storeId }
-			,#{reviewContent }
-			,#{userId}
-			,#{score}
-			,#{reviewImg }
-		)		
-	</insert>
+
+<!-- 리뷰 작성하기 -->
+<insert id="insert">
+	insert into review(
+		REVIEW_NUM,
+		DOE_NUM,
+		MEMBER_ID,
+		SCORE,
+		CONTENT,
+		REGDATE,
+		DELETEYN
+	)
+	values (
+		REVIEW_SQ.NEXTVAL,
+		#{doe_num},
+		#{member_id},
+		#{score},
+		#{content},
+		SYSDATE,
+		'N'
+	)
 	
-	<update id="reviewModify">
-    UPDATE DL_REVIEW SET
-        REVIEW_CONTENT = #{reviewContent }
-        ,SCORE = #{score}
-        
-        <if test="reviewImg != null">
-        ,REVIEW_IMG = #{reviewImg }
-        </if>
-        
-    WHERE
-        ORDER_NUM = ${orderNum }    
-	</update> -->
+	
+</insert>
+
+
 
 </mapper>

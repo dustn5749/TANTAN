@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.project.dao.ChatMemberDAO">
+
+  <insert id="registerChatMember" parameterType="com.team1.project.dto.chat.ChatMemberList">
+    insert into CHATTER
+    (MEMBER_ID, ROOM_NUM, JOIN_TIME)
+    <foreach collection="memberIds" index="index" item="item" separator="UNION ALL" >
+      SELECT  #{item} , #{chatRoomNum} , sysdate FROM DUAL
+    </foreach>
+  </insert>
+  <delete id="deleteMemberRoom">
+    delete from CHATTER
+    where MEMBER_ID = #{memberId}
+      and ROOM_NUM = #{roomNum}
+  </delete>
+  <select id="getChatMemberList" resultType="com.team1.project.dto.chat.ChatMember">
+    select
+      ctt.ROOM_NUM roomNum,
+      ctt.MEMBER_ID memberId,
+      ctt.JOIN_TIME joinTime,
+      mem.NICKNAME nickname
+    from
+      CHATTER ctt
+        inner join MEMBER mem on ctt.MEMBER_ID = mem.MEMBER_ID
+    WHERE
+      ctt.ROOM_NUM = #{roomNum}
+
+
+  </select>
+
+
+</mapper>
+ 

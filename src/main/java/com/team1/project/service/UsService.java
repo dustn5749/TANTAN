@@ -1,5 +1,6 @@
 package com.team1.project.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,9 @@ public class UsService {
 
 		int totalCount = usDAO.totalCount(us);
 		us.setTotalCount(totalCount); //여기서 전체 게시글 수를 불러와서 저장함.
-		System.out.println("totalCount = " + totalCount);
-		System.out.println("us = " + us);
+	
+		System.out.println("us s-e:" + us.getStartNo() + "//" + us.getEndNo());
+		
 		Map<String, Object> result = new HashMap<>();
 		try {
 		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회
@@ -104,6 +106,7 @@ public class UsService {
 	//최신 동행 리스트
 	public List<UsDTO> getUsRecentList() {
 		System.out.println("usService.getUsRecentList()");
+		
 		return usDAO.getUsRecentList();
 	}
 

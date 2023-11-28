@@ -13,7 +13,7 @@
     <!-- 친구이름 검색 & 채팅초대 버튼 -->
     <div class="friend-modal-hd">
         <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
-        <button class="btn" onclick="openModal('chat-invite-modal')">
+        <button class="btn" onclick="openInviteModal()">
             <img src="<c:url value="/assets/sns/images/message-circle-plus.svg"/>" alt="" class="icon">
         </button>
     </div>
@@ -66,9 +66,6 @@
         } else {
           $('#tab-friend-invite').load('/page/friend/request').addClass('active');
         }
-
-        // $('#' + showTabContent).addClass('active');
       });
-
     });
 </script>

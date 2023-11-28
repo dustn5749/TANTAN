@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-    
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
        
 <!DOCTYPE html>
 <html>
@@ -43,13 +47,13 @@ https://templatemo.com/tm-559-zay-shop
 <style type="text/css">
 
 /* 마우스 커서에 대한 설정 */
- body {
+/*  body {
     cursor: url('/assets/img/cursor2.png'), auto !important;
    }
 
    a:hover {
        cursor: url('/assets/img/cursor.png'), auto !important;       
-   }
+   } */
 
 
 
@@ -90,6 +94,15 @@ https://templatemo.com/tm-559-zay-shop
 		<div id="footer">
 		<tiles:insertAttribute name="footer"/>
 		</div>
+		<c:choose>
+		    <c:when test="${empty principal}">
+		        <input type="hidden" value="${principal.user.member_id}" class="member">			
+		    </c:when>
+		    <c:otherwise>
+		        <input type="hidden" value="null" class="member">
+		    </c:otherwise>		
+		</c:choose>
+
 	</div>
 	
 
@@ -104,7 +117,11 @@ https://templatemo.com/tm-559-zay-shop
     <script type="text/javascript">
 	/* 토끼 눌렀을때 sns 페이지로 연동 */
 	$("#rabbit_img").on("click",function(){
-		location.href="/sns/profile";
+		if($(".member").val()!=""){
+			location.href="/sns/profile";		
+		} else {
+			alert("로그인 후 이용해주세요")
+		}
 	})
 	
 	</script>

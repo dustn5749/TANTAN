@@ -21,15 +21,7 @@ public class MemberService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-//	// 일반 로그인하기
-//	public boolean login(MemberDTO member) {
-//		System.out.println("memberService.login(member)");
-//		MemberDTO loginmember = memberDao.login(member);
-//		boolean result = loginmember.getPwd().equals(member.getPwd());
-//		System.out.println("result = " + result);
-//		return result;
-//	}
-//	
+
 	// 회원가입하기
 	public void insertMember(MemberDTO member) throws Exception{
 		System.out.println("memberService.insertMember(member)");

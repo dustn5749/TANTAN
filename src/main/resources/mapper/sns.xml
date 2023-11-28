@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team1.project.dao.SnsDAO">
-<select id="getBoardList" resultType="com.team1.project.dto.SnsBoardDTO">
+<mapper namespace="com.team1.project.dao.sns.SnsDAO">
+  <insert id="saveBoard">
+    insert into SNS_BOARD
+    (BOARD_NUM, MEMBER_ID, TITLE, CONTENT, REG_DATE, MOD_DATE)
+    values (SNS_BOARD_SEQ.nextval,#{memberId},#{title}, #{content},SYSDATE,SYSDATE)
+
+    <selectKey resultType="long" keyProperty="boardNum" order="AFTER">
+      SELECT SNS_BOARD_SEQ.currval from dual
+    </selectKey>
+  </insert>
+  <insert id="saveFile" parameterType="com.team1.project.entity.SnsBoardFile">
+    insert into SNS_FILE
+    (FILE_NUM, BOARD_NUM, MEMBER_ID, LENGTH, UPLOAD_NAME, REAL_NAME, FILE_TYPE, REG_DATE, ORDER_NUM)
+    VALUES
+    (FILE_UPLOAD_SQ.nextval, #{boardNum}, #{memberId}, 0,#{uploadName}, #{realName},#{fileType}, sysdate,1)
+  </insert>
+
+  <update id="updateViewCountByBoardNum">
+    update SNS_BOARD
+    set VIEW_COUNT = VIEW_COUNT + 1
+    where BOARD_NUM = #{boardNum}
+  </update>
+  <update id="update">
+update SNS_BOARD
+  set
+  TITLE = #{title},
+  CONTENT = #{content},
+  MOD_DATE = sysdate,
+  DELETE_YN = #{deleteYn}
+  where BOARD_NUM = #{boardNum}
+
+  </update>
+  <update id="updateProfile">
+    update MEMBER
+        set PROFILE_IMG = #{key}
+    where MEMBER_ID = #{memberId}
+
+  </update>
+  <select id="getBoardList" resultType="com.team1.project.dto.SnsBoardDTO">
     <![CDATA[
         select
             rownum as rnum,
+            A.* from (
+          select
             sb.board_num as boardNum,
             sb.MEMBER_ID as memberId,
             sb.TITLE as title,
@@ -18,18 +57,93 @@
             sb.COMMENT_COUNT as commentCount,
             (case when sl.board_num is not null then 1
                   else 0
-                end )
-                as liked,
-            sf.real_name
-        from sns_board sb
-        left join sns_like sl on (sb.board_num = sl.board_num and sb.member_id = sl.member_id)
-        left join sns_file sf on (sb.board_num = sf.board_num)
+              end )
+              as liked,
+            sf.real_name as realName
+          from sns_board sb
+                 left join sns_like sl on (sb.board_num = sl.board_num and sb.member_id = sl.member_id)
+                 left join sns_file sf on (sb.board_num = sf.board_num)
+          where
+            1 = 1
+            and sb.member_id = #{memberId}
+    ]]>
+            <if test="lastId != null">
+    <![CDATA[
+            and sb.BOARD_NUM < #{lastId}
+    ]]>
+              </if>
+    <![CDATA[
+          order by sb.board_num desc
+        )  A
         where
             1 = 1
-          and sb.member_id = 7800
-        order by sb.board_num desc
+        and rownum < 10
     ]]>
-</select>
+
+  </select>
+  <select id="findAll" resultType="com.team1.project.entity.SnsBoard">
+
+
+  </select>
+  <select id="findByDeleteYn" resultType="com.team1.project.entity.SnsBoard">
+    select
+      sb.board_num as boardNum,
+      sb.MEMBER_ID as memberId,
+      sb.TITLE as title,
+      sb.CONTENT as content,
+      sb.VIEW_COUNT as viewCount,
+      sb.REG_DATE as regDate,
+      sb.MOD_DATE as modDate,
+      sb.DELETE_YN as deleteYn,
+      sb.LIKE_COUNT as likeCount,
+      sb.COMMENT_COUNT as commentCount,
+      (case when sl.board_num is not null then 1
+            else 0
+        end )
+        as liked,
+      sf.real_name
+    from sns_board sb
+      left join sns_like sl on (sb.board_num = sl.board_num and sb.member_id = sl.member_id)
+      left join sns_file sf on (sb.board_num = sf.board_num)
+    where
+      1 = 1
+      and sb.member_id = #{memberId}
+      and sb.delete_yn = #{n}
+
+  </select>
+  <select id="findById" resultType="com.team1.project.entity.SnsBoard">
+    select
+      sb.board_num as boardNum,
+      sb.MEMBER_ID as memberId,
+      sb.TITLE as title,
+      sb.CONTENT as content,
+      sb.VIEW_COUNT as viewCount,
+      sb.REG_DATE as regDate,
+      sb.MOD_DATE as modDate,
+      sb.DELETE_YN as deleteYn,
+      sb.LIKE_COUNT as likeCount,
+      sb.COMMENT_COUNT as commentCount
+    from sns_board sb
+    where
+      1 = 1
+      and sb.BOARD_NUM = #{boardNum}
+      and sb.delete_yn = 'N'
+  </select>
+  <select id="getFile" resultType="com.team1.project.entity.SnsBoardFile">
+    select
+        file_num fileNum,
+        board_num boardNum,
+        member_id memberId,
+        length length,
+        upload_name uploadName,
+        real_name realName,
+        file_type fileType,
+        reg_date regDate,
+        order_num orderNum
+    from SNS_FILE sf
+    where sf.BOARD_NUM = #{boardNum}
+
+  </select>
 
 
 </mapper>

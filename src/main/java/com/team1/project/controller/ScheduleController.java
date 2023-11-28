@@ -1,12 +1,15 @@
 package com.team1.project.controller;
 
-
-
+import java.security.Security;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.annotation.WebServlet;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.config.auth.PrincipalDetails;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.service.ScheduleService;
@@ -31,10 +35,15 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	//일정목록보기
-	@GetMapping(value = "/list")
+	@RequestMapping (value = "/list")
     public String schedule(Model model, ScheduleDTO schedule) throws Exception {
-		model.addAttribute("result", scheduleService.usPageList(schedule));
-	    System.out.println("일정 목록 출력: " + schedule);
+		MemberDTO member = getCurrentMember();
+		String memberId = member == null ? null : member.getMember_id();
+		
+		Map<String, Object> result = scheduleService.schedulePageList(schedule, memberId);
+		model.addAttribute("result", result);
+	    System.out.println("일정 목록 출력: " + result);
+	    System.out.println("일정 페이지출력: " + result);
     return "scheduleList";
    } 
 	
@@ -54,15 +63,36 @@ public class ScheduleController {
         // 일정이 하나라도 실패하면 이 값을 false로 변경
         boolean allSucceeded = true;
         
+        ScheduleDTO insertDto = new ScheduleDTO();
         // 여러 일정에 대한 처리
-        for (ScheduleDTO schedule : schedules) {
-            schedule.setMember_Id("user123");
-            
-            // 일정 등록에 실패하면 allSucceeded를 false로 변경
-            if (!scheduleService.writeInsert(schedule)) {
-                allSucceeded = false;
-            }
+        for (int i = 0; i < schedules.size(); i++) {
+        	ScheduleDTO dto = schedules.get(i);
+        	insertDto.setMember_id("user123");
+        	insertDto.setStart_Num(dto.getStart_Num());
+        	insertDto.setEnd_Date(dto.getEnd_Date());
+        	insertDto.setDoe_Name(dto.getDoe_Name());
+        	insertDto.setTitle(dto.getTitle());
+        	
+        	if (i == 0) {
+        		insertDto.setPlace1(dto.getPlace1());
+        		insertDto.setMemo1(dto.getMemo1());
+        		insertDto.setDate1(dto.getDate1());
+        	} else if (i == 1) {
+        		insertDto.setPlace2(dto.getPlace1());
+        		insertDto.setMemo2(dto.getMemo1());
+        		insertDto.setDate2(dto.getDate1());
+        	} else if (i == 2) {
+        		insertDto.setPlace3(dto.getPlace1());
+        		insertDto.setMemo3(dto.getMemo1());
+        		insertDto.setDate3(dto.getDate1());
+        	}
         }
+        
+        // 일정 등록에 실패하면 allSucceeded를 false로 변경
+        if (!scheduleService.writeInsert(insertDto)) {
+            allSucceeded = false;
+        }
+        
         
         if (allSucceeded) {
             result.put("message", "모든 일정이 성공적으로 등록되었습니다.");
@@ -100,24 +130,80 @@ public class ScheduleController {
     public String getScheduleDetail(@RequestParam("schedule_Num") int schedule_Num, Model model) {
         try {
             List<ScheduleDTO> result = scheduleService.getScheduleDetail(schedule_Num);
+            
+            List<ScheduleDTO> transList = new ArrayList<>();
+            for (int i =0; i< result.size(); i ++) { 
+            	ScheduleDTO current = result.get(i);
+            	ScheduleDTO dto = new ScheduleDTO();
+            	dto.setTitle(current.getTitle());
+            	dto.setStart_Num(current.getStart_Num());
+            	dto.setEnd_Date(current.getEnd_Date());
+            	dto.setMember_id(current.getMember_id());
+            	dto.setSchedule_Num(current.getSchedule_Num());
+            	dto.setDoe_Name(current.getDoe_Name());
+            	dto.setCity_latitude(current.getCity_latitude());
+            	dto.setCity_longitude(current.getCity_longitude());
+            	
+            	if (i == 0) {
+            		dto.setPlace1(current.getPlace1());
+            		dto.setDate1(current.getDate1());
+            		dto.setMemo1(current.getMemo1());
+            	} else if (i == 1) {
+            		dto.setPlace1(current.getPlace2());
+            		dto.setDate1(current.getDate2());
+            		dto.setMemo1(current.getMemo2());
+            	} else if (i == 2) {
+            		dto.setPlace1(current.getPlace3());
+            		dto.setDate1(current.getDate3());
+            		dto.setMemo1(current.getMemo3());
+            	}
+            	
+            	transList.add(dto);
+            }
 
             // 여기서 결과를 적절히 처리
-            model.addAttribute("scheduleList", result);
+            model.addAttribute("scheduleList", transList);
             System.out.println(result);
 
-            return "scheduleDetail"; // 적절한 뷰 이름으로 변경
+            return "scheduleDetail";
         } catch (Exception e) {
             // 예외 처리
             e.printStackTrace();
-            return "errorPage"; // 적절한 에러 페이지로 변경
+            return "errorPage"; 
         }
     }
     
    //수정하기
 	@ResponseBody
-	@PostMapping("/update")
-	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
-	    boolean update = scheduleService.scheduleUpdate(schedule);
+	@PostMapping("/update/{scheduleNum}")
+	public Map<String, Object> update(@RequestBody List<ScheduleDTO> schedules, @PathVariable("scheduleNum") int scheduleNum) throws Exception {
+        ScheduleDTO insertDto = new ScheduleDTO();
+        System.out.println("들어온 데이터 = " + schedules);
+        // 여러 일정에 대한 처리
+        for (int i = 0; i < schedules.size(); i++) {
+        	ScheduleDTO dto = schedules.get(i);
+        	insertDto.setMember_id("user123");
+        	insertDto.setStart_Num(dto.getStart_Num());
+        	insertDto.setEnd_Date(dto.getEnd_Date());
+        	insertDto.setDoe_Name(dto.getDoe_Name());
+        	insertDto.setTitle(dto.getTitle());
+        	
+        	if (i == 0) {
+        		insertDto.setPlace1(dto.getPlace1());
+        		insertDto.setMemo1(dto.getMemo1());
+        		insertDto.setDate1(dto.getDate1());
+        	} else if (i == 1) {
+        		insertDto.setPlace2(dto.getPlace1());
+        		insertDto.setMemo2(dto.getMemo1());
+        		insertDto.setDate2(dto.getDate1());
+        	} else if (i == 2) {
+        		insertDto.setPlace3(dto.getPlace1());
+        		insertDto.setMemo3(dto.getMemo1());
+        		insertDto.setDate3(dto.getDate1());
+        	}
+        }
+		
+	    boolean update = scheduleService.scheduleUpdate(scheduleNum, insertDto);
 	    Map<String, Object> result = new HashMap<>();
 	    if (update) {
 	        result.put("message", "수정 성공했습니다!");
@@ -126,10 +212,28 @@ public class ScheduleController {
 	    }
 	    result.put("schedule", update);
 
-	    System.out.println("수정하기 확인 " + schedule);
-
     return result;
 	}
+    
+//	@ResponseBody
+//	@PostMapping("/update")
+//	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
+//	    boolean update = scheduleService.scheduleUpdate(schedule);
+//	    Map<String, Object> result = new HashMap<>();
+//	    if (update) {
+//	        result.put("message", "수정 성공했습니다!");
+//	    } else {
+//	        result.put("message", "수정 실패했습니다.");
+//	    }
+//	    result.put("schedule", update);
+//
+//	    System.out.println("수정하기 확인 " + schedule);
+//
+//    return result;
+//	}
+	
+	
+	
 
 	// 일정 삭제하기
 	@ResponseBody
@@ -144,14 +248,68 @@ public class ScheduleController {
 	    }
     return result;
 	}
-
-	
-
+//
+//	@Controller
+//	@RequestMapping("/ajax_page")
+//	public class AjaxListController {
+//
+//
+//	@GetMapping
+//	   public String ajaxList(
+//	        @RequestParam(value = "keyword", defaultValue = "") String keyword,
+//	        @RequestParam(value = "order", defaultValue = "") String order,
+//	        @RequestParam(value = "curPage", defaultValue = "1") int curPage,
+//	        Model model) {
+//
+//	        int count = dao.getSearchCount(keyword);
+//	        Pager pager = new Pager(count, curPage);
+//	        int start = pager.getPageBegin();
+//	        int end = pager.getPageEnd();
+//	        int totPage = pager.getTotPage();
+//
+////	        List<ScheduleDTO> list = s.getSearchList(start, end, order, keyword);
+//
+//	        model.addAttribute("List", scheduleList);
+//	        model.addAttribute("page", pager);
+//	        model.addAttribute("pageNo", totPage);
+//	        model.addAttribute("count", count);
+//	        model.addAttribute("keyword", keyword);
+//
+//	        return "ajax_list";
+//	    }
+//	}
+//
+//	//무한 스크크롤
+//    @GetMapping("/list")
+//    public String mainPage(Model model, @RequestParam(value = "page",defaultValue = "1") int pageNo) 			{
+//        int count = dao.getContentsCount();
+//        Pager pager = new Pager(count, pageNo);
+//        int start = pager.getstart_Num();
+//        int end = pager.getend_Date();
+//        int totPage = pager.getTotalCount();
+//        String order = "view_cnt";
+//
+//        List<ScheduleDTO> list = schedule.ScheduleList(start, end, order);
+//
+//        model.addAttribute("list", list);
+//        model.addAttribute("page", pager);
+//        model.addAttribute("totalPageSize", totalPageSize);
+//        model.addAttribute("count", count);
+//
+//        return "scheduleList";
+//    }
+//	
 	
 	//하트색
 	@PostMapping("/updateHeartColor")
 	@ResponseBody
-	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum) {
+	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum, @RequestParam("isLike") boolean isLike) {
+		// isLike가 true면 좋아요 개수 올려주기
+		// false면 좋아요 취소
+		
+		MemberDTO member = getCurrentMember();
+		scheduleService.updateLike(member.getMember_id(), scheduleNum, isLike);
+		
 	    Map<String, Object> response = new HashMap<>();
 	    try {
 
@@ -161,5 +319,16 @@ public class ScheduleController {
 	        response.put("error", e.getMessage());
 	    }
 	    return response;
+	}
+	
+	// 로그인 상태가 아니라면. null 리턴
+	private MemberDTO getCurrentMember() {
+		try {
+			return (MemberDTO)((PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+		} catch (ClassCastException e) {
+			// TODO: handle exception
+			return null;
+		}
+		
 	}
 }

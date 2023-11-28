@@ -42,11 +42,9 @@
     <div class="lg-thumbnail-container">
         <!--큰 이미지-->
         <div class="lg-thumbnail">
-            ${board}
-
             <c:if test="${board.files != null}">
                 <div class="thumnail-img-box">
-                    <img src="<c:url value="${board.files[0].uploadName}"/>" alt="">
+                    <img src="${board.files[0].realName}" alt="">
                 </div>
             </c:if>
 
@@ -67,9 +65,9 @@
         <div class="content-container-top">
             <div class="name-wrap">
                 <figure class="mini-thumnail">
-                    <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                    <img src="${member.profile_img}" alt="">
                 </figure>
-                <h4>choi_seung_hyun_tttop</h4>
+                <h4>${member.nickname}</h4>
                 <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
             </div>
 

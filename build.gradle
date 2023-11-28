@@ -63,7 +63,9 @@ dependencies {
 	//구글 json 라이브러리
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	// JSON
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.470'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2'
@@ -74,6 +76,10 @@ dependencies {
    implementation 'com.oracle.database.security:oraclepki:23.2.0.0'
    implementation 'com.oracle.database.security:osdt_core'
  
+	// 스프링 배치
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	
+	
 	
 	/*redis 관련 설정 추가 */
 	//implementation 'org.springframework.session:spring-session-data-redis'
