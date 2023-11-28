@@ -175,9 +175,9 @@ public class MemberController {
 		try {
 			
 			// 기존회원인지 체크하기
-			if(!memberservice.checkMember(kakaoMember)) {
+			
 				memberservice.insertMember(kakaoMember);				 
-			}
+			
 			
 			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행함");
 		}catch (Exception e) {

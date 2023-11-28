@@ -679,8 +679,7 @@ function btnInsert() {
 									$(div).append(member_id);
 									$(div).append(content);
 									
-									if(e.writer == loggedInUserId){
-										
+		/* 							if(e.writer == loggedInUserId){
 										var btnarea = document.createElement("div");
 										$(btnarea).addClass("btnarea");
 										var btn1 = document.createElement("button");
@@ -693,7 +692,7 @@ function btnInsert() {
 										$(btnarea).append(btn2);
 										
 										$(div).append(btnarea);
-									}
+									} */
 
 									
 									 

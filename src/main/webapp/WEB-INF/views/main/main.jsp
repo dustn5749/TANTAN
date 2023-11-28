@@ -26,9 +26,17 @@
 /* 배너 */
 .carousel-inner{
 	background-color: rgb(244, 250, 255);
+	position: relative;
 }
 
-
+.imgarea {
+    position: absolute;
+    top: 50%; /* 수직 가운데 정렬 */
+    left: 50%; /* 수평 가운데 정렬 */
+    transform: translate(-50%, -50%); /* 가운데 정렬을 위한 변환 */
+    z-index: 1; /* 이미지를 최상위로 표시 */
+    width: 50%; /* 초기 너비 100% */
+}
 
 #template-mo-zay-hero-carousel .carousel-control-next i, #template-mo-zay-hero-carousel .carousel-control-prev i {
     color: #0099ff !important;
@@ -50,14 +58,12 @@
 
 
 /* 일정검색 img  */	
-.schedule_search_bar {
-    position: absolute;
-    top: 50%; /* 수직 가운데 정렬 */
-    left: 50%; /* 수평 가운데 정렬 */
-    transform: translate(-50%, -50%); /* 가운데 정렬을 위한 변환 */
-    z-index: 1; /* 이미지를 최상위로 표시 */
-    width: 50%; /* 초기 너비 100% */
-}
+
+.schedule_search_bar{
+	display: block;
+	width: 100%;
+	height: 100%;	
+} 
 
 @media (max-width: 769px) {
     .schedule_search_bar {
@@ -68,8 +74,8 @@
 /* 일정검색 input */	
 .schedule_bar {
     position: absolute;
-    top: 72%; /* 수직 가운데 정렬 */
-    left: 51%; /* 수평 가운데 정렬 */
+    top: 67%; /* 수직 가운데 정렬 */
+    left: 54%; /* 수평 가운데 정렬 */
     transform: translate(-50%, -50%); /* 가운데 정렬을 위한 변환 */
     z-index: 1; /* 이미지를 최상위로 표시 */;
     flex-direction: column;
@@ -369,26 +375,19 @@
 	<div class="carousel-inner">
     <div class="carousel-item active">
         <img src="/assets/img/sea.jpg" class="d-block w-100 h-100" alt="First Slide" >
-        <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
-           <div class="schedule_bar">
-          <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
-        </div>
     </div>
     <div class="carousel-item">
         <img src="/assets/img/palace.jpg" class="d-block w-100 h-100" alt="Second Slide"   height="700px" >
-        <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
-           <div class="schedule_bar">
-            <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
-        </div>
     </div>
     <div class="carousel-item">
-    	
         <img src="/assets/img/boat.jpg" class="d-block w-100 h-100" alt="Third Slide"  height="700px">
-        <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
-           <div class="schedule_bar">
-            <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
-        </div>
     </div>
+       <div class="imgarea">
+	        <img src="/assets/img/search_menubar.png" class="schedule_search_bar">
+	         <div class="schedule_bar">
+	          <%@ include file="/WEB-INF/views/main/schedule_bar_inner.jsp"%>
+	        </div>
+        </div>
 </div>
 
     <!-- 배너 슬라이드 화살표 -->
