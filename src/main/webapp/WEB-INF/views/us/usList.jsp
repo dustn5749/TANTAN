@@ -616,8 +616,20 @@ div, input, p, span, button, h2 {
                      <div class="card-body p-4">
                         <div class="text-center">
                            <div class="img_div">
-
-                              <c:if test="${item.fileNo!=0}">
+							<c:choose>
+								<c:when test="${item.fileNo!=0}">
+									<img src="/file/displayImage.do?usFileNum=${item.fileNo}" alt="동행이미지 사진" class="us_content_img">
+								</c:when>
+								<c:when test="${!empty item.imageUrl}">
+								 	<img src="${item.imageUrl}" class="us_content_img">
+								</c:when>
+								<c:when test="${empty item.imageUrl&& item.fileNo==0}">
+								    <img src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207"
+                                    class="us_content_img">
+								</c:when>
+							</c:choose>
+							
+      <%--                         <c:if test="${item.fileNo!=0}">
                                  <img src="/file/displayImage.do?usFileNum=${item.fileNo}"
                                     alt="동행이미지 사진" class="us_content_img">
                               </c:if>
@@ -628,7 +640,7 @@ div, input, p, span, button, h2 {
                                  <img
                                     src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207"
                                     class="us_content_img">
-                              </c:if>
+                              </c:if> --%>
 
 
                            </div>

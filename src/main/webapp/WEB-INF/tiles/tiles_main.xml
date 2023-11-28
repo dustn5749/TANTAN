@@ -84,8 +84,13 @@
 		<put-attribute name="title" value="내일정"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/mypage/myschedule.jsp"></put-attribute>
 	</definition>
-
-
+<!-- 일정 위시리스트 -->
+	<definition name="wishList" extends="baseLayout">
+		<put-attribute name="title" value="일정 위시리스트"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/wishList.jsp"></put-attribute>
+	</definition>
+	
+	
 <!-- 고객센터 -->
 	<definition name="inquiry" extends="baseLayout">
 		<put-attribute name="title" value="문의사항"></put-attribute>

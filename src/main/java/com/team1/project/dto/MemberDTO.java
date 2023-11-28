@@ -63,6 +63,8 @@ public class MemberDTO {
 		
 		return memberList();
 	}
+	
+	
 //	관리자 계정 가져오기
 	public List<MemberDTO> adminList(){
 		

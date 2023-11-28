@@ -317,6 +317,24 @@
  .card-img-top{
  	height: 280px !important;
  }
+ 
+ /* 일정상세보기 */
+ .btn.schedule:hover{
+	 background: black;
+	 color: white;
+ }
+ 
+ /* 좋아요 지역이름 div */
+ .doenameAndLikecnt {
+ 	display: flex;
+ 	
+ }
+ .doe_name {
+ 	width: 80%;
+ }
+ .likecnt {
+ 	width: 20%;
+ }
 </style>
 </head>
 <body>
@@ -391,7 +409,7 @@
         <div class="best_top5_city_inner">
         <c:forEach items="${doeList}" var="item">
              <div class="case">
-                <div class="top5_city">
+                <div class="top5_city" data-value="${item.doe_name}">
                 	<img src="/assets/img/doereview/${item.doe_review}" class="city_img">
                 </div>
                     <p class="city_name">${item.doe_name}</p>
@@ -468,6 +486,7 @@
             <div class="row" id="schedule">
             
            <c:forEach items="${scheduleList}" var="item" >
+				
 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-5">
 		                    <div class="card h-100">
@@ -478,7 +497,17 @@
 		                        <div class="card-body p-6">
 		                            <div class="text-center">
 		                            <img src="assets/img/check.png" style=width:30px;float:inline-start; />
-		                            <p style=text-align:left;>${item.doe_Name}</p>
+		                            <div class="doenameAndLikecnt">
+		                            <input type="hidden" value="${item.schedule_Num }"  class="schedule_Num">      
+			                            <p style=text-align:left; class="doe_name">${item.doe_Name}</p>
+										<p class="likecnt">
+											<svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" data-schedule-num="0" style=" left: 0px; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible; fill: rgb(255, 0, 0);">
+    											<path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
+    											</path>
+											</svg>
+										${item.likecnt}</p>		                            
+		                            </div>
+		                            
 		                            <hr>
 		                                <!-- Product name-->
 		                                <h5 class="fw-bolder" style=display:inline;>${item.member_id}</h5>
@@ -489,7 +518,7 @@
 		                        <!-- Product actions-->
 		                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style=text-align:center;>
 		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정담기</a></div>
-		                            <div class="text-center" style=display:contents;><a class="btn btn-outline-dark mt-auto" href="#">일정 상세보기</a></div>
+		                            <div class="text-center" style=display:contents; ><a class="btn schedule" href="#" >일정 상세보기</a></div>
 		                        </div>
 		                    </div>
 	                    </div>
@@ -510,7 +539,18 @@
 });
 	
 	/* 리뷰 상세보기 */
-
+	$(".top5_city").on("click", function(e){
+		 var doeName = $(this).data('value');
+		 location.href="/review/display2?doe_name=" + doeName;
+	})
+	
+	/* 일정 상세보기 */
+	$(".btn.schedule").on("click", function(e) {
+	    var schedule_Num = $(this).closest(".col-12").find(".schedule_Num").val();
+    	location.href="/schedule/detail?schedule_Num=" +schedule_Num;
+    // 여기에 원하는 동작을 추가하세요.
+	});
+	
 </script>	
 
 </body>
