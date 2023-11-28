@@ -168,9 +168,10 @@ function loadGridData(page) {
         url: '/memberList',
         dataType: 'json',
         data: {
-            page: page,
+            pageNo: page,
             pageSize: pageSize
         },
+        
         success: function (data) {
             console.log("로드 완료");
             console.log(data);
