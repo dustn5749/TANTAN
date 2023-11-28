@@ -13,16 +13,16 @@
     <!-- 친구이름 검색 & 채팅초대 버튼 -->
     <div class="friend-modal-hd">
         <input type="text" class="search-inp" placeholder="이름을 검색하세요.." />
-        <button class="btn" onclick="openInviteModal()">
-            <img src="<c:url value="/assets/sns/images/message-circle-plus.svg"/>" alt="" class="icon">
-        </button>
+<!--         <button class="btn" onclick="openInviteModal()"> -->
+<%--             <img src="<c:url value="/assets/sns/images/message-circle-plus.svg"/>" alt="" class="icon"> --%>
+<!--         </button> -->
     </div>
     <!-- END 친구이름 검색 & 채팅초대 버튼 -->
-
+      
     <!-- 친구 목록과 / 친구 요청 탭 버튼 -->
     <div class="friend-modal-tabs">
         <!-- ↓ 활성화된 탭은 active 달면 됨 -->
-        <div class="friend-modal-tab active" data-show="tab-friend-list">
+        <div class="friend-modal-tab" data-show="tab-friend-list">
             <p>친구 <span>${friendSize}</span>명</p>
         </div>
         <div class="friend-modal-tab" data-show="tab-friend-invite">
