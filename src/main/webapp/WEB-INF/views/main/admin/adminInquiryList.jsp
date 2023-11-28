@@ -157,8 +157,8 @@ function showDetails(title, content) {
 
 // 페이징 관련 함수를 초기화합니다.
 function initPage(currentPage) {
-    var pageCount = 10; // 한번에 보여줄 페이지 버튼 개수
-    var totalPage = Math.ceil(totalSize / $('#inquiryGrid').getGridParam('rowNum'));
+    var pageCount = 10;
+    var totalPage = Math.ceil(totalSize / pageSize);
 
     var pageInner = "";
 
@@ -170,15 +170,8 @@ function initPage(currentPage) {
         pageInner += "<span class='customPageMoveBtn'><a class='pre' href='javascript:prePage();' title='이전 페이지로 이동'><i class='fa fa-step-backward faPointer'></i></a></span>";
     }
 
-    var startPage = 1;
-    if (currentPage > 10) {
-        startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
-    }
-    var endPage = startPage + pageCount - 1;
-
-    if (endPage > totalPage) {
-        endPage = totalPage;
-    }
+    var startPage = Math.max(1, currentPage - Math.floor(pageCount / 2));
+    var endPage = Math.min(totalPage, startPage + pageCount - 1);
 
     for (var i = startPage; i <= endPage; i++) {
         var titleGoPage = i + "페이지로 이동";
@@ -212,7 +205,7 @@ function loadGridData() {
         },
         success: function (data) {
             console.log(data);
-            totalSize = data.inquiryList.length; // 데이터 수 업데이트
+            totalSize = data.totalSize; // 데이터 수 업데이트
 
             $("#inquiryGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
                 data: data.inquiryList,
@@ -235,6 +228,7 @@ function loadGridData() {
 // jqGrid 설정
 $("#inquiryGrid").jqGrid({
     datatype: "local", // 데이터를 로컬에서 가져오기
+    data: 'json',
     colNames: ['문의사항 번호','카테고리 번호', '카테고리', '작성자', '제목', '작성일', '답변유무', '답변'],
     colModel: [
         { label: '문의사항 번호', name: 'inquiry_num', key: true, index: 'inquiry_num' },
@@ -256,6 +250,8 @@ $("#inquiryGrid").jqGrid({
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',
+    gridview: true,
+    virtualScrolling: true,
     caption: '문의사항 리스트',
     loadui: "enable",
     loadComplete: function (data) {

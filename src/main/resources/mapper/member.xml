@@ -116,10 +116,46 @@
 	<!-- 관리자 -->
 	
 	<!-- 회원리스트 가져오기 -->
-	<select id="memberList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
-		SELECT * from member 
-		ORDER BY status desc
-	</select>
+    <select id="memberList" resultType="com.team1.project.dto.MemberDTO" parameterType="com.team1.project.dto.MemberDTO">
+    <![CDATA[
+    SELECT
+        member_id,
+        name,
+        phone,
+        email,
+        age,
+        gender,
+        status,
+        reportcnt
+    FROM (
+        SELECT
+            ROWNUM AS nrow,
+            m.*
+        FROM (
+            SELECT
+                member_id,
+                name,
+                phone,
+                email,
+                age,
+                gender,
+                status,
+                reportcnt
+            FROM 
+                member
+            ORDER BY status DESC
+        ) m
+        WHERE ROWNUM <= #{endNo}
+    )
+    WHERE nrow BETWEEN #{startNo} AND #{endNo}
+    ]]>
+    </select>
+
+
+	<select id="getTotalCount" resultType="int">
+      select count(*)
+      from member
+    </select>
 	
 	<!-- 관리자 계정 가져오기 -->
 	<select id="adminList" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">

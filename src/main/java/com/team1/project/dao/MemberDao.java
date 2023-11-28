@@ -37,7 +37,7 @@ public interface MemberDao {
 	 public int checkMember(MemberDTO member);
 	
 	 //회원리스트 가져오기
-	 public List<MemberDTO> memberList();
+	 public List<MemberDTO> memberList(MemberDTO member);
 	
 	//비밀번호 암호화하기
 	public void encodingPwd(MemberDTO member); 
@@ -56,4 +56,6 @@ public interface MemberDao {
 	
 	// 관리자 월별 가입자 현황 리스트
 	public List<MemberDTO> monthMember();
+	
+	public int getTotalCount(MemberDTO member);
 }

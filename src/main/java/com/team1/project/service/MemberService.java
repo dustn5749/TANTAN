@@ -2,7 +2,9 @@ package com.team1.project.service;
 
 import java.util.Objects;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,11 +64,24 @@ public class MemberService {
 	
 	
 	// 회원 리스트 가져오기
-	public List<MemberDTO> memberList() throws Exception{
+//	public List<MemberDTO> memberList(MemberDTO member) throws Exception {
+//	    
+//	    return memberDao.memberList(member);
+//	}
+	public Map<String,Object> memberList(MemberDTO member){
 		
-		System.out.println("service.memberList -> " + memberDao.memberList());
+		Map<String,Object> map = new HashMap<>();
+//		int totalCount = memberDao.getTotalCount(member);
+//		
+//		member.setTotalCount(totalCount);
 		
-		return memberDao.memberList();
+		map.put("memberList", memberDao.memberList(member));
+		
+		return map;
+	}
+	
+	public int getTotalSize(MemberDTO member) {
+	    return memberDao.getTotalCount(member);
 	}
 
 	// 회원 정보 수정하기
@@ -104,4 +119,5 @@ public class MemberService {
 		System.out.println("service.monthMember -> " + memberDao.monthMember());
 		return memberDao.monthMember();
 	}
+	
 }
