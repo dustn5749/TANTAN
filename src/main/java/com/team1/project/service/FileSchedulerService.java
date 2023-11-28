@@ -26,7 +26,7 @@ public class FileSchedulerService {
 	@Transactional
 	@Scheduled(fixedDelay = 60000)
 	public void fileTokenDelete() {
-		System.out.println("업로드 안된 파일 삭제");
+		//System.out.println("업로드 안된 파일 삭제");
 		List<FileTokenDTO> fileTokenList = fileTokenDAO.listToken();
 		if(fileTokenList.size() != 0) {
 			Map<String, Object> map = Map.of("list", fileTokenList);

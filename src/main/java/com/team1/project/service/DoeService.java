@@ -22,7 +22,7 @@ public class DoeService {
 	// 평점 순 리뷰리스트 
 	@Scheduled(fixedDelay = 60000)
 	public List<DoeDTO> getTopReviewList() {
-		System.out.println("시간마다 파일 리뷰 평점 순위 데이터 가져오기");
+		//System.out.println("시간마다 파일 리뷰 평점 순위 데이터 가져오기");
 		// 전체 도 평균 내기
 		doeDAO.averageDoeTotal();
 		List<DoeDTO> doeList = doeDAO.getTopReviewList();
