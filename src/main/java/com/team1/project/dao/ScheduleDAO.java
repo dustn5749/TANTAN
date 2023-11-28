@@ -61,4 +61,7 @@ public interface ScheduleDAO {
 	public void plusLikeCnt(Map<String, Object> param);
 
 	public void minusLikeCnt(Map<String, Object> param);
+	
+	// 관리자 일일 작성된 일정 게시글 수
+	public ScheduleDTO todaySchedule(ScheduleDTO schedule);
 }

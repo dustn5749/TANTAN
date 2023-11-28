@@ -52,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
 <script src="admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
 <!-- Page specific script -->
+<!-- chart.js cdn -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
 <script>

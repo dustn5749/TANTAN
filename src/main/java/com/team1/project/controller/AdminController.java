@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team1.project.dao.MemberDao;
 import com.team1.project.dto.InquiryDTO;
 import com.team1.project.dto.MemberDTO;
+import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.CustomerService;
 import com.team1.project.service.MemberService;
+import com.team1.project.service.ScheduleService;
 import com.team1.project.service.UsService;
 
 
@@ -54,10 +56,19 @@ public class AdminController {
 	private CustomerService customerService;
 	
 	@Autowired
+	private ScheduleService scheduleService;
+	
+	@Autowired
 	private MemberDao memberDAO;
 	
 	@RequestMapping("/admin")
-	public String Admin() {
+	public String Admin(MemberDTO member,UsDTO us, Model model, ScheduleDTO schedule) {
+		int todayRegister = memberservice.todayRegister(member);
+		int todayWrite = usService.todayWrite(us);
+		int todaySchedule = scheduleService.todaySchedule(schedule);
+		model.addAttribute("todayRegister",todayRegister);
+		model.addAttribute("todayWrite", todayWrite);
+		model.addAttribute("todaySchedule", todaySchedule);
 		return "admin";
 	}
 	
@@ -111,11 +122,14 @@ public class AdminController {
 	@ResponseBody
 	public Map<String,Object> memberList(MemberDTO member) {
 		System.out.println("memberList -> " + memberservice.memberList(member));
-//		int startNo = member.getStartNo();
-//		int endNo = member.getEndNo();
+		int todayRegister = memberservice.todayRegister(member);
+		System.out.println("register -> " + todayRegister);
 		Map<String,Object> map = new HashMap<>();
 		map.put("memberList", memberservice.memberList(member));
 		map.put("totalSize", memberservice.getTotalSize(member));
+		System.out.println("totalSize -> " + memberservice.getTotalSize(member));
+//		model.addAttribute("todayRegister", memberservice.todayRegister(member));
+		map.put("todayRegister", todayRegister);
 		return map;
 	}
 	

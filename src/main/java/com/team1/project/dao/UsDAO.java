@@ -66,5 +66,8 @@ public interface UsDAO {
 
 	// 관리자 월별 작성된 게시글 리스트
 	public List<UsDTO> monthUs();
+	
+	// 관리자 일일 작성된 게시글 수
+	public UsDTO todayWrite(UsDTO usDTO);
 
 }

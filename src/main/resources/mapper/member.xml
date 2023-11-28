@@ -184,4 +184,11 @@
 	    GROUP BY TO_CHAR(REGISTER_TIME, 'MM')
 	    ORDER BY TO_CHAR(REGISTER_TIME, 'MM')
 	</select>
+	
+	<!-- 오늘 가입한 인원 추출 -->
+	<select id="todayRegister" parameterType="com.team1.project.dto.MemberDTO" resultType="com.team1.project.dto.MemberDTO">
+	    SELECT COUNT(*) AS todayRegister
+	    FROM member
+	    WHERE TO_CHAR(register_time, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
 </mapper>

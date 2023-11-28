@@ -237,4 +237,11 @@ SELECT u.*, uf.usfilenum as fileNo
 		GROUP BY TO_CHAR(regdate, 'MM')
 		ORDER BY TO_CHAR(regdate, 'MM')
 	</select>
+	
+	<!-- 관리자 오늘 작성된 동행 게시글 수 -->
+		<select id="todayWrite" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
+	    SELECT COUNT(*) AS todayWrite
+	    FROM us
+	    WHERE TO_CHAR(regdate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
 </mapper>

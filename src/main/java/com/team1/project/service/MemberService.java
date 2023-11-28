@@ -69,14 +69,12 @@ public class MemberService {
 //	    return memberDao.memberList(member);
 //	}
 	public Map<String,Object> memberList(MemberDTO member){
-		
+        int todayRegisterCount = memberDao.todayRegister(member).getTodayRegister();
+        member.setTodayRegister(todayRegisterCount);
 		Map<String,Object> map = new HashMap<>();
-//		int totalCount = memberDao.getTotalCount(member);
-//		
-//		member.setTotalCount(totalCount);
 		
 		map.put("memberList", memberDao.memberList(member));
-		
+		map.put("todayRegister", todayRegisterCount);
 		return map;
 	}
 	
@@ -119,5 +117,14 @@ public class MemberService {
 		System.out.println("service.monthMember -> " + memberDao.monthMember());
 		return memberDao.monthMember();
 	}
+	
+	// 관리자 일일 가입자 수
+    public int todayRegister(MemberDTO member) {
+        int todayRegisterCount = memberDao.todayRegister(member).getTodayRegister();
+        System.out.println(todayRegisterCount);
+        member.setTodayRegister(todayRegisterCount);
+
+        return todayRegisterCount;
+    }
 	
 }

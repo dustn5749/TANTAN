@@ -156,4 +156,10 @@ public class ScheduleService {
 				schduleDAO.minusLikeCnt(param);
 			}
 		}
+		
+		public int todaySchedule(ScheduleDTO schedule) {
+			int todayScheduleCount = schduleDAO.todaySchedule(schedule).getTodaySchedule();
+			
+			return todayScheduleCount;
+		}
 }

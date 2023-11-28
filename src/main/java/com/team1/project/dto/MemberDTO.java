@@ -31,6 +31,7 @@ public class MemberDTO {
     private String register_time;
     private String month;
     private int signup_count;
+    private int todayRegister;
 //	private String introduce;
 	
 	//카카오 인증에 대한 필드
@@ -55,20 +56,7 @@ public class MemberDTO {
 	}
 
 //	관리자
-	
-//	전체 회원 가져오기.
-//	public List<MemberDTO> memberList(){
-//		
-//		System.out.println("DTO.memberList -> " + memberList());
-//		
-//		return memberList();
-//	}
-////	관리자 계정 가져오기
-//	public List<MemberDTO> adminList(){
-//		
-//		return adminList();
-//	}
-//	
+
 	// 페이징
 	   public String searchTitle;
 	   public int level = 1;
