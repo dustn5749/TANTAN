@@ -41,9 +41,9 @@ public class SnsBoardController {
         return service.getList(request);
     }
     @GetMapping("/boards/like/{id}")
-    public void dummy(@PathVariable Long id,Authentication authentication) {
+    public boolean like(@PathVariable Long id,Authentication authentication) {
         String memberId = authService.getMemberId(authentication);
-        likeService.registerLike(id,memberId);
+        return likeService.registerLike(id,memberId);
     }
 
     @PostMapping("/boards/upload")

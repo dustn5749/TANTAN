@@ -281,7 +281,7 @@
                             <input type="radio" name="age_open_yn" value="y" checked>공개
                             <input type="radio" name="age_open_yn" value="n">비공개
                         </div>
-                    d</div>
+                    </div>
                 </div>
             </div>
             <!-- 편집 나가기 버튼 -->
@@ -295,7 +295,7 @@
 <script>
 	function ModifyComplete() {
 	    // 프로필 페이지로 리다이렉션
-	    location.href = "/sns/profile/";
+	    location.href = "/sns/profile";
 	}
 
   function modifyProfile(){

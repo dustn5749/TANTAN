@@ -15,8 +15,14 @@
             url: '/boards/like/'+id, // 컨트롤러 엔드포인트 URL로 변경해야함.
             dataType: 'json',
             success: function (data) {
+              if(data){
                 $("#boardLike").show();
                 $("#boardUnLike").hide();
+              } else {
+                $("#boardLike").hide();
+                $("#boardUnLike").show();
+              }
+
             },
             error: function (error) {
                 console.error("Error:", error);
