@@ -31,6 +31,8 @@ public class AuthFailureHandler extends  SimpleUrlAuthenticationFailureHandler{
         } else if(exception instanceof BadCredentialsException ) {
         	msg = "패스워드가 일치하지 않습니다";
         }
+	    
+	    
 	    setDefaultFailureUrl("/member/loginForm.do?error=true&exception=" + msg);
 	    
 		super.onAuthenticationFailure(request, response, exception);

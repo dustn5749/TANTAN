@@ -26,6 +26,7 @@ public class AlimHandler extends ImmutableMessageChannelInterceptor {
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
 
+
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
         for (Map.Entry<String, Object> entry : message.getHeaders().entrySet()) {
             log.info("preSend() header -> {}", entry);

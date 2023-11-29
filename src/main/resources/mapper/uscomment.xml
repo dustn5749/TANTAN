@@ -19,3 +19,5 @@
         where us_num=#{us_num}
     </select>
 </mapper>
+    
+  

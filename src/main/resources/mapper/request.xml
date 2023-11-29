@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.FriendDAO">
+  <insert id="saveFriend">
+    insert into FRIEND
+    (FRIEND_ID, REG_ID, RES_ID, REQ_DATE, RES_DATE)
+    values
+    (FR_SEQ.nextval, #{regId}, #{resId}, #{reqDate}, #{resDate})
+  </insert>
 
-    <select id="getFriendRequest" resultType="com.team1.project.dto.FriendRequestDTO" parameterType="java.lang.String">
+  <update id="updateRequest" parameterType="com.team1.project.entity.FriendRequest">
+    update FRIEND_REQUEST
+    set SEND_MEMBER_ID = #{sendMemberId},
+        RECEIVE_MEMBER_ID = #{receiveMemberId},
+        REQ_DATE = #{reqDate},
+        ACCEPT_YN = #{acceptYn}
+    where FRIEND_REQ_ID = #{id}
+  </update>
+
+  <select id="getFriendRequest" resultType="com.team1.project.dto.FriendRequestDTO" parameterType="java.lang.String">
         <![CDATA[
         select
             fr.friend_req_id as id,
@@ -28,7 +43,8 @@
             fr.REG_ID as regId,
             fr.RES_ID as resId,
             fr.req_date as reqDate,
-            m.nickname as sendNickName
+            m.nickname as nickname,
+            m.PROFILE_IMG as profileImg
         from friend fr
              inner join member m on (m.member_id = fr.REG_ID)
         where
@@ -37,7 +53,73 @@
         order by fr.REG_ID
         ]]>
     </select>
+  <select id="findByReceiveMemberIdAndSendMemberId"
+          resultType="com.team1.project.entity.FriendRequest">
+    <![CDATA[
+        select
+            friend_req_id, send_member_id, receive_member_id, req_date, accept_yn
+        from FRIEND_REQUEST fr
+        where
+            1 = 1
+        and SEND_MEMBER_ID = #{sendMemberId}
+        and RECEIVE_MEMBER_ID = #{receiveMemberId}
+        ]]>
 
+  </select>
+  <select id="findByReceiveMemberId" resultType="com.team1.project.entity.FriendRequest">
+
+  </select>
+  <select id="findById" resultType="com.team1.project.entity.FriendRequest">
+    select
+        friend_req_id as id,
+        send_member_id as sendMemberId,
+        receive_member_id as receiveMemberId,
+        req_date as reqDate,
+        accept_yn as acceptYn
+        from FRIEND_REQUEST
+    where FRIEND_REQ_ID = #{id}
+  </select>
+  <select id="getFriendInfo" resultType="com.team1.project.dto.FriendDTO">
+    select
+        FRIEND_ID id,
+        REG_ID as regId,
+        RES_ID as resId,
+        REQ_DATE as reqDate,
+        RES_DATE as resDate
+    from FRIEND
+    where FRIEND_ID = #{friendId}
+  </select>
+
+  <select id="getFriendInfoByRegIdResId" resultType="com.team1.project.dto.FriendDTO">
+    select
+      FRIEND_ID id,
+      REG_ID as regId,
+      RES_ID as resId,
+      REQ_DATE as reqDate,
+      RES_DATE as resDate
+    from FRIEND
+    where
+        REG_ID = #{regId}
+      and RES_ID = #{resId}
+  </select>
+
+  <delete id="deleteFriendId">
+    delete from FRIEND
+    where FRIEND_ID = #{friendId}
+  </delete>
+
+  <delete id="deleteFriendReq">
+    delete from FRIEND_REQUEST
+    where SEND_MEMBER_ID = #{regId}
+    and RECEIVE_MEMBER_ID = #{resId}
+  </delete>
+
+  <insert id="save">
+    insert into FRIEND_REQUEST
+      (friend_req_id, send_member_id, receive_member_id, req_date, accept_yn)
+      values
+        (FR_REQ_SEQ.nextval, #{sendMemberId}, #{receiveMemberId}, sysdate, 'N')
+  </insert>
 
 
 

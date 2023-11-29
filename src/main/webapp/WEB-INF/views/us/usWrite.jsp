@@ -96,7 +96,9 @@ cursor: pointer;
         }
 
         .dropdown_btn_container {
+
             width: 100%;
+
         }
 
         .dropdown_btn {
@@ -367,7 +369,11 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">부산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">대구</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">인천</li>
+
             <li class="nav-li" onclick="select_area(this.innerText)">광주</li>
+
+				<li class="nav-li" onclick="select_area(this.innerText)">광주</li>
+
                 <li class="nav-li" onclick="select_area(this.innerText)">대전</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">울산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">세종</li>
@@ -378,13 +384,17 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">전북</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">전남</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">경북</li>
+
             <li class="nav-li" onclick="select_area(this.innerText)">경남</li>
+
+				<li class="nav-li" onclick="select_area(this.innerText)">경남</li>
+
                 <li class="nav-li" onclick="select_area(this.innerText)">제주</li>
             </ul>
         </div>
-   </div>
-</div>
-
+        </div>
+        </div>
+       
   
 
     <form id="us_wirte_form"  enctype="multipart/form-data">

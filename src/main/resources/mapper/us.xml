@@ -259,11 +259,13 @@
      
      <!-- 최신 동행 모집글 -->
       <select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
+      <![CDATA[
           SELECT * FROM (
               SELECT * FROM us
-              ORDER BY regdate DESC
+              ORDER BY regdate DESC, us_num asc
           )
-          WHERE ROWNUM &lt;= 3
+          WHERE ROWNUM <= 3
+          ]]> 
       </select>
       
 		<!--조회수 -->

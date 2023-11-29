@@ -43,55 +43,93 @@ border:1px solid black;
     <!-- /.content-header -->
 
     <!-- Main content -->
+    <div class="row">
+	    <div class="col-xl-3 col-md-6 mb-4">
+	        <div class="card border-left-primary shadow h-100 py-2">
+	            <div class="card-body">
+	                <div class="row no-gutters align-items-center">
+	                    <div class="col mr-2">
+	                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+	                               가입자수 (일일)</div>
+	                        <div class="h5 mb-0 font-weight-bold text-gray-800">test</div>
+	                    </div>
+	                    <div class="col-auto">
+	                        <i class="fas fa-users fa-2x text-gray-300"></i>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		<div class="col-xl-3 col-md-6 mb-4">
+		    <div class="card border-left-success shadow h-100 py-2">
+		        <div class="card-body">
+		            <div class="row no-gutters align-items-center">
+		                <div class="col mr-2">
+		                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+		                           SNS 게시글 작성 (일일)</div>
+		                    <div class="h5 mb-0 font-weight-bold text-gray-800">board</div>
+		                </div>
+		                <div class="col-auto">
+		                    <i class="fas fa-edit fa-2x text-gray-300"></i>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">동행 게시글 작성
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-hands-helping fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                   신고(일일)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
     <div class="col-12">
     	<div class="card card-primary card-outline card-tabs">
     		<div class="card-header p-0 pt-1 border-bottom-0">
-<!--     			<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist"> -->
-<!--     				<li class="nav-item"> -->
-<!--     					<a class="nav-link" id="custom-home-tab" data-toggle="pill" href="#home-tab" role="tab" aria-controls="home-tab" > 회원</a> -->
-<!--     				</li> -->
-<!--     				<li class="nav-item"> -->
-<!--     					<a class="nav-link" id="custom-board-tab" data-toggle="pill" href="#board-tab" role="tab" aria-controls="board-tab"> 게시글</a> -->
-<!--     				</li> -->
-<!--     				<li class="nav-item"> -->
-<!--     					<a class="nav-link" id="custom-like-tab" data-toggle="pill" href="#like-tab" role="tab" aria-controls="like-tab"> 여행지</a> -->
-<!--     				</li> -->
-<!--     			</ul> -->
     			<div class="card-body table-responsive p-0">
    					<div class="card-tools">
-   						<div class="input-group input-group-sm" style="width:150px; float:right;">
-<!-- 						<input type="text" name="table_search" class="form-control float-right" placeholder="Search"> -->
-<!-- 							<div class="input-group-append"> -->
-<!-- 								<button type="submit" class="btn btn-default"> -->
-<!-- 								<i class="fas fa-search"></i> -->
-<!-- 								</button> -->
-<!-- 							</div> -->
-   						</div>
+   						<div class="input-group input-group-sm" style="width:150px; float:right;"></div>
    					</div>
     			</div>
     		</div>
+    		
     		<div class="card-body table-responsive p-0">
     		<div class="tab-content p-3" id="nav-tabContent">
     		<!-- 회원 탭 카드 -->
+    		
               <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
-<!-- 	              <hr> -->
 		          <div class="row">
 			          <div class="col-12">
-			            <!-- interactive chart -->
-<!-- 			              <div class="card-header"> -->
-<!-- 			                <h3 class="card-title"> -->
-<!-- 			                  <i class="far fa-chart-bar"></i> -->
-<!-- 			                  Interactive Area Chart -->
-<!-- 			                </h3> -->
-<!-- 			              </div> -->
-<!-- 			              <div class="card-body"> -->
-<!-- 			                <div id="interactive" style="height: 300px;"></div> -->
-<!-- 			                </div> -->
-<!-- 			                <div class="card-header"> -->
-<!-- 			                </div> -->
-<!-- 			                <div class="card-body"> -->
-<!-- 			                <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
-<!-- 			                </div> -->
 			                <div class="card-body">
 <!-- 			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
 								<canvas id="monthMember"></canvas>
@@ -109,58 +147,6 @@ border:1px solid black;
               </div>
               <!-- 회원 탭 카드 종료 -->
               
-              <!-- 게시글 탭 카드 -->
-<!-- 	              <div class="tab-pane fade" id="board-tab" role="tabpanel" aria-labelledby="custom-board-tab"> -->
-<!-- 		              <div class="row"> -->
-<!-- 			              <div class="col-md-6"> -->
-<!-- 			                  <div > -->
-<!-- 			                      <div class="card-header" id="pop-board"> -->
-<!-- 			                          <h3 class="card-title"> -->
-<!-- 			                          <i class="far fa-chart-bar"></i> -->
-<!-- 			                          인기 게시글 -->
-<!-- 			                          </h3> -->
-<!-- 				                      <div class="card-body"> -->
-<!-- 				                      <hr> -->
-<!-- 				                      <div id="area-chart" style="height: 338px;" class="full-width-chart"></div> -->
-<!-- 				                      </div> -->
-<!-- 				                  </div> -->
-<!-- 			              /.card-body -->
-<!-- 			                  </div> -->
-<!-- 			              </div> -->
-<!-- 			              <div class="col-md-6"> -->
-<!-- 			                  <div> -->
-<!-- 			                      <div class="card-header" id="pop-us"> -->
-<!-- 		   	                          <h3 class="card-title"> -->
-<!-- 			                          <i class="far fa-chart-bar"></i> -->
-<!-- 			                          인기 동행글 -->
-<!-- 			                          </h3> -->
-<!-- 				                      <div class="card-body"> -->
-<!-- 				                      <hr> -->
-<!-- 				                      <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
-<!-- 				                      </div> -->
-<!-- 			                      </div> -->
-<!-- 			                  </div> -->
-<!-- 			              </div> -->
-<!-- 		              </div> -->
-<!-- 	              </div> -->
-<!--                게시글 탭 카드 종료 -->
-               
-<!-- 	              	<div class="tab-pane fade" id="like-tab" role="tabpanel" aria-labelledby="custom-like-tab"> -->
-<!-- 		            Bar chart -->
-<!-- 			            <div> -->
-<!-- 			              <div class="card-header"> -->
-<!-- 			                <h3 class="card-title"> -->
-<!-- 			                  <i class="far fa-chart-bar"></i> -->
-<!-- 			                  인기 여행지 -->
-<!-- 			                </h3> -->
-<!-- 			              </div> -->
-<!-- 			              <div class="card-body"> -->
-<!-- 			              	<div id="bar-chart" style="height: 300px;"></div> -->
-<!-- 							<canvas id="stackedBarChart"></canvas> -->
-<!-- 			              </div> -->
-<!-- 			              /.card-body -->
-<!--             			</div> -->
-<!--     				</div> -->
             	</div>
     		</div>
     	</div>
@@ -171,177 +157,6 @@ border:1px solid black;
 
 <script>
   $(function () {
-    /*
-     * Flot Interactive Chart
-     * -----------------------
-     */
-    // We use an inline data source in the example, usually data would
-    // be fetched from a server
-//     var data        = [],
-//         totalPoints = 100
-
-//     function getRandomData() {
-
-//       if (data.length > 0) {
-//         data = data.slice(1)
-//       }
-
-//       // Do a random walk
-//       while (data.length < totalPoints) {
-
-//         var prev = data.length > 0 ? data[data.length - 1] : 50,
-//             y    = prev + Math.random() * 10 - 5
-
-//         if (y < 0) {
-//           y = 0
-//         } else if (y > 100) {
-//           y = 100
-//         }
-
-//         data.push(y)
-//       }
-
-//       // Zip the generated y values with the x values
-//       var res = []
-//       for (var i = 0; i < data.length; ++i) {
-//         res.push([i, data[i]])
-//       }
-
-//       return res
-//     }
-
-//     var interactive_plot = $.plot('#interactive', [
-//         {
-//           data: getRandomData(),
-//         }
-//       ],
-//       {
-//         grid: {
-//           borderColor: '#f3f3f3',
-//           borderWidth: 1,
-//           tickColor: '#f3f3f3'
-//         },
-//         series: {
-//           color: '#3c8dbc',
-//           lines: {
-//             lineWidth: 2,
-//             show: true,
-//             fill: true,
-//           },
-//         },
-//         yaxis: {
-//           min: 0,
-//           max: 100,
-//           show: true
-//         },
-//         xaxis: {
-//           show: true
-//         }
-//       }
-//     )
-
-//     var updateInterval = 500 //Fetch data ever x milliseconds
-//     var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
-//     function update() {
-
-//       interactive_plot.setData([getRandomData()])
-
-//       // Since the axes don't change, we don't need to call plot.setupGrid()
-//       interactive_plot.draw()
-//       if (realtime === 'on') {
-//         setTimeout(update, updateInterval)
-//       }
-//     }
-
-//     //INITIALIZE REALTIME DATA FETCHING
-//     if (realtime === 'on') {
-//       update()
-//     }
-//     //REALTIME TOGGLE
-//     $('#realtime .btn').click(function () {
-//       if ($(this).data('toggle') === 'on') {
-//         realtime = 'on'
-//       }
-//       else {
-//         realtime = 'off'
-//       }
-//       update()
-//     })
-    /*
-     * END INTERACTIVE CHART
-     */
-
-
-    /*
-     * LINE CHART
-     * ----------
-     */
-    //LINE randomly generated data
-
-//     var sin = [],
-//         cos = []
-//     for (var i = 0; i < 14; i += 0.5) {
-//       sin.push([i, Math.sin(i)])
-//       cos.push([i, Math.cos(i)])
-//     }
-//     var line_data1 = {
-//       data : sin,
-//       color: '#3c8dbc'
-//     }
-//     var line_data2 = {
-//       data : cos,
-//       color: '#00c0ef'
-//     }
-//     $.plot('#line-chart', [line_data1, line_data2], {
-//       grid  : {
-//         hoverable  : true,
-//         borderColor: '#f3f3f3',
-//         borderWidth: 1,
-//         tickColor  : '#f3f3f3'
-//       },
-//       series: {
-//         shadowSize: 0,
-//         lines     : {
-//           show: true
-//         },
-//         points    : {
-//           show: true
-//         }
-//       },
-//       lines : {
-//         fill : false,
-//         color: ['#3c8dbc', '#f56954']
-//       },
-//       yaxis : {
-//         show: true
-//       },
-//       xaxis : {
-//         show: true
-//       }
-//     })
-    //Initialize tooltip on hover
-//     $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
-//       position: 'absolute',
-//       display : 'none',
-//       opacity : 0.8
-//     }).appendTo('body')
-//     $('#line-chart').bind('plothover', function (event, pos, item) {
-
-//       if (item) {
-//         var x = item.datapoint[0].toFixed(2),
-//             y = item.datapoint[1].toFixed(2)
-
-//         $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
-//           .css({
-//             top : item.pageY + 5,
-//             left: item.pageX + 5
-//           })
-//           .fadeIn(200)
-//       } else {
-//         $('#line-chart-tooltip').hide()
-//       }
-
-//     })
     /* END LINE CHART */
 
     /*

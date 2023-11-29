@@ -62,7 +62,18 @@ public interface ScheduleDAO {
 	// top3 스케쥴 목록 가져오기
 	public List<ScheduleDTO> getTop3ScheduleList();
 
+	// 좋아요 추가하기
 	public void plusLikeCnt(Map<String, Object> param);
 
+	// 좋아요 삭제하기
 	public void minusLikeCnt(Map<String, Object> param);
+
+	// 좋아요 수 증가하기
+	public void updateLikeCnt(int schedule_Num);
+
+	//일정 위시리스트 가져오기
+	public List<ScheduleDTO> getLikeScheduleList(Map<String, Object> param);
+
+	// 위시리스트 총 갯수 세기
+	public int LikeTotalCount(ScheduleDTO schedule);
 }

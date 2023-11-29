@@ -6,10 +6,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team1.project.dao.MemberDao;
 import com.team1.project.dto.InquiryDTO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.UsDTO;
@@ -51,6 +53,9 @@ public class AdminController {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private MemberDao memberDAO;
+	
 	@RequestMapping("/admin")
 	public String Admin() {
 		return "admin";
@@ -90,15 +95,27 @@ public class AdminController {
 		return "adminMemberList";
 	}
 //	2.1 관리자 회원리스트 출력
+//	public Map<String, Object> memberList(MemberDTO member) throws Exception {
+//	    
+//	    int totalCount = memberDAO.getTotalCount(member);
+//
+//	    List<MemberDTO> memberList = memberservice.memberList(member);
+//	    
+//	    Map<String, Object> resultMap = new HashMap<>();
+//	    resultMap.put("memberList", memberList);
+//	    resultMap.put("totalSize", totalCount);
+//
+//	    return resultMap;
+//	}
 	@RequestMapping("/memberList")
 	@ResponseBody
-	public Map<String, Object> memberList() throws Exception {
-		
-		List<MemberDTO> memberList = memberservice.memberList();
-//		System.out.println("controller.memberList -> " + memberservice.memberList());
-		Map<String, Object> map = new HashMap<>();
-		map.put("memberList",memberList);
-//		System.out.println("controller.map -> " + map);
+	public Map<String,Object> memberList(MemberDTO member) {
+		System.out.println("memberList -> " + memberservice.memberList(member));
+//		int startNo = member.getStartNo();
+//		int endNo = member.getEndNo();
+		Map<String,Object> map = new HashMap<>();
+		map.put("memberList", memberservice.memberList(member));
+		map.put("totalSize", memberservice.getTotalSize(member));
 		return map;
 	}
 	
@@ -237,9 +254,9 @@ public class AdminController {
 // 6.1 관리자 1:1 문의사항 리스트 가져오기
 	@RequestMapping("/inquiryList.do")
 	@ResponseBody
-	public Map<String, Object> getInquiryList() throws Exception {
+	public Map<String, Object> getInquiryList(InquiryDTO inquiry) throws Exception {
+		System.out.println("controller inquiryList -> " + inquiry);
 		List<InquiryDTO> inquiryList = customerService.inquiryList();
-		System.out.println("controller.inquiryList -> " + inquiryList);
 		Map<String, Object> map = new HashMap<>();
 		map.put("inquiryList", inquiryList);
 		return map;

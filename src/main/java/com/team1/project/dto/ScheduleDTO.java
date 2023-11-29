@@ -46,8 +46,12 @@ public class ScheduleDTO {
 	    
 	    private List<ScheduleDTO> scheduleList;
 	    private String memoList;
+
 	    private String area; 
 	    private String Like_CNT;
+
+	    private int likecnt;
+
 	    private String title;
 	    
 	    private boolean isLike;		// 좋아요 여부

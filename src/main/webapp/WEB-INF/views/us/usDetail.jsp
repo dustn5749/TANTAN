@@ -640,8 +640,8 @@ function btnInsert() {
 				        content: replyContent
 				    };
 				
-					$.ajax({
-						url : "/us/insertComment",
+				
+									url : "/comment/insertComment",
 					    type: 'POST',
 					    contentType: "application/json; charset=UTF-8",
 					    data: JSON.stringify(data),
@@ -679,8 +679,7 @@ function btnInsert() {
 									$(div).append(member_id);
 									$(div).append(content);
 									
-									if(e.writer == loggedInUserId){
-										
+		/* 							if(e.writer == loggedInUserId){
 										var btnarea = document.createElement("div");
 										$(btnarea).addClass("btnarea");
 										var btn1 = document.createElement("button");
@@ -693,7 +692,7 @@ function btnInsert() {
 										$(btnarea).append(btn2);
 										
 										$(div).append(btnarea);
-									}
+									} */
 
 									
 									 

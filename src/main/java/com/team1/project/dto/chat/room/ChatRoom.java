@@ -15,4 +15,14 @@ public class ChatRoom {
   private String roomName;
   private RoomType type;
   private LocalDateTime creatTime;
+  private String createMemberId;
+
+  public ChatRoomDTO toDto(){
+    return ChatRoomDTO.builder()
+        .roomNum(roomNum)
+        .roomName(roomName)
+        .type(type)
+        .creatTime(creatTime)
+        .build();
+  }
 }

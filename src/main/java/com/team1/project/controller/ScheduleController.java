@@ -233,12 +233,12 @@ public class ScheduleController {
 	//하트색
 	@PostMapping("/updateHeartColor")
 	@ResponseBody
-	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") String scheduleNum, @RequestParam("isLike") boolean isLike) {
+	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") int schedule_Num, @RequestParam("isLike") boolean isLike) {
 		// isLike가 true면 좋아요 개수 올려주기
 		// false면 좋아요 취소
 		
 		MemberDTO member = getCurrentMember();
-		scheduleService.updateLike(member.getMember_id(), scheduleNum, isLike);
+		scheduleService.updateLike(member.getMember_id(), schedule_Num, isLike);
 		
 	    Map<String, Object> response = new HashMap<>();
 	    try {
@@ -260,5 +260,15 @@ public class ScheduleController {
 			return null;
 		}
 		
+	}
+	
+	// 일정 위시리스트 목록 가져오기
+	@RequestMapping("/likeScheduleList")
+	public String getLikeScheduleList(@RequestParam("member_id") String member_id, Model model,ScheduleDTO schedule) {
+		System.out.println("getLikeScheduleList.member_id = " + member_id);
+		Map<String, Object> result = scheduleService.getLikeScheduleList(member_id, schedule);
+		System.out.println("result = " + result);
+		model.addAttribute("result", result);
+		return "wishList";
 	}
 }

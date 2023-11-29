@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+    <definition name="non-layout" template="/WEB-INF/views/sns/sns-detail-layout.jsp">
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <definition name="chat-modal" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-modal.jsp"/>
+    </definition>
+
+    <definition name="chat-1on1" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-1on1.jsp"/>
+    </definition>
+
+    <definition name="chat-group" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-group.jsp"/>
+    </definition>
+
+    <definition name="chat-detail" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-detail.jsp"/>
+    </definition>
+
+    <definition name="chat-invite" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-invite.jsp"/>
+    </definition>
+
+    <definition name="chat-participant" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-participant.jsp"/>
+    </definition>
+
+    <definition name="chat-exit" extends="non-layout">
+        <put-attribute name="body" value="/WEB-INF/views/sns/chat/chat-exit.jsp"/>
+    </definition>
+
+</tiles-definitions>

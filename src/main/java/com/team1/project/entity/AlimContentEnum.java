@@ -9,9 +9,8 @@ public enum AlimContentEnum {
 
     LIKE("님이 회원님의 게시물을 좋아합니다."),
     FRIEND_REQ("님이 회원님에게 친구요청 했습니다."),
-
+    CHAT_INVITE("님이 채팅을 초대 했습니다."),
     ;
-
 
     private final String template;
 
