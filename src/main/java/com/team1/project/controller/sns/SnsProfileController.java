@@ -1,5 +1,6 @@
 package com.team1.project.controller.sns;
 
+import com.team1.project.dto.FriendDTO;
 import com.team1.project.dto.FriendRequestDTO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.entity.FriendRequest;
@@ -70,11 +71,13 @@ public class SnsProfileController {
         request.setAttribute("boardList", snsBoardService.getBoardList(snsBoardRequest));
 
         List<FriendRequestDTO> requestList = friendService.getRequestDTOList(memberId);
+        List<FriendDTO> friendList = friendService.getFriendList(memberId);
 
         String loginMember = authService.getMemberId(authentication);
-        request.setAttribute("friendList", friendService.getFriendList(memberId));
+        request.setAttribute("friendList", friendList);
         request.setAttribute("friendReqList", requestList);
         request.setAttribute("alreadyReq", requestList.stream().anyMatch(v->v.getSendMemberId().equals(loginMember)));
+        request.setAttribute("alreadyFriend", friendList.stream().anyMatch(v->v.getRegId().equals(loginMember)));
         request.setAttribute("member", byId);
         return "snsProfile";
     }

@@ -111,6 +111,9 @@
                                 <c:when test="${principal.user.member_id == member.member_id}">
                                     <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
                                 </c:when>
+                                <c:when test="${alreadyFriend == true}">
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="">친구 </button>
+                                </c:when>
                                 <c:when test="${alreadyReq == true}">
                                     <button type="button" class="btn solid-btn gray-btn" onclick="">요청 중</button>
                                 </c:when>
