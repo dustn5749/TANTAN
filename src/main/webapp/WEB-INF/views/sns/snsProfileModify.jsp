@@ -286,14 +286,14 @@
             </div>
             <!-- 편집 나가기 버튼 -->
             <div class="btn_area">
-                <button type="button" class="back_btn" onclick="ModifyComplete()">편집 끝내기</button>
+                <button type="button" class="back_btn" onclick="modifyComplete()">편집 끝내기</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-	function ModifyComplete() {
+	function modifyComplete() {
 	    // 프로필 페이지로 리다이렉션
 	    location.href = "/sns/profile";
 	}
@@ -369,10 +369,6 @@
         $('#' + id).removeClass('active');
     }
 
-    /* 편집 끝내기 버튼(뒤로가기) */
-    $(".back_btn").on("click", function () {
-        location.href = "/snsProfile";
-    })
 
 </script>
 </body>
