@@ -216,7 +216,12 @@
 	}
 	
   $(function(){
-    var lastId = ${lastId};
+    var detail = '${detail}';
+    if(detail){
+      openBoardModal(detail);
+    }
+
+    var lastId = '${lastId}';
     $(window).scroll(function() {
       // 현재 스크롤 위치
       var scrollPosition = $(window).scrollTop();

@@ -45,7 +45,11 @@ public class SnsProfileController {
 
     //sns main페이지로 이동
     @GetMapping("/sns/profile")
-    public String goMainPage(HttpServletRequest request, Authentication authentication) {
+    public String goMainPage(
+        HttpServletRequest request,
+        Authentication authentication,
+        @RequestParam(required = false) Long detail
+    ) {
         if(authentication == null || !authentication.isAuthenticated()){
             return "redirect:/member/loginForm.do";
         }
@@ -65,14 +69,14 @@ public class SnsProfileController {
         request.setAttribute("friendList", friendService.getFriendList(memberId));
         request.setAttribute("member", memberService.findById(memberId));
 
-
-
         if(!CollectionUtils.isEmpty(boardList)){
             SnsBoardDTO snsBoardDTO = boardList.get(boardList.size() - 1);
             request.setAttribute("lastId", snsBoardDTO.getBoardNum());
         }else {
             request.setAttribute("lastId", null);
         }
+
+        request.setAttribute("detail",detail);
 
         return "snsProfile";
     }
@@ -140,7 +144,6 @@ public class SnsProfileController {
         String memberId = authService.getMemberId(authentication);
 
         MemberDTO byId = memberService.findById(memberId);
-
 
         snsProfileService.updateProfileImg(memberId,key);
 

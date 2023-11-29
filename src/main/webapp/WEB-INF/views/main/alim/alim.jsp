@@ -63,8 +63,8 @@
       <div class="alarm-list-grp">
         <!-- 알람 리스트 -->
         <c:forEach items="${alimList}" var="alim">
-        <div id='alim${alim.alimId}' class="alarm-list" onclick="eventURL('${alim.url}')">
-            <div class="alarm-item">
+        <div id='alim${alim.alimId}' class="alarm-list" >
+            <div class="alarm-item" onclick="eventURL('${alim.url}')">
               <figure class="mini-thumnail">
                  <img src="${empty alim.profileImg ? "/assets/sns/images/profile-img-default.png" : alim.profileImg}" alt="">
               </figure>
@@ -104,15 +104,17 @@
       }
       if(url.indexOf('/sns/like') > -1){
         location.href = '/page'+url;
-      } else if (url.indexOf('/chat/') > -1){
-
+      } else if (url.indexOf('/chat/detail/') > -1){
+        let id = url.match(/\/chat\/detail\/(\d+)/);
+        openChatModal(function(){
+          openChatDetailModal(id[1]);
+        });
       } else if (url.indexOf('/friend/req') > -1){
-
+        closeModal('alarm-modal');
+        openFriendModal();
       } else {
 
       }
-
-
     }
 
 </script>

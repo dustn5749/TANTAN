@@ -43,4 +43,13 @@ public class SnsBoardPageController {
         request.setAttribute("member", memberService.findById(snsBoard.getMemberId()));
         return "sns-detail"; 
     }
+
+    @GetMapping("/page/sns/like/{id}")
+    public String get(
+        @PathVariable Long id, // 경로 변수 'id'를 가져옴
+        HttpServletRequest request,
+        Authentication authentication
+    ) {
+        return "redirect:/sns/profile?detail="+id;
+    }
 }

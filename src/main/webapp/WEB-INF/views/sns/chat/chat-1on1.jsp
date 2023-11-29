@@ -9,8 +9,7 @@
 <c:forEach items="${chatRoomList}" var="chatRoom">
     <div id="chat-list${chatRoom}" class="chat-list" onclick="openChatDetailModal(${chatRoom.roomNum})">
         <figure class="mini-thumnail">
-<%--             <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt=""> --%>
-				 <img src="<c:url value="${friend.profileImg}"/>" alt="">
+				 <img src="<c:url value="${chatRoom.profileImg}"/>" alt="">
         </figure>
         <div class="chat-info-grp">
             <div class="chat-ttl-wrap">

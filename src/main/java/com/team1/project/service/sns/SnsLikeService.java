@@ -90,4 +90,5 @@ public class SnsLikeService {
     public boolean isLikeBoard(Long boardNum, String memberId) {
         return Objects.nonNull(snsLikeDAO.findById(Map.of("memberId", memberId ,"boardNum",boardNum)));
     }
+
 }
