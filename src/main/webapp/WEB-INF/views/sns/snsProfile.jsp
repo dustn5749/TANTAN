@@ -48,6 +48,7 @@
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
                         <span class="txt">알림</span>
+                    </button>
                     <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
                             <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
@@ -156,7 +157,7 @@
 				</div>
 				
                 <!--게시물 목록 영역 -->
-                <div class="grid-wrapper">
+                <div id="grid-wrapper" class="grid-wrapper">
                     <c:forEach items="${boardList}" var="board">
                         <div class="grid">
                             <!-- 각 이미지 카드를 클릭시 JS함수와 연결 -->
@@ -215,6 +216,60 @@
 	}
 	
   $(function(){
+    var lastId = ${lastId};
+    $(window).scroll(function() {
+      // 현재 스크롤 위치
+      var scrollPosition = $(window).scrollTop();
+
+      // 문서 전체 높이
+      var documentHeight = $(document).height();
+
+      // 창의 높이
+      var windowHeight = $(window).height();
+
+      // 스크롤이 페이지 하단에 도달했을 때
+      if (scrollPosition + windowHeight === documentHeight) {
+        // 여기에 원하는 동작을 추가합니다.
+
+
+        $.ajax({
+          url : '/sns/data/profile',
+          data : {'lastId' : lastId},
+          success : function (data){
+
+            for(var i = 0; i < data.length ; i ++){
+              $(`<div class="grid">\
+                            <figure class="feed-item-card" onclick="openBoardModal('`+data[i].boardNum+`')">\
+                                <img src='`+data[i].realName+`' alt="" class="thumbnail-img">\
+                                <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->\
+                                <div class="overlay">\
+                                    <div class="overlay-content">\
+                                        <dl class="icon-heart-txt">\
+                                            <dt>\
+                                                <img src="/assets/sns/images/icon-heart-filled-white.svg" alt=""\
+                                                     class="icon">\
+                                            </dt>\
+                                            <dd>`+data[i].likeCount+`</dd>\
+                                        </dl>\
+                                        <dl class="icon-msg-txt">\
+                                            <dt>\
+                                                <img src="/assets/sns/images/icon-message-circle-filled-white.svg"\
+                                                     alt=""\
+                                                     class="icon">\
+                                            </dt>\
+                                            <dd>`+data[i].commentCount+`</dd>\
+                                        </dl>\
+                                    </div>\
+                                </div>\
+                            </figure>\
+                        </div>`).appendTo($('#grid-wrapper'));
+            }
+            lastId = data[data.length-1].boardNum;
+          }
+        })
+      }
+    });
+
     $('#collectionBtn').on('click',function(){
       $('#boardFile').trigger('click');
     });
@@ -304,9 +359,9 @@
     }
 
     function fileChange(){
-
-      //$('#boardFile').
     }
+
+
 </script>
 </body>
 
