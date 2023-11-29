@@ -398,6 +398,18 @@ values(
 		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
 	</update>
 
+	<!-- 관리자 일일 작성된 일정 게시글 수 -->
+	<!-- 오늘 가입한 인원 추출 -->
+	<select id="todaySchedule" parameterType="com.team1.project.dto.ScheduleDTO" resultType="com.team1.project.dto.ScheduleDTO">
+	    SELECT COUNT(*) AS todaySchedule
+	    FROM schedule
+	    WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+    </select>
+	<!-- 위시리스트 총 갯수 세기 -->
+	<select id="LikeTotalCount" resultType="int">
+		SELECT COUNT(*) FROM SCHEDULELIKE
+		WHERE USERID=#{member_id}
+	</select>
 
 
 

@@ -1,4 +1,4 @@
-package com.team1.project.dto;
+                 package com.team1.project.dto;
 
 import java.sql.Date;
 import java.util.List;
@@ -34,6 +34,8 @@ public class UsDTO {
 
 	
 	private String comment;
+	private int todayWrite;
+  
 	//관리자 동행 목록 가져오기
 
 	private String month;

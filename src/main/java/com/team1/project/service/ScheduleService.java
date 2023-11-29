@@ -159,6 +159,11 @@ public class ScheduleService {
 			}
 		}
 		
+		public int todaySchedule(ScheduleDTO schedule) {
+			int todayScheduleCount = schduleDAO.todaySchedule(schedule).getTodaySchedule();
+			
+			return todayScheduleCount;
+		}
 		// 일정 위시리스트 가져오기
 		public Map<String, Object> getLikeScheduleList(String member_id, ScheduleDTO schedule) {
 			int totalCount = schduleDAO.LikeTotalCount(schedule);

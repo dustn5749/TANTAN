@@ -30,6 +30,7 @@ public class ScheduleDTO {
 	    private String memo2;
 	    private String place1;
 	    private String place2;
+	    private int todaySchedule;
 	    
 	    private String doe_img;
 	    private String place3;

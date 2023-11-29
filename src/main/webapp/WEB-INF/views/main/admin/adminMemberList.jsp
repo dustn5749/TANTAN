@@ -352,15 +352,6 @@ function lastPage() {
     }).trigger("reloadGrid");
 }
 
-// //그리드 페이지로 이동
-// function goPage(num) {
-// 	currentPage = num;
-//     $("#memberGrid").jqGrid('setGridParam', {
-//     	page: num
-//     }).trigger("reloadGrid");
-//     	console.log("페이지 버튼 누름" + num);
-// }
-
 // // 그리드 페이지로 이동
 function goPage(num) {
     currentPage = num;  // 현재 페이지 업데이트

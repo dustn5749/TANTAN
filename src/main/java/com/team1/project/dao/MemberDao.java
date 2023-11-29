@@ -58,4 +58,6 @@ public interface MemberDao {
 	public List<MemberDTO> monthMember();
 	
 	public int getTotalCount(MemberDTO member);
+	
+	public MemberDTO todayRegister(MemberDTO member);
 }

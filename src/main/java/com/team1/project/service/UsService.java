@@ -166,4 +166,15 @@ public int viewCount(int us_num ) throws Exception {
 
 
 	
+	// 관리자 일일 작성된 동행 게시글 수
+	public int todayWrite(UsDTO us) {
+		int todayWriteCount = usDAO.todayWrite(us).getTodayWrite();
+		
+		return todayWriteCount;
+	}
+	
+//// 조회수 증가
+//public int viewCount(int usNum) throws Exception {
+//System.out.println("us.service.viewCount() 함수 호출됨");
+//return usDAO.viewCount(usNum);
 }

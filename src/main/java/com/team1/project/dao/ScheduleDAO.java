@@ -67,7 +67,10 @@ public interface ScheduleDAO {
 
 	// 좋아요 삭제하기
 	public void minusLikeCnt(Map<String, Object> param);
-
+	
+	// 관리자 일일 작성된 일정 게시글 수
+	public ScheduleDTO todaySchedule(ScheduleDTO schedule);
+	
 	// 좋아요 수 증가하기
 	public void updateLikeCnt(int schedule_Num);
 

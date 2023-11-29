@@ -124,7 +124,7 @@ function openChatDetailModal(chatRoomId) {
 
                 <!-- 그룹 대화 / 1:1 대화 탭 버튼 -->
                 <div class="common-tabs">
-                    <!-- ↓ 활성화된 탭은 active 달면 돼요 -->
+                    <!-- ↓ 활성화된 탭은 active 달면 됨 -->
                     <div class="tab active" data-show="tab-chat-group">
                         <span class="txt-badge">그룹대화</span>
                     </div>

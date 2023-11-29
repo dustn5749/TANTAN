@@ -45,9 +45,7 @@
                 </span>
                 <span class="person-profile">
                   <span class="name-wrap">
-                    <span class="name">${empty friend.nickname ? friend.regId : friend.nickname}</span>
-                      <!-- 블루뱃지 -->
-                    <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">
+                    <span class="name">${empty friend.nickname ? friend.regId : friend.nickname}</span>                    
                   </span>
                 </span>
               </span>

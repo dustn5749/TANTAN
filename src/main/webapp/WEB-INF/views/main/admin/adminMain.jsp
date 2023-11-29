@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +51,8 @@ border:1px solid black;
 	                <div class="row no-gutters align-items-center">
 	                    <div class="col mr-2">
 	                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-	                               가입자수 (일일)</div>
-	                        <div class="h5 mb-0 font-weight-bold text-gray-800">test</div>
+	                               가입자수</div>
+	                        <div class="h5 mb-0 font-weight-bold text-gray-800">${todayRegister}</div>
 	                    </div>
 	                    <div class="col-auto">
 	                        <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -66,8 +67,8 @@ border:1px solid black;
 		            <div class="row no-gutters align-items-center">
 		                <div class="col mr-2">
 		                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-		                           SNS 게시글 작성 (일일)</div>
-		                    <div class="h5 mb-0 font-weight-bold text-gray-800">board</div>
+		                           일정 게시글 작성</div>
+		                    <div class="h5 mb-0 font-weight-bold text-gray-800">${todaySchedule}</div>
 		                </div>
 		                <div class="col-auto">
 		                    <i class="fas fa-edit fa-2x text-gray-300"></i>
@@ -85,7 +86,7 @@ border:1px solid black;
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${todayWrite}</div>
                                 </div>
                             </div>
                         </div>
@@ -135,14 +136,8 @@ border:1px solid black;
 								<canvas id="monthMember"></canvas>
 			                </div>
 			                <hr>
-<!-- 			                <div class="card-body"> -->
-<!-- 			                <canvas id="reportChart"></canvas> -->
-<!-- 			                </div> -->
 			              </div>
-			              <!-- /.card-body-->
-			            <!-- /.card -->
 			        </div>
-		          <!-- /.col -->
 		          </div>
               </div>
               <!-- 회원 탭 카드 종료 -->
@@ -151,10 +146,6 @@ border:1px solid black;
     		</div>
     	</div>
     </div>
-    <!-- /.content -->
-<!--   </div> -->
-  <!-- /.content-wrapper -->
-
 <script>
   $(function () {
     /* END LINE CHART */

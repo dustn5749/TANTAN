@@ -195,7 +195,7 @@
             </div>
           </div>
 
-
+		 
           <!-- 버튼 영역에 대한 div  -->
           <c:choose>
             <c:when test="${!empty principal}">
@@ -209,7 +209,7 @@
                 </button>
                 <button class="nav-icon position-relative text-decoration-none" onclick="openChatModal()">
                   <i class="fa-regular fa-message"></i>
-                  <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+<!--                   <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span> -->
                 </button>
                 <button id = 'alarm-count-button' class="nav-icon position-relative text-decoration-none" onclick="openAlimModal()">
                   <i class="fa-regular fa-bell"></i>
