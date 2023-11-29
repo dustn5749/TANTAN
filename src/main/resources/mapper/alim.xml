@@ -20,7 +20,7 @@
             al.CREATE_TIME as createTime,
             al.READ_YN as readYn,
             al.URL as url,
-            al.THUMBNAIL_URL as thumnailUrl,
+            al.THUMBNAIL_URL as thumbnailUrl,
             m.nickname,
             m.PROFILE_IMG as profileImg
 

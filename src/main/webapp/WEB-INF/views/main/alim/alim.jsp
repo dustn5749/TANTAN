@@ -63,7 +63,7 @@
       <div class="alarm-list-grp">
         <!-- 알람 리스트 -->
         <c:forEach items="${alimList}" var="alim">
-        <div id='alim${alim.alimId}' class="alarm-list">
+        <div id='alim${alim.alimId}' class="alarm-list" onclick="eventURL('${alim.url}')">
             <div class="alarm-item">
               <figure class="mini-thumnail">
                  <img src="${empty alim.profileImg ? "/assets/sns/images/profile-img-default.png" : alim.profileImg}" alt="">
@@ -79,12 +79,9 @@
                 <span class="date">${alim.time}</span>
               </div>
             </div>
-
-            <c:if test="">
-
+            <c:if test="${not empty alim.thumbnailUrl}">
+                <img src="<c:url value="${alim.thumbnailUrl}"/>" alt="" class="alarm-preview-img">
             </c:if>
-            <img src="<c:url value="/assets/sns/images/thumbnail-img03.png"/>" alt="" class="alarm-preview-img">
-
             <button type="button" class="alarm-del-btn" onclick="readAlim('${alim.alimId}')">
               <span class="txt-hidden">이 알람 삭제</span>
               <img src="<c:url value="/assets/sns/images/icon-trash-white.svg"/>" alt="">
@@ -99,3 +96,23 @@
   </div>
   <!-- END 알림 모달 내용들 -->
 </div>
+<script>
+
+    function eventURL(url){
+      if(!url || url === '' || url ==='null'){
+        return;
+      }
+      if(url.indexOf('/sns/like') > -1){
+        location.href = '/page'+url;
+      } else if (url.indexOf('/chat/') > -1){
+
+      } else if (url.indexOf('/friend/req') > -1){
+
+      } else {
+
+      }
+
+
+    }
+
+</script>

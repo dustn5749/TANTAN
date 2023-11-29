@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="principal"/>
@@ -17,7 +18,7 @@
 
                 <div class="ttl">
                     <p>${chatRoom.roomName}</p>
-                    <span class="num">2</span>
+                    <span id="chatter${chatRoom.roomNum}" class="num">${fn:length(chatter)}</span>
                 </div>
             </div>
             <div class="btn-wrap">
@@ -212,11 +213,16 @@ $(function (){
 
       const recvMessage = recv =>  {
 
-        if (recv.type === 'ENTER' || recv.type === 'LEAVE') {
-            let element = $(`<div class="status-txt">
-               ${recv.nickname}님이 들어왔습니다.
-            </div>`);
+        if (recv.messageType === 'ENTER') {
+          $(`<div class="status-txt">`).text((recv.senderNickName ? recv.senderId : recv.senderNickName)+"님이 들어왔습니다.").appendTo($('#chat-view-scroll'));
 
+          let text = Number($('#chatter'+recv.roomNum).text());
+          $('#chatter'+recv.roomNum).text(text+1);
+
+        } else if(recv.messageType === 'LEAVE') {
+          $(`<div class="status-txt">`).text((recv.senderNickName ? recv.senderId : recv.senderNickName)+"님이 나갔습니다.").appendTo($('#chat-view-scroll'));
+          let text = Number($('#chatter'+recv.roomNum).text());
+          $('#chatter'+recv.roomNum).text(text-1);
         } else {
           if(recv.senderId === sender){
             let element = $(`<div class="chat-bubble-wrapper send">
