@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
+   <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
     
 <!DOCTYPE html>
@@ -15,15 +15,15 @@
     
       <style>
       
-	  .dropdown_container {
-	   width: 70px;
-	    position: relative;
-	    text-align: left;
-	    font-family: 'Pretendard-Regular' !important;
-	    margin-left: 10px; /* 한국과의 간격을 조정합니다. */
-	    display: flex;
-	    align-items: center; /* 세로 중앙 정렬을 위해 추가 */
-	}
+     .dropdown_container {
+      width: 70px;
+       position: relative;
+       text-align: left;
+       font-family: 'Pretendard-Regular' !important;
+       margin-left: 10px; /* 한국과의 간격을 조정합니다. */
+       display: flex;
+       align-items: center; /* 세로 중앙 정렬을 위해 추가 */
+   }
 
     
 cursor: pointer;
@@ -96,7 +96,9 @@ cursor: pointer;
         }
 
         .dropdown_btn_container {
-         	width: 100%;
+
+            width: 100%;
+
         }
 
         .dropdown_btn {
@@ -367,7 +369,11 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">부산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">대구</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">인천</li>
+
+            <li class="nav-li" onclick="select_area(this.innerText)">광주</li>
+
 				<li class="nav-li" onclick="select_area(this.innerText)">광주</li>
+
                 <li class="nav-li" onclick="select_area(this.innerText)">대전</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">울산</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">세종</li>
@@ -378,74 +384,78 @@ cursor: pointer;
                 <li class="nav-li" onclick="select_area(this.innerText)">전북</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">전남</li>
                 <li class="nav-li" onclick="select_area(this.innerText)">경북</li>
+
+            <li class="nav-li" onclick="select_area(this.innerText)">경남</li>
+
 				<li class="nav-li" onclick="select_area(this.innerText)">경남</li>
+
                 <li class="nav-li" onclick="select_area(this.innerText)">제주</li>
             </ul>
         </div>
-	</div>
-</div>
-
+        </div>
+        </div>
+       
   
 
- 	<form id="us_wirte_form"  enctype="multipart/form-data">
-	<div class="container-fluid mt-5">
-	    <div class="row justify-content-center">
-	        <div class="col-md-8">
-		        <div class="us_city_div">
-		        	    <div class="us_city_title">
-	                	    <label for="us_city">모집 지역:</label>
-	                	</div>
-	                	<div class="us_city_value_div">
-	                		<input type="text" readonly="readonly" id="us_city_input" name="city_name">
-	                	</div>
-		        </div>
+    <form id="us_wirte_form"  enctype="multipart/form-data">
+   <div class="container-fluid mt-5">
+       <div class="row justify-content-center">
+           <div class="col-md-8">
+              <div class="us_city_div">
+                     <div class="us_city_title">
+                          <label for="us_city">모집 지역:</label>
+                      </div>
+                      <div class="us_city_value_div">
+                         <input type="text" readonly="readonly" id="us_city_input" name="city_name">
+                      </div>
+              </div>
 
-	                <div class="row mb-4">
-	                    <div class="col-md-4 text-end">
-	                        <label for="recruitment">모집인원:</label>
-	                    </div>
-	                    <div class="col-md-2">
-	                        <input type="text" class="form-control" id="recruitmentText" readonly>
-	                    </div>
-	                    <div class="col-md-4">
-	                        <input type="range" min="1" max="10" class="form-range" id="recruitmentSlider" name="us_cnt">
-	                    </div>
-	                </div>
-	                <div class="row mb-4">
-	                    <div class="col-md-3 text-end">
-	                        <label for="date_start">시작 날짜:</label>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <input type="date" class="form-control" id="date_start" name="start_Date">
-	                    </div>
-	                    <div class="col-md-3 text-end">
-	                        <label for="date_end">종료 날짜:</label>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <input type="date" class="form-control" id="date_end" name="end_Date">
-	                    </div>
-	                </div>
-	        </div>
-	    </div>
-	</div>
-		<input type="hidden" value="${principal.user.member_id}" id="writer" name="writer">
+                   <div class="row mb-4">
+                       <div class="col-md-4 text-end">
+                           <label for="recruitment">모집인원:</label>
+                       </div>
+                       <div class="col-md-2">
+                           <input type="text" class="form-control" id="recruitmentText" readonly>
+                       </div>
+                       <div class="col-md-4">
+                           <input type="range" min="1" max="10" class="form-range" id="recruitmentSlider" name="us_cnt">
+                       </div>
+                   </div>
+                   <div class="row mb-4">
+                       <div class="col-md-3 text-end">
+                           <label for="date_start">시작 날짜:</label>
+                       </div>
+                       <div class="col-md-3">
+                           <input type="date" class="form-control" id="date_start" name="start_Date">
+                       </div>
+                       <div class="col-md-3 text-end">
+                           <label for="date_end">종료 날짜:</label>
+                       </div>
+                       <div class="col-md-3">
+                           <input type="date" class="form-control" id="date_end" name="end_Date">
+                       </div>
+                   </div>
+           </div>
+       </div>
+   </div>
+      <input type="hidden" value="${principal.user.member_id}" id="writer" name="writer">
                 
            <div id="root">
-	           <div class="root_inner">
-			  	<h2 class="title">파일 업로드하기</h2>
-		            <div class="contents">
-				    <div class="upload-box">
-				      <div id="drop-file" class="drag-file">
-				        <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
-				        <p class="message">Drag files to upload</p>
-				        <img src="" alt="미리보기 이미지" class="preview">
-				      </div>
-				      <label class="file-label" for="chooseFile">사진 선택하기</label>
-				      <input class="file" id="chooseFile" name ="file" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
-				    </div>
-				  </div>
-	           </div>
-			  <hr>
+              <div class="root_inner">
+              <h2 class="title">파일 업로드하기</h2>
+                  <div class="contents">
+                <div class="upload-box">
+                  <div id="drop-file" class="drag-file">
+                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
+                    <p class="message">Drag files to upload</p>
+                    <img src="" alt="미리보기 이미지" class="preview">
+                  </div>
+                  <label class="file-label" for="chooseFile">사진 선택하기</label>
+                  <input class="file" id="chooseFile" name ="file" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
+                </div>
+              </div>
+              </div>
+           <hr>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="title">제목:</label>
@@ -461,10 +471,10 @@ cursor: pointer;
                             </div>
                         </div>
                     </div>
-		</form>
+      </form>
 
 
-	<script src="/assets/js/uswrite.js"></script>
+   <script src="/assets/js/uswrite.js"></script>
 
     
 </body>

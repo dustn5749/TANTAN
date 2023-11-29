@@ -25,17 +25,29 @@ public class UsService {
 	
 	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
-		// 1. 전체 건수를 얻기
-
-		int totalCount = usDAO.totalCount(us);
-		us.setTotalCount(totalCount); //여기서 전체 게시글 수를 불러와서 저장함.
+		int totalCount = 0;
+		if( us.getDoe_Name() != null ) {
+			totalCount= usDAO.doe_nametotalCount(us);
+			
+		}else {
+			totalCount= usDAO.totalCount(us);
+		}
+		us.setTotalCount(totalCount); 
 	
-		System.out.println("us s-e:" + us.getStartNo() + "//" + us.getEndNo());
+		Map<String, Object> param = new HashMap<>();
+		param.put("endNo", us.getEndNo());
+		param.put("startNo", us.getStartNo());
+		param.put("DOE_NAME", us.getDoe_Name());
+		param.put("ORDER", us.getORDER());
+		
+		System.out.println("param: " + param);
+		
+		System.out.println("param:" + us.getDoe_Name() );
 		
 		Map<String, Object> result = new HashMap<>();
 		try {
-		result.put("list", usDAO.getUsList(us)); // 게시글 목록 조회
-		result.put("us", us);
+			result.put("list", usDAO.getUsList(param));
+			result.put("us", us);
 		} catch (Exception e) {
 			result.put("message", "서버 오류 발생");
 			e.printStackTrace();
@@ -44,8 +56,6 @@ public class UsService {
 		return result;
 	}
 
-	
-	
 	// 메인 top5
 	public List<UsDTO> usTop5() throws Exception {
 		return usDAO.usTop5();
@@ -77,6 +87,7 @@ public class UsService {
 	// 동행 상세보기
 	public UsDTO usDetail(int us_num) throws Exception {
 	    System.out.println("us.service.usDetail() 함수가 호출되었습니다");
+	    
 	    return usDAO.usDetail(us_num);
 	}
 
@@ -139,6 +150,21 @@ public class UsService {
 	public List<UsDTO> monthUs() {
 		return usDAO.monthUs();
 	}
+
+// 조회수 증가
+public int viewCount(int us_num ) throws Exception {
+		System.out.println("us.service.viewCount() 함수 호출됨");
+		return usDAO.viewCount(us_num);
+			}
+
+	public void commentplus(int us_num) {
+		System.out.println("uscomment 댓글 ");
+		usDAO.commentplus(us_num);
+	
+	}
+
+
+
 	
 	// 관리자 일일 작성된 동행 게시글 수
 	public int todayWrite(UsDTO us) {

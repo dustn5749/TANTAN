@@ -39,7 +39,10 @@ public class CrawlingService {
             for (AccompanyList accompany : root.getAccompanyList()) {
                 UsDTO usDTO = new UsDTO();
                 usDTO.setTitle(accompany.getTitle());
-                usDTO.setContent(accompany.getArea());
+                usDTO.setContent(accompany.getContent());
+                
+//                usDTO.setCity_name(accompany.getArea());
+                
                 usDTO.setWriter(accompany.getNickName());
                 usDTO.setUs_cnt(accompany.getIsRecruit());
                 usDTO.setRegdate(accompany.getCreatedAt());

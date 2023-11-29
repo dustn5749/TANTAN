@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dto.MemberDTO;
+import com.team1.project.dto.UsCommentDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.UsCommentService;
@@ -32,13 +33,18 @@ public class UsController {
 	@Autowired
 	 private MemberService memberservice;
 	
+
+	
 	@Autowired
 	private UsCommentService usCommentService;
 	
+	
+
 	// 1. 동행 전체 목록 페이지
 	@RequestMapping(value = "/list")
 	public String list( UsDTO us, Model model) throws Exception {
 		System.out.println("uscontroller.list()");
+		System.out.println("order=" +us);
 
 		System.out.println("us = " + us.getPageNo());
 		model.addAttribute("result", usService.usPageList(us));
@@ -76,6 +82,10 @@ public class UsController {
 	      System.out.println("usDetail = " + usDetail);
 	      MemberDTO writer = memberservice.findById(usDetail.getWriter());
 	      System.out.println("동행 상세보기 컨트롤러");
+	      
+	      usService.viewCount(usDetail.getUs_num());
+	      
+	      
 	      model.addAttribute("writer", writer);
 	      model.addAttribute("us", usDetail);
 	      model.addAttribute("commentList", usCommentService.getUsCommentList(us_num));
@@ -123,25 +133,24 @@ public class UsController {
 	    return result;
 	}
 
-	
-	
-//	 @PostMapping("/comments/add")
-//	    public ResponseEntity<String> addComment(@RequestBody CommentData commentData) {
-//	        String userId = commentData.getUserId();
-//	        String content = commentData.getContent();
-//
-//	        if (userId != null && content != null) {
-//	            Comment comment = new Comment(userId, content);
-//
-//	            try {
-//	            	usService.saveComment(comment); 
-//	                return ResponseEntity.ok("댓글이 성공적으로 추가되었습니다.");
-//	            } catch (Exception e) {
-//	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 추가에 실패했습니다.");
-//	            }
-//	        } else {
-//	            return ResponseEntity.badRequest().body("잘못된 요청입니다.");
-//	        }
-	
-}
+	//댓글 추가하기
+	 @RequestMapping(value = "/insertComment", method = RequestMethod.POST) 
+	 @ResponseBody
+	   public Map<String, Object> insertComment(@RequestBody UsCommentDTO comment) throws Exception {
+		 System.out.println("댓글쓰기");
+		 
+		 usService.commentplus(comment.getUs_num());
+	      Map<String, Object> result = new HashMap<>();
+	      if(usCommentService.insertCommentUs(comment)) {
+	          result.put("status", true);
+	          result.put("message", "댓글이 등록되었습니다");
+	       } else {
+	          result.put("status", false);
+	          result.put("message", "댓글 작성 중 오류가 발생하였습니다");
+	       }
+	      
+	      return result;
+	   }
+	}
+
 

@@ -640,8 +640,8 @@ function btnInsert() {
 				        content: replyContent
 				    };
 				
-					$.ajax({
-						url : "/comment/insertComment",
+				
+									url : "/comment/insertComment",
 					    type: 'POST',
 					    contentType: "application/json; charset=UTF-8",
 					    data: JSON.stringify(data),
