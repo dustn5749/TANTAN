@@ -56,6 +56,7 @@ public class SnsLikeService {
             snsLikeDAO.save(build); //게시물을 저장 또는 업데이트
          // 게시물 번호를 기준으로 해당 게시물을 조회
             SnsBoard byId = snsDAO.findById(boardNum);
+            snsDAO.updateLikeCountByBoardNum(boardNum);
 
             if(Objects.nonNull(byId)){
                 byId.setLikeCount(snsLikeDAO.countByBoardNum(boardNum));
@@ -80,6 +81,7 @@ public class SnsLikeService {
         } else {
         	 // 이미 좋아요가 등록되어 있는 경우, 좋아요를 취소
             snsLikeDAO.deleteByMemberIdAndBoardNum(Map.of("memberId", memberId, "boardNum", boardNum));
+            snsDAO.updateLikeCountByBoardNum(boardNum);
             return false;
         }
 

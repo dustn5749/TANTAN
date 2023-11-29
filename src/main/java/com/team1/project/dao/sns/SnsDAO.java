@@ -22,7 +22,8 @@ public interface SnsDAO {
 
   SnsBoard findById(Long boardNum);
 
-  void updateViewCountByBoardNum(Long id);
+  void updateViewCountByBoardNum(Long boardNum);
+  void updateLikeCountByBoardNum(Long boardNum);
 
   void update(SnsBoard board);
 

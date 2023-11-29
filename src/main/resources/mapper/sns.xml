@@ -23,6 +23,16 @@
     set VIEW_COUNT = VIEW_COUNT + 1
     where BOARD_NUM = #{boardNum}
   </update>
+
+  <update id="updateLikeCountByBoardNum">
+    UPDATE SNS_BOARD
+    SET LIKE_COUNT = (
+      SELECT count(*)
+      FROM SNS_LIKE
+      WHERE BOARD_NUM = #{boardNum}
+    )
+    where BOARD_NUM = #{boardNum}
+  </update>
   <update id="update">
 update SNS_BOARD
   set
