@@ -37,8 +37,9 @@
                         <span class="txt">홈</span>
                     </button>
                     <button type="button" class="sidebar-btn active" onclick="mySchedule()">
-                        <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon">
-                        <span class="txt">일정</span>
+<%--                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon"> --%>
+                        	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
+                        <span class="txt">내 일정</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon">

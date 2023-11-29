@@ -11,8 +11,10 @@
           <img src="<c:url value="${friend.profileImg}"/>" alt="">
         </figure>
         <div class="person-profile">
-          <div class="name-wrap" onclick="snsProfile()">
-            <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
+          <div class="name-wrap">
+            <a href="/sns/profile/${friend.regId}">
+              <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
+            </a>
           </div>
           <p class="intro-txt">소개글</p>
         </div>
