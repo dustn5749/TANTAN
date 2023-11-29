@@ -28,7 +28,7 @@ public interface SnsDAO {
 
   void saveFile(SnsBoardFile snsBoardFile);
 
-  void updateProfile(Map<String,Object> map );
+  void updateProfile(Map<String,Object> map);
 
   List<SnsBoardFile> getFile(Long id);
 }

@@ -32,7 +32,7 @@
         m.PROFILE_IMG
       from
         MESSAGE mss
-        inner join ADMIN.MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
+        inner join MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
       where mss.ROOM_NUM = #{roomNum}
       <if test="lastId != null">
         <![CDATA[
@@ -58,7 +58,7 @@
       mss.SEND_TIME as sendTime
     from
     MESSAGE mss
-    inner join ADMIN.MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
+    inner join MEMBER M on mss.MEMBER_ID = M.MEMBER_ID
     where 1 = 1
     and mss.MESSAGE_NUM = #{messageNum}
 

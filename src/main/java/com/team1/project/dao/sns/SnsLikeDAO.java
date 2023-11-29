@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SnsLikeDAO {
 
-  SnsLike findById(String memberId, Long boardNum);
+  SnsLike findById(Map<String,Object> map);
 
   void save(SnsLike build);
 

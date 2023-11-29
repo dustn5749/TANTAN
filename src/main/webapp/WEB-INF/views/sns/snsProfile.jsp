@@ -47,15 +47,6 @@
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
                         <span class="txt">알림</span>
-<!--                     </button> -->
-<!--                     <button type="button" class="sidebar-btn active"> -->
-<%--                         <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt="" class="icon"> --%>
-<!--                         <span class="txt">저장됨</span> -->
-<!--                     </button> -->
-<!--                     <button type="button" class="sidebar-btn active"> -->
-<%--                         <img src="<c:url value="/assets/sns/images/icon-activity.svg"/>" alt="" class="icon"> --%>
-<!--                         <span class="txt">내 활동</span> -->
-<!--                     </button> -->
                     <button type="button" class="sidebar-btn active">
                         <figure class="mini-thumnail">
                             <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
@@ -97,7 +88,9 @@
                             <h2>
                                 <span>${member.nickname}</span>
                             </h2>
-                            <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
+                            <c:if test="${principal.user.member_id != member.member_id}">
+                                <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
+                            </c:if>
                         </div>
                         <div class="info01">
                             <dl>
@@ -278,8 +271,6 @@
         // 프로필 편집 페이지로 리다이렉션
         location.href = "/sns/profile/modify";
     }
-    
- 
     
 
     function requestFriend(id){

@@ -45,6 +45,11 @@ public class ChatMessageService {
     dto.setSenderNickName(name);
 
     messagingTemplate.convertAndSend("/sub/chat/room/" + dto.getRoomNum(), dto);
+
+//    for(){
+//      messagingTemplate.convertAndSend("/sub/chat/new/" + dto.getRoomNum(), dto);
+//    }
+
   }
 
   public List<ChatMessageDTO> getList(GetMessageRequest messageRequest) {
