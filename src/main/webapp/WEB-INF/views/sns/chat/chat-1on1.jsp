@@ -7,7 +7,7 @@
 </sec:authorize>
 
 <c:forEach items="${chatRoomList}" var="chatRoom">
-    <div class="chat-list" onclick="openChatDetailModal(${chatRoom.roomNum})">
+    <div id="chat-list${chatRoom}" class="chat-list" onclick="openChatDetailModal(${chatRoom.roomNum})">
         <figure class="mini-thumnail">
             <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt="">
         </figure>

@@ -24,6 +24,7 @@ public class Alim {
     private AlimContentEnum content;
     private Date createTime;
     private String readYn;
+    private String thumbnailUrl;
 
     public AlimDTO toDTO(){
         return AlimDTO.builder()
@@ -33,6 +34,7 @@ public class Alim {
                 .receiveMemberId(receiveMemberId)
                 .sendMemberId(sendMemberId)
                 .content(content.name())
+                .thumbnailUrl(thumbnailUrl)
                 .build();
     }
 }

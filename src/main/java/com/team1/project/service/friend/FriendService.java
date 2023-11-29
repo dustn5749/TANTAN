@@ -48,7 +48,8 @@ public class FriendService {
           .receiveMemberId(receiveMemberId)
           .sendMemberId(sendMemberId)
           .content(AlimContentEnum.FRIEND_REQ)
-          .url("")
+          .url("/friend/req")
+          .thumbnailUrl("")
           .readYn("N")
           .createTime(new Date())
           .build();

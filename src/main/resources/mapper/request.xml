@@ -68,6 +68,16 @@
   </select>
   <select id="findByReceiveMemberId" resultType="com.team1.project.entity.FriendRequest">
 
+    select
+      friend_req_id as id,
+      send_member_id as sendMemberId,
+      receive_member_id as receiveMemberId,
+      req_date as reqDate,
+      accept_yn as acceptYn
+    from FRIEND_REQUEST
+    where
+      receive_member_id = #{memberId}
+
   </select>
   <select id="findById" resultType="com.team1.project.entity.FriendRequest">
     select

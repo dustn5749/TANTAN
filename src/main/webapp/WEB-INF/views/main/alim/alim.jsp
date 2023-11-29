@@ -65,13 +65,12 @@
         <div id='alim${alim.alimId}' class="alarm-list">
             <div class="alarm-item">
               <figure class="mini-thumnail">
-                <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt="">
+                <img src="<c:url value="${alim.profileImg}"/>" alt="">
               </figure>
 
               <div class="alarm-txt-grp">
                 <p class="txt">
                 <span class="name">
-<%--                <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">--%>
                 ${alim.nickname}
                 </span>
                   ${alim.content}
@@ -80,6 +79,9 @@
               </div>
             </div>
 
+            <c:if test="">
+
+            </c:if>
             <img src="<c:url value="/assets/sns/images/thumbnail-img03.png"/>" alt="" class="alarm-preview-img">
 
             <button type="button" class="alarm-del-btn" onclick="readAlim('${alim.alimId}')">

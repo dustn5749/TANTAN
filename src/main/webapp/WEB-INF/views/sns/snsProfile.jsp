@@ -110,6 +110,9 @@
                                 <c:when test="${principal.user.member_id == member.member_id}">
                                     <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
                                 </c:when>
+                                <c:when test="${alreadyReq == true}">
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="">요청 중</button>
+                                </c:when>
                                 <c:otherwise>
                                     <button type="button" class="btn solid-btn blue-btn" onclick="requestFriend('${member.member_id}')">친구 추가</button>
                                 </c:otherwise>
@@ -278,7 +281,7 @@
         url : '/friend/request/'+id,
         method : 'POST',
         success : function (data) {
-
+            location.reload();
         }
       })
       $('#' + id).removeClass('active');

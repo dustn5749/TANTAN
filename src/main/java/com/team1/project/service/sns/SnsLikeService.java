@@ -6,16 +6,19 @@ import com.team1.project.dao.sns.SnsLikeDAO;
 import com.team1.project.entity.Alim;
 import com.team1.project.entity.AlimContentEnum;
 import com.team1.project.entity.SnsBoard;
+import com.team1.project.entity.SnsBoardFile;
 import com.team1.project.entity.SnsLike;
 import com.team1.project.service.alim.AlimSendService;
 import com.team1.project.service.alim.AlimService;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 @Slf4j
 @RequiredArgsConstructor // Lombok을 사용하여 생성자를 자동으로 생성
@@ -28,6 +31,7 @@ public class SnsLikeService {
     private final AlimService alimService;
 
     private final AlimSendService alimSendService;
+    private final SnsFileService fileService;
 
 
     //게시물 등록
@@ -36,6 +40,11 @@ public class SnsLikeService {
     	//좋아요를 등록한 회원과 게시물 번호를 기준으로 좋아요 엔터티를 조회
         SnsLike optionalSnsLike = snsLikeDAO.findById(Map.of("memberId", memberId ,"boardNum",boardNum));
 
+        List<SnsBoardFile> file = snsDAO.getFile(boardNum);
+        String url = "";
+        if(!CollectionUtils.isEmpty(file) && Objects.nonNull(file.get(0))){
+            url = file.get(0).getRealName();
+        }
         if(Objects.isNull(optionalSnsLike)){
         	// 좋아요가 등록되어 있지 않은 경우, 새로운 좋아요를 등록
             //
@@ -60,6 +69,8 @@ public class SnsLikeService {
                         .content(AlimContentEnum.LIKE)
                         .readYn("N")
                         .createTime(new Date())
+                        .url("/sns/like/"+boardNum)
+                        .thumbnailUrl(url)
                         .build();
                     alimService.registerAlim(n);
                     alimSendService.sendAlim(n.toDTO());

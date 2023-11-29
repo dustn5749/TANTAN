@@ -203,13 +203,16 @@
                 <button class="nav-icon position-relative text-decoration-none" onclick="openFriendModal()">
                   <i class="fa-solid fa-user-group"></i>
                   <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill text-dark">
-						        <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
-						        <span class="red-circle"></span>
-						        </span>
+                      <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
+                      <span id="red-circle" class="red-circle" style="display: none"></span>
+                      </span>
                 </button>
                 <button class="nav-icon position-relative text-decoration-none" onclick="openChatModal()">
                   <i class="fa-regular fa-message"></i>
-<!--                   <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span> -->
+                  <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill text-dark">
+                      <!-- 이미지 파일 경로를 아래 src 속성에 입력 -->
+                      <span id="red-circle2" class="red-circle" style="display: none"></span>
+                      </span>
                 </button>
                 <button id = 'alarm-count-button' class="nav-icon position-relative text-decoration-none" onclick="openAlimModal()">
                   <i class="fa-regular fa-bell"></i>
@@ -306,6 +309,7 @@
   function openChatModal(callback) {
     $('#chat-modal').load("/page/chat/modal", () => {
       $('#chat-modal').addClass('active');
+      $('#red-circle2').hide();
       if(callback) callback();
     });
   }
@@ -343,6 +347,7 @@
   function openFriendModal() {
     $('#friend-list-modal').load("/page/friend/modal", () => {
       $('#friend-list-modal').addClass('active');
+      $('#red-circle').hide();
     });
   }
 
@@ -400,12 +405,32 @@
                   recvMessage(recv);
                 }, {}
         );
+
+        subscription2 = ws.subscribe("<c:url value='/sub/chat/new/'/>"+memberId
+                , message => {
+                  const recv = JSON.parse(message.body);
+                  recvChatMessage(recv);
+                }, {}
+        );
       }
 
       const recvMessage = recv =>  {
         // if(recv.content === )
-        callAlim();
-        // console.log(z);
+          callAlim();
+
+          if(recv.realContent == 'FRIEND_REQ'){
+            $("#red-circle").show();
+          }
+      }
+
+      const recvChatMessage = recv =>  {
+        if($('#chat-modal.active').length > 0){
+          $('#chat-txt'+recv.roomNum).text(recv.contents);
+          $('#chat-date'+recv.roomNum).text(recv.getSendTimeStr);
+        } else {
+          $("#red-circle2").show();
+        }
+
       }
 
       closeModal = function (id) {

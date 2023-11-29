@@ -236,19 +236,20 @@ $(function (){
 
             element.find('.bubble-wrap').append(dd).append(sendTimeStr);
           } else {
+            let imgurl = recv.profileImg;
             let element =
-                    $(`<div class="chat-bubble-wrapper">
-                            <div class="chat-bubble-grp">
-                                <figure class="mini-thumnail">
-                                    <img src="/assets/sns/images/profile-img-default.png" alt="">
-                                </figure>
-                                <div class="chat-bubble">
-                                    <div class="name-wrap">
-                                    </div>
-                                    <div class="bubble-wrap">
-                                    </div>
-                                </div>
-                            </div>
+                    $(`<div class="chat-bubble-wrapper">\
+                            <div class="chat-bubble-grp">\
+                                <figure class="mini-thumnail">\
+                                    <img src="`+recv.profileImg+`" alt="">\
+                                </figure>\
+                                <div class="chat-bubble">\
+                                    <div class="name-wrap">\
+                                    </div>\
+                                    <div class="bubble-wrap">\
+                                    </div>\
+                                </div>\
+                            </div>\
                         </div>`).appendTo($('#chat-view-scroll'));
 
             let name = $(`<h6 class="name"></h6>`).text(recv.senderNickName ? recv.senderId : recv.senderNickName);

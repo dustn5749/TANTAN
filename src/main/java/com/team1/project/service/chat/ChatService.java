@@ -56,6 +56,7 @@ public class ChatService {
           .receiveMemberId(memberId)
           .content(AlimContentEnum.CHAT_INVITE)
           .createTime(new Date())
+          .url("/chat/detail/"+room.getRoomNum())
           .build();
       alimService.registerChatAlim(n);
       list.add(n.toDTO());
@@ -73,7 +74,6 @@ public class ChatService {
     log.info("{}" ,chatRoomInviteRequest);
     ChatRoom roomById = roomService.getRoomById(chatRoomInviteRequest.getRoomNum());
 
-    Long roomNum = null;
     List<AlimDTO> list= new ArrayList<>();
 
     if (roomById.getType().equals(RoomType.oneOn1)){
@@ -94,7 +94,7 @@ public class ChatService {
       chatRoomRequest.setSenderMemberId(excludeMemberId);
       chatRoomRequest.setMemberIds(memberIds);
 
-      register(chatRoomRequest,excludeMemberId);
+      Long roomId = register(chatRoomRequest,excludeMemberId);
 
       for(String memberId : memberIds) {
         if(memberId.equals(excludeMemberId)) continue;
@@ -104,6 +104,7 @@ public class ChatService {
             .receiveMemberId(memberId)
             .readYn("N")
             .createTime(new Date())
+            .url("/chat/detail/"+roomId)
             .build();
         alimService.registerAlim(a);
         list.add(a.toDTO());
@@ -136,7 +137,6 @@ public class ChatService {
       }
 
     }
-
 
     alimSendService.sendAlims(list);
 
