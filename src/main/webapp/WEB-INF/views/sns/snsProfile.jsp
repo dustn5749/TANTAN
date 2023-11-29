@@ -36,7 +36,7 @@
                         <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="mySchedule()">
                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon">
                         <span class="txt">일정</span>
                     </button>
@@ -47,7 +47,7 @@
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
                         <span class="txt">알림</span>
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
                             <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
                         </figure>
@@ -56,10 +56,10 @@
                 </div>
 
                 <div class="sidebar-menu">
-                    <!--             <button type="button" class="sidebar-btn active"> -->
-                    <!--               <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
-                    <!--               <span class="txt">더보기</span> -->
-                    <!--             </button> -->
+                    <!--  <button type="button" class="sidebar-btn active"> -->
+                    <!--  <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+                    <!--  <span class="txt">더보기</span> -->
+                    <!--  </button> -->
                 </div>
             </div>
         </div>
@@ -139,11 +139,15 @@
             </div>
             <!-- 프로필 영역 아래 부분 -->
             <div class="profile-bottom">
-                <div class="btn-wrap">
-                    <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button>
-                    <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
-                </div>
-
+<!--                 <div class="btn-wrap"> -->
+<!--                     <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button> -->
+<!--                     <span style="display: none;"><input id="boardFile" type="file" name="file"></span> -->
+<!--                 </div> -->
+				<div class="btn-wrap">
+				    <button type="button" id="collectionBtn" class="btn txt-btn blue-btn" ${principal.user.member_id == member.member_id ? '' : 'style="display: none;"'}>+ 새 컬렉션</button>
+				    <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
+				</div>
+				
                 <!--게시물 목록 영역 -->
                 <div class="grid-wrapper">
                     <c:forEach items="${boardList}" var="board">
@@ -195,6 +199,14 @@
 
 <script>
 
+	function myProfile(){
+		location.href = "/sns/profile"
+	}
+	
+	function mySchedule(){
+		location.href = "/member/mySchedule.do"
+	}
+	
   $(function(){
     $('#collectionBtn').on('click',function(){
       $('#boardFile').trigger('click');

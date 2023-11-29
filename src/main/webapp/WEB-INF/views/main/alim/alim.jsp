@@ -17,7 +17,7 @@
       }
     });
   }
-
+  
   function readAlim(id){
     $.ajax({
       url : '/alim/read/'+id,
@@ -29,6 +29,7 @@
       }
     });
   }
+  
 </script>
 
 <div class="modal-overlay" onclick="closeModal('alarm-modal')"></div>
@@ -65,7 +66,8 @@
         <div id='alim${alim.alimId}' class="alarm-list">
             <div class="alarm-item">
               <figure class="mini-thumnail">
-                <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt="">
+              		 <img src="${empty item.profileImg ? "/assets/sns/images/profile-img-default.png" : item.profileImg}" alt="">
+<%--                 <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt=""> --%>
               </figure>
 
               <div class="alarm-txt-grp">
@@ -80,7 +82,7 @@
               </div>
             </div>
 
-            <img src="<c:url value="/assets/sns/images/thumbnail-img03.png"/>" alt="" class="alarm-preview-img">
+<%--             <img src="<c:url value="/assets/sns/images/thumbnail-img03.png"/>" alt="" class="alarm-preview-img"> --%>
 
             <button type="button" class="alarm-del-btn" onclick="readAlim('${alim.alimId}')">
               <span class="txt-hidden">이 알람 삭제</span>

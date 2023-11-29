@@ -51,7 +51,6 @@ public class AlimService {
     alimDAO.updateReadYnByAlimId(alimId);
   }
 
-
   public void registerChatAlim(Alim n) {
   }
 }

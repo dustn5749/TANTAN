@@ -55,14 +55,14 @@
             </c:if>
 
             <!--저장하기 버튼 -->
-            <div class="thumnail-ctrl-bar">
-                <button type="button" class="icon-btn toggle-icon-btn">
-                    <span class="txt-hidden">저장하기</span>
-                    <img src="<c:url value="/assets/sns/images/icon-bookmark.svg"/>" alt="" class="icon icon-inactive" >
-                    <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt=""
-                         class="icon icon-active">
-                </button>
-            </div>
+<!--             <div class="thumnail-ctrl-bar"> -->
+<!--                 <button type="button" class="icon-btn toggle-icon-btn"> -->
+<!--                     <span class="txt-hidden">저장하기</span> -->
+<%--                     <img src="<c:url value="/assets/sns/images/icon-bookmark.svg"/>" alt="" class="icon icon-inactive" > --%>
+<%--                     <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt="" --%>
+<!--                          class="icon icon-active"> -->
+<!--                 </button> -->
+<!--             </div> -->
         </div>
     </div>
     <!--우측 댓글 영역 -->
@@ -74,7 +74,6 @@
                     <img src="${member.profile_img}" alt="">
                 </figure>
                 <h4>${member.nickname}</h4>
-                <img src="/assets/sns/images/badge-certify.svg" alt="" class="badge-certify">
             </div>
 
             <button type="button" class="btn icon-btn" onclick="openModal('feed-ctrl-modal')">
@@ -443,11 +442,11 @@
                             <img id="boardUnLike" src="/assets/sns/images/icon-heart.svg" class="icon icon-inactive" alt="" onclick="fnLike(${board.boardNum})">
                             <img id="boardLike" src="/assets/sns/images/icon-heart-filled.svg" class="icon icon-active" alt="" onclick="fnLike(${board.boardNum})">
                         </button>
-                        <button type="button" class="btn icon-btn">
-                            <span class="txt-hidden">댓글</span>
-                            <img src="/assets/sns/images/icon-message-circle.svg" class="icon icon-inactive"
-                                 alt="">
-                        </button>
+<!--                         <button type="button" class="btn icon-btn"> -->
+<!--                             <span class="txt-hidden">댓글</span> -->
+<!--                             <img src="/assets/sns/images/icon-message-circle.svg" class="icon icon-inactive" -->
+<!--                                  alt=""> -->
+<!--                         </button> -->
                         <!--                   <button type="button" class="btn icon-btn"> -->
                         <!--                     <span class="txt-hidden">메세지</span> -->
                         <!--                     <img src="/assets/sns/images/icon-send.svg" class="icon icon-inactive" alt=""> -->
@@ -456,8 +455,8 @@
                     <div class="display-flex gap-15">
                         <!-- 눌렀을 시 active 클래스 토글 -->
                         <button type="button" class="btn icon-btn toggle-icon-btn">
-                            <span class="txt-hidden">저장됨</span>
-                            <img src="/assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="" >
+<!--                             <span class="txt-hidden">저장됨</span> -->
+<!--                             <img src="/assets/sns/images/icon-bookmark.svg" class="icon icon-inactive" alt="" > -->
                             <img src="/assets/sns/images/icon-bookmark-filled.svg" class="icon icon-active" alt="">
                         </button>
                     </div>
@@ -470,7 +469,7 @@
                 <!-- 좋아요 없을 경우 -->
                 <div class="comment-status-bar">
                     <p class="txt">가장 먼저 <b>좋아요</b>를 눌러보세요</p>
-                    <p class="sm-txt gray-txt">3시간 전</p>
+                    <p class="sm-txt gray-txt">2023-11-29</p>
                 </div>
                 <div class="create-comment-bar">
                     <figure class="mini-thumnail">

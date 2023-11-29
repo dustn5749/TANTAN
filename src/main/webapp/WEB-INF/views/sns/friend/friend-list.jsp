@@ -11,7 +11,7 @@
           <img src="<c:url value="${friend.profileImg}"/>" alt="">
         </figure>
         <div class="person-profile">
-          <div class="name-wrap">
+          <div class="name-wrap" onclick="snsProfile()">
             <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
           </div>
           <p class="intro-txt">소개글</p>
@@ -38,5 +38,9 @@
         $('#friend-list'+deleteId).remove();
       }
     })
+  }
+  
+  	function snsProfile(){
+	  location.href = "/sns/profile";
   }
 </script>

@@ -29,7 +29,6 @@ public class SnsLikeService {
 
     private final AlimSendService alimSendService;
 
-
     //게시물 등록
     @Transactional
     public boolean registerLike(Long boardNum, String memberId) {
