@@ -1,5 +1,7 @@
 package com.team1.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team1.project.dto.InquiryDTO;
 import com.team1.project.service.CustomerService;
 import com.team1.project.service.FileTokenService;
+import com.team1.project.service.FileUploadService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,9 @@ public class CustomerController {
 	@Autowired
 	public CustomerService customerService;
 	private final FileTokenService fileTokenService;
+	
+	@Autowired 
+	public FileUploadService fileUploadService;
 	
 	// 고객센터로 이동
 	@RequestMapping("/inquiryList")
@@ -46,6 +52,10 @@ public class CustomerController {
 		InquiryDTO inquiry = customerService.getInquiry(inquiry_num);
 		System.out.println("inquiry_num = " + inquiry_num);
 		model.addAttribute("inquiry", inquiry);
+		
+		List<Integer> fileList = fileUploadService.getFiles(inquiry_num);
+		System.out.println(fileList);
+		model.addAttribute("file", fileList);
 		return "inquiry_detail";
 	}
 	

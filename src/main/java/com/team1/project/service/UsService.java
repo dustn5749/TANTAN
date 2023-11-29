@@ -25,13 +25,8 @@ public class UsService {
 	
 	// 1. 동행 목록 조회
 	public Map<String, Object> usPageList(UsDTO us) throws Exception {
-		int totalCount = 0;
-		if( us.getDoe_Name() != null ) {
-			totalCount= usDAO.doe_nametotalCount(us);
-			
-		}else {
-			totalCount= usDAO.totalCount(us);
-		}
+		int totalCount= usDAO.totalCount(us);
+		
 		us.setTotalCount(totalCount); 
 	
 		Map<String, Object> param = new HashMap<>();
@@ -52,7 +47,7 @@ public class UsService {
 			result.put("message", "서버 오류 발생");
 			e.printStackTrace();
 		}
-		System.out.println("usService: " + result);
+		//System.out.println("usService: " + result);
 		return result;
 	}
 
@@ -60,14 +55,20 @@ public class UsService {
 	public List<UsDTO> usTop5() throws Exception {
 		return usDAO.usTop5();
 	}
+	
+	
 	//동행 글쓰기
 	public boolean writeInsert(UsDTO us) throws Exception {
 		System.out.println("usService.writeInsert()");
-		System.out.println("us =" + us);
+		System.out.println("usService =" + us);
 		boolean result = false;
-		usDAO.writeInsert(us);
+		
+		
+		usDAO.insert(us);
 		int usNum = usDAO.nextUsNum();
 		System.out.println("usNum = " + usNum);
+		
+		
 		for(UsFileDTO file : us.getFile()) {
 			file.setUsNum(usNum);
 			file.setMemberId(us.getWriter());
@@ -78,9 +79,11 @@ public class UsService {
 			file.setUsFileNum(fileNo);
 			usDAO.updateFile(file);
 		}
-		if(usNum != 0) {
+		if(usNum > 0) {
 			result = true;
 		}
+
+		
 	return result;
 	}
 	

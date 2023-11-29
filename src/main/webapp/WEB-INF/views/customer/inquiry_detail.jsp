@@ -102,7 +102,6 @@
 }
 .content_div{
 	width: 100%;
-	height: 500px;
 	background-color: white;
 	padding: 30px;
 	border: 1px solid rgb(238, 238, 238);
@@ -164,6 +163,12 @@
 	color: black;
 }
 
+/* 출력 이미지 */
+.imgArea_inner {
+	margin-bottom: 20px;
+
+}
+
 </style>
 
 </head>
@@ -209,8 +214,18 @@
 				</div>
 				<div class="content_div">
 				 <input type="text" id="content" value="${inquiry.content}" readonly="readonly">
-				 	<c:if test="${!empty inquiry.file_id }">
+				 	<c:if test="${!empty inquiry.file_id}">
 				 		<img src="/files/${inquiry.file_id}" id="inquiryImg">				 	
+				 	</c:if>
+				 	
+				 	<c:if test="${!empty file}">
+				 		<div  class="imgArea">
+				 			<c:forEach  items="${file}" var="fileNo">
+					 			<div class="imgArea_inner">
+					 				<img src="/files/${fileNo}" width="50%">
+					 			</div>
+				 			</c:forEach>
+				 		</div>
 				 	</c:if>
 				</div>
 				

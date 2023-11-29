@@ -25,7 +25,7 @@ public class FilePrintController {
 	@GetMapping("/files/{fileNo}")
 	public void downloadFile(@PathVariable("fileNo") int fileNo, HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
-		
+		System.out.println("파일 출력하기  = " + fileNo);
 		FileUploadDTO fileUploadVO = fileUploadService.findById(fileNo);
 		
 		if (fileUploadVO == null) {
