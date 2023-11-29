@@ -32,9 +32,14 @@
 
    display: flex;
 }
+.us_header_size > button {
+	width: 150px !important;
+}
 
 .card.box-shadow{
    height: 500px;
+   position: relative;
+   
 }
 
 
@@ -44,20 +49,21 @@
 .card-footer.p-4.pt-0.border-top-0.bg-transparent{
    height: 45px;
    margin-bottom: 5px;
+   position: absolute;
+   bottom: 20px;
+   left: 60px;
 }
 .text-center {
    height: 100%;
-   
+   position: relative;
 }
 .text-center > button {
    height: 100%;
 }
-.fw-bolder {
-   margin-bottom: 10px;
-}
+
 }
 .us_header {
-   position: sticky;
+/*    position: sticky; */
    z-index: 9;
    top: 80px;
    height: fit-content;
@@ -75,7 +81,7 @@
    justify-content: center;
    -webkit-box-align: center;
    align-items: center;
-   position: sticky;
+/*    position: sticky; */
    z-index: 9;
    top: 80px;
    width: 100%;
@@ -95,7 +101,7 @@
 }
 
 .us_header5 {
-   position: relative;
+/*    position: relative; */
    display: flex;
    -webkit-box-align: center;
    align-items: center;
@@ -509,7 +515,7 @@ ul . {
 .fw-bolder {
    font-size: 20px !important;
    margin-bottom: 10px;
-   margin-top: 10px;
+   margin-top: 20px;
    font-weight: bold;
    font-family: 'Pretendard-Regular';
 }
@@ -522,7 +528,7 @@ div, input, p, span, button, h2 {
 #myModal {
    display: none;
    position: fixed;
-   z-index: 1;
+   z-index: 10;
    left: 0;
    top: 0;
    width: 100%;
@@ -551,6 +557,8 @@ div, input, p, span, button, h2 {
 /* 상세 보기 버튼 */
 .detailBtn {
    background: white;
+   font-size: 18px !important;
+   color : black !important;
    border: none;
    width: 120px;
    height: 45px;
@@ -560,7 +568,7 @@ div, input, p, span, button, h2 {
 
 .detailBtn:hover {
    background-color: black;
-   color: white;
+   color: white !important;
 }
 
 /* 페이징 처리 */
@@ -584,8 +592,18 @@ div, input, p, span, button, h2 {
 .nav_div> a,strong {
    margin-left: 10px;
 }
-
-
+.content_inner_detail > div, .content_inner_detail >div > p, input, span{
+	font-size: 16px !important;
+	color: grey;
+}
+.content_inner_detail{
+	text-align: left;
+	padding-left: 30px;
+	margin-top: 20px;
+	position: absolute;
+	top:250px;
+	
+}
 </style>
 </head>
 
@@ -746,27 +764,16 @@ div, input, p, span, button, h2 {
     </c:otherwise>
 </c:choose>
 
-<%--                               <c:if test="${item.fileNo!=0}"> --%>
-<%--                                  <img src="/file/displayImage.do?usFileNum=${item.fileNo}" --%>
-<!--                                     alt="동행이미지 사진" class="us_content_img"> -->
-<%--                               </c:if> --%>
-<%--                               <c:if test="${!empty item.imageUrl}"> --%>
-<%--                                  <img src="${item.imageUrl}" class="us_content_img"> --%>
-<%--                               </c:if> --%>
-<%--                               <c:if test="${empty item.imageUrl&& item.fileNo==0}"> --%>
-<!--                                  <img -->
-<!--                                     src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" -->
-<!--                                     class="us_content_img"> -->
-<%--                               </c:if> --%>
                            </div>
                            <h5 class="fw-bolder">${item.title}</h5>
+                        	<div class="content_inner_detail">
                              <div>지역 : ${item.doe_Name}</div>
-                             <div>작성자 : ${item.writer}</div> 
+                           <%--   <div>작성자 : ${item.writer}</div> --%> 
                           
                            <div class="us_day">
                               <p class="menu">모집기간</p>
                          <span id="start_day">${fn:substring(item.start_Date, 0, 10)} ~ </span>
-					<span id="end_day">${fn:substring(item.end_Date, 0, 10)}</span>
+               <span id="end_day">${fn:substring(item.end_Date, 0, 10)}</span>
                                  
                            </div>
                            <div class="us_cnt_div">
@@ -774,6 +781,7 @@ div, input, p, span, button, h2 {
                          명</span>
                            </div>
                                <div>조회수 :${item.viewCount}</div> 
+                        </div>
                         </div>
                      </div>
                      <input type="hidden" value="${item.us_num}" class="us_num">
@@ -792,7 +800,7 @@ div, input, p, span, button, h2 {
          </div>
          
          <form name="pageForm" id="pageForm" action="/us/list"
-            method="get">
+            method="post">
             <input type="hidden" name="pageNo" id="pageNo"
                value="${result.us.pageNo}">
          </form>
@@ -829,17 +837,36 @@ div, input, p, span, button, h2 {
 
    <script>
    
- 
-   
-	function city_btn1() {
-	    window.location.href = '/us/write';
-	}
+   function city_btn1() {
+       window.location.href = '/us/write';
+   }
 
-    function jsPageNo(pageNo) {
-        document.getElementById("pageNo").value = pageNo;
-        document.getElementById("pageForm").submit();
-    }
+   function jsPageNo(pageNo) {
+       // 현재 URL 가져오기
+       var currentUrl = window.location.href;
 
+       // 기존의 pageNo 매개변수 제거
+       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+       currentUrl = currentUrl.replace(regex, '$2');
+
+       // 현재 URL에 페이지 번호 추가
+       var newUrl;
+       if (currentUrl.indexOf('?') !== -1) {
+           newUrl = currentUrl + "&pageNo=" + pageNo;
+       } else {
+           newUrl = currentUrl + "?pageNo=" + pageNo;
+       }
+
+       // 새로운 URL을 폼의 액션으로 설정
+       document.getElementById("pageForm").action = newUrl;
+
+       // 페이지 번호 설정 및 폼 제출
+       document.getElementById("pageNo").value = pageNo;
+       document.getElementById("pageForm").submit();
+   }
+
+
+      
     document.addEventListener("DOMContentLoaded", function() {
         var scheduleBtn = document.querySelector(".schedule_btn");
 
@@ -851,7 +878,37 @@ div, input, p, span, button, h2 {
     });
 
 
-     /* 동행 상세보기 */
+     
+    
+
+         function loadMoreData(start) {
+               var member_Id = "member_id"; 
+               var doe_Name = "doe_name"; 
+               var us_num = "us_num"; 
+               var end_Date = "end_date";
+               var reg_Date = "reg_date"; 
+
+               $.ajax({
+                   type: "POST",
+                   url: "/us/list",
+                   contentType: "application/json; charset=utf-8",
+                   data: JSON.stringify({
+                       start: start,
+                       member_id: member_Id,
+                       doe_Name: doe_Name,
+                       us_num: us_num,
+                       end_Date: end_Date,
+                       reg_Date: reg_Date
+                   }),
+                   success: function (response) {
+                   },
+                   error: function (xhr, textStatus, errorThrown) {
+                       console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
+                   }
+               });
+           }
+         
+         /* 동행 상세보기 */
          $(".detailBtn").on("click", function(e){
           console.log("상세보기")
            const us_num = e.target.closest(".card").querySelector(".us_num").value;
@@ -859,36 +916,8 @@ div, input, p, span, button, h2 {
             location.href="/us/Detail?us_num="+us_num;
        });
      
-    
-
-         function loadMoreData(start) {
-        	    var member_Id = "member_id"; 
-        	    var doe_Name = "doe_name"; 
-        	    var us_num = "us_num"; 
-        	    var end_Date = "end_date";
-        	    var reg_Date = "reg_date"; 
-
-        	    $.ajax({
-        	        type: "POST",
-        	        url: "/us/list",
-        	        contentType: "application/json; charset=utf-8",
-        	        data: JSON.stringify({
-        	            start: start,
-        	            member_id: member_Id,
-        	            doe_Name: doe_Name,
-        	            us_num: us_num,
-        	            end_Date: end_Date,
-        	            reg_Date: reg_Date
-        	        }),
-        	        success: function (response) {
-        	        },
-        	        error: function (xhr, textStatus, errorThrown) {
-        	            console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
-        	        }
-        	    });
-        	}
          
-
+     //이동    
          function moveToSelectedRegion() {
              window.location.href = '/us/list';
          }
@@ -901,15 +930,18 @@ div, input, p, span, button, h2 {
   
 
          
+         
+         
+         // 지역이동
      function moveRegion() {
-    	    var value = $('[name=deo_name]:checked').val();
-		alert (value);
-    	    if (value == 'all') {
-    	        location.href = '/us/list';
-    	    } else {
-    	        location.href = '/us/list?doe_Name=' + value;
-    	    }
-    	}
+           var value = $('[name=deo_name]:checked').val();
+
+           if (value == 'all') {
+               location.href = '/us/list';
+           } else {
+               location.href = '/us/list?doe_Name=' + value;
+           }
+       }
      
      function order(orderName) {
          location.href = '/us/list?ORDER=' + orderName;

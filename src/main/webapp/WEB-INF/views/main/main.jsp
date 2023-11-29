@@ -23,6 +23,16 @@
     font-weight: 400;
     font-style: normal;
 }
+
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
 /* 배너 */
 .carousel-inner{
 	background-color: rgb(244, 250, 255);
@@ -131,15 +141,14 @@
 }
 /* best top5 여행지 */
 .best_top5_city {	
-   	background: url("/assets/img/wave.jpg");
+  /*  	background: url("/assets/img/wave.jpg"); */
     width: 100%;
-    height: 700px;
+    height: 800px;
     margin: 0 auto;
     align-content: center;
     align-items: center;
     text-align: center;
     padding: 20px;
-    overflow: scroll;
     justify-content: center;
 }
 
@@ -152,14 +161,15 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+ 
 }
+
 
 
 .best_city_title {
 	font-size: 50px  !important;
 	font-weight: bold !important;
 	font-family: 'Pretendard-Regular' !important;
-	margin-bottom:30px; 
 }
 
 /* 더보기  div */
@@ -188,6 +198,7 @@
 		height: 450px;
 		flex-direction: column;
 		overflow: visible;
+		position: relative;
     }
     
 
@@ -199,6 +210,7 @@
         width: 18%; /* 화면이 769px 이상일 때 5개씩 표시 */
         margin: 0 10px;
 		height: 400px;
+		position: relative;
     }
     
    
@@ -233,8 +245,10 @@
 
 .city_name {
     margin: 10px;
-    font-family: 'Pretendard-Regular' !important;
-    font-size: 20px !important;
+        font-family: 'MICEGothic Bold';
+	color :  #0099ff !important;
+	text-shadow: 1px 1px 1px grey;
+    font-size: 35px !important;
 }
 
 /* 지역 사진 */
@@ -248,21 +262,34 @@
 
 /* 최신 동행 모집 */
 
-.container .py-5{
+.usContainer{
+	width: 100%;
+	
+ 	 background: url("/assets/img/fly.png"); /* no-repeat center fixed; */  
+ 	 background-size: cover;
+	background-size: cover !important;
+	
 }
 
 .col-12 .col-md-4 .p-5 .mt-3 {
-	width: 20% !important;
+	width: 15% !important;
 }
 .row, .text-center,  .text-center > a{
 		font-family: 'Pretendard-Regular' !important;
 }
-
+.card-header {
+	box-shadow: 15px 15px 20px grey;
+	background: white;
+}
+.col.mb-5{
+	box-shadow: 15px 15px 20px grey;
+}
 /* 최신 동행 모집 title */
 .fw-bolder {
-	font-size: 23px !important;
+
+	font-size: 20px !important;
 	height: 80px;
-	margin-bottom:10px;
+	margin-top:30px;
 	font-weight: bold;
 	font-family: 'Pretendard-Regular' !important;
 	
@@ -307,7 +334,7 @@
  
  /* 일정 공유 section  */
  .bg-light {
-    background-color: rgb(236, 245, 255) !important;
+     background-color: rgb(236, 245, 255) !important; 
 }
  .schedule_h1 {
  	font-family: 'Pretendard-Regular' !important;
@@ -317,8 +344,15 @@
  
 .card.h-100 {
 	height: 500px !important;
+	position: relative;
 }
- 
+ .priceaArea{
+ 	position: absolute !important;
+ 	bottom: 500px;
+ 	display: inline-block;
+ 	background: none;
+ 	z-index: 15;
+ }
  /* 일정공유 이미지 */
  .card-img-top{
  	height: 280px !important;
@@ -403,7 +437,9 @@
 	<!-- best top5 지역 -->
 	
     <div class="best_top5_city">
-        <p class="best_city_title">BEST 여행지</p>
+        <div class="best_city_title">
+        	<img src="/assets/img/bestTravel.png" width="450px">
+        </div>
         <div class="plus_div"><a class="plus_a" href="/review/main">+더보기</a></div>
         <div class="best_top5_city_inner">
         <c:forEach items="${doeList}" var="item">
@@ -411,7 +447,10 @@
                 <div class="top5_city" data-value="${item.doe_name}">
                 	<img src="/assets/img/doereview/${item.doe_review}" class="city_img">
                 </div>
-                    <p class="city_name">${item.doe_name}</p>
+                    
+	            <div class="doe_Name">
+	            	<p class="city_name">${item.doe_name}</p>
+	            </div>
             </div>
         </c:forEach>
         </div>
@@ -420,11 +459,12 @@
 
 
     <!-- 최신 동행 모집 -->
+    <section class="usContainer">
     <section class="container py-6">
         <div class="row text-center pt-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="best_city_title">최신 동행 모집</h1>
-            </div>
+	        <div class="best_city_title">
+	        	<img src="/assets/img/newus.png" width="470px">
+	        </div>
         </div>
         <!-- 최신 동행 모집 div -->
         <div class="row">
@@ -471,6 +511,7 @@
         </c:forEach>
         </div>
     </section>
+    </section>
     <!-- End Categories of The Month -->
 
 
@@ -478,18 +519,22 @@
     <section class="bg-light">
         <div class="container py-5">
             <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="schedule_h1">가장 인기 있는 일정 공유</h1>
-                </div>
+		        <div class="row text-center pt-3">
+			        <div class="best_city_title">
+			        	<img src="/assets/img/pick.png" width="470px">
+			        </div>
             </div>
             <div class="row" id="schedule">
             
            <c:forEach items="${scheduleList}" var="item" >
 				
 	            <div class="col-12 col-md-4 p-5 mt-3">
-	                	<div class="col mb-5">
-		                    <div class="card h-100">
+	                	<div class="col mb-7">
+		                    <div class="card h-100" style="position: relative;">
 		                        <!-- Product image-->
+		                        <div class="priceaArea" style="position: absolute; text-align: left; width: 150px; left:-33px; top: -30px">
+		                        	<img src="/assets/img/first.png" class="price" width="100%">
+		                        </div>
 		                        <img class="card-img-top" src="/assets/img/doereview/${item.doe_img}" />
 		                        
 		                        <!-- Product details-->
@@ -549,6 +594,25 @@
     	location.href="/schedule/detail?schedule_Num=" +schedule_Num;
     // 여기에 원하는 동작을 추가하세요.
 	});
+	
+	// 1,2,3등 이미지
+/* 	document.addEventListener("DOMContentLoaded", function () {
+        var priceImages = ["/assets/img/first.png", "/assets/img/second.png", "/assets/img/third.png"];
+		
+        var scheduleItems = document.querySelectorAll(".col-12.col-md-4.p-5.mt-3");
+
+        scheduleItems.forEach(function (item, index) {
+
+        	
+        	
+        	var priceImageSrc = priceImages[index % priceImages.length]; // Use modulo to cycle through the price images
+
+            var price = $(".price");
+        	alert(priceImageSrc)
+            price.src = priceImageSrc;
+       
+        });
+    }); */
 	
 </script>	
 

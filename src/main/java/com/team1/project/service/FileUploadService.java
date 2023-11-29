@@ -3,6 +3,7 @@ package com.team1.project.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -99,6 +100,24 @@ public class FileUploadService {
 			fileUploadDAO.deleteTemplateFile(Map.of("list", deleteImageList));
 		}
 
+	}
+	
+	
+	// 문의사항 번호 추가하기
+	public void updateInquiryNum(Integer file, int insertResult) {
+		System.out.println("fileUploadService.updateInquiryNum = " + file +", "+  insertResult);
+		Map<String, Object> map = new HashMap<>();
+		map.put("file_id", file);
+		map.put("inquiry_num", insertResult);
+		
+		fileUploadDAO.updateInquiryNum(map);
+				
+	}
+
+	// 문의사항 게시판에 따른 파일 번호 가져오기
+	public List<Integer> getFiles(int inquiry_num) {
+		System.out.println("fileUploadService.getFiles() =" + inquiry_num);
+		return fileUploadDAO.getFiles(inquiry_num);
 	}
 
 }
