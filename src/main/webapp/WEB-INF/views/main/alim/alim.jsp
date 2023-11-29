@@ -66,7 +66,7 @@
         <div id='alim${alim.alimId}' class="alarm-list">
             <div class="alarm-item">
               <figure class="mini-thumnail">
-                 <img src="${empty item.profileImg ? "/assets/sns/images/profile-img-default.png" : item.profileImg}" alt="">
+                 <img src="${empty alim.profileImg ? "/assets/sns/images/profile-img-default.png" : alim.profileImg}" alt="">
               </figure>
 
               <div class="alarm-txt-grp">
