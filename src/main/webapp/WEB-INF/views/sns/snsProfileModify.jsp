@@ -161,7 +161,7 @@
                         <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
+                    <button type="button" class="sidebar-btn" onclick="mySchedule()">
                         <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
                         <span class="txt">일정</span>
                     </button>
@@ -173,7 +173,7 @@
                         <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
                         <span class="txt">알림</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
+                    <button type="button" class="sidebar-btn" onclick="myProfile()">
                         <figure class="mini-thumnail">
                             <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
@@ -293,6 +293,15 @@
 </div>
 
 <script>
+
+	function myProfile(){
+		location.href = "/sns/profile"
+	}
+	
+	function mySchedule(){
+		location.href = "/member/mySchedule.do"
+	}
+	
 	function modifyComplete() {
 	    // 프로필 페이지로 리다이렉션
 	    location.href = "/sns/profile";
@@ -368,6 +377,11 @@
     function closeModal(id) {
         $('#' + id).removeClass('active');
     }
+
+    /* 편집 끝내기 버튼(뒤로가기) */
+    $(".back_btn").on("click", function () {
+        location.href = "/sns/profile";
+    })
 
 
 </script>

@@ -25,7 +25,7 @@ public interface UsDAO {
     public List<UsDTO> usTop5() throws Exception;
 		
     //동행 글쓰기
-	public int writeInsert(UsDTO us) throws Exception;
+	public int insert(UsDTO us) throws Exception;
 	
 	// 동행 상세보기
 	public UsDTO usDetail(int us_num) throws Exception;

@@ -33,6 +33,10 @@ input, button, div, span, h2, p, h5{
    display: flex;
 }
 
+.us_header_size > button {
+	width: 150px !important;
+}
+
 }
 .us_header {
    position: sticky;
@@ -146,10 +150,13 @@ input, button, div, span, h2, p, h5{
 
 .us_fillter {
    PADDING: 10PX;
+   width: 1260px;
+   margin: 0 auto;
+   text-align: center;
 }
 
 .fillter_btn_area {
-
+  text-align: left;
 /*    left: -820px; */
    width: 78%;
 
@@ -349,7 +356,7 @@ ul>li {
    color: white !important;
 }
 
-.py-5 {
+.3py-5 {
    padding: 10px;
 }
 
@@ -365,7 +372,7 @@ ul>li {
 #myModal {
    display: none;
    position: fixed;
-   z-index: 1;
+   z-index: 10;
    left: 0;
    top: 0;
    width: 100%;
@@ -636,17 +643,26 @@ ul>li {
 
                                           <div class="text-center" style="position: relative;">
                                              <!-- Image Container -->
-                                             <!-- Heart Icon -->
-                                             <svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32"
-                                                aria-hidden="true" role="presentation" focusable="false"
-                                                data-schedule-num="${schedule.schedule_Num }"
-                        style="position: absolute; top: 0; left: 0; fill: ${schedule.like ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 0, 0.5)'}; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
-    <path
-                                                   d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
-    </path>
-</svg>
-                                             </a> <img src="/assets/img/local/${schedule.doe_img}"
-                                                style="max-width: 100%; height: 200px; object-fit: cover;">
+                                             
+  <div style="position: relative; display: inline-block; max-width: 100%; height: 200px; overflow: hidden;">
+    <!-- doe_img 이미지 -->
+    <img src="/assets/img/local/${schedule.doe_img}" alt="doe_img" style="width: 100%; height: 100%; object-fit: cover;">
+
+    <!-- 좋아요 아이콘과 숫자 -->
+    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32"
+             aria-hidden="true" role="presentation" focusable="false"
+             data-schedule-num="${schedule.schedule_Num }"
+             style="fill: ${schedule.like ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 0, 0.5)'}; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
+            <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
+        </svg>
+        
+        <!-- 좋아요 수 텍스트 (파란색) -->
+        <text style="fill: blue; font-size: 12;">${schedule.likecnt}</text>
+    </div>
+</div>
+  
+
                                              <input type="hidden" name="memberId"
                                                 value="${schedule.member_id}"> <input
                                                 type="hidden" name="schedule_Num"
@@ -657,7 +673,7 @@ ul>li {
                                              <p>지역:${schedule.doe_Name}</p>
                                              <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                              <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
-<%--                                       	     <p>좋아요 수: ${schedule.LikeCNT != null ? schedule.LikeCNT : ""}</p> --%>
+<%--                                               <p>좋아요 수: ${schedule.LikeCNT != null ? schedule.LikeCNT : ""}</p> --%>
                                              <input type="hidden" name="regDate"
                                                 value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
                                              <input type="hidden" value="${schedule.schedule_Num}"
@@ -721,111 +737,134 @@ ul>li {
             </c:if>
          </div>
 
-<!--            <form name="searchForm" id="searchForm" action="/schedule/list" method="post"> -->
-<%--              <input type="hidden" id="pageNo2" name="pageNo" value="${result.inquiry.pageNo}"> --%>
-<!--              <div class="search_area"> -->
-<!--                 <div class="search_menu_div"> -->
-<!--                    <select id="search_menu_selects"> -->
-<!--                       <option>제목</option> -->
-<!--                       <option>유형</option> -->
-<!--                       <option>작성일</option> -->
-<!--                       <option>작성자</option> -->
-<!--                       <option>진행상태</option> -->
-<!--                    </select> -->
-<!--                 </div> -->
-<!--                 <div class="search_input_div"> -->
-<!--                    <input type="text" id="search_input" name="searchTitle"> -->
-<!--                    <button id="search_btn"><img src="/assets/img/search.png" width="30px"></button> -->
-<!--                 </div> -->
-<!--              </div> -->
-<!--              </form> -->
 
 
    <script>
    function jsPageNo(pageNo) {
-	    // 현재 URL 가져오기
-	    var currentUrl = window.location.href;
+       // 현재 URL 가져오기
+       var currentUrl = window.location.href;
 
-	    // 기존의 pageNo 매개변수 제거
-	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
-	    currentUrl = currentUrl.replace(regex, '$2');
+       // 기존의 pageNo 매개변수 제거
+       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+       currentUrl = currentUrl.replace(regex, '$2');
 
-	    // 현재 URL에 페이지 번호 추가
-	    var newUrl;
-	    if (currentUrl.indexOf('?') !== -1) {
-	        newUrl = currentUrl + "&pageNo=" + pageNo;
-	    } else {
-	        newUrl = currentUrl + "?pageNo=" + pageNo;
-	    }
+       // 현재 URL에 페이지 번호 추가
+       var newUrl;
+       if (currentUrl.indexOf('?') !== -1) {
+           newUrl = currentUrl + "&pageNo=" + pageNo;
+       } else {
+           newUrl = currentUrl + "?pageNo=" + pageNo;
+       }
 
-	    // 새로운 URL을 폼의 액션으로 설정
-	    document.getElementById("pageForm").action = newUrl;
+       // 새로운 URL을 폼의 액션으로 설정
+       document.getElementById("pageForm").action = newUrl;
 
-	    // 페이지 번호 설정 및 폼 제출
-	    document.getElementById("pageNo").value = pageNo;
-	    document.getElementById("pageForm").submit();
-	}
+       // 페이지 번호 설정 및 폼 제출
+       document.getElementById("pageNo").value = pageNo;
+       document.getElementById("pageForm").submit();
+   }
 
+   //뒤로가기
+   function moveToSelectedRegion() {
+       window.location.href = '/schedule/list';
+   }
    
-   function loadMoreData(start) {
-    var member_Id = "member_id"; 
-    var doe_Name = "doe_name"; 
-    var schedule_Num = "schedule_num"; 
-    var end_Date = "end_date";
-    var reg_Date = "reg_date"; 
-
-    $.ajax({
-        type: "POST",
-        url: "/schedule/list",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-            start: start,
-            member_id: member_Id,
-            doe_Name: doe_Name,
-            schedule_Num: schedule_Num,
-            end_Date: end_Date,
-            reg_Date: reg_Date
-        }),
-        success: function (response) {
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
-        }
-    });
-}
-            function moveToSelectedRegion() {
-                window.location.href = '/schedule/list';
-            }
-
-            $(document).ready(function () {
-                $('.heartIcon').click(function () {
-                    var scheduleNum = $(this).data('schedule-num');
-                    var heartIcon = $(this);
-                    var currentColor = heartIcon.css('fill');
-                    
-                    console.log(scheduleNum)
-                    var isLike = true;
-                    if (currentColor == ('rgb(255, 0, 0)')) {   // 하트가 빨간색이면 (좋아요가 눌려있으면)
-                       heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');   // 좋아요 취소
-                       isLike = false;
-                    } else {
-                       heartIcon.css('fill', 'rgb(255, 0, 0');
-                    }
-                    
-                    $.ajax({
-                        url: '/schedule/updateHeartColor',
-                        method: 'POST',
-                        data: { scheduleNum: scheduleNum, isLike: isLike},
-                        success: function (response) {
-                            
-                        },
-                        error: function () {
-                            console.error('Error during AJAX request.');
-                        }
-                    });
-                });
+   
+            function loadMoreData(start) {
+             var member_Id = "member_id"; 
+             var doe_Name = "doe_name"; 
+             var schedule_Num = "schedule_num"; 
+             var end_Date = "end_date";
+             var reg_Date = "reg_date"; 
+         
+             $.ajax({
+                 type: "POST",
+                 url: "/schedule/list",
+                 contentType: "application/json; charset=utf-8",
+                 data: JSON.stringify({
+                     start: start,
+                     member_id: member_Id,
+                     doe_Name: doe_Name,
+                     schedule_Num: schedule_Num,
+                     end_Date: end_Date,
+                     reg_Date: reg_Date
+                 }),
+                 success: function (response) {
+                 },
+                 error: function (xhr, textStatus, errorThrown) {
+                     console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
+                 }
+             });
+         }
+//                      $(document).ready(function () {
+//                          $('.heartIcon').click(function () {
+//                              var scheduleNum = $(this).data('schedule-num');
+//                              var heartIcon = $(this);
+//                              var currentColor = heartIcon.css('fill');
+                             
+//                              console.log(scheduleNum)
+//                              var isLike = true;
+//                              if (currentColor == ('rgb(255, 0, 0)')) {   // 하트가 빨간색이면 (좋아요가 눌려있으면)
+//                                 heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');   // 좋아요 취소
+//                                 isLike = false;
+//                              } else {
+//                                 heartIcon.css('fill', 'rgb(255, 0, 0');
+//                              }
+                             
+//                              $.ajax({
+//                                  url: '/schedule/updateHeartColor',
+//                                  method: 'POST',
+//                                  data: { scheduleNum: scheduleNum, isLike: isLike},
+//                                  success: function (response) {
+                                     
+//                                  },
+//                                  error: function () {
+//                                      console.error('Error during AJAX request.');
+//                                  }
+//                              });
+//                          });
 
               
+                                
+      $(document).ready(function () {
+       $('.heartIcon').click(function () {
+        var scheduleNum = $(this).data('schedule-num');
+        var heartIcon = $(this);
+        var currentColor = heartIcon.css('fill');
+
+        console.log(scheduleNum);
+        var isLike = true;
+        if (currentColor == 'rgb(255, 0, 0)') {
+            heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');
+            isLike = false;
+        } else {
+            heartIcon.css('fill', 'rgb(255, 0, 0)');
+        }
+
+        $.ajax({
+            url: '/schedule/updateHeartColor',
+            method: 'POST',
+            data: { scheduleNum: scheduleNum, isLike: isLike },
+            success: function (response) {
+                // 서버 응답을 확인하고 필요한 작업 수행
+                if (response.success) {
+                    // 서버에서 좋아요 수를 업데이트
+                    var newLikeCount = response.likeCount;
+                    // 좋아요 수를 UI에 업데이트
+                    var likeCountElement = heartIcon.siblings('.likeCount');
+                    likeCountElement.text(newLikeCount);
+                } else {
+                    console.error('Server response indicates failure.');
+                }
+            },
+            error: function () {
+                console.error('Error during AJAX request.');
+            }
+        });
+    });
+});
+                    
+                       //페이징처리
                 function jsPageNo(pageNo) {
                     document.getElementById("pageNo").value = pageNo;
                     document.getElementById("pageForm").submit();
@@ -863,8 +902,7 @@ ul>li {
                     var modal = document.getElementById("myModal");
                     modal.style.display = "block";
                 });
-            });
-
+        
    function moveRegion() {
       var value = $('[name=deo_name]:checked').val();
       

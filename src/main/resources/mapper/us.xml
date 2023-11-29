@@ -3,44 +3,12 @@
 
 <mapper namespace="com.team1.project.dao.UsDAO">
  
-<insert id="insertUsList" parameterType="com.team1.project.dto.UsDTO">
-    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
-        SELECT NVL(MAX(US_NUM), 0) + 1 FROM US
-    </selectKey>
 
-    INSERT INTO US (
-        US_NUM,
-        TITLE, 
-        CONTENT, 
-        WRITER, 
-        US_CNT, 
-        REGDATE,
-        START_DATE, 
-        END_DATE
-        <if test="imageUrl != null and imageUrl != ''">
-            , IMAGEURL
-        </if>
-    )
-    VALUES (
-        #{us_num},
-        #{title},
-        #{content},
-        #{writer}, 
-        #{us_cnt},
-        TO_DATE(#{regdate}, 'YYYY-MM-DD HH24:MI:SS'),
-        TO_DATE(#{start_Date}, 'YYYY-MM-DD HH24:MI:SS'),
-        TO_DATE(#{end_Date}, 'YYYY-MM-DD HH24:MI:SS')
-        <if test="imageUrl != null and imageUrl != ''">
-            , #{imageUrl}
-        </if>
-    )
-</insert>
 
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
     WITH OrderedUs AS (
         SELECT
             a.us_num,
-            a.city_name,
             a.DOE_NAME,
             a.writer,
             a.us_cnt,
@@ -64,7 +32,7 @@
                         a.VIEWCOUNT DESC
                     </when>
                     <otherwise>
-                        a.us_num ASC
+                        a.us_num DESC
                     </otherwise>
                 </choose>
             ) AS rnum
@@ -85,12 +53,6 @@
 
 </select>
 
- 
-
- 
- 
- 
- 
  
 	<update id="commentplus" >
 		UPDATE
@@ -162,7 +124,7 @@
           ROWNUM AS nrow, SUB.* 
        FROM (  
           SELECT  
-             US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
+             US_NUM,  WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
           FROM us  
           ORDER BY us_num DESC 
        ) SUB   
@@ -183,45 +145,45 @@
     
 
 <!-- 동행 글쓰기 -->
-<insert id="writeInsert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
-    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
-        SELECT us_sq.nextval as us_num FROM dual
-    </selectKey>
+<insert id="insert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
+    <selectKey keyProperty="us_num" resultType="java.lang.Integer" order="AFTER">
+        SELECT us_sq.currval FROM dual
+    </selectKey> 
     insert into us (
         us_num,
-        city_name,
         writer,
         us_cnt,
-        regdate,
-        start_date,
-        end_date,
+        REGDATE,
+        START_DATE,
+        END_DATE,
         title,
         content,
         status,
-        reportcnt
+        REPORTCNT,
+        DOE_NAME
     ) VALUES (
-        us_sq.nextval,
-        #{city_name},
-        #{writer},
+        us_sq.nextval,  
+        #{writer,jdbcType=VARCHAR},
         #{us_cnt},
         sysdate,
-        #{start_Date},
-        #{end_Date},
-        #{title},
-        #{content},
+        TO_DATE(#{start_Date}, 'YYYY-MM-DD'),
+        TO_DATE(#{end_Date}, 'YYYY-MM-DD'),
+        #{title,jdbcType=VARCHAR},
+        #{content,jdbcType=VARCHAR},
         'N',
-        0
-    )
+        0,
+        #{doe_Name,jdbcType=VARCHAR}
+    ) 
 </insert>
+	<select id="nextUsNum" resultType="int">
+		select max(us_num) from us
+	</select>
 
-   <select id="nextUsNum" resultType="int">
-       SELECT max(us_num) from us
-   </select>
+
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
         u.us_num, 
-        u.city_name,
         u.writer, 
         u.us_cnt,
         u.regdate,
@@ -230,6 +192,7 @@
         u.title, 
         u.content,
         u.imageurl,
+        u.doe_Name,
        uf.usfilenum as fileNo
     FROM US u 
    	left outer join us_file uf
@@ -241,7 +204,6 @@
    <update id="usUpdate"> 
     UPDATE US 
     SET 
-    CITY_NAME = #{city_name},
     US_CNT = #{us_cnt}, 
     START_DATE = #{start_Date}, 
     END_DATE = #{end_Date}, 

@@ -47,4 +47,10 @@ public class CustomerService {
 	public List<InquiryDTO> inquiryList() throws Exception{
 		return customerDAO.inquiryList();
 	}
+
+	//최근 삽입된 번호 얻기
+	public int getInsertInquiry() {
+		System.out.println("customerService.getInsertInquiry");
+		return customerDAO.getInsertInquiry();
+	}
 }

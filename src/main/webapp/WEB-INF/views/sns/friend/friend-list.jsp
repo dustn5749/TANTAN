@@ -41,4 +41,8 @@
       }
     })
   }
+  
+  	function snsProfile(){
+	  location.href = "/sns/profile";
+  }
 </script>

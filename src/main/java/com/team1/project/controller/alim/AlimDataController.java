@@ -36,6 +36,7 @@ public class AlimDataController {
                         .readYn("N")
                 .build());
     }
+    
     // 현재 로그인한 사용자의 알림 개수를 조회
     @GetMapping("/alim/count")
     public Long getCount(Authentication authentication){

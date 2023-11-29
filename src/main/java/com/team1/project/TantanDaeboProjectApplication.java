@@ -24,4 +24,3 @@ public class TantanDaeboProjectApplication {
         SpringApplication.run(TantanDaeboProjectApplication.class, args);
     }
 }
-

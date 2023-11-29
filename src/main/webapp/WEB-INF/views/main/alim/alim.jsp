@@ -17,7 +17,7 @@
       }
     });
   }
-
+  
   function readAlim(id){
     $.ajax({
       url : '/alim/read/'+id,
@@ -29,6 +29,7 @@
       }
     });
   }
+  
 </script>
 
 <div class="modal-overlay" onclick="closeModal('alarm-modal')"></div>
@@ -65,7 +66,7 @@
         <div id='alim${alim.alimId}' class="alarm-list">
             <div class="alarm-item">
               <figure class="mini-thumnail">
-                <img src="<c:url value="${alim.profileImg}"/>" alt="">
+                 <img src="${empty item.profileImg ? "/assets/sns/images/profile-img-default.png" : item.profileImg}" alt="">
               </figure>
 
               <div class="alarm-txt-grp">

@@ -34,6 +34,7 @@ public class CKEditorController {
 	@Autowired
 	public CustomerService customerService;
 
+	
 	@PostMapping(value = "/imageUpload")
 	@ResponseBody
 	public Map<String, Object> image(MultipartHttpServletRequest request) throws Exception {
@@ -93,9 +94,14 @@ public class CKEditorController {
 		System.out.println("inquiry = " + inquiry);
 		
 		Map<String, Object> result = new HashMap<>();
-		int insertResult = customerService.insert(inquiry);
+		customerService.insert(inquiry);
+		int insertResult = customerService.getInsertInquiry();
+		System.out.println("insertResultm = " + insertResult);
 		if(insertResult != 0) {
 			result.put("result", true); // 업로드 완료
+			for(Integer file :file_ids) {
+				fileUploadService.updateInquiryNum(file, insertResult);				
+			}
 			
 		} else {
 			
