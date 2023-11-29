@@ -111,4 +111,8 @@ public class FriendService {
     friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getRegId(), "resId", friendInfo.getResId()));
     friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getResId(), "resId", friendInfo.getRegId()));
   }
+
+  public void deleteRequest(Long reqId) {
+    friendDAO.deleteFriendReqById(reqId);
+  }
 }

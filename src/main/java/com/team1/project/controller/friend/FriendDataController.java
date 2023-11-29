@@ -40,4 +40,8 @@ public class FriendDataController {
   public void acceptReq(@PathVariable Long reqId , Authentication authentication){
     service.acceptRequest(reqId);
   }
+  @DeleteMapping("/friend/accept/{reqId}")
+  public void deleteReq(@PathVariable Long reqId , Authentication authentication){
+    service.deleteRequest(reqId);
+  }
 }

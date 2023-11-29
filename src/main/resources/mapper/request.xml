@@ -124,6 +124,11 @@
     and RECEIVE_MEMBER_ID = #{resId}
   </delete>
 
+  <delete id="deleteFriendReqById">
+    delete from FRIEND_REQUEST
+    where FRIEND_REQ_ID = #{reqId}
+  </delete>
+
   <insert id="save">
     insert into FRIEND_REQUEST
       (friend_req_id, send_member_id, receive_member_id, req_date, accept_yn)

@@ -25,8 +25,8 @@ public class AlimService {
   // 알림 등록
   @Transactional
   public void registerAlim(Alim alim) {
-    log.info("alim = {}" , alim);
-     alimDAO.save(alim);
+    log.info("alim = {}", alim);
+    alimDAO.save(alim);
   }
 
   //특정 회원이 받은 알림 목록을 조회
@@ -52,5 +52,6 @@ public class AlimService {
   }
 
   public void registerChatAlim(Alim n) {
+    alimDAO.save(n);
   }
 }
