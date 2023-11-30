@@ -43,8 +43,18 @@ public class CustomerService {
 		return customerDAO.getInquiry(inquiry_num);
 	}
 	
-	// 관리자 문의사항 리스트 가져오기
-	public List<InquiryDTO> inquiryList() throws Exception{
-		return customerDAO.inquiryList();
+//	// 관리자 문의사항 리스트 가져오기
+//	public List<InquiryDTO> inquiryList2() throws Exception{
+//		return customerDAO.inquiryList();
+//	}
+	
+	public Map<String,Object> inquiryList(InquiryDTO inquiry) throws Exception{
+		Map<String,Object> map = new HashMap<>();
+		map.put("inquiryList", customerDAO.inquiryList(inquiry));
+		return map;
+	}
+	
+	public int getTotalSize(InquiryDTO inquiry) {
+		return customerDAO.getTotalCount(inquiry);
 	}
 }

@@ -31,4 +31,6 @@ public interface DoeDAO {
 
 	// 전체 도 평균 내기
 	public void averageDoeTotal();
+	
+	public List<DoeDTO> doeRank();
 }

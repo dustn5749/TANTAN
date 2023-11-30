@@ -193,8 +193,40 @@ SELECT u.*, uf.usfilenum as fileNo
 <!-- 관리자 -->
 <!-- 신고받은 동행 리스트 가져오기 -->
    <select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
-<!--       SELECT * from us where reportcnt > 0 ORDER BY STATUS desc -->
-		SELECT * FROM us ORDER BY status desc
+		<![CDATA[
+    SELECT
+        us_num,
+        writer,
+        us_cnt,
+        regdate,
+        title,
+        content,
+        status,
+        reportcnt,
+        doe_name
+    FROM (
+        SELECT
+            ROWNUM AS nrow,
+            m.*
+        FROM (
+            SELECT
+		        us_num,
+		        writer,
+		        us_cnt,
+		        regdate,
+		        title,
+		        content,
+		        status,
+		        reportcnt,
+		        doe_name
+	            FROM 
+                us
+            ORDER BY status DESC
+        ) m
+        WHERE ROWNUM <= #{endNo2}
+    )
+    WHERE nrow BETWEEN #{startNo2} AND #{endNo2}
+    ]]>
    </select>
    
    <!--us에 fileno저장  -->

@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team1.project.dao.MemberDao;
+import com.team1.project.dto.DoeDTO;
 import com.team1.project.dto.InquiryDTO;
 import com.team1.project.dto.MemberDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.CustomerService;
+import com.team1.project.service.DoeService;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.ScheduleService;
 import com.team1.project.service.UsService;
@@ -61,6 +63,9 @@ public class AdminController {
 	@Autowired
 	private MemberDao memberDAO;
 	
+	@Autowired
+	private DoeService doeService;
+	
 	@RequestMapping("/admin")
 	public String Admin(MemberDTO member,UsDTO us, Model model, ScheduleDTO schedule) {
 		int todayRegister = memberservice.todayRegister(member);
@@ -87,6 +92,15 @@ public class AdminController {
 		return map;
 	}
 	
+	@RequestMapping("/doeRank")
+	@ResponseBody
+	public Map<String,Object> doeRank() throws Exception{
+		List<DoeDTO> doeRank = doeService.doeRank();
+		Map<String,Object> map = new HashMap<>();
+		map.put("doeRank",doeRank);
+		return map;
+	}
+	
 //	@RequestMapping("/monthUs")
 //	@ResponseBody
 //	public Map<String, Object> monthUs() throws Exception{
@@ -106,30 +120,12 @@ public class AdminController {
 		return "adminMemberList";
 	}
 //	2.1 관리자 회원리스트 출력
-//	public Map<String, Object> memberList(MemberDTO member) throws Exception {
-//	    
-//	    int totalCount = memberDAO.getTotalCount(member);
-//
-//	    List<MemberDTO> memberList = memberservice.memberList(member);
-//	    
-//	    Map<String, Object> resultMap = new HashMap<>();
-//	    resultMap.put("memberList", memberList);
-//	    resultMap.put("totalSize", totalCount);
-//
-//	    return resultMap;
-//	}
 	@RequestMapping("/memberList")
 	@ResponseBody
 	public Map<String,Object> memberList(MemberDTO member) {
-		System.out.println("memberList -> " + memberservice.memberList(member));
-		int todayRegister = memberservice.todayRegister(member);
-		System.out.println("register -> " + todayRegister);
 		Map<String,Object> map = new HashMap<>();
 		map.put("memberList", memberservice.memberList(member));
 		map.put("totalSize", memberservice.getTotalSize(member));
-		System.out.println("totalSize -> " + memberservice.getTotalSize(member));
-//		model.addAttribute("todayRegister", memberservice.todayRegister(member));
-		map.put("todayRegister", todayRegister);
 		return map;
 	}
 	
@@ -162,14 +158,6 @@ public class AdminController {
     	}
     	return result;
     }
-//	
-//	@GetMapping("/memberListData")
-//	public String allMemberList(Model model) throws Exception {
-//		
-//		model.addAttribute("memberListData", memberservice.memberList());
-//		
-//		return "adminMemberList";
-//	}
 	
 // 3. 관리자 동행관리 페이지
 // 관리자 페이지에서 동행관리로 이동
@@ -181,13 +169,13 @@ public class AdminController {
 	//3.1 관리자 동행 리스트 불러오기
 	@RequestMapping("/usList.do")
 	@ResponseBody
-	public Map<String, Object> adminUsList() throws Exception {
-		
-		List<UsDTO> usList = usService.usList();
-//		System.out.println("controller.adminUsList -> " + usService.usList());
+	public Map<String, Object> adminUsList(UsDTO us) throws Exception {
+		System.out.println("여기탔나?");
+//		List<UsDTO> usList = usService.usList(us);
+//		System.out.println("usList -> " + usList);
 		Map<String, Object> map = new HashMap<>();
-		map.put("usList",usList);
-//		System.out.println("controller.map -> " + map);
+		map.put("usList",usService.usList(us));
+		map.put("totalSize", usService.getTotalSize(us));
 		return map;
 	}
 	
@@ -197,7 +185,6 @@ public class AdminController {
 	public Map<String,Object> usReportList() throws Exception{
 		
 		List<UsDTO> usReportList = usService.usReportList();
-//		System.out.println("usReportList -> " + usReportList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("usReportList",usReportList);
 		return map;
@@ -244,10 +231,8 @@ public class AdminController {
 	public Map<String, Object> adminMember() throws Exception {
 		
 		List<MemberDTO> adminList = memberservice.adminList();
-//		System.out.println("controller.memberList -> " + memberservice.adminList());
 		Map<String, Object> map = new HashMap<>();
 		map.put("adminList",adminList);
-//		System.out.println("controller.map -> " + map);
 		return map;
 	}
 	
@@ -269,10 +254,9 @@ public class AdminController {
 	@RequestMapping("/inquiryList.do")
 	@ResponseBody
 	public Map<String, Object> getInquiryList(InquiryDTO inquiry) throws Exception {
-		System.out.println("controller inquiryList -> " + inquiry);
-		List<InquiryDTO> inquiryList = customerService.inquiryList();
 		Map<String, Object> map = new HashMap<>();
-		map.put("inquiryList", inquiryList);
+		map.put("inquiryList", customerService.inquiryList(inquiry));
+		map.put("totalSize", customerService.getTotalSize(inquiry));
 		return map;
 	}
 }

@@ -30,6 +30,8 @@ public class InquiryDTO {
     public int totalCount;
     public int totalPageSize;
     public int pageLength = 15;
+    public int pageLength2 = 26;
+    
     
     private int navSize = 10;
     private int navStart = 0;
@@ -60,5 +62,31 @@ public class InquiryDTO {
 	
 	public int getEndNo() {
 		return pageNo * pageLength;  // 페이지의 마지막 게시글 번호 계산
+	}
+	
+    public void setTotalCount2(int totalCount) {
+		this.totalCount = totalCount;
+		
+		// 2. 전체 페이지 건수를 계산한다
+		totalPageSize = (int) Math.ceil((double) totalCount / pageLength2);
+		
+		// 3. 페이지 네비게이터 시작 페이지를 계산한다
+		navStart = ((pageNo - 1) / navSize) * navSize + 1;
+		
+		// 4. 페이지 네비게이터 끝 페이지를 계산한다
+		navEnd = ((pageNo - 1) / navSize + 1) * navSize;
+		
+		// 5. 전체 페이지를 초과하면 전체 페이지 값을 변경한다
+		if (navEnd >= totalPageSize) {
+			navEnd = totalPageSize;
+		}
+	}
+	
+	public int getStartNo2() {
+		return (pageNo - 1) * pageLength2 + 1;  // 페이지의 시작 게시글 번호 계산
+	}
+	
+	public int getEndNo2() {
+		return pageNo * pageLength2;  // 페이지의 마지막 게시글 번호 계산
 	}
 }

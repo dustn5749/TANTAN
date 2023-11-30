@@ -50,4 +50,14 @@
           )
           WHERE ROWNUM &lt;= 5
 	</select>
+	
+	<!-- 여행지 점수 산정 및 차트 -->
+	<select id="doeRank" resultType="com.team1.project.dto.DoeDTO">
+		SELECT
+	    doe_name,
+	    average,
+	    RANK() OVER (ORDER BY average DESC) AS score_rank
+	FROM
+	    DOE
+	</select>
 </mapper>

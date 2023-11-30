@@ -43,7 +43,7 @@ public interface UsDAO {
 	public List<UsDTO> getUsRecentList();
 	
 	//관리자 동행 리스트
-	public List<UsDTO> usList();
+	public List<UsDTO> usList(UsDTO us);
 
 	//us_num의 번호 가져오기
 	public int nextUsNum();
