@@ -43,7 +43,7 @@ public interface UsDAO {
 	public List<UsDTO> getUsRecentList();
 	
 	//관리자 동행 리스트
-	public List<UsDTO> usList();
+	public List<UsDTO> usList(UsDTO us);
 
 	//us_num의 번호 가져오기
 	public int nextUsNum();
@@ -69,13 +69,14 @@ public interface UsDAO {
 	// 관리자 일일 작성된 게시글 수
 	public UsDTO todayWrite(UsDTO usDTO);
 
+	public int totalPosts(UsDTO us);
 	
 	//댓글 증가
 	public void commentplus(int us_num);
 
 	public int doe_nametotalCount(UsDTO us);
 
-	
+	public int increaseReportCount(int us_num);
 	
 	
 	

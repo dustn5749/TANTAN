@@ -116,9 +116,10 @@
 	<!-- 관리자 -->
 	
 	<!-- 회원리스트 가져오기 -->
-    <select id="memberList" resultType="com.team1.project.dto.MemberDTO" parameterType="com.team1.project.dto.MemberDTO">
+    <select id="memberList" resultType="com.team1.project.dto.MemberDTO" parameterType="com.team1.project.dto.MemberDTO" fetchSize="1000">
     <![CDATA[
     SELECT
+    	ROWNUM + #{startNo} -1 AS nrow,
         member_id,
         name,
         phone,
@@ -130,27 +131,19 @@
     FROM (
         SELECT
             ROWNUM AS nrow,
-            m.*
+            mm.*
         FROM (
             SELECT
-                member_id,
-                name,
-                phone,
-                email,
-                age,
-                gender,
-                status,
-                reportcnt
+                m.*
             FROM 
-                member
+                member m
             ORDER BY status DESC
-        ) m
+        ) mm
         WHERE ROWNUM <= #{endNo}
     )
     WHERE nrow BETWEEN #{startNo} AND #{endNo}
     ]]>
     </select>
-
 
 	<select id="getTotalCount" resultType="int">
       select count(*)
@@ -183,6 +176,15 @@
 	    FROM member
 	    GROUP BY TO_CHAR(REGISTER_TIME, 'MM')
 	    ORDER BY TO_CHAR(REGISTER_TIME, 'MM')
+	</select>
+	
+	<select id="totalMembers" resultType="java.lang.Integer">
+	    SELECT 
+	        COUNT(*) AS TOTAL_MEMBERS
+	    FROM 
+	        member
+	    WHERE 
+	        TO_CHAR(REGISTER_TIME, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
 	</select>
 	
 	<!-- 오늘 가입한 인원 추출 -->

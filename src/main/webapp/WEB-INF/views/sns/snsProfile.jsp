@@ -61,7 +61,7 @@
                     </button>
                     <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
-                            <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
+                            <img src="<c:url value="${member.profile_img}"/>" alt="">
                         </figure>
                         <span class="txt">프로필</span>
                     </button>
@@ -107,7 +107,7 @@
                         <div class="info01">
                             <dl>
                                 <dt>게시물</dt>
-                                <dd>${fn:length(boardList)}</dd>
+                                <dd>${boardCount}</dd>
                             </dl>
                             <dl>
                                 <dt>친구수</dt>

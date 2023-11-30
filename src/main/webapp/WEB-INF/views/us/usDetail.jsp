@@ -530,6 +530,132 @@ input, span, div, p, button, a, h2 {
           </c:otherwise>      
       </c:choose>
       <input type="hidden" id="us_num" value="${us.us_num}">
+
+	<div id="reportSubmissionMessage" style="text-align: center; color: green; margin-top: 10px;"></div>
+	 
+	 
+	  <div class="profile-details">
+	        <c:choose>
+	           <c:when test="${us.fileNo!=0}">
+	              <img   src="/file/displayImage.do?usFileNum=${us.fileNo}" alt="동행이미지 사진" class="us_content_img">
+	           </c:when>
+	           <c:when test="${!empty us.imageUrl}">
+	              <img   src="${us.imageUrl}" class="us_content_img">
+	           </c:when>
+	           <c:when test="${empty us.imageUrl&& us.fileNo==0}">
+	              <img  src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
+	           </c:when>
+	        </c:choose>
+	</div> 
+	<div class="detail_content">
+		<div class="detail_content_div">
+			<div class="detail_title">
+		        <p id="title"><span>${us.title}</span></p>	
+		   	</div>
+		
+		    <div class="detail_content_inner">
+		   		<div class="detail_content_inner1">
+			    	<div class="detail_date">
+			    		<p class="doe">모집 지역 : <sapn class="doe_area">${us.doe_Name}<span></span></p>
+			    		<div class="detail_date_inner">
+				            <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
+				            <p class="date"> ~ </p>
+				            <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
+				            <p class="uscnt">모집 인원 : <span id="us_cnt">${us.us_cnt}</span></p>		    		
+			    		</div>
+			   		</div>
+			   		<div class="details">
+			   			<p id="content">${us.content}</p>
+			   		</div>
+		   		</div>
+				<div class="profile">	       
+				    <div class="profile-image">
+				        <img src="/assets/img/no_profile.png" alt="프로필 이미지">
+				    </div>
+				    <div class="user-details">
+				        <h2 id="writer">${us.writer}</h2>
+				    </div>
+				    <button id="report-button" onclick="openModal()"><img src="/assets/img/report.jpg" id="reportBtn" width="25px"></button>	    	
+				    
+			  </div>
+		   </div>     
+		 </div>
+		        <!-- 버튼 그룹 -->
+		        <div class="button-group">
+		       
+		           <c:if test="${principal.user.member_id == us.writer}">
+			            <button class="orange-btn" onclick="editEntry()">수정하기</button>
+			            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
+			            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
+		            </c:if>
+		        </div>
+		        
+		        <!-- 댓글 섹션 -->
+		        <div class="reply-section">
+		            <div id="replyContainer">
+		             	<div class="reply_content">
+			                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
+		             	</div>
+			                <button class="insertBtn" onclick="btnInsert()">댓글쓰기</button>	             	
+		            </div>
+		            
+		            <div class="commnet_area">
+		            	<c:forEach items="${commentList}" var="item">
+		            		<div class="comment_area_inner">
+		            			<div class="member_id_div">
+		            				<img src="/assets/img/userReview.png" width="30px">
+		            				<p class="member_id">${item.writer}</p>
+		            			</div>
+		            			<div class="content_area">${item.content}</div>
+		            			<c:if test="${item.writer==principal.user.member_id}">
+		            				<div class="btnarea">
+		            					<button class="modifybtn">수정하기</button>
+		            					<button class="deleteBtn">삭제하기</button>
+		            				</div>
+		            			
+		            			</c:if>
+		            		</div>
+		            	</c:forEach>
+		            </div>
+		                <div class="reply-form-button-wrapper">
+		                    <button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
+		                </div>
+		        </div>
+		</div>
+	        <!-- 신고 모달 -->
+			<div id="reportModal" class="reportmodal">
+			    <div class="modal-content">
+			        <span class="close" onclick="closeModal()">&times;</span>
+			        <h2>신고하기</h2>
+			        <form id="reportForm">
+			            <label for="reportType">신고유형</label>
+			            <select id="reportType" name="reportType">
+			                <option value="욕설">욕설</option>
+			                <option value="음란물">음란물</option>
+			                <option value="도배">도배</option>
+			                <option value="유도성글">유도성 글</option>
+			                <option value="광고">광고</option>
+			            </select>
+			
+			            <label for="reportReason">신고사유</label>
+			            <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
+			
+			            <button type="button" onclick="submitReport()">신고 제출</button>
+			            <button type="button" onclick="closeModal()">닫기</button>
+			        </form>
+			    </div>
+			</div>
+	 </div>
+		<c:choose>
+		    <c:when test="${!empty principal}">
+		        <input type="hidden" value="${principal.user.member_id}" class="member">			
+		    </c:when>
+		    <c:otherwise>
+		        <input type="hidden" value="" class="member">
+		    </c:otherwise>		
+		</c:choose>
+		<input type="hidden" id="us_num" value="${us.us_num}">
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     <script>
     
           document.addEventListener("DOMContentLoaded", function () {
@@ -547,19 +673,48 @@ input, span, div, p, button, a, h2 {
             document.getElementById("reportModal").style.display = "none";
         }
 
-
+        principal.user.member_id == us.writer
         <!-- 수정된 submitReport 함수 -->
         function submitReport() {
             console.log('submitReport function called'); 
             const reportType = document.getElementById('reportType').value;
             const reportReason = document.getElementById('reportReason').value;
+            const us_num = $("#us_num").val();
+            const writer = $("#writer").text();  // 수정: 작성자 정보 가져오기
+            const reporter = $(".member").val();  // 수정: 신고자 정보 가져오기
+			
+            console.log("reportType -> " + reportType);
+            console.log("reportReason -> " + reportReason);
+            console.log("us_num -> " + us_num);
+            console.log("writer -> " + writer);
+            console.log("reporter -> " + reporter);
+            
+            // Ajax로 서버에 데이터 전송
+            $.ajax({
+                type: "POST",
+                url: "/report",
+                data: {
+                    usNum: us_num,  // 신고 대상 글 번호
+                    reporter: reporter,  // 수정: 로그인한 회원 아이디
+                    reportType: reportType,
+                    reportReason: reportReason,
+                    writer: writer  // 수정: 작성자 정보
+                },
+                success: function(response) {
+                    console.log('신고가 성공적으로 처리되었습니다.');
+                    console.log(response);
 
-            // 일단 콘솔에 메시지를 출력하는 것으로 확인
-            console.log('Report Type:', reportType);
-            console.log('Report Reason:', reportReason);
+                    closeModal();
+                    showReportSubmissionMessage();
+                },
+                error: function(error) {
+                    console.error('신고 처리 중 오류가 발생했습니다.');
+                    console.error(error);
 
-            closeModal();
-            showReportSubmissionMessage();
+                    closeModal();
+                    showReportErrorMessage();
+                }
+            });
         }
 
         function showReportSubmissionMessage() {

@@ -49,6 +49,9 @@ public class DoeService {
 		return doe_img;
 	}
     
-
+	// 관리자
+	public List<DoeDTO> doeRank() throws Exception{
+		return doeDAO.doeRank();
+	}
 
 }

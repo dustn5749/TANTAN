@@ -76,7 +76,7 @@
 
 </head>
 <body>
-<div class="loading-overlay" id="loadingOverlay">Loading...</div>
+<!-- <div class="loading-overlay" id="loadingOverlay">Loading...</div> -->
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -107,6 +107,7 @@ function hideLoadingMessage() {
 }
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
+var currentPage2 = 1;
 var pageSize = 26;
 
 function showPage() {
@@ -115,12 +116,13 @@ function showPage() {
 }
 
 // 페이징 관련 함수를 초기화합니다.
-function initPage(currentPage) {
+function initPage(page) {
+	currentPage = page;
     var totalPage = Math.ceil(totalSize / pageSize);
 
     var pageInner = "";
 
-    if (currentPage <= 1) {
+    if (page <= 1) {
         pageInner += "<span class='customPageMoveBtn'><i class='fa fa-fast-backward'></i></span>";
         pageInner += "<span class='customPageMoveBtn'><i class='fa fa-step-backward'></i></span>";
     } else {
@@ -131,8 +133,8 @@ function initPage(currentPage) {
     var pageCount = Math.min(totalPage, 10); // 페이지 개수를 전체 페이지 또는 10으로 제한
 
     var startPage = 1;
-    if (currentPage > 10) {
-        startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+    if (page > 10) {
+        startPage = Math.floor((page - 1) / 10) * 10 + 1;
     }
     var endPage = startPage + pageCount - 1;
 
@@ -142,14 +144,14 @@ function initPage(currentPage) {
 
     for (var i = startPage; i <= endPage; i++) {
         var titleGoPage = i + "페이지로 이동";
-        if (i == currentPage) {
+        if (i == page) {
             pageInner += "<span class='customPageNumberBtn'><a href='javascript:goPage(" + i + ");' id='" + i + "' title='" + titleGoPage + "'><strong>" + i + "</strong></a></span>";
         } else {
             pageInner += "<span class='customPageNumberBtn'><a href='javascript:goPage(" + i + ");' id='" + i + "' title='" + titleGoPage + "'>" + i + "</a></span>";
         }
     }
 
-    if (currentPage >= totalPage) {
+    if (page >= totalPage) {
         pageInner += "<span class='customPageMoveBtn'><i class='fa fa-step-forward'></i></span>";
         pageInner += "<span class='customPageMoveBtn'><i class='fa fa-fast-forward'></i></span>";
     } else {
@@ -162,7 +164,8 @@ function initPage(currentPage) {
 }
 
 function loadGridData(page) {
-    $("#paginate").hide();
+    currentPage = page;  // 현재 페이지 업데이트
+	console.log("loadGridData 함수 내 currentPage 값: " + currentPage);
     // Ajax 요청을 통한 데이터 로딩
     $.ajax({
         url: '/memberList',
@@ -176,7 +179,6 @@ function loadGridData(page) {
             console.log("로드 완료");
             console.log(data);
             totalSize = data.totalSize;
-
             $("#memberGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
                 data: data.memberList.memberList,
                 datatype: 'local'
@@ -186,9 +188,6 @@ function loadGridData(page) {
             initPage(page); // 페이지 초기화
 
             hideLoadingMessage(); // 로딩 메시지 숨기기
-
-            // 페이징 컴포넌트 다시 보이게 하기
-            $("#paginate").show();
         },
         error: function (error) {
             console.error("Error:", error);
@@ -196,13 +195,19 @@ function loadGridData(page) {
     });
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#memberGrid").jqGrid({
     datatype: "json", // 데이터를 서버에서 가져오기
     url: '/memberList', // 데이터를 가져올 URL 설정 (컨트롤러 엔드포인트 URL로 변경해야 합니다.)
     mtype: 'GET', // HTTP 요청 방식 (GET 또는 POST)
-    colNames: ['아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
+    colNames: ['','아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
     colModel: [
+    	{ name: 'nrow', index: 'nrow', width: 50, label: '행 번호', sortable: false, align: 'center' },
         { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
         { label: '이름', name: 'name', index: 'name' },
         { label: '전화번호', name: 'phone', index: 'phone' },
@@ -227,7 +232,7 @@ $("#memberGrid").jqGrid({
     height: 690,
     autowidth: true,
     rowNum: 26,
-    rownumbers: true,
+//     rownumbers: true,
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',
@@ -248,8 +253,7 @@ $("#memberGrid").jqGrid({
         }
     },
 });
-loadGridData(1);
-
+loadGridData();
 function staOpt1(cellvalue, options, rowObject) {
     var str = "";
     var row_id = options.rowId;
@@ -306,59 +310,52 @@ function fn_release(rowid, member_id) {
 
 //그리드 첫 페이지로 이동
 function firstPage() {
-    $("#memberGrid").jqGrid('setGridParam', {
-        page: 1
-    }).trigger("reloadGrid");
+    goPage(1);
 }
-
+//// 그리드 페이지로 이동
+function goPage(num) {
+    console.log("goPage 함수 호출: " + num);
+    loadGridData(num);  
+}
 //그리드 이전 페이지로 이동
 function prePage() {
-    var currentPage = $("#memberGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
-
-    // 이전 10페이지로 이동
     var newPage = currentPage - 10;
-    if (newPage < 1) newPage = 1;
+    
+    if (newPage < 1) {
+        // 새 페이지가 1보다 작으면 1로 설정
+        newPage = 1;
+    }
 
-    $("#memberGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+    goPage(newPage);
 }
 
 //그리드 다음 페이지로 이동
 function nextPage() {
-    var currentPage = $("#memberGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
+//     var currentPage = $("#memberGrid").getGridParam('page');
+//     alert(currentPage);
+//     var newPage = currentPage + 10;
+	currentPage = currentPage + 10;
+    var totalPage = Math.ceil(totalSize / pageSize);
 
-    // 다음 10페이지로 이동
-    var newPage = currentPage + 10;
-    var totalPage = Math.ceil(totalSize / $('#memberGrid').getGridParam('rowNum'));
-    if (newPage > totalPage) newPage = totalPage;
-
-    $("#memberGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+//     if (newPage > totalPage) {
+//         // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
+//         newPage = totalPage;
+//     }
+    if (currentPage > totalPage) {
+        // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
+        currentPage = totalPage;
+    }
+//     currentPage = newPage; // 전역 변수 업데이트
+//     goPage(newPage);
+    goPage(currentPage);
 }
 
 // 그리드 마지막 페이지로 이동
 function lastPage() {
     var totalPage = Math.ceil(totalSize / $('#memberGrid').getGridParam('rowNum'));
-    $("#memberGrid").jqGrid('setGridParam', {
-        page: totalPage
-    }).trigger("reloadGrid");
+    goPage(totalPage);
 }
 
-// // 그리드 페이지로 이동
-function goPage(num) {
-    currentPage = num;  // 현재 페이지 업데이트
-    loadGridData(currentPage);  // 페이지 번호를 인자로 전달하여 데이터 로드
-page: num
-    console.log("페이지 버튼 누름" + num);
-}
 
 function fn_delete(rowid, member_id) {
     console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
