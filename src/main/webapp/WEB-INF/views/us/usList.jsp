@@ -32,9 +32,14 @@
 
    display: flex;
 }
+.us_header_size > button {
+	width: 150px !important;
+}
 
 .card.box-shadow{
    height: 500px;
+   position: relative;
+   
 }
 
 
@@ -44,17 +49,18 @@
 .card-footer.p-4.pt-0.border-top-0.bg-transparent{
    height: 45px;
    margin-bottom: 5px;
+   position: absolute;
+   bottom: 20px;
+   left: 60px;
 }
 .text-center {
    height: 100%;
-   
+   position: relative;
 }
 .text-center > button {
    height: 100%;
 }
-.fw-bolder {
-   margin-bottom: 10px;
-}
+
 }
 .us_header {
 /*    position: sticky; */
@@ -509,7 +515,7 @@ ul . {
 .fw-bolder {
    font-size: 20px !important;
    margin-bottom: 10px;
-   margin-top: 10px;
+   margin-top: 20px;
    font-weight: bold;
    font-family: 'Pretendard-Regular';
 }
@@ -551,6 +557,8 @@ div, input, p, span, button, h2 {
 /* 상세 보기 버튼 */
 .detailBtn {
    background: white;
+   font-size: 18px !important;
+   color : black !important;
    border: none;
    width: 120px;
    height: 45px;
@@ -560,7 +568,7 @@ div, input, p, span, button, h2 {
 
 .detailBtn:hover {
    background-color: black;
-   color: white;
+   color: white !important;
 }
 
 /* 페이징 처리 */
@@ -584,8 +592,18 @@ div, input, p, span, button, h2 {
 .nav_div> a,strong {
    margin-left: 10px;
 }
-
-
+.content_inner_detail > div, .content_inner_detail >div > p, input, span{
+	font-size: 16px !important;
+	color: grey;
+}
+.content_inner_detail{
+	text-align: left;
+	padding-left: 30px;
+	margin-top: 20px;
+	position: absolute;
+	top:250px;
+	
+}
 </style>
 </head>
 
@@ -748,13 +766,14 @@ div, input, p, span, button, h2 {
 
                            </div>
                            <h5 class="fw-bolder">${item.title}</h5>
+                        	<div class="content_inner_detail">
                              <div>지역 : ${item.doe_Name}</div>
-                             <div>작성자 : ${item.writer}</div> 
+                           <%--   <div>작성자 : ${item.writer}</div> --%> 
                           
                            <div class="us_day">
                               <p class="menu">모집기간</p>
                          <span id="start_day">${fn:substring(item.start_Date, 0, 10)} ~ </span>
-					<span id="end_day">${fn:substring(item.end_Date, 0, 10)}</span>
+               <span id="end_day">${fn:substring(item.end_Date, 0, 10)}</span>
                                  
                            </div>
                            <div class="us_cnt_div">
@@ -762,6 +781,7 @@ div, input, p, span, button, h2 {
                          명</span>
                            </div>
                                <div>조회수 :${item.viewCount}</div> 
+                        </div>
                         </div>
                      </div>
                      <input type="hidden" value="${item.us_num}" class="us_num">
@@ -817,13 +837,14 @@ div, input, p, span, button, h2 {
 
    <script>
    
-	function city_btn1() {
-	    window.location.href = '/us/write';
-	}
 
-	function jsPageNo(pageNo) {
-	    // 현재 URL 가져오기
-	    var currentUrl = window.location.href;
+   function city_btn1() {
+       window.location.href = '/us/write';
+   }
+
+	
+   function jsPageNo(pageNo) {
+       var currentUrl = window.location.href;
 
 	    // 기존의 pageNo 매개변수 제거
 	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
@@ -846,7 +867,9 @@ div, input, p, span, button, h2 {
 	}
 
 
-	   
+	 
+
+      
     document.addEventListener("DOMContentLoaded", function() {
         var scheduleBtn = document.querySelector(".schedule_btn");
 
@@ -858,35 +881,32 @@ div, input, p, span, button, h2 {
     });
 
 
-     
-    
-
          function loadMoreData(start) {
-        	    var member_Id = "member_id"; 
-        	    var doe_Name = "doe_name"; 
-        	    var us_num = "us_num"; 
-        	    var end_Date = "end_date";
-        	    var reg_Date = "reg_date"; 
+               var member_Id = "member_id"; 
+               var doe_Name = "doe_name"; 
+               var us_num = "us_num"; 
+               var end_Date = "end_date";
+               var reg_Date = "reg_date"; 
 
-        	    $.ajax({
-        	        type: "POST",
-        	        url: "/us/list",
-        	        contentType: "application/json; charset=utf-8",
-        	        data: JSON.stringify({
-        	            start: start,
-        	            member_id: member_Id,
-        	            doe_Name: doe_Name,
-        	            us_num: us_num,
-        	            end_Date: end_Date,
-        	            reg_Date: reg_Date
-        	        }),
-        	        success: function (response) {
-        	        },
-        	        error: function (xhr, textStatus, errorThrown) {
-        	            console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
-        	        }
-        	    });
-        	}
+               $.ajax({
+                   type: "POST",
+                   url: "/us/list",
+                   contentType: "application/json; charset=utf-8",
+                   data: JSON.stringify({
+                       start: start,
+                       member_id: member_Id,
+                       doe_Name: doe_Name,
+                       us_num: us_num,
+                       end_Date: end_Date,
+                       reg_Date: reg_Date
+                   }),
+                   success: function (response) {
+                   },
+                   error: function (xhr, textStatus, errorThrown) {
+                       console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
+                   }
+               });
+           }
          
          /* 동행 상세보기 */
          $(".detailBtn").on("click", function(e){
@@ -895,8 +915,8 @@ div, input, p, span, button, h2 {
           
             location.href="/us/Detail?us_num="+us_num;
        });
-     
-         
+
+
      //이동    
          function moveToSelectedRegion() {
              window.location.href = '/us/list';
@@ -914,14 +934,15 @@ div, input, p, span, button, h2 {
          
          // 지역이동
      function moveRegion() {
-    	    var value = $('[name=deo_name]:checked').val();
 
-    	    if (value == 'all') {
-    	        location.href = '/us/list';
-    	    } else {
-    	        location.href = '/us/list?doe_Name=' + value;
-    	    }
-    	}
+           var value = $('[name=deo_name]:checked').val();
+
+           if (value == 'all') {
+               location.href = '/us/list';
+           } else {
+               location.href = '/us/list?doe_Name=' + value;
+           }
+       }
      
      function order(orderName) {
          location.href = '/us/list?ORDER=' + orderName;

@@ -82,4 +82,15 @@
 		where token=#{token}
 	</select>
 
+
+	<update id="updateInquiryNum">
+		update file_upload set 
+		inquiry_num=#{inquiry_num}
+		where FILE_ID=${file_id}
+	</update>
+	
+	<select id="getFiles" resultType="int">
+		select file_id from file_upload
+		where inquiry_num=#{inquiry_num}
+	</select>
 </mapper>

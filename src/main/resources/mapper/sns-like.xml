@@ -7,7 +7,7 @@
     insert into SNS_LIKE
     (BOARD_NUM, MEMBER_ID, REG_DATE)
     VALUES
-    (#{boardNum},#{memberId}, #{regDate})
+    (#{boardNum}, #{memberId}, #{regDate})
   </insert>
 
   <delete id="deleteByMemberIdAndBoardNum">

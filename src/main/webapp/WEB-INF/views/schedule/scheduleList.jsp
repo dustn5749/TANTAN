@@ -734,9 +734,35 @@ ul>li {
 
 
    <script>
+//    function jsPageNo(pageNo) {
+// 	    // 현재 URL 가져오기
+// 	    var currentUrl = window.location.href;
+
+// 	    // 기존의 pageNo 매개변수 제거
+// 	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+// 	    currentUrl = currentUrl.replace(regex, '$2');
+
+// 	    // 현재 URL에 페이지 번호 추가
+// 	    var newUrl;
+// 	    if (currentUrl.indexOf('?') !== -1) {
+// 	        newUrl = currentUrl + "&pageNo=" + pageNo;
+// 	    } else {
+// 	        newUrl = currentUrl + "?pageNo=" + pageNo;
+// 	    }
+
+// 	    // 새로운 URL을 폼의 액션으로 설정
+// 	    document.getElementById("pageForm").action = newUrl;
+
+// 	    // 페이지 번호 설정 및 폼 제출
+// 	    document.getElementById("pageNo").value = pageNo;
+// 	    document.getElementById("pageForm").submit();
+// 	}
+
+   
+   
+	
    function jsPageNo(pageNo) {
-	    // 현재 URL 가져오기
-	    var currentUrl = window.location.href;
+       var currentUrl = window.location.href;
 
 	    // 기존의 pageNo 매개변수 제거
 	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
@@ -758,6 +784,9 @@ ul>li {
 	    document.getElementById("pageForm").submit();
 	}
 
+
+   
+   
    //뒤로가기
    function moveToSelectedRegion() {
        window.location.href = '/schedule/list';

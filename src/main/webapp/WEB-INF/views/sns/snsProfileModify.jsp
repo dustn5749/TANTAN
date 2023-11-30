@@ -161,7 +161,7 @@
                         <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
+                    <button type="button" class="sidebar-btn" onclick="mySchedule()">
                         <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
                         <span class="txt">일정</span>
                     </button>
@@ -173,7 +173,7 @@
                         <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
                         <span class="txt">알림</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
+                    <button type="button" class="sidebar-btn" onclick="myProfile()">
                         <figure class="mini-thumnail">
                             <img src="/assets/sns/images/profile-img.jpeg" alt="">
                         </figure>
@@ -281,21 +281,30 @@
                             <input type="radio" name="age_open_yn" value="y" checked>공개
                             <input type="radio" name="age_open_yn" value="n">비공개
                         </div>
-                    d</div>
+                    </div>
                 </div>
             </div>
             <!-- 편집 나가기 버튼 -->
             <div class="btn_area">
-                <button type="button" class="back_btn" onclick="ModifyComplete()">편집 끝내기</button>
+                <button type="button" class="back_btn" onclick="modifyComplete()">편집 끝내기</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-	function ModifyComplete() {
+
+	function myProfile(){
+		location.href = "/sns/profile"
+	}
+	
+	function mySchedule(){
+		location.href = "/member/mySchedule.do"
+	}
+	
+	function modifyComplete() {
 	    // 프로필 페이지로 리다이렉션
-	    location.href = "/sns/profile/";
+	    location.href = "/sns/profile";
 	}
 
   function modifyProfile(){
@@ -371,8 +380,9 @@
 
     /* 편집 끝내기 버튼(뒤로가기) */
     $(".back_btn").on("click", function () {
-        location.href = "/snsProfile";
+        location.href = "/sns/profile";
     })
+
 
 </script>
 </body>

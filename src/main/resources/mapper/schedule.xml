@@ -4,19 +4,19 @@
 
 <mapper namespace="com.team1.project.dao.ScheduleDAO">
 
-	<resultMap type="com.team1.project.dto.CityDTO" id="CityMap">
-		<result property="cityNum" column="city_num" />
-		<result property="doeNum" column="doe_num" />
-		<result property="cityName" column="city_name" />
-		<result property="LATITUDE" column="LATITUDE" />
-		<result property="LONGITUDE" column="LONGITUDE" />
-	</resultMap>
-	<resultMap type="com.team1.project.dto.DayDTO" id="DayMap">
+   <resultMap type="com.team1.project.dto.CityDTO" id="CityMap">
+      <result property="cityNum" column="city_num" />
+      <result property="doeNum" column="doe_num" />
+      <result property="cityName" column="city_name" />
+      <result property="LATITUDE" column="LATITUDE" />
+      <result property="LONGITUDE" column="LONGITUDE" />
+   </resultMap>
+   <resultMap type="com.team1.project.dto.DayDTO" id="DayMap">
     <result property="dayId" column="day_id" />
     <result property="schedule_Num" column="schedule_Num" />
     <result property="dayDate" column="dayDate" />
 
-	</resultMap>
+   </resultMap>
 
 
 <insert id="insertScheduleList" parameterType="com.team1.project.dto.ScheduleDTO">
@@ -220,39 +220,39 @@
     </selectKey> 
     insert into schedule(SCHEDULE_NUM, MEMBER_ID, TITLE, DOE_NAME, START_NUM, END_DATE, REG_DATE, PLACE1,PLACE2,PLACE3, MEMO1,MEMO2,MEMO3, DATE1, DATE2, DATE3)
 values(
-	#{schedule_Num},
+   #{schedule_Num},
     #{member_id},
     #{title},
     #{doe_Name},    
     #{start_Num},
     #{end_Date},
     SYSDATE,
-	#{place1, jdbcType=VARCHAR},
-	#{place2, jdbcType=VARCHAR},
-	#{place3, jdbcType=VARCHAR},
-	#{memo1, jdbcType=CLOB},
-	#{memo2, jdbcType=VARCHAR},
-	#{memo3, jdbcType=VARCHAR},
-	#{date1, jdbcType=DATE},
-	#{date2, jdbcType=DATE},
-	#{date3, jdbcType=DATE}
-	)
+   #{place1, jdbcType=VARCHAR},
+   #{place2, jdbcType=VARCHAR},
+   #{place3, jdbcType=VARCHAR},
+   #{memo1, jdbcType=CLOB},
+   #{memo2, jdbcType=VARCHAR},
+   #{memo3, jdbcType=VARCHAR},
+   #{date1, jdbcType=DATE},
+   #{date2, jdbcType=DATE},
+   #{date3, jdbcType=DATE}
+   )
 </insert>
 
     <!--지역번호 만들기 --> 
     <select id="Doenum" resultMap="CityMap">
-		 SELECT city_num, city_name
+       SELECT city_num, city_name
         FROM city
         WHERE doe_num = #{doe_Num}
-	</select>
+   </select>
 
 
   <!--지역의 위도, 경도 데이터 가져오기 --> 
     <select id="selectCity" resultMap="CityMap">
-		SELECT  LATITUDE, LONGITUDE
+      SELECT  LATITUDE, LONGITUDE
         FROM city
         WHERE city_name = #{city_name}
-	</select>
+   </select>
 
 <!-- 상세보기 -->
 <select id="schduleDetail" resultType="com.team1.project.dto.ScheduleDTO">  
@@ -285,13 +285,13 @@ values(
 
 <!-- 전체 게시글 수 -->
  <select id="totalCount" resultType="int"> 
- 		select count(*) 
- 		from schedule 
- 		where DELETEYN = 'N'
+       select count(*) 
+       from schedule 
+       where DELETEYN = 'N'
         <if test='doe_Name != null'>
-        	AND DOE_NAME = #{doe_Name}
+           AND DOE_NAME = #{doe_Name}
         </if>
- 	</select>
+    </select>
 
 
 
@@ -299,20 +299,20 @@ values(
   <update id="scheduleUpdate" parameterType="map">
     UPDATE SCHEDULE
     SET
-	    MEMBER_ID = #{schedule.member_id},
-	    TITLE = #{schedule.title},
-	    DOE_NAME = #{schedule.doe_Name},    
-	    START_NUM = #{schedule.start_Num},
-	    END_DATE = #{schedule.end_Date},
-		PLACE1 = #{schedule.place1, jdbcType=VARCHAR},
-		PLACE2 = #{schedule.place2, jdbcType=VARCHAR},
-		PLACE3 = #{schedule.place3, jdbcType=VARCHAR},
-		MEMO1= #{schedule.memo1, jdbcType=CLOB},
-		MEMO2 = #{schedule.memo2, jdbcType=VARCHAR},
-		MEMO3 = #{schedule.memo3, jdbcType=VARCHAR},
-		DATE1 = #{schedule.date1, jdbcType=DATE},
-		DATE2 = #{schedule.date2, jdbcType=DATE},
-		DATE3 = #{schedule.date3, jdbcType=DATE}
+       MEMBER_ID = #{schedule.member_id},
+       TITLE = #{schedule.title},
+       DOE_NAME = #{schedule.doe_Name},    
+       START_NUM = #{schedule.start_Num},
+       END_DATE = #{schedule.end_Date},
+      PLACE1 = #{schedule.place1, jdbcType=VARCHAR},
+      PLACE2 = #{schedule.place2, jdbcType=VARCHAR},
+      PLACE3 = #{schedule.place3, jdbcType=VARCHAR},
+      MEMO1= #{schedule.memo1, jdbcType=CLOB},
+      MEMO2 = #{schedule.memo2, jdbcType=VARCHAR},
+      MEMO3 = #{schedule.memo3, jdbcType=VARCHAR},
+      DATE1 = #{schedule.date1, jdbcType=DATE},
+      DATE2 = #{schedule.date2, jdbcType=DATE},
+      DATE3 = #{schedule.date3, jdbcType=DATE}
     WHERE
         SCHEDULE_NUM = #{scheduleNum}
 </update>
@@ -323,12 +323,19 @@ values(
         FROM schedule
         WHERE schedule_Num = #{scheduleNum}
     </select>
+    
+    <!--삭제하기 -->  
+<!--           <delete id="schduleDelete">      -->
+<!--               DELETE FROM SCHEDULE   -->
+<!--               WHERE      -->
+<!--            SCHEDULE_NUM = #{schedule_Num}    -->
+<!--      </delete>     -->
 
 
  <delete id="schduleDelete" parameterType="map"> 
    
      <![CDATA[ 
-           	 UPDATE SCHEDULE SET DELETEYN= 'Y'
+               UPDATE SCHEDULE SET DELETEYN= 'Y'
              WHERE SCHEDULE_NUM = #{schedule_Num}
      ]]> 
  </delete> 
@@ -336,9 +343,29 @@ values(
 
 
 
+   <!-- 좋아요 삭제  --> 
+   <delete id="deleteLike">
+      DELETE FROM snslike
+      WHERE bno = #{bno} AND userID = #{userId}   
+   </delete>
+ 
+ 
+ 
+<!-- 좋아요 검색  -->
+   <select id="searchLike" resultType="int">
+      SELECT COUNT(*) FROM snslike
+      WHERE bno = #{bno} AND userId = #{userId}
+   </select>
+   
+   <!-- 좋아요 등록  -->
+   <insert id="createLike">
+      INSERT INTO snslike(bno, userId, lno) 
+      VALUES(#{bno}, #{userId}, snslike_seq.NEXTVAL)
+   </insert>
+   
 
 
-	 <!-- 컨텐츠 검색 갯수 -->
+    <!-- 컨텐츠 검색 갯수 -->
   <select id="getSearchCount" resultType="int">
     select count(*) from contents
     where subject like #{keyword} or content like #{keyword} and show='y'
@@ -346,50 +373,54 @@ values(
   
   <!-- 마지막 게시물 번호 불러오기 -->
   <select id="MaxCidx" resultType="int">
-	select MAX(c_idx) from contents  
+   select MAX(c_idx) from contents  
   </select>
-	<!-- 내 일정 정보 가져오기  -->
-	<select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-		select * from SCHEDULE
-		where member_id=#{member_id}
-	</select>
-	
-	<!--top3 스케쥴목록 가져오기  -->
-	<select id="getTop3ScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
-		     SELECT * FROM (
+   <!-- 내 일정 정보 가져오기  -->
+   <select id="getMyScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+      select * from SCHEDULE
+      where member_id=#{member_id}
+   </select>
+   
+   <!--top3 스케쥴목록 가져오기  -->
+   <select id="getTop3ScheduleList" resultType="com.team1.project.dto.ScheduleDTO">
+           SELECT * FROM (
               SELECT * FROM SCHEDULE
               ORDER BY LIKECNT DESC
           )
-          WHERE ROWNUM &lt;= 3
-	</select>
-	
-	<update id="plusLikeCnt" parameterType="map">
-		UPDATE
-			SCHEDULE
-			SET LIKECNT = LIKECNT + 1
-		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
-	</update>
-	
-		<update id="minusLikeCnt" parameterType="map">
-		UPDATE
-			SCHEDULE
-			SET LIKECNT = LIKECNT - 1
-		WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
-	</update>
+          WHERE ROWNUM &lt;= 3 AND
+          DELETEYN='N'
+   </select>
+   
+   <update id="plusLikeCnt" parameterType="map">
+      UPDATE
+         SCHEDULE
+         SET LIKECNT = LIKECNT + 1
+      WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
+   </update>
+   
+      <update id="minusLikeCnt" parameterType="map">
+      UPDATE
+         SCHEDULE
+         SET LIKECNT = LIKECNT - 1
+      WHERE SCHEDULE_NUM = #{SCHEDULE_NUM}
+   </update>
 
-	<!-- 관리자 일일 작성된 일정 게시글 수 -->
-	<!-- 오늘 가입한 인원 추출 -->
-	<select id="todaySchedule" parameterType="com.team1.project.dto.ScheduleDTO" resultType="com.team1.project.dto.ScheduleDTO">
-	    SELECT COUNT(*) AS todaySchedule
-	    FROM schedule
-	    WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+   <!-- 관리자 일일 작성된 일정 게시글 수 -->
+   <!-- 오늘 가입한 인원 추출 -->
+   <select id="todaySchedule" parameterType="com.team1.project.dto.ScheduleDTO" resultType="com.team1.project.dto.ScheduleDTO">
+       SELECT COUNT(*) AS todaySchedule
+       FROM schedule
+       WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
     </select>
-	<!-- 위시리스트 총 갯수 세기 -->
-	<select id="LikeTotalCount" resultType="int">
-		SELECT COUNT(*) FROM SCHEDULELIKE
-		WHERE USERID=#{member_id}
+   <!-- 위시리스트 총 갯수 세기 -->
+   <select id="LikeTotalCount" resultType="int">
+      SELECT COUNT(*) FROM SCHEDULELIKE
+      WHERE USERID=#{member_id}
+   </select>
+
+	<!-- 글쓴이 얻기  -->
+	<select id="getWriter" resultType="String">
+		select MEMBER_ID from schedule
+		where SCHEDULE_NUM=#{schedule_Num}
 	</select>
-
-
-
 </mapper>

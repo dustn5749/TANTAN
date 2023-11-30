@@ -17,7 +17,7 @@
       }
     });
   }
-
+  
   function readAlim(id){
     $.ajax({
       url : '/alim/read/'+id,
@@ -29,6 +29,7 @@
       }
     });
   }
+  
 </script>
 
 <div class="modal-overlay" onclick="closeModal('alarm-modal')"></div>
@@ -62,16 +63,15 @@
       <div class="alarm-list-grp">
         <!-- 알람 리스트 -->
         <c:forEach items="${alimList}" var="alim">
-        <div id='alim${alim.alimId}' class="alarm-list">
-            <div class="alarm-item">
+        <div id='alim${alim.alimId}' class="alarm-list" >
+            <div class="alarm-item" onclick="eventURL('${alim.url}')">
               <figure class="mini-thumnail">
-                <img src="<c:url value="/assets/sns/images/profile-img-jessica.png"/>" alt="">
+                 <img src="${empty alim.profileImg ? "/assets/sns/images/profile-img-default.png" : alim.profileImg}" alt="">
               </figure>
 
               <div class="alarm-txt-grp">
                 <p class="txt">
                 <span class="name">
-<%--                <img src="<c:url value="/assets/sns/images/badge-certify.svg"/>" class="badge-certify" alt="">--%>
                 ${alim.nickname}
                 </span>
                   ${alim.content}
@@ -79,9 +79,9 @@
                 <span class="date">${alim.time}</span>
               </div>
             </div>
-
-            <img src="<c:url value="/assets/sns/images/thumbnail-img03.png"/>" alt="" class="alarm-preview-img">
-
+            <c:if test="${not empty alim.thumbnailUrl}">
+                <img src="<c:url value="${alim.thumbnailUrl}"/>" alt="" class="alarm-preview-img">
+            </c:if>
             <button type="button" class="alarm-del-btn" onclick="readAlim('${alim.alimId}')">
               <span class="txt-hidden">이 알람 삭제</span>
               <img src="<c:url value="/assets/sns/images/icon-trash-white.svg"/>" alt="">
@@ -96,3 +96,25 @@
   </div>
   <!-- END 알림 모달 내용들 -->
 </div>
+<script>
+
+    function eventURL(url){
+      if(!url || url === '' || url ==='null'){
+        return;
+      }
+      if(url.indexOf('/sns/like') > -1){
+        location.href = '/page'+url;
+      } else if (url.indexOf('/chat/detail/') > -1){
+        let id = url.match(/\/chat\/detail\/(\d+)/);
+        openChatModal(function(){
+          openChatDetailModal(id[1]);
+        });
+      } else if (url.indexOf('/friend/req') > -1){
+        closeModal('alarm-modal');
+        openFriendModal();
+      } else {
+
+      }
+    }
+
+</script>

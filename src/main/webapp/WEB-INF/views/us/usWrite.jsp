@@ -406,7 +406,7 @@ cursor: pointer;
                           <label for="us_city">모집 지역:</label>
                       </div>
                       <div class="us_city_value_div">
-                         <input type="text" readonly="readonly" id="us_city_input" name="city_name">
+                         <input type="text" readonly="readonly" id="us_city_input" name="doe_Name">
                       </div>
               </div>
 

@@ -31,8 +31,13 @@ public class AlimDTO {
 
     private String readYn;
     private String nickname;
+    private String profileImg;
+    private String thumbnailUrl;
     public String getContent(){
         return AlimContentEnum.valueOf(content).getTemplate();
+    }
+    public String getRealContent(){
+        return AlimContentEnum.valueOf(content).name();
     }
 
 

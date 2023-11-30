@@ -85,4 +85,7 @@ public interface ScheduleDAO {
 
 	// 위시리스트 총 갯수 세기
 	public int LikeTotalCount(ScheduleDTO schedule);
+
+	//글쓴이 얻기
+	public String getWriter(int schedule_Num);
 }

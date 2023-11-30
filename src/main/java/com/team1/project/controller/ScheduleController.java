@@ -163,6 +163,8 @@ public class ScheduleController {
 
             // 여기서 결과를 적절히 처리
             model.addAttribute("scheduleList", transList);
+            model.addAttribute("writer", scheduleService.getWriter(schedule_Num));
+            
             System.out.println(result);
 
             return "scheduleDetail";
@@ -220,7 +222,7 @@ public class ScheduleController {
 	@RequestMapping(value = "/delete")
 	public Map<String, Object> delete(@RequestBody ScheduleDTO schedule) throws Exception {
 	    Map<String, Object> result = new HashMap<>();
-	  
+	    System.out.println("schedule = " + schedule);
 	    if (scheduleService.scheduleDelete(schedule.getSchedule_Num())) {
 	        result.put("message", "삭제가 완료했습니다!");
 	    } else {

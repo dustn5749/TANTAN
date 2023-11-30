@@ -4,8 +4,8 @@
 <mapper namespace="com.team1.project.dao.AlimDAO">
   <insert id="save">
     insert into ALIM
-    (ALIM_ID, RECEIVE_MEMBER_ID, SEND_MEMBER_ID, CONTENT, CREATE_TIME, READ_YN, URL) VALUES
-   ( ALIM_SEQ.nextval, #{receiveMemberId}, #{sendMemberId}, #{content}, sysdate, 'N', #{url} )
+    (ALIM_ID, RECEIVE_MEMBER_ID, SEND_MEMBER_ID, CONTENT, CREATE_TIME, READ_YN, URL,THUMBNAIL_URL) VALUES
+   ( ALIM_SEQ.nextval, #{receiveMemberId}, #{sendMemberId}, #{content}, sysdate, 'N', #{url},#{thumbnailUrl} )
 
 
   </insert>
@@ -20,7 +20,10 @@
             al.CREATE_TIME as createTime,
             al.READ_YN as readYn,
             al.URL as url,
-            m.nickname
+            al.THUMBNAIL_URL as thumbnailUrl,
+            m.nickname,
+            m.PROFILE_IMG as profileImg
+
         from alim al
          inner join member m on (m.member_id = al.SEND_MEMBER_ID)
         where 1 = 1

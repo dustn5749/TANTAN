@@ -21,6 +21,7 @@ public class ChatRoomDTO {
   private String lastText;
 
   private Long memberCnt;
+  private String profileImg;
 
   private List<ChatMember> chatters;
 }

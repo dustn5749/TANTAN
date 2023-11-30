@@ -183,5 +183,10 @@ public class ScheduleService {
 			}
 			return result;
 		}
-	
+
+		//글쓴이 얻기
+		public String getWriter(int schedule_Num) {
+			System.out.println("글쓴이 얻기");
+			return schduleDAO.getWriter(schedule_Num);
+		}
 }

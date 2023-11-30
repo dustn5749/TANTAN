@@ -9,13 +9,11 @@ import com.team1.project.entity.Friend;
 import com.team1.project.entity.FriendRequest;
 import com.team1.project.service.alim.AlimSendService;
 import com.team1.project.service.alim.AlimService;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +48,8 @@ public class FriendService {
           .receiveMemberId(receiveMemberId)
           .sendMemberId(sendMemberId)
           .content(AlimContentEnum.FRIEND_REQ)
-          .url("")
+          .url("/friend/req")
+          .thumbnailUrl("")
           .readYn("N")
           .createTime(new Date())
           .build();
@@ -111,5 +110,9 @@ public class FriendService {
     //String regId, String resId
     friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getRegId(), "resId", friendInfo.getResId()));
     friendDAO.deleteFriendReq(Map.of("regId",friendInfo.getResId(), "resId", friendInfo.getRegId()));
+  }
+
+  public void deleteRequest(Long reqId) {
+    friendDAO.deleteFriendReqById(reqId);
   }
 }
