@@ -32,7 +32,7 @@
             <div class="sidebar-inner">
                 <div class="sidebar-menu">
                     <!--사이드바 버튼들 -->
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="home()">
                         <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
@@ -41,21 +41,21 @@
                         	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
                         <span class="txt">내 일정</span>
                     </button> 
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="usList()">
 <%--                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon"> --%>
                         <img src="<c:url value="/assets/sns/images/donghang.png"/>" alt="" class="icon">
                         <span class="txt">동행 모집</span>
                     </button>
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="likeScheduleList()">
 <%--                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon"> --%>
                         <img src="<c:url value="/assets/sns/images/weseelist.png"/>" alt="" class="icon">
                         <span class="txt">위시 리스트</span>
                     </button>
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="scheduleList()">
                         <img src="<c:url value="/assets/sns/images/gongyou.png"/>" alt="" class="icon">
                         <span class="txt">일정 공유</span>
                     </button>
-                    <button type="button" class="sidebar-btn active">
+                    <button type="button" class="sidebar-btn active" onclick="review()">
                         <img src="<c:url value="/assets/sns/images/review.png"/>" alt="" class="icon">
                         <span class="txt">리뷰 및 추천</span>
                     </button>
@@ -216,13 +216,32 @@
 </div>
 
 <script>
-
-	function myProfile(){
-		location.href = "/sns/profile"
+	function home(){
+		location.href = "/main.do"
 	}
 	
 	function mySchedule(){
 		location.href = "/member/mySchedule.do"
+	}
+	
+	function usList(){
+		location.href = "/us/list"
+	}
+	
+	function likeScheduleList(){
+		location.href="/schedule/likeScheduleList?member_id="
+	}
+	
+	function scheduleList(){
+		location.href = "/schedule/list"
+	}
+	
+	function review(){
+		location.href = "/review/main"
+	}
+	
+	function myProfile(){
+		location.href = "/sns/profile"
 	}
 	
   $(function(){
