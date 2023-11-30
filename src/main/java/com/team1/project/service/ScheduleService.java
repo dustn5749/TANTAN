@@ -26,9 +26,18 @@ public class ScheduleService {
 		public Map<String, Object> schedulePageList(ScheduleDTO schdule, String memberId) throws Exception {
 		
 			int totalCount = schduleDAO.totalCount(schdule);
+//			int totalCount = 0;
+//			if( schdule.getDoe_Name() != null ) {
+//				totalCount= schduleDAO.doe_nametotalCount(schdule);
+//				
+//			}else {
+//				totalCount= schduleDAO.totalCount(schdule);
+//			}
+			
+			schdule.setTotalCount(totalCount); 
+			
 			System.out.println("totalCount " + totalCount );
-			System.out.println("totalCount " + schdule.getNavStart() );
-			schdule.setTotalCount(totalCount);
+
 			
 			Map<String, Object> param = new HashMap<>();
 			param.put("MEMBER_ID", memberId);
@@ -86,15 +95,7 @@ public class ScheduleService {
 			System.out.println(result);			
 			return result;
 		}
-		
-		// 일정추가 
-		//		public Map<String, Object> day(ScheduleDTO schedule) {
-		//			Map<String, Object> result = new HashMap<>();
-		//			result.put("day", schduleDAO.day(schedule)); 
-		//			System.out.println(result);			
-		//			return result;
-		//		}
-		
+
 	
 		//일정 상세보기
 		public List<ScheduleDTO> getScheduleDetail(int schedule_Num) {
@@ -182,5 +183,11 @@ public class ScheduleService {
 				e.printStackTrace();
 			}
 			return result;
+		}
+		
+		//글쓴이 얻기
+		public String getWriter(int schedule_Num) {
+			System.out.println("글쓴이 얻기");
+			return schduleDAO.getWriter(schedule_Num);
 		}
 }

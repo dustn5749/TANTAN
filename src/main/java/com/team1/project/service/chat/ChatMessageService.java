@@ -1,5 +1,6 @@
 package com.team1.project.service.chat;
 
+import com.team1.project.dto.chat.ChatMember;
 import com.team1.project.dto.chat.message.ChatMessageRequest;
 import com.team1.project.dao.ChatMessageDAO;
 import com.team1.project.dto.MemberDTO;
@@ -22,6 +23,7 @@ public class ChatMessageService {
 
   private final MemberService memberService;
   private final ChatMessageDAO messageDAO;
+  private final ChatMemberService chatMemberService;
   private final SimpMessageSendingOperations messagingTemplate;
 
   public void sendMessage(ChatMessageRequest request) {
@@ -43,8 +45,16 @@ public class ChatMessageService {
 
     dto.setSendTime(new Date());
     dto.setSenderNickName(name);
+    dto.setProfileImg(byId.getProfile_img());
 
     messagingTemplate.convertAndSend("/sub/chat/room/" + dto.getRoomNum(), dto);
+
+    List<ChatMember> chatMemberList = chatMemberService.getChatMemberList(request.getRoomNum());
+    for(ChatMember chatMember : chatMemberList){
+      if(chatMember.getMemberId().equals(request.getMemberId())) continue;
+      messagingTemplate.convertAndSend("/sub/chat/new/" + chatMember.getMemberId(), dto);
+    }
+
   }
 
   public List<ChatMessageDTO> getList(GetMessageRequest messageRequest) {

@@ -3,85 +3,119 @@
 
 <mapper namespace="com.team1.project.dao.UsDAO">
  
-<insert id="insertUsList" parameterType="com.team1.project.dto.UsDTO">
-    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
-        SELECT NVL(MAX(US_NUM), 0) + 1 FROM US
-    </selectKey>
 
-    INSERT INTO US (
-        US_NUM,
-        TITLE, 
-        CONTENT, 
-        WRITER, 
-        US_CNT, 
-        REGDATE,
-        START_DATE, 
-        END_DATE
-        <if test="imageUrl != null and imageUrl != ''">
-            , IMAGEURL
-        </if>
-    )
-    VALUES (
-        #{us_num},
-        #{title},
-        #{content},
-        #{writer}, 
-        #{us_cnt},
-        TO_DATE(#{regdate}, 'YYYY-MM-DD HH24:MI:SS'),
-        TO_DATE(#{start_Date}, 'YYYY-MM-DD HH24:MI:SS'),
-        TO_DATE(#{end_Date}, 'YYYY-MM-DD HH24:MI:SS')
-        <if test="imageUrl != null and imageUrl != ''">
-            , #{imageUrl}
-        </if>
-    )
-</insert>
 
- 
-  <!-- 전체목록조회 -->
 <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
+    WITH OrderedUs AS (
+        SELECT
+            a.us_num,
+            a.DOE_NAME,
+            a.writer,
+            a.us_cnt,
+            a.regdate,
+            a.start_Date,
+            a.end_Date,
+            a.title,
+            a.content,
+            a.imageurl,
+            a.VIEWCOUNT,
+            ROW_NUMBER() OVER (
+                <if test='DOE_NAME != null'>
+                    PARTITION BY a.DOE_NAME
+                </if>
+                ORDER BY
+                <choose>
+                    <when test="ORDER == 'comment'">
+                        a.us_comment DESC
+                    </when>
+                    <when test="ORDER == 'viewCount'">
+                        a.VIEWCOUNT DESC
+                    </when>
+                    <otherwise>
+                        a.us_num DESC
+                    </otherwise>
+                </choose>
+            ) AS rnum
+        FROM
+            us a
+          <if test='DOE_NAME != null'>
+            where a.DOE_NAME = #{DOE_NAME}
+        </if>
+    )
+    SELECT
+        u.*,
+        uf.usfilenum as fileNo
+    FROM
+        OrderedUs u
+    LEFT OUTER JOIN us_file uf ON u.us_num = uf.us_num
+    WHERE
+        u.rnum BETWEEN #{startNo, jdbcType=INTEGER} AND #{endNo, jdbcType=INTEGER}
 
-SELECT u.*, uf.usfilenum as fileNo
-	FROM (
-		SELECT * 
-	    FROM (
-	        SELECT 
-	        rownum AS nrow, 
-	        us_num, 
-	        city_name,
-	        writer, 
-	        us_cnt,
-	        regdate,
-	        start_Date,
-	        end_Date,
-	        title, 
-	        content,
-	        imageurl
-	        FROM (
-	            SELECT rownum  AS 
-	            nrow,
-	            us_num,
-	            city_name,
-	            writer,
-	            us_cnt,
-	            regdate,
-	            start_Date,
-	            end_Date,
-	            title,
-	            content,
-	            imageurl
-	            FROM us a 
-	            <if test="start_Date != null and end_Date != null">
-	                WHERE start_Date <![CDATA[>=]]> TO_DATE( #{start_Date}, 'YYYY-MM-DD') 
-          			AND end_Date <![CDATA[<=]]> TO_DATE(#{end_Date}, 'YYYY-MM-DD')
-	            </if>
-	            order by us_num desc
-	        )
-	    ) WHERE nrow BETWEEN #{startNo} AND #{endNo}
-	) u
-	left outer join us_file uf
-		on u.us_num = uf.us_num
 </select>
 
+ 
+	<update id="commentplus" >
+		UPDATE
+			US
+			SET US_COMMENT = US_COMMENT + 1
+		WHERE US_NUM = #{us_num}
+	</update>
+ 
+ 
+  <!-- 전체목록조회 --> 
+<!-- <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map"> -->
+<!-- SELECT u.*, uf.usfilenum as fileNo -->
+<!-- 	FROM ( -->
+<!-- 		SELECT *  -->
+<!-- 	    FROM ( -->
+<!-- 	        SELECT  -->
+<!-- 	        rownum AS nrow,  -->
+<!-- 	        us_num,  -->
+<!-- 	        city_name, -->
+<!-- 	        deo_name, -->
+<!-- 	        writer,  -->
+<!-- 	        us_cnt, -->
+<!-- 	        regdate, -->
+<!-- 	        start_Date, -->
+<!-- 	        end_Date, -->
+<!-- 	        title,  -->
+<!-- 	        content, -->
+<!-- 	        imageurl, -->
+<!-- 	        VIEWCOUNT -->
+<!-- 	        FROM ( -->
+<!-- 	            SELECT rownum  AS  -->
+<!-- 	            nrow, -->
+<!-- 	            us_num, -->
+<!-- 	            city_name, -->
+<!-- 	            writer, -->
+<!-- 	            us_cnt, -->
+<!-- 	            deo_name, -->
+<!-- 	            regdate, -->
+<!-- 	            start_Date, -->
+<!-- 	            end_Date, -->
+<!-- 	            title, -->
+<!-- 	            content, -->
+<!-- 	           imageurl, -->
+<!-- 	           VIEWCOUNT -->
+<!-- 	            FROM us a  -->
+	       
+<!-- 	            <if test="start_Date != null and end_Date != null"> -->
+<!-- 	                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
+<!-- 	            </if> -->
+	            
+<!-- 	            order by us_num -->
+<!-- 	        ) -->
+<!-- 	    ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
+<!-- 	) u -->
+<!-- 	left outer join us_file uf -->
+<!-- 		on u.us_num = uf.us_num -->
+
+<!-- </select> -->
+
+   
+   
+   
+   
    
 <!-- 메인 탑5 노출 -->
 <select id="usTop5" resultType="com.team1.project.dto.UsDTO">
@@ -90,7 +124,7 @@ SELECT u.*, uf.usfilenum as fileNo
           ROWNUM AS nrow, SUB.* 
        FROM (  
           SELECT  
-             US_NUM, CITY_NAME, WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
+             US_NUM,  WRITER, US_CNT, REGDATE, START_DATE, END_DATE, TITLE, CONTENT 
           FROM us  
           ORDER BY us_num DESC 
        ) SUB   
@@ -103,47 +137,53 @@ SELECT u.*, uf.usfilenum as fileNo
       select count(*)
       from us
     </select>
+    
+    <select id="doe_nametotalCount" resultType="int">
+      select count(*)
+      from us where doe_name = #{doe_Name}
+    </select>
+    
 
 <!-- 동행 글쓰기 -->
-<insert id="writeInsert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
-    <selectKey keyProperty="us_num" resultType="int" order="BEFORE">
-        SELECT us_sq.nextval as us_num FROM dual
-    </selectKey>
+<insert id="insert" keyProperty="us_num" useGeneratedKeys="true" parameterType="com.team1.project.dto.UsDTO">
+    <selectKey keyProperty="us_num" resultType="java.lang.Integer" order="AFTER">
+        SELECT us_sq.currval FROM dual
+    </selectKey> 
     insert into us (
         us_num,
-        city_name,
         writer,
         us_cnt,
-        regdate,
-        start_date,
-        end_date,
+        REGDATE,
+        START_DATE,
+        END_DATE,
         title,
         content,
         status,
-        reportcnt
+        REPORTCNT,
+        DOE_NAME
     ) VALUES (
-        us_sq.nextval,
-        #{city_name},
-        #{writer},
+        us_sq.nextval,  
+        #{writer,jdbcType=VARCHAR},
         #{us_cnt},
         sysdate,
-        #{start_Date},
-        #{end_Date},
-        #{title},
-        #{content},
+        TO_DATE(#{start_Date}, 'YYYY-MM-DD'),
+        TO_DATE(#{end_Date}, 'YYYY-MM-DD'),
+        #{title,jdbcType=VARCHAR},
+        #{content,jdbcType=VARCHAR},
         'N',
-        0
-    )
+        0,
+        #{doe_Name,jdbcType=VARCHAR}
+    ) 
 </insert>
+	<select id="nextUsNum" resultType="int">
+		select max(us_num) from us
+	</select>
 
-   <select id="nextUsNum" resultType="int">
-       SELECT max(us_num) from us
-   </select>
+
 <!-- 상세보기 -->
     <select id="usDetail" resultType="com.team1.project.dto.UsDTO">
     SELECT 
         u.us_num, 
-        u.city_name,
         u.writer, 
         u.us_cnt,
         u.regdate,
@@ -152,6 +192,7 @@ SELECT u.*, uf.usfilenum as fileNo
         u.title, 
         u.content,
         u.imageurl,
+        u.doe_Name,
        uf.usfilenum as fileNo
     FROM US u 
    	left outer join us_file uf
@@ -163,7 +204,6 @@ SELECT u.*, uf.usfilenum as fileNo
    <update id="usUpdate"> 
     UPDATE US 
     SET 
-    CITY_NAME = #{city_name},
     US_CNT = #{us_cnt}, 
     START_DATE = #{start_Date}, 
     END_DATE = #{end_Date}, 
@@ -181,20 +221,29 @@ SELECT u.*, uf.usfilenum as fileNo
      
      <!-- 최신 동행 모집글 -->
       <select id="getUsRecentList" resultType="com.team1.project.dto.UsDTO">
+      <![CDATA[
           SELECT * FROM (
               SELECT * FROM us
-              ORDER BY us_num 
+              ORDER BY regdate DESC, us_num asc
           )
-          WHERE ROWNUM &lt;= 3
+          WHERE ROWNUM <= 3
+          ]]> 
       </select>
       
-      
+		<!--조회수 -->
+      <update id="viewCount">
+      update us set
+         viewCount = viewCount + 1 
+      where US_NUM = #{us_num}
+   </update>
+
       
 <!-- 관리자 -->
 <!-- 신고받은 동행 리스트 가져오기 -->
    <select id="usList" parameterType="com.team1.project.dto.UsDTO" resultType="com.team1.project.dto.UsDTO">
 		<![CDATA[
     SELECT
+    	ROWNUM + #{startNo} -1 AS nrow,
         us_num,
         writer,
         us_cnt,
@@ -275,5 +324,14 @@ SELECT u.*, uf.usfilenum as fileNo
 	    SELECT COUNT(*) AS todayWrite
 	    FROM us
 	    WHERE TO_CHAR(regdate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
+	
+		<select id="totalPosts" resultType="java.lang.Integer">
+	    SELECT 
+	        COUNT(*) AS TOTAL_POSTS
+	    FROM 
+	        us
+	    WHERE 
+	        TO_CHAR(REGDATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
 	</select>
 </mapper>

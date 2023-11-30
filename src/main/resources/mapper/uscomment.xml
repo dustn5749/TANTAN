@@ -12,10 +12,12 @@
             SEQ_COMMENT.nextval, #{us_num}, #{content}, #{writer}, SYSDATE
         )
     </insert>
-    
+
     <!-- 댓글 목록 가져오기 -->
     <select id="getUsCommentList" resultType="com.team1.project.dto.UsCommentDTO">
-    	select * from us_comment
-    	where us_num=#{us_num}
+        select * from us_comment
+        where us_num=#{us_num}
     </select>
 </mapper>
+    
+  

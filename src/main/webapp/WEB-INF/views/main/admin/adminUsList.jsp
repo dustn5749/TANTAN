@@ -184,12 +184,18 @@ function loadGridData(page) {
 
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#usGrid").jqGrid({
     datatype: "json", // 데이터를 서버에서 가져오기
     url: '/usList',
-    colNames: ['제목', '작성자', '등록일', '조회수', '여행지', '신고 횟수', '상태', '삭제 여부', 'us_num'],
+    colNames: ['','제목', '작성자', '등록일', '조회수', '여행지', '신고 횟수', '상태', '삭제 여부', 'us_num'],
     colModel: [
+    	{ name: 'nrow', index: 'nrow', width: 50, label: '행 번호', sortable: false, align: 'center' },
         { label: 'title', name: 'title', index: 'title' },
         { label: '작성자', name: 'writer', index: 'writer' },
         { label: '등록일', name: 'regdate', index: 'regdate' },
@@ -219,7 +225,7 @@ $("#usGrid").jqGrid({
     sortorder: 'desc',
     caption: '동행리스트',
     loadui: "enable",
-    rownumbers: true,
+//     rownumbers: true,
     loadComplete: function (data) {
         var allRowsInGrid = jQuery('#usGrid').jqGrid('getGridParam', 'records');
         console.log("그리드 데이터 수:", allRowsInGrid);

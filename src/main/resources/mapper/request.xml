@@ -68,6 +68,16 @@
   </select>
   <select id="findByReceiveMemberId" resultType="com.team1.project.entity.FriendRequest">
 
+    select
+      friend_req_id as id,
+      send_member_id as sendMemberId,
+      receive_member_id as receiveMemberId,
+      req_date as reqDate,
+      accept_yn as acceptYn
+    from FRIEND_REQUEST
+    where
+      receive_member_id = #{memberId}
+
   </select>
   <select id="findById" resultType="com.team1.project.entity.FriendRequest">
     select
@@ -112,6 +122,11 @@
     delete from FRIEND_REQUEST
     where SEND_MEMBER_ID = #{regId}
     and RECEIVE_MEMBER_ID = #{resId}
+  </delete>
+
+  <delete id="deleteFriendReqById">
+    delete from FRIEND_REQUEST
+    where FRIEND_REQ_ID = #{reqId}
   </delete>
 
   <insert id="save">

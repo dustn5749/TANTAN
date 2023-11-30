@@ -36,4 +36,6 @@ public interface FriendDAO {
     void deleteFriendId(Long friendId);
 
     void deleteFriendReq(Map<String,Object> map);
+
+    void deleteFriendReqById(Long reqId);
 }

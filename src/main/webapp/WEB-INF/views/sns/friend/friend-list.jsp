@@ -12,7 +12,9 @@
         </figure>
         <div class="person-profile">
           <div class="name-wrap">
-            <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
+            <a href="/sns/profile/${friend.regId}">
+              <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
+            </a>
           </div>
           <p class="intro-txt">소개글</p>
         </div>
@@ -38,5 +40,9 @@
         $('#friend-list'+deleteId).remove();
       }
     })
+  }
+  
+  	function snsProfile(){
+	  location.href = "/sns/profile";
   }
 </script>

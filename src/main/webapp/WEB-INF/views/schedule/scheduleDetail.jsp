@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<sec:authorize access="isAuthenticated()">
+  <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 
 <!DOCTYPE html>
 <html>
@@ -28,16 +33,27 @@
    margin: 0 auto;
 }
 
+input, a, span, div, h2, button, li, ul {
+   font-family: 'Pretendard-Regular';
+
+}
+
 /* 날짜 선택 div */
 .schedule {
-   margin-top: 80px !important;
-   display: flex;
-   width: 100%;
-   text-align: center;
-   justify-content: center;
-   align-content: center;
-   align-items: center;
+    margin-top: 50px !important;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    padding: 5px;
+/*     transform: translate(-50%, -50%); */
 }
+
+
 
 .schedule>form {
    display: flex;
@@ -61,6 +77,19 @@
    margin-right: 100px;
    font-weight: bold;
    font-size: 20px !important;
+}
+.titlediv{
+	text-align: center;
+	width: 70px;
+}
+#title {
+	position: absolute;
+	left: 120px;
+	width: 45%;
+	height: 30px;
+	padding-left: 10px;
+	border-radius: 3px;
+	border : 1px solid rgb(219, 219, 219);
 }
 
 .form-control {
@@ -146,7 +175,7 @@
    width: calc(100% - 100px);
 }
 
-.schedule form:after { `1: "";
+.schedule form:after { 
    position: absolute;
    top: 50%;
    left: 50%;
@@ -202,6 +231,8 @@
 
 .schedule-list ul em {
    font-style: normal;
+   left: 170px;
+   position: absolute;
 }
 
 .schedule-list>ul>li {
@@ -220,13 +251,15 @@
 
 .schedule-list p {
    position: relative;
+   display: flex;
+   padding-left: 20px;
 }
 
 .schedule-list p:after {
    content: "";
    position: absolute;
    top: 50%;
-   left: 90px;
+   left: 120px;
    margin-top: -8px;
    width: 2px;
    height: 16px;
@@ -469,6 +502,49 @@
 .content {
    width: 800px;
 }
+
+ .center-align {
+ 	position: relative;
+ 	padding: 35px;
+    text-align: left;
+    padding-left: 20px;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+  }
+
+  /* 간격 추가 스타일 */
+ .spacing {
+    margin-bottom: 20px;
+  }
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .memo-modal {
+    margin-top: 20px;
+  }
+	
+  .day_li_btn_div button {
+    margin-right: 10px;
+  }
+  .daycontent {
+  	margin-top: 20px;
+  }
+  .inline, .memo-div {
+  	display: flex;
+  	margin-bottom: 2px;
+  }
+  .inline>div, .memo-div > div {
+  	margin-right: 50px;
+  
+  }
+  .inline>input, .memo-div > input{
+  	width: 300px !important;
+  	border-radius: 3px;
+  	border: 1px solid rgb(219, 219, 219);
+  	padding-left: 10px;
+  }
 </style>
 <body>
 
@@ -525,7 +601,7 @@
 
    <div class="scheduleDetailContent">
       <div class="schedule">
-         <div class="schedule_title">날짜선택</div>
+<!--          <div class="schedule_title">날짜선택</div> -->
          <form>
             <div class="startDate_div">
                <p class="Date_title">시작 날짜 :</p>
@@ -550,9 +626,14 @@
 
             <div class="schedule-list">
                <div class="title_div">
-                  <span> 제목 </span><input type="text" id="title"
-                     value="${scheduleList[0].title }">
-               </div>
+                 
+    <div class="title-container center-align">
+	  <div class="titlediv">제목</div>
+	  <input type="text" id="title" value="${scheduleList[0].title}" readonly="readonly" >
+	</div>
+
+               
+               
                <ul class="schedule-ul">
                   <c:forEach items="${scheduleList}" var="item" varStatus="status">
                      <li class="schedule-item day-${status.count }"><input
@@ -563,24 +644,40 @@
                               class="day_date"><input type="date"
                               class="detail_scedule" value=${item.date1 }></em>
                         </p>
-                        <div>
-                           <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
-                           <input type="text" readonly="readonly"
-                              id="select_city_area_${status.count }"
-                              class="day-${status.count } placeList"
-                              name="location${status.count }" value="${item.place1 }" />
-                           <%-- <input type="hidden" id="select_city_area_2" value="${scheduleList[0].place2}" /> --%>
-
-                        </div> <!-- 메모 부분 수정 -->
-                        <div class="memo-div">
-                           <button class="schedule-btn-grp memo-add-btn"
-                              onclick="addMemo(this)">메모수정</button>
-                           <input type="text" readonly="readonly"
-                              id="select_city_area_${status.count }"
-                              class="day-${status.count } placeList memoList"
-                              name="location${status.count }" value="${item.memo1}" />
-                           <%-- <input type="hidden" id="select_city_memo_2" value="${scheduleList[0].memo2}" /> --%>
-
+                        <div class="daycontent">
+	                        <div class="inline">
+	                        <c:choose>
+	                          <c:when test="${principal.user.member_id==writer}">
+	                           <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
+	                          </c:when>
+	                          <c:otherwise>
+	                           <div class="schedule-btn-grp" >장소</div>
+	                          </c:otherwise>
+	                          </c:choose>
+	                           <input type="text" readonly="readonly"
+	                              id="select_city_area_${status.count }"
+	                              class="day-${status.count } placeList"
+	                              name="location${status.count }" value="${item.place1 }" />
+	                           <%-- <input type="hidden" id="select_city_area_2" value="${scheduleList[0].place2}" /> --%>
+	
+	                        </div> <!-- 메모 부분 수정 -->
+	                        <div class="memo-div">
+	                        <c:choose>
+	                          <c:when test="${principal.user.member_id==writer}">
+	                           <button class="schedule-btn-grp memo-add-btn"
+	                              onclick="addMemo(this)">메모수정</button>
+	                          </c:when>
+	                          <c:otherwise>
+	                          	<div class="schedule-btn-grp memo-add-btn">메모</div>
+	                          </c:otherwise>
+	                          </c:choose>
+	                           <input type="text" readonly="readonly"
+	                              id="select_city_area_${status.count }"
+	                              class="day-${status.count } placeList memoList"
+	                              name="location${status.count }" value="${item.memo1}" />
+	                           <%-- <input type="hidden" id="select_city_memo_2" value="${scheduleList[0].memo2}" /> --%>
+								</div>
+							</div>
                            <!-- 메모 모달창 -->
                            <div class="memo-modal" style="display: none;">
                               <div class="modal-content">
@@ -619,16 +716,20 @@
                            </div></li>
                   </c:forEach>
                </ul>
-               <!-- 일정 추가 버튼 -->
-               <div class="day_li_btn_div">
-                  <button class="add_shedule_btn">다른일정수정</button>
-                  <button class="minus_shedule_btn">일정삭제</button>
-               </div>
-               <!--일정 수정하기 버튼 -->
-               <div class="mySchedule"
-                  style="text-align: center; margin-bottom: 20px;">
-                  <a href="javascript:void(0);" id="saveEntryBtn">수정완료</a>
-               </div>
+               <c:if test="${principal.user.member_id==writer}">
+               		<!-- 일정 추가 버튼 -->
+	               <div class="day_li_btn_div">
+	                  <button class="add_shedule_btn">일정추가</button>
+	                  <button class="minus_shedule_btn">일정삭제</button>
+	               </div>    
+	                          
+	               <!--일정 수정하기 버튼 -->
+	               <div class="mySchedule"
+	                  style="text-align: center; margin-bottom: 20px;">
+	                  <a href="javascript:void(0);" id="saveEntryBtn">수정완료</a>
+	               </div>
+               </c:if>
+               
             </div>
    
          </div>

@@ -24,6 +24,7 @@ public class AlimSendService {
     for (AlimDTO dto : list) {
       messagingTemplate.convertAndSend("/sub/alim/" + dto.getReceiveMemberId(), dto);
     }
+    
   }
 
 }

@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page session="false"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
-</sec:authorize>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
@@ -31,11 +26,15 @@ input, button, div, span, h2, p, h5{
 
 .us_header_size {
    float: right;
-   width: 27%;
+   width: 19%;
    top: 80px;
    height: fit-content;
    /*     background-color: rgb(255, 255, 255); */
    display: flex;
+}
+
+.us_header_size > button {
+	width: 150px !important;
 }
 
 }
@@ -151,17 +150,21 @@ input, button, div, span, h2, p, h5{
 
 .us_fillter {
    PADDING: 10PX;
+   width: 1260px;
+   margin: 0 auto;
+   text-align: center;
 }
 
 .fillter_btn_area {
-   position: relative;
-   left: -820px;
+  text-align: left;
+/*    left: -820px; */
    width: 78%;
-   margin-bottom: 30px;
+
 }
 
 .fillter_btn {
    width: 80px;
+   margin:34px;
    height: 40px;
    border-radius: 10px;
    background-color: black;
@@ -353,7 +356,7 @@ ul>li {
    color: white !important;
 }
 
-.py-5 {
+.3py-5 {
    padding: 10px;
 }
 
@@ -369,7 +372,7 @@ ul>li {
 #myModal {
    display: none;
    position: fixed;
-   z-index: 1;
+   z-index: 10;
    left: 0;
    top: 0;
    width: 100%;
@@ -439,49 +442,49 @@ ul>li {
    text-align: center;
 }
 .card.box-shadow{
-	height: 450px;
+   height: 450px;
 }
 .schedule_detail {
-	height: 130px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+   height: 130px;
+   margin-top: 20px;
+   margin-bottom: 20px;
 }
 .detail_btn_area {
-	margin-top: 20px;
-	height: 50px;
+   margin-top: 20px;
+   height: 50px;
 }
 .detailBtn{
-	background: white;
-	border: none;
-	width: 100px;
-	height: 40px;
-	border-radius: 7px;
+   background: white;
+   border: none;
+   width: 100px;
+   height: 40px;
+   border-radius: 7px;
 }
 .detailBtn:hover{
-	background: black;
-	color: white;
+   background: black;
+   color: white;
 }
 
 /* 페이징 처리 */
 .nav_div {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	
+   margin-top: 30px;
+   margin-bottom: 30px;
+   
 }
 
 .nav_div > a {
-	font-size: 20px !important;
-	cursor: pointer !important;
+   font-size: 20px !important;
+   cursor: pointer !important;
 }
 .nav_div > a:hover {
-	color : red;
+   color : red;
 }
 .nav_div  > strong {
-	font-size: 24px !important;
-	background-color: rgb(248, 248, 248);
+   font-size: 24px !important;
+   background-color: rgb(248, 248, 248);
 }
 .nav_div> a,strong {
-	margin-left: 10px;
+   margin-left: 10px;
 }
 
 </style>
@@ -526,7 +529,7 @@ ul>li {
             </button>
 
 
-            <button class="city_btn1"
+            <button class="city_btn1" onclick="window.location.href ='write'"
                style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
          </div>
 
@@ -573,19 +576,19 @@ ul>li {
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gyeonggiCheckbox" value="경기"> <label class="form-check-label"
-                        for="gyeonggiCheckbox">경기도</label>
+                        for="gyeonggiCheckbox">경기</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="chungcheongCheckbox"> <label
-                        class="form-check-label" for="chungcheongCheckbox">충청도</label>
+                        class="form-check-label" for="chungcheongCheckbox">충북</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gyeongsangCheckbox"> <label class="form-check-label"
-                        for="gyeongsangCheckbox">경상도</label>
+                        for="gyeongsangCheckbox">경북</label>
                   </div>
 
                   <div class="form-check">
@@ -611,16 +614,16 @@ ul>li {
 
             </div>
          </div>
-         <div class="fillter_btn_area"
-            style="display: flex; justify-content: flex-end;">
-            <button class="fillter_btn">댓글순</button>
-            <button class="fillter_btn">조회순</button>
-            <button class="fillter_btn" onclick="order('like')">인기순</button>
-         </div>
+
+         
          <div class="container">
-
-
-
+         
+                  <div class="fillter_btn_area" justify-content: flex-end;">
+            <button class="fillter_btn" onclick="order('hh')">최신순</button>
+            <button class="fillter_btn" style="margin-left: -28px;"
+} onclick="order('like')">인기순</button>
+         </div>
+         
             <div class="cy5jw6o dir dir-ltr" role="group"
                data-testid="card-container"
                aria-labelledby="title_896641117667634802">
@@ -640,29 +643,37 @@ ul>li {
 
                                           <div class="text-center" style="position: relative;">
                                              <!-- Image Container -->
-                                             <!-- Heart Icon -->
-                                             <svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32"
-                                                aria-hidden="true" role="presentation" focusable="false"
-                                                data-schedule-num="${schedule.schedule_Num }"
-                        style="position: absolute; top: 0; left: 0; fill: ${schedule.like ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 0, 0.5)'}; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
-    <path
-                                                   d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z">
-    </path>
-</svg>
-                                             </a> <img src="/assets/img/local/${schedule.doe_img}"
-                                                style="max-width: 100%; height: 200px; object-fit: cover;">
+                                             
+  <div style="position: relative; display: inline-block; max-width: 100%; height: 200px; overflow: hidden;">
+    <!-- doe_img 이미지 -->
+    <img src="/assets/img/local/${schedule.doe_img}" alt="doe_img" style="width: 100%; height: 100%; object-fit: cover;">
+
+    <!-- 좋아요 아이콘과 숫자 -->
+    <div style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32"
+             aria-hidden="true" role="presentation" focusable="false"
+             data-schedule-num="${schedule.schedule_Num }"
+             style="fill: ${schedule.like ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 0, 0.5)'}; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
+            <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
+        </svg>
+        
+        <!-- 좋아요 수 텍스트 (파란색) -->
+        <text style="fill: blue; font-size: 12;">${schedule.likecnt}</text>
+    </div>
+</div>
+  
+
                                              <input type="hidden" name="memberId"
                                                 value="${schedule.member_id}"> <input
                                                 type="hidden" name="schedule_Num"
                                                 value="${schedule.schedule_Num}">
-                                                
-                                                
                                             <div class="schedule_detail">
                                              <h5 class="fw-bolder">${schedule.title}</h5>
                                              <p>${schedule.member_id}</p>
                                              <p>지역:${schedule.doe_Name}</p>
                                              <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
                                              <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+<%--                                               <p>좋아요 수: ${schedule.LikeCNT != null ? schedule.LikeCNT : ""}</p> --%>
                                              <input type="hidden" name="regDate"
                                                 value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
                                              <input type="hidden" value="${schedule.schedule_Num}"
@@ -692,8 +703,10 @@ ul>li {
             method="post">
             <input type="hidden" name="pageNo" id="pageNo"
                value="${result.schedule.pageNo}">
-            <%--<input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">--%>
+            <input type="hidden" id="pageNo2" name="pageNo" value="${result.schedule.pageNo}">
          </form>
+         
+         
       </div>
 
    </div>
@@ -722,94 +735,136 @@ ul>li {
                <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
                   class="pageArrow">&gt;</a>
             </c:if>
-
          </div>
 
-		<c:choose>
-		    <c:when test="${empty principal}">
-		        <input type="hidden" value="${principal.user.member_id}" class="member">			
-		    </c:when>
-		    <c:otherwise>
-		        <input type="hidden" value="null" class="member">
-		    </c:otherwise>		
-		</c:choose>
+
 
    <script>
-   $(".city_btn1").on("click", function() {
-		if($(".member").val()!=""){
-			location.href="/schedule/write";		
-		} else {
-			alert("로그인 후 이용해주세요")
-		}
-	 
-	})
+   function jsPageNo(pageNo) {
+       // 현재 URL 가져오기
+       var currentUrl = window.location.href;
+
+       // 기존의 pageNo 매개변수 제거
+       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+       currentUrl = currentUrl.replace(regex, '$2');
+
+       // 현재 URL에 페이지 번호 추가
+       var newUrl;
+       if (currentUrl.indexOf('?') !== -1) {
+           newUrl = currentUrl + "&pageNo=" + pageNo;
+       } else {
+           newUrl = currentUrl + "?pageNo=" + pageNo;
+       }
+
+       // 새로운 URL을 폼의 액션으로 설정
+       document.getElementById("pageForm").action = newUrl;
+
+       // 페이지 번호 설정 및 폼 제출
+       document.getElementById("pageNo").value = pageNo;
+       document.getElementById("pageForm").submit();
+   }
+
+   //뒤로가기
+   function moveToSelectedRegion() {
+       window.location.href = '/schedule/list';
+   }
    
    
-    function jsPageNo(pageNo) {
-       console.log("pageNo" + pageNo);
-        document.getElementById("pageNo").value = pageNo;
-        document.getElementById("pageForm").submit();
-    }
-
-   function loadMoreData(start) {
-    var member_Id = "member_id"; 
-    var doe_Name = "doe_name"; 
-    var schedule_Num = "schedule_num"; 
-    var end_Date = "end_date";
-    var reg_Date = "reg_date"; 
-
-    $.ajax({
-        type: "POST",
-        url: "/schedule/list",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-            start: start,
-            member_id: member_Id,
-            doe_Name: doe_Name,
-            schedule_Num: schedule_Num,
-            end_Date: end_Date,
-            reg_Date: reg_Date
-        }),
-        success: function (response) {
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
-        }
-    });
-}
-            function moveToSelectedRegion() {
-                window.location.href = '/schedule/list';
-            }
-
-            $(document).ready(function () {
-                $('.heartIcon').click(function () {
-                    var scheduleNum = $(this).data('schedule-num');
-                    var heartIcon = $(this);
-                    var currentColor = heartIcon.css('fill');
-                    
-                    console.log(scheduleNum)
-                    var isLike = true;
-                    if (currentColor == ('rgb(255, 0, 0)')) {   // 하트가 빨간색이면 (좋아요가 눌려있으면)
-                       heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');   // 좋아요 취소
-                       isLike = false;
-                    } else {
-                       heartIcon.css('fill', 'rgb(255, 0, 0');
-                    }
-                    
-                    $.ajax({
-                        url: '/schedule/updateHeartColor',
-                        method: 'POST',
-                        data: { scheduleNum: scheduleNum, isLike: isLike},
-                        success: function (response) {
-                            
-                        },
-                        error: function () {
-                            console.error('Error during AJAX request.');
-                        }
-                    });
-                });
+            function loadMoreData(start) {
+             var member_Id = "member_id"; 
+             var doe_Name = "doe_name"; 
+             var schedule_Num = "schedule_num"; 
+             var end_Date = "end_date";
+             var reg_Date = "reg_date"; 
+         
+             $.ajax({
+                 type: "POST",
+                 url: "/schedule/list",
+                 contentType: "application/json; charset=utf-8",
+                 data: JSON.stringify({
+                     start: start,
+                     member_id: member_Id,
+                     doe_Name: doe_Name,
+                     schedule_Num: schedule_Num,
+                     end_Date: end_Date,
+                     reg_Date: reg_Date
+                 }),
+                 success: function (response) {
+                 },
+                 error: function (xhr, textStatus, errorThrown) {
+                     console.error("AJAX 요청 중 오류 발생:", textStatus, errorThrown);
+                 }
+             });
+         }
+//                      $(document).ready(function () {
+//                          $('.heartIcon').click(function () {
+//                              var scheduleNum = $(this).data('schedule-num');
+//                              var heartIcon = $(this);
+//                              var currentColor = heartIcon.css('fill');
+                             
+//                              console.log(scheduleNum)
+//                              var isLike = true;
+//                              if (currentColor == ('rgb(255, 0, 0)')) {   // 하트가 빨간색이면 (좋아요가 눌려있으면)
+//                                 heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');   // 좋아요 취소
+//                                 isLike = false;
+//                              } else {
+//                                 heartIcon.css('fill', 'rgb(255, 0, 0');
+//                              }
+                             
+//                              $.ajax({
+//                                  url: '/schedule/updateHeartColor',
+//                                  method: 'POST',
+//                                  data: { scheduleNum: scheduleNum, isLike: isLike},
+//                                  success: function (response) {
+                                     
+//                                  },
+//                                  error: function () {
+//                                      console.error('Error during AJAX request.');
+//                                  }
+//                              });
+//                          });
 
               
+                                
+      $(document).ready(function () {
+       $('.heartIcon').click(function () {
+        var scheduleNum = $(this).data('schedule-num');
+        var heartIcon = $(this);
+        var currentColor = heartIcon.css('fill');
+
+        console.log(scheduleNum);
+        var isLike = true;
+        if (currentColor == 'rgb(255, 0, 0)') {
+            heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');
+            isLike = false;
+        } else {
+            heartIcon.css('fill', 'rgb(255, 0, 0)');
+        }
+
+        $.ajax({
+            url: '/schedule/updateHeartColor',
+            method: 'POST',
+            data: { scheduleNum: scheduleNum, isLike: isLike },
+            success: function (response) {
+                // 서버 응답을 확인하고 필요한 작업 수행
+                if (response.success) {
+                    // 서버에서 좋아요 수를 업데이트
+                    var newLikeCount = response.likeCount;
+                    // 좋아요 수를 UI에 업데이트
+                    var likeCountElement = heartIcon.siblings('.likeCount');
+                    likeCountElement.text(newLikeCount);
+                } else {
+                    console.error('Server response indicates failure.');
+                }
+            },
+            error: function () {
+                console.error('Error during AJAX request.');
+            }
+        });
+    });
+});
+                    
+                       //페이징처리
                 function jsPageNo(pageNo) {
                     document.getElementById("pageNo").value = pageNo;
                     document.getElementById("pageForm").submit();
@@ -847,8 +902,7 @@ ul>li {
                     var modal = document.getElementById("myModal");
                     modal.style.display = "block";
                 });
-            });
-
+        
    function moveRegion() {
       var value = $('[name=deo_name]:checked').val();
       

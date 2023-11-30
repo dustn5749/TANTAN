@@ -32,6 +32,8 @@ public class MemberDTO {
     private String month;
     private int signup_count;
     private int todayRegister;
+    private int nrow;
+    private int totalMembers;
 //	private String introduce;
 	
 	//카카오 인증에 대한 필드

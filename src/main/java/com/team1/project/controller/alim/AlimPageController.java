@@ -28,6 +28,7 @@ public class AlimPageController {
         // 현재 로그인한 사용자가 받은 알림 목록을 알림 페이지에 전달
         request.setAttribute("alimList", service.getAlimListByReceiveMember(memberId));
         return "alim";
+        
     }
 
 }

@@ -43,7 +43,8 @@ public interface ScheduleDAO {
 
 	// 일정 삭제하기
 	public boolean schduleDelete(int schedule_Num) throws Exception;
-
+	
+	
 	//답글 폼
 	public int reply(ScheduleDTO schdule) throws Exception;
 
@@ -55,6 +56,9 @@ public interface ScheduleDAO {
 	public List<ScheduleDTO> getMyScheduleList(String member_id);
 
 
+	public int doe_nametotalCount(ScheduleDTO schdule);
+
+	
 	// top3 스케쥴 목록 가져오기
 	public List<ScheduleDTO> getTop3ScheduleList();
 
@@ -75,4 +79,7 @@ public interface ScheduleDAO {
 
 	// 위시리스트 총 갯수 세기
 	public int LikeTotalCount(ScheduleDTO schedule);
+
+	//글쓴이 얻기
+	public String getWriter(int schedule_Num);
 }

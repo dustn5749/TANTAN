@@ -37,13 +37,13 @@ public class ScheduleController {
 	//일정목록보기
 	@RequestMapping (value = "/list")
     public String schedule(Model model, ScheduleDTO schedule) throws Exception {
+		System.out.println("schedule" + schedule);
 		MemberDTO member = getCurrentMember();
 		String memberId = member == null ? null : member.getMember_id();
 		
 		Map<String, Object> result = scheduleService.schedulePageList(schedule, memberId);
 		model.addAttribute("result", result);
-	    System.out.println("일정 목록 출력: " + result);
-	    System.out.println("일정 페이지출력: " + result);
+	   
     return "scheduleList";
    } 
 	
@@ -163,6 +163,8 @@ public class ScheduleController {
 
             // 여기서 결과를 적절히 처리
             model.addAttribute("scheduleList", transList);
+            model.addAttribute("writer", scheduleService.getWriter(schedule_Num));
+            
             System.out.println(result);
 
             return "scheduleDetail";
@@ -215,32 +217,12 @@ public class ScheduleController {
     return result;
 	}
     
-//	@ResponseBody
-//	@PostMapping("/update")
-//	public Map<String, Object> update(@RequestBody ScheduleDTO schedule) throws Exception {
-//	    boolean update = scheduleService.scheduleUpdate(schedule);
-//	    Map<String, Object> result = new HashMap<>();
-//	    if (update) {
-//	        result.put("message", "수정 성공했습니다!");
-//	    } else {
-//	        result.put("message", "수정 실패했습니다.");
-//	    }
-//	    result.put("schedule", update);
-//
-//	    System.out.println("수정하기 확인 " + schedule);
-//
-//    return result;
-//	}
-	
-	
-	
-
 	// 일정 삭제하기
 	@ResponseBody
 	@RequestMapping(value = "/delete")
 	public Map<String, Object> delete(@RequestBody ScheduleDTO schedule) throws Exception {
 	    Map<String, Object> result = new HashMap<>();
-	  
+	    System.out.println("schedule = " + schedule);
 	    if (scheduleService.scheduleDelete(schedule.getSchedule_Num())) {
 	        result.put("message", "삭제가 완료했습니다!");
 	    } else {
@@ -248,7 +230,7 @@ public class ScheduleController {
 	    }
     return result;
 	}
-	
+
 	
 	//하트색
 	@PostMapping("/updateHeartColor")
@@ -281,8 +263,6 @@ public class ScheduleController {
 		}
 		
 	}
-	
-	
 	
 	// 일정 위시리스트 목록 가져오기
 	@RequestMapping("/likeScheduleList")

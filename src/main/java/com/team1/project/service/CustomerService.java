@@ -57,4 +57,10 @@ public class CustomerService {
 	public int getTotalSize(InquiryDTO inquiry) {
 		return customerDAO.getTotalCount(inquiry);
 	}
+
+	//최근 삽입된 번호 얻기
+	public int getInsertInquiry() {
+		System.out.println("customerService.getInsertInquiry");
+		return customerDAO.getInsertInquiry();
+	}
 }

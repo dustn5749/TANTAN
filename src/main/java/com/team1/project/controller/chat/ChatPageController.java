@@ -61,6 +61,7 @@ public class ChatPageController {
 
     request.setAttribute("chatItemList", list);
     request.setAttribute("chatRoom", chatRoomService.getRoomById(chatRoomId));
+    request.setAttribute("chatter", chatMemberService.getChatMemberList(chatRoomId));
 
     return "chat-detail";
   }

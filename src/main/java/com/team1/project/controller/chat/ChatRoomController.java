@@ -66,8 +66,6 @@ public class ChatRoomController {
       throw new Exception();
     }
 
-
-
     if(roomRequest.getRoomType().equals(RoomType.oneOn1)){
 
       String s = roomRequest.getMemberIds().get(0);

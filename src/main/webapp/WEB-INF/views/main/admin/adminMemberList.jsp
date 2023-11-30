@@ -102,18 +102,18 @@
   </div>
 
 <script>
-// function hideLoadingMessage() {
-//     document.getElementById("loadingOverlay").style.display = "none";
-// }
+function hideLoadingMessage() {
+    document.getElementById("loadingOverlay").style.display = "none";
+}
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
 var currentPage2 = 1;
 var pageSize = 26;
 
-// function showPage() {
-//   document.getElementById("loader").style.display = "none";
-//   document.getElementById("myDiv").style.display = "block";
-// }
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
 
 // 페이징 관련 함수를 초기화합니다.
 function initPage(page) {
@@ -187,7 +187,7 @@ function loadGridData(page) {
             console.log(currentPage);
             initPage(page); // 페이지 초기화
 
-//             hideLoadingMessage(); // 로딩 메시지 숨기기
+            hideLoadingMessage(); // 로딩 메시지 숨기기
         },
         error: function (error) {
             console.error("Error:", error);
@@ -195,13 +195,19 @@ function loadGridData(page) {
     });
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#memberGrid").jqGrid({
     datatype: "json", // 데이터를 서버에서 가져오기
     url: '/memberList', // 데이터를 가져올 URL 설정 (컨트롤러 엔드포인트 URL로 변경해야 합니다.)
     mtype: 'GET', // HTTP 요청 방식 (GET 또는 POST)
-    colNames: ['아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
+    colNames: ['','아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
     colModel: [
+    	{ name: 'nrow', index: 'nrow', width: 50, label: '행 번호', sortable: false, align: 'center' },
         { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
         { label: '이름', name: 'name', index: 'name' },
         { label: '전화번호', name: 'phone', index: 'phone' },
@@ -226,7 +232,7 @@ $("#memberGrid").jqGrid({
     height: 690,
     autowidth: true,
     rowNum: 26,
-    rownumbers: true,
+//     rownumbers: true,
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',

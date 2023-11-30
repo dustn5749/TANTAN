@@ -36,9 +36,10 @@
                         <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn active">
-                        <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon">
-                        <span class="txt">일정</span>
+                    <button type="button" class="sidebar-btn active" onclick="mySchedule()">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon"> --%>
+                        	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
+                        <span class="txt">내 일정</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon">
@@ -47,16 +48,8 @@
                     <button type="button" class="sidebar-btn active">
                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
                         <span class="txt">알림</span>
-<!--                     </button> -->
-<!--                     <button type="button" class="sidebar-btn active"> -->
-<%--                         <img src="<c:url value="/assets/sns/images/icon-bookmark-filled.svg"/>" alt="" class="icon"> --%>
-<!--                         <span class="txt">저장됨</span> -->
-<!--                     </button> -->
-<!--                     <button type="button" class="sidebar-btn active"> -->
-<%--                         <img src="<c:url value="/assets/sns/images/icon-activity.svg"/>" alt="" class="icon"> --%>
-<!--                         <span class="txt">내 활동</span> -->
-<!--                     </button> -->
-                    <button type="button" class="sidebar-btn active">
+                    </button>
+                    <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
                             <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
                         </figure>
@@ -65,10 +58,10 @@
                 </div>
 
                 <div class="sidebar-menu">
-                    <!--             <button type="button" class="sidebar-btn active"> -->
-                    <!--               <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
-                    <!--               <span class="txt">더보기</span> -->
-                    <!--             </button> -->
+                    <!--  <button type="button" class="sidebar-btn active"> -->
+                    <!--  <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+                    <!--  <span class="txt">더보기</span> -->
+                    <!--  </button> -->
                 </div>
             </div>
         </div>
@@ -97,7 +90,9 @@
                             <h2>
                                 <span>${member.nickname}</span>
                             </h2>
-                            <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
+                            <c:if test="${principal.user.member_id != member.member_id}">
+                                <button type="button" class="btn solid-btn blue-btn" onclick="chatRegister(null,'${member.member_id}')">메세지 보내기</button>
+                            </c:if>
                         </div>
                         <div class="info01">
                             <dl>
@@ -116,6 +111,12 @@
                             <c:choose>
                                 <c:when test="${principal.user.member_id == member.member_id}">
                                     <button type="button" class="btn solid-btn gray-btn" onclick="snsProfileModify()">프로필 편집</button>
+                                </c:when>
+                                <c:when test="${alreadyFriend == true}">
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="">친구 </button>
+                                </c:when>
+                                <c:when test="${alreadyReq == true}">
+                                    <button type="button" class="btn solid-btn gray-btn" onclick="">요청 중</button>
                                 </c:when>
                                 <c:otherwise>
                                     <button type="button" class="btn solid-btn blue-btn" onclick="requestFriend('${member.member_id}')">친구 추가</button>
@@ -146,13 +147,17 @@
             </div>
             <!-- 프로필 영역 아래 부분 -->
             <div class="profile-bottom">
-                <div class="btn-wrap">
-                    <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button>
-                    <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
-                </div>
-
+<!--                 <div class="btn-wrap"> -->
+<!--                     <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button> -->
+<!--                     <span style="display: none;"><input id="boardFile" type="file" name="file"></span> -->
+<!--                 </div> -->
+				<div class="btn-wrap">
+				    <button type="button" id="collectionBtn" class="btn txt-btn blue-btn" ${principal.user.member_id == member.member_id ? '' : 'style="display: none;"'}>+ 새 컬렉션</button>
+				    <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
+				</div>
+				
                 <!--게시물 목록 영역 -->
-                <div class="grid-wrapper">
+                <div id="grid-wrapper" class="grid-wrapper">
                     <c:forEach items="${boardList}" var="board">
                         <div class="grid">
                             <!-- 각 이미지 카드를 클릭시 JS함수와 연결 -->
@@ -202,7 +207,74 @@
 
 <script>
 
+	function myProfile(){
+		location.href = "/sns/profile"
+	}
+	
+	function mySchedule(){
+		location.href = "/member/mySchedule.do"
+	}
+	
   $(function(){
+    var detail = '${detail}';
+    if(detail){
+      openBoardModal(detail);
+    }
+
+    var lastId = '${lastId}';
+    $(window).scroll(function() {
+      // 현재 스크롤 위치
+      var scrollPosition = $(window).scrollTop();
+
+      // 문서 전체 높이
+      var documentHeight = $(document).height();
+
+      // 창의 높이
+      var windowHeight = $(window).height();
+
+      // 스크롤이 페이지 하단에 도달했을 때
+      if (scrollPosition + windowHeight === documentHeight) {
+        // 여기에 원하는 동작을 추가합니다.
+
+
+        $.ajax({
+          url : '/sns/data/profile',
+          data : {'lastId' : lastId},
+          success : function (data){
+
+            for(var i = 0; i < data.length ; i ++){
+              $(`<div class="grid">\
+                            <figure class="feed-item-card" onclick="openBoardModal('`+data[i].boardNum+`')">\
+                                <img src='`+data[i].realName+`' alt="" class="thumbnail-img">\
+                                <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->\
+                                <div class="overlay">\
+                                    <div class="overlay-content">\
+                                        <dl class="icon-heart-txt">\
+                                            <dt>\
+                                                <img src="/assets/sns/images/icon-heart-filled-white.svg" alt=""\
+                                                     class="icon">\
+                                            </dt>\
+                                            <dd>`+data[i].likeCount+`</dd>\
+                                        </dl>\
+                                        <dl class="icon-msg-txt">\
+                                            <dt>\
+                                                <img src="/assets/sns/images/icon-message-circle-filled-white.svg"\
+                                                     alt=""\
+                                                     class="icon">\
+                                            </dt>\
+                                            <dd>`+data[i].commentCount+`</dd>\
+                                        </dl>\
+                                    </div>\
+                                </div>\
+                            </figure>\
+                        </div>`).appendTo($('#grid-wrapper'));
+            }
+            lastId = data[data.length-1].boardNum;
+          }
+        })
+      }
+    });
+
     $('#collectionBtn').on('click',function(){
       $('#boardFile').trigger('click');
     });
@@ -279,24 +351,22 @@
         location.href = "/sns/profile/modify";
     }
     
- 
-    
 
     function requestFriend(id){
       $.ajax({
         url : '/friend/request/'+id,
         method : 'POST',
         success : function (data) {
-
+            location.reload();
         }
       })
       $('#' + id).removeClass('active');
     }
 
     function fileChange(){
-
-      //$('#boardFile').
     }
+
+
 </script>
 </body>
 

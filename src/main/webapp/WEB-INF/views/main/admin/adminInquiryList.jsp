@@ -153,9 +153,9 @@ var currentPage = 1;
 var pageSize = 30;
 
 // 페이징 관련 함수를 초기화합니다.
-function initPage(page) {
+function initPage() {
     var pageCount = 10;
-    var totalPage = Math.ceil(totalSize / $('#inquiryGrid').getGridParam('rowNum'));
+    var totalPage = Math.ceil(totalSize / pageSize);
 
     var pageInner = "";
 
@@ -199,17 +199,19 @@ function initPage(page) {
 }
 
 function loadGridData(page) {
-	currentPage = page;
+    // 현재 페이지 설정
+    currentPage = page;
+
     $.ajax({
-        url: '/inquiryList.do', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
+        url: '/inquiryList.do',
         dataType: 'json',
         data: {
-        	pageNo: page,
-        	pageSize: pageSize
+            pageNo: page,
+            pageSize: pageSize
         },
         success: function (data) {
             console.log(data);
-            totalSize = data.totalSize; // 데이터 수 업데이트
+            totalSize = data.totalSize;
 
             $("#inquiryGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
                 data: data.inquiryList.inquiryList,
@@ -217,9 +219,7 @@ function loadGridData(page) {
             }).trigger('reloadGrid');
 
             initPage(currentPage); // 페이지 초기화
-            
-//             hideLoadingMessage(); // 로딩 메시지 숨기기
-            
+
             // 페이징 컴포넌트 다시 보이게 하기
         },
         error: function (error) {
@@ -228,20 +228,26 @@ function loadGridData(page) {
     });
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#inquiryGrid").jqGrid({
-    datatype: "local", // 데이터를 로컬에서 가져오기
+    datatype: "local",
     data: 'json',
     colNames: ['문의사항 번호','카테고리 번호', '카테고리', '작성자', '제목', '작성일', '답변유무', '답변'],
     colModel: [
-        { label: '문의사항 번호', name: 'inquiry_num', key: true, index: 'inquiry_num' },
-        { label: '카테고리 번호', name: 'category_num', index: 'category_num' },
-        { label: '카테고리', name: 'category', index: 'category' },
-        { label: '작성자', name: 'member_id', index: 'member_id' },
-        { label: '제목', name: 'title', index: 'title' },
-        { label: '작성일', name: 'regdate', index: 'regdate' },
+        { name: 'inquiry_num', key: true, index: 'inquiry_num', sortable: true },
+        { name: 'category_num', index: 'category_num', sortable: true },
+        { name: 'category', index: 'category', sortable: true },
+        { name: 'member_id', index: 'member_id', sortable: true },
+        { name: 'title', index: 'title', sortable: true },
+        { name: 'regdate', index: 'regdate', sortable: true },
         {
-            label: '정지유무', name: 'answer_yn', index: 'answer_yn',
+            name: 'answer_yn',
+            index: 'answer_yn',
             formatter: function (cellValue, options, rowObject) {
                 if (rowObject.answer_yn === 'N') {
                     return '<span style="text-align:center; background-color: #FFCCCC; color:red; border: 1px solid #FF0000;">미답변</span>';
@@ -251,24 +257,22 @@ $("#inquiryGrid").jqGrid({
             },
             sortable: false
         },
-//         { label: '신고횟수', name:'reportcnt', index: 'reportcnt'},
-        { name: 'answerBtn', formatter: staOpt1, sortable: false}
+        { name: 'answerBtn', formatter: staOpt1, sortable: false }
     ],
     viewrecords: true,
     height: 690,
     autowidth: true,
     rowNum: 26,
-    rownumbers: true,
     rowList: [30, 50, 100],
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
-    sortorder: 'desc',
+    sortname: 'inquiry_num', // 정렬 기준 필드
+    sortorder: 'desc',       // 정렬 순서 (내림차순)
     gridview: true,
     virtualScrolling: true,
     caption: '문의사항 리스트',
     loadui: "enable",
     loadComplete: function (data) {
-//     	$("#memberGrid").setGridWidth($(window).width() );
         var allRowsInGrid = jQuery('#inquiryGrid').jqGrid('getGridParam', 'records');
         $("#NoData").html("");
         if (allRowsInGrid == 0) {
@@ -357,6 +361,7 @@ function prePage() {
 //그리드 다음 페이지로 이동
 function nextPage() {
 	currentPage = currentPage + 10;
+	console.log("currentPage" + currentPage);
     var totalPage = Math.ceil(totalSize / pageSize);
 
     if (currentPage > totalPage) {
@@ -369,14 +374,15 @@ function nextPage() {
 
 // 그리드 마지막 페이지로 이동
 function lastPage() {
-    var totalPage = Math.ceil(totalSize / $('#inquiryGrid').getGridParam('rowNum'));
+    var totalPage = Math.ceil(totalSize / pageSize);
     goPage(totalPage);
 }
 
 //그리드 페이지로 이동
 function goPage(num) {
     console.log("goPage 함수 호출: " + num);
-    loadGridData(num);  
+    currentPage = num;
+    loadGridData(currentPage);  
 }
 function showDetails(title, content, inquiry_num) {
     alert(inquiry_num);

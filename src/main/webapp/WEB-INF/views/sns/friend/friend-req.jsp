@@ -23,7 +23,7 @@
             <!-- 확인 & 요청 삭제 버튼 -->
             <div class="btn-wrap">
                 <button type="button" class="btn blue-btn" onclick="acceptReq('${friend.id}')">확인</button>
-                <button type="button" class="btn gray-btn">요청 삭제</button>
+                <button type="button" class="btn gray-btn" onclick="deleteReq('${friend.id}')">요청 삭제</button>
             </div>
             <!-- END 확인 & 요청 삭제 버튼 -->
         </div>
@@ -38,6 +38,17 @@
           $('.friend-modal-tab').trigger('click');
         }
       });
+    }
+
+    function deleteReq(reqId){
+      $.ajax({
+        url : '/friend/accept/'+reqId,
+        method: 'DELETE',
+        success : function (data) {
+          $('.friend-modal-tab').trigger('click');
+        }
+      });
+
     }
 
     $(function (){

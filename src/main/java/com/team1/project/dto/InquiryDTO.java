@@ -22,6 +22,7 @@ public class InquiryDTO {
     public Date regdate;
     public String answer_yn;
     public List<Integer> file_id;
+    public int nrow;
     
     // 페이징
     public String searchTitle;

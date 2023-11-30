@@ -125,6 +125,12 @@
 						<canvas id="monthMember"></canvas>
 					</div>
 				</div>
+				<div class="card-footer">
+					<div class="h5 mb-0 font-weight-bold text-gray-800 d-flex">
+					    <span class="mr-auto">전체 회원 : ${totalMembers}</span>
+					    <span class="ml-auto">전체 게시글 : ${totalPosts}</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-xl-6 col-lg-7">
@@ -137,123 +143,138 @@
 						<canvas id="doeChart"></canvas>
 					</div>
 				</div>
+				<div class="card-footer">
+					<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">전체 리뷰 건수 : 987</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-     $(function () {
-    	    const urlMonth = "/monthData";
+$(function () {
+    const urlMonth = "/monthData";
 
-    	    $.ajax({
-    	        url: urlMonth,
-    	        method: "GET",
-    	        success: function (data) {
-    	            console.log(data);
-    	            const monthData = data.monthMember.map(function (item) {
-    	                console.log(item.month);
-    	                return item.month;
-    	            });
-    	            const counts = data.monthMember.map(function (item) {
-    	                console.log(item.signup_count);
-    	                return item.signup_count;
-    	            });
-    	            const write_count = data.monthUs.map(function (item) {
-    	                console.log(item.write_count);
-    	                return item.write_count;
-    	            })
-    	            var stackedChartData = {
-    	                labels: monthData,
-    	                datasets: [
-    	                    {
-    	                        label: "월별 가입자 현황",
-    	                        backgroundColor: "rgba(60,141,188,0.9)",
-    	                        borderColor: "rgba(60,141,188,0.8)",
-    	                        pointRadius: false,
-    	                        pointColor: "#3b8bba",
-    	                        pointStrokeColor: "rgba(60,141,188,1)",
-    	                        pointHighlightFill: "#fff",
-    	                        pointHighlightStroke: "rgba(60,141,188,1)",
-    	                        data: counts,
-    	                        borderWidth: 10, // 선의 굵기를 조절합니다.
-    	                    },
-    	                    {
-    	                        label: "월별 작성된 게시글",
-    	                        backgroundColor: "rgba(92,184,92,0.9)",
-    	                        borderColor: "rgba(92,184,92,0.8)",
-    	                        pointRadius: false,
-    	                        pointColor: "#5cb85c",
-    	                        pointStrokeColor: "rgba(92,184,92,1)",
-    	                        pointHighlightFill: "#fff",
-    	                        pointHighlightStroke: "rgba(92,184,92,1)",
-    	                        data: write_count,
-    	                        borderWidth: 10, // 선의 굵기를 조절합니다.
-    	                    }
-    	                ],
-    	            };
-    	            var barChartData = $.extend(true, {}, stackedChartData);
-    	            var stackedBarChartCanvas = $("#monthMember")
-    	                .get(0)
-    	                .getContext("2d");
-    	            var stackedBarChartData = $.extend(true, {}, barChartData);
-    	            var stackedBarChartOptions = {
-    	                responsive: true,
-    	                maintainAspectRadio: false,
-    	                scales: {
-    	                    xAxes: [
-    	                        {
-    	                            type: 'time',
-    	                            time: {
-    	                                unit: 'month',
-    	                                displayFormats: {
-    	                                    month: 'MM'
-    	                                }
-    	                            },
-    	                            distribution: 'series',
-    	                            ticks: {
-    	                                source: 'labels',
-    	                            },
-    	                        },
-    	                    ],
-    	                    yAxes: [
-    	                        {
-    	                            stacked: true,
-    	                            position: 'left',
-    	                            id: 'y-axis-0',
-    	                        },
-    	                        {
-    	                            stacked: false,
-    	                            position: 'right',
-    	                            id: 'y-axis-1',
-    	                        }
-    	                    ],
-    	                },
-    	                tooltips: {
-    	                    mode: 'index',
-    	                    intersect: false,
-    	                    callbacks: {
-    	                        title: function(tooltipItem, data) {
-    	                            return '월: ' + tooltipItem[0].xLabel;
-    	                        },
-    	                        label: function(tooltipItem, data) {
-    	                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
-    	                            var yLabel = tooltipItem.yLabel;
-    	                            return label + ': ' + yLabel;
-    	                        }
-    	                    }
-    	                }
-    	            };
-    	            new Chart(stackedBarChartCanvas, {
-    	                type: "line",
-    	                data: stackedBarChartData,
-    	                options: stackedBarChartOptions,
-    	            });
-    	        },
-    	        error: function (error) {
-    	            console.error("Error", error);
-    	        },
-    	    });
-    	});
+    $.ajax({
+        url: urlMonth,
+        method: "GET",
+        success: function (data) {
+            console.log(data);
+
+            const monthData = data.monthMember.map(function (item) {
+                console.log(item.month);
+                return item.month;
+            });
+
+            const counts = data.monthMember.map(function (item) {
+                console.log(item.signup_count);
+                return item.signup_count;
+            });
+
+            const write_count = data.monthUs.map(function (item) {
+                console.log(item.write_count);
+                return item.write_count;
+            });
+
+            // 추가: 전체 회원 가입 수 및 전체 게시글 수
+            const totalMembers = data.totalMembers;  // 전체 회원 수
+            const totalPosts = data.totalPosts;  // 전체 게시글 수
+
+            // 차트 데이터
+            var stackedChartData = {
+                labels: monthData,
+                datasets: [
+                    {
+                        label: "월별 가입자 현황",
+                        backgroundColor: "rgba(60,141,188,0.9)",
+                        borderColor: "rgba(60,141,188,0.8)",
+                        pointRadius: false,
+                        pointColor: "#3b8bba",
+                        pointStrokeColor: "rgba(60,141,188,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(60,141,188,1)",
+                        data: counts,
+                        borderWidth: 10,
+                    },
+                    {
+                        label: "월별 작성된 게시글",
+                        backgroundColor: "rgba(92,184,92,0.9)",
+                        borderColor: "rgba(92,184,92,0.8)",
+                        pointRadius: false,
+                        pointColor: "#5cb85c",
+                        pointStrokeColor: "rgba(92,184,92,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(92,184,92,1)",
+                        data: write_count,
+                        borderWidth: 10,
+                    },
+                ],
+            };
+
+            // 차트를 그리기 전에 텍스트로 전체 회원 가입 수 및 전체 게시글 수를 표시
+            $("#totalMembersText").text("전체 회원 가입 수: " + totalMembers + "명");
+            $("#totalPostsText").text("전체 게시글 수: " + totalPosts + "건");
+            console.log("종합 인원 ->" + totalMembers);
+
+            // 차트 그리기
+            var barChartData = $.extend(true, {}, stackedChartData);
+            var stackedBarChartCanvas = $("#monthMember")
+                .get(0)
+                .getContext("2d");
+            var stackedBarChartData = $.extend(true, {}, barChartData);
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRadio: false,
+                scales: {
+                    xAxes: [
+                        {
+                            type: 'time',
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MM'
+                                }
+                            },
+                            distribution: 'series',
+                            ticks: {
+                                source: 'labels',
+                            },
+                        },
+                    ],
+                    yAxes: [
+                        {
+                            stacked: true,
+                            position: 'left',
+                            id: 'y-axis-0',
+                        },
+                    ],
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        title: function(tooltipItem, data) {
+                            return '월: ' + tooltipItem[0].xLabel;
+                        },
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            var yLabel = tooltipItem.yLabel;
+                            return label + ': ' + yLabel;
+                        }
+                    }
+                },
+            };
+
+            new Chart(stackedBarChartCanvas, {
+                type: "line",
+                data: stackedBarChartData,
+                options: stackedBarChartOptions,
+            });
+        },
+        error: function (error) {
+            console.error("Error", error);
+        },
+    });
+});
 
 
 $(function () {

@@ -37,10 +37,12 @@
                 select room_num, max(message_num) max_message_num from message b
                 where b.room_num = CR.room_num
                 group by b.room_num
-            ) a inner join message mes on (mes.message_num = a.max_message_num)) as lastText
+            ) a inner join message mes on (mes.message_num = a.max_message_num)) as lastText,
+            m.PROFILE_IMG as profileImg
 
         from CHATROOM CR
         inner join CHATTER C on CR.ROOM_NUM = C.ROOM_NUM
+        inner join MEMBER m on CR.CREATE_MEMBER_ID = m.MEMBER_ID
         where C.MEMBER_ID = #{memberId}
         <if test="searchTxt != null and searchTxt != ''">
             and CR.ROOM_NAME like CONCAT(#{searchTxt},'%')
