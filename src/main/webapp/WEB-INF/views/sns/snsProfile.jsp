@@ -223,6 +223,7 @@
 
     var lastId = '${lastId}';
     $(window).scroll(function() {
+    	console.log('2222');
       // 현재 스크롤 위치
       var scrollPosition = $(window).scrollTop();
 
@@ -231,11 +232,13 @@
 
       // 창의 높이
       var windowHeight = $(window).height();
-
+      console.log('documentHeight' + documentHeight);
+      console.log('scrollPosition' + windowHeight);
+      console.log('windowHeight' + scrollPosition);
       // 스크롤이 페이지 하단에 도달했을 때
-      if (scrollPosition + windowHeight === documentHeight) {
+      if ((scrollPosition + windowHeight) > (documentHeight-2)) {
         // 여기에 원하는 동작을 추가합니다.
-
+        console.log('111');
 
         $.ajax({
           url : '/sns/data/profile',

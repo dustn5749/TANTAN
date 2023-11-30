@@ -162,7 +162,7 @@
                         <span class="txt">홈</span>
                     </button>
                     <button type="button" class="sidebar-btn" onclick="mySchedule()">
-                        <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
+                        <img src="/assets/sns/images/Calander.png" alt="" class="icon">
                         <span class="txt">일정</span>
                     </button>
                     <button type="button" class="sidebar-btn">
