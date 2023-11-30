@@ -63,4 +63,8 @@ public class SnsBoardService {
             snsDAO.updateViewCountByBoardNum(id);
         }
     }
+
+  public Long getBoardCount(SnsBoardRequest snsBoardRequest) {
+        return snsDAO.getBoardCount(snsBoardRequest);
+  }
 }

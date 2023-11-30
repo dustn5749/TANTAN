@@ -17,5 +17,6 @@ public class ChatMember {
   private Long roomNum;
   private LocalDateTime joinTime;
   private String nickname;
+  private String profileImg;
 
 }
