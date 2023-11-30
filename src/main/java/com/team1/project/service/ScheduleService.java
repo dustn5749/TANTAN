@@ -26,19 +26,9 @@ public class ScheduleService {
 		public Map<String, Object> schedulePageList(ScheduleDTO schdule, String memberId) throws Exception {
 		
 			int totalCount = schduleDAO.totalCount(schdule);
-//			int totalCount = 0;
-//			if( schdule.getDoe_Name() != null ) {
-//				totalCount= schduleDAO.doe_nametotalCount(schdule);
-//				
-//			}else {
-//				totalCount= schduleDAO.totalCount(schdule);
-//			}
-			
-			schdule.setTotalCount(totalCount); 
-			
-			System.out.println("totalCount " + totalCount );
 
-			
+			schdule.setTotalCount(totalCount); 
+
 			Map<String, Object> param = new HashMap<>();
 			param.put("MEMBER_ID", memberId);
 			param.put("endNo", schdule.getEndNo());
@@ -62,7 +52,6 @@ public class ScheduleService {
 		}
 		//일정 작성하기
 		public boolean writeInsert(ScheduleDTO schedule) throws Exception {
-		System.out.println("ScheduleDTO 일정 작성하기 =" + schedule);
 		int result = schduleDAO.writeInsert(schedule);
 		
 //		DayDTO in = DayDTO.builder()
@@ -147,9 +136,12 @@ public class ScheduleService {
 		
 		// 좋아요 
 		public void updateLike(String member_id, int schedule_Num, boolean isLike) {
+			System.out.println("islike = " +isLike );
 			Map<String, Object> param = new HashMap<>();
 			param.put("USERID", member_id);
 			param.put("SCHEDULE_NUM", schedule_Num);
+			
+			
 			if (isLike) {	// 좋아요 추가
 				scheduleLikeDAO.insert(param);
 				schduleDAO.plusLikeCnt(param);
@@ -158,6 +150,13 @@ public class ScheduleService {
 				schduleDAO.minusLikeCnt(param);
 			}
 		}
+		
+		
+		   // 좋아요 수 조회
+		public int getLikeCount(int scheduleNum) {
+	        return schduleDAO.getLikeCount(scheduleNum);
+	    }
+
 		
 		public int todaySchedule(ScheduleDTO schedule) {
 			int todayScheduleCount = schduleDAO.todaySchedule(schedule).getTodaySchedule();
@@ -184,7 +183,7 @@ public class ScheduleService {
 			}
 			return result;
 		}
-		
+
 		//글쓴이 얻기
 		public String getWriter(int schedule_Num) {
 			System.out.println("글쓴이 얻기");

@@ -44,11 +44,11 @@ public class UsController {
 	@Autowired
 	 private MemberService memberservice;
 	
-
 	
 	@Autowired
 	private UsCommentService usCommentService;
 	
+
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\file_repo";
 
 
@@ -159,7 +159,6 @@ public class UsController {
 	      
 	      model.addAttribute("writer", writer);
 	      model.addAttribute("us", usDetail);
-	      model.addAttribute("commentList", usCommentService.getUsCommentList(us_num));
 	    return "usDetail";
 	    }
 	

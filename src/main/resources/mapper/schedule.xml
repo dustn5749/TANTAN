@@ -318,6 +318,12 @@ values(
 </update>
 
    
+ <select id="getLikeCount" resultType="int" parameterType="int">
+        SELECT likecnt
+        FROM schedule
+        WHERE schedule_Num = #{scheduleNum}
+    </select>
+    
     <!--삭제하기 -->  
 <!--           <delete id="schduleDelete">      -->
 <!--               DELETE FROM SCHEDULE   -->

@@ -837,34 +837,37 @@ div, input, p, span, button, h2 {
 
    <script>
    
+
    function city_btn1() {
        window.location.href = '/us/write';
    }
 
+	
    function jsPageNo(pageNo) {
-       // 현재 URL 가져오기
        var currentUrl = window.location.href;
 
-       // 기존의 pageNo 매개변수 제거
-       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
-       currentUrl = currentUrl.replace(regex, '$2');
+	    // 기존의 pageNo 매개변수 제거
+	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+	    currentUrl = currentUrl.replace(regex, '$2');
 
-       // 현재 URL에 페이지 번호 추가
-       var newUrl;
-       if (currentUrl.indexOf('?') !== -1) {
-           newUrl = currentUrl + "&pageNo=" + pageNo;
-       } else {
-           newUrl = currentUrl + "?pageNo=" + pageNo;
-       }
+	    // 현재 URL에 페이지 번호 추가
+	    var newUrl;
+	    if (currentUrl.indexOf('?') !== -1) {
+	        newUrl = currentUrl + "&pageNo=" + pageNo;
+	    } else {
+	        newUrl = currentUrl + "?pageNo=" + pageNo;
+	    }
 
-       // 새로운 URL을 폼의 액션으로 설정
-       document.getElementById("pageForm").action = newUrl;
+	    // 새로운 URL을 폼의 액션으로 설정
+	    document.getElementById("pageForm").action = newUrl;
 
-       // 페이지 번호 설정 및 폼 제출
-       document.getElementById("pageNo").value = pageNo;
-       document.getElementById("pageForm").submit();
-   }
+	    // 페이지 번호 설정 및 폼 제출
+	    document.getElementById("pageNo").value = pageNo;
+	    document.getElementById("pageForm").submit();
+	}
 
+
+	 
 
       
     document.addEventListener("DOMContentLoaded", function() {
@@ -877,9 +880,6 @@ div, input, p, span, button, h2 {
         }
     });
 
-
-     
-    
 
          function loadMoreData(start) {
                var member_Id = "member_id"; 
@@ -915,8 +915,8 @@ div, input, p, span, button, h2 {
           
             location.href="/us/Detail?us_num="+us_num;
        });
-     
-         
+
+
      //이동    
          function moveToSelectedRegion() {
              window.location.href = '/us/list';
@@ -934,6 +934,7 @@ div, input, p, span, button, h2 {
          
          // 지역이동
      function moveRegion() {
+
            var value = $('[name=deo_name]:checked').val();
 
            if (value == 'all') {
