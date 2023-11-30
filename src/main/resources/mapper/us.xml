@@ -54,6 +54,13 @@
 </select>
 
  
+
+ 
+ 
+ 
+ 
+ 
+
 	<update id="commentplus" >
 		UPDATE
 			US
@@ -65,50 +72,50 @@
   <!-- 전체목록조회 --> 
 <!-- <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map"> -->
 <!-- SELECT u.*, uf.usfilenum as fileNo -->
-<!-- 	FROM ( -->
-<!-- 		SELECT *  -->
-<!-- 	    FROM ( -->
-<!-- 	        SELECT  -->
-<!-- 	        rownum AS nrow,  -->
-<!-- 	        us_num,  -->
-<!-- 	        city_name, -->
-<!-- 	        deo_name, -->
-<!-- 	        writer,  -->
-<!-- 	        us_cnt, -->
-<!-- 	        regdate, -->
-<!-- 	        start_Date, -->
-<!-- 	        end_Date, -->
-<!-- 	        title,  -->
-<!-- 	        content, -->
-<!-- 	        imageurl, -->
-<!-- 	        VIEWCOUNT -->
-<!-- 	        FROM ( -->
-<!-- 	            SELECT rownum  AS  -->
-<!-- 	            nrow, -->
-<!-- 	            us_num, -->
-<!-- 	            city_name, -->
-<!-- 	            writer, -->
-<!-- 	            us_cnt, -->
-<!-- 	            deo_name, -->
-<!-- 	            regdate, -->
-<!-- 	            start_Date, -->
-<!-- 	            end_Date, -->
-<!-- 	            title, -->
-<!-- 	            content, -->
-<!-- 	           imageurl, -->
-<!-- 	           VIEWCOUNT -->
-<!-- 	            FROM us a  -->
-	       
-<!-- 	            <if test="start_Date != null and end_Date != null"> -->
-<!-- 	                AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
-<!-- 	            </if> -->
-	            
-<!-- 	            order by us_num -->
-<!-- 	        ) -->
-<!-- 	    ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
-<!-- 	) u -->
-<!-- 	left outer join us_file uf -->
-<!-- 		on u.us_num = uf.us_num -->
+<!--    FROM ( -->
+<!--       SELECT *  -->
+<!--        FROM ( -->
+<!--            SELECT  -->
+<!--            rownum AS nrow,  -->
+<!--            us_num,  -->
+<!--            city_name, -->
+<!--            deo_name, -->
+<!--            writer,  -->
+<!--            us_cnt, -->
+<!--            regdate, -->
+<!--            start_Date, -->
+<!--            end_Date, -->
+<!--            title,  -->
+<!--            content, -->
+<!--            imageurl, -->
+<!--            VIEWCOUNT -->
+<!--            FROM ( -->
+<!--                SELECT rownum  AS  -->
+<!--                nrow, -->
+<!--                us_num, -->
+<!--                city_name, -->
+<!--                writer, -->
+<!--                us_cnt, -->
+<!--                deo_name, -->
+<!--                regdate, -->
+<!--                start_Date, -->
+<!--                end_Date, -->
+<!--                title, -->
+<!--                content, -->
+<!--               imageurl, -->
+<!--               VIEWCOUNT -->
+<!--                FROM us a  -->
+          
+<!--                <if test="start_Date != null and end_Date != null"> -->
+<!--                    AND (end_Date <![CDATA[<=]]> #{end_Date} AND start_Date <![CDATA[>=]]> #{start_Date}) -->
+<!--                </if> -->
+               
+<!--                order by us_num -->
+<!--            ) -->
+<!--        ) WHERE nrow BETWEEN #{startNo} AND #{endNo} -->
+<!--    ) u -->
+<!--    left outer join us_file uf -->
+<!--       on u.us_num = uf.us_num -->
 
 <!-- </select> -->
 
@@ -153,13 +160,13 @@
         us_num,
         writer,
         us_cnt,
-        REGDATE,
+        regdate,
         START_DATE,
         END_DATE,
         title,
         content,
         status,
-        REPORTCNT,
+        reportcnt,
         DOE_NAME
     ) VALUES (
         us_sq.nextval,  
@@ -172,7 +179,7 @@
         #{content,jdbcType=VARCHAR},
         'N',
         0,
-        #{doe_Name,jdbcType=VARCHAR}
+        #{doe_Name}
     ) 
 </insert>
 	<select id="nextUsNum" resultType="int">
@@ -195,8 +202,8 @@
         u.doe_Name,
        uf.usfilenum as fileNo
     FROM US u 
-   	left outer join us_file uf
-   		on u.us_num = uf.us_num
+      left outer join us_file uf
+         on u.us_num = uf.us_num
     WHERE u.US_NUM = #{us_num}
  </select> 
 
@@ -230,7 +237,7 @@
           ]]> 
       </select>
       
-		<!--조회수 -->
+      <!--조회수 -->
       <update id="viewCount">
       update us set
          viewCount = viewCount + 1 
@@ -276,6 +283,7 @@
     )
     WHERE nrow BETWEEN #{startNo2} AND #{endNo2}
     ]]>
+
    </select>
    
    <!--us에 fileno저장  -->
@@ -334,4 +342,5 @@
 	    WHERE 
 	        TO_CHAR(REGDATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
 	</select>
+
 </mapper>

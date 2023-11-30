@@ -504,10 +504,15 @@ input, a, span, div, h2, button, li, ul {
 }
 
  .center-align {
+<<<<<<< HEAD
+    padding: 35px;
+    text-align: center;
+=======
  	position: relative;
  	padding: 35px;
     text-align: left;
     padding-left: 20px;
+>>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     margin: auto;
     margin-top: 30px;
     display: flex;
@@ -919,7 +924,7 @@ function saveEntry() {
   /* 일정 삭제하기 */
 $(".minus_shedule_btn").on("click", function(){
     
-	deleteEntry();
+   deleteEntry();
 });
 
 
@@ -1183,23 +1188,23 @@ $(".minus_shedule_btn").on("click", function(){
        paths.push(path);
        
        if (i != 0) {
-    	   // 이전 좌표 + 현재 좌표로 선 객체 생성
-    	   var line = new kakao.maps.Polyline({
+          // 이전 좌표 + 현재 좌표로 선 객체 생성
+          var line = new kakao.maps.Polyline({
                path: [prevPath, path], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
            });
-    	   // line.getLength()로 좌표간 거리를 가져옴 (m단위)
-    	   var distance = Math.round(line.getLength());
-    	   
-    	   // 1000m 이상이면 km으로 변환
-    	   var message = distance;
-    	   var unit = 'm';
-    	   if (distance > 1000) {
-    		   message = distance / 1000;
-    		   unit = 'km';
-    	   }
-    	   
-    	   // 지도에 거리를 표시해줌
-    	   distanceOverlay = new kakao.maps.CustomOverlay({
+          // line.getLength()로 좌표간 거리를 가져옴 (m단위)
+          var distance = Math.round(line.getLength());
+          
+          // 1000m 이상이면 km으로 변환
+          var message = distance;
+          var unit = 'm';
+          if (distance > 1000) {
+             message = distance / 1000;
+             unit = 'km';
+          }
+          
+          // 지도에 거리를 표시해줌
+          distanceOverlay = new kakao.maps.CustomOverlay({
                map: map, // 커스텀오버레이를 표시할 지도입니다
                content: '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + message + '</span>' + unit +'</div>',  // 커스텀오버레이에 표시할 내용입니다
                position: path, // 커스텀오버레이를 표시할 위치입니다.
