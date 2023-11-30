@@ -14,7 +14,6 @@
             <div class="left-ttl-wrap">
                 <div class="ttl">
                     <p>${chatRoom.roomName}</p>
-                    <span class="num">2</span>
                 </div>
             </div>
             <div class="btn-wrap">

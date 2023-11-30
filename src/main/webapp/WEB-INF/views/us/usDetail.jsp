@@ -44,6 +44,7 @@ input, span, div, p, button, a, h2 {
       border-radius: 3px;
       margin-top: 30px;
       margin-bottom: 30px;
+      
    }
    .profile-details > img {
       width: 100%;
@@ -58,11 +59,15 @@ input, span, div, p, button, a, h2 {
       width: 95%;
    }
    .detail_content_div{
-      display: flex;
+      
       width: 100%;
    }
    .detail_content_inner {
-      width: 70%;
+      width: 100%;
+      display: flex;
+   }
+   .detail_content_inner1{
+      width: 100%;
    }
    .detail_content_inner>div{
       text-align: left;
@@ -70,31 +75,44 @@ input, span, div, p, button, a, h2 {
    } 
    .detail_title {
       width: 100%;
+      display: flex;
    }
    .detail_title >p{
       font-size: 30px !important;
       font-weight: bold;
       font-family: 'Pretendard-Regular';
-      
+      width: 90%;
+      text-align: left;
+   }
+   #report-button {
+      border: none;
+      background-color: rgb(239, 239, 239);
    }
    
    /* 동행 날짜 div */
    .detail_date {
-      display: flex;
       border: 2px dotted rgb(229, 229, 229);
       border-radius: 10px;
       font-family: 'Pretendard-Regular';
-      height: 100px;
-      padding: 30px;
+      height: 150px;
+      padding: 35px;
       margin-top: 20px;
       margin-bottom: 20px;
+      width: 95%;
       
    }
-   .detail_date > input, p {
+   .detail_date_inner{
+      margin-top: 10px;
+      display: flex;
+   }  
+   .detail_date_inner > input, p {
       font-family: 'Pretendard-Regular';
    }
    .date {
       margin-right: 30px;
+   }
+   .doe_area {
+      margin-left: 20px;
    }
    .detail_date > p> input {
       font-family: 'Pretendard-Regular';
@@ -106,93 +124,6 @@ input, span, div, p, button, a, h2 {
    }
    
    /* 프로필 */
-	.profile-details{
-		width: 100%;
-		height: 350px;
-		border: none;
-		border-radius: 3px;
-		margin-top: 30px;
-		margin-bottom: 30px;
-		
-	}
-	.profile-details > img {
-		width: 100%;
-		height: 100%;
-		border-radius: 7px;
-	}
-	
-	/* detail content div */
-	.detail_content{
-		text-align: center;
-		margin: 0 auto;
-		width: 95%;
-	}
-	.detail_content_div{
-		
-		width: 100%;
-	}
-	.detail_content_inner {
-		width: 100%;
-		display: flex;
-	}
-	.detail_content_inner1{
-		width: 100%;
-	}
-	.detail_content_inner>div{
-		text-align: left;
-	
-	} 
-	.detail_title {
-		width: 100%;
-		display: flex;
-	}
-	.detail_title >p{
-		font-size: 30px !important;
-		font-weight: bold;
-		font-family: 'Pretendard-Regular';
-		width: 90%;
-		text-align: left;
-	}
-	#report-button {
-		border: none;
-		background-color: rgb(239, 239, 239);
-	}
-	
-	/* 동행 날짜 div */
-	.detail_date {
-		border: 2px dotted rgb(229, 229, 229);
-		border-radius: 10px;
-		font-family: 'Pretendard-Regular';
-		height: 150px;
-		padding: 35px;
-		margin-top: 20px;
-		margin-bottom: 20px;
-		width: 95%;
-		
-	}
-	.detail_date_inner{
-		margin-top: 10px;
-		display: flex;
-	}  
-	.detail_date_inner > input, p {
-		font-family: 'Pretendard-Regular';
-	}
-	.date {
-		margin-right: 30px;
-	}
-	.doe_area {
-		margin-left: 20px;
-	}
-	.detail_date > p> input {
-		font-family: 'Pretendard-Regular';
-		padding-left: 10px;
-		margin-left: 10px;
-		border: none;
-		border-radius: 10px;
-		height: 30px;
-	}
-	
-	/* 프로필 */
    .profile {
     font-family: 'Pretendard-Regular';
       display: flex;
@@ -202,20 +133,10 @@ input, span, div, p, button, a, h2 {
       align-content: center;
       align-items: center;
       padding-left: 20px;
-      height: 80px;
+      height: 75px;
      margin: 30px;
-      width: 30%;
-   	display: flex;
-   	text-align: left;
-   	background: rgb(239, 239, 239);
-   	border-radius: 8px;
-   	align-content: center;
-   	align-items: center;
-   	padding-left: 20px;
-   	height: 75px;
-  	margin: 30px;
-  	padding: 10px;
-  	width: 300px;
+     padding: 10px;
+     width: 300px;
    }   
    .profile-image > img{
        width: 50px;
@@ -459,12 +380,26 @@ input, span, div, p, button, a, h2 {
            color : grey;
         }
         .btnarea>button {
-        	border: none;
-        	background: none;
+           border: none;
+           background: none;
         } 
-      	.content_area{
-      		width: 60%;
-      	}
+         .content_area{
+            width: 60%;
+         }
+         
+         /* content */
+      #contentText{
+         border: none;
+         width: 90%;
+         height: 200px;
+         white-space: normal;
+         overflow: hidden;
+         border-radius: 5px;
+      }
+      #us_cnt {
+         width: 50px;
+         border: none;
+      }
     </style>
 </head>
 
@@ -489,20 +424,27 @@ input, span, div, p, button, a, h2 {
    </div> 
    <div class="detail_content">
       <div class="detail_content_div">
+         <div class="detail_title">
+              <p id="title"><span>${us.title}</span></p>   
+            </div>
+      
           <div class="detail_content_inner">
-             <div class="detail_title">
-                  <p id="title"><span>${us.title}</span></p>             
-             </div>
-             <div class="detail_date">
-                  <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
-                  <p class="date"> ~ </p>
-                  <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
-                  <p class="uscnt">모집 인원 : <span id="us_cnt">${us.us_cnt}</span></p>
+               <div class="detail_content_inner1">
+                <div class="detail_date">
+                   <p class="doe">모집 지역 : <sapn class="doe_area">${us.doe_Name}<span></span></p>
+                   <div class="detail_date_inner">
+                        <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
+                        <p class="date"> ~ </p>
+                        <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
+                        <p class="uscnt">모집 인원 : <input type="number" id="us_cnt" value="${us.us_cnt}" readonly="readonly" width="30px"></p>                
+                   </div>
+                  </div>
+                  <div class="details">
+                     <p id="contentText" >${us.content}</p>
+                           
+                     
+                  </div>
                </div>
-               <div class="details">
-                  <p id="content">${us.content}</p>
-               </div>
-         </div>     
             <div class="profile">          
                 <div class="profile-image">
                     <img src="/assets/img/no_profile.png" alt="프로필 이미지">
@@ -510,11 +452,13 @@ input, span, div, p, button, a, h2 {
                 <div class="user-details">
                     <h2 id="writer">${us.writer}</h2>
                 </div>
+                <button id="report-button" onclick="openModal()"><img src="/assets/img/report.jpg" id="reportBtn" width="25px"></button>          
+                
            </div>
+         </div>     
        </div>
               <!-- 버튼 그룹 -->
               <div class="button-group">
-                  <button class="report-button" onclick="openModal()">신고하기</button>
                  <c:if test="${principal.user.member_id == us.writer}">
                      <button class="orange-btn" onclick="editEntry()">수정하기</button>
                      <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
@@ -532,7 +476,6 @@ input, span, div, p, button, a, h2 {
                   </div>
                   
                   <div class="commnet_area">
-              
                      <c:forEach items="${commentList}" var="item">
                         <div class="comment_area_inner">
                            <div class="member_id_div">
@@ -572,7 +515,7 @@ input, span, div, p, button, a, h2 {
    
                        <label for="reportReason">신고사유</label>
                        <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
-   
+
                        <button type="button" onclick="submitReport()">신고 제출</button>
                    </form>
                </div>
@@ -583,133 +526,10 @@ input, span, div, p, button, a, h2 {
               <input type="hidden" value="${principal.user.member_id}" class="member">         
           </c:when>
           <c:otherwise>
-              <input type="hidden" value="null" class="member">
+              <input type="hidden" value="" class="member">
           </c:otherwise>      
       </c:choose>
       <input type="hidden" id="us_num" value="${us.us_num}">
-	<div id="reportSubmissionMessage" style="text-align: center; color: green; margin-top: 10px;"></div>
-	 
-	 
-	  <div class="profile-details">
-	        <c:choose>
-	           <c:when test="${us.fileNo!=0}">
-	              <img   src="/file/displayImage.do?usFileNum=${us.fileNo}" alt="동행이미지 사진" class="us_content_img">
-	           </c:when>
-	           <c:when test="${!empty us.imageUrl}">
-	              <img   src="${us.imageUrl}" class="us_content_img">
-	           </c:when>
-	           <c:when test="${empty us.imageUrl&& us.fileNo==0}">
-	              <img  src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
-	           </c:when>
-	        </c:choose>
-	</div> 
-	<div class="detail_content">
-		<div class="detail_content_div">
-			<div class="detail_title">
-		        <p id="title"><span>${us.title}</span></p>	
-		   	</div>
-		
-		    <div class="detail_content_inner">
-		   		<div class="detail_content_inner1">
-			    	<div class="detail_date">
-			    		<p class="doe">모집 지역 : <sapn class="doe_area">${us.doe_Name}<span></span></p>
-			    		<div class="detail_date_inner">
-				            <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
-				            <p class="date"> ~ </p>
-				            <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
-				            <p class="uscnt">모집 인원 : <span id="us_cnt">${us.us_cnt}</span></p>		    		
-			    		</div>
-			   		</div>
-			   		<div class="details">
-			   			<p id="content">${us.content}</p>
-			   		</div>
-		   		</div>
-				<div class="profile">	       
-				    <div class="profile-image">
-				        <img src="/assets/img/no_profile.png" alt="프로필 이미지">
-				    </div>
-				    <div class="user-details">
-				        <h2 id="writer">${us.writer}</h2>
-				    </div>
-				    <button id="report-button" onclick="openModal()"><img src="/assets/img/report.jpg" id="reportBtn" width="25px"></button>	    	
-				    
-			  </div>
-		   </div>     
-		 </div>
-		        <!-- 버튼 그룹 -->
-		        <div class="button-group">
-		       
-		           <c:if test="${principal.user.member_id == us.writer}">
-			            <button class="orange-btn" onclick="editEntry()">수정하기</button>
-			            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
-			            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
-		            </c:if>
-		        </div>
-		        
-		        <!-- 댓글 섹션 -->
-		        <div class="reply-section">
-		            <div id="replyContainer">
-		             	<div class="reply_content">
-			                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
-		             	</div>
-			                <button class="insertBtn" onclick="btnInsert()">댓글쓰기</button>	             	
-		            </div>
-		            
-		            <div class="commnet_area">
-		            	<c:forEach items="${commentList}" var="item">
-		            		<div class="comment_area_inner">
-		            			<div class="member_id_div">
-		            				<img src="/assets/img/userReview.png" width="30px">
-		            				<p class="member_id">${item.writer}</p>
-		            			</div>
-		            			<div class="content_area">${item.content}</div>
-		            			<c:if test="${item.writer==principal.user.member_id}">
-		            				<div class="btnarea">
-		            					<button class="modifybtn">수정하기</button>
-		            					<button class="deleteBtn">삭제하기</button>
-		            				</div>
-		            			
-		            			</c:if>
-		            		</div>
-		            	</c:forEach>
-		            </div>
-		                <div class="reply-form-button-wrapper">
-		                    <button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
-		                </div>
-		        </div>
-		</div>
-	        <!-- 신고 모달 -->
-	        <div id="reportModal" class="reportmodal">
-	            <div class="modal-content">
-	                <span class="close" onclick="closeModal()">&times;</span>
-	                <h2>신고하기</h2>
-	                <form id="reportForm">
-	                    <label for="reportType">신고유형</label>
-	                    <select id="reportType" name="reportType">
-	                        <option value="욕설">욕설</option>
-	                        <option value="음란물">음란물</option>
-	                        <option value="도배">도배</option>
-	                        <option value="유도성글">유도성 글</option>
-	                        <option value="광고">광고</option>
-	                    </select>
-	
-	                    <label for="reportReason">신고사유</label>
-	                    <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
-
-	                    <button type="button" onclick="submitReport()">신고 제출</button>
-	                </form>
-	            </div>
-	        </div>
-	 </div>
-		<c:choose>
-		    <c:when test="${!empty principal}">
-		        <input type="hidden" value="${principal.user.member_id}" class="member">			
-		    </c:when>
-		    <c:otherwise>
-		        <input type="hidden" value="" class="member">
-		    </c:otherwise>		
-		</c:choose>
-		<input type="hidden" id="us_num" value="${us.us_num}">
     <script>
     
           document.addEventListener("DOMContentLoaded", function () {
@@ -780,34 +600,40 @@ input, span, div, p, button, a, h2 {
 // 수정하기
 function editEntry() {
     const title = document.getElementById('title');
-    const content = document.getElementById('content');
+    const content = document.getElementById('contentText');
     const dateStart = document.getElementById('start_Date'); 
     const dateEnd = document.getElementById('end_Date'); 
+    const us_cnt = document.getElementById('us_cnt'); 
 
     title.contentEditable = true;
+      title.style.border ="1px solid grey";
+    content.style.border = "1px solid grey";
     content.contentEditable = true;
+
     dateStart.readOnly = false;
     dateEnd.readOnly = false;
+    us_cnt.readOnly = false;
    
 }
 //수정한거 저장버튼
 function saveEntry() {
     const title = document.getElementById('title').innerText;
-    const content = document.getElementById('content').innerText;
+    const content = document.getElementById('contentText').innerText;
     const start_Date = document.getElementById('start_Date').value;
     const end_Date = document.getElementById('end_Date').value;
+    const us_cnt = $("#us_cnt").val();
     const us_num =$("#us_num").val();
-   	
 
     const data = {
         us_num: us_num,
-        doe_Name: "수원시",
+        doe_Name: $(".doe_area").text(),
         title: title,
         content: content,
         start_Date: start_Date,
-        end_Date: end_Date
+        end_Date: end_Date,
+       us_cnt : us_cnt
     };
-	
+   
     fetch('/us/update', {
         method: 'POST',
         headers: {
@@ -820,7 +646,7 @@ function saveEntry() {
         console.log(json);
         if (json.message === "수정 성공했습니다!") {
             alert('수정이 완료되었습니다.');
-            // 여기에서 수정이 완료된 후 수행할 작업을 추가할 수 있습니다.
+             location.href="/us/Detail?us_num="+json.us_num;
         } else {
             alert('수정에 실패했습니다.');
             // 수정에 실패한 경우에 대한 처리를 추가할 수 있습니다.
@@ -862,8 +688,8 @@ function btnInsert() {
     const loggedInUserId = $(".member").val(); // 사용자의 ID를 가져와야 함
     const replyContent = document.getElementById('reply-form').value;
    const us_num = $("#us_num").val();
-   
-    if(loggedInUserId != ""){ 
+
+   if(loggedInUserId != ""){ 
        if(replyContent != ""){
            const data = {
                    us_num : us_num,
@@ -925,7 +751,6 @@ function btnInsert() {
                               
                               $(div).append(btnarea);
                            }
-   
 
                            
                             
@@ -934,7 +759,11 @@ function btnInsert() {
 
                         });
                         
-                        
+                         const title = document.getElementById('title');
+                         const content = document.getElementById('contentText');
+                         
+                         title.style.border="none";
+                         content.style.border = "none";
                      }
                   }
                })
@@ -945,10 +774,13 @@ function btnInsert() {
      
       
     } else {
-      alert("로그인 후 이용해주세요")
-   } 
-								});
-							
+       alert("로그인 후 이용해주세요")
+       
+    }
+    
+
+}
+
     </script>
 </body>
 </html>

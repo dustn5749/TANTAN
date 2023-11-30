@@ -157,25 +157,36 @@
             <div class="sidebar-inner">
                 <div class="sidebar-menu">
                     <!--사이드바 버튼들 -->
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
+                    <button type="button" class="sidebar-btn active">
+                        <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn" onclick="mySchedule()">
-                        <img src="/assets/sns/images/Calander.png" alt="" class="icon">
-                        <span class="txt">일정</span>
+                    <button type="button" class="sidebar-btn active" onclick="mySchedule()">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon"> --%>
+                        	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
+                        <span class="txt">내 일정</span>
+                    </button> 
+                    <button type="button" class="sidebar-btn active">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/donghang.png"/>" alt="" class="icon">
+                        <span class="txt">동행 모집</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-send.svg" alt="" class="icon">
-                        <span class="txt">메세지</span>
+                    <button type="button" class="sidebar-btn active">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/weseelist.png"/>" alt="" class="icon">
+                        <span class="txt">위시 리스트</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
-                        <span class="txt">알림</span>
+                    <button type="button" class="sidebar-btn active">
+                        <img src="<c:url value="/assets/sns/images/gongyou.png"/>" alt="" class="icon">
+                        <span class="txt">일정 공유</span>
                     </button>
-                    <button type="button" class="sidebar-btn" onclick="myProfile()">
+                    <button type="button" class="sidebar-btn active">
+                        <img src="<c:url value="/assets/sns/images/review.png"/>" alt="" class="icon">
+                        <span class="txt">리뷰 및 추천</span>
+                    </button>
+                    <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
-                            <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                            <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
                         </figure>
                         <span class="txt">프로필</span>
                     </button>

@@ -40,14 +40,24 @@
 <%--                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon"> --%>
                         	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
                         <span class="txt">내 일정</span>
+                    </button> 
+                    <button type="button" class="sidebar-btn active">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/donghang.png"/>" alt="" class="icon">
+                        <span class="txt">동행 모집</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon">
-                        <span class="txt">메세지</span>
+<%--                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/weseelist.png"/>" alt="" class="icon">
+                        <span class="txt">위시 리스트</span>
                     </button>
                     <button type="button" class="sidebar-btn active">
-                        <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon">
-                        <span class="txt">알림</span>
+                        <img src="<c:url value="/assets/sns/images/gongyou.png"/>" alt="" class="icon">
+                        <span class="txt">일정 공유</span>
+                    </button>
+                    <button type="button" class="sidebar-btn active">
+                        <img src="<c:url value="/assets/sns/images/review.png"/>" alt="" class="icon">
+                        <span class="txt">리뷰 및 추천</span>
                     </button>
                     <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
