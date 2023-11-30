@@ -55,7 +55,7 @@ public interface ScheduleDAO {
 	// 내 일정 정보 가져오기 
 	public List<ScheduleDTO> getMyScheduleList(String member_id);
 
-
+	//도 전체카운트
 	public int doe_nametotalCount(ScheduleDTO schdule);
 
 	
@@ -73,6 +73,12 @@ public interface ScheduleDAO {
 	
 	// 좋아요 수 증가하기
 	public void updateLikeCnt(int schedule_Num);
+	
+	// 좋아요 수 가져오기
+	public int getLikeCount(int schedule_Num) ;
+	
+	
+	
 
 	//일정 위시리스트 가져오기
 	public List<ScheduleDTO> getLikeScheduleList(Map<String, Object> param);

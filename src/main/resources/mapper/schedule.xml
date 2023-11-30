@@ -69,7 +69,7 @@
                     </if>
                     <choose>
                         <when test="ORDER == 'like'">
-                            ORDER BY s.LIKECNT ASC 
+                            ORDER BY s.LIKECNT DESC 
                         </when>
                         <when test="ORDER == 'hh'">
                             ORDER BY s.SCHEDULE_NUM DESC
@@ -107,13 +107,13 @@
                 </if>
                 <choose>
                     <when test="ORDER == 'like'">
-                        ORDER BY s.LIKECNT ASC 
+                        ORDER BY s.LIKECNT DESC
                     </when>
                     <when test="ORDER == 'hh'">
                         ORDER BY s.SCHEDULE_NUM DESC
                     </when>
                     <otherwise>
-                        ORDER BY s.SCHEDULE_NUM ASC 
+                        ORDER BY s.SCHEDULE_NUM ASC
                     </otherwise>
                 </choose>
             ) a
@@ -318,12 +318,11 @@ values(
 </update>
 
    
- 	<!--삭제하기 -->  
-<!--           <delete id="schduleDelete">      -->
-<!--               DELETE FROM SCHEDULE   -->
-<!--       		  WHERE      -->
-<!--            SCHEDULE_NUM = #{schedule_Num}    -->
-<!--      </delete>     -->
+ <select id="getLikeCount" resultType="int" parameterType="int">
+        SELECT likecnt
+        FROM schedule
+        WHERE schedule_Num = #{scheduleNum}
+    </select>
 
 
  <delete id="schduleDelete" parameterType="map"> 
@@ -337,26 +336,6 @@ values(
 
 
 
-	<!-- 좋아요 삭제  --> 
-	<delete id="deleteLike">
-		DELETE FROM snslike
-		WHERE bno = #{bno} AND userID = #{userId}	
-	</delete>
- 
- 
- 
-<!-- 좋아요 검색  -->
-	<select id="searchLike" resultType="int">
-		SELECT COUNT(*) FROM snslike
-		WHERE bno = #{bno} AND userId = #{userId}
-	</select>
-	
-	<!-- 좋아요 등록  -->
-	<insert id="createLike">
-		INSERT INTO snslike(bno, userId, lno) 
-		VALUES(#{bno}, #{userId}, snslike_seq.NEXTVAL)
-	</insert>
-	
 
 
 	 <!-- 컨텐츠 검색 갯수 -->

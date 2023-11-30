@@ -57,7 +57,7 @@
 }
 }
 .us_header {
-   position: sticky;
+/*    position: sticky; */
    z-index: 9;
    top: 80px;
    height: fit-content;
@@ -75,7 +75,7 @@
    justify-content: center;
    -webkit-box-align: center;
    align-items: center;
-   position: sticky;
+/*    position: sticky; */
    z-index: 9;
    top: 80px;
    width: 100%;
@@ -95,7 +95,7 @@
 }
 
 .us_header5 {
-   position: relative;
+/*    position: relative; */
    display: flex;
    -webkit-box-align: center;
    align-items: center;
@@ -522,7 +522,7 @@ div, input, p, span, button, h2 {
 #myModal {
    display: none;
    position: fixed;
-   z-index: 1;
+   z-index: 10;
    left: 0;
    top: 0;
    width: 100%;
@@ -746,18 +746,6 @@ div, input, p, span, button, h2 {
     </c:otherwise>
 </c:choose>
 
-<%--                               <c:if test="${item.fileNo!=0}"> --%>
-<%--                                  <img src="/file/displayImage.do?usFileNum=${item.fileNo}" --%>
-<!--                                     alt="동행이미지 사진" class="us_content_img"> -->
-<%--                               </c:if> --%>
-<%--                               <c:if test="${!empty item.imageUrl}"> --%>
-<%--                                  <img src="${item.imageUrl}" class="us_content_img"> --%>
-<%--                               </c:if> --%>
-<%--                               <c:if test="${empty item.imageUrl&& item.fileNo==0}"> --%>
-<!--                                  <img -->
-<!--                                     src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" -->
-<!--                                     class="us_content_img"> -->
-<%--                               </c:if> --%>
                            </div>
                            <h5 class="fw-bolder">${item.title}</h5>
                              <div>지역 : ${item.doe_Name}</div>
@@ -792,7 +780,7 @@ div, input, p, span, button, h2 {
          </div>
          
          <form name="pageForm" id="pageForm" action="/us/list"
-            method="get">
+            method="post">
             <input type="hidden" name="pageNo" id="pageNo"
                value="${result.us.pageNo}">
          </form>
@@ -829,17 +817,36 @@ div, input, p, span, button, h2 {
 
    <script>
    
- 
-   
 	function city_btn1() {
 	    window.location.href = '/us/write';
 	}
 
-    function jsPageNo(pageNo) {
-        document.getElementById("pageNo").value = pageNo;
-        document.getElementById("pageForm").submit();
-    }
+	function jsPageNo(pageNo) {
+	    // 현재 URL 가져오기
+	    var currentUrl = window.location.href;
 
+	    // 기존의 pageNo 매개변수 제거
+	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+	    currentUrl = currentUrl.replace(regex, '$2');
+
+	    // 현재 URL에 페이지 번호 추가
+	    var newUrl;
+	    if (currentUrl.indexOf('?') !== -1) {
+	        newUrl = currentUrl + "&pageNo=" + pageNo;
+	    } else {
+	        newUrl = currentUrl + "?pageNo=" + pageNo;
+	    }
+
+	    // 새로운 URL을 폼의 액션으로 설정
+	    document.getElementById("pageForm").action = newUrl;
+
+	    // 페이지 번호 설정 및 폼 제출
+	    document.getElementById("pageNo").value = pageNo;
+	    document.getElementById("pageForm").submit();
+	}
+
+
+	   
     document.addEventListener("DOMContentLoaded", function() {
         var scheduleBtn = document.querySelector(".schedule_btn");
 
@@ -851,13 +858,6 @@ div, input, p, span, button, h2 {
     });
 
 
-     /* 동행 상세보기 */
-         $(".detailBtn").on("click", function(e){
-          console.log("상세보기")
-           const us_num = e.target.closest(".card").querySelector(".us_num").value;
-          
-            location.href="/us/Detail?us_num="+us_num;
-       });
      
     
 
@@ -888,7 +888,16 @@ div, input, p, span, button, h2 {
         	    });
         	}
          
-
+         /* 동행 상세보기 */
+         $(".detailBtn").on("click", function(e){
+          console.log("상세보기")
+           const us_num = e.target.closest(".card").querySelector(".us_num").value;
+          
+            location.href="/us/Detail?us_num="+us_num;
+       });
+     
+         
+     //이동    
          function moveToSelectedRegion() {
              window.location.href = '/us/list';
          }
@@ -901,9 +910,12 @@ div, input, p, span, button, h2 {
   
 
          
+         
+         
+         // 지역이동
      function moveRegion() {
     	    var value = $('[name=deo_name]:checked').val();
-		alert (value);
+
     	    if (value == 'all') {
     	        location.href = '/us/list';
     	    } else {

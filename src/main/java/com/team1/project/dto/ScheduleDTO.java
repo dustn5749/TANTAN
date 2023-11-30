@@ -49,7 +49,6 @@ public class ScheduleDTO {
 	    private String memoList;
 
 	    private String area; 
-	    private String Like_CNT;
 
 	    private int likecnt;
 

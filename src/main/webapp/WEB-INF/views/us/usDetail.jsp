@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
+   <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
 <!DOCTYPE HTML>
@@ -30,97 +30,97 @@ input, span, div, p, button, a, h2 {
  
  /* 상세보기 페이지 전체 div */
     .usDetail_div {
-    	 width: 80%;
-    	 margin-top:10px;
-    	 margin-bottom: 10px;
-    	 margin: 0 auto;
-    	 text-align: center; 
+        width: 80%;
+        margin-top:10px;
+        margin-bottom: 10px;
+        margin: 0 auto;
+        text-align: center; 
     }
     /* 이미지 배너 */
-	.profile-details{
-		width: 100%;
-		height: 350px;
-		border: none;
-		border-radius: 3px;
-		margin-top: 30px;
-		margin-bottom: 30px;
-	}
-	.profile-details > img {
-		width: 100%;
-		height: 100%;
-		border-radius: 7px;
-	}
-	
-	/* detail content div */
-	.detail_content{
-		text-align: center;
-		margin: 0 auto;
-		width: 95%;
-	}
-	.detail_content_div{
-		display: flex;
-		width: 100%;
-	}
-	.detail_content_inner {
-		width: 70%;
-	}
-	.detail_content_inner>div{
-		text-align: left;
-	
-	} 
-	.detail_title {
-		width: 100%;
-	}
-	.detail_title >p{
-		font-size: 30px !important;
-		font-weight: bold;
-		font-family: 'Pretendard-Regular';
-		
-	}
-	
-	/* 동행 날짜 div */
-	.detail_date {
-		display: flex;
-		border: 2px dotted rgb(229, 229, 229);
-		border-radius: 10px;
-		font-family: 'Pretendard-Regular';
-		height: 100px;
-		padding: 30px;
-		margin-top: 20px;
-		margin-bottom: 20px;
-		
-	}
-	.detail_date > input, p {
-		font-family: 'Pretendard-Regular';
-	}
-	.date {
-		margin-right: 30px;
-	}
-	.detail_date > p> input {
-		font-family: 'Pretendard-Regular';
-		padding-left: 10px;
-		margin-left: 10px;
-		border: none;
-		border-radius: 10px;
-		height: 30px;
-	}
-	
-	/* 프로필 */
+   .profile-details{
+      width: 100%;
+      height: 350px;
+      border: none;
+      border-radius: 3px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+   }
+   .profile-details > img {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+   }
+   
+   /* detail content div */
+   .detail_content{
+      text-align: center;
+      margin: 0 auto;
+      width: 95%;
+   }
+   .detail_content_div{
+      display: flex;
+      width: 100%;
+   }
+   .detail_content_inner {
+      width: 70%;
+   }
+   .detail_content_inner>div{
+      text-align: left;
+   
+   } 
+   .detail_title {
+      width: 100%;
+   }
+   .detail_title >p{
+      font-size: 30px !important;
+      font-weight: bold;
+      font-family: 'Pretendard-Regular';
+      
+   }
+   
+   /* 동행 날짜 div */
+   .detail_date {
+      display: flex;
+      border: 2px dotted rgb(229, 229, 229);
+      border-radius: 10px;
+      font-family: 'Pretendard-Regular';
+      height: 100px;
+      padding: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      
+   }
+   .detail_date > input, p {
+      font-family: 'Pretendard-Regular';
+   }
+   .date {
+      margin-right: 30px;
+   }
+   .detail_date > p> input {
+      font-family: 'Pretendard-Regular';
+      padding-left: 10px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      height: 30px;
+   }
+   
+   /* 프로필 */
    .profile {
     font-family: 'Pretendard-Regular';
-   	display: flex;
-   	text-align: left;
-   	background: rgb(239, 239, 239);
-   	border-radius: 8px;
-   	align-content: center;
-   	align-items: center;
-   	padding-left: 20px;
-   	height: 80px;
-  	margin: 30px;
-   	width: 30%;
+      display: flex;
+      text-align: left;
+      background: rgb(239, 239, 239);
+      border-radius: 8px;
+      align-content: center;
+      align-items: center;
+      padding-left: 20px;
+      height: 80px;
+     margin: 30px;
+      width: 30%;
    }   
    .profile-image > img{
-   	 width: 50px;
+       width: 50px;
    }
 
 
@@ -182,28 +182,28 @@ input, span, div, p, button, a, h2 {
         .reply-form-button-wrapper {
             text-align: center;
         }
-		/*  */
-		#replyContainer {
-			display: flex;
-			width: 100%;
-			text-align: center;
-		}
-		#replyContainer > div  {
-		font-family: 'Pretendard-Regular';
-		margin-right: 20px;
-		}
-		#replyContainer > button {
-			font-family: 'Pretendard-Regular';
-			width: 150px;
-			background:  #0099ff;
-			border: none;
-			border-radius: 7px;
-		}
-		
-		#replyContainer > button:hover {
+      /*  */
+      #replyContainer {
+         display: flex;
+         width: 100%;
+         text-align: center;
+      }
+      #replyContainer > div  {
+      font-family: 'Pretendard-Regular';
+      margin-right: 20px;
+      }
+      #replyContainer > button {
+         font-family: 'Pretendard-Regular';
+         width: 150px;
+         background:  #0099ff;
+         border: none;
+         border-radius: 7px;
+      }
+      
+      #replyContainer > button:hover {
             background-color: rgb(0, 71, 119);
             color : white;
-		}
+      }
         /* 신고 모달 스타일 */
         .reportmodal {
             display: none;
@@ -307,56 +307,56 @@ input, span, div, p, button, a, h2 {
         }   
         /* 내용 div */
        .details{
-       	padding-left: 40px;
-       	margin-top: 50px;
-       	margin-bottom: 30px;
+          padding-left: 40px;
+          margin-top: 50px;
+          margin-bottom: 30px;
        }
         .details > p {
-   			font-size: 20px !important;
-  			font-family: 'Pretendard-Regular';
+            font-size: 20px !important;
+           font-family: 'Pretendard-Regular';
         }
         
         /* 댓글 작성 div */
         .reply_content {
-        	display: flex;
-        	width: 100%;
-        	border: 1px solid grey;
-        	border-radius: 7px;
-        	
+           display: flex;
+           width: 100%;
+           border: 1px solid grey;
+           border-radius: 7px;
+           
         }
         .reply_content > textarea{
-        	width: 100%;
-        	border: none;
+           width: 100%;
+           border: none;
         }
 
         
         /* 댓글 리스트 */
         .commnet_area {
-        	text-align: center;
-        	margin-top: 30px !important;
-        	margin-bottom: 50px !important;
-        	margin: 0 auto;
-        	align-content: center;
-        	align-items: center;
-        	justify-content: center;
-        	padding-left: 50px;
+           text-align: center;
+           margin-top: 30px !important;
+           margin-bottom: 50px !important;
+           margin: 0 auto;
+           align-content: center;
+           align-items: center;
+           justify-content: center;
+           padding-left: 50px;
         }
         .comment_area_inner {
-        	display: flex;
-			text-align: left;
-			height: 40px;
-		
+           display: flex;
+         text-align: left;
+         height: 40px;
+      
 
         }
         .member_id_div{
-        	display: flex;
-        	margin-right: 30px;
-        	width: 120px;
-        	
+           display: flex;
+           margin-right: 30px;
+           width: 120px;
+           
         }
         .member_id_div > p {
-        	font-size: 20px !important;
-        	color : grey;
+           font-size: 20px !important;
+           color : grey;
         }
     </style>
 </head>
@@ -364,122 +364,122 @@ input, span, div, p, button, a, h2 {
 <body>
 
 <div class="usDetail_div">
-	<div id="reportSubmissionMessage" style="text-align: center; color: green; margin-top: 10px;"></div>
-	 
-	 
-	  <div class="profile-details">
-	        <c:choose>
-	           <c:when test="${us.fileNo!=0}">
-	              <img   src="/file/displayImage.do?usFileNum=${us.fileNo}" alt="동행이미지 사진" class="us_content_img">
-	           </c:when>
-	           <c:when test="${!empty us.imageUrl}">
-	              <img   src="${us.imageUrl}" class="us_content_img">
-	           </c:when>
-	           <c:when test="${empty us.imageUrl&& us.fileNo==0}">
-	              <img  src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
-	           </c:when>
-	        </c:choose>
-	</div> 
-	<div class="detail_content">
-		<div class="detail_content_div">
-		    <div class="detail_content_inner">
-		    	<div class="detail_title">
-		            <p id="title"><span>${us.title}</span></p>		    	
-		    	</div>
-		    	<div class="detail_date">
-		            <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
-		            <p class="date"> ~ </p>
-		            <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
-		            <p class="uscnt">모집 인원 : <span id="us_cnt">${us.us_cnt}</span></p>
-		   		</div>
-		   		<div class="details">
-		   			<p id="content">${us.content}</p>
-		   		</div>
-		   </div>     
-				<div class="profile">	       
-				    <div class="profile-image">
-				        <img src="/assets/img/no_profile.png" alt="프로필 이미지">
-				    </div>
-				    <div class="user-details">
-				        <h2 id="writer">${us.writer}</h2>
-				    </div>
-			  </div>
-		 </div>
-		        <!-- 버튼 그룹 -->
-		        <div class="button-group">
-		            <button class="report-button" onclick="openModal()">신고하기</button>
-		           <c:if test="${principal.user.member_id == us.writer}">
-			            <button class="orange-btn" onclick="editEntry()">수정하기</button>
-			            <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
-			            <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
-		            </c:if>
-		        </div>
-		        
-		        <!-- 댓글 섹션 -->
-		        <div class="reply-section">
-		            <div id="replyContainer">
-		             	<div class="reply_content">
-			                <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
-		             	</div>
-			                <button class="insertBtn" onclick="btnInsert()">댓글쓰기</button>	             	
-		            </div>
-		            
-		            <div class="commnet_area">
-		        
-		            	<c:forEach items="${commentList}" var="item">
-		            		<div class="comment_area_inner">
-		            			<div class="member_id_div">
-		            				<img src="/assets/img/userReview.png" width="30px">
-		            				<p class="member_id">${item.writer}</p>
-		            			</div>
-		            			<div class="content_area">${item.content}</div>
-		            			<c:if test="${item.writer==principal.user.member_id}">
-		            				<div class="btnarea">
-		            					<button class="modifybtn">수정하기</button>
-		            					<button class="deleteBtn">삭제하기</button>
-		            				</div>
-		            			
-		            			</c:if>
-		            		</div>
-		            	</c:forEach>
-		            </div>
-		                <div class="reply-form-button-wrapper">
-		                    <button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
-		                </div>
-		        </div>
-		</div>
-	        <!-- 신고 모달 -->
-	        <div id="reportModal" class="reportmodal">
-	            <div class="modal-content">
-	                <span class="close" onclick="closeModal()">&times;</span>
-	                <h2>신고하기</h2>
-	                <form id="reportForm">
-	                    <label for="reportType">신고유형</label>
-	                    <select id="reportType" name="reportType">
-	                        <option value="욕설">욕설</option>
-	                        <option value="음란물">음란물</option>
-	                        <option value="도배">도배</option>
-	                        <option value="유도성글">유도성 글</option>
-	                        <option value="광고">광고</option>
-	                    </select>
-	
-	                    <label for="reportReason">신고사유</label>
-	                    <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
-	
-	                    <button type="button" onclick="submitReport()">신고 제출</button>
-	                </form>
-	            </div>
-	        </div>
-	 </div>
-		<c:choose>
-		    <c:when test="${!empty principal}">
-		        <input type="hidden" value="${principal.user.member_id}" class="member">			
-		    </c:when>
-		    <c:otherwise>
-		        <input type="hidden" value="null" class="member">
-		    </c:otherwise>		
-		</c:choose>
-		<input type="hidden" id="us_num" value="${us.us_num}">
+   <div id="reportSubmissionMessage" style="text-align: center; color: green; margin-top: 10px;"></div>
+    
+    
+     <div class="profile-details">
+           <c:choose>
+              <c:when test="${us.fileNo!=0}">
+                 <img   src="/file/displayImage.do?usFileNum=${us.fileNo}" alt="동행이미지 사진" class="us_content_img">
+              </c:when>
+              <c:when test="${!empty us.imageUrl}">
+                 <img   src="${us.imageUrl}" class="us_content_img">
+              </c:when>
+              <c:when test="${empty us.imageUrl&& us.fileNo==0}">
+                 <img  src="https://tripsoda.s3.ap-northeast-2.amazonaws.com/prod/accompany/1697506783063-1207" class="us_content_img">
+              </c:when>
+           </c:choose>
+   </div> 
+   <div class="detail_content">
+      <div class="detail_content_div">
+          <div class="detail_content_inner">
+             <div class="detail_title">
+                  <p id="title"><span>${us.title}</span></p>             
+             </div>
+             <div class="detail_date">
+                  <p class="date">시작 날짜: <input type="date" id="start_Date" value="${fn:substring(us.start_Date, 0, 10) }" readonly="readonly"> </p>
+                  <p class="date"> ~ </p>
+                  <p class="date">종료 날짜: <input type="date" id="end_Date" value="${fn:substring(us.end_Date, 0, 10) }" readonly="readonly"></p>
+                  <p class="uscnt">모집 인원 : <span id="us_cnt">${us.us_cnt}</span></p>
+               </div>
+               <div class="details">
+                  <p id="content">${us.content}</p>
+               </div>
+         </div>     
+            <div class="profile">          
+                <div class="profile-image">
+                    <img src="/assets/img/no_profile.png" alt="프로필 이미지">
+                </div>
+                <div class="user-details">
+                    <h2 id="writer">${us.writer}</h2>
+                </div>
+           </div>
+       </div>
+              <!-- 버튼 그룹 -->
+              <div class="button-group">
+                  <button class="report-button" onclick="openModal()">신고하기</button>
+                 <c:if test="${principal.user.member_id == us.writer}">
+                     <button class="orange-btn" onclick="editEntry()">수정하기</button>
+                     <button class="orange-btn saveButton" onclick="saveEntry()">저장하기</button>
+                     <button class="orange-btn" onclick="deleteEntry()">삭제하기</button>
+                  </c:if>
+              </div>
+              
+              <!-- 댓글 섹션 -->
+              <div class="reply-section">
+                  <div id="replyContainer">
+                      <div class="reply_content">
+                         <textarea class="form-control" id="reply-form" placeholder="댓글을 입력하세요"></textarea>
+                      </div>
+                         <button class="insertBtn" onclick="btnInsert()">댓글쓰기</button>                   
+                  </div>
+                  
+                  <div class="commnet_area">
+              
+                     <c:forEach items="${commentList}" var="item">
+                        <div class="comment_area_inner">
+                           <div class="member_id_div">
+                              <img src="/assets/img/userReview.png" width="30px">
+                              <p class="member_id">${item.writer}</p>
+                           </div>
+                           <div class="content_area">${item.content}</div>
+                           <c:if test="${item.writer==principal.user.member_id}">
+                              <div class="btnarea">
+                                 <button class="modifybtn">수정하기</button>
+                                 <button class="deleteBtn">삭제하기</button>
+                              </div>
+                           
+                           </c:if>
+                        </div>
+                     </c:forEach>
+                  </div>
+                      <div class="reply-form-button-wrapper">
+                          <button class="orange-btn" onclick="goToHomepage()">뒤로가기</button>
+                      </div>
+              </div>
+      </div>
+           <!-- 신고 모달 -->
+           <div id="reportModal" class="reportmodal">
+               <div class="modal-content">
+                   <span class="close" onclick="closeModal()">&times;</span>
+                   <h2>신고하기</h2>
+                   <form id="reportForm">
+                       <label for="reportType">신고유형</label>
+                       <select id="reportType" name="reportType">
+                           <option value="욕설">욕설</option>
+                           <option value="음란물">음란물</option>
+                           <option value="도배">도배</option>
+                           <option value="유도성글">유도성 글</option>
+                           <option value="광고">광고</option>
+                       </select>
+   
+                       <label for="reportReason">신고사유</label>
+                       <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
+   
+                       <button type="button" onclick="submitReport()">신고 제출</button>
+                   </form>
+               </div>
+           </div>
+    </div>
+      <c:choose>
+          <c:when test="${!empty principal}">
+              <input type="hidden" value="${principal.user.member_id}" class="member">         
+          </c:when>
+          <c:otherwise>
+              <input type="hidden" value="null" class="member">
+          </c:otherwise>      
+      </c:choose>
+      <input type="hidden" id="us_num" value="${us.us_num}">
     <script>
     
           document.addEventListener("DOMContentLoaded", function () {
@@ -630,90 +630,91 @@ const replyContainer = document.getElementById('replyContainer');
 function btnInsert() {
     const loggedInUserId = $(".member").val(); // 사용자의 ID를 가져와야 함
     const replyContent = document.getElementById('reply-form').value;
-	const us_num = $("#us_num").val();
-	
-	 if(loggedInUserId != ""){ 
-		 if(replyContent != ""){
-			  const data = {
-				    	us_num : us_num,
-				    	writer: loggedInUserId,
-				        content: replyContent
-				    };
-				
-				
-									url : "/comment/insertComment",
-					    type: 'POST',
-					    contentType: "application/json; charset=UTF-8",
-					    data: JSON.stringify(data),
-					    dataType: "json",
-					    success: function (data) {
-							alert(data.message);
-							if(data.status){
-								var commentList = data.commentList;
-								var commentArea = $(".commnet_area");
-								commentArea.empty();
-								
-								commentList.forEach(function(e) {
-									var div = document.createElement("div");
-									$(div).addClass("comment_area_inner");
-									
-			     	                var member_id = document.createElement("div");
-			     	                var member_img = document.createElement("img");
-			     	               $(member_img).attr("src", "/assets/img/userReview.png");
-			     	              $(member_img).css({
-			     	            		"width" : "30px"  
-			     	              })
-			     	                var member_id_p = document.createElement("p");
-			     	                $(member_id_p).text(e.writer);
-			     	                $(member_id).addClass("member_id_div");
-				     	            $(member_id_p).addClass("member_id");
-				     	            
-				     	            $(member_id).append(member_img);
-				     	            $(member_id).append(member_id_p);
-				     	            
-									
-									var content = document.createElement("div");
-									$(content).addClass("content_area");
-									$(content).text(e.content);
-									
-									$(div).append(member_id);
-									$(div).append(content);
-									
-		/* 							if(e.writer == loggedInUserId){
-										var btnarea = document.createElement("div");
-										$(btnarea).addClass("btnarea");
-										var btn1 = document.createElement("button");
-										$(btn1).addClass("modifyBtn");
-										$(btn1).text("수정하기");			
-										var btn2 = document.createElement("button");
-										$(btn2).addClass("deleteBtn");
-										$(btn2).text("삭제하기");
-										$(btnarea).append(btn1);
-										$(btnarea).append(btn2);
-										
-										$(div).append(btnarea);
-									} */
+   const us_num = $("#us_num").val();
+   
+    if(loggedInUserId != ""){ 
+       if(replyContent != ""){
+           const data = {
+                   us_num : us_num,
+                   writer: loggedInUserId,
+                    content: replyContent
+                };
+            
+               $.ajax({
+                  url : "/comment/insertComment",
+                   type: 'POST',
+                   contentType: "application/json; charset=UTF-8",
+                   data: JSON.stringify(data),
+                   dataType: "json",
+                   success: function (data) {
+                     alert(data.message);
+                     if(data.status){
+                        var commentList = data.commentList;
+                        var commentArea = $(".commnet_area");
+                        commentArea.empty();
+                        
+                        commentList.forEach(function(e) {
+                           var div = document.createElement("div");
+                           $(div).addClass("comment_area_inner");
+                           
+                                 var member_id = document.createElement("div");
+                                 var member_img = document.createElement("img");
+                                $(member_img).attr("src", "/assets/img/userReview.png");
+                               $(member_img).css({
+                                   "width" : "30px"  
+                               })
+                                 var member_id_p = document.createElement("p");
+                                 $(member_id_p).text(e.writer);
+                                 $(member_id).addClass("member_id_div");
+                                $(member_id_p).addClass("member_id");
+                                
+                                $(member_id).append(member_img);
+                                $(member_id).append(member_id_p);
+                                
+                           
+                           var content = document.createElement("div");
+                           $(content).addClass("content_area");
+                           $(content).text(e.content);
+                           
+                           $(div).append(member_id);
+                           $(div).append(content);
+                           
+                           if(e.writer == loggedInUserId){
+                              
+                              var btnarea = document.createElement("div");
+                              $(btnarea).addClass("btnarea");
+                              var btn1 = document.createElement("button");
+                              $(btn1).addClass("modifyBtn");
+                              $(btn1).text("수정하기");         
+                              var btn2 = document.createElement("button");
+                              $(btn2).addClass("deleteBtn");
+                              $(btn2).text("삭제하기");
+                              $(btnarea).append(btn1);
+                              $(btnarea).append(btn2);
+                              
+                              $(div).append(btnarea);
+                           }
 
-									
-									 
-									 
-									 $(commentArea).append(div);
+                           
+                            
+                            
+                            $(commentArea).append(div);
 
-								});
-								
-								
-							}
-						}
-					})
-					
-		 } else {
-			 alert("댓글 내용을 입력해주세요");
-		 }
-	  
-		
-	 } else {
-		alert("로그인 후 이용해주세요")
-	} 
+                        });
+                        
+                        
+                     }
+                  }
+               })
+               
+       } else {
+          alert("댓글 내용을 입력해주세요");
+       }
+     
+      
+    } else {
+      alert("로그인 후 이용해주세요")
+   } 
     
 
 }

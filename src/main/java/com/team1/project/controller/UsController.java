@@ -33,13 +33,12 @@ public class UsController {
 	@Autowired
 	 private MemberService memberservice;
 	
-
 	
 	@Autowired
 	private UsCommentService usCommentService;
 	
 	
-
+	
 	// 1. 동행 전체 목록 페이지
 	@RequestMapping(value = "/list")
 	public String list( UsDTO us, Model model) throws Exception {
@@ -88,7 +87,6 @@ public class UsController {
 	      
 	      model.addAttribute("writer", writer);
 	      model.addAttribute("us", usDetail);
-	      model.addAttribute("commentList", usCommentService.getUsCommentList(us_num));
 	    return "usDetail";
 	    }
 	

@@ -231,36 +231,61 @@ public class ScheduleController {
 
 	
 	//하트색
-	@PostMapping("/updateHeartColor")
-	@ResponseBody
-	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") int schedule_Num, @RequestParam("isLike") boolean isLike) {
-		// isLike가 true면 좋아요 개수 올려주기
-		// false면 좋아요 취소
-		
-		MemberDTO member = getCurrentMember();
-		scheduleService.updateLike(member.getMember_id(), schedule_Num, isLike);
-		
-	    Map<String, Object> response = new HashMap<>();
-	    try {
-
-	        response.put("success", true);
-	    } catch (Exception e) {
-	        response.put("success", false);
-	        response.put("error", e.getMessage());
-	    }
-	    return response;
-	}
+//	@PostMapping("/updateHeartColor")
+//	@ResponseBody
+//	public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") int schedule_Num, @RequestParam("isLike") boolean isLike) {
+//		// isLike가 true면 좋아요 개수 올려주기
+//		// false면 좋아요 취소
+//		
+//		MemberDTO member = getCurrentMember();
+//		scheduleService.updateLike(member.getMember_id(), schedule_Num, isLike);
+//		
+//	    Map<String, Object> response = new HashMap<>();
+//	    try {
+//
+//	        response.put("success", true);
+//	    } catch (Exception e) {
+//	        response.put("success", false);
+//	        response.put("error", e.getMessage());
+//	    }
+//	    return response;
+//	}
+//	
+//	
 	
-	// 로그인 상태가 아니라면. null 리턴
-	private MemberDTO getCurrentMember() {
-		try {
-			return (MemberDTO)((PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
-		} catch (ClassCastException e) {
-			// TODO: handle exception
-			return null;
-		}
-		
-	}
+	
+	@PostMapping("/updateHeartColor")
+    @ResponseBody
+    public Map<String, Object> updateHeartColor(@RequestParam("scheduleNum") int scheduleNum, @RequestParam("isLike") boolean isLike) {
+        MemberDTO member = getCurrentMember();
+        scheduleService.updateLike(member.getMember_id(), scheduleNum, isLike);
+
+        Map<String, Object> response = new HashMap<>();
+        try {
+            System.out.println("likecont ??????= ");
+
+        	
+            // 좋아요 수를 응답에 추가
+            int likeCount = scheduleService.getLikeCount(scheduleNum);
+            System.out.println("likecont = " + likeCount);
+            response.put("success", true);
+            response.put("likeCount", likeCount);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+        }
+        return response;
+    }
+
+    // 로그인 상태가 아니라면. null 리턴
+    private MemberDTO getCurrentMember() {
+        try {
+            return (MemberDTO) ((PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        } catch (ClassCastException e) {
+            return null;
+        }
+    }
+
 	
 	// 일정 위시리스트 목록 가져오기
 	@RequestMapping("/likeScheduleList")
