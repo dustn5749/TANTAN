@@ -23,4 +23,7 @@ public interface CustomerDAO {
 
     // 관리자 문의사항 리스트 가져오기
     public List<InquiryDTO> inquiryList(InquiryDTO inquiry);
+
+    // 추가된 문의사항 번호 얻기
+	public int getInsertInquiry();
 }
