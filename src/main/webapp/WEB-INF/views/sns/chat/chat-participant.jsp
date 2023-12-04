@@ -39,7 +39,7 @@
                         <!-- 친구 프사 & 이름 -->
                         <div class="person-item">
                             <figure class="mini-thumnail">
-                                <img src="<c:url value="${chatter.profileImg}"/>" alt="">
+                                <img src="${empty chatter.profileImg ? "/assets/sns/images/profile-img-default.png" : chatter.profileImg}" alt="">
                             </figure>
                             <div class="person-profile">
                                 <div class="name-wrap">

@@ -9,6 +9,7 @@
     <div class="chat-list" onclick="openChatDetailModal(${chatRoom.roomNum})">
         <figure class="mini-thumnail">
             <img src="<c:url value="${chatRoom.profileImg}"/>" alt="">
+<%--       <img src="${empty chatRoom.profileImg ? "/assets/sns/images/profile-img-default.png" : chatRoom.profileImg}" alt=""> --%>
         </figure>
         <div class="chat-info-grp">
             <div class="chat-ttl-wrap">
