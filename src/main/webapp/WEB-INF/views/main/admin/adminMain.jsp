@@ -14,12 +14,6 @@
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
 <script src="admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
 <style>
-#pop-board{
-border:1px solid black;
-}
-#pop-us{
-border:1px solid black;
-}
 </style>
 </head>
 <body>
@@ -71,7 +65,7 @@ border:1px solid black;
 		                    <div class="h5 mb-0 font-weight-bold text-gray-800">${todaySchedule}</div>
 		                </div>
 		                <div class="col-auto">
-		                    <i class="fas fa-edit fa-2x text-gray-300"></i>
+		                    <i class="fas fa-plane fa-2x text-gray-300"></i>
 		                </div>
 		            </div>
 		        </div>
@@ -104,7 +98,7 @@ border:1px solid black;
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                    신고(일일)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${todayReport }</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -114,304 +108,232 @@ border:1px solid black;
             </div>
         </div>
 	</div>
-    <div class="col-12">
-    	<div class="card card-primary card-outline card-tabs">
-    		<div class="card-header p-0 pt-1 border-bottom-0">
-    			<div class="card-body table-responsive p-0">
-   					<div class="card-tools">
-   						<div class="input-group input-group-sm" style="width:150px; float:right;"></div>
-   					</div>
-    			</div>
-    		</div>
-    		
-    		<div class="card-body table-responsive p-0">
-    		<div class="tab-content p-3" id="nav-tabContent">
-    		<!-- 회원 탭 카드 -->
-    		
-              <div class="tab-pane fade show active" id="home-tab" role="tabpanel" aria-labelledby="custom-home-tab">
-		          <div class="row">
-			          <div class="col-12">
-			                <div class="card-body">
-<!-- 			                <div id="donut-chart" style="height: 338px;" class="full-width-chart"></div> -->
-								<canvas id="monthMember"></canvas>
-			                </div>
-			                <hr>
-			              </div>
-			        </div>
-		          </div>
-              </div>
-              <!-- 회원 탭 카드 종료 -->
-              
-            	</div>
-    		</div>
-    	</div>
-    </div>
+	<div class="row">
+		<div class="col-xl-6 col-lg-7">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">월간 이용</h6>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="monthMember"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="h5 mb-0 font-weight-bold text-gray-800 d-flex">
+					    <span class="mr-auto">전체 회원 : ${totalMembers}</span>
+					    <span class="ml-auto">전체 게시글 : ${totalPosts}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-6 col-lg-7">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">여행지별 점수</h6>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="doeChart"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">전체 리뷰 건수 : 987</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
-  $(function () {
-    /* END LINE CHART */
+$(function () {
+    const urlMonth = "/monthData";
 
-    /*
-     * FULL WIDTH STATIC AREA CHART
-     * -----------------
-     */
-     const urlMonth = "/monthData";
+    $.ajax({
+        url: urlMonth,
+        method: "GET",
+        success: function (data) {
+            console.log(data);
 
-     $.ajax({
-         url: urlMonth,
-         method: "GET",
-         success: function (data) {
-             console.log(data);
-             const monthData = data.monthMember.map(function (item) {
-                 console.log(item.month);
-                 return item.month;
-             });
-             const counts = data.monthMember.map(function (item) {
-                 console.log(item.signup_count);
-                 return item.signup_count;
-             });
-             const write_count = data.monthUs.map(function (item) {
-//             	 console.log(item.write_count);
-            	 return item.write_count;
-             })
-             var stackedChartData = {
-                 labels: monthData,
-                 datasets: [
-                	 {
-                         label: "월별 가입자 현황",
-                         backgroundColor: "rgba(60,141,188,0.9)",
-                         borderColor: "rgba(60,141,188,0.8)",
-                         pointRadius: false,
-                         pointColor: "#3b8bba",
-                         pointStrokeColor: "rgba(60,141,188,1)",
-                         pointHighlightFill: "#fff",
-                         pointHighlightStroke: "rgba(60,141,188,1)",
-                         data: counts,
-                     },
-                     {
-                         label: "월별 작성된 게시글",
-                         backgroundColor: "rgba(92,184,92,0.9)",  // 초록색
-                         borderColor: "rgba(92,184,92,0.8)",     // 초록색
-                         pointRadius: false,
-                         pointColor: "#5cb85c",                  // 초록색
-                         pointStrokeColor: "rgba(92,184,92,1)",  // 초록색
-                         pointHighlightFill: "#fff",
-                         pointHighlightStroke: "rgba(92,184,92,1)",  // 초록색
-                         data: write_count,
-                     }
-                 ],
-             };
-             var barChartData = $.extend(true, {}, stackedChartData);
-             var stackedBarChartCanvas = $("#monthMember")
-                 .get(0)
-                 .getContext("2d");
-             var stackedBarChartData = $.extend(true, {}, barChartData);
-             var stackedBarChartOptions = {
-                 responsive: true,
-                 maintainAspectRadio: false,
-                 scales: {
-                     xAxes: [
-                         {
-                             type: 'time',
-                             time: {
-                                 unit: 'month',
-                                 displayFormats: {
-                                     month: 'MM'
-                                 }
-                             },
-                             distribution: 'series', // 추가 부분
-                             ticks: {
-                                 source: 'labels', // 추가 부분
-                             },
-                         },
-                     ],
-                     yAxes: [
-                         {
-                             stacked: true,
-                             position:'left',
-                             id: 'y-axis-0', // y축 식별자
-                         },
-                         {
-                        	 stacked:false,
-                        	 position: 'right',
-                        	 id: 'y-axis-1', // y축 식별자
-                         }
-                     ],
-                 },
-             };
-             new Chart(stackedBarChartCanvas, {
-                 type: "bar",
-                 data: stackedBarChartData,
-                 options: stackedBarChartOptions,
-             });
-         },
-         error: function (error) {
-             console.error("Error", error);
-         },
-     });
+            const monthData = data.monthMember.map(function (item) {
+                console.log(item.month);
+                return item.month + "월";
+            });
 
-     
-//      const url = "/usReportList";
-// //      const labels = [];
+            const counts = data.monthMember.map(function (item) {
+                console.log(item.signup_count);
+                return item.signup_count;
+            });
 
-//      $.ajax({
-//        url: url,
-//        method: "GET",
-//        success: function (data) {
-//     	   const dayData = data.usReportList.map(function (item) {
-//     		    return item.reportcnt;
-//     		  });
-//     	   const labels = data.usReportList.map(function (item) {
-//     		    return item.regdate; // 날짜 데이터를 가져와서 레이블로 사용
-//     		  });
-//          var stackedChartData = {
-// 			labels: labels,
-//            datasets: [
-//              {
-//                label: "일자별 신고받은 게시글 수",
-//                backgroundColor: "rgba(60,141,188,0.9)",
-//                borderColor: "rgba(60,141,188,0.8)",
-//                pointRadius: false,
-//                pointColor: "#3b8bba",
-//                pointStrokeColor: "rgba(60,141,188,1)",
-//                pointHighlightFill: "#fff",
-//                pointHighlightStroke: "rgba(60,141,188,1)",
-//                data: dayData,
-//              },
-//            ],
-//          };
+            const write_count = data.monthUs.map(function (item) {
+                console.log(item.write_count);
+                return item.write_count;
+            });
 
-//          var barChartData = $.extend(true, {}, stackedChartData);
-//          var stackedBarChartCanvas = $("#reportChart")
-//            .get(0)
-//            .getContext("2d");
-//          var stackedBarChartData = $.extend(true, {}, barChartData);
-//          var stackedBarChartOptions = {
-//            responsive: true,
-//            maintainAspectRatio: false,
-//            scales: {
-//         	   xAxes: [
-// 	        		      {
-// 	        		        stacked: true,
-// 	        		        type: 'time', // X축 스케일을 시간형식으로 설정
-// 	        		        time: {
-// 	        		          unit: 'day', // 날짜 간격을 일(day)로 설정
-// 	        		          displayFormats: {
-// 	        		            day: 'YYYY-MM-DD' // 날짜 형식을 지정
-// 	        		          }
-// 	        		        }
-// 	        		      }
-//        		    		],
-//              yAxes: [
-//                {
-//                  stacked: true,
-//                },
-//              ],
-//            },
-//          };
-//          new Chart(stackedBarChartCanvas, {
-//            type: "bar",
-//            data: stackedBarChartData,
-//            options: stackedBarChartOptions,
-//          });
-//        },
-//        error: function (error) {
-//          // Handle the error here
-//          console.error("Error:", error);
-//        },
-//      });
+            // 추가: 전체 회원 가입 수 및 전체 게시글 수
+            const totalMembers = data.totalMembers;  // 전체 회원 수
+            const totalPosts = data.totalPosts;  // 전체 게시글 수
 
-    /* END AREA CHART */
+         // 12월 데이터가 없는 경우 0으로 초기화
+            const lastMonth = 12;  // 최대 월
+            if (!monthData.includes(lastMonth + "월")) {
+                monthData.push(lastMonth + "월");
+                counts.push(0);
+                write_count.push(0);
+            }
+            
+            // 차트 데이터
+            var stackedChartData = {
+                labels: monthData,
+                datasets: [
+                    {
+                        label: "월별 가입자 현황",
+                        backgroundColor: "rgba(60,141,188,0.9)",
+                        borderColor: "rgba(60,141,188,0.8)",
+                        pointRadius: false,
+                        pointColor: "#3b8bba",
+                        pointStrokeColor: "rgba(60,141,188,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(60,141,188,1)",
+                        data: counts,
+                        borderWidth: 10,
+                    },
+                    {
+                        label: "월별 작성된 게시글",
+                        backgroundColor: "rgba(92,184,92,0.9)",
+                        borderColor: "rgba(92,184,92,0.8)",
+                        pointRadius: false,
+                        pointColor: "#5cb85c",
+                        pointStrokeColor: "rgba(92,184,92,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(92,184,92,1)",
+                        data: write_count,
+                        borderWidth: 10,
+                    },
+                ],
+            };
 
-     /*
-     * DONUT CHART
-     * -----------
-     */
+            // 차트를 그리기 전에 텍스트로 전체 회원 가입 수 및 전체 게시글 수를 표시
+            $("#totalMembersText").text("전체 회원 가입 수: " + totalMembers + "명");
+            $("#totalPostsText").text("전체 게시글 수: " + totalPosts + "건");
+            console.log("종합 인원 ->" + totalMembers);
 
-    var donutData = [
-      {
-        label: 'Series2',
-        data : 30,
-        color: '#3c8dbc'
-      },
-      {
-        label: 'Series3',
-        data : 20,
-        color: '#0073b7'
-      },
-      {
-        label: 'Series4',
-        data : 50,
-        color: '#00c0ef'
-      }
-    ]
-    $.plot('#donut-chart', donutData, {
-      series: {
-        pie: {
-          show       : true,
-          radius     : 1,
-          innerRadius: 0.5,
-          label      : {
-            show     : true,
-            radius   : 2 / 3,
-            formatter: labelFormatter,
-            threshold: 0.1
-          }
+            // 차트 그리기
+            var barChartData = $.extend(true, {}, stackedChartData);
+            var stackedBarChartCanvas = $("#monthMember")
+                .get(0)
+                .getContext("2d");
+            var stackedBarChartData = $.extend(true, {}, barChartData);
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRadio: false,
+                scales: {
+                    xAxes: [
+                        {
+                            type: 'time',
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MM'
+                                }
+                            },
+                            distribution: 'series',
+                            ticks: {
+                                source: 'labels',
+                            },
+                        },
+                    ],
+                    yAxes: [
+                        {
+                            stacked: true,
+                            position: 'left',
+                            id: 'y-axis-0',
+                        },
+                    ],
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        title: function(tooltipItem, data) {
+                            return '월: ' + tooltipItem[0].xLabel;
+                        },
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            var yLabel = tooltipItem.yLabel;
+                            return label + ': ' + yLabel;
+                        }
+                    }
+                },
+            };
 
-        }
-      },
-      legend: {
-        show: false
-      }
-    })
-    /*
-     * END DONUT CHART
-     */
-    
-    /*
-     * BAR CHART
-     * ---------
-     */
+            new Chart(stackedBarChartCanvas, {
+                type: "line",
+                data: stackedBarChartData,
+                options: stackedBarChartOptions,
+            });
+        },
+        error: function (error) {
+            console.error("Error", error);
+        },
+    });
+});
 
-     const usReportList = [
-    	  { regdate: '2023-11-06', reportcnt: 5 },
-    	  { regdate: '2023-11-07', reportcnt: 8 },
-    	  // 다른 데이터...
-    	];
-     
-  // X축 레이블을 추출합니다.
-     const labels = usReportList.map(item => item.regdate);
 
-     // Y축 데이터를 추출합니다.
-     const dataPoints = usReportList.map(item => item.reportcnt);
+$(function () {
+    	    const urlDoeRank = "/doeRank";
 
-     var bar_data = {
-       data: [dataPoints], // Y축 데이터를 설정합니다.
-       bars: { show: true }
-     };
+    	    $.ajax({
+    	        url: '/doeRank',
+    	        method: "GET",
+    	        success: function (data) {
+    	        	// 데이터 가공
+    	        	var labels = data.doeRank.map(function (item) {
+    	        	    return item.doe_name;
+    	        	});
 
-     // 그래프를 그립니다.
-     $.plot('#bar-chart', [bar_data], {
-       grid: {
-         borderWidth: 1,
-         borderColor: '#f3f3f3',
-         tickColor: '#f3f3f3'
-       },
-       series: {
-         bars: {
-           show: true,
-           barWidth: 0.5,
-           align: 'center'
-         },
-       },
-       colors: ['#3c8dbc'],
-       xaxis: {
-         ticks: labels // X축 레이블을 설정합니다.
-       },
-     });
-    /* END BAR CHART */
+    	        	var scores = data.doeRank.map(function (item) {
+    	        	    return item.average;
+    	        	});
 
-  })
+    	        	var ranks = data.doeRank.map(function (item) {
+    	        	    return item.score_rank;
+    	        	});
 
+    	        	var doeData = {
+    	        	    labels: labels,
+    	        	    scores: scores,
+    	        	    ranks: ranks, // 추가: 각 항목의 순위 배열
+    	        	};
+    	            console.log(doeData);
+
+    	            // 차트 그리기
+    	            var ctx = document.getElementById('doeChart').getContext('2d');
+    	            var doeChart = new Chart(ctx, {
+    	                type: 'bar',  // 여기를 'bar'에서 'line'으로 변경
+    	                data: {
+    	                    labels: doeData.labels,
+    	                    datasets: [{
+    	                        label: '평균 점수',
+    	                        data: doeData.scores,
+    	                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    	                        borderColor: 'rgba(75, 192, 192, 1)',
+    	                        borderWidth: 1,
+    	                    }]
+    	                },
+    	                options: {
+    	                    scales: {
+    	                        y: {
+    	                            beginAtZero: true
+    	                        }
+    	                    }
+    	                }
+    	            });
+    	        },
+    	        error: function (error) {
+    	            console.error("Error", error);
+    	        },
+    	    });
+    	});
   /*
    * Custom Label formatter
    * ----------------------

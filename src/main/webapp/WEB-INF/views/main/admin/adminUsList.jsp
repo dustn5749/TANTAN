@@ -75,7 +75,7 @@
   <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid-theme.min.css">
 </head>
 <body>
-<div class="loading-overlay" id="loadingOverlay">Loading...</div>
+<!-- <div class="loading-overlay" id="loadingOverlay">Loading...</div> -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -93,39 +93,18 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-    <!-- Main content -->
-<!--     <section class="content"> -->
-<!--       <div class="card"> -->
-        <!-- /.card-header -->
-<!--         <div class="card-body"> -->
-<!--           <div id="usGrid" style=text-align:center;></div> -->
-<!--         </div> -->
 		<table id="usGrid"></table>
 		<div id="paginate" style=text-align:center;></div>
-        <!-- /.card-body -->
-<!--       </div> -->
-      <!-- /.card -->
-<!--     </section> -->
-    <!-- /.content -->
   </div>
 
 <script>
-function hideLoadingMessage() {
-    document.getElementById("loadingOverlay").style.display = "none";
-}
 
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
 var pageSize = 30;
 
-function showPage() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("myDiv").style.display = "block";
-}
-
 // 페이징 관련 함수를 초기화합니다.
-function initPage(currentPage) {
+function initPage(page) {
     var pageCount = 10; // 한번에 보여줄 페이지 버튼 개수
     var totalPage = Math.ceil(totalSize / $('#usGrid').getGridParam('rowNum'));
 
@@ -170,63 +149,76 @@ function initPage(currentPage) {
     $("#paginate").append(pageInner);
 }
 
-function loadGridData() {
-    $("#paginate").hide();
+function loadGridData(page) {
+	currentPage = page;
     $.ajax({
         url: 'usList.do',
         dataType: 'json',
         data: {
-            page: currentPage,
+            pageNo: page,
             pageSize: pageSize
         },
         success: function (data) {
             console.log(data);
-            totalSize = data.usList.length;
+            totalSize = data.totalSize;
 
             $("#usGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
-                data: data.usList,
-                datatype: 'local'
+                data: data.usList.usList,
+                datatype: 'local',
             }).trigger('reloadGrid');
-
+            console.log("그리드 데이터:", $("#usGrid").jqGrid('getGridParam', 'data'));
             initPage(currentPage);
 
-            hideLoadingMessage();
-
-            $("#paginate").show();
         }
     });
 
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#usGrid").jqGrid({
-    datatype: "local", // 데이터를 서버에서 가져오기
-    colNames: ['제목', '작성자', '등록일', '조회수', '여행지', '신고 횟수', '상태', '삭제 여부', 'us_num'],
+    datatype: "json", // 데이터를 서버에서 가져오기
+    url: '/usList',
+    colNames: ['','제목', '작성자', '등록일', '조회수', '여행지', '신고 횟수', '상태', '삭제 여부', 'us_num'],
     colModel: [
+    	{ name: 'nrow', index: 'nrow', width: 50, label: '행 번호', sortable: false, align: 'center' },
         { label: 'title', name: 'title', index: 'title' },
         { label: '작성자', name: 'writer', index: 'writer' },
         { label: '등록일', name: 'regdate', index: 'regdate' },
         { label: '조회수', name: 'us_cnt', index: 'us_cnt' },
-        { label: '여행지', name: 'content', index: 'content' },
+        { label: '여행지', name: 'doe_Name', index: 'doe_Name' },
         { label: '신고 횟수', name: 'reportcnt', index: 'reportcnt' },
-        { label: '상태', name: 'status', index: 'status' },
+        {
+            label: '정지유무', name: 'status', index: 'status',
+            formatter: function (cellValue, options, rowObject) {
+                if (rowObject.status === 'Y') {
+                    return '<span style="text-align:center; background-color: #FFCCCC; color:red; border: 1px solid #FF0000;">삭제됨</span>';
+                } else if (rowObject.status === 'N') {
+                    return '<span style="background-color: #CCFFCC; color: green; border: 1px solid #008000;">활성화됨</span>';
+                }
+            },
+            sortable: false
+        },
         { name: 'deleteBtn', formatter: formatOpt1, sortable: false },
         { name: 'us_num', index: 'us_num', hidden: true }
     ],
     viewrecords: true,
     autowidth: true,
     height: 690,
-    rowNum: 30,
-    rowList: [30, 50, 100],
+    rowNum: 26,
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',
     caption: '동행리스트',
     loadui: "enable",
-    rownumbers: true,
     loadComplete: function (data) {
-
+    	console.log("doe_name -> " + data.doe_Name);
         var allRowsInGrid = jQuery('#usGrid').jqGrid('getGridParam', 'records');
+        console.log("그리드 데이터 수:", allRowsInGrid);
         $("#NoData").html("");
         if (allRowsInGrid == 0) {
             $("#NoData").html("<br>데이터가 없습니다.<br>");
@@ -241,14 +233,13 @@ $("#usGrid").jqGrid({
     }
 });
 loadGridData();
-
 function formatOpt1(cellvalue, options, rowObject) {
     var str = "";
     var row_id = options.rowId;
     var us_num = rowObject.us_num;
     var status = rowObject.status;
 
-    str += "<div class=\"btn-group\">";
+    str += "<div class=\"btn-group\" style=\"text-align: center; display: flex; justify-content: center;\">";
 
     if (status === 'Y') {
         // status가 'Y'인 경우 복구 버튼 출력
@@ -299,62 +290,43 @@ function fn_restore(rowid, us_num) {
 
 //그리드 첫 페이지로 이동
 function firstPage() {
-    $("#usGrid").jqGrid('setGridParam', {
-        page: 1
-    }).trigger("reloadGrid");
+    goPage(1);
 }
 
 //그리드 이전 페이지로 이동
 function prePage() {
-    var currentPage = $("#usGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
-
-    // 이전 10페이지로 이동
     var newPage = currentPage - 10;
-    if (newPage < 1) newPage = 1;
+    
+    if (newPage < 1) {
+        // 새 페이지가 1보다 작으면 1로 설정
+        newPage = 1;
+    }
 
-    $("#usGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+    goPage(newPage);
 }
 
 //그리드 다음 페이지로 이동
 function nextPage() {
-    var currentPage = $("#usGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
+	currentPage = currentPage + 10;
+    var totalPage = Math.ceil(totalSize / pageSize);
 
-    // 다음 10페이지로 이동
-    var newPage = currentPage + 10;
-    var totalPage = Math.ceil(totalSize / $('#usGrid').getGridParam('rowNum'));
-    if (newPage > totalPage) newPage = totalPage;
-
-    $("#usGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+    if (currentPage > totalPage) {
+        // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
+        currentPage = totalPage;
+    }
+    goPage(currentPage);
 }
 
 // 그리드 마지막 페이지로 이동
 function lastPage() {
     var totalPage = Math.ceil(totalSize / $('#usGrid').getGridParam('rowNum'));
-    $("#usGrid").jqGrid('setGridParam', {
-        page: totalPage
-    }).trigger("reloadGrid");
+    goPage(totalPage);
 }
 
 //그리드 페이지로 이동
 function goPage(num) {
-    $("#usGrid").jqGrid('setGridParam', {
-        page: num
-    }).trigger("reloadGrid");
-}
-
-function fn_delete(rowid, us_num) {
-    console.log("rowid는 " + rowid + " / us_num은 " + us_num + "입니다.");
-    $("#click_result").html(str);
+    console.log("goPage 함수 호출: " + num);
+    loadGridData(num);  
 }
 
 </script>

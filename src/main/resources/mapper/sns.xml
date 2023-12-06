@@ -154,6 +154,12 @@ update SNS_BOARD
     where sf.BOARD_NUM = #{boardNum}
 
   </select>
+  <select id="getBoardCount" resultType="java.lang.Long">
+        select count(*)
+        from SNS_BOARD
+        where MEMBER_ID = #{memberId}
+
+  </select>
 
 
 </mapper>

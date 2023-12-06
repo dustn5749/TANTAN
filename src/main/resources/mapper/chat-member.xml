@@ -15,17 +15,24 @@
     where MEMBER_ID = #{memberId}
       and ROOM_NUM = #{roomNum}
   </delete>
+
   <select id="getChatMemberList" resultType="com.team1.project.dto.chat.ChatMember">
     select
       ctt.ROOM_NUM roomNum,
       ctt.MEMBER_ID memberId,
       ctt.JOIN_TIME joinTime,
-      mem.NICKNAME nickname
+      mem.NICKNAME nickname,
+      mem.profile_img profileImg,
+      case when CREATE_MEMBER_ID = ctt.MEMBER_ID then 0
+           else 1 end as ordering
     from
-      CHATTER ctt
+      CHATROOM crm
+        inner join CHATTER ctt on crm.ROOM_NUM = ctt.ROOM_NUM
         inner join MEMBER mem on ctt.MEMBER_ID = mem.MEMBER_ID
     WHERE
       ctt.ROOM_NUM = #{roomNum}
+    order by
+      ordering, mem.nickname
 
 
   </select>

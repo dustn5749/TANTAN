@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-/* Center the loader */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+/* /* Center the loader */ */
+/*         .loading-overlay { */
+/*             position: fixed; */
+/*             top: 0; */
+/*             left: 0; */
+/*             width: 100%; */
+/*             height: 100%; */
+/*             background: rgba(255, 255, 255, 0.7); */
+/*             display: flex; */
+/*             justify-content: center; */
+/*             align-items: center; */
+/*             z-index: 9999; */
+/*         } */
 
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -74,8 +75,6 @@
 </head>
 <body>
 
-  <!-- Content Wrapper. Contains page content body 부분-->
-  <div class="loading-overlay" id="loadingOverlay">Loading...</div>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -115,7 +114,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                     <!-- 수정 및 답변 버튼을 모달 창 내부로 이동 -->
-                    <button type="button" class="btn btn-primary" id="modalAnswerBtn">답변</button>
+                    <button type='button' class='btn btn-default btn-sm' onclick="javascript:showDetails()">답변</button>
+
                     <button type="button" class="btn btn-success" id="modalReleaseBtn">수정</button>
                 </div>
             </div>
@@ -125,38 +125,12 @@
   <!-- /.content-wrapper -->
 
 <script>
-function hideLoadingMessage() {
-    document.getElementById("loadingOverlay").style.display = "none";
-}
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
 var pageSize = 30;
 
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
-}
-
-function showDetails(title, content) {
-    $("#modalTitle").text(title);
-    $("#modalContent").text(content);
-
-    $("#modalAnswerBtn").off("click").on("click", function () {
-        alert("답변 버튼 클릭");
-        $("#myModal").modal("hide");
-    });
-
-    $("#modalReleaseBtn").off("click").on("click", function () {
-        alert("수정 버튼 클릭");
-        // 수정 버튼 클릭 시 모달창 띄우기
-        $("#myModal").modal("show");
-    });
-
-    $("#myModal").modal("show");
-}
-
 // 페이징 관련 함수를 초기화합니다.
-function initPage(currentPage) {
+function initPage() {
     var pageCount = 10;
     var totalPage = Math.ceil(totalSize / pageSize);
 
@@ -170,8 +144,15 @@ function initPage(currentPage) {
         pageInner += "<span class='customPageMoveBtn'><a class='pre' href='javascript:prePage();' title='이전 페이지로 이동'><i class='fa fa-step-backward faPointer'></i></a></span>";
     }
 
-    var startPage = Math.max(1, currentPage - Math.floor(pageCount / 2));
-    var endPage = Math.min(totalPage, startPage + pageCount - 1);
+    var startPage = 1;
+    if (currentPage > 10) {
+        startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+    }
+    var endPage = startPage + pageCount - 1;
+
+    if (endPage > totalPage) {
+        endPage = totalPage;
+    }
 
     for (var i = startPage; i <= endPage; i++) {
         var titleGoPage = i + "페이지로 이동";
@@ -194,30 +175,29 @@ function initPage(currentPage) {
     $("#paginate").append(pageInner);
 }
 
-function loadGridData() {
-	$("#paginate").hide();
+function loadGridData(page) {
+    // 현재 페이지 설정
+    currentPage = page;
+
     $.ajax({
-        url: '/inquiryList.do', // 컨트롤러 엔드포인트 URL로 변경해야 합니다.
+        url: '/inquiryList.do',
         dataType: 'json',
         data: {
-        	page: currentPage,
-        	pageSize: pageSize
+            pageNo: page,
+            pageSize: pageSize
         },
         success: function (data) {
             console.log(data);
-            totalSize = data.totalSize; // 데이터 수 업데이트
+            totalSize = data.totalSize;
 
             $("#inquiryGrid").jqGrid('clearGridData', true).jqGrid('setGridParam', {
-                data: data.inquiryList,
+                data: data.inquiryList.inquiryList,
                 datatype: 'local'
             }).trigger('reloadGrid');
 
             initPage(currentPage); // 페이지 초기화
-            
-            hideLoadingMessage(); // 로딩 메시지 숨기기
-            
+
             // 페이징 컴포넌트 다시 보이게 하기
-            $("#paginate").show();
         },
         error: function (error) {
             console.error("Error:", error);
@@ -225,37 +205,51 @@ function loadGridData() {
     });
 }
 
+//처음 페이지 로드 시 1페이지의 데이터를 불러오도록 설정
+$(document).ready(function () {
+    loadGridData(1);
+});
+
 // jqGrid 설정
 $("#inquiryGrid").jqGrid({
-    datatype: "local", // 데이터를 로컬에서 가져오기
+    datatype: "local",
     data: 'json',
     colNames: ['문의사항 번호','카테고리 번호', '카테고리', '작성자', '제목', '작성일', '답변유무', '답변'],
     colModel: [
-        { label: '문의사항 번호', name: 'inquiry_num', key: true, index: 'inquiry_num' },
-        { label: '카테고리 번호', name: 'category_num', index: 'category_num' },
-        { label: '카테고리', name: 'category', index: 'category' },
-        { label: '작성자', name: 'member_id', index: 'member_id' },
-        { label: '제목', name: 'title', index: 'title' },
-        { label: '작성일', name: 'regdate', index: 'regdate' },
-        { label: '답변유무', name: 'answer_yn', index: 'answer_yn'},
-//         { label: '신고횟수', name:'reportcnt', index: 'reportcnt'},
-        { name: 'answerBtn', formatter: staOpt1, sortable: false}
+        { name: 'inquiry_num', key: true, index: 'inquiry_num', sortable: true },
+        { name: 'category_num', index: 'category_num', sortable: true },
+        { name: 'category', index: 'category', sortable: true },
+        { name: 'member_id', index: 'member_id', sortable: true },
+        { name: 'title', index: 'title', sortable: true },
+        { name: 'regdate', index: 'regdate', sortable: true },
+        {
+            name: 'answer_yn',
+            index: 'answer_yn',
+            formatter: function (cellValue, options, rowObject) {
+                if (rowObject.answer_yn === 'N') {
+                    return '<span style="text-align:center; background-color: #FFCCCC; color:red; border: 1px solid #FF0000;">미답변</span>';
+                } else if (rowObject.answer_yn === 'Y') {
+                    return '<span style="background-color: #CCFFCC; color: green; border: 1px solid #008000;">답변완료</span>';
+                }
+            },
+            sortable: false
+        },
+        { name: 'answerBtn', formatter: staOpt1, sortable: false }
     ],
     viewrecords: true,
     height: 690,
     autowidth: true,
     rowNum: 26,
-    rownumbers: true,
     rowList: [30, 50, 100],
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
-    sortorder: 'desc',
+    sortname: 'inquiry_num', // 정렬 기준 필드
+    sortorder: 'desc',       // 정렬 순서 (내림차순)
     gridview: true,
     virtualScrolling: true,
     caption: '문의사항 리스트',
     loadui: "enable",
     loadComplete: function (data) {
-//     	$("#memberGrid").setGridWidth($(window).width() );
         var allRowsInGrid = jQuery('#inquiryGrid').jqGrid('getGridParam', 'records');
         $("#NoData").html("");
         if (allRowsInGrid == 0) {
@@ -326,64 +320,66 @@ function fn_release(rowid, inquiry_num) {
 
 //그리드 첫 페이지로 이동
 function firstPage() {
-    $("#inquiryGrid").jqGrid('setGridParam', {
-        page: 1
-    }).trigger("reloadGrid");
+    goPage(1);
 }
 
 //그리드 이전 페이지로 이동
 function prePage() {
-    var currentPage = $("#inquiryGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
-
-    // 이전 10페이지로 이동
     var newPage = currentPage - 10;
-    if (newPage < 1) newPage = 1;
+    
+    if (newPage < 1) {
+        // 새 페이지가 1보다 작으면 1로 설정
+        newPage = 1;
+    }
 
-    $("#inquiryGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+    goPage(newPage);
 }
 
 //그리드 다음 페이지로 이동
 function nextPage() {
-    var currentPage = $("#inquiryGrid").getGridParam('page');
-    var pageCount = 30; // 한 페이지에 보여줄 데이터 수
+	currentPage = currentPage + 10;
+	console.log("currentPage" + currentPage);
+    var totalPage = Math.ceil(totalSize / pageSize);
 
-    // 다음 10페이지로 이동
-    var newPage = currentPage + 10;
-    var totalPage = Math.ceil(totalSize / $('#inquiryGrid').getGridParam('rowNum'));
-    if (newPage > totalPage) newPage = totalPage;
-
-    $("#inquiryGrid").jqGrid('setGridParam', {
-        page: newPage
-    }).trigger("reloadGrid");
-
-    initPage(newPage);
+    if (currentPage > totalPage) {
+        // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
+        currentPage = totalPage;
+    }
+    goPage(currentPage);
 }
+
 
 // 그리드 마지막 페이지로 이동
 function lastPage() {
-    var totalPage = Math.ceil(totalSize / $('#inquiryGrid').getGridParam('rowNum'));
-    $("#inquiryGrid").jqGrid('setGridParam', {
-        page: totalPage
-    }).trigger("reloadGrid");
+    var totalPage = Math.ceil(totalSize / pageSize);
+    goPage(totalPage);
 }
 
 //그리드 페이지로 이동
 function goPage(num) {
-    $("#inquiryGrid").jqGrid('setGridParam', {
-        page: num
-    }).trigger("reloadGrid");
+    console.log("goPage 함수 호출: " + num);
+    currentPage = num;
+    loadGridData(currentPage);  
 }
+function showDetails(title, content, inquiry_num) {
+//     alert(inquiry_num);
+    $("#modalTitle").text(title);
+    $("#modalContent").text(content);
 
-// function fn_delete(rowid, member_id) {
-//     console.log("rowid는 " + rowid + " / member_id은 " + member_id + "입니다.");
-//     $("#click_result").html(str);
-// }
+    $("#modalAnswerBtn").off("click").on("click", function () {
+        // "답변" 버튼 클릭 시 showAnswerModal을 호출할 때 inquiry_num 값을 전달합니다.
+        showAnswerModal(inquiry_num);
+        $("#myModal").modal("hide");
+    });
+
+    $("#modalReleaseBtn").off("click").on("click", function () {
+//         alert("수정 버튼 클릭");
+        // 수정 버튼 클릭 시 모달창 띄우기
+        $("#myModal").modal("show");
+    });
+
+    $("#myModal").modal("show");
+}
 </script>
-
 </body>
 </html>

@@ -127,13 +127,16 @@ public class UsService {
 	}
 
 	// 관리자 리스트 가져오기
-	public List<UsDTO> usList() throws Exception{
-		
-		System.out.println("service.memberList -> " + usDAO.usList());
-		
-		return usDAO.usList();
+	public List<UsDTO> usList2(UsDTO us) throws Exception{
+		return usDAO.usList(us);
 	}
 
+	public Map<String,Object> usList(UsDTO us){
+		Map<String,Object> map = new HashMap<>();
+		map.put("usList", usDAO.usList(us));
+		return map;
+	}
+	
 	// 관리자 신고 리스트
 	public List<UsDTO> usReportList() throws Exception{
 		return usDAO.usReportList();
@@ -178,6 +181,17 @@ public int viewCount(int us_num ) throws Exception {
 		return todayWriteCount;
 	}
 	
+	public int getTotalSize(UsDTO us) throws Exception {
+		return usDAO.totalCount(us);
+	}
+	
+	public int totalPosts(UsDTO us) {
+		return usDAO.totalPosts(us);
+	}
+	
+	public int reportCnt(int us_num) {
+		return usDAO.increaseReportCount(us_num);
+	}
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

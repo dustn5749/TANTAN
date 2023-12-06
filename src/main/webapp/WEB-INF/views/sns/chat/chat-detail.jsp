@@ -207,8 +207,7 @@ $(function (){
           success : function (){
             $("#chat-textarea").val("");
           }
-
-        })
+        });
       };
 
       const recvMessage = recv =>  {
@@ -237,7 +236,7 @@ $(function (){
                 </div>
             </div>`).appendTo($('#chat-view-scroll'));
 
-            let dd = $(`<div class="bubble"></div>`).text(recv.contents);
+            let dd = $(`<div class="bubble"></divㅇ`).text(recv.contents);
             let sendTimeStr = $(`<span class="date"></span>`).text(recv.sendTimeStr);
 
             element.find('.bubble-wrap').append(dd).append(sendTimeStr);
@@ -267,6 +266,7 @@ $(function (){
             element.find('.bubble-wrap').append(dd).append(sendTimeStr);
           }
           let id = '#chat-view-scroll';
+
           $(id).scrollTop($(id).prop("scrollHeight"));
         }
       }

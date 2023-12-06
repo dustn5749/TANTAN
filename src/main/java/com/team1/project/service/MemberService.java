@@ -118,6 +118,11 @@ public class MemberService {
 		return memberDao.monthMember();
 	}
 	
+	public int totalMembers(MemberDTO member) {
+		
+		return memberDao.totalMembers(member);
+	}
+	
 	// 관리자 일일 가입자 수
     public int todayRegister(MemberDTO member) {
         int todayRegisterCount = memberDao.todayRegister(member).getTodayRegister();
@@ -127,4 +132,9 @@ public class MemberService {
         return todayRegisterCount;
     }
 	
+    public void reportCnt(String member_id) {
+    	System.out.println("Inside reportCnt service method");
+    	memberDao.increaseReportCount(member_id);
+    }
+    
 }

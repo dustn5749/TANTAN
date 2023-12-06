@@ -32,4 +32,6 @@ public interface SnsDAO {
   void updateProfile(Map<String,Object> map);
 
   List<SnsBoardFile> getFile(Long id);
+
+  Long getBoardCount(SnsBoardRequest snsBoardRequest);
 }

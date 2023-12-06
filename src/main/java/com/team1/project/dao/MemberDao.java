@@ -57,7 +57,11 @@ public interface MemberDao {
 	// 관리자 월별 가입자 현황 리스트
 	public List<MemberDTO> monthMember();
 	
+	public int totalMembers(MemberDTO member);
+	
 	public int getTotalCount(MemberDTO member);
 	
 	public MemberDTO todayRegister(MemberDTO member);
+	
+	public void increaseReportCount(String member_id);
 }
