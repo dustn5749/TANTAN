@@ -17,12 +17,14 @@ import com.team1.project.dao.MemberDao;
 import com.team1.project.dto.DoeDTO;
 import com.team1.project.dto.InquiryDTO;
 import com.team1.project.dto.MemberDTO;
+import com.team1.project.dto.ReportDTO;
 import com.team1.project.dto.ScheduleDTO;
 import com.team1.project.dto.UsDTO;
 import com.team1.project.service.CustomerService;
 import com.team1.project.service.DoeService;
 import com.team1.project.service.MemberService;
 import com.team1.project.service.ReportService;
+//import com.team1.project.service.ReportService;
 import com.team1.project.service.ScheduleService;
 import com.team1.project.service.UsService;
 
@@ -73,17 +75,19 @@ public class AdminController {
 	private ReportService reportService;
 	
 	@RequestMapping("/admin")
-	public String Admin(MemberDTO member,UsDTO us, Model model, ScheduleDTO schedule) {
+	public String Admin(MemberDTO member,UsDTO us, Model model, ScheduleDTO schedule, ReportDTO report) {
 		int todayRegister = memberservice.todayRegister(member);
 		int totalMembers = memberservice.totalMembers(member);
 		int todayWrite = usService.todayWrite(us);
 		int totalPosts = usService.totalPosts(us);
 		int todaySchedule = scheduleService.todaySchedule(schedule);
+		int todayReport = reportService.todayReport(report);
 		model.addAttribute("todayRegister",todayRegister);
 		model.addAttribute("todayWrite", todayWrite);
 		model.addAttribute("todaySchedule", todaySchedule);
 		model.addAttribute("totalMembers",totalMembers);
 		model.addAttribute("totalPosts",totalPosts);
+		model.addAttribute("todayReport",todayReport);
 		return "admin";
 	}
 	
@@ -100,7 +104,6 @@ public class AdminController {
 		map.put("monthMember", monthMember);
 		map.put("monthUs", monthUs);
 		map.put("totalMembers", totalMembers);
-//		System.out.println("controller.monthMap -> " + map);
 		return map;
 	}
 	
@@ -112,15 +115,6 @@ public class AdminController {
 		map.put("doeRank",doeRank);
 		return map;
 	}
-	
-//	@RequestMapping("/monthUs")
-//	@ResponseBody
-//	public Map<String, Object> monthUs() throws Exception{
-//		List<UsDTO> monthUs = usService.monthUs();
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("monthUs", monthUs);
-//		return map;
-//	}
 	
 // 2. 관리자 회원관리 페이지
 // 관리자 페이지에서 회원관리로 이동
@@ -136,7 +130,6 @@ public class AdminController {
 	@ResponseBody
 	public Map<String,Object> memberList(MemberDTO member) {
 		Map<String,Object> map = new HashMap<>();
-//		System.out.println("controller.memberList -> " + memberservice.memberList(member));
 		map.put("memberList", memberservice.memberList(member));
 		map.put("totalSize", memberservice.getTotalSize(member));
 		return map;
@@ -183,9 +176,6 @@ public class AdminController {
 	@RequestMapping("/usList.do")
 	@ResponseBody
 	public Map<String, Object> adminUsList(UsDTO us) throws Exception {
-		System.out.println("여기탔나?");
-//		List<UsDTO> usList = usService.usList(us);
-//		System.out.println("usList -> " + usList);
 		Map<String, Object> map = new HashMap<>();
 		map.put("usList",usService.usList(us));
 		map.put("totalSize", usService.getTotalSize(us));
@@ -273,21 +263,24 @@ public class AdminController {
 		return map;
 	}
 	
+	
+	
     @RequestMapping("/report")
     @ResponseBody
-    public ResponseEntity<String> report(@RequestParam("usNum") int usNum,
-                                        @RequestParam("memberId") String memberId,
-                                        @RequestParam("reportType") String reportType,
-                                        @RequestParam("reporter")String reporter) {
-        try {
-            // 여기서 신고 처리 비즈니스 로직 호출
-            reportService.report(memberId, usNum, reportType, reporter);
-            
-            // 성공했을 경우
-            return ResponseEntity.ok("신고가 접수되었습니다.");
-        } catch (Exception e) {
-            // 실패했을 경우
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("오류가 발생했습니다.");
-        }
+    public Map<String,Object> report(@RequestParam("us_num") int us_num,
+							         @RequestParam("member_id") String member_id){
+    	Map<String,Object> result = new HashMap<>();
+    	try {
+    		System.out.println("컨트롤러 접근");
+    		System.out.println("us_num ->" + us_num);
+    		System.out.println("member_id ->" + member_id);
+    		usService.reportCnt(us_num);
+    		memberservice.reportCnt(member_id);
+            reportService.report(us_num);
+            result.put("message", "신고가 완료되었습니다");
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return result;
     }
 }

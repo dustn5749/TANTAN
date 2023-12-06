@@ -75,8 +75,6 @@
 </head>
 <body>
 
-  <!-- Content Wrapper. Contains page content body 부분-->
-<!--   <div class="loading-overlay" id="loadingOverlay">Loading...</div> -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -116,34 +114,13 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                     <!-- 수정 및 답변 버튼을 모달 창 내부로 이동 -->
-                    <button type='button' class='btn btn-default btn-sm' onclick="javascript:showDetails('${rowObject.title}', '${rowObject.content}', ${rowObject.inquiry_num})">답변</button>
+                    <button type='button' class='btn btn-default btn-sm' onclick="javascript:showDetails()">답변</button>
 
                     <button type="button" class="btn btn-success" id="modalReleaseBtn">수정</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="answerModalLabel">문의사항 답변</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><strong>제목:</strong> <span id="answerModalTitle"></span></p>
-                <p><strong>내용:</strong> <span id="answerModalContent"></span></p>
-                <!-- 여기에 답변 입력 폼 등을 추가할 수 있습니다. -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                <!-- 답변 전송 버튼 등을 추가할 수 있습니다. -->
-            </div>
-        </div>
-    </div>
-</div>
 </div>
   <!-- /.content-wrapper -->
 
@@ -385,7 +362,7 @@ function goPage(num) {
     loadGridData(currentPage);  
 }
 function showDetails(title, content, inquiry_num) {
-    alert(inquiry_num);
+//     alert(inquiry_num);
     $("#modalTitle").text(title);
     $("#modalContent").text(content);
 
@@ -396,38 +373,12 @@ function showDetails(title, content, inquiry_num) {
     });
 
     $("#modalReleaseBtn").off("click").on("click", function () {
-        alert("수정 버튼 클릭");
+//         alert("수정 버튼 클릭");
         // 수정 버튼 클릭 시 모달창 띄우기
         $("#myModal").modal("show");
     });
 
     $("#myModal").modal("show");
-}
-function showAnswerModal(inquiry_num) {
-    // AJAX를 사용하여 inquiry_num에 해당하는 문의사항 정보를 서버에서 가져옵니다.
-    alert(inquiry_num);
-    $.ajax({
-        url: '/customer/detail', // 실제 컨트롤러 엔드포인트 URL로 변경해야 합니다.
-        dataType: 'json',
-        data: {
-            inquiry_num: inquiry_num
-        },
-        success: function (data) {
-        	
-            // 서버에서 가져온 데이터를 사용하여 모달 내용을 업데이트합니다.
-            var inquiryDetails = data.inquiryDetails; // 실제 데이터 구조에 따라 변경되어야 합니다.
-
-            // 모달 내용 업데이트
-            $("#answerModalTitle").text(inquiryDetails.title);
-            $("#answerModalContent").text(inquiryDetails.content);
-
-            // 답변 모달을 보여줍니다.
-            $("#answerModal").modal("show");
-        },
-        error: function (error) {
-            console.error("Error:", error);
-        }
-    });
 }
 </script>
 </body>

@@ -63,5 +63,5 @@ public interface MemberDao {
 	
 	public MemberDTO todayRegister(MemberDTO member);
 	
-	public String increaseReportCount(String memberId);
+	public void increaseReportCount(String member_id);
 }

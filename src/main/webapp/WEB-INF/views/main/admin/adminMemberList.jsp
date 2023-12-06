@@ -205,15 +205,12 @@ $("#memberGrid").jqGrid({
     datatype: "json", // 데이터를 서버에서 가져오기
     url: '/memberList', // 데이터를 가져올 URL 설정 (컨트롤러 엔드포인트 URL로 변경해야 합니다.)
     mtype: 'GET', // HTTP 요청 방식 (GET 또는 POST)
-    colNames: ['','아이디', '이름', '전화번호', '이메일', '나이', '성별', '정지유무', '신고횟수', '상태 변경'],
+    colNames: ['','아이디', '이름',  '이메일',  '정지유무', '신고횟수', '상태 변경'],
     colModel: [
     	{ name: 'nrow', index: 'nrow', width: 50, label: '행 번호', sortable: false, align: 'center' },
         { label: 'member_id', name: 'member_id', key: true, index: 'member_id' },
         { label: '이름', name: 'name', index: 'name' },
-        { label: '전화번호', name: 'phone', index: 'phone' },
         { label: '이메일', name: 'email', index: 'email' },
-        { label: '나이', name: 'age', index: 'age' },
-        { label: '성별', name: 'gender', index: 'gender' },
         {
             label: '정지유무', name: 'status', index: 'status',
             formatter: function (cellValue, options, rowObject) {
@@ -232,7 +229,6 @@ $("#memberGrid").jqGrid({
     height: 690,
     autowidth: true,
     rowNum: 26,
-//     rownumbers: true,
     pager: '#paginate',
     pgtext: 'Page {0} of {1}',
     sortorder: 'desc',
@@ -274,38 +270,42 @@ function staOpt1(cellvalue, options, rowObject) {
 
 
 function fn_stop(rowid, member_id) {
-	if(confirm("정지하시겠습니까?")){
-		$.ajax({
-			url: '/memberStop',
-			dataType: 'json',
-			data: {
-				member_id: member_id
-			},
-			success: function(data){
-				console.log(data);
-				alert("정지되었습니다.");
-				loadGridData();
-			}
-		});
-		
-	}
+    if (confirm("정지하시겠습니까?")) {
+        $.ajax({
+            url: '/memberStop',
+            dataType: 'json',
+            data: {
+                member_id: member_id
+            },
+            success: function (data) {
+                console.log(data);
+                alert("정지되었습니다.");
+                loadGridData(1);
+                // 정지 후에도 페이징 포커스 유지
+                initPage(currentPage);
+            }
+        });
+
+    }
 }
 
 function fn_release(rowid, member_id) {
-	if(confirm("해제하시겠습니까?")){
-	$.ajax({
-		url: '/memberRelease',
-		dataType: 'json',
-		data: {
-			member_id: member_id
-		},
-		success: function(data){
-			console.log(data);
-			alert("해제되었습니다.");
-			loadGridData()
-			}
-		});
-	}
+    if (confirm("해제하시겠습니까?")) {
+        $.ajax({
+            url: '/memberRelease',
+            dataType: 'json',
+            data: {
+                member_id: member_id
+            },
+            success: function (data) {
+                console.log(data);
+                alert("해제되었습니다.");
+                loadGridData(1);
+                // 해제 후에도 페이징 포커스 유지
+                initPage(currentPage);
+            }
+        });
+    }
 }
 
 //그리드 첫 페이지로 이동
@@ -331,22 +331,14 @@ function prePage() {
 
 //그리드 다음 페이지로 이동
 function nextPage() {
-//     var currentPage = $("#memberGrid").getGridParam('page');
-//     alert(currentPage);
-//     var newPage = currentPage + 10;
 	currentPage = currentPage + 10;
     var totalPage = Math.ceil(totalSize / pageSize);
 
-//     if (newPage > totalPage) {
 //         // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
-//         newPage = totalPage;
-//     }
     if (currentPage > totalPage) {
         // 새 페이지가 총 페이지보다 크면 총 페이지로 설정
         currentPage = totalPage;
     }
-//     currentPage = newPage; // 전역 변수 업데이트
-//     goPage(newPage);
     goPage(currentPage);
 }
 
