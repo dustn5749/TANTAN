@@ -591,7 +591,7 @@
         <!-- 신고 모달 -->
         <div id="reportModal" class="reportmodal">
             <div class="modal-content">
-                <span class="close" onclick="closeModal2()">&times;</span>
+                <span class="close" onclick="closeModal()">&times;</span>
                 <h2>신고하기</h2>
                 <form id="reportForm">
                     <label for="reportType">신고유형</label>
@@ -607,7 +607,6 @@
                     <textarea id="reportReason" name="reportReason" rows="4" cols="50" placeholder="신고사유를 입력하세요"></textarea>
 
                     <button type="button" onclick="submitReport()">신고 제출</button>
-                    <button type="button" onclick="closeModal2()">닫기</button>
                 </form>
             </div>
         </div>
@@ -632,67 +631,55 @@
             document.getElementById("reportModal").style.display = "block";
         }
 
-        function closeModal2() {
+        function closeModal() {
             document.getElementById("reportModal").style.display = "none";
         }
 
-        <!-- 수정된 submitReport 함수 -->
         function submitReport() {
-            console.log('submitReport function called'); 
+            console.log('submitReport function called');
             const reportType = document.getElementById('reportType').value;
             const reportReason = document.getElementById('reportReason').value;
-            const us_num = $("#us_num").val();
-            const writer = $("#writer").text();  // 수정: 작성자 정보 가져오기
-         
-            console.log("us_num -> " + us_num);
-            console.log("writer -> " + writer);
-            
-            // Ajax로 서버에 데이터 전송
-            $.ajax({
-                url: "/report",
-                data: {
-                    us_num: us_num,  // 신고 대상 글 번호
-                    member_id: writer  // 수정: 작성자 정보
-                },
-                success: function(result) {
-                    console.log('신고가 성공적으로 처리되었습니다.');
-					alert(result.message);
-                    closeModal2();
-                },
-                error: function(error) {
-                    console.error('신고 처리 중 오류가 발생했습니다.');
-                    console.error(error);
 
-                    closeModal2();
-                }
-            });
+            // 일단 콘솔에 메시지를 출력하는 것으로 확인
+            console.log('Report Type:', reportType);
+            console.log('Report Reason:', reportReason);
+
+            closeModal();
+            showReportSubmissionMessage();
         }
 
-        
-  // 동행게시글 상세보기
-   function DetailForm(us_num) {
-    const url = "/RealDetail" + us_num;
-    fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-        },
-    })
-    .then(response => response.json())
-    .then(json => {
-        document.getElementById("writer").textContent = json.writer;
-        document.getElementById("title").textContent = json.title;
-        document.getElementById("content").textContent = json.content;
-        document.getElementById("start_Date").value = json.start_Date; 
-        document.getElementById("end_Date").value = json.end_Date; 
-        document.getElementById("us_num").textContent = json.us_num;
-        document.getElementById("us_cnt").textContent = json.us_cnt;
-    })
-    .catch(error => {
-        console.error("오류 발생:", error);
-    });
-    return false;
-}
+        function showReportSubmissionMessage() {
+            console.log('Entering showReportSubmissionMessage');
+            const submissionMessageElement = document.getElementById('reportSubmissionMessage');
+            submissionMessageElement.textContent = '신고 접수 완료했습니다.';
+            setTimeout(() => {
+                submissionMessageElement.textContent = '';
+            }, 3000); // 3초 후 메시지 초기화
+        }
+        // 동행게시글 상세보기
+        function DetailForm(us_num) {
+            const url = "/RealDetail" + us_num;
+            fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8",
+                    },
+                })
+                .then(response => response.json())
+                .then(json => {
+                    document.getElementById("writer").textContent = json.writer;
+                    document.getElementById("title").textContent = json.title;
+                    document.getElementById("content").textContent = json.content;
+                    document.getElementById("start_Date").value = json.start_Date;
+                    document.getElementById("end_Date").value = json.end_Date;
+                    document.getElementById("us_num").textContent = json.us_num;
+                    document.getElementById("us_cnt").textContent = json.us_cnt;
+                })
+                .catch(error => {
+                    console.error("오류 발생:", error);
+                });
+            return false;
+        }
 
         // 수정하기
         function editEntry() {

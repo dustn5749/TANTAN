@@ -115,7 +115,7 @@
                             </dl>                            
                         </div>
                         <div class="info02">
-                            <p>안녕하세요~</p>
+                            <p>안녕하세요</p>
                         </div>
                         <div class="btn-wrap">
                             <c:choose>
@@ -149,7 +149,7 @@
                             </dl>
                             <dl>
                                 <dt>소개글</dt>
-                                <dd>안녕하세요~</dd>
+                                <dd>안녕하세요</dd>
                             </dl>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
       var documentHeight = $(document).height();
       // 창의 높이
       var windowHeight = $(window).height();
-
+	  // 스크롤이 페이지 하단에 도달했을때
       if ((scrollPosition + windowHeight) > (documentHeight-2)) {
 
         $.ajax({

@@ -52,6 +52,26 @@
 		</div>
 	</div>
 
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+	    var urlParams = new URLSearchParams(window.location.search);
+	    var exception = urlParams.get('exception');
+
+	    if (exception === 'wrongPassword') {
+	        alert("비밀번호가 틀렸습니다.");
+		    window.location.href = "/member/loginForm.do";	  		
+	        
+	    } else if (exception === 'locked'){
+	       alert("계정이 잠겼습니다.");
+		    window.location.href = "/member/loginForm.do";
+	    } else if (exception === 'none'){
+	    	alert("유효하지 않은 계정입니다.")
+		    window.location.href = "/member/loginForm.do";
+	    }
+	    
+	    
+	});
+	</script>
 	<script type="text/javascript" src="/assets/js/loginForm.js"></script>
 </body>
 </html>

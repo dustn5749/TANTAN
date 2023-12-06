@@ -257,7 +257,7 @@ $(function (){
                             </div>\
                         </div>`).appendTo($('#chat-view-scroll'));
 
-            let name = $(`<h6 class="name"></h6>`).text(recv.senderNickName ? recv.senderId : recv.senderNickName);
+            let name = $(`<h6 class="name"></h6>`).text(recv.senderNickName ? recv.senderNickName : recv.senderId);
             element.find('.name-wrap').append(name);
 
             let dd = $(`<div class="bubble"></div>`).text(recv.contents);

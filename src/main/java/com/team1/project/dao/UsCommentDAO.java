@@ -16,4 +16,7 @@ public boolean insertCommentUS(UsCommentDTO comment) throws Exception;
 // 댓글 목록 가져오기
 public List<UsCommentDTO> getUsCommentList(int us_num);
 
+// 댓글 수 세기
+public int getLength(int us_num);
+
 }

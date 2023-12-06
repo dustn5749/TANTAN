@@ -40,6 +40,7 @@ public class CustomerController {
 	// 1대1 문의사항 글쓰기
 	@RequestMapping("/write")
 	public String write(Model model) {
+		System.out.println("문의사항 글쓰기 ");
 		final String token = fileTokenService.getToken();
 		log.debug("token = ", token);
 		model.addAttribute("token", token);	

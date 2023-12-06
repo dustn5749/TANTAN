@@ -28,4 +28,10 @@ public class UsCommentService {
 	}
 	
 	
+	// 댓글 수 세기
+	public int getLength(int us_num){
+		System.out.println("commentService.getLenght()");
+		return uscommentDAO.getLength(us_num);
+	}
+	
 }
