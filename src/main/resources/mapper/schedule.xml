@@ -423,4 +423,15 @@ values(
 		select MEMBER_ID from schedule
 		where SCHEDULE_NUM=#{schedule_Num}
 	</select>
+	
+	
+	<!--  일정 위시리스트  -->
+	<select id="getLikeScheduleList" resultType="com.team1.project.dto.ScheduleDTO"> 
+		SELECT S.*, D.doe_img 
+		FROM SCHEDULE S 
+		JOIN SCHEDULELIKE SL 
+		ON SL.SCHEDULE_NUM = S.SCHEDULE_NUM 
+		JOIN DOE D ON S.doe_name = D.doe_name 
+		WHERE SL.USERID = #{MEMBER_ID} ORDER BY S.SCHEDULE_NUM 
+	</select>
 </mapper>

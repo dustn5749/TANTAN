@@ -27,6 +27,7 @@
 .inquiry_detail_div {
 	display: flex;
 	width: 100%;
+	padding: 0 !important;
 }
 
 /* 문의 메뉴 */

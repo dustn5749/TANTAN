@@ -66,12 +66,17 @@ https://templatemo.com/tm-559-zay-shop
     width: 290px;
     height: 240px;
     text-align: center;
-    display: flex;
+    display: flex;     
 }
 
 .bg:hover img {
     transform: scale(1.1);
     transition: transform 0.3s; /* 선택적인 트랜지션을 추가하여 부드럽게 확대/축소 가능 */
+ 
+}
+
+#rabbit_img{
+	cursor: pointer;
 }
 </style>
 

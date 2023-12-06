@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page session="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta charset="UTF-8">
+
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+   <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <title>동행 목록조회</title>
 <style>
 @font-face {
@@ -26,14 +34,14 @@
 
 .us_header_size {
    float: right;
-    width: 235px;
+    width: 200px;
    top: 80px;
    height: fit-content;
 
    display: flex;
 }
 .us_header_size > button {
-	width: 150px !important;
+   width: 150px !important;
 }
 
 .card.box-shadow{
@@ -195,7 +203,7 @@
 }
 
 .fillter_btn {
-    margin: 10px;
+    margin: -10px;
     width: 80px;
     height: 40px;
     border-radius: 10px;
@@ -593,16 +601,16 @@ div, input, p, span, button, h2 {
    margin-left: 10px;
 }
 .content_inner_detail > div, .content_inner_detail >div > p, input, span{
-	font-size: 16px !important;
-	color: grey;
+   font-size: 16px !important;
+   color: grey;
 }
 .content_inner_detail{
-	text-align: left;
-	padding-left: 30px;
-	margin-top: 20px;
-	position: absolute;
-	top:250px;
-	
+   text-align: left;
+   padding-left: 30px;
+   margin-top: 20px;
+   position: absolute;
+   top:250px;
+   
 }
 </style>
 </head>
@@ -646,15 +654,17 @@ div, input, p, span, button, h2 {
             </button>
 
 
-               <button class="city_btn1" onclick="window.location.href ='write'"
-                  style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
+               <button class="city_btn1"    style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
             </div>
 
 
  <!-- 필터 모달 -->
          <div id="myModal" class="modal">
+
+         
+         
             <!-- Modal content -->
-            <div class="modal-content">
+            <div class="modal-content" >
                <h1 id="filter-section-FILTER_SECTION_CONTAINER:ROOM_TYPE"
                   tabindex="-1" class="hpipapi dir dir-ltr"
                   elementtiming="LCP-target">국내여행</h1>
@@ -677,48 +687,48 @@ div, input, p, span, button, h2 {
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gangwonCheckbox" value="강원"> <label class="form-check-label"
-                        for="gangwonCheckbox">강원도</label>
+                        for="gangwonCheckbox">강원</label>
                   </div>
 
                   <div class="form-check">
-                     <input type="radio" name="deo_name" class="form-check-input" id="jejuCheckbox">
+                     <input type="radio" name="deo_name" class="form-check-input" id="jejuCheckbox"  value="제주" >
                      <label class="form-check-label" for="jejuCheckbox">제주</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="busanCheckbox"> <label class="form-check-label"
+                        id="busanCheckbox" value="부산" > <label class="form-check-label"
                         for="busanCheckbox">부산</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gyeonggiCheckbox" value="경기"> <label class="form-check-label"
-                        for="gyeonggiCheckbox">경기도</label>
+                        for="gyeonggiCheckbox">경기</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="chungcheongCheckbox"> <label
-                        class="form-check-label" for="chungcheongCheckbox">충청도</label>
+                        id="chungcheongCheckbox" value="충북"> <label
+                        class="form-check-label" for="chungcheongCheckbox">충북</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="gyeongsangCheckbox"> <label class="form-check-label"
-                        for="gyeongsangCheckbox">경상도</label>
+                        id="gyeongsangCheckbox" value="경남" > <label class="form-check-label"
+                        for="gyeongsangCheckbox">경남</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="jeollaCheckbox"> <label class="form-check-label"
-                        for="jeollaCheckbox">전라도</label>
+                        for="jeollaCheckbox">인천</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="ulleungCheckbox"> <label class="form-check-label"
-                        for="ulleungCheckbox">울릉도</label>
+                        id="ulleungCheckbox" value="울산" > <label class="form-check-label"
+                        for="ulleungCheckbox" >울산</label>
                   </div>
                </div>
 
@@ -735,7 +745,7 @@ div, input, p, span, button, h2 {
 
   <div class="container">
   
-            <div class="fillter_btn_area" style=" padding: 20px; "justify-content: "flex-end;">
+            <div class="fillter_btn_area"  "justify-content: "flex-end;">
                <button class="fillter_btn" onclick="order('comment')" >댓글순
                </button>
                <button class="fillter_btn" onclick="order('viewCount')" >조회순</button>
@@ -766,7 +776,7 @@ div, input, p, span, button, h2 {
 
                            </div>
                            <h5 class="fw-bolder">${item.title}</h5>
-                        	<div class="content_inner_detail">
+                           <div class="content_inner_detail">
                              <div>지역 : ${item.doe_Name}</div>
                            <%--   <div>작성자 : ${item.writer}</div> --%> 
                           
@@ -825,7 +835,6 @@ div, input, p, span, button, h2 {
                </c:choose>
             </c:forEach>
 
-
             <c:if test="${result.us.navEnd != result.us.totalPageSize}">
                <a href="#" onclick="jsPageNo(${result.us.navEnd+1})"
                   class="pageArrow">&gt;</a>
@@ -835,39 +844,59 @@ div, input, p, span, button, h2 {
       </div>
    </div>
 
+
+<!--//회원가입 -->
+   <c:choose>
+      <c:when test="${!empty principal}">
+         <input type="hidden" id="loginMember" value="${principal.user.member_id}">
+      </c:when>
+      <c:otherwise>
+         <input type="hidden" id="loginMember" value="">
+      </c:otherwise>
+   </c:choose>
+
+
    <script>
    
 
-   function city_btn1() {
+   $(".city_btn1").on("click", function() {
+       
+       if ($("#loginMember").val() === "") {
+           alert("로그인 후 이용해주세요");
+          
+       } else {
        window.location.href = '/us/write';
-   }
+    
+       }
+   })
 
-	
+
+   
    function jsPageNo(pageNo) {
        var currentUrl = window.location.href;
 
-	    // 기존의 pageNo 매개변수 제거
-	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
-	    currentUrl = currentUrl.replace(regex, '$2');
+       // 기존의 pageNo 매개변수 제거
+       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+       currentUrl = currentUrl.replace(regex, '$2');
 
-	    // 현재 URL에 페이지 번호 추가
-	    var newUrl;
-	    if (currentUrl.indexOf('?') !== -1) {
-	        newUrl = currentUrl + "&pageNo=" + pageNo;
-	    } else {
-	        newUrl = currentUrl + "?pageNo=" + pageNo;
-	    }
+       // 현재 URL에 페이지 번호 추가
+       var newUrl;
+       if (currentUrl.indexOf('?') !== -1) {
+           newUrl = currentUrl + "&pageNo=" + pageNo;
+       } else {
+           newUrl = currentUrl + "?pageNo=" + pageNo;
+       }
 
-	    // 새로운 URL을 폼의 액션으로 설정
-	    document.getElementById("pageForm").action = newUrl;
+       // 새로운 URL을 폼의 액션으로 설정
+       document.getElementById("pageForm").action = newUrl;
 
-	    // 페이지 번호 설정 및 폼 제출
-	    document.getElementById("pageNo").value = pageNo;
-	    document.getElementById("pageForm").submit();
-	}
+       // 페이지 번호 설정 및 폼 제출
+       document.getElementById("pageNo").value = pageNo;
+       document.getElementById("pageForm").submit();
+   }
 
 
-	 
+    
 
       
     document.addEventListener("DOMContentLoaded", function() {
@@ -923,7 +952,7 @@ div, input, p, span, button, h2 {
          }
 
          // 지역 필터
-         $('.location-filter').on('click', function() {
+         $('#categoryButton').on('click', function() {
              var modal = document.getElementById("myModal");
              modal.style.display = "block";
          });

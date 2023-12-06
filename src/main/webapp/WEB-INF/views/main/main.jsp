@@ -343,7 +343,6 @@
  }
  
 .card.h-100 {
-	height: 500px !important;
 	position: relative;
 }
  .priceaArea{
@@ -373,7 +372,13 @@
  	width: 80%;
  }
  .likecnt {
- 	width: 20%;
+ 	width: 36%;
+ }
+ .card_inner_div {
+ 	padding: 30px;
+ }
+ .card_header_div {
+ 	height: 30px;
  }
 </style>
 </head>
@@ -477,6 +482,7 @@
             	</div>
                     <div class="col mb-5">
                         <div class="card h-100">
+          
                             <!-- Product image-->
                             <div class="img_div">
                             
@@ -505,6 +511,7 @@
 					            <input type="hidden" value="${item.us_num}" class="us_num">
                                 <div class="text-center"><button class="detailBtn">상세보기</button></div>
                             </div>
+                           
                         </div>
                     </div>
             </div>
@@ -531,9 +538,13 @@
 	            <div class="col-12 col-md-4 p-5 mt-3">
 	                	<div class="col mb-7">
 		                    <div class="card h-100" style="position: relative;">
+		                    <div class="card_inner_div">
+		                    	<div class="card_header_div">
+		                    		<p id="boldText"></p>
+		                    	</div>
 		                        <!-- Product image-->
-		                        <div class="priceaArea" style="position: absolute; text-align: left; width: 150px; left:-33px; top: -30px">
-		                        	<img src="/assets/img/first.png" class="price" width="100%">
+		                        <div class="priceaArea" style="position: absolute; text-align: left; width: 150px; left:33px; top: 13px;">
+		                        	<img src="/assets/img/like.png" class="price" width="278px" height="31px">
 		                        </div>
 		                        <img class="card-img-top" src="/assets/img/doereview/${item.doe_img}" />
 		                        
@@ -566,6 +577,7 @@
 		                        </div>
 		                    </div>
 	                    </div>
+		             </div>
 	            </div>
 	            </c:forEach>
  

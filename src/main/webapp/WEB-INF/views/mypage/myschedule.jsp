@@ -106,7 +106,31 @@
 		font-family: 'Pretendard-Regular';
 		
 	}
-	
+	/* 캘린더 div */
+	#calendar{
+		width: 630px;
+	}
+.fc-toolbar-chunk {
+	display: flex !important;
+
+}	
+.fc-col-header-cell.fc-day.fc-day-sun{
+	width: 90px;
+}
+.fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+	width: 90px;
+	height: 90px;
+}
+.fc .fc-button:not(:disabled) {
+	color: black !important;
+    background: white !important;
+
+}
+.fc-direction-ltr .fc-button-group > .fc-button{
+    background: #212934 !important;
+    color: white !important;
+}
+}
 </style>
 
 <!-- fullcalendar css -->

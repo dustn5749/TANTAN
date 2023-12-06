@@ -21,6 +21,11 @@
      font-weight: 400;
      font-style: normal;
 }
+
+	input, p, span, div, label, button, a {
+     font-family: 'Pretendard-Regular';
+	
+	}
  .review_container {
      margin: 0 auto;
      padding: 10px;
@@ -29,17 +34,23 @@
      align-content:flex-start !important;
      height: 1300px;
      padding-top: 30px;
+     background: url("/assets/img/reviewBack.png");
+      	 background-size: cover;
+	background-size: cover !important; 
 }
 
 
 
  .boardmap_container {
-     width: 90% !important;
+ /* 	visibility: hidden; */
+     width: 100% !important;
      padding: 3% !important;
      margin: 0 auto;
      display: flex;
+     margin-top : 20px;
+     background: white !important;
      justify-content: center;
-     
+     box-shadow: 10px 10px 15px grey;
 }
  .row {
      display: flex;
@@ -106,28 +117,46 @@
     }
     /* 검색바 div */
      .search_bar {
+     	width : 100%;
+     	background: white;
+/*      	 box-shadow : 10px 10px 15px grey;
+ */     /* 	 border-radius: 10px; */
          height: 100px;
          margin: 0 auto;
          padding-top: 25px;
+         position: relative;
     }
     /* 검색 input 창 */
      .search_bar > input {
-         width: 350px;
-         border: 1px solid rgb(233, 233, 233);
-         border-radius: 3px;
-         padding: 1%;
+         width: 80%;
+         border : none;
+         box-shadow : 5px 5px 10px gray;
+         background : white;
+       /* border: 1px solid rgb(233, 233, 233); */
+        /*  border-radius: 3px; */
+         padding: 2%;
+         border-radius : 15px;
+         height : 50px;
+         
          font-family: 'Pretendard-Regular' !important;
     }
     /* 검색 버튼 */
      #search_btn{
          border: none;
          box-shadow: 1px 1px 1px 1px rgb(233, 233, 233);
-         border-radius: 10px;
          width: 50px;
          height: 50px;
+         background: #0099FF;
+         border-radius: 15px !important;
+         position: absolute;
+         left: 512
+         px;
+    }
+    #search_btn > img {
+    	left: -60px;
     }
      #search_btn:hover {
-         background-color: rgb(173, 173, 173);
+         background-color: #58B5D4;
     }
     /* 벌점을 선택해주세요 */
      .warning_msg {
@@ -263,14 +292,14 @@
          left: 179px;
     }
 	.star-rating {
-	    border: solid 1px #ccc;
+	    
 	    justify-content: flex-end;
 	    align-content: center;
 	    text-align: center;
 	    margin: 0 auto;
 	    display: flex;
 	    flex-direction: row-reverse;
-	    font-size: 3em;
+	    font-size: 2em;
 	    justify-content: space-around;
 	    padding: 0 .2em;
 	    text-align: center;
@@ -293,26 +322,26 @@
 	    color: #f90;
 	}
 	
-	.star-rating label:hover, .star-rating label:hover ~ label {
-	    color: #fc0;
+	.scoreStar.star-rating input:checked ~ label {
+	    color: #f90;
 	}
+	
+
      .cmd {
-         height: 75px;
-         margin: 0 atuo;
          align-items: center;
-         padding-top: 25px 
     }
      .cmd > input{
-         width: 100px;
-         height: 35px;
-         border-radius: 10px;
+         width: 80px;
+         height: 50px;
+         border-radius: 5px;
          box-shadow: 1px 1px 1px 1px rgb(233, 233, 233);
-         background-color: rgb(216, 242, 248);
+         background-color:  #0099FF;
+         color : white;
          border: none;
          font-family: 'Pretendard-Regular' !important;
-    }
+    } 
      .cmd > input:hover {
-         background-color: rgb(85, 193, 220);
+         background-color: #58B5D4;
          color : white;
     }
     
@@ -333,14 +362,16 @@
     /* 지역 별점 div */
     .avlStar {
     	display: none;
-
+		padding-top: 35px;
+		height: 100%;
+		margin-left: 20px;
     }
     
     
     /* 평점 리스트 */
     .reviewList{
     	height: 300px;
-    	overflow: scroll;
+    	overflow: auto;
     }
     .review_area {
      	display : flex;
@@ -376,6 +407,52 @@
     	margin-left: 15px;
     	width: 30px;
     }
+    
+    /* 지역 이름 div */
+    .img_title_div_inner {
+    	display: flex;
+    	height: 100px;
+	    text-align: center;
+	    align-content: center;
+	    align-content: center;
+	    justify-content: center;
+    }
+    
+    .img_div {
+    	/* visibility: hidden; */
+    }
+    .memoArea {
+    	display: flex;
+		height: 100px;
+		align-content: center;
+		align-items: center;
+		justify-content: center;
+    }
+    .memoArea > input {
+    	height: 100%;
+    	width: 80px;
+    }
+    
+    /* 메모 영역 */
+    .review_textarea {
+    	height: 50px;
+    	width: 70%;
+    	border :1px solid grey;
+    	border-radius: 3px;
+    	margin-right: 5px;
+    }
+    
+    .unsu {
+     width: 65px;
+  
+    margin-top: -2px;
+ 
+    position: relative;
+    left: -12px;
+}
+    
+    }
+    
      </style> 
      </head> 
      <body> 
@@ -456,26 +533,46 @@
      			</div> 
      			
      			<div class="col-md-6" style="text-align: center;"> 
-     				<div class="boardmap_container" style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; display: inline-block;"> 
      					<div class="search_bar" > 
      						<input type="text" placeholder="지역을 검색해보세요" id="search_bar_input" style="margin-bottom: 10px;"> 
      							<button id="search_btn"> 
-     								<img src="/assets/img/search.png" width="30px"> 
+     								<img src="/assets/img/search.png" id="unsu" style=" width: 65px;
+    margin-top: -2px;
+    position: relative;
+    left: -14px;"
+     								
+     								 width="60px"> 
      							</button> 
      						</div> 
+     				<div class="boardmap_container" style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; display: inline-block;"> 
      						
      						<div class="img_div">
      							<div class="img_title_div">
-     							<c:choose>     							
-	     							<c:when test="${!empty doe}">
-	     								<p id="img_title">${doe.doe_name}</p>
-	     							</c:when>
-	     							<c:otherwise>
-		     							<p id="img_title"></p>	     							
-	     							</c:otherwise>
-     							</c:choose>
-     							
+     							<div class="img_title_div_inner">
+	     							<c:choose>     							
+		     							<c:when test="${!empty doe}">
+		     								<p id="img_title">${doe.doe_name}</p>
+		     							</c:when>
+		     							<c:otherwise>
+			     							<p id="img_title"></p>	     							
+		     							</c:otherwise>
+	     							</c:choose>
+	     							<div class="avlStar">
+	     							    <div class="star-rating"> 
+	     									<input type="radio" id="5-stars" name="rating1" class="star_score"  value="5" /> 
+	     									<label for="5-stars" class="star">&#9733; </label> 
+	     									<input type="radio" id="4-stars" name="rating1" class="star_score"  value="4" /> 
+	     									<label for="4-stars" class="star">&#9733;</label> 
+	     									<input type="radio" id="3-stars" name="rating1" class="star_score"  value="3" /> 
+	     									<label for="3-stars" class="star">&#9733; </label> 
+	     									<input type="radio" id="2-stars" name="rating1" class="star_score"  value="2" /> 
+	     									<label for="2-stars" class="star">&#9733;</label> 
+	     									<input type="radio" id="1-stars" name="rating1" class="star_score"  value="1" /> 
+	     									<label for="1-stars" class="star">&#9733;</label> 
+	     								</div>
+	     							</div>
      							</div>
+
      							<div class="img_content_div">
      								<c:choose>     							
 	     							<c:when test="${!empty doe}">
@@ -490,45 +587,35 @@
      						</div>
     
      				
-     						
-     						<div class="avlStar">
-     							<p id="avl_text">평균 별점 : </p>
-     							    <div class="star-rating"> 
-     									<input type="radio" id="5-stars" name="rating" class="star_score"  value="5" /> 
-     									<label for="5-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="4-stars" name="rating" class="star_score"  value="4" /> 
-     									<label for="4-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="3-stars" name="rating" class="star_score"  value="3" /> 
-     									<label for="3-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="2-stars" name="rating" class="star_score"  value="2" /> 
-     									<label for="2-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="1-star" name="rating" class="star_score"  value="1" /> 
-     									<label for="1-star" class="star">&#9733;</label> 
-     								</div>
-     						</div>
+     					
      						<div class="seachcity" style="margin-bottom: 10px;"></div> 
      						<div class="row"> 
      							<input type="hidden" name="rate" id="rate" value="0" style="margin-bottom: 10px;"> 
      								<div class="warning_msg" >별점을 선택해 주세요</div> 
-										<div class="star-rating"> 
-     									<input type="radio" id="5-stars" name="rating" class="star_score"  value="5" /> 
-     									<label for="5-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="4-stars" name="rating" class="star_score"  value="4" /> 
-     									<label for="4-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="3-stars" name="rating" class="star_score"  value="3" /> 
-     									<label for="3-stars" class="star">&#9733; </label> 
-     									<input type="radio" id="2-stars" name="rating" class="star_score"  value="2" /> 
-     									<label for="2-stars" class="star">&#9733;</label> 
-     									<input type="radio" id="1-star" name="rating" class="star_score"  value="1" /> 
-     									<label for="1-star" class="star">&#9733;</label> 
+     								<div class="scoreStar">
+ 										<div class="star-rating"> 
+     									<input type="radio" id="stars-5" name="rating" class="star_score"  value="5" /> 
+     									<label for="stars-5" class="star">&#9733; </label> 
+     									<input type="radio"  id="stars-4" name="rating" class="star_score"  value="4" /> 
+     									<label for="stars-4" class="star">&#9733;</label> 
+     									<input type="radio"  id="stars-3" name="rating" class="star_score"  value="3" /> 
+     									<label for="stars-3" class="star">&#9733; </label> 
+     									<input type="radio"  id="stars-2" name="rating" class="star_score"  value="2" /> 
+     									<label for="stars-2" class="star">&#9733;</label> 
+     									<input type="radio"  id="stars-1" name="rating" class="star_score"  value="1" /> 
+     									<label for="stars-1" class="star">&#9733;</label> 
      									</div>
-     								<div class="review_contents" style="margin-bottom: 10px;"> 
-     									<div class="warning_msg_comment">5자 이상으로 작성해 주세요.</div> 
-     									<textarea rows="2" class="review_textarea" style="width: 100%;"></textarea> 
+     									<input type="hidden" id="scoreStarval">
      								</div> 
-     								<div class="cmd"> 
-     									<input type="button" name="save" id="save" value="등록"> 
-     								</div> 
+
+     						
+     									<div class="memoArea">
+	     									<textarea rows="2" class="review_textarea" placeholder="5자 이상으로 작성해 주세요"></textarea> 
+		     								<div class="cmd"> 
+		     									<input type="button" name="save" id="save" value="등록"> 
+		     								</div> 
+     									</div>
+     				
      								
      								<div class="reviewList"></div>
      							</div> 
@@ -630,7 +717,12 @@
      
      // 지도 클릭시 이벤트 
      function smenu_click(musName, doe_Num){
-    	 
+  		$(".boardmap_container").css({
+  		  "visibility": "visible"
+  		});
+ 		$(".img_div").css({
+		  "visibility": "visible"
+		});
     	 const regionImages = {
      	        '전남': '/assets/img/doereview/jeonnam.png',
      	        '전북': '/assets/img/doereview/Jeonbuk.jpg',
@@ -725,14 +817,19 @@
      	});
 
     }
+     //별점 선택하기
+    //$(".scoreStar .star-rating .star").on("click", e => {
+    	//$(".scoreStar .star-rating input").prop("disabled", true);
+   	//});
+     
+     
      
      // 평점 등록하기
      $("#save").on("click", function(){
     	 var doe_name = $("#img_title").text()
-    	 var score = $(".row .star-rating input:checked").val();
+    	 var score = $(".scoreStar .star-rating input:checked").val();
 		 var content = $(".review_textarea").val();
 		 var memberId = $("#member_id").val();
-		 
     	 if(memberId == ""){
     		alert("로그인 후 이용해주세요")
     	 } else if(doe_name==""){
@@ -756,13 +853,13 @@
 		     	dataType: "json",
 		     	success: function (data){
 		     		if(data.result){
-		     			alert("일정이 성공적으로 등록되었습니다");
+		     			alert("리뷰가 성공적으로 등록되었습니다");
 		 	            var reviewListDiv = $('.reviewList');
 		     	           reviewListDiv.empty();
 		     	            var average = Math.round(data.doe.average);
 		     	            console.log(average);
 		     	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
-		     	            $(".avlStar .star-rating input").prop("disabled", true);
+		     	          //  $(".avlStar .star-rating input").prop("disabled", true);
 		     	            var reviewList = data.reviewList;
 
 		     	            reviewList.forEach(function (e) {
@@ -859,7 +956,7 @@
 	     	            var average = Math.round(data.doe.average);
 	     	            console.log(average);
 	     	            $(".avlStar .star-rating input[value='" + average + "']").prop("checked", true);
-	     	            $(".avlStar .star-rating input").prop("disabled", true);
+	     	            //$(".avlStar .star-rating input").prop("disabled", true);
 	     	            var reviewList = data.reviewList;
 
 	     	            reviewList.forEach(function (e) {

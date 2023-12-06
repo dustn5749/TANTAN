@@ -159,6 +159,9 @@ public class UsController {
 	      
 	      model.addAttribute("writer", writer);
 	      model.addAttribute("us", usDetail);
+	      model.addAttribute("commentList", usCommentService.getUsCommentList(us_num));
+	      model.addAttribute("commentLength", usCommentService.getLength(us_num));
+	      
 	    return "usDetail";
 	    }
 	
@@ -181,6 +184,7 @@ public class UsController {
 	    Map<String, Object> result = new HashMap<>();
 	    if (update) {
 	        result.put("message", "수정 성공했습니다!");
+	        result.put("us_num", us.getUs_num());
 	    } else {
 	        result.put("message", "수정 실패했습니다.");
 	    }
@@ -215,6 +219,7 @@ public class UsController {
 	      if(usCommentService.insertCommentUs(comment)) {
 	          result.put("status", true);
 	          result.put("message", "댓글이 등록되었습니다");
+	       
 	       } else {
 	          result.put("status", false);
 	          result.put("message", "댓글 작성 중 오류가 발생하였습니다");

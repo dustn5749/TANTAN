@@ -18,6 +18,13 @@
         select * from us_comment
         where us_num=#{us_num}
     </select>
+    
+    
+    <!-- 댓글 수 세기 -->
+    <select id="getLength" resultType="int">
+    	select count(*) from us_comment
+    	  where us_num=#{us_num}
+    </select>
 </mapper>
     
   

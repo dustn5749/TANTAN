@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<sec:authorize access="isAuthenticated()">
+   <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +24,7 @@
  			</div>
  		</div>
  		<div class="inquiry_container_inner">
+ 		<div class="inquiry_detail_div">
  				<!-- 검색창 div -->
  				<form name="pageForm" id="pageForm" action="/customer/inquiryList" method="post">
 	 				<input type="hidden" name="pageNo" id="pageNo1" value="${result.inquiry.pageNo}" />
@@ -39,11 +45,12 @@
  					<div class="search_input_div">
  						<input type="text" id="search_input" name="searchTitle">
  						<button id="search_btn"><img src="/assets/img/search.png" width="30px"></button>
+ 						<div class="writeBtn_div"><a class="writeBtn" >글쓰기</a></div>
+ 					
  					</div>
  				</div>
  				</form>
  				
-				<div class="writeBtn_div"><button class="writeBtn">글쓰기</button></div>
  				<table class="inquiry_table">
 				<caption class="table_header">1:1 문의하기
 				</caption>
@@ -75,6 +82,7 @@
 					</c:forEach>
  				</table>
  		</div>
+ 		
  		<div class="nav_div">
  			<c:if test="${result.inquiry.navStart != 1}">
  				<a href="#" onclick="jsPageNo(${result.inquiry.navStart-1})" class="pageArrow"> &lt; </a> 
@@ -93,7 +101,32 @@
 		        <a href="#" onclick="jsPageNo(${result.inquiry.navEnd+1})" class="pageArrow"> &gt; </a> 
 		     </c:if>
  		</div>
+ 		
  	</div>
+ 	</div>
+ 	
+ 	<c:choose>
+ 		<c:when test="${!empty principal}">
+ 			<input type="hidden" value="${principal.user.member_id}" id="loginMember">
+ 		</c:when>
+ 		<c:otherwise>
+ 			<input type="hidden" value="null" id="loginMember">
+ 		</c:otherwise>
+ 	</c:choose>
  	<script src="/assets/js/inquiry.js"></script>
+ 	<script> 
+ 	// 글쓰기
+	 	$(".writeBtn").on("click", function(){
+	 		
+	 		if($("#loginMember").val()=="null"){
+	 			alert("로그인 후 이용해주세요")
+	 		}else {
+				 location.href = "/customer/write";	 			
+	 		}
+		 })
+ 	
+ 	
+ 	</script>
+ 	
 </body>
 </html>

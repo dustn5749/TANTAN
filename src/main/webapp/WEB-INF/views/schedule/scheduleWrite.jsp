@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<sec:authorize access="isAuthenticated()">
+  <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 
 <!DOCTYPE html>
 <html>
@@ -534,6 +538,19 @@
    padding-left: 5px;
    margin-left: 10px;
 }
+.dayDiv {
+   text-align: left !important;
+   padding-left: 50px;
+   width: 100%;
+   align-content: center;
+   margin-top: 5px;
+}
+.dayDiv > div {
+   margin-bottom: 2px;
+}
+.memo-div {
+   display: flex;
+}
 </style>
 <body >
    <div class="nav-wrap">
@@ -597,35 +614,44 @@
                   <div class="schedule-list">
                   <div class="title_div"><span>글 제목 : </span><input type="text" id="title"></div>
                    <ul class="schedule-ul">
-					</ul>
-				<div>
-				<!-- 일정 추가 버튼 -->
-				<div class="day_li_btn_div">
-					<button class="add_shedule_btn">일정추가하기</button>
-					<button class="minus_shedule_btn">일정삭제하기</button>
-				</div>
-				<!--일정 등록하기 버튼 -->
-				<div class="mySchedule"
-					style="text-align: center; margin-bottom: 20px;">
-					<a href="javascript:void(0);" onclick="sendDataToServer()">일정등록하기</a>
-				</div>
-				</div>
-		</div>
-		</div>
-		<script>
+               </ul>
+            <div>
+            <!-- 일정 추가 버튼 -->
+            <div class="day_li_btn_div">
+               <button class="add_shedule_btn">일정추가하기</button>
+               <button class="minus_shedule_btn">일정삭제하기</button>
+            </div>
+            <!--일정 등록하기 버튼 -->
+            <div class="mySchedule"
+               style="text-align: center; margin-bottom: 20px;">
+               <a href="javascript:void(0);" onclick="sendDataToServer()">일정등록하기</a>
+            </div>
+            </div>
+      </div>
+      </div>
+      
+      <c:choose>
+      	<c:when test="${!empty principal}">
+      		<input type="hidden" value="${principal.user.member_id}" id="member_id">
+      	</c:when>
+      	<c:otherwise>
+      		<input type="hidden" id="member_id">
+      	</c:otherwise>
+      </c:choose>
+      <script>
 
      
 /* 일정 추가 날짜 범위 지정하기 */
 
    const startDateInput = document.getElementById('start_Date');
    const endDateInput = document.getElementById('end_Date');
-   const detailScheduleInputs = document.querySelectorAll('.detail_scedule');
-      
+
    function setMinMax() {
+     const detailScheduleInputs = document.querySelectorAll('.detail_scedule');
       detailScheduleInputs.forEach(function (input) {
-      input.setAttribute('min', startDateInput.value);
-      input.setAttribute('max', endDateInput.value);
-   });
+         input.setAttribute('min', startDateInput.value);
+         input.setAttribute('max', endDateInput.value);
+      });
    }
       
    // 최초 실행
@@ -645,7 +671,8 @@
       "   <span>day<em class='day_num'>" + day + "</em></span><em class='day_date'>" +
       "   <input type='date' class='detail_scedule'></em>" + 
       "</p>" +
-      "<div>" + 
+      "<div class='dayDiv'>"+
+      "<div class='doeArea'>" + 
          "<button class='schedule-btn-grp' onclick='openModal(this)'>장소추가</button>" +
          "<input type='text' readonly='readonly' id='select_city_area' class='day-" + day +" placeList' name='location"+ day +"' />" +
       "</div>" +  <!-- 메모 부분 수정 -->
@@ -653,6 +680,7 @@
       "   <button class='schedule-btn-grp memo-add-btn' onclick='addMemo(this)'>메모추가</button>" + 
       "   <input type='text' readonly='readonly' id='memo_area_" + day + "' name='memo_area_" + day + "' class='memoList'> "+
       "</div>" + <!-- 메모 모달창 -->
+      "</div>"+
       "<div class='memo-modal' style='display: none;'>"+
       "   <div class='modal-content'>" + 
             "<p>" + 
@@ -686,6 +714,34 @@
       return html;
    }
    
+   function setNextSchduleMinMax(currentDay) {
+      var nextDay = currentDay + 1;
+      
+      var nextSchedule = document.querySelector('.schedule-item.day-' + nextDay);
+      console.log(currentDay, 'next: ', nextSchedule)
+      if (nextSchedule) {
+         var currentSchedule = document.querySelector('.schedule-item.day-' + currentDay);
+         var value = currentSchedule.querySelector('.detail_scedule').value;
+         
+         if (value == '') {
+            var dateInputs = document.querySelectorAll('.schedule-ul .schedule-item .detail_scedule');
+            for (let i = 0; i < dateInputs.length - 1; i++) {
+               var el = dateInputs[i];
+               console.log('el ', i, ': ', el);
+               if (el.value != '') {
+                  value = el.value;
+               }
+            }
+         }
+         
+         var max = document.getElementById('end_Date').value;
+         
+         var nextDateInput = nextSchedule.querySelector('.detail_scedule');
+         nextDateInput.min = value;
+         nextDateInput.max = max;
+         }
+   }
+   
    $(document).ready(function(){
       $('.schedule-ul').append(createSchedule(1));
    });
@@ -695,10 +751,11 @@
    $(".add_shedule_btn").on("click", function() {
 
       var lastScheduleItem = $(".schedule-ul li:last-child");
+      var lastDayNum = parseInt(lastScheduleItem.find(".day_num").text());
             
       // 복제된 일정 아이템을 새로운 일정으로 설정
       //var newScheduleItem = lastScheduleItem.clone();
-      let newScheduleItem = $(createSchedule(parseInt(lastScheduleItem.find(".day_num").text()) + 1));
+      let newScheduleItem = $(createSchedule(lastDayNum + 1));
      
             
       var currentDayNum = newScheduleItem.find(".day_num").text();
@@ -706,7 +763,7 @@
             
       // 새로운 일정을 schedule-ul에 추가
       $(".schedule-ul").append(newScheduleItem);
-       setMinMax();
+      setNextSchduleMinMax(lastDayNum);
 
 
       var lastScheduleItem = $(".schedule-ul li:last-child");
@@ -715,10 +772,10 @@
 
                
       // 시작 날짜 입력 시
-      startDateInput.addEventListener('input', setMinMax);
+      //startDateInput.addEventListener('input', setMinMax);
    
       // 종료 날짜 입력 시
-      endDateInput.addEventListener('input', setMinMax);
+      //endDateInput.addEventListener('input', setMinMax);
    
       });   
                   
@@ -934,12 +991,13 @@
       function sendDataToServer() {
           const scheduleItems = document.querySelectorAll(".schedule-item");
           const schedules = [];
-
+		
       console.log($("#doe_location").val())
 
           for (i=0;i<scheduleItems.length;i++) {
              schedules.push({
-               title : $("#title").val(),
+            	 member_id : $("#member_id").val(),
+               	title : $("#title").val(),
                 day_date : scheduleItems[i].querySelector(".day_num").innerText,
                 place1 : scheduleItems[i].querySelector(".placeList").value,
                 memo1 : scheduleItems[i].querySelector(".memoList").value,

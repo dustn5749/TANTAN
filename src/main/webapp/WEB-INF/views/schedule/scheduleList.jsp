@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page session="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<sec:authorize access="isAuthenticated()">
+   <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <meta charset="UTF-8">
 <title>일정 목록 조회</title>
 <style>
@@ -33,13 +37,17 @@ input, button, div, span, h2, p, h5{
    display: flex;
 }
 
+.us_header_size > button {
+   width: 150px !important;
 }
+
+
 .us_header {
-   position: sticky;
-   z-index: 9;
+/*    position: sticky; */
+/*    z-index: 9; */
    top: 80px;
    height: fit-content;
-   background-color: rgb(255, 255, 255);
+/*    background-color: rgb(255, 255, 255); */
    transition: all 0.1s ease-in-out 0.3s;
 }
 
@@ -49,8 +57,8 @@ input, button, div, span, h2, p, h5{
    justify-content: center;
    -webkit-box-align: center;
    align-items: center;
-   position: sticky;
-   z-index: 9;
+/*    position: sticky; */
+/*    z-index: 9; */
    top: 80px;
    width: 100%;
    height: 44px;
@@ -60,7 +68,7 @@ input, button, div, span, h2, p, h5{
 }
 
 .us_header4 {
-   z-index: 9;
+/*    z-index: 9; */
    box-sizing: border-box;
    width: 260px;
    height: 38px;
@@ -146,10 +154,13 @@ input, button, div, span, h2, p, h5{
 
 .us_fillter {
    PADDING: 10PX;
+   width: 1260px;
+   margin: 0 auto;
+   text-align: center;
 }
 
 .fillter_btn_area {
-
+  text-align: left;
 /*    left: -820px; */
    width: 78%;
 
@@ -349,7 +360,7 @@ ul>li {
    color: white !important;
 }
 
-.py-5 {
+.3py-5 {
    padding: 10px;
 }
 
@@ -365,7 +376,7 @@ ul>li {
 #myModal {
    display: none;
    position: fixed;
-   z-index: 1;
+   z-index: 10;
    left: 0;
    top: 0;
    width: 100%;
@@ -441,6 +452,7 @@ ul>li {
    height: 130px;
    margin-top: 20px;
    margin-bottom: 20px;
+   position: relative;
 }
 .detail_btn_area {
    margin-top: 20px;
@@ -452,10 +464,12 @@ ul>li {
    width: 100px;
    height: 40px;
    border-radius: 7px;
+   font-size:18px;
+   color: black !important;
 }
 .detailBtn:hover{
    background: black;
-   color: white;
+   color: white !important;
 }
 
 /* 페이징 처리 */
@@ -479,7 +493,22 @@ ul>li {
 .nav_div> a,strong {
    margin-left: 10px;
 }
+.content_inner_detail{
+   text-align: left;
+   padding-left: 30px;
+   margin-top: 20px;
+    position: absolute;
+   top:20px;
+   font-size: 16px !important;
+}
+.content_inner_detail > div, .content_inner_detail  > p, input, span{
+   font-size: 16px !important;
+   color: grey;
+}
+/* 일정 제목 */
+.fw-bolder {
 
+}
 </style>
 </head>
 
@@ -522,7 +551,7 @@ ul>li {
             </button>
 
 
-            <button class="city_btn1" onclick="window.location.href ='write'"
+            <button class="city_btn1" 
                style="cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: auto; height: 40px; margin-right: 15px; margin-left: 0; padding: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(233, 233, 233); border-radius: 10px;">글쓰기</button>
          </div>
 
@@ -552,17 +581,17 @@ ul>li {
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
                         id="gangwonCheckbox" value="강원"> <label class="form-check-label"
-                        for="gangwonCheckbox">강원도</label>
+                        for="gangwonCheckbox">강원</label>
                   </div>
 
                   <div class="form-check">
-                     <input type="radio" name="deo_name" class="form-check-input" id="jejuCheckbox">
-                     <label class="form-check-label" for="jejuCheckbox">제주</label>
+                     <input type="radio" name="deo_name" class="form-check-input" id="jejuCheckbox" value="제주">
+                     <label class="form-check-label" for="jejuCheckbox"  >제주</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="busanCheckbox"> <label class="form-check-label"
+                        id="busanCheckbox" value="부산"> <label class="form-check-label"
                         for="busanCheckbox">부산</label>
                   </div>
 
@@ -574,26 +603,26 @@ ul>li {
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="chungcheongCheckbox"> <label
-                        class="form-check-label" for="chungcheongCheckbox">충북</label>
+                        id="chungcheongCheckbox" value="충북"> <label
+                        class="form-check-label" for="chungcheongCheckbox" >충북</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="gyeongsangCheckbox"> <label class="form-check-label"
-                        for="gyeongsangCheckbox">경북</label>
+                        id="gyeongsangCheckbox" value="경남"> <label class="form-check-label"
+                        for="gyeongsangCheckbox">경남</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="jeollaCheckbox"> <label class="form-check-label"
-                        for="jeollaCheckbox">전라도</label>
+                        id="jeollaCheckbox" value="인천" > <label class="form-check-label"
+                        for="jeollaCheckbox">인천</label>
                   </div>
 
                   <div class="form-check">
                      <input type="radio" name="deo_name" class="form-check-input"
-                        id="ulleungCheckbox"> <label class="form-check-label"
-                        for="ulleungCheckbox">울릉도</label>
+                        id="ulleungCheckbox" value="울산"> <label class="form-check-label"
+                        for="ulleungCheckbox">울산</label>
                   </div>
                </div>
 
@@ -646,13 +675,12 @@ ul>li {
         <svg id="heartIcon" class="heartIcon" viewBox="0 0 32 32"
              aria-hidden="true" role="presentation" focusable="false"
              data-schedule-num="${schedule.schedule_Num }"
-
              style="fill: ${schedule.like ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 0, 0.5)'}; height: 24px; width: 24px; stroke: var(--f-mkcy-f); stroke-width: 2; overflow: visible;">
             <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
         </svg>
         
         <!-- 좋아요 수 텍스트 (파란색) -->
-        <text style="fill: blue; font-size: 12;" class ="heartCount">${schedule.likecnt}</text>
+        <p style="fill: blue; font-size: 12;" class="likecnt">${schedule.likecnt}</p>
     </div>
 </div>
   
@@ -662,12 +690,13 @@ ul>li {
                                                 type="hidden" name="schedule_Num"
                                                 value="${schedule.schedule_Num}">
                                             <div class="schedule_detail">
-                                             <h5 class="fw-bolder">${schedule.title}</h5>
-                                             <p>${schedule.member_id}</p>
-                                             <p>지역:${schedule.doe_Name}</p>
-                                             <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
-                                             <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
-<%--                                       	     <p>좋아요 수: ${schedule.LikeCNT != null ? schedule.LikeCNT : ""}</p> --%>
+                                             <h5 class="fw-bolder" >${schedule.title}</h5>
+                                             <div class="content_inner_detail">
+                                                <p>${schedule.member_id}</p>
+                                                <p>지역:${schedule.doe_Name}</p>
+                                                <p>여행시작:${schedule.start_Num != null ? schedule.start_Num : ""}</p>
+                                                <p>여행끝:${schedule.end_Date != null ? schedule.end_Date : ""}</p>
+                                 </div>   
                                              <input type="hidden" name="regDate"
                                                 value="${schedule.reg_Date != null ? schedule.reg_Date : ""}">
                                              <input type="hidden" value="${schedule.schedule_Num}"
@@ -732,57 +761,50 @@ ul>li {
          </div>
 
 
+   <c:choose>
+      <c:when test="${!empty principal}">
+         <input type="hidden" id="loginMember" value="${principal.user.member_id}">
+      </c:when>
+      <c:otherwise>
+         <input type="hidden" id="loginMember" value="">
+      </c:otherwise>
+   </c:choose>
 
    <script>
-//    function jsPageNo(pageNo) {
-// 	    // 현재 URL 가져오기
-// 	    var currentUrl = window.location.href;
-
-// 	    // 기존의 pageNo 매개변수 제거
-// 	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
-// 	    currentUrl = currentUrl.replace(regex, '$2');
-
-// 	    // 현재 URL에 페이지 번호 추가
-// 	    var newUrl;
-// 	    if (currentUrl.indexOf('?') !== -1) {
-// 	        newUrl = currentUrl + "&pageNo=" + pageNo;
-// 	    } else {
-// 	        newUrl = currentUrl + "?pageNo=" + pageNo;
-// 	    }
-
-// 	    // 새로운 URL을 폼의 액션으로 설정
-// 	    document.getElementById("pageForm").action = newUrl;
-
-// 	    // 페이지 번호 설정 및 폼 제출
-// 	    document.getElementById("pageNo").value = pageNo;
-// 	    document.getElementById("pageForm").submit();
-// 	}
-
    
+$(".city_btn1").on("click", function() {
+       
+       if ($("#loginMember").val() === "") {
+           alert("로그인 후 이용해주세요");
+          
+       } else {
+       window.location.href = '/schedule/write';
+    
+       }
+   })
    
-	
    function jsPageNo(pageNo) {
        var currentUrl = window.location.href;
 
-	    // 기존의 pageNo 매개변수 제거
-	    var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
-	    currentUrl = currentUrl.replace(regex, '$2');
+       // 기존의 pageNo 매개변수 제거
+       var regex = /[?&]pageNo(=[^&]*)?(&|$)/;
+       currentUrl = currentUrl.replace(regex, '$2');
 
-	    // 현재 URL에 페이지 번호 추가
-	    var newUrl;
-	    if (currentUrl.indexOf('?') !== -1) {
-	        newUrl = currentUrl + "&pageNo=" + pageNo;
-	    } else {
-	        newUrl = currentUrl + "?pageNo=" + pageNo;
-	    }
+       // 현재 URL에 페이지 번호 추가
+       var newUrl;
+       if (currentUrl.indexOf('?') !== -1) {
+           newUrl = currentUrl + "&pageNo=" + pageNo;
+       } else {
+           newUrl = currentUrl + "?pageNo=" + pageNo;
+       }
 
-	    // 새로운 URL을 폼의 액션으로 설정
-	    document.getElementById("pageForm").action = newUrl;
+       // 새로운 URL을 폼의 액션으로 설정
+       document.getElementById("pageForm").action = newUrl;
 
-	    // 페이지 번호 설정 및 폼 제출
-	    document.getElementById("pageNo").value = pageNo;
-	    document.getElementById("pageForm").submit();
-	}
+       // 페이지 번호 설정 및 폼 제출
+       document.getElementById("pageNo").value = pageNo;
+       document.getElementById("pageForm").submit();
+   }
 
 
    
@@ -820,114 +842,64 @@ ul>li {
     });
 }
        
-// 			// 원본 하트
-//             $(document).ready(function () {
-//                 $('.heartIcon').click(function () {
-//                     var scheduleNum = $(this).data('schedule-num');
-//                     var heartIcon = $(this);
-//                     var currentColor = heartIcon.css('fill');
-                    
-//                     console.log(scheduleNum)
-//                     var isLike = true;
-//                     if (currentColor == ('rgb(255, 0, 0)')) {   // 하트가 빨간색이면 (좋아요가 눌려있으면)
-//                        heartIcon.css('fill', 'rgba(0, 0, 0, 0.5)');   // 좋아요 취소
-//                        isLike = false;
-//                     } else {
-//                        heartIcon.css('fill', 'rgb(255, 0, 0');
-//                     }
-                    
-//                     $.ajax({
-//                         url: '/schedule/updateHeartColor',
-//                         method: 'POST',
-//                         data: { scheduleNum: scheduleNum, isLike: isLike},
-//                         success: function (response) {
-                            
-//                         },
-//                         error: function () {
-//                             console.error('Error during AJAX request.');
-//                         }
-//                     });
-//                 });
 
               
-             $(document).ready(function () {
+   $(document).ready(function () {
     $('.heartIcon').click(function () {
-        var scheduleNum = $(this).data('schedule-num');
-        var heartIcon = $(this);
-        var currentColor = heartIcon.css('fill');
+       if($("#loginMember").val()!=""){
+            var scheduleNum = $(this).data('schedule-num');
+            var heartIcon = $(this);
+            var currentColor = heartIcon.css('fill');
 
-        console.log(scheduleNum)
-        var isLike = true;
-         if (currentColor == 'rgb(255, 0, 0)') {
-            heartIcon.css('fill', 'rgba(0, 0, 0.5)');
-            isLike = false;
-        } else {
-            heartIcon.css('fill', 'rgb(255, 0, 0)');
-        } 
+            console.log(scheduleNum)
+            var isLike = true;
+             if (currentColor == 'rgb(255, 0, 0)') {
+                heartIcon.css('fill', 'rgba(0, 0, 0.5)');
+                isLike = false;
+            } else {
+                heartIcon.css('fill', 'rgb(255, 0, 0)');
+            } 
 
-        $.ajax({
-            url: '/schedule/updateHeartColor',
-            method: 'POST',
-            data: { scheduleNum: scheduleNum, isLike: isLike },
-            success: function (response) {
-                	
-                // 서버 응답을 확인하고 필요한 작업 수행
-                if (response.success) {
-                    // 서버에서 좋아요 수를 업데이트
-                    var newLikeCount = response.likeCount;
-                    const likeText = document.querySelector('text');
-                    // 좋아요 수를 UI에 업데이트
-              //      const currentLikeCnt = parseInt(likeText.textContent, 10);
-                    if (heartIcon.css('fill') == 'rgb(255, 0, 0)') {
-                    	
-                        // 현재 likecnt가 -1이 아닌 경우, 1을 더하고 하트를 빨간색으로 변경
-                      	likeText.textContent="";
-                        likeText.textContent = newLikeCount;
-          //              heartIcon.css('fill', 'rgb(0, 0, 0.5)');
-                    } else {
-                    	
-                    	likeText.textContent="";
-                        // 현재 likecnt가 -1인 경우, 1을 빼고 하트를 회색으로 변경
-                        likeText.textContent = newLikeCount;
-                  //     heartIcon.css('fill', 'rgb(255, 0, 0)');
-                    }
-                } 
-            },
-            error: function () {
-                console.error('Error during AJAX request.');
-            }
-        });
+            $.ajax({
+                url: '/schedule/updateHeartColor',
+                method: 'POST',
+                data: { scheduleNum: scheduleNum, isLike: isLike },
+                success: function (response) {
+                       
+                    // 서버 응답을 확인하고 필요한 작업 수행
+                    if (response.success) {
+                        var newLikeCount = response.likeCount;
+                        const likeText = heartIcon.closest(".card").find(".likecnt");
+                        // 좋아요 수를 UI에 업데이트
+                        likeText.text(newLikeCount);
+                      
+                    } 
+                },
+                error: function () {
+                    console.error('Error during AJAX request.');
+                }
+            });
+          
+       }else {
+          alert("로그인 후 이용해주세요")
+          
+       }
+
     });
 });
 
                      
 
-//                document.addEventListener('DOMContentLoaded', function () {
-//            	    const heartIcon = document.getElementById('heartIcon');
-//            	    const likeText = document.querySelector('text');
 
-//            	    heartIcon.addEventListener('click', function () {
-//            	        const currentLikeCnt = parseInt(likeText.textContent, 10);
-//            	        if (currentLikeCnt !== -1) {
-//            	            // 현재 likecnt가 -1이 아닌 경우, 1을 더하고 하트를 빨간색으로 변경
-//            	            likeText.textContent = currentLikeCnt + 1;
-//            	            heartIcon.style.fill = 'rgb(0, 0, 0.5)';
-//            	        } else {
-//            	            // 현재 likecnt가 -1인 경우, 1을 빼고 하트를 회색으로 변경
-//            	            likeText.textContent = currentLikeCnt - 1;
-//            	            heartIcon.style.fill = 'rgb(255, 0, 0)';
-//            	        }
-//            	    });
-//            	});
                   
 
                    
                        
-                 //페이징 처리.
-                function jsPageNo(pageNo) {
-                    document.getElementById("pageNo").value = pageNo;
-                    document.getElementById("pageForm").submit();
-                }
+//                  //페이징 처리.
+//                 function jsPageNo(pageNo) {
+//                     document.getElementById("pageNo").value = pageNo;
+//                     document.getElementById("pageForm").submit();
+//                 }
 
                 
                 //일정목록으로 이동 
@@ -957,7 +929,7 @@ ul>li {
                 });
                 
                 // 지역 필터
-                $('.location-filter').on('click', function() {
+                $('#categoryButton').on('click', function() {
                     var modal = document.getElementById("myModal");
                     modal.style.display = "block";
                 });
