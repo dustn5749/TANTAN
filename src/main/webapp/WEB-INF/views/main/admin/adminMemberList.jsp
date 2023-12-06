@@ -76,7 +76,6 @@
 
 </head>
 <body>
-<!-- <div class="loading-overlay" id="loadingOverlay">Loading...</div> -->
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

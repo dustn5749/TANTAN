@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.project.dao.ReportDAO">
+
+<insert id="addReport" parameterType="map">
+    INSERT INTO report (REPORTNUM, reportDate)
+    VALUES (report_seq.NEXTVAL, SYSDATE)
+</insert>
+<select id="todayReport">
+	    SELECT COUNT(*) AS todayReport
+	    FROM report
+	    WHERE TO_CHAR(reportDate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+</select>
+
+</mapper>

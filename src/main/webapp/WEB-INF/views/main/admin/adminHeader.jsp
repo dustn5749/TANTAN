@@ -27,11 +27,7 @@ jQuery.browser = {};
 })();
 </script>
 <script src="admin/js/loading-overlay.min.js"></script>
-<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" /> -->
- <!-- jqGrid CSS -->
-<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" /> -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/jqgrid/4.6.0/css/ui.jqgrid.css" type="text/css" />
-<!-- <script src="admin/css/jquery-ui.css"></script> -->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" type="text/css" />
 
 <script src="admin/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
@@ -60,10 +56,6 @@ jQuery.browser = {};
     <a href="admin" class="brand-link d" style="text-align: center; align-items: center;">
       <img src="admin/img/LOGO.png" style="margin: auto; width: 200px;">
     </a>
-    <!-- <a href="#" class="brand-link">
-      <img src="dist/img/LOGO.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">"     "</span>
-    </a> -->
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -77,18 +69,6 @@ jQuery.browser = {};
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
-<!--       <div class="form-inline"> -->
-<!--         <div class="input-group" data-widget="sidebar-search"> -->
-<!--           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search"> -->
-<!--           <div class="input-group-append"> -->
-<!--             <button class="btn btn-sidebar"> -->
-<!--               <i class="fas fa-search fa-fw"></i> -->
-<!--             </button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -99,7 +79,6 @@ jQuery.browser = {};
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   대시보드
-                  <!-- <span class="right badge badge-danger">New</span> -->
                 </p>
               </a>
             </li>
@@ -108,7 +87,6 @@ jQuery.browser = {};
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
                   관리자 계정관리
-                  <!-- <span class="right badge badge-danger">New</span> -->
                 </p>
               </a>
             </li>

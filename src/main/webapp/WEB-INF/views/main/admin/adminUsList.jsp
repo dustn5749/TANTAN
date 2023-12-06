@@ -75,7 +75,6 @@
   <link rel="stylesheet" href="admin/plugins/jsgrid/jsgrid-theme.min.css">
 </head>
 <body>
-<!-- <div class="loading-overlay" id="loadingOverlay">Loading...</div> -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
