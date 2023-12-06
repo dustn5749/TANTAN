@@ -16,9 +16,11 @@ import lombok.NoArgsConstructor;
 
 public class ReportDTO {
 	private int reportnum;
-	private String member_id;
-	private String report_type;
+	public String member_id;
+	private Date reportDate;
+//	private String report_type;
 	private int us_num;
-	private String reporter;
+	private int todayReport;
+//	private String reporter;
 	
 }

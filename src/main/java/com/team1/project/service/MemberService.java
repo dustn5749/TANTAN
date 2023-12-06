@@ -132,4 +132,9 @@ public class MemberService {
         return todayRegisterCount;
     }
 	
+    public void reportCnt(String member_id) {
+    	System.out.println("Inside reportCnt service method");
+    	memberDao.increaseReportCount(member_id);
+    }
+    
 }

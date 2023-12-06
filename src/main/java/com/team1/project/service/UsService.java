@@ -186,6 +186,10 @@ public int viewCount(int us_num ) throws Exception {
 	public int totalPosts(UsDTO us) {
 		return usDAO.totalPosts(us);
 	}
+	
+	public int reportCnt(int us_num) {
+		return usDAO.increaseReportCount(us_num);
+	}
 //// 조회수 증가
 //public int viewCount(int usNum) throws Exception {
 //System.out.println("us.service.viewCount() 함수 호출됨");

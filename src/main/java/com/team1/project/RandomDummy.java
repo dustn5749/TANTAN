@@ -146,14 +146,16 @@ public class RandomDummy {
     }
     
     public static void main(String[] args) {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100; i++) {
             if (i % 10 == 0) {
                 System.err.println();
             }
             System.err.print("INSERT INTO member (member_id, name, pwd, nickname, register_time, phone, email, gender, age) VALUES ('");
+            System.out.println();
             System.err.print(nId() + nNo2() + "', '");
             System.err.print(nName() + "', '");
             System.err.print("$2a$10$yNyTiw5aKVqx7RkcpiZ.juA9vqwoLPaaiilK4C8xX0tV6rqYPWkqq" + "', '");
+            System.out.println();
             System.err.print(nNick() + "', '");
             System.err.print(nDate() + "', '");
             System.err.print(nPhone() + "', '");

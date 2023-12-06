@@ -98,18 +98,10 @@
   </div>
 
 <script>
-// function hideLoadingMessage() {
-//     document.getElementById("loadingOverlay").style.display = "none";
-// }
 
 var totalSize = 0; // 전역 변수로 총 데이터 수를 설정합니다.
 var currentPage = 1;
 var pageSize = 30;
-
-// function showPage() {
-//     document.getElementById("loader").style.display = "none";
-//     document.getElementById("myDiv").style.display = "block";
-// }
 
 // 페이징 관련 함수를 초기화합니다.
 function initPage(page) {
@@ -177,8 +169,6 @@ function loadGridData(page) {
             console.log("그리드 데이터:", $("#usGrid").jqGrid('getGridParam', 'data'));
             initPage(currentPage);
 
-//             hideLoadingMessage();
-
         }
     });
 
@@ -200,7 +190,7 @@ $("#usGrid").jqGrid({
         { label: '작성자', name: 'writer', index: 'writer' },
         { label: '등록일', name: 'regdate', index: 'regdate' },
         { label: '조회수', name: 'us_cnt', index: 'us_cnt' },
-        { label: '여행지', name: 'doe_name', index: 'doe_name' },
+        { label: '여행지', name: 'doe_Name', index: 'doe_Name' },
         { label: '신고 횟수', name: 'reportcnt', index: 'reportcnt' },
         {
             label: '정지유무', name: 'status', index: 'status',
@@ -225,8 +215,8 @@ $("#usGrid").jqGrid({
     sortorder: 'desc',
     caption: '동행리스트',
     loadui: "enable",
-//     rownumbers: true,
     loadComplete: function (data) {
+    	console.log("doe_name -> " + data.doe_Name);
         var allRowsInGrid = jQuery('#usGrid').jqGrid('getGridParam', 'records');
         console.log("그리드 데이터 수:", allRowsInGrid);
         $("#NoData").html("");

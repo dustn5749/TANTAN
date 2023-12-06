@@ -137,7 +137,9 @@
                 m.*
             FROM 
                 member m
-            ORDER BY status DESC
+            WHERE
+            	m.member_id LIKE '%' || #{member_id, jdbcType=VARCHAR} || '%'
+            ORDER BY reportcnt DESC
         ) mm
         WHERE ROWNUM <= #{endNo}
     )
@@ -193,4 +195,11 @@
 	    FROM member
 	    WHERE TO_CHAR(register_time, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 	</select>
+	
+	<!-- 게시글 작성자 신고 횟수 증가 -->
+	<update id="increaseReportCount">
+		UPDATE member m
+		SET reportcnt = reportcnt + 1
+		WHERE m.member_id = #{member_id}
+	</update>
 </mapper>

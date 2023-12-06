@@ -14,12 +14,6 @@
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
 <script src="admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
 <style>
-/* #pop-board{ */
-/* border:1px solid black; */
-/* } */
-/* #pop-us{ */
-/* border:1px solid black; */
-/* } */
 </style>
 </head>
 <body>
@@ -104,7 +98,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                    신고(일일)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${todayReport }</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -162,7 +156,7 @@ $(function () {
 
             const monthData = data.monthMember.map(function (item) {
                 console.log(item.month);
-                return item.month;
+                return item.month + "월";
             });
 
             const counts = data.monthMember.map(function (item) {
@@ -179,6 +173,14 @@ $(function () {
             const totalMembers = data.totalMembers;  // 전체 회원 수
             const totalPosts = data.totalPosts;  // 전체 게시글 수
 
+         // 12월 데이터가 없는 경우 0으로 초기화
+            const lastMonth = 12;  // 최대 월
+            if (!monthData.includes(lastMonth + "월")) {
+                monthData.push(lastMonth + "월");
+                counts.push(0);
+                write_count.push(0);
+            }
+            
             // 차트 데이터
             var stackedChartData = {
                 labels: monthData,

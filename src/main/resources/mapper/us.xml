@@ -343,4 +343,10 @@
 	        TO_CHAR(REGDATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
 	</select>
 
+	<update id="increaseReportCount">
+	UPDATE us u
+	SET reportcnt = reportcnt + 1
+	WHERE u.us_num = #{us_num}
+	</update>
+
 </mapper>
