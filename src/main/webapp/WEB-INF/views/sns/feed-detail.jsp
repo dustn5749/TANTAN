@@ -39,9 +39,9 @@
     <img src="<c:url value="/assets/sns/images/icon-close-white.svg"/>" alt="">
 </button>
 <!-- 이전 항목으로 이동하는 버튼 -->
-<button type="button" class="feed-ctrl-btn prev">
-    <img src="<c:url value="/assets/sns/images/icon-chevron-left.svg"/>" alt="" class="icon">
-</button>
+<!-- <button type="button" class="feed-ctrl-btn prev"> -->
+<%--     <img src="<c:url value="/assets/sns/images/icon-chevron-left.svg"/>" alt="" class="icon"> --%>
+<!-- </button> -->
 <!-- 모달 내용 -->
 <div class="common-modal feed-modal">
     <!-- 큰 이미지 컨테이너 -->
@@ -108,8 +108,8 @@
                                                 <div class="name-content-wrap">
                                                     <div class="name-wrap">
                                                         <h6 class="name">choi_seung_hyun_tttop</h6>
-                                                        <img src="/assets/sns/images/badge-certify.svg"
-                                                             class="badge-certify" alt="">
+                                                        <img src="/assets/sns/images/badge-certify.svg"                                                             class="badge-certify" alt="">
+
                                                     </div>
                                                     <p>내용입니다.</p>
                                                 </div>
@@ -462,15 +462,21 @@
                     </div>
                 </div>
                 <!-- 좋아요 있을 경우 -->
-                <!-- <div class="comment-status-bar">
-                  <p class="txt"><b>좋아요 200개</b></p>
-                  <p class="sm-txt gray-txt">3시간 전</p>
-                </div> -->
+                <c:if test="${board.likeCount > 0}">
+                <div class="comment-status-bar">
+                  <p class="txt"><b>좋아요 ${board.likeCount} 개</b></p>
+                  <p class="sm-txt gray-txt">작성일: 2023-11-30</p>
+                </div>
+                </c:if>
+                
                 <!-- 좋아요 없을 경우 -->
+                <c:if test="${board.likeCount == 0}">
                 <div class="comment-status-bar">
                     <p class="txt">가장 먼저 <b>좋아요</b>를 눌러보세요</p>
-                    <p class="sm-txt gray-txt">2023-11-29</p>
+                    <p class="sm-txt gray-txt">작성일: 2023-11-30</p>
                 </div>
+                </c:if>
+                
                 <div class="create-comment-bar">
                     <figure class="mini-thumnail">
                         <img src="/assets/sns/images/profile-img.jpeg" alt="">
@@ -483,7 +489,7 @@
     </div>
 </div>
 <!-- 우측상단 게시물 상세 편집 버튼 -->
-<button type="button" class="feed-ctrl-btn next">
-    <img src="/assets/sns/images/icon-chevron-right.svg" alt="" class="icon">
-</button>
+<!-- <button type="button" class="feed-ctrl-btn next"> -->
+<!--     <img src="/assets/sns/images/icon-chevron-right.svg" alt="" class="icon"> -->
+<!-- </button> -->
 </div>

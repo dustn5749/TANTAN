@@ -64,12 +64,5 @@ public class SnsBoardController {
             .build(), key);
 
     }
-
-    private File convertMultiPartToFile(MultipartFile file) throws IOException {
-        File convertedFile = new File(file.getOriginalFilename());
-        file.transferTo(convertedFile);
-        return convertedFile;
-    }
-
 }
 

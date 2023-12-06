@@ -14,7 +14,6 @@
             <div class="left-ttl-wrap">
                 <div class="ttl">
                     <p>${chatRoom.roomName}</p>
-                    <span class="num">2</span>
                 </div>
             </div>
             <div class="btn-wrap">
@@ -40,7 +39,7 @@
                         <!-- 친구 프사 & 이름 -->
                         <div class="person-item">
                             <figure class="mini-thumnail">
-                                <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
+                                <img src="${empty chatter.profileImg ? "/assets/sns/images/profile-img-default.png" : chatter.profileImg}" alt="">
                             </figure>
                             <div class="person-profile">
                                 <div class="name-wrap">

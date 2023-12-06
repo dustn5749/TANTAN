@@ -41,7 +41,7 @@
                     <!-- 친구 프사 & 이름 -->
                     <span class="person-item">
                 <span class="mini-thumnail">
-                  <img src="<c:url value="/assets/sns/images/profile-img.jpeg"/>" alt="">
+                  <img src="${empty friend.profileImg ? "/assets/sns/images/profile-img-default.png" : friend.profileImg}" alt="">
                 </span>
                 <span class="person-profile">
                   <span class="name-wrap">
@@ -71,8 +71,6 @@
     $(function (){
 
         $('#applyChatRoom').on('click',function () {
-          console.log(11);
-
 
           let selectedCheckboxes = $('.friend-list-checkbox:checked');
           // Get values of selected checkboxes
@@ -106,9 +104,7 @@
 
                             <div class="inp-unit">
                                 <input id="text-box" type="text" class="inp" maxlength="50">
-                                <span class="unit">
-                                  <span class="text-count">0</span><span>/50</span>
-                                </span>
+                               
                             </div>
 
                             <div class="bottom-btn-wrap">

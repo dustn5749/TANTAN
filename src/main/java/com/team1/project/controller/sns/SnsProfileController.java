@@ -14,6 +14,7 @@ import com.team1.project.service.sns.SnsBoardService;
 import com.team1.project.service.sns.SnsProfileService;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,9 @@ public class SnsProfileController {
         snsBoardRequest.setMemberId(memberId);
 
         List<SnsBoardDTO> boardList = snsBoardService.getBoardList(snsBoardRequest);
+        Long count = snsBoardService.getBoardCount(snsBoardRequest);
 
+        request.setAttribute("boardCount", count);
         request.setAttribute("boardList", boardList);
         request.setAttribute("friendList", friendService.getFriendList(memberId));
         request.setAttribute("member", memberService.findById(memberId));
@@ -89,12 +92,18 @@ public class SnsProfileController {
 
         MemberDTO byId = memberService.findById(memberId);
 
+        if(Objects.isNull(byId)){
+          return request.getHeader("referer");
+        }
+
         SnsBoardRequest snsBoardRequest = new SnsBoardRequest();
         snsBoardRequest.setSize(10L);
         snsBoardRequest.setMemberId(memberId);
 
         List<SnsBoardDTO> boardList = snsBoardService.getBoardList(snsBoardRequest);
+        Long count = snsBoardService.getBoardCount(snsBoardRequest);
 
+        request.setAttribute("boardCount", count);
         request.setAttribute("boardList", boardList);
 
         List<FriendRequestDTO> requestList = friendService.getRequestDTOList(memberId);

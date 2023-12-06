@@ -97,7 +97,6 @@
   <!-- END 알림 모달 내용들 -->
 </div>
 <script>
-
     function eventURL(url){
       if(!url || url === '' || url ==='null'){
         return;
@@ -116,5 +115,4 @@
 
       }
     }
-
 </script>

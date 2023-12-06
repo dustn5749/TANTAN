@@ -8,7 +8,7 @@
       <!-- 친구 프사 & 이름 -->
       <div class="person-item">
         <figure class="mini-thumnail">
-          <img src="<c:url value="${friend.profileImg}"/>" alt="">
+          <img src="${empty friend.profileImg ? "/assets/sns/images/profile-img-default.png" : friend.profileImg}" alt="">
         </figure>
         <div class="person-profile">
           <div class="name-wrap">
@@ -16,7 +16,7 @@
               <h6 class="name">${empty friend.nickname ? friend.regId : friend.nickname}</h6>
             </a>
           </div>
-          <p class="intro-txt">소개글</p>
+<!--           <p class="intro-txt">소개글</p> -->
         </div>
       </div>
       <!-- END 친구 프사 & 이름 -->

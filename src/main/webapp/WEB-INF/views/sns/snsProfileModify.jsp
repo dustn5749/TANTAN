@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+         
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
@@ -12,11 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" as="style" crossorigin
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
+<!--     <link rel="stylesheet" as="style" crossorigin -->
+<!--           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/> -->
     <link rel="stylesheet" href="/assets/sns/css/profileReset.css">
     <link rel="stylesheet" href="/assets/sns/css/proflieStyle.css">
-    <script src="/assets/js/jquery-3.6.1.min.js"></script>
+<%--     <script src="<c:url value="/assets/js/jquery-1.11.0.min.js"/>"></script> --%>
     <style>
         .page-wrapper {
             margin: 0 atuo !important;
@@ -157,36 +160,47 @@
             <div class="sidebar-inner">
                 <div class="sidebar-menu">
                     <!--사이드바 버튼들 -->
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-home.svg" alt="" class="icon">
+                    <button type="button" class="sidebar-btn active" onclick="home()">
+                        <img src="<c:url value="/assets/sns/images/icon-home.svg"/>" alt="" class="icon">
                         <span class="txt">홈</span>
                     </button>
-                    <button type="button" class="sidebar-btn" onclick="mySchedule()">
-                        <img src="/assets/sns/images/icon-brand-safari.svg" alt="" class="icon">
-                        <span class="txt">일정</span>
+                    <button type="button" class="sidebar-btn active" onclick="mySchedule()">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-brand-safari.svg"/>" alt="" class="icon"> --%>
+                        	<img src="<c:url value="/assets/sns/images/Calander.png"/>" alt="" class="icon">
+                        <span class="txt">내 일정</span>
+                    </button> 
+                    <button type="button" class="sidebar-btn active" onclick="usList()">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-send.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/donghang.png"/>" alt="" class="icon">
+                        <span class="txt">동행 모집</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-send.svg" alt="" class="icon">
-                        <span class="txt">메세지</span>
+                    <button type="button" class="sidebar-btn active" onclick="likeScheduleList()">
+<%--                         <img src="<c:url value="/assets/sns/images/icon-heart.svg"/>" alt="" class="icon"> --%>
+                        <img src="<c:url value="/assets/sns/images/weseelist.png"/>" alt="" class="icon">
+                        <span class="txt">위시 리스트</span>
                     </button>
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-heart.svg" alt="" class="icon">
-                        <span class="txt">알림</span>
+                    <button type="button" class="sidebar-btn active" onclick="scheduleList()">
+                        <img src="<c:url value="/assets/sns/images/gongyou.png"/>" alt="" class="icon">
+                        <span class="txt">일정 공유</span>
                     </button>
-                    <button type="button" class="sidebar-btn" onclick="myProfile()">
+                    <button type="button" class="sidebar-btn active" onclick="review()">
+                        <img src="<c:url value="/assets/sns/images/review.png"/>" alt="" class="icon">
+                        <span class="txt">리뷰 및 추천</span>
+                    </button>
+                    <button type="button" class="sidebar-btn active" onclick="myProfile()">
                         <figure class="mini-thumnail">
-                            <img src="/assets/sns/images/profile-img.jpeg" alt="">
+                            <img src="<c:url value="${member.profile_img}"/>" alt="">
                         </figure>
                         <span class="txt">프로필</span>
                     </button>
                 </div>
 
-                <div class="sidebar-menu">
-                    <button type="button" class="sidebar-btn">
-                        <img src="/assets/sns/images/icon-list.svg" alt="" class="icon">
-                        <span class="txt">더보기</span>
-                    </button>
-                </div>
+<!--                 <div class="sidebar-menu"> -->
+<!--                     <button type="button" class="sidebar-btn"> -->
+<!--                         <img src="/assets/sns/images/icon-list.svg" alt="" class="icon"> -->
+<!--                         <span class="txt">더보기</span> -->
+<!--                     </button> -->
+<!--                 </div> -->
             </div>
         </div>
     </div>
@@ -294,17 +308,28 @@
 
 <script>
 
-	function myProfile(){
-		location.href = "/sns/profile"
-	}
-	
 	function mySchedule(){
 		location.href = "/member/mySchedule.do"
 	}
 	
-	function modifyComplete() {
-	    // 프로필 페이지로 리다이렉션
-	    location.href = "/sns/profile";
+	function usList(){
+		location.href = "/us/list"
+	}
+	
+	function likeScheduleList(){
+		location.href="/schedule/likeScheduleList?member_id="
+	}
+	
+	function scheduleList(){
+		location.href = "/schedule/list"
+	}
+	
+	function review(){
+		location.href = "/review/main"
+	}
+	
+	function myProfile(){
+		location.href = "/sns/profile"
 	}
 
   function modifyProfile(){
