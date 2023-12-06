@@ -253,7 +253,7 @@
                     </div>
                     <div class="detail_content">
                         <div class="input_area">
-                            <textarea id="introduce" name="introduce"></textarea>
+                            <textarea id="introduce" name="introduce">안녕하세요</textarea>
                         </div>
                     </div>
                 </div>
