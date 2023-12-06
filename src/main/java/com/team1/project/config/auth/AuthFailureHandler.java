@@ -1,6 +1,8 @@
 package com.team1.project.config.auth;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +25,16 @@ public class AuthFailureHandler extends  SimpleUrlAuthenticationFailureHandler{
 	    
 	    // exception 관련 메세지 처리
 	    if (exception instanceof LockedException) {
-        	msg = "계정이 잠겼습니다";
+        	msg = "locked";
 	    } else if (exception instanceof DisabledException) {
-        	msg = "유효하지 않은 계정입니다";
+        	msg = "none";
         } else if(exception instanceof CredentialsExpiredException) {
-        	msg = "패스워드 유효기간이 만료되었습니다";
+        	msg = "expiredPassword";
         } else if(exception instanceof BadCredentialsException ) {
-        	msg = "패스워드가 일치하지 않습니다";
+        	msg = "wrongPassword";
         }
 	    
-	    
+	    msg = URLEncoder.encode(msg, StandardCharsets.UTF_8.toString());
 	    setDefaultFailureUrl("/member/loginForm.do?error=true&exception=" + msg);
 	    
 		super.onAuthenticationFailure(request, response, exception);

@@ -336,35 +336,6 @@ ul>li {
          </form>
       </div>
 
- 
-         <!-- 페이징 처리 -->
-<%--          <div class="nav_div" style="text-align: center; margin-top: 10px;">
-            <c:if test="${result.schedule.navStart != 1}">
-               <a href="#" onclick="jsPageNo(${result.schedule.navStart-1})"
-                  class="pageArrow">&lt;</a>
-            </c:if>
-
-
-            <c:forEach var="item" begin="${result.schedule.navStart}"
-               end="${result.schedule.navEnd}">
-               <c:choose>
-                  <c:when test="${result.schedule.pageNo != item}">
-                     <a href="#" onclick="jsPageNo(${item})" class="pageNum">${item}</a>
-                  </c:when>
-                  <c:otherwise>
-                     <strong>${item}</strong>
-                  </c:otherwise>
-               </c:choose>
-            </c:forEach>
-
-
-            <c:if test="${result.schedule.navEnd != result.schedule.totalPageSize}">
-               <a href="#" onclick="jsPageNo(${result.schedule.navEnd+1})"
-                  class="pageArrow">&gt;</a>
-            </c:if>
- 	 </div>
- --%>
-
 
    <script>
     function jsPageNo(pageNo) {

@@ -2,10 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.project.dao.UsDAO">
- 
-
-
-<select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
+ <select id="getUsList" resultType="com.team1.project.dto.UsDTO" parameterType="java.util.Map">
     WITH OrderedUs AS (
         SELECT
             a.us_num,
@@ -38,9 +35,18 @@
             ) AS rnum
         FROM
             us a
-          <if test='DOE_NAME != null'>
-            where a.DOE_NAME = #{DOE_NAME}
-        </if>
+        WHERE
+            <choose>
+                <when test='DOE_NAME != null'>
+                    a.DOE_NAME = #{DOE_NAME}
+                </when>
+                <when test='start_Date != null and end_Date != null'>
+                    (a.end_Date <![CDATA[ <= ]]> #{end_Date} AND a.start_Date <![CDATA[ >= ]]> #{start_Date})
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
     )
     SELECT
         u.*,
@@ -49,11 +55,16 @@
         OrderedUs u
     LEFT OUTER JOIN us_file uf ON u.us_num = uf.us_num
     WHERE
-        u.rnum BETWEEN #{startNo, jdbcType=INTEGER} AND #{endNo, jdbcType=INTEGER}
-
+        <choose>
+            <when test='start_Date != null and end_Date != null'>
+                u.start_Date <![CDATA[ BETWEEN ]]> #{start_Date} <![CDATA[ AND ]]> #{end_Date}
+            </when>
+            <otherwise>
+                1=1
+            </otherwise>
+        </choose>
+        AND u.rnum BETWEEN #{startNo, jdbcType=INTEGER} AND #{endNo, jdbcType=INTEGER}
 </select>
-
- 
 
  
  
@@ -200,6 +211,7 @@
         u.content,
         u.imageurl,
         u.doe_Name,
+        u.viewcount,
        uf.usfilenum as fileNo
     FROM US u 
       left outer join us_file uf

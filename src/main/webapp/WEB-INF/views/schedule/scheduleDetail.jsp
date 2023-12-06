@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sec:authorize access="isAuthenticated()">
   <sec:authentication property="principal" var="principal"/>
@@ -29,6 +28,8 @@
 /* 상세보기 전페 div */
 .scheduleDetailContent {
    width: 80%;
+       margin-bottom:  100px  !important;
+
    padding: 2%;
    margin: 0 auto;
 }
@@ -79,17 +80,17 @@ input, a, span, div, h2, button, li, ul {
    font-size: 20px !important;
 }
 .titlediv{
-	text-align: center;
-	width: 70px;
+   text-align: center;
+   width: 70px;
 }
 #title {
-	position: absolute;
-	left: 120px;
-	width: 45%;
-	height: 30px;
-	padding-left: 10px;
-	border-radius: 3px;
-	border : 1px solid rgb(219, 219, 219);
+   position: absolute;
+   left: 120px;
+   width: 45%;
+   height: 30px;
+   padding-left: 10px;
+   border-radius: 3px;
+   border : 1px solid rgb(219, 219, 219);
 }
 
 .form-control {
@@ -322,11 +323,17 @@ input, a, span, div, h2, button, li, ul {
    margin: 30px auto 0;
    width: 150px;
    border-radius: 25px;
-   background-color: #0099FF;
+   position: relative;
 }
 
 .mySchedule a {
-   display: block;
+	position: relative;
+	border-radius:30px;
+	width: 74%;
+	height: 50px;
+	left :-80px;
+ 	background-color: #0077FF;
+   	display: block;
    line-height: 50px;
    font-size: 14px !important;
    font-weight: bold !important;
@@ -481,7 +488,7 @@ input, a, span, div, h2, button, li, ul {
    margin-top: 30px;
    height: 50px;
    margin-bottom: 20px;
-   width: 100%;
+   width: 74%;
    text-align: center;
 }
 
@@ -504,15 +511,12 @@ input, a, span, div, h2, button, li, ul {
 }
 
  .center-align {
-<<<<<<< HEAD
     padding: 35px;
     text-align: center;
-=======
- 	position: relative;
- 	padding: 35px;
+    position: relative;
+    padding: 35px;
     text-align: left;
     padding-left: 20px;
->>>>>>> branch 'main' of https://github.com/dustn5749/TANTAN.git
     margin: auto;
     margin-top: 30px;
     display: flex;
@@ -529,27 +533,65 @@ input, a, span, div, h2, button, li, ul {
   .memo-modal {
     margin-top: 20px;
   }
-	
+   
   .day_li_btn_div button {
     margin-right: 10px;
   }
   .daycontent {
-  	margin-top: 20px;
+     margin-top: 20px;
   }
   .inline, .memo-div {
-  	display: flex;
-  	margin-bottom: 2px;
+     display: flex;
+     margin-bottom: 2px;
   }
   .inline>div, .memo-div > div {
-  	margin-right: 50px;
+     margin-right: 50px;
   
   }
   .inline>input, .memo-div > input{
-  	width: 300px !important;
-  	border-radius: 3px;
-  	border: 1px solid rgb(219, 219, 219);
-  	padding-left: 10px;
+     width: 300px !important;
+     border-radius: 3px;
+     border: 1px solid rgb(219, 219, 219);
+     padding-left: 10px;
   }
+  
+#goback {
+    background-color: #0099FF;!important; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 26px;
+}
+
+#goback:hover {
+    background-color:  #0099ff !important; /* Darker Green */
+}
+
+  
+  .back {
+     margin-left: 220px;
+     margin-top: 20px;
+  }
+  
+  .dotOverlay.distanceInfo {
+   color: #0066ff !important;
+    font-size: 16px;
+/*     margin-top: 20px; */
+    text-align: center;
+    background-color: #fff;
+  }
+  
+      .title {font-weight:bold;display:block;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+  
 </style>
 <body>
 
@@ -633,56 +675,58 @@ input, a, span, div, h2, button, li, ul {
                <div class="title_div">
                  
     <div class="title-container center-align">
-	  <div class="titlediv">제목</div>
-	  <input type="text" id="title" value="${scheduleList[0].title}" readonly="readonly" >
-	</div>
+     <div class="titlediv">제목</div>
+     <input type="text" id="title" value='${scheduleList[0].title}' readonly="readonly" >
+   </div>
 
-               
-               
+
                <ul class="schedule-ul">
                   <c:forEach items="${scheduleList}" var="item" varStatus="status">
-                     <li class="schedule-item day-${status.count }"><input
-                        type="hidden" class="lat" value="${item.city_latitude }" /> <input
-                        type="hidden" class="lng" value="${item.city_longitude }" />
+                     <li class="schedule-item day-${status.count }">
+                     <input type="hidden" class="lat" value="${item.city_latitude }" /> 
+                     <input type="hidden" class="lng" value="${item.city_longitude }" />
+                      
+                      
                         <p>
-                           <span>day<em class="day_num">${status.count }</em></span><em
-                              class="day_date"><input type="date"
-                              class="detail_scedule" value=${item.date1 }></em>
+                           <span>day<em class="day_num">${status.count }</em></span>
+                           <em class="day_date">
+                              <input type="date" class="detail_scedule" value=${item.date1 }></em>
                         </p>
+                 
+                 
                         <div class="daycontent">
-	                        <div class="inline">
-	                        <c:choose>
-	                          <c:when test="${principal.user.member_id==writer}">
-	                           <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
-	                          </c:when>
-	                          <c:otherwise>
-	                           <div class="schedule-btn-grp" >장소</div>
-	                          </c:otherwise>
-	                          </c:choose>
-	                           <input type="text" readonly="readonly"
-	                              id="select_city_area_${status.count }"
-	                              class="day-${status.count } placeList"
-	                              name="location${status.count }" value="${item.place1 }" />
-	                           <%-- <input type="hidden" id="select_city_area_2" value="${scheduleList[0].place2}" /> --%>
-	
-	                        </div> <!-- 메모 부분 수정 -->
-	                        <div class="memo-div">
-	                        <c:choose>
-	                          <c:when test="${principal.user.member_id==writer}">
-	                           <button class="schedule-btn-grp memo-add-btn"
-	                              onclick="addMemo(this)">메모수정</button>
-	                          </c:when>
-	                          <c:otherwise>
-	                          	<div class="schedule-btn-grp memo-add-btn">메모</div>
-	                          </c:otherwise>
-	                          </c:choose>
-	                           <input type="text" readonly="readonly"
-	                              id="select_city_area_${status.count }"
-	                              class="day-${status.count } placeList memoList"
-	                              name="location${status.count }" value="${item.memo1}" />
-	                           <%-- <input type="hidden" id="select_city_memo_2" value="${scheduleList[0].memo2}" /> --%>
-								</div>
-							</div>
+                           <div class="inline">
+                           <c:choose>
+                             <c:when test="${principal.user.member_id==writer}">
+                              <button class="schedule-btn-grp" onclick="openModal(this)">장소수정</button>
+                             </c:when>
+                             <c:otherwise>
+                              <div class="schedule-btn-grp" >장소</div>
+                             </c:otherwise>
+                             </c:choose>
+                              <input type="text" readonly="readonly"
+                                 id="select_city_area_${status.count }"
+                                 class="day-${status.count } placeList"
+                                 name="location${status.count }" value="${item.place1 }" />
+                   
+                           </div> <!-- 메모 부분 수정 -->
+                           <div class="memo-div">
+                           <c:choose>
+                             <c:when test="${principal.user.member_id==writer}">
+                              <button class="schedule-btn-grp memo-add-btn"
+                                 onclick="addMemo(this)">메모수정</button>
+                             </c:when>
+                             <c:otherwise>
+                                <div class="schedule-btn-grp memo-add-btn">메모</div>
+                             </c:otherwise>
+                             </c:choose>
+                              <input type="text" readonly="readonly"
+                                 id="select_city_area_${status.count }"
+                                 class="day-${status.count } placeList memoList"
+                                 name="location${status.count }" value="${item.memo1}" />
+              
+                        </div>
+                     </div>
                            <!-- 메모 모달창 -->
                            <div class="memo-modal" style="display: none;">
                               <div class="modal-content">
@@ -701,54 +745,68 @@ input, a, span, div, h2, button, li, ul {
                               </div>
                            </div>
 
-                           <!--장소선택버튼 -->
-                           <input type="hidden" id="Doenum">
-                           <div id="myModal" class="modal" style="display: none;">
-                              <div class="modal-content">
-                                 <select id="selectBox" class="select-styling">
-                                    <option value="" disabled selected>전체를 선택하세요</option>
-                                 </select>
-                                 <div class="selection-text">
-                                    <p>가고 싶은 장소를 선택해주세요!</p>
-                                 </div>
-                                 <div class="button-container">
-                                    <button class="modal-button select-button"
-                                       onclick="selectLocation(this)">선택하기</button>
-                                    <button class="modal-button go-back-button"
-                                       onclick="cancleLocation()">뒤로가기</button>
-                                 </div>
-                              </div>
-                           </div></li>
+         <input type="hidden" id="Doenum">
+         <div id="myModal" class="modal" style="display: none;">
+             <div class="modal-content">
+                 <select id="selectBox" class="select-styling">
+                     <option value="" disabled selected>전체를 선택하세요</option>
+                 </select>
+                 <div class="selection-text">
+                     <p>가고 싶은 장소를 선택해주세요!</p>
+                 </div>
+         
+                 <div class="button-container" style="text-align: center;">
+                     <button class="modal-button select-button" onclick="selectLocation(this)">선택하기</button>
+                 </div>
+                 
+             </div>
+         </div>
+                     </li>
                   </c:forEach>
                </ul>
+               
+               <div class = "back">
+                  <button id ="goback" onclick="goBack()">뒤로 가기</button>
+              
+               </div>
                <c:if test="${principal.user.member_id==writer}">
-               		<!-- 일정 추가 버튼 -->
-	               <div class="day_li_btn_div">
-	                  <button class="add_shedule_btn">일정추가</button>
-	                  <button class="minus_shedule_btn">일정삭제</button>
-	               </div>    
-	                          
-	               <!--일정 수정하기 버튼 -->
-	               <div class="mySchedule"
-	                  style="text-align: center; margin-bottom: 20px;">
-	                  <a href="javascript:void(0);" id="saveEntryBtn">수정완료</a>
-	               </div>
+                     <!-- 일정 추가 버튼 -->
+                  <div class="day_li_btn_div">
+                     <button class="add_shedule_btn">일정추가</button>
+                     <button class="minus_shedule_btn">일정삭제</button>
+                  </div>    
+                             
+                  <!--일정 수정하기 버튼 -->
+                  <div class="mySchedule"
+                     style="text-align: center; margin-bottom: 20px;">
+                     <a href="javascript:void(0);" id="saveEntryBtn">수정완료</a>
+                  </div>
                </c:if>
+               
+               
                
             </div>
    
          </div>
       </div>
-      <div id="map"></div>
+  
    </div>
 
 
+
+
+   <script type="text/javascript"
+      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f&libraries=services,clusterer,drawing"></script>
+
    <script>
+   
+   
+   
+   function goBack() {
+       window.history.back();
+   }
 
-
-
-
-
+   
 //수정한 내용 저장 버튼
 function saveEntry() {
     // 수정할 스케줄 정보 가져오기
@@ -760,6 +818,7 @@ function saveEntry() {
      // 스케줄 정보를 data 배열에 추가
    scheduleList.forEach((schedule, index) => {
        const schedule_Num = document.getElementById(`schedule_Num${index}`).textContent;
+       
        const MEMO1Element = document.getElementById(`MEMO1_${index}`);
        const MEMO1 = MEMO1Element ? MEMO1Element.innerText : ''; 
        const MEMO2 = document.getElementById(`MEMO2_${index}`).innerText;
@@ -768,6 +827,7 @@ function saveEntry() {
    
        data.push({
            schedule_Num: schedule_Num,
+           
            MEMO1: MEMO1,
            MEMO2: MEMO2,
            PLACE1: PLACE1,
@@ -788,10 +848,8 @@ function saveEntry() {
         console.log(json);
         if (json.message === "수정 성공했습니다!") {
             alert('수정이 완료되었습니다.');
-            // 여기에서 수정이 완료된 후 수행할 작업을 추가할 수 있습니다.
         } else {
             alert('수정에 실패했습니다.');
-            // 수정에 실패한 경우에 대한 처리를 추가할 수 있습니다.
         }
     })
     .catch(error => {
@@ -801,7 +859,6 @@ function saveEntry() {
 
 // 삭제하기
 function deleteEntry() {
-    //const schedule_Num = document.getElementById('schedule_Num').textContent;
     const schedule_Num = ${param.schedule_Num}
     
 
@@ -828,12 +885,9 @@ function goToHomepage() {
     window.location.href = '/schedule/list';
 }
      
+     
 function saveEntry() {
-    // 일정 수정이 완료되었습니다 알림창 띄우기
-    //alert('일정 수정이 완료되었습니다.');
 
-    // 페이지 이동
-    //window.location.href = '/schedule/list'; // 적절한 URL로 변경
     
     const scheduleItems = document.querySelectorAll(".schedule-item");
     const schedules = [];
@@ -842,6 +896,7 @@ function saveEntry() {
 
     for (i=0;i<scheduleItems.length;i++) {
        schedules.push({
+          member_id : $("#member_id").val(),
          title : $("#title").val(),
           day_date : scheduleItems[i].querySelector(".day_num").innerText,
           place1 : scheduleItems[i].querySelector(".placeList").value,
@@ -853,8 +908,6 @@ function saveEntry() {
        });
     }
 
-    console.log(schedules);
-    console.log(JSON.stringify(schedules));
       
     $.ajax({
         url : "/schedule/update/${param.schedule_Num}",
@@ -906,11 +959,14 @@ function saveEntry() {
    var currentDayNum = newScheduleItem.find(".day_num").text();
    newScheduleItem.find(".day_num").text(parseInt(currentDayNum) + 1);
    
+   
    newScheduleItem.find(".placeList").val($("#select_city_area_2").val());
    newScheduleItem.find(".memoList").val($("#select_city_memo_2").val());
          
    // 새로운 일정을 schedule-ul에 추가
    $(".schedule-ul").append(newScheduleItem);
+   
+   
              
    setMinMax();
             
@@ -987,6 +1043,8 @@ $(".minus_shedule_btn").on("click", function(){
           modal.style.display = "none";
          
       }
+      
+      
    //메모
    let selectedDayForMemo = null;
    
@@ -1154,104 +1212,229 @@ $(".minus_shedule_btn").on("click", function(){
 
       
       
-     // 오늘 내가 한 작업들
       document.addEventListener('DOMContentLoaded', function () {
-    // 지도를 표시할 div 요소의 id를 가져옵니다.
-    var mapContainer = document.getElementById('map');
+           var mapContainer = document.getElementById('map');
+           var mapOption = {
+               center: new kakao.maps.LatLng(37.5, 128),
+               level: 13
+           };
 
-    // 지도의 기본 옵션을 설정합니다.
-    var mapOption = {
-        center: new kakao.maps.LatLng(37.5, 128),
-        level: 13
-    };
+           var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 지도를 생성합니다.
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+           var scheduleItems = document.querySelectorAll('.schedule-item');
+           var paths = [];
+           var prevPath = null;
 
-    // 상세보기 페이지에서 받아온 좌표 값
-    var place1X = 37.47575;
-    var place1Y = 126.866708333333;
-    var place2X = 37.5219305555555;
-    var place2Y = 129.116633333333;
+           for (var i = 0; i < scheduleItems.length; i++) {
+               var lat = parseFloat(scheduleItems[i].querySelector('.lat').value);
+               var lng = parseFloat(scheduleItems[i].querySelector('.lng').value);
+               var path = new kakao.maps.LatLng(lat, lng);
+               paths.push(path);
 
-    // 받아온 좌표 값으로 LatLng 객체를 생성합니다.
-    var place1Coords = new kakao.maps.LatLng(place1X, place1Y);
-    var place2Coords = new kakao.maps.LatLng(place2X, place2Y);
-    
-    var paths = [];
-    var scheduleItems = document.querySelectorAll('.schedule-item');
-    var prevPath = null;
-    for (var i=0; i < scheduleItems.length; i++) {
-       var lat = scheduleItems[i].querySelector('.lat').value;
-       var lng = scheduleItems[i].querySelector('.lng').value;
-       var path = new kakao.maps.LatLng(lat, lng);
-       paths.push(path);
-       
-       if (i != 0) {
-          // 이전 좌표 + 현재 좌표로 선 객체 생성
-          var line = new kakao.maps.Polyline({
-               path: [prevPath, path], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+               var description = scheduleItems[i].querySelector('.placeList').value;
+               var marker = new kakao.maps.Marker({
+                   position: path,
+                   map: map,
+                   title: description
+               });
+
+               addClickEventToMarker(map, marker, path, description);
+
+               if (i !== 0) {
+                   var line = new kakao.maps.Polyline({
+                       path: [prevPath, path],
+                   });
+
+                   var distance = Math.round(line.getLength());
+                   var message = distance;
+                   var unit = 'm';
+                   if (distance > 1000) {
+                       message = distance / 1000;
+                       unit = 'km';
+                   }
+
+                   var distanceOverlay = new kakao.maps.CustomOverlay({
+                       map: map,
+                       content: '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + message + '</span>' + unit + '</div>',
+                       position: path,
+                       xAnchor: 0,
+                       yAnchor: 0,
+                       zIndex: 3
+                   });
+               }
+
+               prevPath = path;
+           }
+
+           if (line) {
+               line.setMap(null);
+           }
+
+           var line = new kakao.maps.Polyline({
+               path: paths,
+               strokeWeight: 3,
+               strokeColor: '#db4040',
+               strokeOpacity: 1,
+               strokeStyle: 'solid'
            });
-          // line.getLength()로 좌표간 거리를 가져옴 (m단위)
-          var distance = Math.round(line.getLength());
-          
-          // 1000m 이상이면 km으로 변환
-          var message = distance;
-          var unit = 'm';
-          if (distance > 1000) {
-             message = distance / 1000;
-             unit = 'km';
-          }
-          
-          // 지도에 거리를 표시해줌
-          distanceOverlay = new kakao.maps.CustomOverlay({
-               map: map, // 커스텀오버레이를 표시할 지도입니다
-               content: '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + message + '</span>' + unit +'</div>',  // 커스텀오버레이에 표시할 내용입니다
-               position: path, // 커스텀오버레이를 표시할 위치입니다.
-               xAnchor: 0,
-               yAnchor: 0,
-               zIndex: 3  
-           }); 
-       }
-       prevPath = path;
-       
-       var marker = new kakao.maps.Marker({
-           position: new kakao.maps.LatLng(lat, lng)
+
+           line.setMap(map);
        });
-       marker.setMap(map);
-    }
-    
 
-    // 기존에 그려진 선을 제거합니다.
-    if (line) {
-        line.setMap(null);
-    }
+       function addClickEventToMarker(map, marker, position, description) {
+           kakao.maps.event.addListener(marker, 'click', function () {
+               searchDetailAddrFromCoords(marker.getPosition(), function (result, status) {
+                   if (status === kakao.maps.services.Status.OK) {
 
-    // 새로운 선을 생성합니다.
-    var line = new kakao.maps.Polyline({
-        //path: [place1Coords, place2Coords],
-        path: paths,
-        strokeWeight: 3,
-        strokeColor: '#db4040',
-        strokeOpacity: 1,
-        strokeStyle: 'solid'
-    });
+                      
+                      var detailAddr = getDetailAddr(result);
+                      var content = '<div class="bAddr">' +
+                          '<span class="title">주소정보</span>' +
+                          detailAddr +
+                          '</div>';
+                          
 
-    // 새로운 선을 지도에 표시합니다.
-    line.setMap(map);
-});
-      
+                      infowindow.setContent(content);
+                      infowindow.open(map, marker);
 
-     $(document).ready(function() {
-        //document.getElementById('deleteBtn').addEventListener('click', deleteEntry);
-        document.getElementById('saveEntryBtn').addEventListener('click', saveEntry);
-     }); 
-      
+                   }
+               });
+           });
+       }
+
+       var mapContainer = document.getElementById('map'),
+           mapOption = {
+               center: new kakao.maps.LatLng(37.566826, 126.9786567),
+               level: 1
+           };
+
+       var map = new kakao.maps.Map(mapContainer, mapOption);
+       var geocoder = new kakao.maps.services.Geocoder();
+       var marker = new kakao.maps.Marker();
+       var infowindow = new kakao.maps.InfoWindow({ zindex: 1 });
+
+       searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+       kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+           searchDetailAddrFromCoords(mouseEvent.latLng, function (result, status) {
+               if (status === kakao.maps.services.Status.OK) {
+                   var detailAddr = getDetailAddr(result);
+                   var content = '<div class="bAddr">' +
+                       '<span class="title">법정동 주소정보</span>' +
+                       detailAddr +
+                       '</div>';
+
+                   marker.setPosition(mouseEvent.latLng);
+                   marker.setMap(map);
+
+                   infowindow.setContent(content);
+                   infowindow.open(map, marker);
+
+                   addInfoToMarker(map, marker, mouseEvent.latLng);
+               }
+           });
+       });
+
+       kakao.maps.event.addListener(map, 'idle', function () {
+           searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+       });
+
+       function searchAddrFromCoords(coords, callback) {
+           geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+       }
+
+       function searchDetailAddrFromCoords(coords, callback) {
+           geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+       }
+
+       function displayCenterInfo(result, status) {
+           if (status === kakao.maps.services.Status.OK) {
+               var infoDiv = document.getElementById('centerAddr');
+
+               for (var i = 0; i < result.length; i++) {
+                   if (result[i].region_type === 'H') {
+                       infoDiv.innerHTML = result[i].address_name;
+                       break;
+                   }
+               }
+           }
+       }
+
+       function addInfoToMarker(map, marker, position) {
+           function updateInfoWindow(result, status) {
+               if (status === kakao.maps.services.Status.OK) {
+                   var info = result[0];
+                   var detailedAddress = getDetailAddr(result);
+                   var placeName = info.place_name;
+
+                   var infowindow = new kakao.maps.InfoWindow({
+                       content: '<div class="info-window">' +
+                           '<div class="info-title">장소명: </div>' +
+                           '<div class="info-content">' + placeName + '</div>' +
+                           '<div class="info-title">상세주소: </div>' +
+                           '<div class="info-content">' + detailedAddress + '</div>' +
+                           '</div>',
+                       removable: true
+                   });
+
+                   kakao.maps.event.addListener(marker, 'click', function () {
+                       infowindow.open(map, marker);
+                   });
+               }
+           }
+
+           geocoder.coord2Address(position.getLng(), position.getLat(), updateInfoWindow);
+       }
+
+       kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+           marker.setMap(null);
+           marker.setPosition(mouseEvent.latLng);
+           marker.setMap(map);
+           addInfoToMarker(map, marker, mouseEvent.latLng);
+       });
+
+       function addInfoWindowToMarker(map, marker, description) {
+           var infowindow = new kakao.maps.InfoWindow({
+               content: '<div class="info-window">' +
+                   '<div class="info-content">' + description + '</div>' +
+                   '</div>',
+               removable: true
+           });
+
+           kakao.maps.event.addListener(marker, 'click', function () {
+               infowindow.open(map, marker);
+           });
+       }
+
+       function getDetailAddr(result) {
+          console.log('result: ', result);
+           if (result && result.length > 0) {
+               var detailAddr = '';
+               var roadAddr = result[0].road_address;
+               var jibunAddr = result[0].address;
+
+               if (roadAddr) {
+                   detailAddr += '도로명주소 : ' + roadAddr.address_name + '<br>';
+               }
+               if (jibunAddr) {
+                   detailAddr += '지번 주소 : ' + jibunAddr.address_name;
+               }
+
+               return detailAddr;
+           }
+           return '';
+       }
+
+
+  
+      $(document).ready(function () {
+          //document.getElementById('deleteBtn').addEventListener('click', deleteEntry);
+          document.getElementById('saveEntryBtn').addEventListener('click', saveEntry);
+          
+      });
+
+
 </script>
-   <script type="text/javascript"
-      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f"></script>
 
-   <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47505492acfacae877bc0ab034617c5f&libraries=services,clusterer,drawing"></script>
 </body>
 </html>

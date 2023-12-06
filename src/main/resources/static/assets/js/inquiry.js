@@ -21,7 +21,3 @@
 		location.href="/customer/detail?inquiry_num="+inquiry_num;
  	})
  	
- 	// 글쓰기
- 	$(".writeBtn").on("click", function(){
-		 location.href = "/customer/write";
-	 })

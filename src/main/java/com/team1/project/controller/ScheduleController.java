@@ -67,7 +67,7 @@ public class ScheduleController {
         // 여러 일정에 대한 처리
         for (int i = 0; i < schedules.size(); i++) {
         	ScheduleDTO dto = schedules.get(i);
-        	insertDto.setMember_id("user123");
+        	insertDto.setMember_id(dto.getMember_id());
         	insertDto.setStart_Num(dto.getStart_Num());
         	insertDto.setEnd_Date(dto.getEnd_Date());
         	insertDto.setDoe_Name(dto.getDoe_Name());
@@ -130,11 +130,11 @@ public class ScheduleController {
     public String getScheduleDetail(@RequestParam("schedule_Num") int schedule_Num, Model model) {
         try {
             List<ScheduleDTO> result = scheduleService.getScheduleDetail(schedule_Num);
-            
             List<ScheduleDTO> transList = new ArrayList<>();
             for (int i =0; i< result.size(); i ++) { 
             	ScheduleDTO current = result.get(i);
             	ScheduleDTO dto = new ScheduleDTO();
+            	
             	dto.setTitle(current.getTitle());
             	dto.setStart_Num(current.getStart_Num());
             	dto.setEnd_Date(current.getEnd_Date());
@@ -157,14 +157,11 @@ public class ScheduleController {
             		dto.setDate1(current.getDate3());
             		dto.setMemo1(current.getMemo3());
             	}
-            	
             	transList.add(dto);
             }
-
             // 여기서 결과를 적절히 처리
             model.addAttribute("scheduleList", transList);
             model.addAttribute("writer", scheduleService.getWriter(schedule_Num));
-            
             System.out.println(result);
 
             return "scheduleDetail";
@@ -184,7 +181,7 @@ public class ScheduleController {
         // 여러 일정에 대한 처리
         for (int i = 0; i < schedules.size(); i++) {
         	ScheduleDTO dto = schedules.get(i);
-        	insertDto.setMember_id("user123");
+        	insertDto.setMember_id(dto.getMember_id());
         	insertDto.setStart_Num(dto.getStart_Num());
         	insertDto.setEnd_Date(dto.getEnd_Date());
         	insertDto.setDoe_Name(dto.getDoe_Name());

@@ -29,6 +29,7 @@
 .inquiry_detail_div {
 	display: flex;
 	width: 100%;
+	padding: 0  !important;
 }
 
 .inquiry_input_title {
@@ -147,10 +148,10 @@
 	align-content: center;
 	align-items: center; 
 }
-.btn_div > button{
+.backbtn{
 	width: 200px;
 	height: 42px;
-	background: rgb(5, 118, 243);
+	background: rgb(5, 118, 243) !important;
 	color: white;
 	border-radius: 6px;
 	border: none;
@@ -158,8 +159,8 @@
 	cursor: pointer;
 	margin-top: 20px;
 }
-.btn_div > button:hover{
-	background: rgb(173, 211, 254);
+.backbtn:hover{
+	background: rgb(173, 211, 254) !important;
 	color: black;
 }
 

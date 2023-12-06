@@ -30,6 +30,8 @@ public class UsService {
 		us.setTotalCount(totalCount); 
 	
 		Map<String, Object> param = new HashMap<>();
+		param.put("start_Date", us.getStart_Date());
+		param.put("end_Date", us.getEnd_Date());		
 		param.put("endNo", us.getEndNo());
 		param.put("startNo", us.getStartNo());
 		param.put("DOE_NAME", us.getDoe_Name());

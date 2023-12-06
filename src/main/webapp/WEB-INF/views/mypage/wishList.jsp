@@ -210,7 +210,6 @@
 		</div>
 	</div>
 						<input type="hidden" value="${principal.user.member_id}" class="memberId"> 
-	
 	<script >
 	
 	/* 일정 위시리스트 */
